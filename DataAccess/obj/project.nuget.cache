@@ -1,0 +1,11 @@
+{
+  "version": 2,
+  "dgSpecHash": "BTfhom0bsNWf/ed4zabTmfuQ2uo45xbIh+KZgaovDaT8oTj40vK3eAaxbBIWefsQAMmMz5Jn1q82SrwXZ4QipQ==",
+  "success": true,
+  "projectFilePath": "/Users/yulianagomez/Documents/proyectos/Diseño2/Damasco-Gomez/DataAccess/DataAccess.csproj",
+  "expectedPackageFiles": [
+    "/Users/yulianagomez/.nuget/packages/microsoft.netcore.platforms/1.1.0/microsoft.netcore.platforms.1.1.0.nupkg.sha512",
+    "/Users/yulianagomez/.nuget/packages/netstandard.library/2.0.3/netstandard.library.2.0.3.nupkg.sha512"
+  ],
+  "logs": []
+}

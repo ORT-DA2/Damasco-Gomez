@@ -1,0 +1,11 @@
+{
+  "version": 2,
+  "dgSpecHash": "gU5OVWEhmS9QENpfbJs/P+Peo869ZUvP+RBU4Nh+vHFzki4ZOnoneZcnJpFuzO48T8qweU4U9a7snGvh9GdpVQ==",
+  "success": true,
+  "projectFilePath": "/Users/yulianagomez/Documents/proyectos/Diseño2/Damasco-Gomez/Domain/Domain.csproj",
+  "expectedPackageFiles": [
+    "/Users/yulianagomez/.nuget/packages/microsoft.netcore.platforms/1.1.0/microsoft.netcore.platforms.1.1.0.nupkg.sha512",
+    "/Users/yulianagomez/.nuget/packages/netstandard.library/2.0.3/netstandard.library.2.0.3.nupkg.sha512"
+  ],
+  "logs": []
+}
