@@ -8,3 +8,5 @@ App/.vs
 App/DataAccess/obj/Debug/netstandard2.0
 App/DataAccess/obj/Debug
 *.cache
+*.cache
+App/WebApi/obj
