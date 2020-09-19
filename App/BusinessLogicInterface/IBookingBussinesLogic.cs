@@ -4,12 +4,12 @@ namespace BusinessLogicInterface
     {
         void GetBookingById(int id);
 
-        void GetBookingByName(in string name);
+        void GetBookingByName(string name);
 
-        void CreateBooking(in int checkIn, in int checkOut, in string name, in string email, in string house, in string token);
+        void CreateBooking(int checkIn, int checkOut, string name, string email, string house, string token);
 
-        void GetCode(in int id, in string token);
+        void GetCode(int id, string token);
 
-        void DeleteBooking(in int id, in string token);
+        void DeleteBooking(int id, string token);
     }
 }
