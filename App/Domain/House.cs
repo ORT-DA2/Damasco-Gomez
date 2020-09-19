@@ -1,22 +1,22 @@
+using System;
 namespace Domain
 {
     public class House
     {
-        
         public int Id {get ; set ; }
 
         public bool Avaible {get ; set; }
-       
         public int PricePerNight {get; set;}
-        public Spot TouristPoint {get ; set; }
-        
+
+        public TouristPoint Spot {get ; set; }
+
         public string HouseName {get ; set; }
-        
+
        public int Starts {get ; set; }
-       
+
        public string Address {get ; set; }
 
-       public List<Image> Image {get ; set; }
+       public List<Image> Images {get ; set; }
 
        public string Description {get ; set;}
 
@@ -24,9 +24,6 @@ namespace Domain
 
        public string Contanct {get; set;}
 
-       
-
-      
         public void udpatePricePerNight (int id) 
         {
             PricePerNight = id;
@@ -39,5 +36,5 @@ namespace Domain
              Contact = contact;
         }
 
-    } 
+    }
 }

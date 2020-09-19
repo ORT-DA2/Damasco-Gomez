@@ -1,3 +1,5 @@
+using System;
+
 namespace Domain
 {
     public class TouristPoint
@@ -20,7 +22,7 @@ namespace Domain
 
             Description = description;
         }
-        public UdpateName (string name)
+        public void UdpateName (string name)
         {
             Name = name ;
         }

@@ -1,3 +1,4 @@
+using System;
 namespace Domain
 {
     public class Region
@@ -8,6 +9,6 @@ namespace Domain
 
         public List<TouristPoint> TouristPoints {get; set; }
 
-        
+
     }
 }

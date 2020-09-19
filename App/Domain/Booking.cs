@@ -1,3 +1,5 @@
+using System;
+
 namespace Domain
 {
     public class Booking
@@ -22,7 +24,7 @@ namespace Domain
 
         public void UpdateState (string state)
         {
-            
+
         }
         public void UpdateDates(DateTime chechkIn, DateTime checkOut)
         {

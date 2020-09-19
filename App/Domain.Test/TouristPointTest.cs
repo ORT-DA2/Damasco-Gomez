@@ -1,7 +1,6 @@
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 
-
-namespace Domain.Tests
+namespace Domain.Test
 {
     [TestClass]
     public class TouristPointTest
@@ -18,10 +17,22 @@ namespace Domain.Tests
         [TestMethod]
         public void TestUdpateDescription()
         {
+            string newDescription = "Un lugar paridisíaco";
+            TouristPoint  touristPoint = new TouristPoint();
+            touristPoint.UpdateDescription(newDescription);
+            string realDescription = touristPoint.Description();
+            assertEquals(realDescription , newDescription);
+
+
         }
-         [TestMethod]
+          [TestMethod]
         public void TestUdpateName()
         {
+            string newName = "Yuliana";
+            TouristPoint touristPoint = new TouristPoint();
+            touristPoint.UdpateName(newName);
+            string realName = touristPoint.Name();
+            assertEquals(realName , newName);
         }
     }
 }
