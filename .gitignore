@@ -1,15 +1,6 @@
 .DS_Store
-App/BusinessLogic/obj
-App/BusinessLogic/obj
 App/BusinessLogicInterface/bin
-App/BusinessLogicInterface/obj/Debug
-App/DataAccess/bin/Debug
-App/DataAccess/obj
-
+App/BusinessLogic/bin
+App/DataAccess/bin
 App/DataAccessInterface/bin
-App/DataAccessInterface/obj
-
 App/Domain/bin
-App/Domain/obj
-App/Factory/obj
-App/WebApi/obj

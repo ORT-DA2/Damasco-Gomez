@@ -1,0 +1,4 @@
+/Users/valedamasco/Documents/DA2/Obligatorio1/Damasco-Gomez/App/BusinessLogic/obj/Debug/netstandard2.0/BusinessLogic.csprojAssemblyReference.cache
+/Users/valedamasco/Documents/DA2/Obligatorio1/Damasco-Gomez/App/BusinessLogic/obj/Debug/netstandard2.0/BusinessLogic.AssemblyInfoInputs.cache
+/Users/valedamasco/Documents/DA2/Obligatorio1/Damasco-Gomez/App/BusinessLogic/obj/Debug/netstandard2.0/BusinessLogic.AssemblyInfo.cs
+/Users/valedamasco/Documents/DA2/Obligatorio1/Damasco-Gomez/App/BusinessLogic/obj/Debug/netstandard2.0/BusinessLogic.csproj.CoreCompileInputs.cache
