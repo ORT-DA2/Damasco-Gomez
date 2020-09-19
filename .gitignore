@@ -13,3 +13,6 @@ App/Domain/bin
 App/Domain/obj
 App/Factory/obj
 App/WebApi/obj
+Domain.Tests/obj
+App/Domain/Domain.Tests/bin
+App/Domain/Domain.Tests/obj
