@@ -1,6 +1,6 @@
 namespace BusinessLogicInterface
 {
-    public interface IBookingBussinesLogic
+    public interface IHouseBussinesLogic
     {
         void GetHouses(Date checkIn, Date checkOut, int adult, int kids, int babies, string touristPoint);
 
