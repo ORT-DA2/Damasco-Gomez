@@ -1,0 +1,12 @@
+/Users/valedamasco/Documents/DA2/Obligatorio1/Damasco-Gomez/App/BusinessLogicInterface/bin/Debug/netstandard2.0/BusinessLogicInterface.deps.json
+/Users/valedamasco/Documents/DA2/Obligatorio1/Damasco-Gomez/App/BusinessLogicInterface/bin/Debug/netstandard2.0/BusinessLogicInterface.dll
+/Users/valedamasco/Documents/DA2/Obligatorio1/Damasco-Gomez/App/BusinessLogicInterface/bin/Debug/netstandard2.0/BusinessLogicInterface.pdb
+/Users/valedamasco/Documents/DA2/Obligatorio1/Damasco-Gomez/App/BusinessLogicInterface/bin/Debug/netstandard2.0/Domain.dll
+/Users/valedamasco/Documents/DA2/Obligatorio1/Damasco-Gomez/App/BusinessLogicInterface/bin/Debug/netstandard2.0/Domain.pdb
+/Users/valedamasco/Documents/DA2/Obligatorio1/Damasco-Gomez/App/BusinessLogicInterface/obj/Debug/netstandard2.0/BusinessLogicInterface.csprojAssemblyReference.cache
+/Users/valedamasco/Documents/DA2/Obligatorio1/Damasco-Gomez/App/BusinessLogicInterface/obj/Debug/netstandard2.0/BusinessLogicInterface.AssemblyInfoInputs.cache
+/Users/valedamasco/Documents/DA2/Obligatorio1/Damasco-Gomez/App/BusinessLogicInterface/obj/Debug/netstandard2.0/BusinessLogicInterface.AssemblyInfo.cs
+/Users/valedamasco/Documents/DA2/Obligatorio1/Damasco-Gomez/App/BusinessLogicInterface/obj/Debug/netstandard2.0/BusinessLogicInterface.csproj.CoreCompileInputs.cache
+/Users/valedamasco/Documents/DA2/Obligatorio1/Damasco-Gomez/App/BusinessLogicInterface/obj/Debug/netstandard2.0/BusinessLogicInterface.csproj.CopyComplete
+/Users/valedamasco/Documents/DA2/Obligatorio1/Damasco-Gomez/App/BusinessLogicInterface/obj/Debug/netstandard2.0/BusinessLogicInterface.dll
+/Users/valedamasco/Documents/DA2/Obligatorio1/Damasco-Gomez/App/BusinessLogicInterface/obj/Debug/netstandard2.0/BusinessLogicInterface.pdb

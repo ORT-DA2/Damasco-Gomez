@@ -1,0 +1,9 @@
+/Users/valedamasco/Documents/DA2/Obligatorio1/Damasco-Gomez/App/Domain/bin/Debug/netstandard2.0/Domain.deps.json
+/Users/valedamasco/Documents/DA2/Obligatorio1/Damasco-Gomez/App/Domain/bin/Debug/netstandard2.0/Domain.dll
+/Users/valedamasco/Documents/DA2/Obligatorio1/Damasco-Gomez/App/Domain/bin/Debug/netstandard2.0/Domain.pdb
+/Users/valedamasco/Documents/DA2/Obligatorio1/Damasco-Gomez/App/Domain/obj/Debug/netstandard2.0/Domain.csprojAssemblyReference.cache
+/Users/valedamasco/Documents/DA2/Obligatorio1/Damasco-Gomez/App/Domain/obj/Debug/netstandard2.0/Domain.AssemblyInfoInputs.cache
+/Users/valedamasco/Documents/DA2/Obligatorio1/Damasco-Gomez/App/Domain/obj/Debug/netstandard2.0/Domain.AssemblyInfo.cs
+/Users/valedamasco/Documents/DA2/Obligatorio1/Damasco-Gomez/App/Domain/obj/Debug/netstandard2.0/Domain.csproj.CoreCompileInputs.cache
+/Users/valedamasco/Documents/DA2/Obligatorio1/Damasco-Gomez/App/Domain/obj/Debug/netstandard2.0/Domain.dll
+/Users/valedamasco/Documents/DA2/Obligatorio1/Damasco-Gomez/App/Domain/obj/Debug/netstandard2.0/Domain.pdb

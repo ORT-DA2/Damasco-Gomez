@@ -1,0 +1,12 @@
+/Users/valedamasco/Documents/DA2/Obligatorio1/Damasco-Gomez/App/DataAccessInterface/bin/Debug/netstandard2.0/DataAccessInterface.deps.json
+/Users/valedamasco/Documents/DA2/Obligatorio1/Damasco-Gomez/App/DataAccessInterface/bin/Debug/netstandard2.0/DataAccessInterface.dll
+/Users/valedamasco/Documents/DA2/Obligatorio1/Damasco-Gomez/App/DataAccessInterface/bin/Debug/netstandard2.0/DataAccessInterface.pdb
+/Users/valedamasco/Documents/DA2/Obligatorio1/Damasco-Gomez/App/DataAccessInterface/bin/Debug/netstandard2.0/Domain.dll
+/Users/valedamasco/Documents/DA2/Obligatorio1/Damasco-Gomez/App/DataAccessInterface/bin/Debug/netstandard2.0/Domain.pdb
+/Users/valedamasco/Documents/DA2/Obligatorio1/Damasco-Gomez/App/DataAccessInterface/obj/Debug/netstandard2.0/DataAccessInterface.csprojAssemblyReference.cache
+/Users/valedamasco/Documents/DA2/Obligatorio1/Damasco-Gomez/App/DataAccessInterface/obj/Debug/netstandard2.0/DataAccessInterface.AssemblyInfoInputs.cache
+/Users/valedamasco/Documents/DA2/Obligatorio1/Damasco-Gomez/App/DataAccessInterface/obj/Debug/netstandard2.0/DataAccessInterface.AssemblyInfo.cs
+/Users/valedamasco/Documents/DA2/Obligatorio1/Damasco-Gomez/App/DataAccessInterface/obj/Debug/netstandard2.0/DataAccessInterface.csproj.CoreCompileInputs.cache
+/Users/valedamasco/Documents/DA2/Obligatorio1/Damasco-Gomez/App/DataAccessInterface/obj/Debug/netstandard2.0/DataAccessInterface.csproj.CopyComplete
+/Users/valedamasco/Documents/DA2/Obligatorio1/Damasco-Gomez/App/DataAccessInterface/obj/Debug/netstandard2.0/DataAccessInterface.dll
+/Users/valedamasco/Documents/DA2/Obligatorio1/Damasco-Gomez/App/DataAccessInterface/obj/Debug/netstandard2.0/DataAccessInterface.pdb
