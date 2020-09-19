@@ -1,7 +1,0 @@
-namespace .
-{
-    public class HousingBusinessLogic
-    {
-        
-    }
-}
