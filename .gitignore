@@ -15,3 +15,5 @@ App/.vscode
 
 App/Factory/obj
 App/WebApi/obj
+App/BusinessLogic.Test/obj
+App/BusinessLogic.Test/bin
