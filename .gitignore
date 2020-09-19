@@ -13,3 +13,5 @@ App/DataAccessInterface/obj
 App/Domain/obj
 App/.vscode
 
+App/Factory/obj
+App/WebApi/obj
