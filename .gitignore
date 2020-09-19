@@ -10,3 +10,11 @@ App/DataAccess/obj/Debug
 *.cache
 *.cache
 App/WebApi/obj
+App/BusinessLogic/obj
+App/BusinessLogic/obj
+App/BusinessLogicInterface/obj
+App/BusinessLogic/obj
+App/DataAccess/obj
+App/DataAccessInterface/obj
+App/Factory/obj
+App/WebApi/obj
