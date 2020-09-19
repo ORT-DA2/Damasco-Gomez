@@ -1,8 +1,10 @@
+using System;
+
 namespace BusinessLogicInterface
 {
     public interface IHouseBussinesLogic
     {
-        void GetHouses(Date checkIn, Date checkOut, int adult, int kids, int babies, string touristPoint);
+        void GetHouses(DateTime checkIn, DateTime checkOut, int adult, int kids, int babies, string touristPoint);
 
         void PostHospedaje(int pricePerNight,string touristPoint,string houseName,int starts,string address,int image,string description,string phone,string contact,string token);
     
@@ -16,6 +18,6 @@ namespace BusinessLogicInterface
 
         void UpdateContactInformation(int id, string phone, string contact, string token);
 
-        void CalculatePrice(Date checkIn, Date checkOut);
+        void CalculatePrice(DateTime checkIn, DateTime checkOut);
     }
 }
