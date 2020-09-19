@@ -17,3 +17,5 @@ App/Factory/obj
 App/WebApi/obj
 App/BusinessLogic.Test/obj
 App/BusinessLogic.Test/bin
+App/Factory/bin
+App/WebApi/bin
