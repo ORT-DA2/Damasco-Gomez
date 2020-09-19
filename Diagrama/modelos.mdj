@@ -21651,7 +21651,8 @@
 											"_parent": {
 												"$ref": "AAAAAAF0mQBSqSn4F1g="
 											},
-											"name": "string name"
+											"name": "string name",
+											"type": ""
 										},
 										{
 											"_type": "UMLParameter",
@@ -21659,7 +21660,8 @@
 											"_parent": {
 												"$ref": "AAAAAAF0mQBSqSn4F1g="
 											},
-											"name": "string token"
+											"name": "string token",
+											"type": ""
 										}
 									]
 								},
@@ -21705,7 +21707,8 @@
 											"_parent": {
 												"$ref": "AAAAAAF0mQBfBCoEonw="
 											},
-											"name": "int id"
+											"name": "int id",
+											"type": ""
 										},
 										{
 											"_type": "UMLParameter",
@@ -21713,7 +21716,8 @@
 											"_parent": {
 												"$ref": "AAAAAAF0mQBfBCoEonw="
 											},
-											"name": "string touristPoint"
+											"name": "string touristPoint",
+											"type": ""
 										}
 									]
 								},
@@ -21731,7 +21735,8 @@
 											"_parent": {
 												"$ref": "AAAAAAF0mQBhhSoKMdQ="
 											},
-											"name": "int id"
+											"name": "int id",
+											"type": ""
 										}
 									]
 								},
@@ -21802,7 +21807,8 @@
 											"_parent": {
 												"$ref": "AAAAAAF0mP9PICkaCHQ="
 											},
-											"name": "Date checkIn"
+											"name": "Date checkIn",
+											"type": ""
 										},
 										{
 											"_type": "UMLParameter",
@@ -21810,7 +21816,8 @@
 											"_parent": {
 												"$ref": "AAAAAAF0mP9PICkaCHQ="
 											},
-											"name": "Date checkOut"
+											"name": "Date checkOut",
+											"type": ""
 										},
 										{
 											"_type": "UMLParameter",
@@ -21818,7 +21825,8 @@
 											"_parent": {
 												"$ref": "AAAAAAF0mP9PICkaCHQ="
 											},
-											"name": "int adultos"
+											"name": "int adultos",
+											"type": ""
 										},
 										{
 											"_type": "UMLParameter",
@@ -21826,7 +21834,8 @@
 											"_parent": {
 												"$ref": "AAAAAAF0mP9PICkaCHQ="
 											},
-											"name": "int ninios"
+											"name": "int ninios",
+											"type": ""
 										},
 										{
 											"_type": "UMLParameter",
@@ -21834,7 +21843,8 @@
 											"_parent": {
 												"$ref": "AAAAAAF0mP9PICkaCHQ="
 											},
-											"name": "int bebes"
+											"name": "int bebes",
+											"type": ""
 										},
 										{
 											"_type": "UMLParameter",
@@ -21842,7 +21852,8 @@
 											"_parent": {
 												"$ref": "AAAAAAF0mP9PICkaCHQ="
 											},
-											"name": "string puntoTuristico"
+											"name": "string puntoTuristico",
+											"type": ""
 										}
 									]
 								},
@@ -21860,7 +21871,8 @@
 											"_parent": {
 												"$ref": "AAAAAAF0mP9YMSkgFKw="
 											},
-											"name": "int pricePerNight"
+											"name": "int pricePerNight",
+											"type": ""
 										},
 										{
 											"_type": "UMLParameter",
@@ -21868,7 +21880,8 @@
 											"_parent": {
 												"$ref": "AAAAAAF0mP9YMSkgFKw="
 											},
-											"name": "string touristPoint"
+											"name": "string touristPoint",
+											"type": ""
 										},
 										{
 											"_type": "UMLParameter",
@@ -21876,7 +21889,8 @@
 											"_parent": {
 												"$ref": "AAAAAAF0mP9YMSkgFKw="
 											},
-											"name": "string houseName"
+											"name": "string houseName",
+											"type": ""
 										},
 										{
 											"_type": "UMLParameter",
@@ -21884,7 +21898,8 @@
 											"_parent": {
 												"$ref": "AAAAAAF0mP9YMSkgFKw="
 											},
-											"name": "int starts"
+											"name": "int starts",
+											"type": ""
 										},
 										{
 											"_type": "UMLParameter",
@@ -21892,7 +21907,8 @@
 											"_parent": {
 												"$ref": "AAAAAAF0mP9YMSkgFKw="
 											},
-											"name": "string address"
+											"name": "string address",
+											"type": ""
 										},
 										{
 											"_type": "UMLParameter",
@@ -21900,7 +21916,8 @@
 											"_parent": {
 												"$ref": "AAAAAAF0mP9YMSkgFKw="
 											},
-											"name": "int image"
+											"name": "int image",
+											"type": ""
 										},
 										{
 											"_type": "UMLParameter",
@@ -21908,7 +21925,8 @@
 											"_parent": {
 												"$ref": "AAAAAAF0mP9YMSkgFKw="
 											},
-											"name": "string description"
+											"name": "string description",
+											"type": ""
 										},
 										{
 											"_type": "UMLParameter",
@@ -21916,7 +21934,8 @@
 											"_parent": {
 												"$ref": "AAAAAAF0mP9YMSkgFKw="
 											},
-											"name": "string phone"
+											"name": "string phone",
+											"type": ""
 										},
 										{
 											"_type": "UMLParameter",
@@ -21924,7 +21943,8 @@
 											"_parent": {
 												"$ref": "AAAAAAF0mP9YMSkgFKw="
 											},
-											"name": "string contact"
+											"name": "string contact",
+											"type": ""
 										},
 										{
 											"_type": "UMLParameter",
@@ -21932,7 +21952,8 @@
 											"_parent": {
 												"$ref": "AAAAAAF0mP9YMSkgFKw="
 											},
-											"name": "string token"
+											"name": "string token",
+											"type": ""
 										}
 									]
 								},
@@ -22180,7 +22201,8 @@
 											"_parent": {
 												"$ref": "AAAAAAF0mP/UnSmYaLw="
 											},
-											"name": "int id"
+											"name": "int id",
+											"type": ""
 										},
 										{
 											"_type": "UMLParameter",
@@ -22188,7 +22210,8 @@
 											"_parent": {
 												"$ref": "AAAAAAF0mP/UnSmYaLw="
 											},
-											"name": "string touristPoint"
+											"name": "string touristPoint",
+											"type": ""
 										},
 										{
 											"_type": "UMLParameter",
@@ -22196,7 +22219,8 @@
 											"_parent": {
 												"$ref": "AAAAAAF0mP/UnSmYaLw="
 											},
-											"name": "string token"
+											"name": "string token",
+											"type": ""
 										}
 									]
 								},
@@ -22296,7 +22320,8 @@
 											"_parent": {
 												"$ref": "AAAAAAF0mP+HXylWexQ="
 											},
-											"name": "int id"
+											"name": "int id",
+											"type": ""
 										}
 									]
 								},
@@ -22495,7 +22520,8 @@
 											"_parent": {
 												"$ref": "AAAAAAF0mQAK2im8Z8E="
 											},
-											"name": "string name"
+											"name": "string name",
+											"type": ""
 										},
 										{
 											"_type": "UMLParameter",
@@ -22503,7 +22529,8 @@
 											"_parent": {
 												"$ref": "AAAAAAF0mQAK2im8Z8E="
 											},
-											"name": "int image"
+											"name": "int image",
+											"type": ""
 										},
 										{
 											"_type": "UMLParameter",
@@ -22511,7 +22538,8 @@
 											"_parent": {
 												"$ref": "AAAAAAF0mQAK2im8Z8E="
 											},
-											"name": "string description"
+											"name": "string description",
+											"type": ""
 										},
 										{
 											"_type": "UMLParameter",
@@ -22519,7 +22547,8 @@
 											"_parent": {
 												"$ref": "AAAAAAF0mQAK2im8Z8E="
 											},
-											"name": "string token"
+											"name": "string token",
+											"type": ""
 										}
 									]
 								},
@@ -22537,7 +22566,8 @@
 											"_parent": {
 												"$ref": "AAAAAAF0mQAVzinCIZ4="
 											},
-											"name": "int id"
+											"name": "int id",
+											"type": ""
 										},
 										{
 											"_type": "UMLParameter",
@@ -22545,7 +22575,8 @@
 											"_parent": {
 												"$ref": "AAAAAAF0mQAVzinCIZ4="
 											},
-											"name": "string token"
+											"name": "string token",
+											"type": ""
 										}
 									]
 								},
@@ -22637,7 +22668,8 @@
 											"_parent": {
 												"$ref": "AAAAAAF0mQAf0ynUPM4="
 											},
-											"name": "string name"
+											"name": "string name",
+											"type": ""
 										}
 									]
 								},
@@ -24053,7 +24085,7 @@
 											"top": 349,
 											"width": 358.77587890625,
 											"height": 13,
-											"text": "+Phone: string",
+											"text": "+Phone: int",
 											"horizontalAlignment": 0
 										},
 										{
@@ -24155,7 +24187,7 @@
 											"top": 432,
 											"width": 358.77587890625,
 											"height": 13,
-											"text": "+UpdateContactInformation(int id, string phone, string contact)",
+											"text": "+UpdateContactInformation(int id, int phone, string contact)",
 											"horizontalAlignment": 0
 										},
 										{
@@ -25197,7 +25229,7 @@
 											"top": 705,
 											"width": 256.14697265625,
 											"height": 13,
-											"text": "+UpdateImage(int id, string image)",
+											"text": "+UpdateImage(Image  image)",
 											"horizontalAlignment": 0
 										},
 										{
@@ -25214,7 +25246,7 @@
 											"top": 720,
 											"width": 256.14697265625,
 											"height": 13,
-											"text": "+UpdateDescription(int id, string description)",
+											"text": "+UpdateDescription(string description)",
 											"horizontalAlignment": 0
 										},
 										{
@@ -25231,7 +25263,7 @@
 											"top": 735,
 											"width": 256.14697265625,
 											"height": 13,
-											"text": "+UpdateName(int id, string name)",
+											"text": "+UpdateName(string name)",
 											"horizontalAlignment": 0
 										},
 										{
@@ -32849,7 +32881,7 @@
 										"$ref": "AAAAAAF0mQSCSC4dJnQ="
 									},
 									"name": "Phone",
-									"type": "string"
+									"type": "int"
 								},
 								{
 									"_type": "UMLAttribute",
@@ -32913,8 +32945,7 @@
 											"_parent": {
 												"$ref": "AAAAAAF0mVZW/qrHRiU="
 											},
-											"name": "int id",
-											"type": ""
+											"name": "int id"
 										},
 										{
 											"_type": "UMLParameter",
@@ -32922,8 +32953,7 @@
 											"_parent": {
 												"$ref": "AAAAAAF0mVZW/qrHRiU="
 											},
-											"name": "string phone",
-											"type": ""
+											"name": "int phone"
 										},
 										{
 											"_type": "UMLParameter",
@@ -32931,8 +32961,7 @@
 											"_parent": {
 												"$ref": "AAAAAAF0mVZW/qrHRiU="
 											},
-											"name": "string contact",
-											"type": ""
+											"name": "string contact"
 										}
 									]
 								},
@@ -33223,17 +33252,7 @@
 											"_parent": {
 												"$ref": "AAAAAAF0mVbVGasi0As="
 											},
-											"name": "int id",
-											"type": ""
-										},
-										{
-											"_type": "UMLParameter",
-											"_id": "AAAAAAF0nI00AcAdE2I=",
-											"_parent": {
-												"$ref": "AAAAAAF0mVbVGasi0As="
-											},
-											"name": "string image",
-											"type": ""
+											"name": "Image  image"
 										}
 									]
 								},
@@ -33251,17 +33270,7 @@
 											"_parent": {
 												"$ref": "AAAAAAF0mVbeeqsoLvM="
 											},
-											"name": "int id",
-											"type": ""
-										},
-										{
-											"_type": "UMLParameter",
-											"_id": "AAAAAAF0nI1pS8DoLm0=",
-											"_parent": {
-												"$ref": "AAAAAAF0mVbeeqsoLvM="
-											},
-											"name": "string description",
-											"type": ""
+											"name": "string description"
 										}
 									]
 								},
@@ -33279,17 +33288,7 @@
 											"_parent": {
 												"$ref": "AAAAAAF0mVbhgKsue64="
 											},
-											"name": "int id",
-											"type": ""
-										},
-										{
-											"_type": "UMLParameter",
-											"_id": "AAAAAAF0nI2c+8H76rA=",
-											"_parent": {
-												"$ref": "AAAAAAF0mVbhgKsue64="
-											},
-											"name": "string name",
-											"type": ""
+											"name": "string name"
 										}
 									]
 								},
@@ -33359,7 +33358,8 @@
 											"_parent": {
 												"$ref": "AAAAAAF0mQVf0C9xc1g="
 											},
-											"name": "Date checkIn"
+											"name": "Date checkIn",
+											"type": ""
 										},
 										{
 											"_type": "UMLParameter",
@@ -33367,7 +33367,8 @@
 											"_parent": {
 												"$ref": "AAAAAAF0mQVf0C9xc1g="
 											},
-											"name": "Date checkOut"
+											"name": "Date checkOut",
+											"type": ""
 										},
 										{
 											"_type": "UMLParameter",
@@ -33375,7 +33376,8 @@
 											"_parent": {
 												"$ref": "AAAAAAF0mQVf0C9xc1g="
 											},
-											"name": "int adult"
+											"name": "int adult",
+											"type": ""
 										},
 										{
 											"_type": "UMLParameter",
@@ -33383,7 +33385,8 @@
 											"_parent": {
 												"$ref": "AAAAAAF0mQVf0C9xc1g="
 											},
-											"name": "int kids"
+											"name": "int kids",
+											"type": ""
 										},
 										{
 											"_type": "UMLParameter",
@@ -33391,7 +33394,8 @@
 											"_parent": {
 												"$ref": "AAAAAAF0mQVf0C9xc1g="
 											},
-											"name": "int babies"
+											"name": "int babies",
+											"type": ""
 										},
 										{
 											"_type": "UMLParameter",
@@ -33399,7 +33403,8 @@
 											"_parent": {
 												"$ref": "AAAAAAF0mQVf0C9xc1g="
 											},
-											"name": "string touristPoint"
+											"name": "string touristPoint",
+											"type": ""
 										}
 									]
 								},
