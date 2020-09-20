@@ -25,6 +25,9 @@ App/Model/bin
 App/Model/obj
 App/WebApi.Test/bin
 App/WebApi.Test/obj
+App/WebApi/Properties/launchSettings.json
+obj
+App/WebApi/Properties/launchSettings.json
 App/Migrations/obj
 App/obj
 obj
