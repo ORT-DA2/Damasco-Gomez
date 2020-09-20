@@ -2,8 +2,8 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace WebApi.Controllers
 {
-    [Route("api/regions")]
-    public class RegionController : VidlyControllerBase
+    [ApiController]
+    public class VidlyControllerBase : ControllerBase
     {
         
     }
