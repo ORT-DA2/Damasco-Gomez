@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using System.Drawing;
 
 namespace Domain
 {
@@ -18,24 +19,19 @@ namespace Domain
 
        public string Address {get ; set; }
 
-       public List<Image> Images {get ; set; }
+       public List<string> Ilustrations {get ; set; }
 
        public string Description {get ; set;}
 
        public int Phone {get; set; }
 
-       public string Contanct {get; set;}
-
-        public void udpatePricePerNight (int id) 
-        {
-            PricePerNight = id;
-        }
-
-        public void udpateContactInformation (int id , string phone , string contact)
+       public string Contact {get; set;}
+        public void UpdateInformation (int id , int phone , string contact, int price)
         {
              Id = id;
              Phone = phone;
              Contact = contact;
+             PricePerNight = price;
         }
 
     }
