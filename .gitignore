@@ -21,3 +21,5 @@ App/Factory/bin
 App/WebApi/bin
 App/Domain.Test/bin
 App/Domain.Test/obj
+App/Model/bin
+App/Model/obj
