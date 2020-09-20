@@ -1,0 +1,29 @@
+using Domain;
+using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.Configuration;
+using System.IO;
+
+namespace DataAccess.Context
+{
+    public class VidlyContext : DbContext
+    {
+        public DbSet<TouristPoint> TouristPoints {get; set;}
+
+        public VidlyContext(){}
+        public VidlyContext(DbContextOptions options) : base(options){}
+
+        protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
+        {
+            if(!optionsBuilder.IsConfigured)
+            {
+                string directory = System.IO.Directory.GetCurrentDirectory();
+                IConfigurationRoot configuration = new ConfigurationBuilder()
+                .SetBasePath(directory)
+                .AddJsonFile("appsettings.json")
+                .Build();
+                var connectionString = configuration.GetConnectionString(@"UruguayNatural");
+                optionsBuilder.UseSqlServer(connectionString);
+            }
+        }
+    }
+}

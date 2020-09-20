@@ -25,3 +25,6 @@ App/Model/bin
 App/Model/obj
 App/WebApi.Test/bin
 App/WebApi.Test/obj
+App/Migrations/obj
+App/obj
+obj

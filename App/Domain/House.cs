@@ -6,7 +6,7 @@ namespace Domain
 {
     public class House
     {
-        public int Id {get ; set ; }
+        public Guid Id {get ; set ; }
 
         public bool Avaible {get ; set; }
         public int PricePerNight {get; set;}
@@ -26,7 +26,7 @@ namespace Domain
        public int Phone {get; set; }
 
        public string Contact {get; set;}
-        public void UpdateInformation (int id , int phone , string contact, int price)
+        public void UpdateInformation (Gui id , int phone , string contact, int price)
         {
              Id = id;
              Phone = phone;

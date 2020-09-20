@@ -4,6 +4,7 @@
     <ProjectReference Include="..\BusinessLogicInterface\BusinessLogicInterface.csproj" />
     <ProjectReference Include="..\DataAccessInterface\DataAccessInterface.csproj" />
     <ProjectReference Include="..\Domain\Domain.csproj" />
+    <ProjectReference Include="..\DataAccess\DataAccess.csproj" />
   </ItemGroup>
 
   <PropertyGroup>
