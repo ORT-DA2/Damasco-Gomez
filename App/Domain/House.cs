@@ -26,9 +26,8 @@ namespace Domain
        public int Phone {get; set; }
 
        public string Contact {get; set;}
-        public void UpdateInformation (Gui id , int phone , string contact, int price)
+        public void UpdateInformation (int phone , string contact, int price)
         {
-             Id = id;
              Phone = phone;
              Contact = contact;
              PricePerNight = price;
