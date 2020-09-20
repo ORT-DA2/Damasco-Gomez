@@ -4,7 +4,7 @@ namespace WebApi.Controllers
 {
     [ApiController]
     [Route("api/regions")]
-    public class RegionController
+    public class RegionController : ControllerBase
     {
         
     }
