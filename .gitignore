@@ -23,3 +23,5 @@ App/Domain.Test/bin
 App/Domain.Test/obj
 App/Model/bin
 App/Model/obj
+App/WebApi.Test/bin
+App/WebApi.Test/obj
