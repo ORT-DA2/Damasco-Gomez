@@ -1,7 +1,16 @@
+using DataAccess.Repositories;
+
 namespace BusinessLogic
 {
     public class TouristPointBussinesLogic
     {
+        private TouristPointRepository touristPointRepository;
+
+        public TouristPointBussinesLogic()
+        {
+            TouristPointContext context = ContextFactory.GetNewContext();
+            touristPointRepository = new TouristPointRepository(context);
+        }
         public void AddTouristPoint(in string name, in int image, in string description, in string token)
         {
 
