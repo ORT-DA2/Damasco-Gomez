@@ -1,9 +1,9 @@
 <Project Sdk="Microsoft.NET.Sdk">
 
   <ItemGroup>
-    <ProjectReference Include="..\BusinessLogicInterface\BusinessLogicInterface.csproj" />
     <ProjectReference Include="..\DataAccessInterface\DataAccessInterface.csproj" />
     <ProjectReference Include="..\Domain\Domain.csproj" />
+    <ProjectReference Include="..\BusinessLogicInterface\BusinessLogicInterface.csproj" />
   </ItemGroup>
 
   <PropertyGroup>

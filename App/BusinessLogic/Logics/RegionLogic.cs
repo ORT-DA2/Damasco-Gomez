@@ -1,6 +1,8 @@
+using BusinessLogicInterface;
+
 namespace BusinessLogic
 {
-    public class RegionBussinesLogic
+    public class RegionLogic : IRegionLogic
     {
         
         public void AddRegion(string name, string token)

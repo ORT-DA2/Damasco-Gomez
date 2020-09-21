@@ -1,6 +1,6 @@
 namespace BusinessLogicInterface
 {
-    public interface ICategoryBussinesLogic
+    public interface ICategoryLogic
     {
          void AddCategory(string name, string token);
 

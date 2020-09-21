@@ -1,6 +1,8 @@
+using BusinessLogicInterface;
+
 namespace BusinessLogic
 {
-    public class CategoryBussinesLogic
+    public class CategoryLogic : ICategoryLogic
     {   
         public void AddCategory(string name, string token)
         {
