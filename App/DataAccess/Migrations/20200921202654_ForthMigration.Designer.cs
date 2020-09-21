@@ -4,14 +4,16 @@ using DataAccess.Context;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace DataAccess.Migrations
 {
     [DbContext(typeof(VidlyContext))]
-    partial class VidlyContextModelSnapshot : ModelSnapshot
+    [Migration("20200921202654_ForthMigration")]
+    partial class ForthMigration
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -70,28 +72,6 @@ namespace DataAccess.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("Categories");
-                });
-
-            modelBuilder.Entity("Domain.Entities.CategoryTouristPoint", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int")
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
-
-                    b.Property<int>("CategoryId")
-                        .HasColumnType("int");
-
-                    b.Property<int>("TouristPointId")
-                        .HasColumnType("int");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("CategoryId");
-
-                    b.HasIndex("TouristPointId");
-
-                    b.ToTable("CategoryTouristPoint");
                 });
 
             modelBuilder.Entity("Domain.House", b =>
@@ -187,7 +167,7 @@ namespace DataAccess.Migrations
                     b.Property<string>("Name")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<int>("RegionId")
+                    b.Property<int?>("RegionId")
                         .HasColumnType("int");
 
                     b.HasKey("Id");
@@ -204,21 +184,6 @@ namespace DataAccess.Migrations
                         .HasForeignKey("HouseId");
                 });
 
-            modelBuilder.Entity("Domain.Entities.CategoryTouristPoint", b =>
-                {
-                    b.HasOne("Domain.Category", "Category")
-                        .WithMany("CategoryTouristPoints")
-                        .HasForeignKey("CategoryId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.HasOne("Domain.TouristPoint", "TouristPoint")
-                        .WithMany("CategoriesTouristPoints")
-                        .HasForeignKey("TouristPointId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-                });
-
             modelBuilder.Entity("Domain.House", b =>
                 {
                     b.HasOne("Domain.TouristPoint", "Spot")
@@ -228,11 +193,9 @@ namespace DataAccess.Migrations
 
             modelBuilder.Entity("Domain.TouristPoint", b =>
                 {
-                    b.HasOne("Domain.Region", "Region")
+                    b.HasOne("Domain.Region", null)
                         .WithMany("TouristPoints")
-                        .HasForeignKey("RegionId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
+                        .HasForeignKey("RegionId");
                 });
 #pragma warning restore 612, 618
         }

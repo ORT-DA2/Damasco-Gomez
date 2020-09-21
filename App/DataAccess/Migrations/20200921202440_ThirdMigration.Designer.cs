@@ -4,14 +4,16 @@ using DataAccess.Context;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace DataAccess.Migrations
 {
     [DbContext(typeof(VidlyContext))]
-    partial class VidlyContextModelSnapshot : ModelSnapshot
+    [Migration("20200921202440_ThirdMigration")]
+    partial class ThirdMigration
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -67,31 +69,14 @@ namespace DataAccess.Migrations
                     b.Property<string>("Name")
                         .HasColumnType("nvarchar(max)");
 
-                    b.HasKey("Id");
-
-                    b.ToTable("Categories");
-                });
-
-            modelBuilder.Entity("Domain.Entities.CategoryTouristPoint", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int")
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
-
-                    b.Property<int>("CategoryId")
-                        .HasColumnType("int");
-
-                    b.Property<int>("TouristPointId")
+                    b.Property<int?>("TouristPointId")
                         .HasColumnType("int");
 
                     b.HasKey("Id");
-
-                    b.HasIndex("CategoryId");
 
                     b.HasIndex("TouristPointId");
 
-                    b.ToTable("CategoryTouristPoint");
+                    b.ToTable("Categories");
                 });
 
             modelBuilder.Entity("Domain.House", b =>
@@ -166,7 +151,12 @@ namespace DataAccess.Migrations
                     b.Property<string>("Name")
                         .HasColumnType("nvarchar(max)");
 
+                    b.Property<int>("TouristPointId")
+                        .HasColumnType("int");
+
                     b.HasKey("Id");
+
+                    b.HasIndex("TouristPointId");
 
                     b.ToTable("Regions");
                 });
@@ -187,12 +177,7 @@ namespace DataAccess.Migrations
                     b.Property<string>("Name")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<int>("RegionId")
-                        .HasColumnType("int");
-
                     b.HasKey("Id");
-
-                    b.HasIndex("RegionId");
 
                     b.ToTable("TouristPoints");
                 });
@@ -204,19 +189,11 @@ namespace DataAccess.Migrations
                         .HasForeignKey("HouseId");
                 });
 
-            modelBuilder.Entity("Domain.Entities.CategoryTouristPoint", b =>
+            modelBuilder.Entity("Domain.Category", b =>
                 {
-                    b.HasOne("Domain.Category", "Category")
-                        .WithMany("CategoryTouristPoints")
-                        .HasForeignKey("CategoryId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.HasOne("Domain.TouristPoint", "TouristPoint")
-                        .WithMany("CategoriesTouristPoints")
-                        .HasForeignKey("TouristPointId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
+                    b.HasOne("Domain.TouristPoint", null)
+                        .WithMany("categories")
+                        .HasForeignKey("TouristPointId");
                 });
 
             modelBuilder.Entity("Domain.House", b =>
@@ -226,11 +203,11 @@ namespace DataAccess.Migrations
                         .HasForeignKey("SpotId");
                 });
 
-            modelBuilder.Entity("Domain.TouristPoint", b =>
+            modelBuilder.Entity("Domain.Region", b =>
                 {
-                    b.HasOne("Domain.Region", "Region")
-                        .WithMany("TouristPoints")
-                        .HasForeignKey("RegionId")
+                    b.HasOne("Domain.TouristPoint", "TouristPoint")
+                        .WithMany()
+                        .HasForeignKey("TouristPointId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
                 });
