@@ -22,10 +22,10 @@ namespace Domain
 
         public DateTime CheckOut {get; set;}
 
-        public void UpdateInformation()
-        {
+        // public void UpdateInformation()
+        // {
 
-        }
+        // }
 
     }
 

@@ -11,6 +11,8 @@ namespace DataAccess.Context
         public DbSet<Category> Categories {get; set;}
         public DbSet<House> Houses {get; set;}
         public DbSet<Booking> Bookings {get; set;}
+        public DbSet<Person> Persons {get; set;}
+        public DbSet<Region> Regions {get; set;}
 
         public VidlyContext(){}
         public VidlyContext(DbContextOptions options) : base(options){}
@@ -24,7 +26,7 @@ namespace DataAccess.Context
                 .SetBasePath(directory)
                 .AddJsonFile("appsettings.json")
                 .Build();
-                var connectionString = configuration.GetConnectionString(@"UruguayNatural");
+                var connectionString = configuration.GetConnectionString(@"VidlyDB");
                 optionsBuilder.UseSqlServer(connectionString);
             }
         }

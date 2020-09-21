@@ -19,17 +19,17 @@ namespace Domain
 
         public string Address {get ; set; }
 
-        public List<string> Ilustrations {get ; set; }
+        public string Ilustrations {get ; set; }
 
         public string Description {get ; set;}
 
         public int Phone {get; set; }
 
         public string Contact {get; set;}
-        public void UpdateInformation()
-        {
+        // public void UpdateInformation()
+        // {
 
-        }
+        // }
 
     }
 }
