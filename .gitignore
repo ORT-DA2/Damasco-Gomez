@@ -31,3 +31,4 @@ App/WebApi/Properties/launchSettings.json
 App/Migrations/obj
 App/obj
 obj
+App/Migrations/bin
