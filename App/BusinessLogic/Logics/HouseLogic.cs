@@ -1,10 +1,16 @@
 using System;
 using BusinessLogicInterface;
+using DataAccessInterface.Repositories;
 
 namespace BusinessLogic
 {
     public class HouseLogic : IHouseLogic
     {
+        private readonly IHouseRepository houseRepository;
+        public HouseLogic(IHouseRepository houseRepository)
+        {
+            this.houseRepository = houseRepository;
+        }
         // public void GetHouses(DateTime checkIn, DateTime checkOut, int adult, int kids, int babies, string touristPoint)
         // {
 

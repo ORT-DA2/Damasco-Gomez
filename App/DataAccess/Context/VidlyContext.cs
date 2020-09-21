@@ -8,6 +8,9 @@ namespace DataAccess.Context
     public class VidlyContext : DbContext
     {
         public DbSet<TouristPoint> TouristPoints {get; set;}
+        public DbSet<Category> Categories {get; set;}
+        public DbSet<House> Houses {get; set;}
+        public DbSet<Booking> Bookings {get; set;}
 
         public VidlyContext(){}
         public VidlyContext(DbContextOptions options) : base(options){}
