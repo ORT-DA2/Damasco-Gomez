@@ -1,33 +1,38 @@
 using BusinessLogicInterface;
+using DataAccessInterface.Repositories;
 
 namespace BusinessLogic
 {
     public class RegionLogic : IRegionLogic
     {
-        
-        public void AddRegion(string name, string token)
+        private readonly IRegionRepository regionRepository;
+        public RegionLogic(IRegionRepository regionRepository)
         {
+            this.regionRepository = regionRepository;
+        }        
+        // public void AddRegion(string name, string token)
+        // {
             
-        }
-        public void DeleteRegion(int id, string token)
-        {
+        // }
+        // public void DeleteRegion(int id, string token)
+        // {
             
-        }
-        public void AddTouristPoint(int id, string touristPoint, string token)
-        {
+        // }
+        // public void AddTouristPoint(int id, string touristPoint, string token)
+        // {
             
-        }
-        public void GetTouristPoints()
-        {
+        // }
+        // public void GetTouristPoints()
+        // {
             
-        }
-        public void GetTouristPointById(int id)
-        {
+        // }
+        // public void GetTouristPointById(int id)
+        // {
             
-        }
-        public void GetCategoryByName(string name)
-        {
+        // }
+        // public void GetCategoryByName(string name)
+        // {
             
-        }
+        // }
     }
 }

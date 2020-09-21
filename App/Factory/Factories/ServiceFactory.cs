@@ -28,6 +28,8 @@ namespace Factory.Factories
             services.AddScoped<IHouseLogic, HouseLogic>();
             services.AddScoped<IPersonRepository, PersonRepository>();
             services.AddScoped<IPersonLogic, PersonLogic>();
+            services.AddScoped<IRegionRepository, RegionRepository>();
+            services.AddScoped<IRegionLogic, RegionLogic>();
         }
         public void AddDbContextService()
         {
