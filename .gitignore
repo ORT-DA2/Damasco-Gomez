@@ -28,3 +28,6 @@ App/WebApi.Test/obj
 App/WebApi/Properties/launchSettings.json
 obj
 App/WebApi/Properties/launchSettings.json
+App/Migrations/obj
+App/obj
+obj
