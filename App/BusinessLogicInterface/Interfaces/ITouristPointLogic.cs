@@ -1,7 +1,7 @@
 ﻿using System;
 namespace BusinessLogicInterface
 {
-    public interface ITouristPointController
+    public interface ITouristPointLogic
     {
         void AddTouristPoint(string name, int image, string description, string token);
 

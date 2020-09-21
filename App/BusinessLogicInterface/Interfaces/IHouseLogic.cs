@@ -2,7 +2,7 @@ using System;
 
 namespace BusinessLogicInterface
 {
-    public interface IHouseBussinesLogic
+    public interface IHouseLogic
     {
         void GetHouses(DateTime checkIn, DateTime checkOut, int adult, int kids, int babies, string touristPoint);
 

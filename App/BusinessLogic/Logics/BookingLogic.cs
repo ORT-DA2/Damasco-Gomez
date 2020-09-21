@@ -1,33 +1,34 @@
+
 using BusinessLogicInterface;
 
-namespace BusinessLogic
+namespace BusinessLogic.Logics
 {
     public class BookingLogic : IBookingLogic
     {
-        public void GetBookingById(in int id)
+        void GetBookingById(int id)
         {
 
         }
 
-        public void GetBookingByName(in string name)
+        void GetBookingByName(string name)
         {
 
         }
 
-        public void CreateBooking(in int checkIn, in int checkOut, in string name, in string email, in string house, in string token)
+        void CreateBooking(int checkIn, int checkOut, string name, string email, string house, string token)
+        {
+        
+        }
+
+        void GetCode(int id, string token)
         {
 
         }
 
-        public void GetCode(in int id, in string token)
+        void DeleteBooking(int id, string token)
         {
 
         }
-
-        public void DeleteBooking(in int id, in string token)
-        {
-
-        }
-
+        
     }
 }

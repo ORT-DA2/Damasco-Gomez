@@ -1,6 +1,6 @@
 namespace BusinessLogicInterface
 {
-    public interface IPersonBussinesLogic
+    public interface IPersonLogic
     {
          void CreateUser(string token);
 

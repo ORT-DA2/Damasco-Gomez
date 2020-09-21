@@ -1,6 +1,6 @@
 namespace BusinessLogicInterface
 {
-    public interface IBookingBussinesLogic
+    public interface IBookingLogic
     {
         void GetBookingById(int id);
 

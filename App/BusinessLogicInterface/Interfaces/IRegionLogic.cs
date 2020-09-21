@@ -1,6 +1,6 @@
 namespace BusinessLogicInterface
 {
-    public interface IRegionBussinesLogic
+    public interface IRegionLogic
     {
          void AddRegion(string name, string token);
 
