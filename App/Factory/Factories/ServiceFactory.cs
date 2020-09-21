@@ -24,6 +24,10 @@ namespace Factory.Factories
             services.AddScoped<IBookingLogic, BookingLogic>();
             services.AddScoped<ICategoryRepository, CategoryRepository>();
             services.AddScoped<ICategoryLogic, CategoryLogic>();
+            services.AddScoped<IHouseRepository, HouseRepository>();
+            services.AddScoped<IHouseLogic, HouseLogic>();
+            services.AddScoped<IPersonRepository, PersonRepository>();
+            services.AddScoped<IPersonLogic, PersonLogic>();
         }
         public void AddDbContextService()
         {
