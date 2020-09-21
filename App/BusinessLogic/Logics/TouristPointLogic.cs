@@ -10,23 +10,23 @@ namespace BusinessLogic
         // }
         // public void DeleteTouristPoint(in int id, in string token)
         // {
-            
+
         // }
         // public void AddImage(in int id, in int image, in string token)
         // {
-            
+
         // }
         // public void RemoveImage(in int id, in int image, in string token)
         // {
-            
+
         // }
         // public void GetTouristPointByName(in string name)
         // {
-            
+
         // }
         // public void GetTouristPointById(in int id)
         // {
-            
+
         // }
     }
 }

@@ -13,7 +13,7 @@ namespace DataAccess.Repositories
         {
             Context = context;
         }
-        public TouristPoint Get(Guid id)
+        public TouristPoint Get(int id)
         {
             return Context.Set<TouristPoint>().First(x=>x.Id==id);
         }

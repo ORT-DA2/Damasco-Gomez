@@ -4,7 +4,7 @@ namespace Domain
 {
     public class Booking
     {
-        public Guid Id {get; set; }
+        public int Id {get; set; }
 
         public string Name {get; set;}
 
@@ -22,20 +22,7 @@ namespace Domain
 
         public DateTime CheckOut {get; set;}
 
-        public void UpdateState (string state)
-        {
-
-        }
-        public void UpdateDates(DateTime chechkIn, DateTime checkOut)
-        {
-
-
-        }
-        public void UpdatePrice(int price)
-        {
-
-        }
-        public void UpadteContact (string email)
+        public void UpdateInformation()
         {
 
         }
