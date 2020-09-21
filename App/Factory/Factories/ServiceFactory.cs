@@ -1,6 +1,6 @@
-using BusinessLogic;
-using BusinessLogicInterface;
 using DataAccess.Context;
+using DataAccess.Repositories;
+using DataAccessInterface.Repositories;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.DependencyInjection;
 
@@ -13,11 +13,11 @@ namespace Factory.Factories
         {
             this.services = services;
         }
-        // public void AddCustomServices()
-        // {
-        //     services.AddScoped<ITouristPointRepository, TouristPointRepository>();
-        //     services.AddScoped<IMovieLogic, MovieLogic>();
-        // }
+        public void AddCustomServices()
+        {
+            // services.AddScoped<ITouristPointRepository, TouristPointRepository>();
+            // services.AddScoped<IMovieLogic, MovieLogic>();
+        }
         public void AddDbContextService()
         {
             services.AddDbContext<DbContext, VidlyContext>();
