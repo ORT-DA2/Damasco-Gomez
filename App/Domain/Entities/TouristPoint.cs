@@ -12,11 +12,11 @@ namespace Domain
 
         public string Description {get; set;}
 
-        public void UpdateInformation (string name, string image, string description)
-        {
-            Name = name ;
-            Description = description;
-            Image = image;
-        }
+        // public void UpdateInformation (string name, string image, string description)
+        // {
+        //     Name = name ;
+        //     Description = description;
+        //     Image = image;
+        // }
     }
 }

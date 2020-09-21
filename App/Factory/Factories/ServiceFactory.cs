@@ -1,3 +1,5 @@
+using BusinessLogic;
+using BusinessLogicInterface;
 using DataAccess.Context;
 using DataAccess.Repositories;
 using DataAccessInterface.Repositories;
@@ -16,7 +18,7 @@ namespace Factory.Factories
         public void AddCustomServices()
         {
             // services.AddScoped<ITouristPointRepository, TouristPointRepository>();
-            // services.AddScoped<IMovieLogic, MovieLogic>();
+            services.AddScoped<ITouristPointLogic, TouristPointLogic>();
         }
         public void AddDbContextService()
         {
