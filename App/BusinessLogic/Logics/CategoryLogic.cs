@@ -1,28 +1,34 @@
 using BusinessLogicInterface;
+using DataAccessInterface.Repositories;
 
 namespace BusinessLogic
 {
     public class CategoryLogic : ICategoryLogic
-    {   
-        public void AddCategory(string name, string token)
+    {
+        private readonly ICategoryRepository categoryRepository;
+        public CategoryLogic(ICategoryRepository categoryRepository)
         {
-            
+            this.categoryRepository = categoryRepository;
         }
-        public void DeleteCategory(int id, string token)
-        {
+        // public void AddCategory(string name, string token)
+        // {
             
-        }
-        public void GetTouristPointById(int id)
-        {
+        // }
+        // public void DeleteCategory(int id, string token)
+        // {
             
-        }
-        public void GetTouristPoints()
-        {
+        // }
+        // public void GetTouristPointById(int id)
+        // {
             
-        }
-        public void GetCategoryByName(string name)
-        {
+        // }
+        // public void GetTouristPoints()
+        // {
             
-        }
+        // }
+        // public void GetCategoryByName(string name)
+        // {
+            
+        // }
     }
 }

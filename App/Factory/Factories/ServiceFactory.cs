@@ -22,6 +22,8 @@ namespace Factory.Factories
             services.AddScoped<ITouristPointLogic, TouristPointLogic>();
             services.AddScoped<IBookingRepository, BookingRepository>();
             services.AddScoped<IBookingLogic, BookingLogic>();
+            services.AddScoped<ICategoryRepository, CategoryRepository>();
+            services.AddScoped<ICategoryLogic, CategoryLogic>();
         }
         public void AddDbContextService()
         {
