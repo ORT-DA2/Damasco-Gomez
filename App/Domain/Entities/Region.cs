@@ -10,10 +10,10 @@ namespace Domain
         public string Name {get; set;}
 
         public List<TouristPoint> TouristPoints {get; set; }
-        public void UpdateInformation()
-        {
+        // public void UpdateInformation()
+        // {
 
-        }
+        // }
 
 
     }

@@ -30,6 +30,7 @@ namespace WebApi
         {
             ServiceFactory factory = new ServiceFactory(services);
             services.AddControllers();
+            factory.AddDbContextService();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
