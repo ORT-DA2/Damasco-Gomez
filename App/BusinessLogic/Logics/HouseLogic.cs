@@ -1,8 +1,9 @@
 using System;
+using BusinessLogicInterface;
 
 namespace BusinessLogic
 {
-    public class HouseBusinessLogic
+    public class HouseLogic : IHouseLogic
     {
         public void GetHouses(DateTime checkIn, DateTime checkOut, int adult, int kids, int babies, string touristPoint)
         {

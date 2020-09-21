@@ -1,6 +1,8 @@
+using BusinessLogicInterface;
+
 namespace BusinessLogic
 {
-    public class TouristPointBussinesLogic
+    public class TouristPointLogic : ITouristPointLogic
     {
         public void AddTouristPoint(in string name, in int image, in string description, in string token)
         {

@@ -1,6 +1,8 @@
+using BusinessLogicInterface;
+
 namespace BusinessLogic
 {
-    public class BookingBussinesLogic
+    public class BookingLogic : IBookingLogic
     {
         public void GetBookingById(in int id)
         {
