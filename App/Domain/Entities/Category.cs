@@ -1,5 +1,5 @@
-using System;
 using System.Collections.Generic;
+using Domain.Entities;
 
 namespace Domain
 {
@@ -9,7 +9,7 @@ namespace Domain
 
         public string Name {get; set;}
 
-        public  List<TouristPoint>  TouristPoints {get; set;}
+        public  List<CategoryTouristPoint>  CategoryTouristPoints {get; set;}
         // public void UpdateInformation()
         // {
 
