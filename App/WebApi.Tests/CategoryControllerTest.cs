@@ -1,7 +1,16 @@
+using System.Collections.Generic;
+using System.Linq;
+using BusinessLogicInterface;
+using Domain;
+using Microsoft.AspNetCore.Mvc;
+using Microsoft.VisualStudio.TestTools.UnitTesting;
+using Moq;
+using WebApi.Controllers;
+
 namespace WebApi.Test
 {
     [TestClass]
-    public class TestCategoryController
+    public class CategoryControllerTest
     {
         [TestMethod]
         public void TestGetAllCategoriesOk()
@@ -12,13 +21,13 @@ namespace WebApi.Test
                 {
                     Id = 1,
                     Name = "New category",
-                    CategoryTouristPoints = new List<TouristPoint>(),
+                    CategoryTouristPoints = null,
                 },
                 new Category()
                 {
                     Id = 2,
                     Name = "Other category",
-                    CategoryTouristPoints = new List<TouristPoint>(),
+                    CategoryTouristPoints = null,
                 }
             };
             var mock = new Mock<ICategoryLogic>(MockBehavior.Strict);
