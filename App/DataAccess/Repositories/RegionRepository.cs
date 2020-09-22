@@ -1,6 +1,7 @@
 using DataAccessInterface.Repositories;
 using Microsoft.EntityFrameworkCore;
 using Domain;
+using System.Collections.Generic;
 
 namespace DataAccess.Repositories
 {
@@ -12,6 +13,11 @@ namespace DataAccess.Repositories
         {
             this.vidlyContext = context;
             this.regions = context.Set<Region>();
+        }
+
+        public IEnumerable<Region> GetAll()
+        {
+            return this.regions;
         }
     }
 }
