@@ -12,7 +12,7 @@ namespace BusinessLogic
         public RegionLogic(IRegionRepository regionRepository)
         {
             this.regionRepository = regionRepository;
-        }        
+        }
 
         public IEnumerable <Region> GetAll()
         {

@@ -1,3 +1,4 @@
+using BusinessLogicInterface;
 using Microsoft.AspNetCore.Mvc;
 
 namespace WebApi.Controllers
@@ -13,9 +14,9 @@ namespace WebApi.Controllers
         }
         [HttpGet]
         //api/regions
-        public IActionResult Get()
+        public IActionResult GetAll()
         {
-            return Ok(this.regionsLogic.getAll().select(m=>regionBasicModel(m)));
+            return Ok(this.regionsLogic.GetAll());
         }
 
 

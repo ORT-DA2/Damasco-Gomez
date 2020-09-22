@@ -1,4 +1,4 @@
-namespace Models.In\Region
+namespace Models
 {
     public class RegionBasicModel
     {
