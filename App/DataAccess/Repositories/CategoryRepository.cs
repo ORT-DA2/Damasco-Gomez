@@ -1,3 +1,4 @@
+using System.Collections.Generic;
 using DataAccessInterface.Repositories;
 using Domain;
 using Microsoft.EntityFrameworkCore;
@@ -12,6 +13,11 @@ namespace DataAccess.Repositories
         {
             this.vidlyContext = context;
             this.categories = context.Set<Category>();
+        }
+
+        public IEnumerable<Category> GetAll()
+        {
+            return this.categories;
         }
     }
 }

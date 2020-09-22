@@ -14,5 +14,14 @@ namespace Domain
         // {
 
         // }
+        public override bool Equals(object obj)
+        {
+            var result = false;
+            if(obj is Category category)
+            {
+                result = this.Id == category.Id && this.Name.Equals(category.Name);
+            }
+            return result;
+        }
     }
 }

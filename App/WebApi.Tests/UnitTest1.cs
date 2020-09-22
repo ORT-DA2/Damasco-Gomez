@@ -1,6 +1,6 @@
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 
-namespace WebApi.Test
+namespace WebApi.Tests
 {
     [TestClass]
     public class UnitTest1
