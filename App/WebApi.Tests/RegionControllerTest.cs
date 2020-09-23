@@ -15,27 +15,27 @@ namespace WebApi.Test
          [TestMethod]
          public void TestGetAllCategoriesOk()
         {
-            List<Category> categoriesToReturn = new List<Category>()
+            List<Region> categoriesToReturn = new List<Region>()
             {
-                new Category()
+                new Region()
                 {
                     Id = 1,
-                    Name = "New category",
-                    CategoryTouristPoints = null,
+                    Name = "New Region",
+                    TouristPoints = null,
                 },
-                new Category()
+                new Region()
                 {
                     Id = 2,
-                    Name = "Other category",
-                    CategoryTouristPoints = null,
+                    Name = "Other Region",
+                    TouristPoints = null,
                 }
             };
-            var mock = new Mock<ICategoryLogic>(MockBehavior.Strict);
+            var mock = new Mock<IRegionLogic>(MockBehavior.Strict);
             mock.Setup(m => m.GetAll()).Returns(categoriesToReturn);
-            var controller = new CategoryController(mock.Object);
+            var controller = new RegionController(mock.Object);
             var result = controller.Get();
             var okResult = result as OkObjectResult;
-            var categories = okResult.Value as IEnumerable<Category>;
+            var categories = okResult.Value as IEnumerable<Region>;
             mock.VerifyAll();
             Assert.IsTrue(categoriesToReturn.SequenceEqual(categories));
         }
