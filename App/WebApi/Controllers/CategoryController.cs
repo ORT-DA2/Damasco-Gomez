@@ -1,6 +1,6 @@
+using System.Linq;
 using BusinessLogicInterface;
 using Microsoft.AspNetCore.Mvc;
-
 namespace WebApi.Controllers
 {
     [Route("api/categories")]
