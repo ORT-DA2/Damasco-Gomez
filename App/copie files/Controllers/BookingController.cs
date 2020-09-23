@@ -5,6 +5,6 @@ namespace WebApi.Controllers
     [Route("api/bookings")]
     public class BookingController : VidlyControllerBase
     {
-
+        
     }
 }

@@ -9,39 +9,36 @@ using WebApi.Controllers;
 
 namespace WebApi.Test
 {
-    [TestClass] 
+    [TestClass]
     public class RegionControllerTest
     {
          [TestMethod]
-         public void TestGetRegionsOk()
-         {
-           List<Region> regionsToReturn = new List<Region> (){
-                new Region ()
+         public void TestGetAllCategoriesOk()
+        {
+            List<Category> categoriesToReturn = new List<Category>()
+            {
+                new Category()
                 {
                     Id = 1,
-                    Name = "CentroSur",
-                    TouristPoints = null,
-
-
+                    Name = "New category",
+                    CategoryTouristPoints = null,
                 },
-                new Region ()
+                new Category()
                 {
                     Id = 2,
-                    Name = "Costanera",
-                    TouristPoints = null,
-
+                    Name = "Other category",
+                    CategoryTouristPoints = null,
                 }
-           };
-
-           var mock = new Mock <IRegionLogic> (MockBehavior.Strict);
-           mock.Setup(mock => mock.GetAll()).Returns(regionsToReturn);
-           var controller = new RegionController(mock.Object);
-           var result = controller.GetAll();
-           var okResult = result as OkObjectResult;
-           var regions = okResult.Value as IEnumerable<Region>;
-           mock.VerifyAll();
-           Assert.IsTrue(regionsToReturn.SequenceEqual(regions));
-         }
+            };
+            var mock = new Mock<ICategoryLogic>(MockBehavior.Strict);
+            mock.Setup(m => m.GetAll()).Returns(categoriesToReturn);
+            var controller = new CategoryController(mock.Object);
+            var result = controller.Get();
+            var okResult = result as OkObjectResult;
+            var categories = okResult.Value as IEnumerable<Category>;
+            mock.VerifyAll();
+            Assert.IsTrue(categoriesToReturn.SequenceEqual(categories));
+        }
 
     }
 }
