@@ -4,6 +4,7 @@ using BusinessLogicInterface;
 using Domain;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
+using Model.Out;
 using Moq;
 using WebApi.Controllers;
 
@@ -35,9 +36,9 @@ namespace WebApi.Test
             var controller = new CategoryController(mock.Object);
             var result = controller.Get();
             var okResult = result as OkObjectResult;
-            var categories = okResult.Value as IEnumerable<Category>;
+            var categories = okResult.Value as IEnumerable<CategoryBasicInfoModel>;
             mock.VerifyAll();
-            Assert.IsTrue(categoriesToReturn.SequenceEqual(categories));
+            Assert.IsTrue(categoriesToReturn.Select(m=> new CategoryBasicInfoModel(m)).SequenceEqual(categories));
         }
         [TestMethod]
         public void TestGetBy()

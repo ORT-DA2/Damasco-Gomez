@@ -1,6 +1,8 @@
+using System.Linq;
 using BusinessLogicInterface;
 using Domain;
 using Microsoft.AspNetCore.Mvc;
+using Model.Out;
 
 namespace WebApi.Controllers
 {
@@ -15,7 +17,7 @@ namespace WebApi.Controllers
         [HttpGet]
         public IActionResult Get()
         {
-            return Ok(this.categoryLogic.GetAll());
+            return Ok(this.categoryLogic.GetAll().Select(m=> new CategoryBasicInfoModel(m)));
         }
 
         [HttpGet("{id}")]
