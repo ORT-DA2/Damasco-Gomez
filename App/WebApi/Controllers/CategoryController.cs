@@ -1,4 +1,5 @@
 using BusinessLogicInterface;
+using Domain;
 using Microsoft.AspNetCore.Mvc;
 
 namespace WebApi.Controllers
@@ -15,6 +16,35 @@ namespace WebApi.Controllers
         public IActionResult Get()
         {
             return Ok(this.categoryLogic.GetAll());
+        }
+
+        [HttpGet("{id}")]
+        public IActionResult GetBy([FromQuery]int id)
+        {
+            return Ok();
+        }
+        [HttpPost()]
+        //The post should have CategoryModel , but will leave it like this
+        public IActionResult Post([FromBody]Category category)
+        {
+            return Ok();
+        }
+        [HttpPut("{id}")]
+        //The put should have CategoryModel , but will leave it like this
+
+        public IActionResult Put([FromRoute]int id,[FromBody]Category category)
+        {
+            return Ok();
+        }
+        [HttpDelete("{id}")]
+        public IActionResult Delete([FromQuery]int id)
+        {
+            return Ok();
+        }
+        [HttpDelete()]
+        public IActionResult Delete()
+        {
+            return Ok();
         }
     }
 }
