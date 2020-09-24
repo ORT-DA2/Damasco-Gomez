@@ -16,5 +16,11 @@ namespace WebApi.Controllers
         {
             return Ok(this.categoryLogic.GetAll());
         }
+
+        [HttpGet]
+        public IActionResult GetBy([FromQuery]int id)
+        {
+            return Ok();
+        }
     }
 }
