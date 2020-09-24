@@ -1,6 +1,8 @@
+using Domain;
+
 namespace DataAccessInterface.Repositories
 {
-    public interface ITouristPointRepository
+    public interface ITouristPointRepository : IAccessData<TouristPoint>
     {
 
     }

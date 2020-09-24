@@ -5,7 +5,7 @@ using Microsoft.EntityFrameworkCore;
 
 namespace DataAccess.Repositories
 {
-    public class CategoryRepository : ICategoryRepository
+    public class CategoryRepository : AccessData<Category> , ICategoryRepository
     {
         private readonly DbSet<Category> categories;
         private readonly DbContext vidlyContext;

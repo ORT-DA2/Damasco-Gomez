@@ -4,7 +4,7 @@ using Microsoft.EntityFrameworkCore;
 
 namespace DataAccess.Repositories
 {
-    public class BookingRepository : IBookingRepository
+    public class BookingRepository : AccessData<Booking> , IBookingRepository
     {
         private readonly DbSet<Booking> bookings;
        private readonly DbContext vidlyContext;

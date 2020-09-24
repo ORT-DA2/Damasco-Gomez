@@ -5,7 +5,7 @@ using System.Collections.Generic;
 
 namespace DataAccess.Repositories
 {
-    public class RegionRepository : IRegionRepository
+    public class RegionRepository : AccessData<Region> , IRegionRepository
     {
         private readonly DbSet<Region> regions;
         private readonly DbContext vidlyContext;

@@ -4,7 +4,7 @@ using Microsoft.EntityFrameworkCore;
 
 namespace DataAccess.Repositories
 {
-    public class PersonRepository : IPersonRepository
+    public class PersonRepository : AccessData<Person> , IPersonRepository
     {
         private readonly DbSet<Person> persons;
         private readonly DbContext vidlyContext;

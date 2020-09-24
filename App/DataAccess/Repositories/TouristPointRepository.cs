@@ -7,7 +7,7 @@ using Microsoft.EntityFrameworkCore;
 
 namespace DataAccess.Repositories
 {
-    public class TouristPointRepository : ITouristPointRepository
+    public class TouristPointRepository : AccessData<TouristPoint> , ITouristPointRepository
     {
        private readonly DbSet<TouristPoint> touristPoints;
        private readonly DbContext vidlyContext;

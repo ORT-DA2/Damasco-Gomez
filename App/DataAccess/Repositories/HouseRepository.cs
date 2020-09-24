@@ -4,7 +4,7 @@ using Microsoft.EntityFrameworkCore;
 
 namespace DataAccess.Repositories
 {
-    public class HouseRepository : IHouseRepository
+    public class HouseRepository : AccessData<House> , IHouseRepository
     {
         private readonly DbSet<House> houses;
         private readonly DbContext vidlyContext;
