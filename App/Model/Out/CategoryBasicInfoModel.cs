@@ -16,5 +16,19 @@ namespace Model.Out
             this.Name = category.Name;
             this.CategoryTouristPoints = category.CategoryTouristPoints;
         }
+
+        public CategoryBasicInfoModel()
+        {
+        }
+
+        public override bool Equals(object obj)
+        {
+            var result = false;
+            if(obj is CategoryBasicInfoModel category)
+            {
+                result = this.Id == category.Id ;
+            }
+            return result;
+        }
     }
 }
