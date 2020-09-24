@@ -13,10 +13,13 @@ namespace WebApi.Test
     [TestClass]
     public class CategoryControllerTest
     {
-        [TestMethod]
-        public void TestGetAllCategoriesOk()
+        private List<Category> categoriesToReturn;
+        private List<Category> categoriesToReturnEmpty;
+        private Mock<ICategoryLogic> mock;
+        [TestInitialize]
+        public void initVariables()
         {
-            List<Category> categoriesToReturn = new List<Category>()
+            categoriesToReturn = new List<Category>()
             {
                 new Category()
                 {
@@ -31,7 +34,13 @@ namespace WebApi.Test
                     CategoryTouristPoints = null,
                 }
             };
-            var mock = new Mock<ICategoryLogic>(MockBehavior.Strict);
+            categoriesToReturnEmpty = new List<Category>();
+            mock = new Mock<ICategoryLogic>();
+        }
+        [TestMethod]
+        public void TestGetAllCategoriesOk()
+        {
+            mock = new Mock<ICategoryLogic>(MockBehavior.Strict);
             mock.Setup(m => m.GetAll()).Returns(categoriesToReturn);
             var controller = new CategoryController(mock.Object);
             var result = controller.Get();
@@ -39,6 +48,19 @@ namespace WebApi.Test
             var categories = okResult.Value as IEnumerable<CategoryBasicInfoModel>;
             mock.VerifyAll();
             Assert.IsTrue(categoriesToReturn.Select(n => new CategoryBasicInfoModel(n)).SequenceEqual(categories));
+        }
+
+        [TestMethod]
+        public void TestGetAllCategoriesVacia()
+        {
+            mock = new Mock<ICategoryLogic>(MockBehavior.Strict);
+            mock.Setup(m => m.GetAll()).Returns(categoriesToReturnEmpty);
+            var controller = new CategoryController(mock.Object);
+            var result = controller.Get();
+            var okResult = result as OkObjectResult;
+            var categories = okResult.Value as IEnumerable<CategoryBasicInfoModel>;
+            mock.VerifyAll();
+            Assert.IsTrue(categoriesToReturnEmpty.Select(n => new CategoryBasicInfoModel(n)).SequenceEqual(categories));
         }
         [TestMethod]
         public void TestGetBy()
