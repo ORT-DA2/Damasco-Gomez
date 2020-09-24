@@ -39,5 +39,31 @@ namespace WebApi.Test
             mock.VerifyAll();
             Assert.IsTrue(categoriesToReturn.SequenceEqual(categories));
         }
+        [TestMethod]
+        public void TestGetBy()
+        {
+            Assert.IsTrue(true);
+        }
+        [TestMethod]
+        public void TestPost()
+        {
+            Assert.IsTrue(true);
+        }
+        [TestMethod]
+        public void TestPut()
+        {
+            Assert.IsTrue(true);
+        }
+        [TestMethod]
+        public void TestDeleteWithId()
+        {
+            Assert.IsTrue(true);
+        }
+
+        [TestMethod]
+        public void TestDelete()
+        {
+            Assert.IsTrue(true);
+        }
     }
 }
