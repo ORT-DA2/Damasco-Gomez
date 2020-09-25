@@ -7,17 +7,9 @@ namespace DataAccess.Repositories
 {
     public class CategoryRepository : AccessData<Category> , ICategoryRepository
     {
-        private readonly DbSet<Category> categories;
-        private readonly DbContext vidlyContext;
-        public CategoryRepository(DbContext context)
+        public CategoryRepository(RepositoryMaster repositoryMaster)
         {
-            this.vidlyContext = context;
-            this.categories = context.Set<Category>();
-        }
-
-        public IEnumerable<Category> GetAll()
-        {
-            return this.categories;
+            this.repository = repositoryMaster.Categories;
         }
 
         protected override void Validate(Category element)

@@ -6,12 +6,9 @@ namespace DataAccess.Repositories
 {
     public class PersonRepository : AccessData<Person> , IPersonRepository
     {
-        private readonly DbSet<Person> persons;
-        private readonly DbContext vidlyContext;
-        public PersonRepository(DbContext context)
+        public PersonRepository(RepositoryMaster repositoryMaster)
         {
-            this.vidlyContext = context;
-            this.persons = context.Set<Person>();
+            this.repository = repositoryMaster.Persons;
         }
 
         protected override void Validate(Person element)

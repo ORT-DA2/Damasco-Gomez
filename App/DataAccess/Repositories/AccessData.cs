@@ -8,7 +8,7 @@ namespace DataAccess.Repositories
 {
     public abstract class AccessData<T> : IAccessData<T> where T : class
     {
-        private IRepository<T> repository;
+        protected IRepository<T> repository;
         protected abstract void Validate(T element);
         public void Add(T element)
         {
