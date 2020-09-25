@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using BusinessLogicInterface;
@@ -86,9 +87,45 @@ namespace WebApi.Test
             Assert.IsNull(categories);
         }
         [TestMethod]
-        public void TestPost()
+        public void TestPostOk()
         {
-            Assert.IsTrue(true);
+            mock.Setup(m => m.Add(categoryId1));
+            var result = controller.Post(categoryId1);
+            var okResult = result as CreatedAtRouteResult;
+            mock.VerifyAll();
+            Assert.IsNotNull(okResult);
+            Assert.AreEqual("Api", okResult.RouteName);
+            Assert.AreEqual(okResult.Value, categoryId1);
+        }
+        [TestMethod]
+        public void TestPostFailSameCategory()
+        {
+            mock.Setup(m => m.Add(categoryId1));
+            Exception exist = new AggregateException();
+            mock.Setup(p => p.Add(categoryId1)).Throws(exist);
+            var result = controller.Post(categoryId1);
+            mock.VerifyAll();
+            Assert.IsInstanceOfType(result, typeof(BadRequestObjectResult));
+        }
+        [TestMethod]
+        public void TestPostFailValidation()
+        {
+            mock.Setup(m => m.Add(categoryId1));
+            Exception exist = new ArgumentException();
+            mock.Setup(p => p.Add(categoryId1)).Throws(exist);
+            var result = controller.Post(categoryId1);
+            mock.VerifyAll();
+            Assert.IsInstanceOfType(result, typeof(BadRequestObjectResult));
+        }
+        [TestMethod]
+        public void TestPostFailServer()
+        {
+            mock.Setup(m => m.Add(categoryId1));
+            Exception exist = new Exception();
+            mock.Setup(p => p.Add(categoryId1)).Throws(exist);
+            var result = controller.Post(categoryId1);
+            mock.VerifyAll();
+            Assert.IsInstanceOfType(result, typeof(BadRequestObjectResult));
         }
         [TestMethod]
         public void TestPut()

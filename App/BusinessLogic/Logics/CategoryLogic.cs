@@ -22,6 +22,11 @@ namespace BusinessLogic
             return this.CategoryRepository.Find(id);
         }
 
+        public void Add(Category category)
+        {
+            this.CategoryRepository.Add(category);
+        }
+
         // public void AddCategory(string name, string token)
         // {
 

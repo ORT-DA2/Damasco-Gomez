@@ -8,5 +8,6 @@ namespace BusinessLogicInterface
 
         IEnumerable<Category> GetAll();
         Category GetBy(int id);
+        void Add(Category category);
     }
 }
