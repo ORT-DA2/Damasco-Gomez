@@ -17,7 +17,8 @@ namespace WebApi.Controllers
         [HttpGet]
         public IActionResult Get()
         {
-            return Ok(this.categoryLogic.GetAll().Select(m => new CategoryBasicInfoModel(m)));
+            var elementCategory = this.categoryLogic.GetAll().Select(m => new CategoryBasicInfoModel(m));
+            return Ok(elementCategory);
         }
 
         [HttpGet("{id}")]
