@@ -13,5 +13,10 @@ namespace DataAccess.Repositories
             this.vidlyContext = context;
             this.persons = context.Set<Person>();
         }
+
+        protected override void Validate(Person element)
+        {
+            throw new System.NotImplementedException();
+        }
     }
 }

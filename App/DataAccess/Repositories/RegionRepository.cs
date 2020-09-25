@@ -19,5 +19,15 @@ namespace DataAccess.Repositories
         {
             return this.regions;
         }
+
+        protected override void Validate(Region element)
+        {
+            throw new System.NotImplementedException();
+        }
+
+        IEnumerable<Region> IRegionRepository.GetAll()
+        {
+            throw new System.NotImplementedException();
+        }
     }
 }

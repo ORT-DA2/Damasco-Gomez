@@ -19,5 +19,10 @@ namespace DataAccess.Repositories
         {
             return this.categories;
         }
+
+        protected override void Validate(Category element)
+        {
+            throw new System.NotImplementedException();
+        }
     }
 }
