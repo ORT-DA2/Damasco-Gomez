@@ -1,6 +1,8 @@
+using Domain;
+
 namespace DataAccessInterface.Repositories
 {
-    public interface IPersonRepository
+    public interface IPersonRepository : IAccessData<Person>
     {
          
     }

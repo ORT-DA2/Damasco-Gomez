@@ -1,17 +1,20 @@
 using DataAccessInterface.Repositories;
 using Microsoft.EntityFrameworkCore;
 using Domain;
+using System.Collections.Generic;
 
 namespace DataAccess.Repositories
 {
-    public class RegionRepository : IRegionRepository
+    public class RegionRepository : AccessData<Region> , IRegionRepository
     {
-        private readonly DbSet<Region> regions;
-        private readonly DbContext vidlyContext;
-        public RegionRepository(DbContext context)
+        public RegionRepository(RepositoryMaster repositoryMaster)
         {
-            this.vidlyContext = context;
-            this.regions = context.Set<Region>();
+            this.repository = repositoryMaster.Regions;
+        }
+
+        protected override void Validate(Region element)
+        {
+            throw new System.NotImplementedException();
         }
     }
 }

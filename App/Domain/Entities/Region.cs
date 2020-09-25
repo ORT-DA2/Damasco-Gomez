@@ -14,6 +14,18 @@ namespace Domain
         // {
 
         // }
+        public override bool Equals (object obj)
+        {
+
+            var result = false;
+
+            if (obj is Region region)
+            {
+
+                result = this.Id == region.Id && this.Name.Equals(region.Name);
+            }
+            return result; 
+        }
 
 
     }

@@ -1,3 +1,6 @@
+using System.Collections.Generic;
+using Domain;
+
 namespace BusinessLogicInterface
 {
     public interface IRegionLogic
@@ -13,5 +16,6 @@ namespace BusinessLogicInterface
         //  void GetTouristPointById(int id);
 
         //  void GetCategoryByName(string name);
+        IEnumerable<Region> GetAll();
     }
 }

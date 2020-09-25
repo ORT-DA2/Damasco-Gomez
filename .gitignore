@@ -32,3 +32,4 @@ App/Migrations/obj
 App/obj
 obj
 App/Migrations/bin
+App/WebApi.Tests/bin

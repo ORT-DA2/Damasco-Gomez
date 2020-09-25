@@ -1,5 +1,8 @@
 using BusinessLogicInterface;
 using DataAccessInterface.Repositories;
+using Domain;
+using System;
+using System.Collections.Generic;
 
 namespace BusinessLogic
 {
@@ -9,7 +12,12 @@ namespace BusinessLogic
         public RegionLogic(IRegionRepository regionRepository)
         {
             this.regionRepository = regionRepository;
-        }        
+        }
+
+        public IEnumerable<Region> GetAll()
+        {
+            return this.regionRepository.GetElements();
+        }
         // public void AddRegion(string name, string token)
         // {
             

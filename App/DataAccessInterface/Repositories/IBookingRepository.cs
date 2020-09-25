@@ -1,6 +1,8 @@
+using Domain;
+
 namespace DataAccessInterface.Repositories
 {
-    public interface IBookingRepository
+    public interface IBookingRepository: IAccessData<Booking>
     {
          
     }

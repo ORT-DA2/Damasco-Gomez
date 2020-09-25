@@ -1,6 +1,8 @@
+using Domain;
+
 namespace DataAccessInterface.Repositories
 {
-    public interface IHouseRepository
+    public interface IHouseRepository : IAccessData<House>
     {
          
     }
