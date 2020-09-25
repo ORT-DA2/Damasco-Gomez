@@ -15,7 +15,9 @@ namespace WebApi.Test
     {
         private List<Category> categoriesToReturn;
         private List<Category> categoriesToReturnEmpty;
+        private Category categoryId1;
         private Mock<ICategoryLogic> mock;
+        private CategoryController controller ;
         [TestInitialize]
         public void initVariables()
         {
@@ -35,14 +37,14 @@ namespace WebApi.Test
                 }
             };
             categoriesToReturnEmpty = new List<Category>();
-            mock = new Mock<ICategoryLogic>();
+            categoryId1 = categoriesToReturn.First();
+            mock = new Mock<ICategoryLogic>(MockBehavior.Strict);
+            controller = new CategoryController(mock.Object);
         }
         [TestMethod]
         public void TestGetAllCategoriesOk()
         {
-            mock = new Mock<ICategoryLogic>(MockBehavior.Strict);
             mock.Setup(m => m.GetAll()).Returns(categoriesToReturn);
-            var controller = new CategoryController(mock.Object);
             var result = controller.Get();
             var okResult = result as OkObjectResult;
             var categories = okResult.Value as IEnumerable<CategoryBasicInfoModel>;
@@ -53,9 +55,7 @@ namespace WebApi.Test
         [TestMethod]
         public void TestGetAllCategoriesVacia()
         {
-            mock = new Mock<ICategoryLogic>(MockBehavior.Strict);
             mock.Setup(m => m.GetAll()).Returns(categoriesToReturnEmpty);
-            var controller = new CategoryController(mock.Object);
             var result = controller.Get();
             var okResult = result as OkObjectResult;
             var categories = okResult.Value as IEnumerable<CategoryBasicInfoModel>;
@@ -63,9 +63,27 @@ namespace WebApi.Test
             Assert.IsTrue(categoriesToReturnEmpty.Select(n => new CategoryBasicInfoModel(n)).SequenceEqual(categories));
         }
         [TestMethod]
-        public void TestGetBy()
+        public void TestGetByOk()
         {
-            Assert.IsTrue(true);
+            int id = 1;
+            mock.Setup(m => m.GetBy(id)).Returns(categoryId1);
+            var result = controller.GetBy(id);
+            var okResult = result as OkObjectResult;
+            var categories = okResult.Value as Category;
+            mock.VerifyAll();
+            Assert.IsTrue(categories.Equals(categoryId1));
+        }
+        [TestMethod]
+        public void TestGetByNotFound()
+        {
+            int id = 4;
+            Category categoryReturn = null;
+            mock.Setup(m => m.GetBy(id)).Returns(categoryReturn);
+            var result = controller.GetBy(id);
+            var okResult = result as OkObjectResult;
+            var categories = okResult.Value as Category;
+            mock.VerifyAll();
+            Assert.IsNull(categories);
         }
         [TestMethod]
         public void TestPost()

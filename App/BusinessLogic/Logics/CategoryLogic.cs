@@ -17,6 +17,10 @@ namespace BusinessLogic
         {
             return this.CategoryRepository.GetElements();
         }
+        public Category GetBy(int id)
+        {
+            return this.CategoryRepository.Find(id);
+        }
 
         // public void AddCategory(string name, string token)
         // {

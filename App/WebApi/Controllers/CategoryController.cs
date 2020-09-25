@@ -24,7 +24,8 @@ namespace WebApi.Controllers
         [HttpGet("{id}")]
         public IActionResult GetBy([FromQuery]int id)
         {
-            return Ok();
+            var elementCategory = this.categoryLogic.GetBy(id);
+            return Ok(elementCategory);
         }
         [HttpPost()]
         //The post should have CategoryModel , but will leave it like this
