@@ -2,6 +2,7 @@ using System;
 using DataAccess.Context;
 using DataAccessInterface.Repositories;
 using Microsoft.EntityFrameworkCore;
+using System.Collections.Generic;
 
 namespace DataAccess.Repositories
 {
@@ -50,15 +51,40 @@ namespace DataAccess.Repositories
             repository.Delete(id);
         }
 
-        // T IAccessData<T>.Find(int id)
-        // {
-        //     throw new System.NotImplementedException();
-        // }
+        public T Find(int id)
+        {
+            var elementFind = repository.FindInRepository(id);
+            if (elementFind == null)
+            {
+                throw new ArgumentException();
+            }
+            return elementFind;
+        }
 
-        // void IAccessData<T>.Update(T element)
-        // {
-        //     throw new System.NotImplementedException();
-        // }
+        public T Find(Predicate<T> element)
+        {
+            var elementFind = repository.FindInRepository(element);
+            if (elementFind == null)
+            {
+                throw new ArgumentException();
+            }
+            return elementFind;
+        }
+
+        public void Update(T element)
+        {
+            Validate(element);
+            if (ExistElement(element))
+            {
+                throw new ArgumentException();
+            }
+            repository.UpdateInContext(element);
+        }
+
+        public List<T> GetElements()
+        {
+            return repository.GetElementsInContext();
+        }
 
     }
 }

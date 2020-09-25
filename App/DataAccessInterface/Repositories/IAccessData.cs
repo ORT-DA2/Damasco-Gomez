@@ -11,8 +11,9 @@ namespace DataAccessInterface.Repositories
         bool ExistElement(Predicate<T> element);
         void Delete(T element);
         void Delete(int id);
-        // void Update(T element);
-        // T Find(int id);
-
+        T Find(int id);
+        T Find(Predicate<T> element);
+        void Update(T element);
+        List<T> GetElements();
     }
 }

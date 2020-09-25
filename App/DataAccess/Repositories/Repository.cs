@@ -1,4 +1,5 @@
 using System;
+using System.Collections.Generic;
 using System.Linq;
 using DataAccess.Context;
 using DataAccessInterface.Repositories;
@@ -20,6 +21,11 @@ namespace DataAccess.Repositories
         public void AddInContext(T element)
         {
             this.dbSet.Add(element);
+            this.managerContext.SaveChanges();
+        }
+        public void UpdateInContext(T element)
+        {
+            this.dbSet.Update(element);
             this.managerContext.SaveChanges();
         }
 
@@ -49,6 +55,19 @@ namespace DataAccess.Repositories
         public bool ExistInRepository(int id)
         {
             return this.dbSet.Find(id) != null;
+        }
+
+        public T FindInRepository(Predicate<T> element)
+        {
+            return this.dbSet.ToList().Find(element);
+        }
+        public T FindInRepository(int id)
+        {
+            return this.dbSet.Find(id);
+        }
+        public List<T> GetElementsInContext()
+        {
+            return this.dbSet.ToList();
         }
     }
 }
