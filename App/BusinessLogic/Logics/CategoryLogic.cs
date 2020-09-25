@@ -26,6 +26,10 @@ namespace BusinessLogic
         {
             this.CategoryRepository.Add(category);
         }
+        public void Update(Category category)
+        {
+            this.CategoryRepository.Update(category);
+        }
 
         // public void AddCategory(string name, string token)
         // {

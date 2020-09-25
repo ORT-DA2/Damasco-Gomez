@@ -35,6 +35,18 @@ namespace WebApi.Test
                     Id = 2,
                     Name = "Other category",
                     CategoryTouristPoints = null,
+                },
+                new Category()
+                {
+                    Id = 3,
+                    Name = "And other category",
+                    CategoryTouristPoints = null,
+                },
+                new Category()
+                {
+                    Id = 4,
+                    Name = "And one more category",
+                    CategoryTouristPoints = null,
                 }
             };
             categoriesToReturnEmpty = new List<Category>();
@@ -100,7 +112,7 @@ namespace WebApi.Test
         [TestMethod]
         public void TestPostFailSameCategory()
         {
-            mock.Setup(m => m.Add(categoryId1));
+            categoryId1 = categoriesToReturn.First();
             Exception exist = new AggregateException();
             mock.Setup(p => p.Add(categoryId1)).Throws(exist);
             var result = controller.Post(categoryId1);
@@ -110,7 +122,7 @@ namespace WebApi.Test
         [TestMethod]
         public void TestPostFailValidation()
         {
-            mock.Setup(m => m.Add(categoryId1));
+            categoryId1 = categoriesToReturn.First();
             Exception exist = new ArgumentException();
             mock.Setup(p => p.Add(categoryId1)).Throws(exist);
             var result = controller.Post(categoryId1);
@@ -120,7 +132,7 @@ namespace WebApi.Test
         [TestMethod]
         public void TestPostFailServer()
         {
-            mock.Setup(m => m.Add(categoryId1));
+            categoryId1 = categoriesToReturn.First();
             Exception exist = new Exception();
             mock.Setup(p => p.Add(categoryId1)).Throws(exist);
             var result = controller.Post(categoryId1);
@@ -128,9 +140,36 @@ namespace WebApi.Test
             Assert.IsInstanceOfType(result, typeof(BadRequestObjectResult));
         }
         [TestMethod]
-        public void TestPut()
+        public void TestPutOk()
         {
-            Assert.IsTrue(true);
+            categoryId1 = categoriesToReturn.First();
+            mock.Setup(m => m.Update(categoryId1));
+            var result = controller.Put(categoryId1.Id, categoryId1);
+            var okResult = result as CreatedAtRouteResult;
+            mock.VerifyAll();
+            Assert.IsNotNull(okResult);
+            Assert.AreEqual("Api", okResult.RouteName);
+            Assert.AreEqual(okResult.Value, categoryId1);
+        }
+        [TestMethod]
+        public void TestPutFailValidate()
+        {
+            categoryId1 = categoriesToReturn.First();
+            Exception exist = new ArgumentException();
+            mock.Setup(p => p.Update(categoryId1)).Throws(exist);
+            var result = controller.Put(categoryId1.Id, categoryId1);
+            mock.VerifyAll();
+            Assert.IsInstanceOfType(result, typeof(BadRequestObjectResult));
+        }
+        [TestMethod]
+        public void TestPutFailServer()
+        {
+            categoryId1 = categoriesToReturn.First();
+            Exception exist = new Exception();
+            mock.Setup(p => p.Update(categoryId1)).Throws(exist);
+            var result = controller.Put(categoryId1.Id, categoryId1);
+            mock.VerifyAll();
+            Assert.IsInstanceOfType(result, typeof(BadRequestObjectResult));
         }
         [TestMethod]
         public void TestDeleteWithId()

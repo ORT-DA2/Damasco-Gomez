@@ -52,10 +52,22 @@ namespace WebApi.Controllers
         }
         [HttpPut("{id}")]
         //The put should have CategoryModel , but will leave it like this
-
         public IActionResult Put([FromRoute]int id,[FromBody]Category category)
         {
-            return Ok();
+            try
+            {
+                this.categoryLogic.Update(category);
+                return CreatedAtRoute("Api", category.Id, category);
+                //return Ok(category);
+            }
+            catch(ArgumentException)
+            {
+                return BadRequest("Error while validate");
+            }
+            catch (Exception)
+            {
+                return BadRequest("Internal server error");
+            }
         }
         [HttpDelete("{id}")]
         public IActionResult Delete([FromQuery]int id)
