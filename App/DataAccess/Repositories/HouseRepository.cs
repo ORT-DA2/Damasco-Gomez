@@ -12,6 +12,11 @@ namespace DataAccess.Repositories
         {
             this.vidlyContext = context;
             this.houses = context.Set<House>();
-        }        
+        }
+
+        protected override void Validate(House element)
+        {
+            throw new System.NotImplementedException();
+        }
     }
 }

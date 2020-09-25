@@ -16,5 +16,10 @@ namespace DataAccess.Repositories
            this.vidlyContext = context;
            this.touristPoints = context.Set<TouristPoint>();
        }
+
+        protected override void Validate(TouristPoint element)
+        {
+            throw new NotImplementedException();
+        }
     }
 }
