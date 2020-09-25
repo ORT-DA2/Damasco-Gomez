@@ -14,9 +14,9 @@ namespace BusinessLogic
             this.regionRepository = regionRepository;
         }
 
-        public IEnumerable <Region> GetAll()
+        public IEnumerable<Region> GetAll()
         {
-            return this.regionRepository.GetAll();
+            return this.regionRepository.GetElements();
         }
         // public void AddRegion(string name, string token)
         // {

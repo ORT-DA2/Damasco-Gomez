@@ -15,7 +15,7 @@ namespace BusinessLogic
 
         public IEnumerable<Category> GetAll()
         {
-            return this.CategoryRepository.GetAll();
+            return this.CategoryRepository.GetElements();
         }
 
         // public void AddCategory(string name, string token)
