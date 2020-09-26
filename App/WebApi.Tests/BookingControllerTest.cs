@@ -158,38 +158,38 @@ namespace WebApi.Tests
             mock.VerifyAll();
             Assert.IsInstanceOfType(result, typeof(BadRequestObjectResult));
         }
-        // [TestMethod]
-        // public void TestPutOk()
-        // {
-        //     bookingId1 = bookingsToReturn.First();
-        //     mock.Setup(m => m.Update(bookingId1));
-        //     var result = controller.Put(bookingId1.Id, bookingId1);
-        //     var okResult = result as CreatedAtRouteResult;
-        //     mock.VerifyAll();
-        //     Assert.IsNotNull(okResult);
-        //     Assert.AreEqual("Api", okResult.RouteName);
-        //     Assert.AreEqual(okResult.Value, bookingId1);
-        // }
-        // [TestMethod]
-        // public void TestPutFailValidate()
-        // {
-        //     bookingId1 = bookingsToReturn.First();
-        //     Exception exist = new ArgumentException();
-        //     mock.Setup(p => p.Update(bookingId1)).Throws(exist);
-        //     var result = controller.Put(bookingId1.Id, bookingId1);
-        //     mock.VerifyAll();
-        //     Assert.IsInstanceOfType(result, typeof(BadRequestObjectResult));
-        // }
-        // [TestMethod]
-        // public void TestPutFailServer()
-        // {
-        //     bookingId1 = bookingsToReturn.First();
-        //     Exception exist = new Exception();
-        //     mock.Setup(p => p.Update(bookingId1)).Throws(exist);
-        //     var result = controller.Put(bookingId1.Id, bookingId1);
-        //     mock.VerifyAll();
-        //     Assert.IsInstanceOfType(result, typeof(BadRequestObjectResult));
-        // }
+        [TestMethod]
+        public void TestPutOk()
+        {
+            bookingId1 = bookingsToReturn.First();
+            mock.Setup(m => m.Update(bookingId1));
+            var result = controller.Put(bookingId1.Id, bookingId1);
+            var okResult = result as CreatedAtRouteResult;
+            mock.VerifyAll();
+            Assert.IsNotNull(okResult);
+            Assert.AreEqual("Api", okResult.RouteName);
+            Assert.AreEqual(okResult.Value, bookingId1);
+        }
+        [TestMethod]
+        public void TestPutFailValidate()
+        {
+            bookingId1 = bookingsToReturn.First();
+            Exception exist = new ArgumentException();
+            mock.Setup(p => p.Update(bookingId1)).Throws(exist);
+            var result = controller.Put(bookingId1.Id, bookingId1);
+            mock.VerifyAll();
+            Assert.IsInstanceOfType(result, typeof(BadRequestObjectResult));
+        }
+        [TestMethod]
+        public void TestPutFailServer()
+        {
+            bookingId1 = bookingsToReturn.First();
+            Exception exist = new Exception();
+            mock.Setup(p => p.Update(bookingId1)).Throws(exist);
+            var result = controller.Put(bookingId1.Id, bookingId1);
+            mock.VerifyAll();
+            Assert.IsInstanceOfType(result, typeof(BadRequestObjectResult));
+        }
         // [TestMethod]
         // public void TestDeleteWithId()
         // {

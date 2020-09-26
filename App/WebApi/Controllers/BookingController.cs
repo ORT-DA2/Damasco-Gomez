@@ -47,25 +47,25 @@ namespace WebApi.Controllers
                 return BadRequest("The server had an error");
             }
         }
-        // [HttpPut("{id}")]
-        // //The put should have BookingModel , but will leave it like this
-        // public IActionResult Put([FromRoute]int id,[FromBody]Booking booking)
-        // {
-        //     try
-        //     {
-        //         this.bookingLogic.Update(booking);
-        //         return CreatedAtRoute("Api", booking.Id, booking);
-        //         //return Ok(booking);
-        //     }
-        //     catch(ArgumentException)
-        //     {
-        //         return BadRequest("Error while validate");
-        //     }
-        //     catch (Exception)
-        //     {
-        //         return BadRequest("Internal server error");
-        //     }
-        // }
+        [HttpPut("{id}")]
+        //The put should have BookingModel , but will leave it like this
+        public IActionResult Put([FromRoute]int id,[FromBody]Booking booking)
+        {
+            try
+            {
+                this.bookingLogic.Update(booking);
+                return CreatedAtRoute("Api", booking.Id, booking);
+                //return Ok(booking);
+            }
+            catch(ArgumentException)
+            {
+                return BadRequest("Error while validate");
+            }
+            catch (Exception)
+            {
+                return BadRequest("Internal server error");
+            }
+        }
         // [HttpDelete("{id}")]
         // public IActionResult Delete([FromQuery]int id)
         // {
