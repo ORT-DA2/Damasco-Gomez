@@ -6,12 +6,11 @@ namespace DataAccess.Repositories
 {
     public class BookingRepository : AccessData<Booking> , IBookingRepository
     {
+        IRepository<House> repositoryHouse ;
         public BookingRepository(RepositoryMaster repositoryMaster)
         {
             this.repository = repositoryMaster.Bookings;
-
-            // this.vidlyContext = context;
-            // this.bookings = context.Set<Booking>();
+            this.repositoryHouse = repositoryMaster.Houses;
         }
 
         protected override void Validate(Booking element)

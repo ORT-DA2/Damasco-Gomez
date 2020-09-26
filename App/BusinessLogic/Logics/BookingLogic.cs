@@ -9,9 +9,11 @@ namespace BusinessLogic.Logics
     public class BookingLogic : Logic<Booking> , IBookingLogic
     {
         private readonly IBookingRepository bookingRepository;
-        public BookingLogic(IBookingRepository bookingRepository)
+        private readonly IHouseRepository houseRepository;
+        public BookingLogic(IBookingRepository bookingRepository, IHouseRepository houseRepository)
         {
             this.bookingRepository = bookingRepository;
+            this.houseRepository = houseRepository;
         }
         public override void Delete()
         {
@@ -19,6 +21,11 @@ namespace BusinessLogic.Logics
             {
                 this.Delete(Booking.Id);
             }
+        }
+        public void AddHouse(int id, House house)
+        {
+            this.houseRepository.Add(house);
+            this.bookingRepository.Find(id).House = house;
         }
     }
 }
