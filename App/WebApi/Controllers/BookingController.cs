@@ -25,28 +25,28 @@ namespace WebApi.Controllers
             var elementBooking = this.bookingLogic.GetBy(id);
             return Ok(elementBooking);
         }
-        // [HttpPost()]
-        // //The post should have BookingModel , but will leave it like this
-        // public IActionResult Post([FromBody]Booking booking)
-        // {
-        //     try
-        //     {
-        //         this.bookingLogic.Add(booking);
-        //         return CreatedAtRoute("Api", booking.Id, booking);
-        //     }
-        //     catch (AggregateException)
-        //     {
-        //         return BadRequest("The booking was already added");
-        //     }
-        //     catch (ArgumentException)
-        //     {
-        //         return BadRequest("Error while validate ");
-        //     }
-        //     catch (Exception)
-        //     {
-        //         return BadRequest("The server had an error");
-        //     }
-        // }
+        [HttpPost()]
+        //The post should have BookingModel , but will leave it like this
+        public IActionResult Post([FromBody]Booking booking)
+        {
+            try
+            {
+                this.bookingLogic.Add(booking);
+                return CreatedAtRoute("Api", booking.Id, booking);
+            }
+            catch (AggregateException)
+            {
+                return BadRequest("The booking was already added");
+            }
+            catch (ArgumentException)
+            {
+                return BadRequest("Error while validate ");
+            }
+            catch (Exception)
+            {
+                return BadRequest("The server had an error");
+            }
+        }
         // [HttpPut("{id}")]
         // //The put should have BookingModel , but will leave it like this
         // public IActionResult Put([FromRoute]int id,[FromBody]Booking booking)
