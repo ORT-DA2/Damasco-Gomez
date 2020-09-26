@@ -7,6 +7,7 @@ namespace WebApi.Controllers
     public class RegionController : VidlyControllerBase
     {
        private readonly IRegionLogic regionLogic;
+
         public RegionController(IRegionLogic regionLogic)
         {
             this.regionLogic = regionLogic;
@@ -15,6 +16,12 @@ namespace WebApi.Controllers
         public IActionResult Get()
         {
             return Ok(this.regionLogic.GetAll());
+        }
+         [HttpGet("{id}")]
+        public IActionResult GetBy([FromQuery]int id)
+        {
+            var elementRegion = this.regionLogic.GetBy(id);
+            return Ok(elementRegion);
         }
 
     }
