@@ -7,19 +7,44 @@ using System.Collections.Generic;
 
 namespace BusinessLogic
 {
-    public class RegionLogic : Logic<Region> , IRegionLogic
+    public class RegionLogic : IRegionLogic
     {
         private readonly IRegionRepository regionRepository;
         public RegionLogic(IRegionRepository regionRepository)
         {
             this.regionRepository = regionRepository;
         }
-        public override void Delete()
+        public void Delete()
         {
-            foreach(Region region in this.regionRepository.GetElements())
+            foreach(Region Region in this.regionRepository.GetElements())
             {
-                this.Delete(region.Id);
+                this.Delete(Region.Id);
             }
         }
-     }
+        public IEnumerable<Region> GetAll()
+        {
+            return this.regionRepository.GetElements();
+        }
+        public Region GetBy(int id)
+        {
+            return this.regionRepository.Find(id);
+        }
+
+        public void Add(Region Region)
+        {
+            this.regionRepository.Add(Region);
+        }
+        public void Update(Region Region)
+        {
+            this.regionRepository.Update(Region);
+        }
+        public void Delete(int id)
+        {
+            this.regionRepository.Delete(id);
+        }
+        public bool Exist(Region Region)
+        {
+            return this.regionRepository.ExistElement(Region);
+        }
+    }
 }
