@@ -124,6 +124,26 @@ namespace WebApi.Test
             mock.VerifyAll();
             Assert.IsInstanceOfType(result, typeof(BadRequestObjectResult));
         }
+        [TestMethod]
+          public void TestPostFailValidation()
+        {
+            regionId1 = regionsToReturn.First();
+            Exception exist = new ArgumentException();
+            mock.Setup(p => p.Add(regionId1)).Throws(exist);
+            var result = controller.Post(regionId1);
+            mock.VerifyAll();
+            Assert.IsInstanceOfType(result, typeof(BadRequestObjectResult));
+        }
+        [TestMethod]
+        public void TestPostFailServer()
+        {
+            regionId1 = regionsToReturn.First();
+            Exception exist = new Exception();
+            mock.Setup(p => p.Add(regionId1)).Throws(exist);
+            var result = controller.Post(regionId1);
+            mock.VerifyAll();
+            Assert.IsInstanceOfType(result, typeof(BadRequestObjectResult));
+        }
 
     }
 }
