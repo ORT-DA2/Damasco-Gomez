@@ -46,5 +46,22 @@ namespace WebApi.Controllers
                 return BadRequest("The server had an error");
             }
         }
+         [HttpPut("{id}")]
+        public IActionResult Put([FromRoute]int id,[FromBody]Region region)
+        {
+            try
+            {
+                this.regionLogic.Update(region);
+                return CreatedAtRoute("Api", region.Id, region);
+            }
+            catch(ArgumentException)
+            {
+                return BadRequest("Error while validate");
+            }
+            catch (Exception)
+            {
+                return BadRequest("Internal server error");
+            }
+        }
     }
 }

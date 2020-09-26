@@ -144,6 +144,18 @@ namespace WebApi.Test
             mock.VerifyAll();
             Assert.IsInstanceOfType(result, typeof(BadRequestObjectResult));
         }
+        [TestMethod]
+        public void TestPutOk()
+        {
+            regionId1 = regionsToReturn.First();
+            mock.Setup(m => m.Update(regionId1));
+            var result = controller.Put(regionId1.Id, regionId1);
+            var okResult = result as CreatedAtRouteResult;
+            mock.VerifyAll();
+            Assert.IsNotNull(okResult);
+            Assert.AreEqual("Api", okResult.RouteName);
+            Assert.AreEqual(okResult.Value, regionId1);
+        }
 
     }
 }
