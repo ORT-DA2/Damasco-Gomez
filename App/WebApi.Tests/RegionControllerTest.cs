@@ -195,8 +195,13 @@ namespace WebApi.Test
             var result = controller.Delete(region.Id);
             Assert.IsInstanceOfType(result,typeof(NotFoundResult));
         }
-
-        
+        [TestMethod]
+        public void TestDelete()
+        {
+            mock.Setup(mock=> mock.Delete());
+            var result = controller.Delete();
+            Assert.IsNotNull(result);
+        }
 
     }
 }

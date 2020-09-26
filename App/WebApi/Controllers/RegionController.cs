@@ -19,7 +19,7 @@ namespace WebApi.Controllers
         {
             return Ok(this.regionLogic.GetAll());
         }
-         [HttpGet("{id}")]
+        [HttpGet("{id}")]
         public IActionResult GetBy([FromQuery]int id)
         {
             var elementRegion = this.regionLogic.GetBy(id);
@@ -46,7 +46,7 @@ namespace WebApi.Controllers
                 return BadRequest("The server had an error");
             }
         }
-         [HttpPut("{id}")]
+        [HttpPut("{id}")]
         public IActionResult Put([FromRoute]int id,[FromBody]Region region)
         {
             try
@@ -63,8 +63,8 @@ namespace WebApi.Controllers
                 return BadRequest("Internal server error");
             }
         }
-          [HttpDelete("{id}")]
-         public IActionResult Delete([FromQuery]int id)
+        [HttpDelete("{id}")]
+        public IActionResult Delete([FromQuery]int id)
         {
             if (this.regionLogic.GetBy(id) == null)
             {
@@ -73,6 +73,11 @@ namespace WebApi.Controllers
             this.regionLogic.Delete(id);
             return Ok();
         }
-      
+        [HttpDelete()]
+        public IActionResult Delete()
+        {
+            this.regionLogic.Delete();
+            return Ok();
+        }
     }
 }
