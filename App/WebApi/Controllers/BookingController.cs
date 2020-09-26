@@ -1,4 +1,6 @@
+using System;
 using BusinessLogicInterface;
+using Domain;
 using Microsoft.AspNetCore.Mvc;
 
 namespace WebApi.Controllers
@@ -11,6 +13,75 @@ namespace WebApi.Controllers
         {
             this.bookingLogic = bookingLogic;
         }
+        public IActionResult Get()
+        {
+            var elementBooking = this.bookingLogic.GetAll();
+            return Ok(elementBooking);
+        }
+
+        // [HttpGet("{id}")]
+        // public IActionResult GetBy([FromQuery]int id)
+        // {
+        //     var elementBooking = this.bookingLogic.GetBy(id);
+        //     return Ok(elementBooking);
+        // }
+        // [HttpPost()]
+        // //The post should have BookingModel , but will leave it like this
+        // public IActionResult Post([FromBody]Booking booking)
+        // {
+        //     try
+        //     {
+        //         this.bookingLogic.Add(booking);
+        //         return CreatedAtRoute("Api", booking.Id, booking);
+        //     }
+        //     catch (AggregateException)
+        //     {
+        //         return BadRequest("The booking was already added");
+        //     }
+        //     catch (ArgumentException)
+        //     {
+        //         return BadRequest("Error while validate ");
+        //     }
+        //     catch (Exception)
+        //     {
+        //         return BadRequest("The server had an error");
+        //     }
+        // }
+        // [HttpPut("{id}")]
+        // //The put should have BookingModel , but will leave it like this
+        // public IActionResult Put([FromRoute]int id,[FromBody]Booking booking)
+        // {
+        //     try
+        //     {
+        //         this.bookingLogic.Update(booking);
+        //         return CreatedAtRoute("Api", booking.Id, booking);
+        //         //return Ok(booking);
+        //     }
+        //     catch(ArgumentException)
+        //     {
+        //         return BadRequest("Error while validate");
+        //     }
+        //     catch (Exception)
+        //     {
+        //         return BadRequest("Internal server error");
+        //     }
+        // }
+        // [HttpDelete("{id}")]
+        // public IActionResult Delete([FromQuery]int id)
+        // {
+        //     if (this.bookingLogic.GetBy(id) == null)
+        //     {
+        //         return NotFound();
+        //     }
+        //     this.bookingLogic.Delete(id);
+        //     return Ok();
+        // }
+        // [HttpDelete()]
+        // public IActionResult Delete()
+        // {
+        //     this.bookingLogic.Delete();
+        //     return Ok();
+        // }
     }
-    
+
 }
