@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using BusinessLogicInterface;
@@ -12,33 +13,190 @@ namespace WebApi.Test
     [TestClass]
     public class RegionControllerTest
     {
-         [TestMethod]
-         public void TestGetAllCategoriesOk()
+        private List<Region> regionToReturnEmpty;
+         private List<Region> region;
+        private List<Region> regionsToReturn;
+        private Region regionId1;
+        private Mock<IRegionLogic> mock;
+        private RegionController controller ;
+
+        [TestInitialize]
+        public void initVariables()
         {
-            List<Region> categoriesToReturn = new List<Region>()
+            regionsToReturn = new List<Region>()
             {
                 new Region()
                 {
                     Id = 1,
-                    Name = "New Region",
+                    Name = "New region",
                     TouristPoints = null,
                 },
                 new Region()
                 {
                     Id = 2,
-                    Name = "Other Region",
+                    Name = "Other region",
+                    TouristPoints = null,
+                },
+                new Region()
+                {
+                    Id = 3,
+                    Name = "And other region",
+                    TouristPoints = null,
+                },
+                new Region()
+                {
+                    Id = 4,
+                    Name = "And one more region",
                     TouristPoints = null,
                 }
             };
-            var mock = new Mock<IRegionLogic>(MockBehavior.Strict);
-            mock.Setup(m => m.GetAll()).Returns(categoriesToReturn);
-            var controller = new RegionController(mock.Object);
+            regionToReturnEmpty = new List<Region>();
+            regionId1 = regionsToReturn.First();
+            mock = new Mock<IRegionLogic>(MockBehavior.Strict);
+            controller = new RegionController(mock.Object);
+        }
+        [TestMethod]
+        public void TestGetAllRegionsOk()
+        {
+            mock.Setup(m => m.GetAll()).Returns(regionsToReturn);
             var result = controller.Get();
             var okResult = result as OkObjectResult;
-            var categories = okResult.Value as IEnumerable<Region>;
+            var regions = okResult.Value as IEnumerable<Region>;
             mock.VerifyAll();
-            Assert.IsTrue(categoriesToReturn.SequenceEqual(categories));
+            Assert.IsTrue(regionsToReturn.SequenceEqual(regions));
         }
+
+        [TestMethod]
+        public void TestGetAllEmptyRegions ()
+        {
+            var mock = new Mock<IRegionLogic>(MockBehavior.Strict);
+             mock.Setup(m => m.GetAll()).Returns(regionToReturnEmpty);
+             var controller = new RegionController(mock.Object);
+             var result = controller.Get();
+             var okResult = result as OkObjectResult;
+             var regions = okResult.Value as IEnumerable<Region>;
+             mock.VerifyAll();
+             Assert.IsTrue(regionToReturnEmpty.SequenceEqual(regions));
+
+        }
+        [TestMethod]
+         public void TestGetByOk()
+        {
+            int id = 1;
+            regionId1 = regionsToReturn.First();
+            mock.Setup(m => m.GetBy(id)).Returns(regionId1);
+            var result = controller.GetBy(id);
+            var okResult = result as OkObjectResult;
+            var region = okResult.Value as Region;
+            mock.VerifyAll();
+            Assert.IsTrue(region.Equals(regionId1));
+        }
+         [TestMethod]
+         public void TestGetByNotFoud ()
+         {
+            int id = 5;
+            Region regionNull = null;
+            mock.Setup(m => m.GetBy(id)).Returns(regionNull);
+            var result = controller.GetBy(id);
+            var okResult = result as OkObjectResult;
+            var region = okResult.Value as Region;
+            mock.VerifyAll();
+            Assert.IsNull(region);
+         }
+         [TestMethod]
+         public void TestPostOk ()
+         {
+            mock.Setup(m => m.Add(regionId1));
+            var result = controller.Post(regionId1);
+            var okResult = result as CreatedAtRouteResult;
+            mock.VerifyAll();
+            Assert.IsNotNull(okResult);
+            Assert.AreEqual("Api", okResult.RouteName);
+            Assert.AreEqual(okResult.Value, regionId1);
+         }
+         [TestMethod]
+          public void TestPostFailSameRegion()
+        {
+            regionId1 = regionsToReturn.First();
+            Exception exist = new AggregateException();
+            mock.Setup(p => p.Add(regionId1)).Throws(exist);
+            var result = controller.Post(regionId1);
+            mock.VerifyAll();
+            Assert.IsInstanceOfType(result, typeof(BadRequestObjectResult));
+        }
+        [TestMethod]
+          public void TestPostFailValidation()
+        {
+            regionId1 = regionsToReturn.First();
+            Exception exist = new ArgumentException();
+            mock.Setup(p => p.Add(regionId1)).Throws(exist);
+            var result = controller.Post(regionId1);
+            mock.VerifyAll();
+            Assert.IsInstanceOfType(result, typeof(BadRequestObjectResult));
+        }
+        [TestMethod]
+        public void TestPostFailServer()
+        {
+            regionId1 = regionsToReturn.First();
+            Exception exist = new Exception();
+            mock.Setup(p => p.Add(regionId1)).Throws(exist);
+            var result = controller.Post(regionId1);
+            mock.VerifyAll();
+            Assert.IsInstanceOfType(result, typeof(BadRequestObjectResult));
+        }
+        [TestMethod]
+        public void TestPutOk()
+        {
+            regionId1 = regionsToReturn.First();
+            mock.Setup(m => m.Update(regionId1));
+            var result = controller.Put(regionId1.Id, regionId1);
+            var okResult = result as CreatedAtRouteResult;
+            mock.VerifyAll();
+            Assert.IsNotNull(okResult);
+            Assert.AreEqual("Api", okResult.RouteName);
+            Assert.AreEqual(okResult.Value, regionId1);
+        }
+         [TestMethod]
+        public void TestPutFailValidate()
+        {
+            regionId1 = regionsToReturn.First();
+            Exception exist = new ArgumentException();
+            mock.Setup(p => p.Update(regionId1)).Throws(exist);
+            var result = controller.Put(regionId1.Id, regionId1);
+            mock.VerifyAll();
+            Assert.IsInstanceOfType(result, typeof(BadRequestObjectResult));
+        }
+        [TestMethod]
+        public void TestPutFailServer()
+        {
+            regionId1 = regionsToReturn.First();
+            Exception exist = new Exception();
+            mock.Setup(p => p.Update(regionId1)).Throws(exist);
+            var result = controller.Put(regionId1.Id, regionId1);
+            mock.VerifyAll();
+            Assert.IsInstanceOfType(result, typeof(BadRequestObjectResult));
+        }
+        [TestMethod]
+        public void TestDeleteWithId()
+        {
+            Region region = regionsToReturn.First();
+            mock.Setup(m => m.GetBy(region.Id)).Returns(region);
+            mock.Setup(mock=> mock.Delete(region.Id));
+            var result = controller.Delete(region.Id);
+            Assert.IsNotNull(result);
+        }
+        [TestMethod]
+        public void TestDeleteWithIdNotFound()
+        {
+            Region region = regionsToReturn.First();
+            Region regionNull = null;
+            mock.Setup(m => m.GetBy(region.Id)).Returns(regionNull);
+            mock.Setup(mock=> mock.Delete(region.Id));
+            var result = controller.Delete(region.Id);
+            Assert.IsInstanceOfType(result,typeof(NotFoundResult));
+        }
+
+        
 
     }
 }
