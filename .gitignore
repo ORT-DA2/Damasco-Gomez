@@ -34,3 +34,4 @@ obj
 App/Migrations/bin
 App/WebApi.Tests/bin
 App/BusinessLogic.Tests/bin
+App/DataAccess.Tests/bin
