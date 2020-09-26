@@ -30,26 +30,17 @@ namespace BusinessLogic
         {
             this.CategoryRepository.Update(category);
         }
+        public void Delete(int id)
+        {
+            this.CategoryRepository.Delete(id);
+        }
 
-        // public void AddCategory(string name, string token)
-        // {
-
-        // }
-        // public void DeleteCategory(int id, string token)
-        // {
-
-        // }
-        // public void GetTouristPointById(int id)
-        // {
-
-        // }
-        // public void GetTouristPoints()
-        // {
-
-        // }
-        // public void GetCategoryByName(string name)
-        // {
-
-        // }
+        public void Delete()
+        {
+            foreach(Category category in this.CategoryRepository.GetElements())
+            {
+                this.Delete(category.Id);
+            }
+        }
     }
 }

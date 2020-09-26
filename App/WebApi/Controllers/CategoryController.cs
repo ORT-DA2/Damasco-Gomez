@@ -72,11 +72,17 @@ namespace WebApi.Controllers
         [HttpDelete("{id}")]
         public IActionResult Delete([FromQuery]int id)
         {
+            if (this.categoryLogic.GetBy(id) == null)
+            {
+                return NotFound();
+            }
+            this.categoryLogic.Delete(id);
             return Ok();
         }
         [HttpDelete()]
         public IActionResult Delete()
         {
+            this.categoryLogic.Delete();
             return Ok();
         }
     }

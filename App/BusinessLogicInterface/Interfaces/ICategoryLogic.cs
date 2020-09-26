@@ -10,5 +10,7 @@ namespace BusinessLogicInterface
         Category GetBy(int id);
         void Add(Category category);
         void Update(Category category);
+        void Delete(int id);
+        void Delete();
     }
 }
