@@ -1,9 +1,17 @@
+using System.Collections.Generic;
 using BusinessLogicInterface.Interfaces;
 using Domain;
 
 namespace BusinessLogicInterface
 {
-    public interface IPersonLogic : ILogic<Person>
+    public interface IPersonLogic
     {
+        IEnumerable<Person> GetAll();
+        Person GetBy(int id);
+        void Add(Person element);
+        void Update(Person element);
+        void Delete(int id);
+        void Delete();
+        bool Exist(Person element);
     }
 }
