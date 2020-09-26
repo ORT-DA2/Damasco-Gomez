@@ -1,6 +1,8 @@
 
+using System.Collections.Generic;
 using BusinessLogicInterface;
 using DataAccessInterface.Repositories;
+using Domain;
 
 namespace BusinessLogic.Logics
 {
@@ -11,29 +13,39 @@ namespace BusinessLogic.Logics
         {
             this.bookingRepository = bookingRepository;
         }
-        // void GetBookingById(int id)
-        // {
+        public IEnumerable<Booking> GetAll()
+        {
+            return this.bookingRepository.GetElements();
+        }
+        public  Booking GetBy(int id)
+        {
+            return this.bookingRepository.Find(id);
+        }
 
-        // }
+        public void Add(Booking Booking)
+        {
+            this.bookingRepository.Add(Booking);
+        }
+        public void Update(Booking Booking)
+        {
+            this.bookingRepository.Update(Booking);
+        }
+        public void Delete(int id)
+        {
+            this.bookingRepository.Delete(id);
+        }
 
-        // void GetBookingByName(string name)
-        // {
-
-        // }
-
-        // void CreateBooking(int checkIn, int checkOut, string name, string email, string house, string token)        
-        // {
-        // }
-
-        // void GetCode(int id, string token)
-        // {
-
-        // }
-
-        // void DeleteBooking(int id, string token)
-        // {
-
-        // }
+        public void Delete()
+        {
+            foreach(Booking Booking in this.bookingRepository.GetElements())
+            {
+                this.Delete(Booking.Id);
+            }
+        }
+        public bool Exist(Booking Booking)
+        {
+            return this.bookingRepository.ExistElement(Booking);
+        }
 
     }
 }
