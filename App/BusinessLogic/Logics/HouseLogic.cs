@@ -1,6 +1,8 @@
 using System;
+using System.Collections.Generic;
 using BusinessLogicInterface;
 using DataAccessInterface.Repositories;
+using Domain;
 
 namespace BusinessLogic
 {
@@ -11,44 +13,39 @@ namespace BusinessLogic
         {
             this.houseRepository = houseRepository;
         }
-        // public void GetHouses(DateTime checkIn, DateTime checkOut, int adult, int kids, int babies, string touristPoint)
-        // {
+        public IEnumerable<House> GetAll()
+        {
+            return this.houseRepository.GetElements();
+        }
+        public  House GetBy(int id)
+        {
+            return this.houseRepository.Find(id);
+        }
 
-        // }
+        public void Add(House House)
+        {
+            this.houseRepository.Add(House);
+        }
+        public void Update(House House)
+        {
+            this.houseRepository.Update(House);
+        }
+        public void Delete(int id)
+        {
+            this.houseRepository.Delete(id);
+        }
 
-        // public void PostHospedaje(int pricePerNight, string touristPoint, string houseName, int starts, string address, int image, string description, string phone, string contact, string token)
-        // {
+        public void Delete()
+        {
+            foreach(House House in this.houseRepository.GetElements())
+            {
+                this.Delete(House.Id);
+            }
+        }
+        public bool Exist(House House)
+        {
+            return this.houseRepository.ExistElement(House);
+        }
 
-        // }
-
-        // public void GetHouseByName(string name)
-        // {
-
-        // }
-
-        // public void GetHouseById(int id)
-        // {
-
-        // }
-
-        // public void DeleteHouse(int id, string token)
-        // {
-
-        // }
-
-        // public void UpdatePricePerNight(int id, string token)
-        // {
-
-        // }
-
-        // public void UpdateContactInformation(int id, string phone, string contact, string token)
-        // {
-
-        // }
-
-        // private void CalculatePrice(DateTime checkIn, DateTime checkOut)
-        // {
-
-        // }
     }
 }
