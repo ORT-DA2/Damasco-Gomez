@@ -1,7 +1,10 @@
 ﻿using System;
+using BusinessLogicInterface.Interfaces;
+using Domain;
+
 namespace BusinessLogicInterface
 {
-    public interface ITouristPointLogic
+    public interface ITouristPointLogic : ILogic<TouristPoint>
     {
     }
 }

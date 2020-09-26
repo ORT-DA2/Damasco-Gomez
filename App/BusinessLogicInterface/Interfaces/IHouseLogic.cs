@@ -1,17 +1,11 @@
 using System;
 using System.Collections.Generic;
+using BusinessLogicInterface.Interfaces;
 using Domain;
 
 namespace BusinessLogicInterface
 {
-    public interface IHouseLogic
+    public interface IHouseLogic : ILogic<House>
     {
-        IEnumerable<House> GetAll();
-        House GetBy(int id);
-        void Add(House category);
-        void Update(House category);
-        void Delete(int id);
-        void Delete();
-        bool Exist(House category);
     }
 }

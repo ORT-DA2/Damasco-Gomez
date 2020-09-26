@@ -1,17 +1,10 @@
 using System.Collections.Generic;
+using BusinessLogicInterface.Interfaces;
 using Domain;
 
 namespace BusinessLogicInterface
 {
-    public interface ICategoryLogic
+    public interface ICategoryLogic : ILogic<Category>
     {
-
-        IEnumerable<Category> GetAll();
-        Category GetBy(int id);
-        void Add(Category category);
-        void Update(Category category);
-        void Delete(int id);
-        void Delete();
-        bool Exist(Category category);
     }
 }

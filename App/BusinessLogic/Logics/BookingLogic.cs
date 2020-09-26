@@ -6,46 +6,19 @@ using Domain;
 
 namespace BusinessLogic.Logics
 {
-    public class BookingLogic : IBookingLogic
+    public class BookingLogic : Logic<Booking> , IBookingLogic
     {
         private readonly IBookingRepository bookingRepository;
         public BookingLogic(IBookingRepository bookingRepository)
         {
             this.bookingRepository = bookingRepository;
         }
-        public IEnumerable<Booking> GetAll()
-        {
-            return this.bookingRepository.GetElements();
-        }
-        public  Booking GetBy(int id)
-        {
-            return this.bookingRepository.Find(id);
-        }
-
-        public void Add(Booking Booking)
-        {
-            this.bookingRepository.Add(Booking);
-        }
-        public void Update(Booking Booking)
-        {
-            this.bookingRepository.Update(Booking);
-        }
-        public void Delete(int id)
-        {
-            this.bookingRepository.Delete(id);
-        }
-
-        public void Delete()
+        public override void Delete()
         {
             foreach(Booking Booking in this.bookingRepository.GetElements())
             {
                 this.Delete(Booking.Id);
             }
         }
-        public bool Exist(Booking Booking)
-        {
-            return this.bookingRepository.ExistElement(Booking);
-        }
-
     }
 }

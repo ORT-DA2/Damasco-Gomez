@@ -1,16 +1,10 @@
 using System.Collections.Generic;
+using BusinessLogicInterface.Interfaces;
 using Domain;
 
 namespace BusinessLogicInterface
 {
-    public interface IBookingLogic
+    public interface IBookingLogic : ILogic<Booking>
     {
-        IEnumerable<Booking> GetAll();
-        Booking GetBy(int id);
-        void Add(Booking category);
-        void Update(Booking category);
-        void Delete(int id);
-        void Delete();
-        bool Exist(Booking category);
     }
 }

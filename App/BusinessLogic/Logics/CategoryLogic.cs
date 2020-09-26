@@ -1,11 +1,12 @@
 using System.Collections.Generic;
+using BusinessLogic.Logics;
 using BusinessLogicInterface;
 using DataAccessInterface.Repositories;
 using Domain;
 
 namespace BusinessLogic
 {
-    public class CategoryLogic : ICategoryLogic
+    public class CategoryLogic : Logic<Category> , ICategoryLogic
     {
         private readonly ICategoryRepository CategoryRepository;
         public CategoryLogic(ICategoryRepository categoryRepository)
@@ -13,38 +14,12 @@ namespace BusinessLogic
             this.CategoryRepository = categoryRepository;
         }
 
-        public IEnumerable<Category> GetAll()
-        {
-            return this.CategoryRepository.GetElements();
-        }
-        public Category GetBy(int id)
-        {
-            return this.CategoryRepository.Find(id);
-        }
-
-        public void Add(Category category)
-        {
-            this.CategoryRepository.Add(category);
-        }
-        public void Update(Category category)
-        {
-            this.CategoryRepository.Update(category);
-        }
-        public void Delete(int id)
-        {
-            this.CategoryRepository.Delete(id);
-        }
-
-        public void Delete()
+        public override void Delete()
         {
             foreach(Category category in this.CategoryRepository.GetElements())
             {
                 this.Delete(category.Id);
             }
-        }
-        public bool Exist(Category category)
-        {
-            return this.CategoryRepository.ExistElement(category);
         }
     }
 }
