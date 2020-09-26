@@ -190,32 +190,32 @@ namespace WebApi.Tests
             mock.VerifyAll();
             Assert.IsInstanceOfType(result, typeof(BadRequestObjectResult));
         }
-        // [TestMethod]
-        // public void TestDeleteWithId()
-        // {
-        //     Booking booking = bookingsToReturn.First();
-        //     mock.Setup(m => m.GetBy(booking.Id)).Returns(booking);
-        //     mock.Setup(mock=> mock.Delete(booking.Id));
-        //     var result = controller.Delete(booking.Id);
-        //     Assert.IsNotNull(result);
-        // }
-        // [TestMethod]
-        // public void TestDeleteWithIdNotFound()
-        // {
-        //     Booking booking = bookingsToReturn.First();
-        //     Booking bookingNull = null;
-        //     mock.Setup(m => m.GetBy(booking.Id)).Returns(bookingNull);
-        //     mock.Setup(mock=> mock.Delete(booking.Id));
-        //     var result = controller.Delete(booking.Id);
-        //     Assert.IsInstanceOfType(result,typeof(NotFoundResult));
-        // }
+        [TestMethod]
+        public void TestDeleteWithId()
+        {
+            Booking booking = bookingsToReturn.First();
+            mock.Setup(m => m.GetBy(booking.Id)).Returns(booking);
+            mock.Setup(mock=> mock.Delete(booking.Id));
+            var result = controller.Delete(booking.Id);
+            Assert.IsNotNull(result);
+        }
+        [TestMethod]
+        public void TestDeleteWithIdNotFound()
+        {
+            Booking booking = bookingsToReturn.First();
+            Booking bookingNull = null;
+            mock.Setup(m => m.GetBy(booking.Id)).Returns(bookingNull);
+            mock.Setup(mock=> mock.Delete(booking.Id));
+            var result = controller.Delete(booking.Id);
+            Assert.IsInstanceOfType(result,typeof(NotFoundResult));
+        }
 
-        // [TestMethod]
-        // public void TestDelete()
-        // {
-        //     mock.Setup(mock=> mock.Delete());
-        //     var result = controller.Delete();
-        //     Assert.IsNotNull(result);
-        // }
+        [TestMethod]
+        public void TestDelete()
+        {
+            mock.Setup(mock=> mock.Delete());
+            var result = controller.Delete();
+            Assert.IsNotNull(result);
+        }
     }
 }

@@ -66,22 +66,22 @@ namespace WebApi.Controllers
                 return BadRequest("Internal server error");
             }
         }
-        // [HttpDelete("{id}")]
-        // public IActionResult Delete([FromQuery]int id)
-        // {
-        //     if (this.bookingLogic.GetBy(id) == null)
-        //     {
-        //         return NotFound();
-        //     }
-        //     this.bookingLogic.Delete(id);
-        //     return Ok();
-        // }
-        // [HttpDelete()]
-        // public IActionResult Delete()
-        // {
-        //     this.bookingLogic.Delete();
-        //     return Ok();
-        // }
+        [HttpDelete("{id}")]
+        public IActionResult Delete([FromQuery]int id)
+        {
+            if (this.bookingLogic.GetBy(id) == null)
+            {
+                return NotFound();
+            }
+            this.bookingLogic.Delete(id);
+            return Ok();
+        }
+        [HttpDelete()]
+        public IActionResult Delete()
+        {
+            this.bookingLogic.Delete();
+            return Ok();
+        }
     }
 
 }
