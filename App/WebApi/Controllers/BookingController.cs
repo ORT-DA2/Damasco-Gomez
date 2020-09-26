@@ -19,12 +19,12 @@ namespace WebApi.Controllers
             return Ok(elementBooking);
         }
 
-        // [HttpGet("{id}")]
-        // public IActionResult GetBy([FromQuery]int id)
-        // {
-        //     var elementBooking = this.bookingLogic.GetBy(id);
-        //     return Ok(elementBooking);
-        // }
+        [HttpGet("{id}")]
+        public IActionResult GetBy([FromQuery]int id)
+        {
+            var elementBooking = this.bookingLogic.GetBy(id);
+            return Ok(elementBooking);
+        }
         // [HttpPost()]
         // //The post should have BookingModel , but will leave it like this
         // public IActionResult Post([FromBody]Booking booking)

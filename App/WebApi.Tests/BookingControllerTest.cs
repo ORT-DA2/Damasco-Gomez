@@ -93,29 +93,29 @@ namespace WebApi.Tests
             mock.VerifyAll();
             Assert.IsTrue(bookingsToReturnEmpty.SequenceEqual(bookings));
         }
-        // [TestMethod]
-        // public void TestGetByOk()
-        // {
-        //     int id = 1;
-        //     mock.Setup(m => m.GetBy(id)).Returns(bookingId1);
-        //     var result = controller.GetBy(id);
-        //     var okResult = result as OkObjectResult;
-        //     var categories = okResult.Value as Booking;
-        //     mock.VerifyAll();
-        //     Assert.IsTrue(categories.Equals(bookingId1));
-        // }
-        // [TestMethod]
-        // public void TestGetByNotFound()
-        // {
-        //     int id = 4;
-        //     Booking bookingReturn = null;
-        //     mock.Setup(m => m.GetBy(id)).Returns(bookingReturn);
-        //     var result = controller.GetBy(id);
-        //     var okResult = result as OkObjectResult;
-        //     var categories = okResult.Value as Booking;
-        //     mock.VerifyAll();
-        //     Assert.IsNull(categories);
-        // }
+        [TestMethod]
+        public void TestGetByOk()
+        {
+            int id = 1;
+            mock.Setup(m => m.GetBy(id)).Returns(bookingId1);
+            var result = controller.GetBy(id);
+            var okResult = result as OkObjectResult;
+            var categories = okResult.Value as Booking;
+            mock.VerifyAll();
+            Assert.IsTrue(categories.Equals(bookingId1));
+        }
+        [TestMethod]
+        public void TestGetByNotFound()
+        {
+            int id = 4;
+            Booking bookingReturn = null;
+            mock.Setup(m => m.GetBy(id)).Returns(bookingReturn);
+            var result = controller.GetBy(id);
+            var okResult = result as OkObjectResult;
+            var categories = okResult.Value as Booking;
+            mock.VerifyAll();
+            Assert.IsNull(categories);
+        }
         // [TestMethod]
         // public void TestPostOk()
         // {
