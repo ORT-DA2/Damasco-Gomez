@@ -4,14 +4,16 @@ using Microsoft.EntityFrameworkCore;
 
 namespace DataAccess.Repositories
 {
-    public class HouseRepository : IHouseRepository
+    public class HouseRepository : AccessData<House> , IHouseRepository
     {
-        private readonly DbSet<House> houses;
-        private readonly DbContext vidlyContext;
-        public HouseRepository(DbContext context)
+        public HouseRepository(RepositoryMaster repositoryMaster)
         {
-            this.vidlyContext = context;
-            this.houses = context.Set<House>();
-        }        
+            this.repository = repositoryMaster.Houses;
+        }
+
+        protected override void Validate(House element)
+        {
+            throw new System.NotImplementedException();
+        }
     }
 }

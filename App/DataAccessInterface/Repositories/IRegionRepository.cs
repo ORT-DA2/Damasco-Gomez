@@ -5,8 +5,7 @@ using Domain;
 
 namespace DataAccessInterface.Repositories
 {
-    public interface IRegionRepository
+    public interface IRegionRepository : IAccessData<Region>
     {
-         IEnumerable <Region> GetAll();
     }
 }

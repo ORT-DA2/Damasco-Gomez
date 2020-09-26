@@ -4,14 +4,19 @@ using Microsoft.EntityFrameworkCore;
 
 namespace DataAccess.Repositories
 {
-    public class BookingRepository : IBookingRepository
+    public class BookingRepository : AccessData<Booking> , IBookingRepository
     {
-        private readonly DbSet<Booking> bookings;
-       private readonly DbContext vidlyContext;
-       public BookingRepository(DbContext context)
-       {
-           this.vidlyContext = context;
-           this.bookings = context.Set<Booking>();
-       }
+        public BookingRepository(RepositoryMaster repositoryMaster)
+        {
+            this.repository = repositoryMaster.Bookings;
+
+            // this.vidlyContext = context;
+            // this.bookings = context.Set<Booking>();
+        }
+
+        protected override void Validate(Booking element)
+        {
+            throw new System.NotImplementedException();
+        }
     }
 }

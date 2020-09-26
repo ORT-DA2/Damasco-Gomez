@@ -5,19 +5,16 @@ using System.Collections.Generic;
 
 namespace DataAccess.Repositories
 {
-    public class RegionRepository : IRegionRepository
+    public class RegionRepository : AccessData<Region> , IRegionRepository
     {
-        private readonly DbSet<Region> regions;
-        private readonly DbContext vidlyContext;
-        public RegionRepository(DbContext context)
+        public RegionRepository(RepositoryMaster repositoryMaster)
         {
-            this.vidlyContext = context;
-            this.regions = context.Set<Region>();
+            this.repository = repositoryMaster.Regions;
         }
 
-        public IEnumerable<Region> GetAll()
+        protected override void Validate(Region element)
         {
-            return this.regions;
+            throw new System.NotImplementedException();
         }
     }
 }

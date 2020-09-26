@@ -15,28 +15,32 @@ namespace BusinessLogic
 
         public IEnumerable<Category> GetAll()
         {
-            return this.CategoryRepository.GetAll();
+            return this.CategoryRepository.GetElements();
+        }
+        public Category GetBy(int id)
+        {
+            return this.CategoryRepository.Find(id);
         }
 
-        // public void AddCategory(string name, string token)
-        // {
+        public void Add(Category category)
+        {
+            this.CategoryRepository.Add(category);
+        }
+        public void Update(Category category)
+        {
+            this.CategoryRepository.Update(category);
+        }
+        public void Delete(int id)
+        {
+            this.CategoryRepository.Delete(id);
+        }
 
-        // }
-        // public void DeleteCategory(int id, string token)
-        // {
-
-        // }
-        // public void GetTouristPointById(int id)
-        // {
-
-        // }
-        // public void GetTouristPoints()
-        // {
-
-        // }
-        // public void GetCategoryByName(string name)
-        // {
-
-        // }
+        public void Delete()
+        {
+            foreach(Category category in this.CategoryRepository.GetElements())
+            {
+                this.Delete(category.Id);
+            }
+        }
     }
 }
