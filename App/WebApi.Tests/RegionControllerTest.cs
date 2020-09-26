@@ -102,7 +102,16 @@ namespace WebApi.Test
             mock.VerifyAll();
             Assert.IsNull(region);
          }
-
-
+         [TestMethod]
+         public void TestPostOk ()
+         {
+            mock.Setup(m => m.Add(regionId1));
+            var result = controller.Post(regionId1);
+            var okResult = result as CreatedAtRouteResult;
+            mock.VerifyAll();
+            Assert.IsNotNull(okResult);
+            Assert.AreEqual("Api", okResult.RouteName);
+            Assert.AreEqual(okResult.Value, regionId1);
+         }
     }
 }

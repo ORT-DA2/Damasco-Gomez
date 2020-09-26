@@ -22,5 +22,11 @@ namespace BusinessLogic
         {
            return this.regionRepository.Find(id);
         }
+
+        public void Add (Region region)
+        {
+             this.regionRepository.Add(region);
+        }
+
      }
 }
