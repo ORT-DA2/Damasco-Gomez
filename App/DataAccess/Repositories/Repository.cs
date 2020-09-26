@@ -10,36 +10,36 @@ namespace DataAccess.Repositories
     public class Repository<T> : IRepository<T> where T : class
     {
         private readonly DbSet<T> dbSet;
-        private readonly VidlyContext managerContext;
+        private readonly DbContext context;
 
-        public Repository(VidlyContext context)
+        public Repository(DbContext context)
         {
-            this.managerContext = context;
+            this.context = context;
             this.dbSet = context.Set<T>();
         }
 
         public void AddInContext(T element)
         {
             this.dbSet.Add(element);
-            this.managerContext.SaveChanges();
+            this.context.SaveChanges();
         }
         public void UpdateInContext(T element)
         {
             this.dbSet.Update(element);
-            this.managerContext.SaveChanges();
+            this.context.SaveChanges();
         }
 
         public void Delete(T element)
         {
             this.dbSet.Remove(element);
-            this.managerContext.SaveChanges();
+            this.context.SaveChanges();
         }
 
         public void Delete(int id)
         {
             var entityToDelete = this.dbSet.Find(id);
-            this.managerContext.Entry(entityToDelete).State = EntityState.Deleted;
-            this.managerContext.SaveChanges();
+            this.context.Entry(entityToDelete).State = EntityState.Deleted;
+            this.context.SaveChanges();
         }
 
         public bool ExistInRepository(T element)

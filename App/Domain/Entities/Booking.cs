@@ -22,10 +22,15 @@ namespace Domain
 
         public DateTime CheckOut {get; set;}
 
-        // public void UpdateInformation()
-        // {
-
-        // }
+        public override bool Equals(object obj)
+        {
+            var result = false;
+            if(obj is Booking booking)
+            {
+                result = this.Id == booking.Id ;
+            }
+            return result;
+        }
 
     }
 
