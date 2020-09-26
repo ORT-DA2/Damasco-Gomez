@@ -1,3 +1,4 @@
+using System;
 using System.Linq;
 using BusinessLogicInterface;
 using Domain;
@@ -24,29 +25,64 @@ namespace WebApi.Controllers
         [HttpGet("{id}")]
         public IActionResult GetBy([FromQuery]int id)
         {
-            return Ok();
+            var elementCategory = this.categoryLogic.GetBy(id);
+            return Ok(elementCategory);
         }
         [HttpPost()]
         //The post should have CategoryModel , but will leave it like this
         public IActionResult Post([FromBody]Category category)
         {
-            return Ok();
+            try
+            {
+                this.categoryLogic.Add(category);
+                return CreatedAtRoute("Api", category.Id, category);
+            }
+            catch (AggregateException)
+            {
+                return BadRequest("The category was already added");
+            }
+            catch (ArgumentException)
+            {
+                return BadRequest("Error while validate ");
+            }
+            catch (Exception)
+            {
+                return BadRequest("The server had an error");
+            }
         }
         [HttpPut("{id}")]
         //The put should have CategoryModel , but will leave it like this
-
         public IActionResult Put([FromRoute]int id,[FromBody]Category category)
         {
-            return Ok();
+            try
+            {
+                this.categoryLogic.Update(category);
+                return CreatedAtRoute("Api", category.Id, category);
+                //return Ok(category);
+            }
+            catch(ArgumentException)
+            {
+                return BadRequest("Error while validate");
+            }
+            catch (Exception)
+            {
+                return BadRequest("Internal server error");
+            }
         }
         [HttpDelete("{id}")]
         public IActionResult Delete([FromQuery]int id)
         {
+            if (this.categoryLogic.GetBy(id) == null)
+            {
+                return NotFound();
+            }
+            this.categoryLogic.Delete(id);
             return Ok();
         }
         [HttpDelete()]
         public IActionResult Delete()
         {
+            this.categoryLogic.Delete();
             return Ok();
         }
     }
