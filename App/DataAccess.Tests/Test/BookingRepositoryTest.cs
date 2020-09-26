@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using System.Linq;
 using DataAccess.Context;
 using DataAccess.Repositories;
 using Domain;
@@ -12,7 +13,8 @@ namespace DataAccess.Tests.Test
     {
         private List<Booking> bookingsToReturn;
         private List<Booking> bookingsToReturnEmpty;
-        private BookingRepository bookingRepository;
+        private RepositoryMaster masterRepository;
+        private VidlyContext context;
         [TestInitialize]
         public void initVariables()
         {
@@ -65,15 +67,23 @@ namespace DataAccess.Tests.Test
             };
             var options = new DbContextOptionsBuilder<VidlyContext>()
                 .UseInMemoryDatabase(databaseName: "VidlyDb").Options;
-            var context = new VidlyContext(options);
-            bookingRepository = new BookingRepository(context);
+            context = new VidlyContext(options);
+            masterRepository = new RepositoryMaster(context);
         }
         [TestMethod]
         public void TestGetAllBookingsOk()
         {
-            bookingsToReturn.ForEach(m => this.bookingRepository.Add(m));
-            var result = bookingRepository.GetElements();
-            Assert.IsTrue(bookingsToReturn.Equals(result));
+            bookingsToReturn.ForEach(m => masterRepository.Bookings.AddInContext(m));
+            List<Booking> result = this.masterRepository.Bookings.GetElementsInContext();
+            Assert.IsTrue(bookingsToReturn.SequenceEqual(result));
         }
+        // [TestMethod]
+        // public void TestGetAllBookingsNull()
+        // {
+        //     List<Booking> emptyBooking = new List<Booking>();
+        //     emptyBooking.ForEach(m => masterRepository.Bookings.AddInContext(m));
+        //     List<Booking> result = this.masterRepository.Bookings.GetElementsInContext();
+        //     Assert.IsTrue(emptyBooking.SequenceEqual(result));
+        // }
     }
 }

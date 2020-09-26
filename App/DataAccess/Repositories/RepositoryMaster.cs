@@ -2,12 +2,13 @@ using System;
 using DataAccess.Context;
 using DataAccessInterface.Repositories;
 using Domain;
+using Microsoft.EntityFrameworkCore;
 
 namespace DataAccess.Repositories
 {
     public class RepositoryMaster : IDisposable
     {
-        private VidlyContext context;
+        private DbContext context;
         private IRepository<Category> categories;
         private IRepository<Booking> bookings;
         private IRepository<House> houses;
@@ -15,17 +16,13 @@ namespace DataAccess.Repositories
         private IRepository<Region> regions;
         private IRepository<TouristPoint> touristPoints;
         private bool isDispose = false;
-        public RepositoryMaster(VidlyContext masterContext)
+        public RepositoryMaster(DbContext masterContext)
         {
             this.context = masterContext;
         }
-        public RepositoryMaster()
-        {
-            this.context = new VidlyContext();
-        }
         public void Dispose()
         {
-            throw new NotImplementedException();
+            this.context.Dispose();
         }
         public IRepository<Category> Categories
         {
