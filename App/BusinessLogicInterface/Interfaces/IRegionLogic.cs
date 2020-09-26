@@ -10,8 +10,7 @@ namespace BusinessLogicInterface
         Region GetBy(int id);
         void Add(Region region);
         void Update(Region region);
-
-       // void Delete(int id);
-        //void Delete();
+       void Delete(int id);
+    
     }
 }

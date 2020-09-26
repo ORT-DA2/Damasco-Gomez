@@ -31,5 +31,10 @@ namespace BusinessLogic
         {
             this.regionRepository.Update(region);
         }
+         public void Delete(int id)
+         {
+            this.regionRepository.Delete(id);
+         }
+        
      }
 }

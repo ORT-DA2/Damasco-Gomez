@@ -74,7 +74,7 @@ namespace DataAccess.Repositories
         public void Update(T element)
         {
             Validate(element);
-            if (ExistElement(element))
+            if (!ExistElement(element))
             {
                 throw new ArgumentException();
             }

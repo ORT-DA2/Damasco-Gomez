@@ -63,5 +63,16 @@ namespace WebApi.Controllers
                 return BadRequest("Internal server error");
             }
         }
+          [HttpDelete("{id}")]
+         public IActionResult Delete([FromQuery]int id)
+        {
+            if (this.regionLogic.GetBy(id) == null)
+            {
+                return NotFound();
+            }
+            this.regionLogic.Delete(id);
+            return Ok();
+        }
+      
     }
 }
