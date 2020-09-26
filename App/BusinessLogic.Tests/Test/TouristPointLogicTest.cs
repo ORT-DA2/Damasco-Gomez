@@ -1,6 +1,9 @@
 using System.Collections.Generic;
-using BusinessLogicInterface;
+using System.Linq;
+using DataAccessInterface.Repositories;
+using Domain;
 using Domain.Entities;
+using Microsoft.AspNetCore.Mvc;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Moq;
 
@@ -9,11 +12,15 @@ namespace BusinessLogic.Tests.Test
     [TestClass]
     public class TouristPointLogicTest
     {
-        private TouristPointLogic touristPointLogic ; 
+        private TouristPointLogic touristPointLogic ;
 
-        List<CategoryTouristPoint> categoriesTouristPoints ;
+        private List<CategoryTouristPoint> categoriesTouristPoints ;
 
-        private Mock<ITouristPointLogic> mock;
+        private Mock<ITouristPointRepository> mock;
+
+        private List<TouristPoint> touristPoints;
+
+        [TestInitialize]
         void Initialize ()
         {
 
@@ -60,20 +67,18 @@ namespace BusinessLogic.Tests.Test
                     CategoriesTouristPoints = null,
                 }
             };
-             mock = new Mock<ITouristPointLogic>(MockBehavior.Strict);
+             mock = new Mock<ITouristPointRepository>(MockBehavior.Strict);
              touristPointLogic = new TouristPointLogic(mock.Object);
         }
        [TestMethod]
         public void TestGetAll ()
         {
-            id =1;
-            var touristPointToReturn = touristPoints.First();
-            mock.Setup(m => m.Add(id)).Returns(touristPointToReturn);
+            mock.Setup(m => m.GetElements()).Returns(touristPoints);
             var result = touristPointLogic.GetAll();
             var okResult = result as OkObjectResult;
             var touristPonits = okResult.Value as TouristPointLogic;
             mock.VerifyAll();
-            Assert.IsTrue(touristPonits.Equals(touristPointToReturn));
+            Assert.IsTrue(touristPonits.Equals(touristPoints));
         }
 
     }
