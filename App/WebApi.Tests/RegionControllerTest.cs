@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using BusinessLogicInterface;
@@ -113,5 +114,16 @@ namespace WebApi.Test
             Assert.AreEqual("Api", okResult.RouteName);
             Assert.AreEqual(okResult.Value, regionId1);
          }
+         [TestMethod]
+          public void TestPostFailSameRegion()
+        {
+            regionId1 = regionsToReturn.First();
+            Exception exist = new AggregateException();
+            mock.Setup(p => p.Add(regionId1)).Throws(exist);
+            var result = controller.Post(regionId1);
+            mock.VerifyAll();
+            Assert.IsInstanceOfType(result, typeof(BadRequestObjectResult));
+        }
+
     }
 }
