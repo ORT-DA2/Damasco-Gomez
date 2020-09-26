@@ -1,34 +1,23 @@
+using BusinessLogic.Logics;
 using BusinessLogicInterface;
 using DataAccessInterface.Repositories;
+using Domain;
 
 namespace BusinessLogic
 {
-    public class PersonLogic : IPersonLogic
+    public class PersonLogic : Logic<Person> ,IPersonLogic
     {
         private readonly IPersonRepository personRepository;
         public PersonLogic(IPersonRepository personRepository)
         {
             this.personRepository = personRepository;
         }
-        // public void CreateUser(string token)
-        // {
-            
-        // }
-        // public void SetPassword(int id, string token)
-        // {
-            
-        // }
-        // public void UpdateEmail(int id, string email, string token)
-        // {
-            
-        // }
-        // public void UpdatePassword(int id, string password, string token)
-        // {
-            
-        // }
-        // public void UpdateName(int id, string name, string token)
-        // {
-            
-        // }
+        public override void Delete()
+        {
+            foreach(Person person in this.personRepository.GetElements())
+            {
+                this.Delete(person.Id);
+            }
+        }
     }
 }

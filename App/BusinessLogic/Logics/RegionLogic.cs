@@ -1,3 +1,4 @@
+using BusinessLogic.Logics;
 using BusinessLogicInterface;
 using DataAccessInterface.Repositories;
 using Domain;
@@ -6,35 +7,19 @@ using System.Collections.Generic;
 
 namespace BusinessLogic
 {
-    public class RegionLogic : IRegionLogic
+    public class RegionLogic : Logic<Region> , IRegionLogic
     {
         private readonly IRegionRepository regionRepository;
         public RegionLogic(IRegionRepository regionRepository)
         {
             this.regionRepository = regionRepository;
         }
-
-        public IEnumerable<Region> GetAll()
+        public override void Delete()
         {
-            return this.regionRepository.GetElements();
+            foreach(Region region in this.regionRepository.GetElements())
+            {
+                this.Delete(region.Id);
+            }
         }
-        public  Region GetBy(int id)
-        {
-           return this.regionRepository.Find(id);
-        }
-
-        public void Add (Region region)
-        {
-             this.regionRepository.Add(region);
-        }
-        public void Update(Region region)
-        {
-            this.regionRepository.Update(region);
-        }
-         public void Delete(int id)
-         {
-            this.regionRepository.Delete(id);
-         }
-        
      }
 }
