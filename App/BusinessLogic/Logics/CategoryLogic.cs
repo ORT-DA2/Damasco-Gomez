@@ -42,5 +42,9 @@ namespace BusinessLogic
                 this.Delete(category.Id);
             }
         }
+        public bool Exist(Category category)
+        {
+            return this.CategoryRepository.ExistElement(category);
+        }
     }
 }

@@ -174,13 +174,29 @@ namespace WebApi.Test
         [TestMethod]
         public void TestDeleteWithId()
         {
-            Assert.IsTrue(true);
+            Category category = categoriesToReturn.First();
+            mock.Setup(m => m.GetBy(category.Id)).Returns(category);
+            mock.Setup(mock=> mock.Delete(category.Id));
+            var result = controller.Delete(category.Id);
+            Assert.IsNotNull(result);
+        }
+        [TestMethod]
+        public void TestDeleteWithIdNotFound()
+        {
+            Category category = categoriesToReturn.First();
+            Category categoryNull = null;
+            mock.Setup(m => m.GetBy(category.Id)).Returns(categoryNull);
+            mock.Setup(mock=> mock.Delete(category.Id));
+            var result = controller.Delete(category.Id);
+            Assert.IsInstanceOfType(result,typeof(NotFoundResult));
         }
 
         [TestMethod]
         public void TestDelete()
         {
-            Assert.IsTrue(true);
+            mock.Setup(mock=> mock.Delete());
+            var result = controller.Delete();
+            Assert.IsNotNull(result);
         }
     }
 }
