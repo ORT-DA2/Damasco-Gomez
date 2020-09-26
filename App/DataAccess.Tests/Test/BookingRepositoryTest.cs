@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using DataAccess.Context;
@@ -20,6 +21,7 @@ namespace DataAccess.Tests.Test
         private VidlyDbSet<Booking> mockSet;
         private Mock<DbContext> mockDbContext;
         private BookingRepository repository;
+        private List<Booking> emptyBooking;
         [TestInitialize]
         public void initVariables()
         {
@@ -70,7 +72,7 @@ namespace DataAccess.Tests.Test
                     CheckOut= new System.DateTime(),
                 }
             };
-
+            emptyBooking = new List<Booking>();
             mockSet = new VidlyDbSet<Booking>();
             mockDbContext = new Mock<DbContext>(MockBehavior.Strict);
         }
@@ -92,6 +94,16 @@ namespace DataAccess.Tests.Test
             repository = new BookingRepository(repositoryMaster);
             var result = repository.GetElements();
             Assert.IsTrue(emptyBooking.SequenceEqual(result));
+        }
+        [TestMethod]
+        public void TestDeleteException()
+        {
+            mockDbContext.Setup(d => d.Set<Booking>()).Returns(mockSet.GetMockDbSet(emptyBooking).Object);
+            repositoryMaster = new RepositoryMaster(mockDbContext.Object);
+            repository = new BookingRepository(repositoryMaster);
+            Booking bookingToAdd = bookingsToReturn.First();
+            repository.Add(bookingToAdd);
+            Assert.IsTrue(true);
         }
     }
 }
