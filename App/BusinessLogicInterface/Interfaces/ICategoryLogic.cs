@@ -12,5 +12,6 @@ namespace BusinessLogicInterface
         void Update(Category category);
         void Delete(int id);
         void Delete();
+        bool Exist(Category category);
     }
 }
