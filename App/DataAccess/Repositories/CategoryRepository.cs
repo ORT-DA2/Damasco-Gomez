@@ -14,7 +14,7 @@ namespace DataAccess.Repositories
 
         protected override void Validate(Category element)
         {
-            throw new System.NotImplementedException();
+            //throw new System.NotImplementedException();
         }
     }
 }
