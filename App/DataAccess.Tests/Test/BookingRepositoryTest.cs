@@ -158,15 +158,18 @@ namespace DataAccess.Tests.Test
         //     Booking result = repository.Find(booking.Id);
         //     Assert.AreEqual(result,booking);
         // }
-        // [TestMethod]
-        // public void TestUpdate()
-        // {
-        //     Booking booking = bookingsToReturn.First();
-        //     mockDbContext.Setup(d => d.Set<Booking>()).Returns(mockSet.GetMockDbSet(bookingsToReturn).Object);
-        //     repositoryMaster = new RepositoryMaster(mockDbContext.Object);
-        //     repository = new BookingRepository(repositoryMaster);
-        //     repository.Update(booking);
-        //     Assert.IsTrue(true);
-        // }
+        [TestMethod]
+        public void TestUpdate()
+        {
+            Booking booking = bookingsToReturn.First();
+            booking.Name = "New name of booking";
+            string newName = booking.Name;
+            mockDbContext.Setup(d => d.Set<Booking>()).Returns(mockSet.GetMockDbSet(bookingsToReturn).Object);
+            mockDbContext.Setup(d => d.SaveChanges()).Returns(bookingsToReturn.First().Id);
+            repositoryMaster = new RepositoryMaster(mockDbContext.Object);
+            repository = new BookingRepository(repositoryMaster);
+            repository.Update(booking);
+            Assert.AreEqual(booking.Name,newName);
+        }
     }
 }
