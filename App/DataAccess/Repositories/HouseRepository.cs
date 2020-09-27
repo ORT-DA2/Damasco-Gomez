@@ -13,7 +13,7 @@ namespace DataAccess.Repositories
 
         protected override void Validate(House element)
         {
-            throw new System.NotImplementedException();
+            //throw new System.NotImplementedException();
         }
     }
 }
