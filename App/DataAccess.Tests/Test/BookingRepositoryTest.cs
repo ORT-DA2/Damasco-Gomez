@@ -126,28 +126,26 @@ namespace DataAccess.Tests.Test
             bool result = repository.ExistElement(bookingId);
             Assert.IsFalse(result);
         }
+        // [TestMethod]
+        // public void TestExistBookingById()
+        // {
+        //     Booking booking = bookingsToReturn.First();
+        //     mockDbContext.Setup(d => d.Set<Booking>()).Returns(mockSet.GetMockDbSet(bookingsToReturn).Object);
+        //     repositoryMaster = new RepositoryMaster(mockDbContext.Object);
+        //     repository = new BookingRepository(repositoryMaster);
+        //     bool result = repository.ExistElement(booking.Id);
+        //     Assert.IsTrue(result);
+        // }
         [TestMethod]
-        public void TestExistWithId()
+        public void TestExistBooking()
         {
             Booking booking = bookingsToReturn.First();
             mockDbContext.Setup(d => d.Set<Booking>()).Returns(mockSet.GetMockDbSet(bookingsToReturn).Object);
             repositoryMaster = new RepositoryMaster(mockDbContext.Object);
             repository = new BookingRepository(repositoryMaster);
-            bool result = repository.ExistElement(booking.Id);
+            bool result = repository.ExistElement(booking);
             Assert.IsTrue(result);
         }
-
-        // [TestMethod]
-        // public void TestFindFail()
-        // {
-        //     Booking booking = bookingsToReturn.First();
-        //     Exception exception = new ArgumentException();
-        //     mockDbContext.Setup(d => d.Set<Booking>()).Returns(mockSet.GetMockDbSet(bookingsToReturn).Object);
-        //     repositoryMaster = new RepositoryMaster(mockDbContext.Object);
-        //     repository = new BookingRepository(repositoryMaster);
-        //     Booking result = repository.Find(booking.Id);
-        //     Assert.IsInstanceOfType(result, typeof(ArgumentException));
-        // }
         // [TestMethod]
         // public void TestFind()
         // {
@@ -158,6 +156,19 @@ namespace DataAccess.Tests.Test
         //     Booking result = repository.Find(booking.Id);
         //     Assert.AreEqual(result,booking);
         // }
+
+        [TestMethod]
+        public void TestFindFail()
+        {
+            Booking booking = bookingsToReturn.First();
+            mockDbContext.Setup(d => d.Set<Booking>()).Returns(mockSet.GetMockDbSet(bookingsToReturn).Object);
+            repositoryMaster = new RepositoryMaster(mockDbContext.Object);
+            repository = new BookingRepository(repositoryMaster);
+            Booking result = repository.Find(booking.Id + 1000);
+            // Exception exception = new ArgumentException();
+            // Assert.IsInstanceOfType(result, typeof(Exception));
+            Assert.IsNull(result);
+        }
         [TestMethod]
         public void TestUpdate()
         {
@@ -170,6 +181,19 @@ namespace DataAccess.Tests.Test
             repository = new BookingRepository(repositoryMaster);
             repository.Update(booking);
             Assert.AreEqual(booking.Name,newName);
+        }
+        [TestMethod]
+        public void TestUpdateFail()
+        {
+            Booking booking = new Booking(){Id = 13000};
+            string newName = booking.Name;
+            mockDbContext.Setup(d => d.Set<Booking>()).Returns(mockSet.GetMockDbSet(bookingsToReturn).Object);
+            mockDbContext.Setup(d => d.SaveChanges()).Returns(bookingsToReturn.First().Id);
+            repositoryMaster = new RepositoryMaster(mockDbContext.Object);
+            repository = new BookingRepository(repositoryMaster);
+            repository.Update(booking);
+            // Exception exception = new ArgumentException();
+            // Assert.IsInstanceOfType(result, typeof(Exception));
         }
     }
 }
