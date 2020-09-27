@@ -1,3 +1,4 @@
+using System.Collections.Generic;
 using BusinessLogic.Logics;
 using BusinessLogicInterface;
 using DataAccessInterface.Repositories;
@@ -5,19 +6,45 @@ using Domain;
 
 namespace BusinessLogic
 {
-    public class PersonLogic : Logic<Person> ,IPersonLogic
+    public class PersonLogic : IPersonLogic
     {
         private readonly IPersonRepository personRepository;
         public PersonLogic(IPersonRepository personRepository)
         {
             this.personRepository = personRepository;
         }
-        public override void Delete()
+
+        public void Delete()
         {
-            foreach(Person person in this.personRepository.GetElements())
+            foreach(Person Person in this.personRepository.GetElements())
             {
-                this.Delete(person.Id);
+                this.Delete(Person.Id);
             }
+        }
+        public IEnumerable<Person> GetAll()
+        {
+            return this.personRepository.GetElements();
+        }
+        public Person GetBy(int id)
+        {
+            return this.personRepository.Find(id);
+        }
+
+        public void Add(Person Person)
+        {
+            this.personRepository.Add(Person);
+        }
+        public void Update(Person Person)
+        {
+            this.personRepository.Update(Person);
+        }
+        public void Delete(int id)
+        {
+            this.personRepository.Delete(id);
+        }
+        public bool Exist(Person Person)
+        {
+            return this.personRepository.ExistElement(Person);
         }
     }
 }

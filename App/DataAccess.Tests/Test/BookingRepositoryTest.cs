@@ -1,10 +1,13 @@
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using DataAccess.Context;
 using DataAccess.Repositories;
+using DataAccess.Tests.Utils;
 using Domain;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
+using Moq;
 
 namespace DataAccess.Tests.Test
 {
@@ -13,8 +16,12 @@ namespace DataAccess.Tests.Test
     {
         private List<Booking> bookingsToReturn;
         private List<Booking> bookingsToReturnEmpty;
-        private RepositoryMaster masterRepository;
+        private RepositoryMaster repositoryMaster;
         private VidlyContext context;
+        private VidlyDbSet<Booking> mockSet;
+        private Mock<DbContext> mockDbContext;
+        private BookingRepository repository;
+        private List<Booking> emptyBooking;
         [TestInitialize]
         public void initVariables()
         {
@@ -65,25 +72,39 @@ namespace DataAccess.Tests.Test
                     CheckOut= new System.DateTime(),
                 }
             };
-            var options = new DbContextOptionsBuilder<VidlyContext>()
-                .UseInMemoryDatabase(databaseName: "VidlyDb").Options;
-            context = new VidlyContext(options);
-            masterRepository = new RepositoryMaster(context);
+            emptyBooking = new List<Booking>();
+            mockSet = new VidlyDbSet<Booking>();
+            mockDbContext = new Mock<DbContext>(MockBehavior.Strict);
         }
         [TestMethod]
         public void TestGetAllBookingsOk()
         {
-            bookingsToReturn.ForEach(m => masterRepository.Bookings.AddInContext(m));
-            List<Booking> result = this.masterRepository.Bookings.GetElementsInContext();
+            mockDbContext.Setup(d => d.Set<Booking>()).Returns(mockSet.GetMockDbSet(bookingsToReturn).Object);
+            repositoryMaster = new RepositoryMaster(mockDbContext.Object);
+            repository = new BookingRepository(repositoryMaster);
+            var result = repository.GetElements();
             Assert.IsTrue(bookingsToReturn.SequenceEqual(result));
         }
-        // [TestMethod]
-        // public void TestGetAllBookingsNull()
-        // {
-        //     List<Booking> emptyBooking = new List<Booking>();
-        //     emptyBooking.ForEach(m => masterRepository.Bookings.AddInContext(m));
-        //     List<Booking> result = this.masterRepository.Bookings.GetElementsInContext();
-        //     Assert.IsTrue(emptyBooking.SequenceEqual(result));
-        // }
+        [TestMethod]
+        public void TestGetAllBookingsNull()
+        {
+            List<Booking> emptyBooking = new List<Booking>();
+            mockDbContext.Setup(d => d.Set<Booking>()).Returns(mockSet.GetMockDbSet(emptyBooking).Object);
+            repositoryMaster = new RepositoryMaster(mockDbContext.Object);
+            repository = new BookingRepository(repositoryMaster);
+            var result = repository.GetElements();
+            Assert.IsTrue(emptyBooking.SequenceEqual(result));
+        }
+        [TestMethod]
+        public void TestAdd()
+        {
+            Booking booking = bookingsToReturn.First();
+            mockDbContext.Setup(d => d.Set<Booking>()).Returns(mockSet.GetMockDbSet(emptyBooking).Object);
+            mockDbContext.Setup(d => d.SaveChanges());
+            repositoryMaster = new RepositoryMaster(mockDbContext.Object);
+            repository = new BookingRepository(repositoryMaster);
+            repository.Add(booking);
+            Assert.IsTrue(true);
+        }
     }
 }

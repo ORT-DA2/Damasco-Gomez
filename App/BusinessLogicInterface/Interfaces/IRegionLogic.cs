@@ -4,7 +4,14 @@ using Domain;
 
 namespace BusinessLogicInterface
 {
-    public interface IRegionLogic : ILogic<Region>
+    public interface IRegionLogic
     {
+        IEnumerable<Region> GetAll();
+        Region GetBy(int id);
+        void Add(Region element);
+        void Update(Region element);
+        void Delete(int id);
+        void Delete();
+        bool Exist(Region element);
     }
 }

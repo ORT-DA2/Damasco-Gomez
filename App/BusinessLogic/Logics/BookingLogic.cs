@@ -6,7 +6,7 @@ using Domain;
 
 namespace BusinessLogic.Logics
 {
-    public class BookingLogic : Logic<Booking> , IBookingLogic
+    public class BookingLogic : IBookingLogic
     {
         private readonly IBookingRepository bookingRepository;
         private readonly IHouseRepository houseRepository;
@@ -15,17 +15,37 @@ namespace BusinessLogic.Logics
             this.bookingRepository = bookingRepository;
             this.houseRepository = houseRepository;
         }
-        public override void Delete()
+        public void Delete()
         {
             foreach(Booking Booking in this.bookingRepository.GetElements())
             {
                 this.Delete(Booking.Id);
             }
         }
-        public void AddHouse(int id, House house)
+        public IEnumerable<Booking> GetAll()
         {
-            this.houseRepository.Add(house);
-            this.bookingRepository.Find(id).House = house;
+            return this.bookingRepository.GetElements();
+        }
+        public  Booking GetBy(int id)
+        {
+            return this.bookingRepository.Find(id);
+        }
+
+        public void Add(Booking Booking)
+        {
+            this.bookingRepository.Add(Booking);
+        }
+        public void Update(Booking Booking)
+        {
+            this.bookingRepository.Update(Booking);
+        }
+        public void Delete(int id)
+        {
+            this.bookingRepository.Delete(id);
+        }
+        public bool Exist(Booking Booking)
+        {
+            return this.bookingRepository.ExistElement(Booking);
         }
     }
 }

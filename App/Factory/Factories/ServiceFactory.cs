@@ -18,17 +18,18 @@ namespace Factory.Factories
         }
         public void AddCustomServices()
         {
+            services.AddScoped<RepositoryMaster>();
             services.AddScoped<ITouristPointRepository, TouristPointRepository>();
-            services.AddScoped<ITouristPointLogic, TouristPointLogic>();
             services.AddScoped<IBookingRepository, BookingRepository>();
-            services.AddScoped<IBookingLogic, BookingLogic>();
             services.AddScoped<ICategoryRepository, CategoryRepository>();
-            services.AddScoped<ICategoryLogic, CategoryLogic>();
             services.AddScoped<IHouseRepository, HouseRepository>();
-            services.AddScoped<IHouseLogic, HouseLogic>();
             services.AddScoped<IPersonRepository, PersonRepository>();
-            services.AddScoped<IPersonLogic, PersonLogic>();
             services.AddScoped<IRegionRepository, RegionRepository>();
+            services.AddScoped<ITouristPointLogic, TouristPointLogic>();
+            services.AddScoped<IBookingLogic, BookingLogic>();
+            services.AddScoped<ICategoryLogic, CategoryLogic>();
+            services.AddScoped<IHouseLogic, HouseLogic>();
+            services.AddScoped<IPersonLogic, PersonLogic>();
             services.AddScoped<IRegionLogic, RegionLogic>();
         }
         public void AddDbContextService()
