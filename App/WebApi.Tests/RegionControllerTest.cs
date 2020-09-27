@@ -29,25 +29,21 @@ namespace WebApi.Test
                 {
                     Id = 1,
                     Name = "New region",
-                    TouristPoints = null,
                 },
                 new Region()
                 {
                     Id = 2,
                     Name = "Other region",
-                    TouristPoints = null,
                 },
                 new Region()
                 {
                     Id = 3,
                     Name = "And other region",
-                    TouristPoints = null,
                 },
                 new Region()
                 {
                     Id = 4,
                     Name = "And one more region",
-                    TouristPoints = null,
                 }
             };
             regionToReturnEmpty = new List<Region>();

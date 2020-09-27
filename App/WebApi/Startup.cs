@@ -30,6 +30,7 @@ namespace WebApi
         {
             ServiceFactory factory = new ServiceFactory(services);
             services.AddControllers();
+            factory.AddCustomServices();
             factory.AddDbContextService();
         }
 

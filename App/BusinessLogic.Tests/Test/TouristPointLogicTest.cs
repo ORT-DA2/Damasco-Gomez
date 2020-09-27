@@ -23,8 +23,7 @@ namespace BusinessLogic.Tests.Test
         [TestInitialize]
         void Initialize ()
         {
-
-             touristPoints = new List<TouristPoint>()
+            touristPoints = new List<TouristPoint>()
             {
                 new TouristPoint()
                 {
@@ -70,8 +69,8 @@ namespace BusinessLogic.Tests.Test
              mock = new Mock<ITouristPointRepository>(MockBehavior.Strict);
              touristPointLogic = new TouristPointLogic(mock.Object);
         }
-       [TestMethod]
-        public void TestGetAll ()
+        [TestMethod]
+        public void TestGetAll()
         {
             mock.Setup(m => m.GetElements()).Returns(touristPoints);
             var result = touristPointLogic.GetAll();

@@ -10,20 +10,15 @@ namespace Domain
         public string Name {get; set;}
 
         public List<TouristPoint> TouristPoints {get; set; }
-        
-        public override bool Equals (object obj)
+
+        public override bool Equals(object obj)
         {
-
             var result = false;
-
             if (obj is Region region)
             {
-
-                result = this.Id == region.Id && this.Name.Equals(region.Name);
+                result = this.Id == region.Id;
             }
-            return result; 
+            return result;
         }
-
-
     }
 }

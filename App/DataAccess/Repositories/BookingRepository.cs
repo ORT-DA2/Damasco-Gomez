@@ -15,7 +15,7 @@ namespace DataAccess.Repositories
 
         protected override void Validate(Booking element)
         {
-            throw new NotImplementedException();
+            //throw new NotImplementedException();
         }
     }
 }

@@ -44,26 +44,31 @@ namespace DataAccess.Repositories
 
         public bool ExistInRepository(T element)
         {
-            return this.dbSet.ToList().Contains(element);
+            var find = this.dbSet.ToList().Contains(element);
+            return find;
         }
 
         public bool ExistInRepository(Predicate<T> element)
         {
-            return this.dbSet.ToList().Exists(element);
+            var find = this.dbSet.ToList().Exists(element);
+            return find;
         }
 
         public bool ExistInRepository(int id)
         {
-            return this.dbSet.Find(id) != null;
+            var find = this.dbSet.Find(id);
+            return find != null;
         }
 
         public T FindInRepository(Predicate<T> element)
         {
-            return this.dbSet.ToList().Find(element);
+            var find = this.dbSet.ToList().Find(element);
+            return find;
         }
         public T FindInRepository(int id)
         {
-            return this.dbSet.Find(id);
+            var find = this.dbSet.Find(id);
+            return find;
         }
         public List<T> GetElementsInContext()
         {
