@@ -96,13 +96,14 @@ namespace DataAccess.Tests.Test
             Assert.IsTrue(emptyBooking.SequenceEqual(result));
         }
         [TestMethod]
-        public void TestDeleteException()
+        public void TestAdd()
         {
+            Booking booking = bookingsToReturn.First();
             mockDbContext.Setup(d => d.Set<Booking>()).Returns(mockSet.GetMockDbSet(emptyBooking).Object);
+            mockDbContext.Setup(d => d.SaveChanges());
             repositoryMaster = new RepositoryMaster(mockDbContext.Object);
             repository = new BookingRepository(repositoryMaster);
-            Booking bookingToAdd = bookingsToReturn.First();
-            repository.Add(bookingToAdd);
+            repository.Add(booking);
             Assert.IsTrue(true);
         }
     }
