@@ -1,4 +1,5 @@
 using System;
+using System.Collections.Generic;
 using BusinessLogicInterface;
 using Domain;
 using Microsoft.AspNetCore.Mvc;
@@ -17,6 +18,8 @@ namespace WebApi.Controllers
         [HttpGet]
         public IActionResult Get()
         {
+            List<string> newList = new List<string>();
+            //return Ok(newList);
             return Ok(this.regionLogic.GetAll());
         }
         [HttpGet("{id}")]
