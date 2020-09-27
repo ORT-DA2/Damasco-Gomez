@@ -44,7 +44,8 @@ namespace DataAccess.Repositories
 
         public bool ExistInRepository(T element)
         {
-            return this.dbSet.ToList().Contains(element);
+            var find = this.dbSet.ToList().Contains(element);
+            return find;
         }
 
         public bool ExistInRepository(Predicate<T> element)
@@ -66,7 +67,8 @@ namespace DataAccess.Repositories
         }
         public T FindInRepository(int id)
         {
-            return this.dbSet.Find(id);
+            var find = this.dbSet.Find(id);
+            return find;
         }
         public List<T> GetElementsInContext()
         {
