@@ -16,7 +16,7 @@ namespace DataAccess.Repositories
 
         protected override void Validate(TouristPoint element)
         {
-            throw new NotImplementedException();
+            //throw new NotImplementedException();
         }
     }
 }

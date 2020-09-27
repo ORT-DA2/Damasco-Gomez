@@ -13,7 +13,7 @@ namespace Domain
 
         public TouristPoint Spot {get ; set; }
 
-        public string HouseName {get ; set; }
+        public string Name {get ; set; }
 
         public int Starts {get ; set; }
 

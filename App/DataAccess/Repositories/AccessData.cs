@@ -56,7 +56,8 @@ namespace DataAccess.Repositories
             var elementFind = repository.FindInRepository(id);
             if (elementFind == null)
             {
-                throw new ArgumentException();
+                return null;
+                //throw new ArgumentException();
             }
             return elementFind;
         }
@@ -66,7 +67,8 @@ namespace DataAccess.Repositories
             var elementFind = repository.FindInRepository(element);
             if (elementFind == null)
             {
-                throw new ArgumentException();
+                return null;
+                //throw new ArgumentException();
             }
             return elementFind;
         }
@@ -76,7 +78,7 @@ namespace DataAccess.Repositories
             Validate(element);
             if (!ExistElement(element))
             {
-                throw new ArgumentException();
+                //throw new ArgumentException();
             }
             repository.UpdateInContext(element);
         }
