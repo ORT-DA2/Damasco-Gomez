@@ -96,15 +96,77 @@ namespace DataAccess.Tests.Test
             Assert.IsTrue(emptyBooking.SequenceEqual(result));
         }
         [TestMethod]
-        public void TestAdd()
+        public void TestExistNot()
         {
             Booking booking = bookingsToReturn.First();
             mockDbContext.Setup(d => d.Set<Booking>()).Returns(mockSet.GetMockDbSet(emptyBooking).Object);
-            mockDbContext.Setup(d => d.SaveChanges());
             repositoryMaster = new RepositoryMaster(mockDbContext.Object);
             repository = new BookingRepository(repositoryMaster);
-            repository.Add(booking);
-            Assert.IsTrue(true);
+            bool result = repository.ExistElement(booking);
+            Assert.IsFalse(result);
         }
+        [TestMethod]
+        public void TestExist()
+        {
+            Booking booking = bookingsToReturn.First();
+            mockDbContext.Setup(d => d.Set<Booking>()).Returns(mockSet.GetMockDbSet(bookingsToReturn).Object);
+            repositoryMaster = new RepositoryMaster(mockDbContext.Object);
+            repository = new BookingRepository(repositoryMaster);
+            bool result = repository.ExistElement(booking);
+            Assert.IsTrue(result);
+        }
+
+        [TestMethod]
+        public void TestExistWithIdFail()
+        {
+            int bookingId = bookingsToReturn.First().Id;
+            mockDbContext.Setup(d => d.Set<Booking>()).Returns(mockSet.GetMockDbSet(bookingsToReturn).Object);
+            repositoryMaster = new RepositoryMaster(mockDbContext.Object);
+            repository = new BookingRepository(repositoryMaster);
+            bool result = repository.ExistElement(bookingId);
+            Assert.IsFalse(result);
+        }
+        [TestMethod]
+        public void TestExistWithId()
+        {
+            Booking booking = bookingsToReturn.First();
+            mockDbContext.Setup(d => d.Set<Booking>()).Returns(mockSet.GetMockDbSet(bookingsToReturn).Object);
+            repositoryMaster = new RepositoryMaster(mockDbContext.Object);
+            repository = new BookingRepository(repositoryMaster);
+            bool result = repository.ExistElement(booking.Id);
+            Assert.IsTrue(result);
+        }
+
+        // [TestMethod]
+        // public void TestFindFail()
+        // {
+        //     Booking booking = bookingsToReturn.First();
+        //     Exception exception = new ArgumentException();
+        //     mockDbContext.Setup(d => d.Set<Booking>()).Returns(mockSet.GetMockDbSet(bookingsToReturn).Object);
+        //     repositoryMaster = new RepositoryMaster(mockDbContext.Object);
+        //     repository = new BookingRepository(repositoryMaster);
+        //     Booking result = repository.Find(booking.Id);
+        //     Assert.IsInstanceOfType(result, typeof(ArgumentException));
+        // }
+        // [TestMethod]
+        // public void TestFind()
+        // {
+        //     Booking booking = bookingsToReturn.First();
+        //     mockDbContext.Setup(d => d.Set<Booking>()).Returns(mockSet.GetMockDbSet(bookingsToReturn).Object);
+        //     repositoryMaster = new RepositoryMaster(mockDbContext.Object);
+        //     repository = new BookingRepository(repositoryMaster);
+        //     Booking result = repository.Find(booking.Id);
+        //     Assert.AreEqual(result,booking);
+        // }
+        // [TestMethod]
+        // public void TestUpdate()
+        // {
+        //     Booking booking = bookingsToReturn.First();
+        //     mockDbContext.Setup(d => d.Set<Booking>()).Returns(mockSet.GetMockDbSet(bookingsToReturn).Object);
+        //     repositoryMaster = new RepositoryMaster(mockDbContext.Object);
+        //     repository = new BookingRepository(repositoryMaster);
+        //     repository.Update(booking);
+        //     Assert.IsTrue(true);
+        // }
     }
 }
