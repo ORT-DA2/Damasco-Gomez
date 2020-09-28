@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using DataAccessInterface.Repositories;
@@ -12,16 +13,13 @@ namespace BusinessLogic.Tests.Test
     [TestClass]
     public class TouristPointLogicTest
     {
-        private TouristPointLogic touristPointLogic ;
-
-        private List<CategoryTouristPoint> categoriesTouristPoints ;
-
+        private TouristPointLogic touristPointLogic;
+        private List<CategoryTouristPoint> categoriesTouristPoints;
         private Mock<ITouristPointRepository> mock;
-
         private List<TouristPoint> touristPoints;
-
+        private List<TouristPoint> touristPointsEmpty;
         [TestInitialize]
-        void Initialize ()
+        public void Initialize ()
         {
             touristPoints = new List<TouristPoint>()
             {
@@ -66,18 +64,64 @@ namespace BusinessLogic.Tests.Test
                     CategoriesTouristPoints = null,
                 }
             };
-             mock = new Mock<ITouristPointRepository>(MockBehavior.Strict);
-             touristPointLogic = new TouristPointLogic(mock.Object);
+            mock = new Mock<ITouristPointRepository>(MockBehavior.Strict);
+            touristPointLogic = new TouristPointLogic(mock.Object);
+            touristPointsEmpty = new List<TouristPoint>();
         }
         [TestMethod]
         public void TestGetAll()
         {
             mock.Setup(m => m.GetElements()).Returns(touristPoints);
             var result = touristPointLogic.GetAll();
-            var okResult = result as OkObjectResult;
-            var touristPonits = okResult.Value as TouristPointLogic;
             mock.VerifyAll();
-            Assert.IsTrue(touristPonits.Equals(touristPoints));
+            Assert.IsTrue(result.SequenceEqual(touristPoints));
+        }
+        [TestMethod]
+        public void TestGetBy()
+        {
+            TouristPoint touristPoint = touristPoints.First();
+            mock.Setup(m => m.Find(touristPoint.Id)).Returns(touristPoint);
+            var result = touristPointLogic.GetBy(touristPoint.Id);
+            mock.VerifyAll();
+            Assert.AreEqual(result,touristPoint);
+        }
+        [TestMethod]
+        public void TestGetByFail()
+        {
+            TouristPoint touristPoint = touristPoints.First();
+            TouristPoint empty = null;
+            mock.Setup(m => m.Find(touristPoint.Id)).Returns(empty);
+            var result = touristPointLogic.GetBy(touristPoint.Id);
+            mock.VerifyAll();
+            Assert.IsNull(result);
+        }
+        [TestMethod]
+        public void TestAdd()
+        {
+            TouristPoint touristPoint = touristPoints.First();
+            mock.Setup(m => m.Add(touristPoint));
+            touristPointLogic.Add(touristPoint);
+            mock.VerifyAll();
+            //Assert.AreEqual(touristPointLogic.);
+        }
+        [TestMethod]
+        public void TestAddValidateError()
+        {
+            // TouristPoint touristPoint = touristPoints.First();
+            // mock.Setup(m => m.Add(touristPoint));
+            // touristPointLogic.Add(touristPoint);
+            // mock.VerifyAll();
+            //Assert.AreEqual(touristPointLogic.);
+        }
+        [TestMethod]
+        public void TestAddExistError()
+        {
+            // TouristPoint touristPoint = touristPoints.First();
+            // ArgumentException exception = new ArgumentException();
+            // mock.Setup(m => m.Add(touristPoint)).Throws(exception);
+            // touristPointLogic.Add(touristPoint);
+            // mock.VerifyAll();
+            //Assert.IsInstanceOfType(touristPointLogic);
         }
 
     }
