@@ -38,7 +38,7 @@ namespace DataAccess.Repositories
         public void Delete(int id)
         {
             var entityToDelete = this.dbSet.Find(id);
-            this.context.Entry(entityToDelete).State = EntityState.Deleted;
+            this.dbSet.Remove(entityToDelete);
             this.context.SaveChanges();
         }
 
