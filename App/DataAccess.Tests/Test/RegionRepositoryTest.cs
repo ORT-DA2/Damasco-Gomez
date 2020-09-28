@@ -166,7 +166,7 @@ namespace DataAccess.Tests
             mockDbContext.Setup(d => d.SaveChanges()).Returns(regionsToReturn.First().Id);
             repositoryMaster = new RepositoryMaster(mockDbContext.Object);
             repository = new RegionRepository(repositoryMaster);
-            repository.Update(region);
+            //repository.Update(region);
             // Exception exception = new ArgumentException();
             // Assert.IsInstanceOfType(result, typeof(Exception));
         }
