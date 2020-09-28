@@ -10,14 +10,14 @@ namespace DataAccess.Repositories
     {
         protected IRepository<T> repository;
         protected abstract void Validate(T element);
-        public void Add(T element)
+        public T Add(T element)
         {
             Validate(element);
-            if (ExistElement(element))
+            if (!ExistElement(element))
             {
                 throw new ArgumentException();
             }
-            repository.AddInContext(element);
+            return repository.AddInContext(element);
         }
 
         public bool ExistElement(T element)
