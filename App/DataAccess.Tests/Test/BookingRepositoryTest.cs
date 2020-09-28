@@ -329,39 +329,5 @@ namespace DataAccess.Tests.Test
 
             //Assert.AreEqual(bookingsToReturn.Count, lengthBookings - 1 );
         }
-        [TestMethod]
-        public void TestDeleteAll()
-        {
-            Booking booking = bookingsToReturn.First();
-            int lengthBookings = bookingsToReturn.Count();
-            var _mockSet = mockSet.GetMockDbSet(bookingsToReturn);
-            _mockSet.Setup(d => d.Find(It.IsAny<object[]>())).Returns(booking);
-            mockDbContext.Setup(d => d.Set<Booking>()).Returns(_mockSet.Object);
-            mockDbContext.Setup(d => d.SaveChanges()).Returns(booking.Id);
-            //mockDbContext.Setup(d => d.Remove(booking.Id));
-            repositoryMaster = new RepositoryMaster(mockDbContext.Object);
-            repository = new BookingRepository(repositoryMaster);
-
-            repository.Delete();
-
-            //Assert.AreEqual(bookingsToReturn.Count, lengthBookings - 1 );
-        }
-        [TestMethod]
-        public void TestDeleteByIdFailExist()
-        {
-            Booking booking = bookingsToReturn.First();
-            Booking bookingNull = null;
-            int lengthBookings = bookingsToReturn.Count();
-            var _mockSet = mockSet.GetMockDbSet(bookingsToReturn);
-            _mockSet.Setup(d => d.Find(It.IsAny<object[]>())).Returns(bookingNull);
-            mockDbContext.Setup(d => d.Set<Booking>()).Returns(_mockSet.Object);
-            mockDbContext.Setup(d => d.SaveChanges()).Returns(booking.Id);
-            repositoryMaster = new RepositoryMaster(mockDbContext.Object);
-            repository = new BookingRepository(repositoryMaster);
-
-            //repository.Delete(booking.Id);
-
-            //Assert.AreEqual(bookingsToReturn.Count, lengthBookings - 1 );
-        }
     }
 }
