@@ -100,9 +100,11 @@ namespace BusinessLogic.Tests.Test
         {
             TouristPoint touristPoint = touristPoints.First();
             mock.Setup(m => m.Add(touristPoint)).Returns(touristPoint);
-            var touristPointToReturn = touristPointLogic.Add(touristPoint);
             mock.VerifyAll();
-            Assert.AreEqual(touristPointLogic, touristPointToReturn );
+            
+            var touristPointToReturn = touristPointLogic.Add(touristPoint);
+
+            Assert.AreEqual(touristPoint, touristPointToReturn );
         }
         [TestMethod]
         public void TestAddValidateError()
@@ -114,14 +116,14 @@ namespace BusinessLogic.Tests.Test
             Assert.AreEqual(touristPointLogic, touristPointToReturn); 
         }
         [TestMethod]
+        [ExpectedException(typeof(ArgumentException))]
         public void TestAddExistError()
         {
             TouristPoint touristPoint = touristPoints.First();
             ArgumentException exception = new ArgumentException();
             mock.Setup(m => m.Add(touristPoint)).Throws(exception);
+
             var touristPointToReturn = touristPointLogic.Add(touristPoint);
-            mock.VerifyAll();
-            Assert.IsInstanceOfType(touristPointToReturn, typeof(ArgumentException));
         }
         [TestMethod]
         public void TestUdpateOk ()
@@ -142,14 +144,15 @@ namespace BusinessLogic.Tests.Test
             //Assert.AreEqual(touristPointLogic, touristPointToReturn); 
         }
         [TestMethod]
+        [ExpectedException(typeof(ArgumentException))]
         public void TestUpdateExistError()
         {
             TouristPoint touristPoint = touristPoints.First();
             ArgumentException exception = new ArgumentException();
             mock.Setup(m => m.Update(touristPoint)).Throws(exception);
+            
             touristPointLogic.Update(touristPoint);
-            mock.VerifyAll();
-            Assert.IsInstanceOfType(touristPointToReturn, typeof(ArgumentException));
+   
         }
         [TestMethod]
         public void TestExistOk()
@@ -169,18 +172,21 @@ namespace BusinessLogic.Tests.Test
             mock.VerifyAll();
             Assert.IsFalse(touristPointToReturn);
         }
-        [TestMethod]
-        public void TestDeleteById ()
+        /*[TestMethod]*/
+        /*public void TestDeleteById ()
         {
-            var int id= 1;
+            int id= 1;
             TouristPoint touristPoint = touristPoints.First();
+            TouristPoint touristPoint2 = touristPoints.Second();
+            int lengthTouristPoint = touristPoints.Count();
+            mock.Setup(m => m.Add(id)).Returns(touristPoint);
             mock.Setup(m => m.Add(id)).Returns(touristPoint);
             mock.Setup(m => m.Delete(id));
             touristPointLogic.Delete(touristPoint);
             mock.VerifyAll();
-            //Assert.IsTrue(touristPointToReturn); no se que assert poner 
-        }
-
+            Assert.AreEqual(touristPoints.Count, lengthTouristPoint - 1 );
+        }*/
+/*
          [TestMethod]
         public void TestDeleteFail ()
         {
@@ -191,7 +197,7 @@ namespace BusinessLogic.Tests.Test
             mock.VerifyAll();
            // Assert.IsInstanceOfType(touristPointToReturn, typeof(ArgumentException));
             
-        }
+        }*/
 
 
     }

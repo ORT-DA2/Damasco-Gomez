@@ -1,12 +1,21 @@
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using DataAccessInterface.Repositories;
+using Domain;
+using Microsoft.VisualStudio.TestTools.UnitTesting;
+using Moq;
+
 namespace BusinessLogic.Tests.Test
 {
     [TestClass]
     public class RegionLogicTest
     {
         private RegionLogic regionLogic; 
-        private Mock<IRegionLogicRepository> mock;
+        private Mock<IRegionRepository> mock;
         private List<Region> regionsToReturn;
         private List<Region> regionsEmpty;
+
          [TestInitialize]
         public void Initialize ()
         {
@@ -37,7 +46,7 @@ namespace BusinessLogic.Tests.Test
                     TouristPoints = null,
                 }
             };
-            mock = new Mock<IRegionLogicRepository>(MockBehavior.Strict);
+            mock = new Mock<IRegionRepository>(MockBehavior.Strict);
             regionLogic = new RegionLogic(mock.Object);
             regionsEmpty = new List<Region>();
         }
@@ -52,11 +61,11 @@ namespace BusinessLogic.Tests.Test
         [TestMethod]
         public void TestGetEmptyGetAll()
         {
-            Region empty = null;
-            mock.Setup(m => m.GetElements()).Returns(empty);
+            List<Region> regionEmpty = new List<Region>();
+            mock.Setup(m => m.GetElements()).Returns(regionEmpty);
             var result = regionLogic.GetAll();
             mock.VerifyAll();
-            Assert.IsNull(result);
+            Assert.AreEqual(regionEmpty, result);
         }
         [TestMethod]
         public void TestAdd()
@@ -72,19 +81,21 @@ namespace BusinessLogic.Tests.Test
         {
             Region region = regionsToReturn.First(); // esta region tiene que terner un formato erroneo despues para que la validación falle
             mock.Setup(m => m.Add(region)).Returns(region);
-            var regionToReturn = regionLogic.Add(region);
             mock.VerifyAll();
+
+            var regionToReturn = regionLogic.Add(region);
+
             Assert.AreEqual(region, regionToReturn); 
         }
         [TestMethod]
+         [ExpectedException(typeof(ArgumentException))]
         public void TestAddExistError()
         {
             Region region = regionsToReturn.First();
             ArgumentException exception = new ArgumentException();
-            mock.Setup(m => m.Add(touristPoint)).Throws(exception);
+            mock.Setup(m => m.Add(region)).Throws(exception);
+
             var regionToReturn = regionLogic.Add(region);
-            mock.VerifyAll();
-            Assert.IsInstanceOfType(regionToReturn, typeof(ArgumentException));
         }
 
     }
