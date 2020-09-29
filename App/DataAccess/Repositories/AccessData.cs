@@ -13,7 +13,7 @@ namespace DataAccess.Repositories
         public T Add(T element)
         {
             Validate(element);
-            if (!ExistElement(element))
+            if (ExistElement(element))
             {
                 throw new ArgumentException();
             }

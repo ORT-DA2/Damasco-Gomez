@@ -105,6 +105,7 @@ namespace DataAccess.Tests.Test
             //Assert.AreEqual(bookingLenght,repositoryMaster.Bookings.Count() + 1);
         }
         [TestMethod]
+        [ExpectedException(typeof(ArgumentException))]
         public void TestAddFailExist()
         {
             Booking booking = bookingsToReturn.First();
@@ -115,7 +116,7 @@ namespace DataAccess.Tests.Test
             repositoryMaster = new RepositoryMaster(mockDbContext.Object);
             repository = new BookingRepository(repositoryMaster);
 
-            //repository.Add(booking);
+            repository.Add(booking);
 
             //Assert.AreEqual();
         }
@@ -252,6 +253,7 @@ namespace DataAccess.Tests.Test
             Assert.AreEqual(booking.Name,newName);
         }
         [TestMethod]
+        [ExpectedException(typeof(ArgumentException))]
         public void TestUpdateFail()
         {
             Booking booking = new Booking(){Id = 13000};
@@ -313,6 +315,7 @@ namespace DataAccess.Tests.Test
             //Assert.AreEqual(bookingsToReturn.Count, lengthBookings - 1 );
         }
         [TestMethod]
+        [ExpectedException(typeof(ArgumentException))]
         public void TestDeleteByIdFailExist()
         {
             Booking booking = bookingsToReturn.First();
@@ -325,7 +328,7 @@ namespace DataAccess.Tests.Test
             repositoryMaster = new RepositoryMaster(mockDbContext.Object);
             repository = new BookingRepository(repositoryMaster);
 
-            //repository.Delete(booking.Id);
+            repository.Delete(booking.Id);
 
             //Assert.AreEqual(bookingsToReturn.Count, lengthBookings - 1 );
         }

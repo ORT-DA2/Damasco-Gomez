@@ -81,6 +81,7 @@ namespace DataAccess.Tests.Test
             //Assert.AreEqual(categoryLenght,repositoryMaster.Categorys.Count() + 1);
         }
         [TestMethod]
+        [ExpectedException(typeof(ArgumentException))]
         public void TestAddFailExist()
         {
             Category category = categoriesToReturn.First();
@@ -91,7 +92,7 @@ namespace DataAccess.Tests.Test
             repositoryMaster = new RepositoryMaster(mockDbContext.Object);
             repository = new CategoryRepository(repositoryMaster);
 
-            //repository.Add(category);
+            repository.Add(category);
 
             //Assert.AreEqual();
         }
@@ -228,6 +229,7 @@ namespace DataAccess.Tests.Test
             Assert.AreEqual(category.Name,newName);
         }
         [TestMethod]
+        [ExpectedException(typeof(ArgumentException))]
         public void TestUpdateFail()
         {
             Category category = new Category(){Id = 13000};
@@ -289,6 +291,7 @@ namespace DataAccess.Tests.Test
             //Assert.AreEqual(categoriesToReturn.Count, lengthCategorys - 1 );
         }
         [TestMethod]
+        [ExpectedException(typeof(ArgumentException))]
         public void TestDeleteByIdFailExist()
         {
             Category category = categoriesToReturn.First();
@@ -301,7 +304,7 @@ namespace DataAccess.Tests.Test
             repositoryMaster = new RepositoryMaster(mockDbContext.Object);
             repository = new CategoryRepository(repositoryMaster);
 
-            //repository.Delete(category.Id);
+            repository.Delete(category.Id);
 
             //Assert.AreEqual(categoriesToReturn.Count, lengthCategorys - 1 );
         }

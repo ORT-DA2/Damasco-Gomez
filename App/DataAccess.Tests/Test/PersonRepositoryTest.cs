@@ -228,6 +228,7 @@ namespace DataAccess.Tests.Test
             Assert.AreEqual(person.Email,newEmail);
         }
         [TestMethod]
+        [ExpectedException(typeof(ArgumentException))]
         public void TestUpdateFail()
         {
             Person person = new Person(){Id = 13000};

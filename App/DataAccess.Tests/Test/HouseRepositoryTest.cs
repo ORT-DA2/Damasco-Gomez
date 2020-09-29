@@ -81,6 +81,7 @@ namespace DataAccess.Tests.Test
             //Assert.AreEqual(houseLenght,repositoryMaster.Houses.Count() + 1);
         }
         [TestMethod]
+        [ExpectedException(typeof(ArgumentException))]
         public void TestAddFailExist()
         {
             House house = housesToReturn.First();
@@ -91,7 +92,7 @@ namespace DataAccess.Tests.Test
             repositoryMaster = new RepositoryMaster(mockDbContext.Object);
             repository = new HouseRepository(repositoryMaster);
 
-            //repository.Add(house);
+            repository.Add(house);
 
             //Assert.AreEqual();
         }
@@ -228,6 +229,7 @@ namespace DataAccess.Tests.Test
             Assert.AreEqual(house.Name,newName);
         }
         [TestMethod]
+        [ExpectedException(typeof(ArgumentException))]
         public void TestUpdateFail()
         {
             House house = new House(){Id = 13000};
@@ -289,6 +291,7 @@ namespace DataAccess.Tests.Test
             //Assert.AreEqual(housesToReturn.Count, lengthHouses - 1 );
         }
         [TestMethod]
+        [ExpectedException(typeof(ArgumentException))]
         public void TestDeleteByIdFailExist()
         {
             House house = housesToReturn.First();
@@ -301,7 +304,7 @@ namespace DataAccess.Tests.Test
             repositoryMaster = new RepositoryMaster(mockDbContext.Object);
             repository = new HouseRepository(repositoryMaster);
 
-            //repository.Delete(house.Id);
+            repository.Delete(house.Id);
 
             //Assert.AreEqual(housesToReturn.Count, lengthHouses - 1 );
         }
