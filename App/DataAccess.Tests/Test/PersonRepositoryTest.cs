@@ -15,9 +15,7 @@ namespace DataAccess.Tests.Test
     public class PersonRepositoryTest
     {
         private List<Person> personsToReturn;
-        private List<Person> personsToReturnEmpty;
         private RepositoryMaster repositoryMaster;
-        private VidlyContext context;
         private VidlyDbSet<Person> mockSet;
         private Mock<DbContext> mockDbContext;
         private PersonRepository repository;
@@ -228,6 +226,7 @@ namespace DataAccess.Tests.Test
             Assert.AreEqual(person.Email,newEmail);
         }
         [TestMethod]
+        [ExpectedException(typeof(ArgumentException))]
         public void TestUpdateFail()
         {
             Person person = new Person(){Id = 13000};
@@ -280,20 +279,17 @@ namespace DataAccess.Tests.Test
             _mockSet.Setup(d => d.Find(It.IsAny<object[]>())).Returns(person);
             mockDbContext.Setup(d => d.Set<Person>()).Returns(_mockSet.Object);
             mockDbContext.Setup(d => d.SaveChanges()).Returns(person.Id);
-            //mockDbContext.Setup(d => d.Remove(person.Id));
             repositoryMaster = new RepositoryMaster(mockDbContext.Object);
             repository = new PersonRepository(repositoryMaster);
 
             repository.Delete(person.Id);
-
-            //Assert.AreEqual(personsToReturn.Count, lengthPersons - 1 );
         }
         [TestMethod]
+        [ExpectedException(typeof(ArgumentException))]
         public void TestDeleteByIdFailExist()
         {
             Person person = personsToReturn.First();
             Person personNull = null;
-            int lengthPersons = personsToReturn.Count();
             var _mockSet = mockSet.GetMockDbSet(personsToReturn);
             _mockSet.Setup(d => d.Find(It.IsAny<object[]>())).Returns(personNull);
             mockDbContext.Setup(d => d.Set<Person>()).Returns(_mockSet.Object);
@@ -301,9 +297,7 @@ namespace DataAccess.Tests.Test
             repositoryMaster = new RepositoryMaster(mockDbContext.Object);
             repository = new PersonRepository(repositoryMaster);
 
-            //repository.Delete(person.Id);
-
-            //Assert.AreEqual(personsToReturn.Count, lengthPersons - 1 );
+            repository.Delete(person.Id);
         }
     }
 }

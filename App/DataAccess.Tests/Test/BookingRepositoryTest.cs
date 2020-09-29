@@ -15,9 +15,7 @@ namespace DataAccess.Tests.Test
     public class BookingRepositoryTest
     {
         private List<Booking> bookingsToReturn;
-        private List<Booking> bookingsToReturnEmpty;
         private RepositoryMaster repositoryMaster;
-        private VidlyContext context;
         private VidlyDbSet<Booking> mockSet;
         private Mock<DbContext> mockDbContext;
         private BookingRepository repository;
@@ -86,11 +84,12 @@ namespace DataAccess.Tests.Test
             repositoryMaster = new RepositoryMaster(mockDbContext.Object);
             repository = new BookingRepository(repositoryMaster);
 
-            repository.Add(booking);
+            var result = repository.Add(booking);
 
-            Assert.AreEqual(bookings+1, bookingsToReturn.Count());
+            Assert.AreEqual(booking, result);
         }
         [TestMethod]
+        //This method should throw an error while validate 
         public void TestAddFailValidate()
         {
             Booking booking = new Booking(){Id = 123, Name="name new"};
@@ -101,10 +100,9 @@ namespace DataAccess.Tests.Test
             repository = new BookingRepository(repositoryMaster);
 
             repository.Add(booking);
-
-            //Assert.AreEqual(bookingLenght,repositoryMaster.Bookings.Count() + 1);
         }
         [TestMethod]
+        [ExpectedException(typeof(ArgumentException))]
         public void TestAddFailExist()
         {
             Booking booking = bookingsToReturn.First();
@@ -115,9 +113,7 @@ namespace DataAccess.Tests.Test
             repositoryMaster = new RepositoryMaster(mockDbContext.Object);
             repository = new BookingRepository(repositoryMaster);
 
-            //repository.Add(booking);
-
-            //Assert.AreEqual();
+            repository.Add(booking);
         }
         [TestMethod]
         public void TestGetAllBookingsOk()
@@ -252,6 +248,7 @@ namespace DataAccess.Tests.Test
             Assert.AreEqual(booking.Name,newName);
         }
         [TestMethod]
+        [ExpectedException(typeof(ArgumentException))]
         public void TestUpdateFail()
         {
             Booking booking = new Booking(){Id = 13000};
@@ -313,6 +310,7 @@ namespace DataAccess.Tests.Test
             //Assert.AreEqual(bookingsToReturn.Count, lengthBookings - 1 );
         }
         [TestMethod]
+        [ExpectedException(typeof(ArgumentException))]
         public void TestDeleteByIdFailExist()
         {
             Booking booking = bookingsToReturn.First();
@@ -325,7 +323,7 @@ namespace DataAccess.Tests.Test
             repositoryMaster = new RepositoryMaster(mockDbContext.Object);
             repository = new BookingRepository(repositoryMaster);
 
-            //repository.Delete(booking.Id);
+            repository.Delete(booking.Id);
 
             //Assert.AreEqual(bookingsToReturn.Count, lengthBookings - 1 );
         }

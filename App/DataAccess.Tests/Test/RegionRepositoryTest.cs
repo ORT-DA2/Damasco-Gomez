@@ -15,9 +15,7 @@ namespace DataAccess.Tests
     public class RegionRepositoryTest
     {
         private List<Region> regionsToReturn;
-        private List<Region> regionsToReturnEmpty;
         private RepositoryMaster repositoryMaster;
-        private VidlyContext context;
         private VidlyDbSet<Region> mockSet;
         private Mock<DbContext> mockDbContext;
         private RegionRepository repository;
@@ -57,30 +55,28 @@ namespace DataAccess.Tests
         {
             Region region = new Region(){Id = 123, Name="name new"};
             mockDbContext.Setup(d => d.Set<Region>()).Returns(mockSet.GetMockDbSet(regionsToReturn).Object);
-            int regions = regionsToReturn.Count();
             mockDbContext.Setup(d => d.SaveChanges()).Returns(region.Id);
             repositoryMaster = new RepositoryMaster(mockDbContext.Object);
             repository = new RegionRepository(repositoryMaster);
 
-            repository.Add(region);
+            var result = repository.Add(region);
 
-            Assert.AreEqual(regions+1, regionsToReturn.Count());
+            Assert.AreEqual(result, region);
         }
         [TestMethod]
+        [ExpectedException(typeof(ArgumentException))]
         public void TestAddFailValidate()
         {
-            Region region = new Region(){Id = 123, Name="name new"};
-            int regionLenght = regionsToReturn.Count() ;
+            Region region = regionsToReturn.First();
             mockDbContext.Setup(d => d.Set<Region>()).Returns(mockSet.GetMockDbSet(regionsToReturn).Object);
             mockDbContext.Setup(d => d.SaveChanges()).Returns(region.Id);
             repositoryMaster = new RepositoryMaster(mockDbContext.Object);
             repository = new RegionRepository(repositoryMaster);
 
             repository.Add(region);
-
-            //Assert.AreEqual(regionLenght,repositoryMaster.Regions.Count() + 1);
         }
         [TestMethod]
+        [ExpectedException(typeof(ArgumentException))]
         public void TestAddFailExist()
         {
             Region region = regionsToReturn.First();
@@ -91,9 +87,7 @@ namespace DataAccess.Tests
             repositoryMaster = new RepositoryMaster(mockDbContext.Object);
             repository = new RegionRepository(repositoryMaster);
 
-            //repository.Add(region);
-
-            //Assert.AreEqual();
+            repository.Add(region);
         }
         [TestMethod]
         public void TestGetAllRegionsOk()
@@ -216,31 +210,24 @@ namespace DataAccess.Tests
         public void TestUpdate()
         {
             Region region = regionsToReturn.First();
-            region.Name = "New name of region";
-            string newName = region.Name;
             mockDbContext.Setup(d => d.Set<Region>()).Returns(mockSet.GetMockDbSet(regionsToReturn).Object);
             mockDbContext.Setup(d => d.SaveChanges()).Returns(region.Id);
             repositoryMaster = new RepositoryMaster(mockDbContext.Object);
             repository = new RegionRepository(repositoryMaster);
 
             repository.Update(region);
-
-            Assert.AreEqual(region.Name,newName);
         }
         [TestMethod]
+        [ExpectedException(typeof(ArgumentException))]
         public void TestUpdateFail()
         {
             Region region = new Region(){Id = 13000};
-            string newName = region.Name;
-            // Exception exception = new ArgumentException();
             mockDbContext.Setup(d => d.Set<Region>()).Returns(mockSet.GetMockDbSet(regionsToReturn).Object);
             mockDbContext.Setup(d => d.SaveChanges()).Returns(regionsToReturn.First().Id);
             repositoryMaster = new RepositoryMaster(mockDbContext.Object);
             repository = new RegionRepository(repositoryMaster);
 
             repository.Update(region);
-
-            // Assert.IsInstanceOfType(result, typeof(Exception));
         }
         [TestMethod]
         public void TestDelete()
@@ -254,8 +241,6 @@ namespace DataAccess.Tests
             repository = new RegionRepository(repositoryMaster);
 
             repository.Delete(region);
-
-            //Assert.AreEqual(regionsToReturn.Count, lengthRegions - 1 );
         }
         [TestMethod]
         public void TestDeleteFailExist()
@@ -268,8 +253,6 @@ namespace DataAccess.Tests
             repository = new RegionRepository(repositoryMaster);
 
             repository.Delete(region);
-
-            //Assert.AreEqual(regionsToReturn.Count, lengthRegions - 1 );
         }
         [TestMethod]
         public void TestDeleteById()
@@ -280,15 +263,13 @@ namespace DataAccess.Tests
             _mockSet.Setup(d => d.Find(It.IsAny<object[]>())).Returns(region);
             mockDbContext.Setup(d => d.Set<Region>()).Returns(_mockSet.Object);
             mockDbContext.Setup(d => d.SaveChanges()).Returns(region.Id);
-            //mockDbContext.Setup(d => d.Remove(region.Id));
             repositoryMaster = new RepositoryMaster(mockDbContext.Object);
             repository = new RegionRepository(repositoryMaster);
 
             repository.Delete(region.Id);
-
-            //Assert.AreEqual(regionsToReturn.Count, lengthRegions - 1 );
         }
         [TestMethod]
+        [ExpectedException(typeof(ArgumentException))]
         public void TestDeleteByIdFailExist()
         {
             Region region = regionsToReturn.First();
@@ -301,9 +282,7 @@ namespace DataAccess.Tests
             repositoryMaster = new RepositoryMaster(mockDbContext.Object);
             repository = new RegionRepository(repositoryMaster);
 
-            //repository.Delete(region.Id);
-
-            //Assert.AreEqual(regionsToReturn.Count, lengthRegions - 1 );
+            repository.Delete(region.Id);
         }
     }
 }
