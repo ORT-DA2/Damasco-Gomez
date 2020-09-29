@@ -17,11 +17,6 @@ namespace Domain
         public Region Region {get; set;}
         public List<CategoryTouristPoint> CategoriesTouristPoints {get; set;}
 
-        // public void UpdateInformation (string name, string image, string description)
-        // {
-        //     Name = name ;
-        //     Description = description;
-        //     Image = image;
-        // }
+        
     }
 }

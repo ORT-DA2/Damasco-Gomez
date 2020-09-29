@@ -100,7 +100,6 @@ namespace BusinessLogic.Tests.Test
         {
             TouristPoint touristPoint = touristPoints.First();
             mock.Setup(m => m.Add(touristPoint)).Returns(touristPoint);
-            mock.VerifyAll();
             
             var touristPointToReturn = touristPointLogic.Add(touristPoint);
 
@@ -113,7 +112,7 @@ namespace BusinessLogic.Tests.Test
             mock.Setup(m => m.Add(touristPoint)).Returns(touristPoint);
             var touristPointToReturn = touristPointLogic.Add(touristPoint);
             mock.VerifyAll();
-            Assert.AreEqual(touristPointLogic, touristPointToReturn); 
+            Assert.AreEqual(touristPoint, touristPointToReturn); 
         }
         [TestMethod]
         [ExpectedException(typeof(ArgumentException))]
