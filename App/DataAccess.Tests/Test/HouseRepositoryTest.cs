@@ -15,9 +15,7 @@ namespace DataAccess.Tests.Test
     public class HouseRepositoryTest
     {
         private List<House> housesToReturn;
-        private List<House> housesToReturnEmpty;
         private RepositoryMaster repositoryMaster;
-        private VidlyContext context;
         private VidlyDbSet<House> mockSet;
         private Mock<DbContext> mockDbContext;
         private HouseRepository repository;
@@ -67,6 +65,7 @@ namespace DataAccess.Tests.Test
             Assert.AreEqual(houses+1, housesToReturn.Count());
         }
         [TestMethod]
+        //This method should throw an error while validate 
         public void TestAddFailValidate()
         {
             House house = new House(){Id = 123, Name="name new"};
@@ -77,8 +76,6 @@ namespace DataAccess.Tests.Test
             repository = new HouseRepository(repositoryMaster);
 
             repository.Add(house);
-
-            //Assert.AreEqual(houseLenght,repositoryMaster.Houses.Count() + 1);
         }
         [TestMethod]
         [ExpectedException(typeof(ArgumentException))]
@@ -93,8 +90,6 @@ namespace DataAccess.Tests.Test
             repository = new HouseRepository(repositoryMaster);
 
             repository.Add(house);
-
-            //Assert.AreEqual();
         }
         [TestMethod]
         public void TestGetAllHousesOk()
@@ -233,16 +228,12 @@ namespace DataAccess.Tests.Test
         public void TestUpdateFail()
         {
             House house = new House(){Id = 13000};
-            string newName = house.Name;
-            // Exception exception = new ArgumentException();
             mockDbContext.Setup(d => d.Set<House>()).Returns(mockSet.GetMockDbSet(housesToReturn).Object);
             mockDbContext.Setup(d => d.SaveChanges()).Returns(housesToReturn.First().Id);
             repositoryMaster = new RepositoryMaster(mockDbContext.Object);
             repository = new HouseRepository(repositoryMaster);
 
             repository.Update(house);
-
-            // Assert.IsInstanceOfType(result, typeof(Exception));
         }
         [TestMethod]
         public void TestDelete()
@@ -256,8 +247,6 @@ namespace DataAccess.Tests.Test
             repository = new HouseRepository(repositoryMaster);
 
             repository.Delete(house);
-
-            //Assert.AreEqual(housesToReturn.Count, lengthHouses - 1 );
         }
         [TestMethod]
         public void TestDeleteFailExist()
@@ -270,25 +259,19 @@ namespace DataAccess.Tests.Test
             repository = new HouseRepository(repositoryMaster);
 
             repository.Delete(house);
-
-            //Assert.AreEqual(housesToReturn.Count, lengthHouses - 1 );
         }
         [TestMethod]
         public void TestDeleteById()
         {
             House house = housesToReturn.First();
-            int lengthHouses = housesToReturn.Count();
             var _mockSet = mockSet.GetMockDbSet(housesToReturn);
             _mockSet.Setup(d => d.Find(It.IsAny<object[]>())).Returns(house);
             mockDbContext.Setup(d => d.Set<House>()).Returns(_mockSet.Object);
             mockDbContext.Setup(d => d.SaveChanges()).Returns(house.Id);
-            //mockDbContext.Setup(d => d.Remove(house.Id));
             repositoryMaster = new RepositoryMaster(mockDbContext.Object);
             repository = new HouseRepository(repositoryMaster);
 
             repository.Delete(house.Id);
-
-            //Assert.AreEqual(housesToReturn.Count, lengthHouses - 1 );
         }
         [TestMethod]
         [ExpectedException(typeof(ArgumentException))]
@@ -305,8 +288,6 @@ namespace DataAccess.Tests.Test
             repository = new HouseRepository(repositoryMaster);
 
             repository.Delete(house.Id);
-
-            //Assert.AreEqual(housesToReturn.Count, lengthHouses - 1 );
         }
     }
 }

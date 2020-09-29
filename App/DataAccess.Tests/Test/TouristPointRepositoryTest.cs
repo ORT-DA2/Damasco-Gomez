@@ -15,9 +15,7 @@ namespace DataAccess.Tests.Test
     public class TouristPointRepositoryTest
     {
         private List<TouristPoint> touristPointsToReturn;
-        private List<TouristPoint> touristPointsToReturnEmpty;
         private RepositoryMaster repositoryMaster;
-        private VidlyContext context;
         private VidlyDbSet<TouristPoint> mockSet;
         private Mock<DbContext> mockDbContext;
         private TouristPointRepository repository;
@@ -67,6 +65,7 @@ namespace DataAccess.Tests.Test
             Assert.AreEqual(touristPoints+1, touristPointsToReturn.Count());
         }
         [TestMethod]
+        //This method should throw an error while validate 
         public void TestAddFailValidate()
         {
             TouristPoint touristPoint = new TouristPoint(){Id = 123, Name="name new"};
@@ -77,10 +76,9 @@ namespace DataAccess.Tests.Test
             repository = new TouristPointRepository(repositoryMaster);
 
             repository.Add(touristPoint);
-
-            //Assert.AreEqual(touristPointLenght,repositoryMaster.TouristPoints.Count() + 1);
         }
         [TestMethod]
+        [ExpectedException(typeof(ArgumentException))]
         public void TestAddFailExist()
         {
             TouristPoint touristPoint = touristPointsToReturn.First();
@@ -91,9 +89,7 @@ namespace DataAccess.Tests.Test
             repositoryMaster = new RepositoryMaster(mockDbContext.Object);
             repository = new TouristPointRepository(repositoryMaster);
 
-            //repository.Add(touristPoint);
-
-            //Assert.AreEqual();
+            repository.Add(touristPoint);
         }
         [TestMethod]
         public void TestGetAllTouristPointsOk()
@@ -240,8 +236,6 @@ namespace DataAccess.Tests.Test
             repository = new TouristPointRepository(repositoryMaster);
 
             repository.Update(touristPoint);
-
-            // Assert.IsInstanceOfType(result, typeof(Exception));
         }
         [TestMethod]
         public void TestDelete()
@@ -255,8 +249,6 @@ namespace DataAccess.Tests.Test
             repository = new TouristPointRepository(repositoryMaster);
 
             repository.Delete(touristPoint);
-
-            //Assert.AreEqual(touristPointsToReturn.Count, lengthTouristPoints - 1 );
         }
         [TestMethod]
         public void TestDeleteFailExist()
@@ -269,27 +261,22 @@ namespace DataAccess.Tests.Test
             repository = new TouristPointRepository(repositoryMaster);
 
             repository.Delete(touristPoint);
-
-            //Assert.AreEqual(touristPointsToReturn.Count, lengthTouristPoints - 1 );
         }
         [TestMethod]
         public void TestDeleteById()
         {
             TouristPoint touristPoint = touristPointsToReturn.First();
-            int lengthTouristPoints = touristPointsToReturn.Count();
             var _mockSet = mockSet.GetMockDbSet(touristPointsToReturn);
             _mockSet.Setup(d => d.Find(It.IsAny<object[]>())).Returns(touristPoint);
             mockDbContext.Setup(d => d.Set<TouristPoint>()).Returns(_mockSet.Object);
             mockDbContext.Setup(d => d.SaveChanges()).Returns(touristPoint.Id);
-            //mockDbContext.Setup(d => d.Remove(touristPoint.Id));
             repositoryMaster = new RepositoryMaster(mockDbContext.Object);
             repository = new TouristPointRepository(repositoryMaster);
 
             repository.Delete(touristPoint.Id);
-
-            //Assert.AreEqual(touristPointsToReturn.Count, lengthTouristPoints - 1 );
         }
         [TestMethod]
+        [ExpectedException(typeof(ArgumentException))]
         public void TestDeleteByIdFailExist()
         {
             TouristPoint touristPoint = touristPointsToReturn.First();
@@ -302,9 +289,7 @@ namespace DataAccess.Tests.Test
             repositoryMaster = new RepositoryMaster(mockDbContext.Object);
             repository = new TouristPointRepository(repositoryMaster);
 
-            //repository.Delete(touristPoint.Id);
-
-            //Assert.AreEqual(touristPointsToReturn.Count, lengthTouristPoints - 1 );
+            repository.Delete(touristPoint.Id);
         }
     }
 }

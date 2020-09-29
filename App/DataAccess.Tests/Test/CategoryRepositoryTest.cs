@@ -15,9 +15,7 @@ namespace DataAccess.Tests.Test
     public class CategoryRepositoryTest
     {
         private List<Category> categoriesToReturn;
-        private List<Category> categoriesToReturnEmpty;
         private RepositoryMaster repositoryMaster;
-        private VidlyContext context;
         private VidlyDbSet<Category> mockSet;
         private Mock<DbContext> mockDbContext;
         private CategoryRepository repository;
@@ -62,11 +60,12 @@ namespace DataAccess.Tests.Test
             repositoryMaster = new RepositoryMaster(mockDbContext.Object);
             repository = new CategoryRepository(repositoryMaster);
 
-            repository.Add(category);
+            var result = repository.Add(category);
 
-            Assert.AreEqual(categories+1, categoriesToReturn.Count());
+            Assert.AreEqual(result , category);
         }
         [TestMethod]
+        //This method should throw an error while validate 
         public void TestAddFailValidate()
         {
             Category category = new Category(){Id = 123, Name="name new"};
@@ -77,8 +76,6 @@ namespace DataAccess.Tests.Test
             repository = new CategoryRepository(repositoryMaster);
 
             repository.Add(category);
-
-            //Assert.AreEqual(categoryLenght,repositoryMaster.Categorys.Count() + 1);
         }
         [TestMethod]
         [ExpectedException(typeof(ArgumentException))]
@@ -93,8 +90,6 @@ namespace DataAccess.Tests.Test
             repository = new CategoryRepository(repositoryMaster);
 
             repository.Add(category);
-
-            //Assert.AreEqual();
         }
         [TestMethod]
         public void TestGetAllCategorysOk()
@@ -233,16 +228,12 @@ namespace DataAccess.Tests.Test
         public void TestUpdateFail()
         {
             Category category = new Category(){Id = 13000};
-            string newName = category.Name;
-            // Exception exception = new ArgumentException();
             mockDbContext.Setup(d => d.Set<Category>()).Returns(mockSet.GetMockDbSet(categoriesToReturn).Object);
             mockDbContext.Setup(d => d.SaveChanges()).Returns(categoriesToReturn.First().Id);
             repositoryMaster = new RepositoryMaster(mockDbContext.Object);
             repository = new CategoryRepository(repositoryMaster);
 
             repository.Update(category);
-
-            // Assert.IsInstanceOfType(result, typeof(Exception));
         }
         [TestMethod]
         public void TestDelete()
@@ -256,8 +247,6 @@ namespace DataAccess.Tests.Test
             repository = new CategoryRepository(repositoryMaster);
 
             repository.Delete(category);
-
-            //Assert.AreEqual(categoriesToReturn.Count, lengthCategorys - 1 );
         }
         [TestMethod]
         public void TestDeleteFailExist()
@@ -270,8 +259,6 @@ namespace DataAccess.Tests.Test
             repository = new CategoryRepository(repositoryMaster);
 
             repository.Delete(category);
-
-            //Assert.AreEqual(categoriesToReturn.Count, lengthCategorys - 1 );
         }
         [TestMethod]
         public void TestDeleteById()
@@ -282,13 +269,10 @@ namespace DataAccess.Tests.Test
             _mockSet.Setup(d => d.Find(It.IsAny<object[]>())).Returns(category);
             mockDbContext.Setup(d => d.Set<Category>()).Returns(_mockSet.Object);
             mockDbContext.Setup(d => d.SaveChanges()).Returns(category.Id);
-            //mockDbContext.Setup(d => d.Remove(category.Id));
             repositoryMaster = new RepositoryMaster(mockDbContext.Object);
             repository = new CategoryRepository(repositoryMaster);
 
             repository.Delete(category.Id);
-
-            //Assert.AreEqual(categoriesToReturn.Count, lengthCategorys - 1 );
         }
         [TestMethod]
         [ExpectedException(typeof(ArgumentException))]
@@ -305,8 +289,6 @@ namespace DataAccess.Tests.Test
             repository = new CategoryRepository(repositoryMaster);
 
             repository.Delete(category.Id);
-
-            //Assert.AreEqual(categoriesToReturn.Count, lengthCategorys - 1 );
         }
     }
 }
