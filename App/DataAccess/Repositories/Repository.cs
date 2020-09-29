@@ -24,10 +24,11 @@ namespace DataAccess.Repositories
             this.context.SaveChanges();
             return element;
         }
-        public void UpdateInContext(T element)
+        public T UpdateInContext(T element)
         {
             this.dbSet.Update(element);
             this.context.SaveChanges();
+            return element;
         }
 
         public void Delete(T element)

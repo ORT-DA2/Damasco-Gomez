@@ -78,9 +78,9 @@ namespace DataAccess.Repositories
             Validate(element);
             if (!ExistElement(element))
             {
-                //throw new ArgumentException();
+                throw new ArgumentException();
             }
-            repository.UpdateInContext(element);
+             repository.UpdateInContext(element);
         }
 
         public List<T> GetElements()

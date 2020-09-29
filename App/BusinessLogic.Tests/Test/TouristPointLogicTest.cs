@@ -123,6 +123,76 @@ namespace BusinessLogic.Tests.Test
             mock.VerifyAll();
             Assert.IsInstanceOfType(touristPointToReturn, typeof(ArgumentException));
         }
+        [TestMethod]
+        public void TestUdpateOk ()
+        {
+            TouristPoint touristPoint = touristPoints.First();
+            mock.Setup(m => m.Update(touristPoint));
+            touristPointLogic.Update(touristPoint);
+            mock.VerifyAll();
+            //Assert.AreEqual(touristPointLogic, touristPointToReturn );
+        }
+         [TestMethod]
+        public void TestUpdateValidateError()
+        {
+            TouristPoint touristPoint = touristPoints.First(); // este punto turistico tiene que terner un formato erroneo despues para que la validación falle
+            mock.Setup(m => m.Update(touristPoint));
+            touristPointLogic.Update(touristPoint);
+            mock.VerifyAll();
+            //Assert.AreEqual(touristPointLogic, touristPointToReturn); 
+        }
+        [TestMethod]
+        public void TestUpdateExistError()
+        {
+            TouristPoint touristPoint = touristPoints.First();
+            ArgumentException exception = new ArgumentException();
+            mock.Setup(m => m.Update(touristPoint)).Throws(exception);
+            touristPointLogic.Update(touristPoint);
+            mock.VerifyAll();
+            Assert.IsInstanceOfType(touristPointToReturn, typeof(ArgumentException));
+        }
+        [TestMethod]
+        public void TestExistOk()
+        {
+            TouristPoint touristPoint = touristPoints.First();
+            mock.Setup(m => m.ExistElement(touristPoint)).Returns(true);
+            var touristPointToReturn = touristPointLogic.Exist(touristPoint);
+            mock.VerifyAll();
+            Assert.IsTrue(touristPointToReturn);
+        }
+        [TestMethod]
+        public void TestNotExistOk()
+        {
+            TouristPoint touristPoint = touristPoints.First();
+            mock.Setup(m => m.ExistElement(touristPoint)).Returns(false);
+            var touristPointToReturn = touristPointLogic.Exist(touristPoint);
+            mock.VerifyAll();
+            Assert.IsFalse(touristPointToReturn);
+        }
+        [TestMethod]
+        public void TestDeleteById ()
+        {
+            var int id= 1;
+            TouristPoint touristPoint = touristPoints.First();
+            mock.Setup(m => m.Add(id)).Returns(touristPoint);
+            mock.Setup(m => m.Delete(id));
+            touristPointLogic.Delete(touristPoint);
+            mock.VerifyAll();
+            //Assert.IsTrue(touristPointToReturn); no se que assert poner 
+        }
+
+         [TestMethod]
+        public void TestDeleteFail ()
+        {
+            var int id= 1;
+            TouristPoint touristPoint = touristPoints.First();
+            mock.Setup(m => m.Delete(id));
+            touristPointLogic.Delete(touristPoint);
+            mock.VerifyAll();
+           // Assert.IsInstanceOfType(touristPointToReturn, typeof(ArgumentException));
+            
+        }
+
 
     }
 }
