@@ -9,7 +9,7 @@ namespace BusinessLogicInterface
     {
         IEnumerable<TouristPoint> GetAll();
         TouristPoint GetBy(int id);
-        void Add(TouristPoint element);
+        TouristPoint Add(TouristPoint element);
         void Update(TouristPoint element);
         void Delete(int id);
         void Delete();

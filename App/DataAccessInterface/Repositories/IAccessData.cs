@@ -5,7 +5,7 @@ namespace DataAccessInterface.Repositories
 {
     public interface IAccessData<T> where T : class
     {
-        void Add(T element);
+        T Add(T element);
         bool ExistElement(T element);
         bool ExistElement(int id);
         bool ExistElement(Predicate<T> element);

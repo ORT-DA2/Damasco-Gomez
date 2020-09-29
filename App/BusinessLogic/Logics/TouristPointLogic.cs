@@ -29,9 +29,9 @@ namespace BusinessLogic
             return this.touristPointRepository.Find(id);
         }
 
-        public void Add(TouristPoint TouristPoint)
+        public TouristPoint Add(TouristPoint TouristPoint)
         {
-            this.touristPointRepository.Add(TouristPoint);
+            return this.touristPointRepository.Add(TouristPoint);
         }
         public void Update(TouristPoint TouristPoint)
         {
