@@ -8,7 +8,7 @@ namespace BusinessLogicInterface
     {
         IEnumerable<Region> GetAll();
         Region GetBy(int id);
-        void Add(Region element);
+        Region Add(Region element);
         void Update(Region element);
         void Delete(int id);
         void Delete();

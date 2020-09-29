@@ -18,15 +18,17 @@ namespace DataAccess.Repositories
             this.dbSet = context.Set<T>();
         }
 
-        public void AddInContext(T element)
+        public T AddInContext(T element)
         {
             this.dbSet.Add(element);
             this.context.SaveChanges();
+            return element;
         }
         public void UpdateInContext(T element)
         {
             this.dbSet.Update(element);
             this.context.SaveChanges();
+             
         }
 
         public void Delete(T element)
