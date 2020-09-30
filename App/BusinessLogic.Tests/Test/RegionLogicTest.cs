@@ -73,7 +73,7 @@ namespace BusinessLogic.Tests.Test
             Region region = regionsToReturn.First();
             mock.Setup(m => m.Add(region)).Returns(region);
             var regionToReturn = regionLogic.Add(region);
-            mock.VerifyAll();
+        
             Assert.AreEqual(region, regionToReturn );
         }
          [TestMethod]
@@ -81,7 +81,6 @@ namespace BusinessLogic.Tests.Test
         {
             Region region = regionsToReturn.First(); // esta region tiene que terner un formato erroneo despues para que la validación falle
             mock.Setup(m => m.Add(region)).Returns(region);
-            mock.VerifyAll();
 
             var regionToReturn = regionLogic.Add(region);
 
