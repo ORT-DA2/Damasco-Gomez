@@ -102,12 +102,12 @@ namespace WebApi.Test
          [TestMethod]
          public void TestPostOk ()
          {
-            mock.Setup(m => m.Add(regionId1));
+            mock.Setup(m => m.Add(regionId1)).Returns(regionId1);
             var result = controller.Post(regionId1);
             var okResult = result as CreatedAtRouteResult;
             mock.VerifyAll();
             Assert.IsNotNull(okResult);
-            Assert.AreEqual("Api", okResult.RouteName);
+            Assert.AreEqual("GetRegion", okResult.RouteName);
             Assert.AreEqual(okResult.Value, regionId1);
          }
          [TestMethod]
@@ -149,7 +149,7 @@ namespace WebApi.Test
             var okResult = result as CreatedAtRouteResult;
             mock.VerifyAll();
             Assert.IsNotNull(okResult);
-            Assert.AreEqual("Api", okResult.RouteName);
+            Assert.AreEqual("GetRegion", okResult.RouteName);
             Assert.AreEqual(okResult.Value, regionId1);
         }
          [TestMethod]
