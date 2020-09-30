@@ -19,8 +19,8 @@ namespace WebApi.Controllers
             return Ok(elementHouse);
         }
 
-        [HttpGet("{id}")]
-        public IActionResult GetBy([FromQuery]int id)
+        [HttpGet("{id}",Name="GetHouse")]
+        public IActionResult GetBy([FromRoute]int id)
         {
             var elementHouse = this.houseLogic.GetBy(id);
             return Ok(elementHouse);
@@ -32,7 +32,7 @@ namespace WebApi.Controllers
             try
             {
                 this.houseLogic.Add(house);
-                return CreatedAtRoute("Api", house.Id, house);
+                return CreatedAtRoute("GetHouse", house.Id, house);
             }
             catch (AggregateException)
             {
@@ -54,7 +54,7 @@ namespace WebApi.Controllers
             try
             {
                 this.houseLogic.Update(house);
-                return CreatedAtRoute("Api", house.Id, house);
+                return CreatedAtRoute("GetHouse", house.Id, house);
                 //return Ok(house);
             }
             catch(ArgumentException)
@@ -67,7 +67,7 @@ namespace WebApi.Controllers
             }
         }
         [HttpDelete("{id}")]
-        public IActionResult Delete([FromQuery]int id)
+        public IActionResult Delete([FromRoute]int id)
         {
             if (this.houseLogic.GetBy(id) == null)
             {
