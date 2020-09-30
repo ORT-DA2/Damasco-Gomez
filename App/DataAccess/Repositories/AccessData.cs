@@ -1,7 +1,5 @@
 using System;
-using DataAccess.Context;
 using DataAccessInterface.Repositories;
-using Microsoft.EntityFrameworkCore;
 using System.Collections.Generic;
 
 namespace DataAccess.Repositories
