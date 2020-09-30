@@ -76,6 +76,14 @@ namespace BusinessLogic.Tests.Test
             mock.VerifyAll();
             Assert.IsTrue(result.SequenceEqual(touristPoints));
         }
+         public void TestGetEmptyGetAll()
+        {
+            List<TouristPoint> touristPointEmpty = new List<TouristPoint>();
+            mock.Setup(m => m.GetElements()).Returns(touristPointEmpty);
+            var result = touristPointLogic.GetAll();
+            mock.VerifyAll();
+            Assert.AreEqual(touristPointEmpty, result);
+        }
         [TestMethod]
         public void TestGetBy()
         {

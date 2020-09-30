@@ -96,6 +96,25 @@ namespace BusinessLogic.Tests.Test
 
             var regionToReturn = regionLogic.Add(region);
         }
+        [TestMethod]
+        public void TestGetBy()
+        {
+            Region region = regionsToReturn.First();
+            mock.Setup(m => m.Find(region.Id)).Returns(region);
+            var result = regionLogic.GetBy(region.Id);
+            mock.VerifyAll();
+            Assert.AreEqual(result,region);
+        }
+        [TestMethod]
+        public void TestGetByFail()
+        {
+            Region region = regionsToReturn.First();
+            Region empty = null;
+            mock.Setup(m => m.Find(region.Id)).Returns(empty);
+            var result = regionLogic.GetBy(region.Id);
+            mock.VerifyAll();
+            Assert.IsNull(result);
+        }
 
     }
 }
