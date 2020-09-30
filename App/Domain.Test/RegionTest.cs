@@ -1,6 +1,7 @@
 namespace Domain.Test
 {
-    public class TestBooking
+    [TestClass]
+    public class RegionTest
     {
         
     }

@@ -139,7 +139,7 @@ namespace BusinessLogic.Tests.Test
             mock.Setup(m => m.Update(touristPoint));
             touristPointLogic.Update(touristPoint);
             mock.VerifyAll();
-            //Assert.AreEqual(touristPointLogic, touristPointToReturn );
+            
         }
          [TestMethod]
         public void TestUpdateValidateError()
@@ -148,7 +148,7 @@ namespace BusinessLogic.Tests.Test
             mock.Setup(m => m.Update(touristPoint));
             touristPointLogic.Update(touristPoint);
             mock.VerifyAll();
-            //Assert.AreEqual(touristPointLogic, touristPointToReturn); 
+            
         }
         [TestMethod]
         [ExpectedException(typeof(ArgumentException))]

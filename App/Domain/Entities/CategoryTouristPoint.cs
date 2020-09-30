@@ -9,10 +9,6 @@ namespace Domain.Entities
         public int TouristPointId {get; set;}
         public TouristPoint TouristPoint {get; set;}
 
-        //public  List<TouristPoint>  TouristPoints {get; set;}
-        // public void UpdateInformation()
-        // {
-
-        // }
+       
     }
 }
