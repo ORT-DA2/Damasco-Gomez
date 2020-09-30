@@ -29,6 +29,9 @@ namespace DataAccess.Tests.Test
                 {
                     Id = 1,
                     Name = "New house",
+                    Starts = 5,
+                    PricePerNight = 40,
+                    Spot = new TouristPoint(){Id = 6, Name = "tourist point name"},
                 },
                 new House()
                 {
@@ -53,7 +56,7 @@ namespace DataAccess.Tests.Test
         [TestMethod]
         public void TestAdd()
         {
-            House house = new House(){Id = 123, Name="name new"};
+            House house = new House(){Id = 123, Name="name new", Starts = 3, PricePerNight = 23};
             mockDbContext.Setup(d => d.Set<House>()).Returns(mockSet.GetMockDbSet(housesToReturn).Object);
             int houses = housesToReturn.Count();
             mockDbContext.Setup(d => d.SaveChanges()).Returns(house.Id);
@@ -65,8 +68,34 @@ namespace DataAccess.Tests.Test
             Assert.AreEqual(houses+1, housesToReturn.Count());
         }
         [TestMethod]
-        //This method should throw an error while validate 
+        [ExpectedException(typeof(ArgumentException))]
         public void TestAddFailValidate()
+        {
+            House house = new House(){Id = 123, Name="name new"};
+            int houseLenght = housesToReturn.Count() ;
+            mockDbContext.Setup(d => d.Set<House>()).Returns(mockSet.GetMockDbSet(housesToReturn).Object);
+            mockDbContext.Setup(d => d.SaveChanges()).Returns(house.Id);
+            repositoryMaster = new RepositoryMaster(mockDbContext.Object);
+            repository = new HouseRepository(repositoryMaster);
+
+            repository.Add(house);
+        }
+        [TestMethod]
+        [ExpectedException(typeof(ArgumentException))]
+        public void TestAddFailValidatePrice()
+        {
+            House house = new House(){Id = 123, Name="name new"};
+            int houseLenght = housesToReturn.Count() ;
+            mockDbContext.Setup(d => d.Set<House>()).Returns(mockSet.GetMockDbSet(housesToReturn).Object);
+            mockDbContext.Setup(d => d.SaveChanges()).Returns(house.Id);
+            repositoryMaster = new RepositoryMaster(mockDbContext.Object);
+            repository = new HouseRepository(repositoryMaster);
+
+            repository.Add(house);
+        }
+        [TestMethod]
+        [ExpectedException(typeof(ArgumentException))]
+        public void TestAddFailValidateStarts()
         {
             House house = new House(){Id = 123, Name="name new"};
             int houseLenght = housesToReturn.Count() ;
