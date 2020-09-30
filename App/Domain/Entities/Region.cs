@@ -16,7 +16,7 @@ namespace Domain
             var result = false;
             if (obj is Region region)
             {
-                result = this.Id == region.Id;
+                result = this.Id == region.Id ;
             }
             return result;
         }
