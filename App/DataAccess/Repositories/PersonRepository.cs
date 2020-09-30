@@ -1,6 +1,6 @@
+using System;
 using DataAccessInterface.Repositories;
 using Domain;
-using Microsoft.EntityFrameworkCore;
 
 namespace DataAccess.Repositories
 {
@@ -13,7 +13,24 @@ namespace DataAccess.Repositories
 
         protected override void Validate(Person element)
         {
-            //throw new System.NotImplementedException();
+            Person emailUniq = this.FindInRepository(element.Email);
+            if (emailUniq!=null)
+            {
+                throw new ArgumentException("The email is already in the database");
+            }
+        }
+
+        public Person FindInRepository(string email)
+        {
+            Person findByEmail = null;
+            foreach(var p in this.repository.GetElementsInContext())
+            {
+                if (p.Email == email)
+                {
+                   findByEmail = p;
+                }
+            }
+            return findByEmail;
         }
     }
 }
