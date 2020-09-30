@@ -22,8 +22,8 @@ namespace WebApi.Controllers
             return Ok(elementCategory);
         }
 
-        [HttpGet("{id}")]
-        public IActionResult GetBy([FromQuery]int id)
+        [HttpGet("{id}",Name="GetCategory")]
+        public IActionResult GetBy([FromRoute]int id)
         {
             var elementCategory = this.categoryLogic.GetBy(id);
             return Ok(elementCategory);
@@ -35,7 +35,7 @@ namespace WebApi.Controllers
             try
             {
                 this.categoryLogic.Add(category);
-                return CreatedAtRoute("Api", category.Id, category);
+                return CreatedAtRoute("GetCategory", category.Id, category);
             }
             catch (AggregateException)
             {
@@ -57,7 +57,7 @@ namespace WebApi.Controllers
             try
             {
                 this.categoryLogic.Update(category);
-                return CreatedAtRoute("Api", category.Id, category);
+                return CreatedAtRoute("GetCategory", category.Id, category);
                 //return Ok(category);
             }
             catch(ArgumentException)
@@ -70,7 +70,7 @@ namespace WebApi.Controllers
             }
         }
         [HttpDelete("{id}")]
-        public IActionResult Delete([FromQuery]int id)
+        public IActionResult Delete([FromRoute]int id)
         {
             if (this.categoryLogic.GetBy(id) == null)
             {

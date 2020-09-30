@@ -19,8 +19,8 @@ namespace WebApi.Controllers
             return Ok(elementTouristPoint);
         }
 
-        [HttpGet("{id}")]
-        public IActionResult GetBy([FromQuery]int id)
+        [HttpGet("{id}",Name="GetTouristPoint")]
+        public IActionResult GetBy([FromRoute]int id)
         {
             var elementTouristPoint = this.touristPointLogic.GetBy(id);
             return Ok(elementTouristPoint);
@@ -31,8 +31,8 @@ namespace WebApi.Controllers
         {
             try
             {
-                this.touristPointLogic.Add(touristPoint);
-                return CreatedAtRoute("Api", touristPoint.Id, touristPoint);
+                var touristPointAdded = this.touristPointLogic.Add(touristPoint);
+                return CreatedAtRoute("GetTouristPoint", touristPoint.Id, touristPoint);
             }
             catch (AggregateException)
             {
@@ -54,7 +54,7 @@ namespace WebApi.Controllers
             try
             {
                 this.touristPointLogic.Update(touristPoint);
-                return CreatedAtRoute("Api", touristPoint.Id, touristPoint);
+                return CreatedAtRoute("GetTouristPoint", new { Id = touristPoint.Id }, touristPoint);
                 //return Ok(touristPoint);
             }
             catch(ArgumentException)
@@ -67,7 +67,7 @@ namespace WebApi.Controllers
             }
         }
         [HttpDelete("{id}")]
-        public IActionResult Delete([FromQuery]int id)
+        public IActionResult Delete([FromRoute]int id)
         {
             if (this.touristPointLogic.GetBy(id) == null)
             {

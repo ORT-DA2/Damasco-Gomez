@@ -19,8 +19,8 @@ namespace WebApi.Controllers
             return Ok(elementBooking);
         }
 
-        [HttpGet("{id}")]
-        public IActionResult GetBy([FromQuery]int id)
+        [HttpGet("{id}",Name="GetBooking")]
+        public IActionResult GetBy([FromRoute]int id)
         {
             var elementBooking = this.bookingLogic.GetBy(id);
             return Ok(elementBooking);
@@ -32,7 +32,7 @@ namespace WebApi.Controllers
             try
             {
                 this.bookingLogic.Add(booking);
-                return CreatedAtRoute("Api", booking.Id, booking);
+                return CreatedAtRoute("GetBooking", booking.Id, booking);
             }
             catch (AggregateException)
             {
@@ -54,7 +54,7 @@ namespace WebApi.Controllers
             try
             {
                 this.bookingLogic.Update(booking);
-                return CreatedAtRoute("Api", booking.Id, booking);
+                return CreatedAtRoute("GetBooking", booking.Id, booking);
                 //return Ok(booking);
             }
             catch(ArgumentException)
@@ -67,7 +67,7 @@ namespace WebApi.Controllers
             }
         }
         [HttpDelete("{id}")]
-        public IActionResult Delete([FromQuery]int id)
+        public IActionResult Delete([FromRoute]int id)
         {
             if (this.bookingLogic.GetBy(id) == null)
             {
