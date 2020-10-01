@@ -1,7 +1,6 @@
-using System.Collections.Generic;
+using System;
 using DataAccessInterface.Repositories;
 using Domain;
-using Microsoft.EntityFrameworkCore;
 
 namespace DataAccess.Repositories
 {
@@ -14,7 +13,10 @@ namespace DataAccess.Repositories
 
         protected override void Validate(Category element)
         {
-            //throw new System.NotImplementedException();
+            if (element.Name.Equals(""))
+            {
+                throw new ArgumentException("Name of category should not be null");
+            }
         }
     }
 }

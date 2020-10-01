@@ -9,10 +9,14 @@ namespace Domain.Entities
         public int TouristPointId {get; set;}
         public TouristPoint TouristPoint {get; set;}
 
-        //public  List<TouristPoint>  TouristPoints {get; set;}
-        // public void UpdateInformation()
-        // {
-
-        // }
+        public override bool Equals(object obj)
+        {
+            var result = false;
+            if(obj is CategoryTouristPoint category)
+            {
+                result = this.Id == category.Id;
+            }
+            return result;
+        }
     }
 }
