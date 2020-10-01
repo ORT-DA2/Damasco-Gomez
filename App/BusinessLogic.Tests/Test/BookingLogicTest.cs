@@ -38,7 +38,7 @@ namespace BusinessLogic.Tests.Test
             emptyBookings = new List<Booking>();
             mock = new Mock<IBookingRepository>(MockBehavior.Strict);
             mock2 = new Mock<IHouseRepository>(MockBehavior.Strict);
-            bookingLogic = new BookingLogic(houseRepository, bookingRepository)(mock.Object);
+            //bookingLogic = new BookingLogic(houseRepository, bookingRepository)(mock.Object);
         }
 
         [TestMethod]
