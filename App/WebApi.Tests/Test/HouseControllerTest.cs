@@ -89,7 +89,9 @@ namespace WebApi.Tests
         public void TestGetAllHousesOk()
         {
             mock.Setup(m => m.GetAll()).Returns(housesToReturn);
+
             var result = controller.Get();
+
             var okResult = result as OkObjectResult;
             var houses = okResult.Value as IEnumerable<House>;
             mock.VerifyAll();
@@ -100,7 +102,9 @@ namespace WebApi.Tests
         public void TestGetAllHousesVacia()
         {
             mock.Setup(m => m.GetAll()).Returns(housesToReturnEmpty);
+
             var result = controller.Get();
+
             var okResult = result as OkObjectResult;
             var houses = okResult.Value as IEnumerable<House>;
             mock.VerifyAll();
@@ -111,7 +115,9 @@ namespace WebApi.Tests
         {
             int id = 1;
             mock.Setup(m => m.GetBy(id)).Returns(houseId1);
+
             var result = controller.GetBy(id);
+
             var okResult = result as OkObjectResult;
             var houses = okResult.Value as House;
             mock.VerifyAll();
@@ -123,7 +129,9 @@ namespace WebApi.Tests
             int id = 4;
             House houseReturn = null;
             mock.Setup(m => m.GetBy(id)).Returns(houseReturn);
+
             var result = controller.GetBy(id);
+
             var okResult = result as OkObjectResult;
             var houses = okResult.Value as House;
             mock.VerifyAll();
@@ -133,7 +141,9 @@ namespace WebApi.Tests
         public void TestPostOk()
         {
             mock.Setup(m => m.Add(houseId1));
+
             var result = controller.Post(houseId1);
+
             var okResult = result as CreatedAtRouteResult;
             mock.VerifyAll();
             Assert.IsNotNull(okResult);
@@ -146,7 +156,9 @@ namespace WebApi.Tests
             houseId1 = housesToReturn.First();
             Exception exist = new AggregateException();
             mock.Setup(p => p.Add(houseId1)).Throws(exist);
+
             var result = controller.Post(houseId1);
+
             mock.VerifyAll();
             Assert.IsInstanceOfType(result, typeof(BadRequestObjectResult));
         }
@@ -156,7 +168,9 @@ namespace WebApi.Tests
             houseId1 = housesToReturn.First();
             Exception exist = new ArgumentException();
             mock.Setup(p => p.Add(houseId1)).Throws(exist);
+
             var result = controller.Post(houseId1);
+
             mock.VerifyAll();
             Assert.IsInstanceOfType(result, typeof(BadRequestObjectResult));
         }
@@ -166,7 +180,9 @@ namespace WebApi.Tests
             houseId1 = housesToReturn.First();
             Exception exist = new Exception();
             mock.Setup(p => p.Add(houseId1)).Throws(exist);
+
             var result = controller.Post(houseId1);
+
             mock.VerifyAll();
             Assert.IsInstanceOfType(result, typeof(BadRequestObjectResult));
         }
@@ -175,7 +191,9 @@ namespace WebApi.Tests
         {
             houseId1 = housesToReturn.First();
             mock.Setup(m => m.Update(houseId1));
+
             var result = controller.Put(houseId1.Id, houseId1);
+
             var okResult = result as CreatedAtRouteResult;
             mock.VerifyAll();
             Assert.IsNotNull(okResult);
@@ -188,7 +206,9 @@ namespace WebApi.Tests
             houseId1 = housesToReturn.First();
             Exception exist = new ArgumentException();
             mock.Setup(p => p.Update(houseId1)).Throws(exist);
+
             var result = controller.Put(houseId1.Id, houseId1);
+
             mock.VerifyAll();
             Assert.IsInstanceOfType(result, typeof(BadRequestObjectResult));
         }
@@ -198,7 +218,9 @@ namespace WebApi.Tests
             houseId1 = housesToReturn.First();
             Exception exist = new Exception();
             mock.Setup(p => p.Update(houseId1)).Throws(exist);
+
             var result = controller.Put(houseId1.Id, houseId1);
+
             mock.VerifyAll();
             Assert.IsInstanceOfType(result, typeof(BadRequestObjectResult));
         }
@@ -208,7 +230,9 @@ namespace WebApi.Tests
             House house = housesToReturn.First();
             mock.Setup(m => m.GetBy(house.Id)).Returns(house);
             mock.Setup(mock=> mock.Delete(house.Id));
+
             var result = controller.Delete(house.Id);
+
             Assert.IsNotNull(result);
         }
         [TestMethod]
@@ -218,7 +242,9 @@ namespace WebApi.Tests
             House houseNull = null;
             mock.Setup(m => m.GetBy(house.Id)).Returns(houseNull);
             mock.Setup(mock=> mock.Delete(house.Id));
+
             var result = controller.Delete(house.Id);
+
             Assert.IsInstanceOfType(result,typeof(NotFoundResult));
         }
 
@@ -226,7 +252,9 @@ namespace WebApi.Tests
         public void TestDelete()
         {
             mock.Setup(mock=> mock.Delete());
+            
             var result = controller.Delete();
+
             Assert.IsNotNull(result);
         }
     }
