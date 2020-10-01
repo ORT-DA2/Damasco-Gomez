@@ -15,116 +15,87 @@ namespace DataAccess.Tests.Test
     public class HouseRepositoryTest
     {
         private List<House> housesToReturn;
-        private List<House> housesToReturnEmpty;
         private RepositoryMaster repositoryMaster;
-        private VidlyContext context;
-        private VidlyDbSet<House> mockSet;
-        private Mock<DbContext> mockDbContext;
+        private DbContext context;
+        private DbContextOptions options;
         private HouseRepository repository;
-        private List<House> emptyHouse;
         [TestInitialize]
-        public void initVariables()
+        public void Setup()
         {
+            this.options = new DbContextOptionsBuilder<VidlyContext>().UseInMemoryDatabase(databaseName: "VidlyDBtest").Options;
+            this.context = new VidlyContext(this.options);
             housesToReturn = new List<House>()
             {
                 new House()
                 {
                     Id = 1,
-                    Name = "New house",
+                    Name = "House 1",
                 },
                 new House()
                 {
                     Id = 2,
-                    Name = "Other house",
-                },
-                new House()
-                {
-                    Id = 3,
-                    Name = "And other house",
-                },
-                new House()
-                {
-                    Id = 4,
-                    Name = "And one more house",
+                    Name = "House 2",
                 }
             };
-            emptyHouse = new List<House>();
-            mockSet = new VidlyDbSet<House>();
-            mockDbContext = new Mock<DbContext>(MockBehavior.Strict);
+
+            housesToReturn.ForEach(m => this.context.Add(m));
+            this.context.SaveChanges();
+            repositoryMaster = new RepositoryMaster(context);
+            repository = new HouseRepository(repositoryMaster);
+        }
+
+        [TestCleanup]
+        public void TestCleanup()
+        {
+            this.context.Database.EnsureDeleted();
         }
         [TestMethod]
         public void TestAdd()
         {
-            House house = new House(){Id = 123, Name="name new"};
-            mockDbContext.Setup(d => d.Set<House>()).Returns(mockSet.GetMockDbSet(housesToReturn).Object);
-            int houses = housesToReturn.Count();
-            mockDbContext.Setup(d => d.SaveChanges()).Returns(house.Id);
-            repositoryMaster = new RepositoryMaster(mockDbContext.Object);
-            repository = new HouseRepository(repositoryMaster);
+            House house = new House(){Id = 123, Name="name new",PricePerNight=11,Starts=2};
+            HouseRepository repo = new HouseRepository(this.repositoryMaster);
+            int cantRepo = this.repository.GetElements().Count();
 
-            repository.Add(house);
+            repo.Add(house);
 
-            Assert.AreEqual(houses+1, housesToReturn.Count());
+            Assert.AreEqual(repo.GetElements().Count(),cantRepo+1);
         }
         [TestMethod]
+        [ExpectedException(typeof(ArgumentException))]
         public void TestAddFailValidate()
         {
-            House house = new House(){Id = 123, Name="name new"};
-            int houseLenght = housesToReturn.Count() ;
-            mockDbContext.Setup(d => d.Set<House>()).Returns(mockSet.GetMockDbSet(housesToReturn).Object);
-            mockDbContext.Setup(d => d.SaveChanges()).Returns(house.Id);
-            repositoryMaster = new RepositoryMaster(mockDbContext.Object);
-            repository = new HouseRepository(repositoryMaster);
+            House house = new House(){Id = 1, Name="name new"};
 
             repository.Add(house);
-
-            //Assert.AreEqual(houseLenght,repositoryMaster.Houses.Count() + 1);
         }
         [TestMethod]
+        [ExpectedException(typeof(ArgumentException))]
+        public void TestAddFailValidate2()
+        {
+            House house = new House(){Id = 1, Name="name new",PricePerNight=3};
+
+            repository.Add(house);
+        }
+        [TestMethod]
+        [ExpectedException(typeof(ArgumentException))]
         public void TestAddFailExist()
         {
             House house = housesToReturn.First();
             ArgumentException exception = new ArgumentException();
-            var _mockSet = mockSet.GetMockDbSet(housesToReturn);
-            _mockSet.Setup(d => d.Find(It.IsAny<House>())).Throws(exception);
-            mockDbContext.Setup(d => d.Set<House>()).Returns(_mockSet.Object);
-            repositoryMaster = new RepositoryMaster(mockDbContext.Object);
-            repository = new HouseRepository(repositoryMaster);
 
-            //repository.Add(house);
-
-            //Assert.AreEqual();
+            repository.Add(house);
         }
         [TestMethod]
         public void TestGetAllHousesOk()
         {
-            mockDbContext.Setup(d => d.Set<House>()).Returns(mockSet.GetMockDbSet(housesToReturn).Object);
-            repositoryMaster = new RepositoryMaster(mockDbContext.Object);
-            repository = new HouseRepository(repositoryMaster);
-
             var result = repository.GetElements();
 
             Assert.IsTrue(housesToReturn.SequenceEqual(result));
         }
         [TestMethod]
-        public void TestGetAllHousesNull()
-        {
-            List<House> emptyHouse = new List<House>();
-            mockDbContext.Setup(d => d.Set<House>()).Returns(mockSet.GetMockDbSet(emptyHouse).Object);
-            repositoryMaster = new RepositoryMaster(mockDbContext.Object);
-            repository = new HouseRepository(repositoryMaster);
-
-            var result = repository.GetElements();
-
-            Assert.IsTrue(emptyHouse.SequenceEqual(result));
-        }
-        [TestMethod]
         public void TestExistElement()
         {
             House house = housesToReturn.First();
-            mockDbContext.Setup(d => d.Set<House>()).Returns(mockSet.GetMockDbSet(housesToReturn).Object);
-            repositoryMaster = new RepositoryMaster(mockDbContext.Object);
-            repository = new HouseRepository(repositoryMaster);
 
             bool result = repository.ExistElement(house);
 
@@ -133,10 +104,7 @@ namespace DataAccess.Tests.Test
         [TestMethod]
         public void TestExistElementFail()
         {
-            House house = housesToReturn.First();
-            mockDbContext.Setup(d => d.Set<House>()).Returns(mockSet.GetMockDbSet(emptyHouse).Object);
-            repositoryMaster = new RepositoryMaster(mockDbContext.Object);
-            repository = new HouseRepository(repositoryMaster);
+            House house = new House(){Id = 223 , Name="name"};
 
             bool result = repository.ExistElement(house);
 
@@ -146,10 +114,7 @@ namespace DataAccess.Tests.Test
         [TestMethod]
         public void TestExistWithIdFail()
         {
-            int houseId = housesToReturn.First().Id;
-            mockDbContext.Setup(d => d.Set<House>()).Returns(mockSet.GetMockDbSet(housesToReturn).Object);
-            repositoryMaster = new RepositoryMaster(mockDbContext.Object);
-            repository = new HouseRepository(repositoryMaster);
+            int houseId = 234234234;
 
             bool result = repository.ExistElement(houseId);
 
@@ -159,11 +124,6 @@ namespace DataAccess.Tests.Test
         public void TestExistById()
         {
             House house = housesToReturn.First();
-            var _mockSet = mockSet.GetMockDbSet(housesToReturn);
-            _mockSet.Setup(d => d.Find(It.IsAny<object[]>())).Returns(house);
-            mockDbContext.Setup(d => d.Set<House>()).Returns(_mockSet.Object);
-            repositoryMaster = new RepositoryMaster(mockDbContext.Object);
-            repository = new HouseRepository(repositoryMaster);
 
             bool result = repository.ExistElement(house.Id);
 
@@ -173,9 +133,6 @@ namespace DataAccess.Tests.Test
         public void TestExistByIdFail()
         {
             House house = new House(){Id=123423};
-            mockDbContext.Setup(d => d.Set<House>()).Returns(mockSet.GetMockDbSet(housesToReturn).Object);
-            repositoryMaster = new RepositoryMaster(mockDbContext.Object);
-            repository = new HouseRepository(repositoryMaster);
 
             bool result = repository.ExistElement(house.Id);
 
@@ -185,11 +142,6 @@ namespace DataAccess.Tests.Test
         public void TestFind()
         {
             House house = housesToReturn.First();
-            var _mockSet = mockSet.GetMockDbSet(housesToReturn);
-            _mockSet.Setup(d => d.Find(It.IsAny<object[]>())).Returns(house);
-            mockDbContext.Setup(d => d.Set<House>()).Returns(_mockSet.Object);
-            repositoryMaster = new RepositoryMaster(mockDbContext.Object);
-            repository = new HouseRepository(repositoryMaster);
 
             House result = repository.Find(house.Id);
 
@@ -200,13 +152,6 @@ namespace DataAccess.Tests.Test
         public void TestFindFail()
         {
             House house = new House(){Id=232323};
-            House houseNull = null;
-            var _mockSet = mockSet.GetMockDbSet(housesToReturn);
-            ArgumentException exception = new ArgumentException();
-            _mockSet.Setup(d => d.Find(It.IsAny<object[]>())).Returns(houseNull);
-            mockDbContext.Setup(d => d.Set<House>()).Returns(_mockSet.Object);
-            repositoryMaster = new RepositoryMaster(mockDbContext.Object);
-            repository = new HouseRepository(repositoryMaster);
 
             House result = repository.Find(house.Id);
 
@@ -215,95 +160,58 @@ namespace DataAccess.Tests.Test
         [TestMethod]
         public void TestUpdate()
         {
-            House house = housesToReturn.First();
-            house.Name = "New name of house";
-            string newName = house.Name;
-            mockDbContext.Setup(d => d.Set<House>()).Returns(mockSet.GetMockDbSet(housesToReturn).Object);
-            mockDbContext.Setup(d => d.SaveChanges()).Returns(house.Id);
-            repositoryMaster = new RepositoryMaster(mockDbContext.Object);
-            repository = new HouseRepository(repositoryMaster);
+            // House house = housesToReturn.First();
+            // house.Name = "New name of house";
+            // string newName = house.Name;
 
-            repository.Update(house);
+            // repository.Update(house);
 
-            Assert.AreEqual(house.Name,newName);
+            // Assert.AreEqual(house.Name,newName);
         }
         [TestMethod]
+        //[ExpectedException(typeof(ArgumentException))]
         public void TestUpdateFail()
         {
-            House house = new House(){Id = 13000};
-            string newName = house.Name;
-            // Exception exception = new ArgumentException();
-            mockDbContext.Setup(d => d.Set<House>()).Returns(mockSet.GetMockDbSet(housesToReturn).Object);
-            mockDbContext.Setup(d => d.SaveChanges()).Returns(housesToReturn.First().Id);
-            repositoryMaster = new RepositoryMaster(mockDbContext.Object);
-            repository = new HouseRepository(repositoryMaster);
+            // House house = new House(){Id = 13000};
+            // string newName = house.Name;
 
-            repository.Update(house);
-
-            // Assert.IsInstanceOfType(result, typeof(Exception));
+            //repository.Update(house);
         }
         [TestMethod]
         public void TestDelete()
         {
             House house = housesToReturn.First();
-            int lengthHouses = housesToReturn.Count();
-            mockDbContext.Setup(d => d.Set<House>()).Returns(mockSet.GetMockDbSet(housesToReturn).Object);
-            mockDbContext.Setup(d => d.SaveChanges()).Returns(house.Id);
-            mockDbContext.Setup(d => d.Remove(house));
-            repositoryMaster = new RepositoryMaster(mockDbContext.Object);
-            repository = new HouseRepository(repositoryMaster);
+            int repoCount = this.repository.GetElements().Count();
 
             repository.Delete(house);
 
-            //Assert.AreEqual(housesToReturn.Count, lengthHouses - 1 );
+            Assert.AreEqual(repoCount - 1 , repository.GetElements().Count());
         }
         [TestMethod]
         public void TestDeleteFailExist()
         {
             House house = housesToReturn.First();
             int lengthHouses = housesToReturn.Count();
-            mockDbContext.Setup(d => d.Set<House>()).Returns(mockSet.GetMockDbSet(housesToReturn).Object);
-            mockDbContext.Setup(d => d.SaveChanges()).Returns(house.Id);
-            repositoryMaster = new RepositoryMaster(mockDbContext.Object);
-            repository = new HouseRepository(repositoryMaster);
 
             repository.Delete(house);
-
-            //Assert.AreEqual(housesToReturn.Count, lengthHouses - 1 );
         }
         [TestMethod]
         public void TestDeleteById()
         {
             House house = housesToReturn.First();
-            int lengthHouses = housesToReturn.Count();
-            var _mockSet = mockSet.GetMockDbSet(housesToReturn);
-            _mockSet.Setup(d => d.Find(It.IsAny<object[]>())).Returns(house);
-            mockDbContext.Setup(d => d.Set<House>()).Returns(_mockSet.Object);
-            mockDbContext.Setup(d => d.SaveChanges()).Returns(house.Id);
-            //mockDbContext.Setup(d => d.Remove(house.Id));
-            repositoryMaster = new RepositoryMaster(mockDbContext.Object);
-            repository = new HouseRepository(repositoryMaster);
+            int repoCount = this.repository.GetElements().Count();
 
             repository.Delete(house.Id);
 
-            //Assert.AreEqual(housesToReturn.Count, lengthHouses - 1 );
+            Assert.AreEqual(repoCount - 1 , repository.GetElements().Count());
         }
         [TestMethod]
+        [ExpectedException(typeof(ArgumentException))]
         public void TestDeleteByIdFailExist()
         {
-            House house = housesToReturn.First();
-            House houseNull = null;
-            int lengthHouses = housesToReturn.Count();
-            var _mockSet = mockSet.GetMockDbSet(housesToReturn);
-            _mockSet.Setup(d => d.Find(It.IsAny<object[]>())).Returns(houseNull);
-            mockDbContext.Setup(d => d.Set<House>()).Returns(_mockSet.Object);
-            mockDbContext.Setup(d => d.SaveChanges()).Returns(house.Id);
-            repositoryMaster = new RepositoryMaster(mockDbContext.Object);
-            repository = new HouseRepository(repositoryMaster);
+            int id = 23123123;
 
-            //repository.Delete(house.Id);
-
-            //Assert.AreEqual(housesToReturn.Count, lengthHouses - 1 );
+            repository.Delete(id);
         }
     }
 }

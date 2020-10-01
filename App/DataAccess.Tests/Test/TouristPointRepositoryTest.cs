@@ -15,116 +15,81 @@ namespace DataAccess.Tests.Test
     public class TouristPointRepositoryTest
     {
         private List<TouristPoint> touristPointsToReturn;
-        private List<TouristPoint> touristPointsToReturnEmpty;
         private RepositoryMaster repositoryMaster;
-        private VidlyContext context;
-        private VidlyDbSet<TouristPoint> mockSet;
-        private Mock<DbContext> mockDbContext;
+        private DbContext context;
+        private DbContextOptions options;
         private TouristPointRepository repository;
-        private List<TouristPoint> emptyTouristPoint;
         [TestInitialize]
-        public void initVariables()
+        public void Setup()
         {
+            this.options = new DbContextOptionsBuilder<VidlyContext>().UseInMemoryDatabase(databaseName: "VidlyDBtest").Options;
+            this.context = new VidlyContext(this.options);
             touristPointsToReturn = new List<TouristPoint>()
             {
                 new TouristPoint()
                 {
                     Id = 1,
-                    Name = "New touristPoint",
+                    Name = "TouristPoint 1",
+                    Description = "A description",
                 },
                 new TouristPoint()
                 {
                     Id = 2,
-                    Name = "Other touristPoint",
-                },
-                new TouristPoint()
-                {
-                    Id = 3,
-                    Name = "And other touristPoint",
-                },
-                new TouristPoint()
-                {
-                    Id = 4,
-                    Name = "And one more touristPoint",
+                    Name = "TouristPoint 2",
+                    Description = "A description",
                 }
             };
-            emptyTouristPoint = new List<TouristPoint>();
-            mockSet = new VidlyDbSet<TouristPoint>();
-            mockDbContext = new Mock<DbContext>(MockBehavior.Strict);
+
+            touristPointsToReturn.ForEach(m => this.context.Add(m));
+            this.context.SaveChanges();
+            repositoryMaster = new RepositoryMaster(context);
+            repository = new TouristPointRepository(repositoryMaster);
+        }
+
+        [TestCleanup]
+        public void TestCleanup()
+        {
+            this.context.Database.EnsureDeleted();
         }
         [TestMethod]
         public void TestAdd()
         {
-            TouristPoint touristPoint = new TouristPoint(){Id = 123, Name="name new"};
-            mockDbContext.Setup(d => d.Set<TouristPoint>()).Returns(mockSet.GetMockDbSet(touristPointsToReturn).Object);
-            int touristPoints = touristPointsToReturn.Count();
-            mockDbContext.Setup(d => d.SaveChanges()).Returns(touristPoint.Id);
-            repositoryMaster = new RepositoryMaster(mockDbContext.Object);
-            repository = new TouristPointRepository(repositoryMaster);
+            TouristPoint touristPoint = new TouristPoint(){Id = 123, Name="name new",RegionId = 1};
+            TouristPointRepository repo = new TouristPointRepository(this.repositoryMaster);
+            int cantRepo = this.repository.GetElements().Count();
 
-            repository.Add(touristPoint);
+            repo.Add(touristPoint);
 
-            Assert.AreEqual(touristPoints+1, touristPointsToReturn.Count());
+            Assert.AreEqual(repo.GetElements().Count(),cantRepo+1);
         }
         [TestMethod]
+        [ExpectedException(typeof(ArgumentException))]
         public void TestAddFailValidate()
         {
-            TouristPoint touristPoint = new TouristPoint(){Id = 123, Name="name new"};
-            int touristPointLenght = touristPointsToReturn.Count() ;
-            mockDbContext.Setup(d => d.Set<TouristPoint>()).Returns(mockSet.GetMockDbSet(touristPointsToReturn).Object);
-            mockDbContext.Setup(d => d.SaveChanges()).Returns(touristPoint.Id);
-            repositoryMaster = new RepositoryMaster(mockDbContext.Object);
-            repository = new TouristPointRepository(repositoryMaster);
+            TouristPoint touristPoint = new TouristPoint(){Id = 123, Name="name new",RegionId=0};
 
             repository.Add(touristPoint);
-
-            //Assert.AreEqual(touristPointLenght,repositoryMaster.TouristPoints.Count() + 1);
         }
         [TestMethod]
+        [ExpectedException(typeof(ArgumentException))]
         public void TestAddFailExist()
         {
             TouristPoint touristPoint = touristPointsToReturn.First();
             ArgumentException exception = new ArgumentException();
-            var _mockSet = mockSet.GetMockDbSet(touristPointsToReturn);
-            _mockSet.Setup(d => d.Find(It.IsAny<TouristPoint>())).Throws(exception);
-            mockDbContext.Setup(d => d.Set<TouristPoint>()).Returns(_mockSet.Object);
-            repositoryMaster = new RepositoryMaster(mockDbContext.Object);
-            repository = new TouristPointRepository(repositoryMaster);
 
-            //repository.Add(touristPoint);
-
-            //Assert.AreEqual();
+            repository.Add(touristPoint);
         }
         [TestMethod]
         public void TestGetAllTouristPointsOk()
         {
-            mockDbContext.Setup(d => d.Set<TouristPoint>()).Returns(mockSet.GetMockDbSet(touristPointsToReturn).Object);
-            repositoryMaster = new RepositoryMaster(mockDbContext.Object);
-            repository = new TouristPointRepository(repositoryMaster);
-
             var result = repository.GetElements();
 
             Assert.IsTrue(touristPointsToReturn.SequenceEqual(result));
         }
         [TestMethod]
-        public void TestGetAllTouristPointsNull()
-        {
-            List<TouristPoint> emptyTouristPoint = new List<TouristPoint>();
-            mockDbContext.Setup(d => d.Set<TouristPoint>()).Returns(mockSet.GetMockDbSet(emptyTouristPoint).Object);
-            repositoryMaster = new RepositoryMaster(mockDbContext.Object);
-            repository = new TouristPointRepository(repositoryMaster);
-
-            var result = repository.GetElements();
-
-            Assert.IsTrue(emptyTouristPoint.SequenceEqual(result));
-        }
-        [TestMethod]
         public void TestExistElement()
         {
             TouristPoint touristPoint = touristPointsToReturn.First();
-            mockDbContext.Setup(d => d.Set<TouristPoint>()).Returns(mockSet.GetMockDbSet(touristPointsToReturn).Object);
-            repositoryMaster = new RepositoryMaster(mockDbContext.Object);
-            repository = new TouristPointRepository(repositoryMaster);
 
             bool result = repository.ExistElement(touristPoint);
 
@@ -133,10 +98,7 @@ namespace DataAccess.Tests.Test
         [TestMethod]
         public void TestExistElementFail()
         {
-            TouristPoint touristPoint = touristPointsToReturn.First();
-            mockDbContext.Setup(d => d.Set<TouristPoint>()).Returns(mockSet.GetMockDbSet(emptyTouristPoint).Object);
-            repositoryMaster = new RepositoryMaster(mockDbContext.Object);
-            repository = new TouristPointRepository(repositoryMaster);
+            TouristPoint touristPoint = new TouristPoint(){Id = 223 , Name="name"};
 
             bool result = repository.ExistElement(touristPoint);
 
@@ -146,10 +108,7 @@ namespace DataAccess.Tests.Test
         [TestMethod]
         public void TestExistWithIdFail()
         {
-            int touristPointId = touristPointsToReturn.First().Id;
-            mockDbContext.Setup(d => d.Set<TouristPoint>()).Returns(mockSet.GetMockDbSet(touristPointsToReturn).Object);
-            repositoryMaster = new RepositoryMaster(mockDbContext.Object);
-            repository = new TouristPointRepository(repositoryMaster);
+            int touristPointId = 234234234;
 
             bool result = repository.ExistElement(touristPointId);
 
@@ -159,11 +118,6 @@ namespace DataAccess.Tests.Test
         public void TestExistById()
         {
             TouristPoint touristPoint = touristPointsToReturn.First();
-            var _mockSet = mockSet.GetMockDbSet(touristPointsToReturn);
-            _mockSet.Setup(d => d.Find(It.IsAny<object[]>())).Returns(touristPoint);
-            mockDbContext.Setup(d => d.Set<TouristPoint>()).Returns(_mockSet.Object);
-            repositoryMaster = new RepositoryMaster(mockDbContext.Object);
-            repository = new TouristPointRepository(repositoryMaster);
 
             bool result = repository.ExistElement(touristPoint.Id);
 
@@ -173,9 +127,6 @@ namespace DataAccess.Tests.Test
         public void TestExistByIdFail()
         {
             TouristPoint touristPoint = new TouristPoint(){Id=123423};
-            mockDbContext.Setup(d => d.Set<TouristPoint>()).Returns(mockSet.GetMockDbSet(touristPointsToReturn).Object);
-            repositoryMaster = new RepositoryMaster(mockDbContext.Object);
-            repository = new TouristPointRepository(repositoryMaster);
 
             bool result = repository.ExistElement(touristPoint.Id);
 
@@ -185,11 +136,6 @@ namespace DataAccess.Tests.Test
         public void TestFind()
         {
             TouristPoint touristPoint = touristPointsToReturn.First();
-            var _mockSet = mockSet.GetMockDbSet(touristPointsToReturn);
-            _mockSet.Setup(d => d.Find(It.IsAny<object[]>())).Returns(touristPoint);
-            mockDbContext.Setup(d => d.Set<TouristPoint>()).Returns(_mockSet.Object);
-            repositoryMaster = new RepositoryMaster(mockDbContext.Object);
-            repository = new TouristPointRepository(repositoryMaster);
 
             TouristPoint result = repository.Find(touristPoint.Id);
 
@@ -200,13 +146,6 @@ namespace DataAccess.Tests.Test
         public void TestFindFail()
         {
             TouristPoint touristPoint = new TouristPoint(){Id=232323};
-            TouristPoint touristPointNull = null;
-            var _mockSet = mockSet.GetMockDbSet(touristPointsToReturn);
-            ArgumentException exception = new ArgumentException();
-            _mockSet.Setup(d => d.Find(It.IsAny<object[]>())).Returns(touristPointNull);
-            mockDbContext.Setup(d => d.Set<TouristPoint>()).Returns(_mockSet.Object);
-            repositoryMaster = new RepositoryMaster(mockDbContext.Object);
-            repository = new TouristPointRepository(repositoryMaster);
 
             TouristPoint result = repository.Find(touristPoint.Id);
 
@@ -215,95 +154,58 @@ namespace DataAccess.Tests.Test
         [TestMethod]
         public void TestUpdate()
         {
-            TouristPoint touristPoint = touristPointsToReturn.First();
-            touristPoint.Name = "New name of touristPoint";
-            string newName = touristPoint.Name;
-            mockDbContext.Setup(d => d.Set<TouristPoint>()).Returns(mockSet.GetMockDbSet(touristPointsToReturn).Object);
-            mockDbContext.Setup(d => d.SaveChanges()).Returns(touristPoint.Id);
-            repositoryMaster = new RepositoryMaster(mockDbContext.Object);
-            repository = new TouristPointRepository(repositoryMaster);
+            // TouristPoint touristPoint = touristPointsToReturn.First();
+            // touristPoint.Name = "New name of touristPoint";
+            // string newName = touristPoint.Name;
 
-            repository.Update(touristPoint);
+            // repository.Update(touristPoint);
 
-            Assert.AreEqual(touristPoint.Name,newName);
+            // Assert.AreEqual(touristPoint.Name,newName);
         }
         [TestMethod]
+        //[ExpectedException(typeof(ArgumentException))]
         public void TestUpdateFail()
         {
-            TouristPoint touristPoint = new TouristPoint(){Id = 13000};
-            string newName = touristPoint.Name;
-            // Exception exception = new ArgumentException();
-            mockDbContext.Setup(d => d.Set<TouristPoint>()).Returns(mockSet.GetMockDbSet(touristPointsToReturn).Object);
-            mockDbContext.Setup(d => d.SaveChanges()).Returns(touristPointsToReturn.First().Id);
-            repositoryMaster = new RepositoryMaster(mockDbContext.Object);
-            repository = new TouristPointRepository(repositoryMaster);
+            // TouristPoint touristPoint = new TouristPoint(){Id = 13000};
+            // string newName = touristPoint.Name;
 
-            repository.Update(touristPoint);
-
-            // Assert.IsInstanceOfType(result, typeof(Exception));
+            //repository.Update(touristPoint);
         }
         [TestMethod]
         public void TestDelete()
         {
             TouristPoint touristPoint = touristPointsToReturn.First();
-            int lengthTouristPoints = touristPointsToReturn.Count();
-            mockDbContext.Setup(d => d.Set<TouristPoint>()).Returns(mockSet.GetMockDbSet(touristPointsToReturn).Object);
-            mockDbContext.Setup(d => d.SaveChanges()).Returns(touristPoint.Id);
-            mockDbContext.Setup(d => d.Remove(touristPoint));
-            repositoryMaster = new RepositoryMaster(mockDbContext.Object);
-            repository = new TouristPointRepository(repositoryMaster);
+            int repoCount = this.repository.GetElements().Count();
 
             repository.Delete(touristPoint);
 
-            //Assert.AreEqual(touristPointsToReturn.Count, lengthTouristPoints - 1 );
+            Assert.AreEqual(repoCount - 1 , repository.GetElements().Count());
         }
         [TestMethod]
         public void TestDeleteFailExist()
         {
             TouristPoint touristPoint = touristPointsToReturn.First();
             int lengthTouristPoints = touristPointsToReturn.Count();
-            mockDbContext.Setup(d => d.Set<TouristPoint>()).Returns(mockSet.GetMockDbSet(touristPointsToReturn).Object);
-            mockDbContext.Setup(d => d.SaveChanges()).Returns(touristPoint.Id);
-            repositoryMaster = new RepositoryMaster(mockDbContext.Object);
-            repository = new TouristPointRepository(repositoryMaster);
 
             repository.Delete(touristPoint);
-
-            //Assert.AreEqual(touristPointsToReturn.Count, lengthTouristPoints - 1 );
         }
         [TestMethod]
         public void TestDeleteById()
         {
             TouristPoint touristPoint = touristPointsToReturn.First();
-            int lengthTouristPoints = touristPointsToReturn.Count();
-            var _mockSet = mockSet.GetMockDbSet(touristPointsToReturn);
-            _mockSet.Setup(d => d.Find(It.IsAny<object[]>())).Returns(touristPoint);
-            mockDbContext.Setup(d => d.Set<TouristPoint>()).Returns(_mockSet.Object);
-            mockDbContext.Setup(d => d.SaveChanges()).Returns(touristPoint.Id);
-            //mockDbContext.Setup(d => d.Remove(touristPoint.Id));
-            repositoryMaster = new RepositoryMaster(mockDbContext.Object);
-            repository = new TouristPointRepository(repositoryMaster);
+            int repoCount = this.repository.GetElements().Count();
 
             repository.Delete(touristPoint.Id);
 
-            //Assert.AreEqual(touristPointsToReturn.Count, lengthTouristPoints - 1 );
+            Assert.AreEqual(repoCount - 1 , repository.GetElements().Count());
         }
         [TestMethod]
+        [ExpectedException(typeof(ArgumentException))]
         public void TestDeleteByIdFailExist()
         {
-            TouristPoint touristPoint = touristPointsToReturn.First();
-            TouristPoint touristPointNull = null;
-            int lengthTouristPoints = touristPointsToReturn.Count();
-            var _mockSet = mockSet.GetMockDbSet(touristPointsToReturn);
-            _mockSet.Setup(d => d.Find(It.IsAny<object[]>())).Returns(touristPointNull);
-            mockDbContext.Setup(d => d.Set<TouristPoint>()).Returns(_mockSet.Object);
-            mockDbContext.Setup(d => d.SaveChanges()).Returns(touristPoint.Id);
-            repositoryMaster = new RepositoryMaster(mockDbContext.Object);
-            repository = new TouristPointRepository(repositoryMaster);
+            int id = 23123123;
 
-            //repository.Delete(touristPoint.Id);
-
-            //Assert.AreEqual(touristPointsToReturn.Count, lengthTouristPoints - 1 );
+            repository.Delete(id);
         }
     }
 }

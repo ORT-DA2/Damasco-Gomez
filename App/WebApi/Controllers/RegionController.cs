@@ -18,12 +18,10 @@ namespace WebApi.Controllers
         [HttpGet]
         public IActionResult Get()
         {
-            List<string> newList = new List<string>();
-            //return Ok(newList);
             return Ok(this.regionLogic.GetAll());
         }
-        [HttpGet("{id}")]
-        public IActionResult GetBy([FromQuery]int id)
+        [HttpGet( "{id}" , Name="GetRegion" )]
+        public IActionResult GetBy([FromRoute]int id)
         {
             var elementRegion = this.regionLogic.GetBy(id);
             return Ok(elementRegion);
@@ -33,8 +31,9 @@ namespace WebApi.Controllers
         {
             try
             {
-                this.regionLogic.Add(region);
-                return CreatedAtRoute("Api", region.Id, region);
+                var addedRegion = this.regionLogic.Add(region);
+                var creationRoute = CreatedAtRoute("GetRegion", new {Id = addedRegion.Id} , addedRegion);
+                return creationRoute;
             }
             catch (AggregateException)
             {
@@ -55,7 +54,8 @@ namespace WebApi.Controllers
             try
             {
                 this.regionLogic.Update(region);
-                return CreatedAtRoute("Api", region.Id, region);
+                var creationRoute = CreatedAtRoute("GetRegion", new {Id = region.Id} , region);
+                return creationRoute;
             }
             catch(ArgumentException)
             {
@@ -67,7 +67,7 @@ namespace WebApi.Controllers
             }
         }
         [HttpDelete("{id}")]
-        public IActionResult Delete([FromQuery]int id)
+        public IActionResult Delete([FromRoute]int id)
         {
             if (this.regionLogic.GetBy(id) == null)
             {

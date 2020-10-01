@@ -16,7 +16,7 @@ namespace BusinessLogic.Tests.Test
         private Mock<IPersonRepository> mock;
         private List<Person> emptyPersons;
 
-
+         [TestInitialize]
          public void initVariables()
         {
             personsToReturn = new List<Person>()
@@ -44,11 +44,8 @@ namespace BusinessLogic.Tests.Test
             };
             emptyPersons = new List<Person>();
             mock = new Mock<IPersonRepository>(MockBehavior.Strict);
-            personLogic = new PersonLogic(mock.Object);
-           
+            personLogic = new PersonLogic(mock.Object); 
         }
-        
-    
         [TestMethod]
         public void DeleteTest()
         {

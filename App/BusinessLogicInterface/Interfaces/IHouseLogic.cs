@@ -9,7 +9,7 @@ namespace BusinessLogicInterface
     {
         IEnumerable<House> GetAll();
         House GetBy(int id);
-        void Add(House element);
+        House Add(House element);
         void Update(House element);
         void Delete(int id);
         void Delete();

@@ -106,7 +106,7 @@ namespace WebApi.Test
             var okResult = result as CreatedAtRouteResult;
             mock.VerifyAll();
             Assert.IsNotNull(okResult);
-            Assert.AreEqual("Api", okResult.RouteName);
+            Assert.AreEqual("GetCategory", okResult.RouteName);
             Assert.AreEqual(okResult.Value, categoryId1);
         }
         [TestMethod]
@@ -148,7 +148,7 @@ namespace WebApi.Test
             var okResult = result as CreatedAtRouteResult;
             mock.VerifyAll();
             Assert.IsNotNull(okResult);
-            Assert.AreEqual("Api", okResult.RouteName);
+            Assert.AreEqual("GetCategory", okResult.RouteName);
             Assert.AreEqual(okResult.Value, categoryId1);
         }
         [TestMethod]

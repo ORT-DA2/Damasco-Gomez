@@ -15,24 +15,23 @@ namespace DataAccess.Tests.Test
     public class BookingRepositoryTest
     {
         private List<Booking> bookingsToReturn;
-        private List<Booking> bookingsToReturnEmpty;
         private RepositoryMaster repositoryMaster;
-        private VidlyContext context;
-        private VidlyDbSet<Booking> mockSet;
-        private Mock<DbContext> mockDbContext;
+        private DbContext context;
+        private DbContextOptions options;
         private BookingRepository repository;
-        private List<Booking> emptyBooking;
         [TestInitialize]
-        public void initVariables()
+        public void Setup()
         {
+            this.options = new DbContextOptionsBuilder<VidlyContext>().UseInMemoryDatabase(databaseName: "VidlyDBtest").Options;
+            this.context = new VidlyContext(this.options);
             bookingsToReturn = new List<Booking>()
             {
                 new Booking()
                 {
                     Id = 1,
-                    Name = "New booking",
+                    Name = "Booking 1",
                     Email = "mail1@mail.com",
-                    House = null,
+                    House = new House(){Avaible=true},
                     State = "Init",
                     Price = 100,
                     CheckIn = new System.DateTime(),
@@ -41,114 +40,76 @@ namespace DataAccess.Tests.Test
                 new Booking()
                 {
                     Id = 2,
-                    Name = "Other booking",
-                    Email = "mail2@mail.com",
-                    House = null,
-                    State = "Passed",
-                    Price = 200,
-                    CheckIn = new System.DateTime(),
-                    CheckOut= new System.DateTime(),
-                },
-                new Booking()
-                {
-                    Id = 3,
-                    Name = "And other booking",
-                    Email = "mail3@mail.com",
-                    House = null,
-                    State = "Init",
-                    Price = 300,
-                    CheckIn = new System.DateTime(),
-                    CheckOut= new System.DateTime(),
-                },
-                new Booking()
-                {
-                    Id = 4,
-                    Name = "And one more booking",
-                    Email = "mail4@mail.com",
-                    House = null,
-                    State = "Init",
-                    Price = 400,
-                    CheckIn = new System.DateTime(),
-                    CheckOut= new System.DateTime(),
+                    Name = "Booking 2",
                 }
             };
-            emptyBooking = new List<Booking>();
-            mockSet = new VidlyDbSet<Booking>();
-            mockDbContext = new Mock<DbContext>(MockBehavior.Strict);
+
+            bookingsToReturn.ForEach(m => this.context.Add(m));
+            this.context.SaveChanges();
+            repositoryMaster = new RepositoryMaster(context);
+            repository = new BookingRepository(repositoryMaster);
+        }
+
+        [TestCleanup]
+        public void TestCleanup()
+        {
+            this.context.Database.EnsureDeleted();
         }
         [TestMethod]
         public void TestAdd()
         {
-            Booking booking = new Booking(){Id = 123, Name="name new"};
-            mockDbContext.Setup(d => d.Set<Booking>()).Returns(mockSet.GetMockDbSet(bookingsToReturn).Object);
-            int bookings = bookingsToReturn.Count();
-            mockDbContext.Setup(d => d.SaveChanges()).Returns(booking.Id);
-            repositoryMaster = new RepositoryMaster(mockDbContext.Object);
-            repository = new BookingRepository(repositoryMaster);
+            Booking booking = new Booking(){Id = 123, Name="name new", House = new House(){Avaible=true}, CheckIn = DateTime.Today, CheckOut= DateTime.Today};
+            BookingRepository repo = new BookingRepository(this.repositoryMaster);
+            int cantRepo = this.repository.GetElements().Count();
 
-            repository.Add(booking);
+            repo.Add(booking);
 
-            Assert.AreEqual(bookings+1, bookingsToReturn.Count());
+            Assert.AreEqual(repo.GetElements().Count(),cantRepo+1);
         }
         [TestMethod]
+        [ExpectedException(typeof(ArgumentException))]
         public void TestAddFailValidate()
         {
-            Booking booking = new Booking(){Id = 123, Name="name new"};
-            int bookingLenght = bookingsToReturn.Count() ;
-            mockDbContext.Setup(d => d.Set<Booking>()).Returns(mockSet.GetMockDbSet(bookingsToReturn).Object);
-            mockDbContext.Setup(d => d.SaveChanges()).Returns(booking.Id);
-            repositoryMaster = new RepositoryMaster(mockDbContext.Object);
-            repository = new BookingRepository(repositoryMaster);
+            Booking booking = new Booking(){Id = 123, Name="name new", House = new House(), CheckIn = DateTime.Today, CheckOut= DateTime.Today};
 
             repository.Add(booking);
-
-            //Assert.AreEqual(bookingLenght,repositoryMaster.Bookings.Count() + 1);
         }
         [TestMethod]
+        [ExpectedException(typeof(ArgumentException))]
+        public void TestAddFailValidate2()
+        {
+            Booking booking = new Booking(){Id = 123, Name="name new", House = new House(){Avaible=true}, CheckIn = DateTime.Today};
+
+            repository.Add(booking);
+        }
+        [TestMethod]
+        [ExpectedException(typeof(ArgumentException))]
+        public void TestAddFailValidate3()
+        {
+            Booking booking = new Booking(){Id = 123, Name="name new", House = new House(){Avaible=true}, CheckOut= DateTime.Today};
+
+            repository.Add(booking);
+        }
+        [TestMethod]
+        [ExpectedException(typeof(ArgumentException))]
         public void TestAddFailExist()
         {
             Booking booking = bookingsToReturn.First();
             ArgumentException exception = new ArgumentException();
-            var _mockSet = mockSet.GetMockDbSet(bookingsToReturn);
-            _mockSet.Setup(d => d.Find(It.IsAny<Booking>())).Throws(exception);
-            mockDbContext.Setup(d => d.Set<Booking>()).Returns(_mockSet.Object);
-            repositoryMaster = new RepositoryMaster(mockDbContext.Object);
-            repository = new BookingRepository(repositoryMaster);
 
-            //repository.Add(booking);
-
-            //Assert.AreEqual();
+            repository.Add(booking);
         }
         [TestMethod]
         public void TestGetAllBookingsOk()
         {
-            mockDbContext.Setup(d => d.Set<Booking>()).Returns(mockSet.GetMockDbSet(bookingsToReturn).Object);
-            repositoryMaster = new RepositoryMaster(mockDbContext.Object);
-            repository = new BookingRepository(repositoryMaster);
-
             var result = repository.GetElements();
 
             Assert.IsTrue(bookingsToReturn.SequenceEqual(result));
         }
         [TestMethod]
-        public void TestGetAllBookingsNull()
-        {
-            List<Booking> emptyBooking = new List<Booking>();
-            mockDbContext.Setup(d => d.Set<Booking>()).Returns(mockSet.GetMockDbSet(emptyBooking).Object);
-            repositoryMaster = new RepositoryMaster(mockDbContext.Object);
-            repository = new BookingRepository(repositoryMaster);
-
-            var result = repository.GetElements();
-
-            Assert.IsTrue(emptyBooking.SequenceEqual(result));
-        }
-        [TestMethod]
         public void TestExistElement()
         {
             Booking booking = bookingsToReturn.First();
-            mockDbContext.Setup(d => d.Set<Booking>()).Returns(mockSet.GetMockDbSet(bookingsToReturn).Object);
-            repositoryMaster = new RepositoryMaster(mockDbContext.Object);
-            repository = new BookingRepository(repositoryMaster);
 
             bool result = repository.ExistElement(booking);
 
@@ -157,10 +118,7 @@ namespace DataAccess.Tests.Test
         [TestMethod]
         public void TestExistElementFail()
         {
-            Booking booking = bookingsToReturn.First();
-            mockDbContext.Setup(d => d.Set<Booking>()).Returns(mockSet.GetMockDbSet(emptyBooking).Object);
-            repositoryMaster = new RepositoryMaster(mockDbContext.Object);
-            repository = new BookingRepository(repositoryMaster);
+            Booking booking = new Booking(){Id = 223 , Name="name"};
 
             bool result = repository.ExistElement(booking);
 
@@ -170,10 +128,7 @@ namespace DataAccess.Tests.Test
         [TestMethod]
         public void TestExistWithIdFail()
         {
-            int bookingId = bookingsToReturn.First().Id;
-            mockDbContext.Setup(d => d.Set<Booking>()).Returns(mockSet.GetMockDbSet(bookingsToReturn).Object);
-            repositoryMaster = new RepositoryMaster(mockDbContext.Object);
-            repository = new BookingRepository(repositoryMaster);
+            int bookingId = 234234234;
 
             bool result = repository.ExistElement(bookingId);
 
@@ -183,11 +138,6 @@ namespace DataAccess.Tests.Test
         public void TestExistById()
         {
             Booking booking = bookingsToReturn.First();
-            var _mockSet = mockSet.GetMockDbSet(bookingsToReturn);
-            _mockSet.Setup(d => d.Find(It.IsAny<object[]>())).Returns(booking);
-            mockDbContext.Setup(d => d.Set<Booking>()).Returns(_mockSet.Object);
-            repositoryMaster = new RepositoryMaster(mockDbContext.Object);
-            repository = new BookingRepository(repositoryMaster);
 
             bool result = repository.ExistElement(booking.Id);
 
@@ -197,9 +147,6 @@ namespace DataAccess.Tests.Test
         public void TestExistByIdFail()
         {
             Booking booking = new Booking(){Id=123423};
-            mockDbContext.Setup(d => d.Set<Booking>()).Returns(mockSet.GetMockDbSet(bookingsToReturn).Object);
-            repositoryMaster = new RepositoryMaster(mockDbContext.Object);
-            repository = new BookingRepository(repositoryMaster);
 
             bool result = repository.ExistElement(booking.Id);
 
@@ -209,11 +156,6 @@ namespace DataAccess.Tests.Test
         public void TestFind()
         {
             Booking booking = bookingsToReturn.First();
-            var _mockSet = mockSet.GetMockDbSet(bookingsToReturn);
-            _mockSet.Setup(d => d.Find(It.IsAny<object[]>())).Returns(booking);
-            mockDbContext.Setup(d => d.Set<Booking>()).Returns(_mockSet.Object);
-            repositoryMaster = new RepositoryMaster(mockDbContext.Object);
-            repository = new BookingRepository(repositoryMaster);
 
             Booking result = repository.Find(booking.Id);
 
@@ -224,13 +166,6 @@ namespace DataAccess.Tests.Test
         public void TestFindFail()
         {
             Booking booking = new Booking(){Id=232323};
-            Booking bookingNull = null;
-            var _mockSet = mockSet.GetMockDbSet(bookingsToReturn);
-            ArgumentException exception = new ArgumentException();
-            _mockSet.Setup(d => d.Find(It.IsAny<object[]>())).Returns(bookingNull);
-            mockDbContext.Setup(d => d.Set<Booking>()).Returns(_mockSet.Object);
-            repositoryMaster = new RepositoryMaster(mockDbContext.Object);
-            repository = new BookingRepository(repositoryMaster);
 
             Booking result = repository.Find(booking.Id);
 
@@ -239,95 +174,58 @@ namespace DataAccess.Tests.Test
         [TestMethod]
         public void TestUpdate()
         {
-            Booking booking = bookingsToReturn.First();
-            booking.Name = "New name of booking";
-            string newName = booking.Name;
-            mockDbContext.Setup(d => d.Set<Booking>()).Returns(mockSet.GetMockDbSet(bookingsToReturn).Object);
-            mockDbContext.Setup(d => d.SaveChanges()).Returns(booking.Id);
-            repositoryMaster = new RepositoryMaster(mockDbContext.Object);
-            repository = new BookingRepository(repositoryMaster);
+            // Booking booking = bookingsToReturn.First();
+            // booking.Name = "New name of booking";
+            // string newName = booking.Name;
 
-            repository.Update(booking);
+            // repository.Update(booking);
 
-            Assert.AreEqual(booking.Name,newName);
+            // Assert.AreEqual(booking.Name,newName);
         }
         [TestMethod]
+        //[ExpectedException(typeof(ArgumentException))]
         public void TestUpdateFail()
         {
-            Booking booking = new Booking(){Id = 13000};
-            string newName = booking.Name;
-            // Exception exception = new ArgumentException();
-            mockDbContext.Setup(d => d.Set<Booking>()).Returns(mockSet.GetMockDbSet(bookingsToReturn).Object);
-            mockDbContext.Setup(d => d.SaveChanges()).Returns(bookingsToReturn.First().Id);
-            repositoryMaster = new RepositoryMaster(mockDbContext.Object);
-            repository = new BookingRepository(repositoryMaster);
+            // Booking booking = new Booking(){Id = 13000};
+            // string newName = booking.Name;
 
-            repository.Update(booking);
-
-            // Assert.IsInstanceOfType(result, typeof(Exception));
+            //repository.Update(booking);
         }
         [TestMethod]
         public void TestDelete()
         {
             Booking booking = bookingsToReturn.First();
-            int lengthBookings = bookingsToReturn.Count();
-            mockDbContext.Setup(d => d.Set<Booking>()).Returns(mockSet.GetMockDbSet(bookingsToReturn).Object);
-            mockDbContext.Setup(d => d.SaveChanges()).Returns(booking.Id);
-            mockDbContext.Setup(d => d.Remove(booking));
-            repositoryMaster = new RepositoryMaster(mockDbContext.Object);
-            repository = new BookingRepository(repositoryMaster);
+            int repoCount = this.repository.GetElements().Count();
 
             repository.Delete(booking);
 
-            //Assert.AreEqual(bookingsToReturn.Count, lengthBookings - 1 );
+            Assert.AreEqual(repoCount - 1 , repository.GetElements().Count());
         }
         [TestMethod]
         public void TestDeleteFailExist()
         {
             Booking booking = bookingsToReturn.First();
             int lengthBookings = bookingsToReturn.Count();
-            mockDbContext.Setup(d => d.Set<Booking>()).Returns(mockSet.GetMockDbSet(bookingsToReturn).Object);
-            mockDbContext.Setup(d => d.SaveChanges()).Returns(booking.Id);
-            repositoryMaster = new RepositoryMaster(mockDbContext.Object);
-            repository = new BookingRepository(repositoryMaster);
 
             repository.Delete(booking);
-
-            //Assert.AreEqual(bookingsToReturn.Count, lengthBookings - 1 );
         }
         [TestMethod]
         public void TestDeleteById()
         {
             Booking booking = bookingsToReturn.First();
-            int lengthBookings = bookingsToReturn.Count();
-            var _mockSet = mockSet.GetMockDbSet(bookingsToReturn);
-            _mockSet.Setup(d => d.Find(It.IsAny<object[]>())).Returns(booking);
-            mockDbContext.Setup(d => d.Set<Booking>()).Returns(_mockSet.Object);
-            mockDbContext.Setup(d => d.SaveChanges()).Returns(booking.Id);
-            //mockDbContext.Setup(d => d.Remove(booking.Id));
-            repositoryMaster = new RepositoryMaster(mockDbContext.Object);
-            repository = new BookingRepository(repositoryMaster);
+            int repoCount = this.repository.GetElements().Count();
 
             repository.Delete(booking.Id);
 
-            //Assert.AreEqual(bookingsToReturn.Count, lengthBookings - 1 );
+            Assert.AreEqual(repoCount - 1 , repository.GetElements().Count());
         }
         [TestMethod]
+        [ExpectedException(typeof(ArgumentException))]
         public void TestDeleteByIdFailExist()
         {
-            Booking booking = bookingsToReturn.First();
-            Booking bookingNull = null;
-            int lengthBookings = bookingsToReturn.Count();
-            var _mockSet = mockSet.GetMockDbSet(bookingsToReturn);
-            _mockSet.Setup(d => d.Find(It.IsAny<object[]>())).Returns(bookingNull);
-            mockDbContext.Setup(d => d.Set<Booking>()).Returns(_mockSet.Object);
-            mockDbContext.Setup(d => d.SaveChanges()).Returns(booking.Id);
-            repositoryMaster = new RepositoryMaster(mockDbContext.Object);
-            repository = new BookingRepository(repositoryMaster);
+            int id = 23123123;
 
-            //repository.Delete(booking.Id);
-
-            //Assert.AreEqual(bookingsToReturn.Count, lengthBookings - 1 );
+            repository.Delete(id);
         }
     }
 }

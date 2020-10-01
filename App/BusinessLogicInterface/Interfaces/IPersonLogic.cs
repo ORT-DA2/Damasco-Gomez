@@ -8,7 +8,7 @@ namespace BusinessLogicInterface
     {
         IEnumerable<Person> GetAll();
         Person GetBy(int id);
-        void Add(Person element);
+        Person Add(Person element);
         void Update(Person element);
         void Delete(int id);
         void Delete();
