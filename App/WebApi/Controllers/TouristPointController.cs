@@ -32,7 +32,8 @@ namespace WebApi.Controllers
             try
             {
                 var touristPointAdded = this.touristPointLogic.Add(touristPoint);
-                return CreatedAtRoute("GetTouristPoint", touristPoint.Id, touristPoint);
+                var routePost = CreatedAtRoute("GetTouristPoint", touristPoint.Id, touristPoint);
+                return routePost;
             }
             catch (AggregateException)
             {

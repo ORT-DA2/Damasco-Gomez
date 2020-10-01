@@ -28,7 +28,6 @@ namespace DataAccess.Repositories
         {
             this.dbSet.Update(element);
             this.context.SaveChanges();
-             
         }
 
         public void Delete(T element)
@@ -50,23 +49,12 @@ namespace DataAccess.Repositories
             return find;
         }
 
-        public bool ExistInRepository(Predicate<T> element)
-        {
-            var find = this.dbSet.ToList().Exists(element);
-            return find;
-        }
-
         public bool ExistInRepository(int id)
         {
             var find = this.dbSet.Find(id);
             return find != null;
         }
 
-        public T FindInRepository(Predicate<T> element)
-        {
-            var find = this.dbSet.ToList().Find(element);
-            return find;
-        }
         public T FindInRepository(int id)
         {
             var find = this.dbSet.Find(id);
