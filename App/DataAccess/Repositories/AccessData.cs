@@ -1,7 +1,5 @@
 using System;
-using DataAccess.Context;
 using DataAccessInterface.Repositories;
-using Microsoft.EntityFrameworkCore;
 using System.Collections.Generic;
 
 namespace DataAccess.Repositories
@@ -75,12 +73,12 @@ namespace DataAccess.Repositories
 
         public void Update(T element)
         {
-            Validate(element);
-            if (!ExistElement(element))
-            {
-                throw new ArgumentException();
-            }
-             repository.UpdateInContext(element);
+            // Validate(element);
+            // if (!ExistElement(element))
+            // {
+            //     throw new ArgumentException();
+            // }
+            //  repository.UpdateInContext(element);
         }
 
         public List<T> GetElements()

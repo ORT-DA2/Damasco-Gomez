@@ -17,6 +17,14 @@ namespace Domain
         public Region Region {get; set;}
         public List<CategoryTouristPoint> CategoriesTouristPoints {get; set;}
 
-        
+        public override bool Equals(object obj)
+        {
+            var result = false;
+            if(obj is TouristPoint touristPoint)
+            {
+                result = this.Id == touristPoint.Id ;
+            }
+            return result;
+        }
     }
 }

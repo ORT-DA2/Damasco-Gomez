@@ -26,10 +26,16 @@ namespace Domain
         public int Phone {get; set; }
 
         public string Contact {get; set;}
-        // public void UpdateInformation()
-        // {
 
-        // }
+        public override bool Equals(object obj)
+        {
+            var result = false;
+            if(obj is House house)
+            {
+                result = this.Id == house.Id ;
+            }
+            return result;
+        }
 
     }
 }

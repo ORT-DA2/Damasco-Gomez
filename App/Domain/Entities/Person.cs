@@ -8,10 +8,16 @@ namespace Domain
         public string Email {get; set;}
 
         public string Password {get; set;}
-        // public void UpdateInformation()
-        // {
 
-        // }
+        public override bool Equals(object obj)
+        {
+            var result = false;
+            if(obj is Person person)
+            {
+                result = this.Id == person.Id ;
+            }
+            return result;
+        }
 
     }
 }
