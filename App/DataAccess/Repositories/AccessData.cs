@@ -26,10 +26,6 @@ namespace DataAccess.Repositories
         {
             return repository.ExistInRepository(id);
         }
-        public bool ExistElement(Predicate<T> element)
-        {
-            return repository.ExistInRepository(element);
-        }
 
         public void Delete(T element)
         {
@@ -54,19 +50,7 @@ namespace DataAccess.Repositories
             var elementFind = repository.FindInRepository(id);
             if (elementFind == null)
             {
-                return null;
-                //throw new ArgumentException();
-            }
-            return elementFind;
-        }
-
-        public T Find(Predicate<T> element)
-        {
-            var elementFind = repository.FindInRepository(element);
-            if (elementFind == null)
-            {
-                return null;
-                //throw new ArgumentException();
+                throw new ArgumentException();
             }
             return elementFind;
         }
