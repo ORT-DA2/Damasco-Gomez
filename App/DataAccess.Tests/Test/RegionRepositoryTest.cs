@@ -71,7 +71,14 @@ namespace DataAccess.Tests
         public void TestAddFailExist()
         {
             Region region = regionsToReturn.First();
-            ArgumentException exception = new ArgumentException();
+
+            repository.Add(region);
+        }
+        [TestMethod]
+        [ExpectedException(typeof(ArgumentException))]
+        public void TestValidateFail()
+        {
+            Region region = new Region(){Name = ""};
 
             repository.Add(region);
         }
