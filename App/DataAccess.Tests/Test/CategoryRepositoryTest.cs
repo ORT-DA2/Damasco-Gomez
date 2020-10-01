@@ -141,13 +141,12 @@ namespace DataAccess.Tests.Test
         }
 
         [TestMethod]
+        [ExpectedException(typeof(ArgumentException))]
         public void TestFindFail()
         {
             Category category = new Category(){Id=232323};
 
             Category result = repository.Find(category.Id);
-
-            Assert.IsNull(result);
         }
         [TestMethod]
         public void TestUpdate()

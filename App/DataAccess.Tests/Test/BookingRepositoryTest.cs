@@ -163,13 +163,12 @@ namespace DataAccess.Tests.Test
         }
 
         [TestMethod]
+        [ExpectedException(typeof(ArgumentException))]
         public void TestFindFail()
         {
             Booking booking = new Booking(){Id=232323};
 
             Booking result = repository.Find(booking.Id);
-
-            Assert.IsNull(result);
         }
         [TestMethod]
         public void TestUpdate()

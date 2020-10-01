@@ -141,13 +141,12 @@ namespace DataAccess.Tests.Test
         }
 
         [TestMethod]
+        [ExpectedException(typeof(ArgumentException))]
         public void TestFindFail()
         {
             Person person = new Person(){Id=232323};
 
             Person result = repository.Find(person.Id);
-
-            Assert.IsNull(result);
         }
         [TestMethod]
         public void TestUpdate()

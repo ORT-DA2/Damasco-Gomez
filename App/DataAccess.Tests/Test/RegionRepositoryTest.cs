@@ -139,13 +139,12 @@ namespace DataAccess.Tests
         }
 
         [TestMethod]
+        [ExpectedException(typeof(ArgumentException))]
         public void TestFindFail()
         {
             Region region = new Region(){Id=232323};
 
             Region result = repository.Find(region.Id);
-
-            Assert.IsNull(result);
         }
         [TestMethod]
         public void TestUpdate()

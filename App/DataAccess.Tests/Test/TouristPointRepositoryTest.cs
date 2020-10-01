@@ -143,13 +143,12 @@ namespace DataAccess.Tests.Test
         }
 
         [TestMethod]
+        [ExpectedException(typeof(ArgumentException))]
         public void TestFindFail()
         {
             TouristPoint touristPoint = new TouristPoint(){Id=232323};
 
             TouristPoint result = repository.Find(touristPoint.Id);
-
-            Assert.IsNull(result);
         }
         [TestMethod]
         public void TestUpdate()

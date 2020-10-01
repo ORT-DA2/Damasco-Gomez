@@ -149,13 +149,12 @@ namespace DataAccess.Tests.Test
         }
 
         [TestMethod]
+        [ExpectedException(typeof(ArgumentException))]
         public void TestFindFail()
         {
             House house = new House(){Id=232323};
 
             House result = repository.Find(house.Id);
-
-            Assert.IsNull(result);
         }
         [TestMethod]
         public void TestUpdate()
