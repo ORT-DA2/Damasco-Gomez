@@ -8,7 +8,7 @@ namespace BusinessLogicInterface
     {
         IEnumerable<Booking> GetAll();
         Booking GetBy(int id);
-        void Add(Booking element);
+        Booking Add(Booking element);
         void Update(Booking element);
         void Delete(int id);
         void Delete();

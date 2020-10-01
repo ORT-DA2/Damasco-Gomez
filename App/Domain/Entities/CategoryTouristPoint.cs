@@ -9,9 +9,6 @@ namespace Domain.Entities
         public int TouristPointId {get; set;}
         public TouristPoint TouristPoint {get; set;}
 
-<<<<<<< HEAD
-       
-=======
         public override bool Equals(object obj)
         {
             var result = false;
@@ -21,6 +18,5 @@ namespace Domain.Entities
             }
             return result;
         }
->>>>>>> develop
     }
 }
