@@ -31,9 +31,9 @@ namespace BusinessLogic
             return this.houseRepository.Find(id);
         }
 
-        public void Add(House House)
+        public House Add(House House)
         {
-            this.houseRepository.Add(House);
+            return this.houseRepository.Add(House);
         }
         public void Update(House House)
         {

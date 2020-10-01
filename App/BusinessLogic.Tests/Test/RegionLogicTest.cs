@@ -96,6 +96,82 @@ namespace BusinessLogic.Tests.Test
 
             var regionToReturn = regionLogic.Add(region);
         }
+        [TestMethod]
+        public void TestGetBy()
+        {
+            Region region = regionsToReturn.First();
+            mock.Setup(m => m.Find(region.Id)).Returns(region);
 
+            var result = regionLogic.GetBy(region.Id);
+
+            mock.VerifyAll();
+            Assert.AreEqual(result,region);
+        }
+        [TestMethod]
+        public void TestGetByFail()
+        {
+            Region region = regionsToReturn.First();
+            Region empty = null;
+            mock.Setup(m => m.Find(region.Id)).Returns(empty);
+
+            var result = regionLogic.GetBy(region.Id);
+
+            mock.VerifyAll();
+            Assert.IsNull(result);
+        }
+         [TestMethod]
+        public void TestUdpateOk ()
+        {
+            Region region = regionsToReturn.First();
+            mock.Setup(m => m.Update(region));
+
+            regionLogic.Update(region);
+
+            mock.VerifyAll();
+            
+        }
+         [TestMethod]
+        public void TestUpdateValidateError()
+        {
+            Region region = regionsToReturn.First(); // este punto turistico tiene que terner un formato erroneo despues para que la validación falle
+            mock.Setup(m => m.Update(region));
+
+            regionLogic.Update(region);
+
+            mock.VerifyAll();
+            
+        }
+        [TestMethod]
+        [ExpectedException(typeof(ArgumentException))]
+        public void TestUpdateExistError()
+        {
+            Region region = regionsToReturn.First();
+            ArgumentException exception = new ArgumentException();
+            mock.Setup(m => m.Update(region)).Throws(exception);
+            
+            regionLogic.Update(region);
+   
+        }
+        [TestMethod]
+        public void TestExistOk()
+        {
+            Region region = regionsToReturn.First();
+            mock.Setup(m => m.ExistElement(region)).Returns(true);
+
+            var result = regionLogic.Exist(region);
+
+            mock.VerifyAll();
+            Assert.IsTrue(result);
+        }
+        [TestMethod]
+        public void TestNotExistOk()
+        {
+            Region region = regionsToReturn.First();
+            mock.Setup(m => m.ExistElement(region)).Returns(false);
+            var result = regionLogic.Exist(region);
+            mock.VerifyAll();
+            Assert.IsFalse(result);
+        }
+        //falta delete
     }
 }

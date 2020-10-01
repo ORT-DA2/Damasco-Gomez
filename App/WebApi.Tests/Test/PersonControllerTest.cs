@@ -104,7 +104,7 @@ namespace WebApi.Tests
         [TestMethod]
         public void TestPostOk()
         {
-            mock.Setup(m => m.Add(personId1));
+            mock.Setup(m => m.Add(personId1)).Returns(personId1);
 
             var result = controller.Post(personId1);
 

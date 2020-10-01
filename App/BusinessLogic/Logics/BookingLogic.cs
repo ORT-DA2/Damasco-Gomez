@@ -31,9 +31,9 @@ namespace BusinessLogic.Logics
             return this.bookingRepository.Find(id);
         }
 
-        public void Add(Booking Booking)
+        public Booking Add(Booking Booking)
         {
-            this.bookingRepository.Add(Booking);
+            return this.bookingRepository.Add(Booking);
         }
         public void Update(Booking Booking)
         {

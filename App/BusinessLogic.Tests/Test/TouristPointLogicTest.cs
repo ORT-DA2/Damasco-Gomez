@@ -76,6 +76,14 @@ namespace BusinessLogic.Tests.Test
             mock.VerifyAll();
             Assert.IsTrue(result.SequenceEqual(touristPoints));
         }
+         public void TestGetEmptyGetAll()
+        {
+            List<TouristPoint> touristPointEmpty = new List<TouristPoint>();
+            mock.Setup(m => m.GetElements()).Returns(touristPointEmpty);
+            var result = touristPointLogic.GetAll();
+            mock.VerifyAll();
+            Assert.AreEqual(touristPointEmpty, result);
+        }
         [TestMethod]
         public void TestGetBy()
         {
@@ -131,7 +139,7 @@ namespace BusinessLogic.Tests.Test
             mock.Setup(m => m.Update(touristPoint));
             touristPointLogic.Update(touristPoint);
             mock.VerifyAll();
-            //Assert.AreEqual(touristPointLogic, touristPointToReturn );
+            
         }
          [TestMethod]
         public void TestUpdateValidateError()
@@ -140,7 +148,7 @@ namespace BusinessLogic.Tests.Test
             mock.Setup(m => m.Update(touristPoint));
             touristPointLogic.Update(touristPoint);
             mock.VerifyAll();
-            //Assert.AreEqual(touristPointLogic, touristPointToReturn); 
+            
         }
         [TestMethod]
         [ExpectedException(typeof(ArgumentException))]

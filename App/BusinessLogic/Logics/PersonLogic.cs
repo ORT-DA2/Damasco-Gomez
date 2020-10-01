@@ -30,9 +30,9 @@ namespace BusinessLogic
             return this.personRepository.Find(id);
         }
 
-        public void Add(Person Person)
+        public Person Add(Person Person)
         {
-            this.personRepository.Add(Person);
+            return this.personRepository.Add(Person);
         }
         public void Update(Person Person)
         {
