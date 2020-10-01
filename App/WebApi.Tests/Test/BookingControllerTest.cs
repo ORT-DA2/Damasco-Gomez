@@ -128,7 +128,7 @@ namespace WebApi.Tests
         [TestMethod]
         public void TestPostOk()
         {
-            mock.Setup(m => m.Add(bookingId1));
+            mock.Setup(m => m.Add(bookingId1)).Returns(bookingId1);
 
             var result = controller.Post(bookingId1);
 
