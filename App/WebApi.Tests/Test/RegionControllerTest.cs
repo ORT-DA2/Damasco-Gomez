@@ -14,7 +14,6 @@ namespace WebApi.Test
     public class RegionControllerTest
     {
         private List<Region> regionToReturnEmpty;
-         private List<Region> region;
         private List<Region> regionsToReturn;
         private Region regionId1;
         private Mock<IRegionLogic> mock;
