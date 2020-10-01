@@ -92,6 +92,14 @@ namespace DataAccess.Tests.Test
         }
         [TestMethod]
         [ExpectedException(typeof(ArgumentException))]
+        public void TestAddFailValidate4()
+        {
+            Booking booking = new Booking(){Id = 123, Name="name new", CheckIn = DateTime.Today, CheckOut= DateTime.Today};
+
+            repository.Add(booking);
+        }
+        [TestMethod]
+        [ExpectedException(typeof(ArgumentException))]
         public void TestAddFailExist()
         {
             Booking booking = bookingsToReturn.First();

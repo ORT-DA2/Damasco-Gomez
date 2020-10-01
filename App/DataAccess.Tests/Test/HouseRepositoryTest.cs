@@ -64,7 +64,7 @@ namespace DataAccess.Tests.Test
         [ExpectedException(typeof(ArgumentException))]
         public void TestAddFailValidate()
         {
-            House house = new House(){Id = 1, Name="name new"};
+            House house = new House(){Id = 123, Name="name new",PricePerNight=11,Starts=0};
 
             repository.Add(house);
         }
@@ -72,7 +72,15 @@ namespace DataAccess.Tests.Test
         [ExpectedException(typeof(ArgumentException))]
         public void TestAddFailValidate2()
         {
-            House house = new House(){Id = 1, Name="name new",PricePerNight=3};
+            House house = new House(){Id = 123, Name="name new",PricePerNight=11,Starts=8};
+
+            repository.Add(house);
+        }
+        [TestMethod]
+        [ExpectedException(typeof(ArgumentException))]
+        public void TestAddFailValidate3()
+        {
+            House house = new House(){Id = 123, Name="name new",PricePerNight=0,Starts=2};
 
             repository.Add(house);
         }
