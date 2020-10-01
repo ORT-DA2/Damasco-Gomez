@@ -36,7 +36,7 @@ namespace BusinessLogic.Tests.Test
             houseLogic = new HouseLogic(mock.Object);
         }
 
-             [TestMethod]
+        [TestMethod]
         public void DeleteTest()
         {
             Assert.IsTrue(true);
@@ -80,7 +80,7 @@ namespace BusinessLogic.Tests.Test
          [TestMethod]
         public void TestAddValidateError()
         {
-            House house = housesToReturn.First(); // PERSON tiene que terner un formato erroneo despues para que la validación falle
+            House house = housesToReturn.First(); // House tiene que terner un formato erroneo despues para que la validación falle
             mock.Setup(m => m.Add(house)).Returns(house);
 
             var result = houseLogic.Add(house);
@@ -110,7 +110,7 @@ namespace BusinessLogic.Tests.Test
          [TestMethod]
         public void TestUpdateValidateError()
         {
-            House house = housesToReturn.First();// PERSON tiene que terner un formato erroneo despues para que la validación falle
+            House house = housesToReturn.First();// House tiene que terner un formato erroneo despues para que la validación falle
              mock.Setup(m => m.Update(house));
 
             houseLogic.Update(house);

@@ -8,7 +8,7 @@ namespace BusinessLogicInterface
     {
         IEnumerable<Category> GetAll();
         Category GetBy(int id);
-        void Add(Category element);
+        Category Add(Category element);
         void Update(Category element);
         void Delete(int id);
         void Delete();
