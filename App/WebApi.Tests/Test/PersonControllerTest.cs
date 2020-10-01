@@ -53,7 +53,9 @@ namespace WebApi.Tests
         public void TestGetAllPersonsOk()
         {
             mock.Setup(m => m.GetAll()).Returns(personsToReturn);
+
             var result = controller.Get();
+
             var okResult = result as OkObjectResult;
             var persons = okResult.Value as IEnumerable<Person>;
             mock.VerifyAll();
@@ -64,7 +66,9 @@ namespace WebApi.Tests
         public void TestGetAllPersonsVacia()
         {
             mock.Setup(m => m.GetAll()).Returns(personsToReturnEmpty);
+
             var result = controller.Get();
+
             var okResult = result as OkObjectResult;
             var persons = okResult.Value as IEnumerable<Person>;
             mock.VerifyAll();
@@ -75,7 +79,9 @@ namespace WebApi.Tests
         {
             int id = 1;
             mock.Setup(m => m.GetBy(id)).Returns(personId1);
+
             var result = controller.GetBy(id);
+
             var okResult = result as OkObjectResult;
             var persons = okResult.Value as Person;
             mock.VerifyAll();
@@ -87,7 +93,9 @@ namespace WebApi.Tests
             int id = 4;
             Person personReturn = null;
             mock.Setup(m => m.GetBy(id)).Returns(personReturn);
+
             var result = controller.GetBy(id);
+
             var okResult = result as OkObjectResult;
             var persons = okResult.Value as Person;
             mock.VerifyAll();
@@ -97,7 +105,9 @@ namespace WebApi.Tests
         public void TestPostOk()
         {
             mock.Setup(m => m.Add(personId1));
+
             var result = controller.Post(personId1);
+
             var okResult = result as CreatedAtRouteResult;
             mock.VerifyAll();
             Assert.IsNotNull(okResult);
@@ -110,7 +120,9 @@ namespace WebApi.Tests
             personId1 = personsToReturn.First();
             Exception exist = new AggregateException();
             mock.Setup(p => p.Add(personId1)).Throws(exist);
+
             var result = controller.Post(personId1);
+
             mock.VerifyAll();
             Assert.IsInstanceOfType(result, typeof(BadRequestObjectResult));
         }
@@ -120,7 +132,9 @@ namespace WebApi.Tests
             personId1 = personsToReturn.First();
             Exception exist = new ArgumentException();
             mock.Setup(p => p.Add(personId1)).Throws(exist);
+
             var result = controller.Post(personId1);
+
             mock.VerifyAll();
             Assert.IsInstanceOfType(result, typeof(BadRequestObjectResult));
         }
@@ -130,7 +144,9 @@ namespace WebApi.Tests
             personId1 = personsToReturn.First();
             Exception exist = new Exception();
             mock.Setup(p => p.Add(personId1)).Throws(exist);
+
             var result = controller.Post(personId1);
+
             mock.VerifyAll();
             Assert.IsInstanceOfType(result, typeof(BadRequestObjectResult));
         }
@@ -139,7 +155,9 @@ namespace WebApi.Tests
         {
             personId1 = personsToReturn.First();
             mock.Setup(m => m.Update(personId1));
+
             var result = controller.Put(personId1.Id, personId1);
+
             var okResult = result as CreatedAtRouteResult;
             mock.VerifyAll();
             Assert.IsNotNull(okResult);
@@ -152,7 +170,9 @@ namespace WebApi.Tests
             personId1 = personsToReturn.First();
             Exception exist = new ArgumentException();
             mock.Setup(p => p.Update(personId1)).Throws(exist);
+
             var result = controller.Put(personId1.Id, personId1);
+
             mock.VerifyAll();
             Assert.IsInstanceOfType(result, typeof(BadRequestObjectResult));
         }
@@ -162,7 +182,9 @@ namespace WebApi.Tests
             personId1 = personsToReturn.First();
             Exception exist = new Exception();
             mock.Setup(p => p.Update(personId1)).Throws(exist);
+
             var result = controller.Put(personId1.Id, personId1);
+
             mock.VerifyAll();
             Assert.IsInstanceOfType(result, typeof(BadRequestObjectResult));
         }
@@ -172,7 +194,9 @@ namespace WebApi.Tests
             Person person = personsToReturn.First();
             mock.Setup(m => m.GetBy(person.Id)).Returns(person);
             mock.Setup(mock=> mock.Delete(person.Id));
+
             var result = controller.Delete(person.Id);
+
             Assert.IsNotNull(result);
         }
         [TestMethod]
@@ -182,7 +206,9 @@ namespace WebApi.Tests
             Person personNull = null;
             mock.Setup(m => m.GetBy(person.Id)).Returns(personNull);
             mock.Setup(mock=> mock.Delete(person.Id));
+
             var result = controller.Delete(person.Id);
+
             Assert.IsInstanceOfType(result,typeof(NotFoundResult));
         }
 
@@ -190,7 +216,9 @@ namespace WebApi.Tests
         public void TestDelete()
         {
             mock.Setup(mock=> mock.Delete());
+
             var result = controller.Delete();
+            
             Assert.IsNotNull(result);
         }
     }

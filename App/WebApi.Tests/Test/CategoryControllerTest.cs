@@ -58,7 +58,9 @@ namespace WebApi.Test
         public void TestGetAllCategoriesOk()
         {
             mock.Setup(m => m.GetAll()).Returns(categoriesToReturn);
+
             var result = controller.Get();
+
             var okResult = result as OkObjectResult;
             var categories = okResult.Value as IEnumerable<CategoryBasicInfoModel>;
             mock.VerifyAll();
@@ -69,7 +71,9 @@ namespace WebApi.Test
         public void TestGetAllCategoriesVacia()
         {
             mock.Setup(m => m.GetAll()).Returns(categoriesToReturnEmpty);
+
             var result = controller.Get();
+
             var okResult = result as OkObjectResult;
             var categories = okResult.Value as IEnumerable<CategoryBasicInfoModel>;
             mock.VerifyAll();
@@ -80,7 +84,9 @@ namespace WebApi.Test
         {
             int id = 1;
             mock.Setup(m => m.GetBy(id)).Returns(categoryId1);
+
             var result = controller.GetBy(id);
+
             var okResult = result as OkObjectResult;
             var categories = okResult.Value as Category;
             mock.VerifyAll();
@@ -92,7 +98,9 @@ namespace WebApi.Test
             int id = 4;
             Category categoryReturn = null;
             mock.Setup(m => m.GetBy(id)).Returns(categoryReturn);
+
             var result = controller.GetBy(id);
+
             var okResult = result as OkObjectResult;
             var categories = okResult.Value as Category;
             mock.VerifyAll();
@@ -102,7 +110,9 @@ namespace WebApi.Test
         public void TestPostOk()
         {
             mock.Setup(m => m.Add(categoryId1));
+
             var result = controller.Post(categoryId1);
+
             var okResult = result as CreatedAtRouteResult;
             mock.VerifyAll();
             Assert.IsNotNull(okResult);
@@ -115,7 +125,9 @@ namespace WebApi.Test
             categoryId1 = categoriesToReturn.First();
             Exception exist = new AggregateException();
             mock.Setup(p => p.Add(categoryId1)).Throws(exist);
+
             var result = controller.Post(categoryId1);
+
             mock.VerifyAll();
             Assert.IsInstanceOfType(result, typeof(BadRequestObjectResult));
         }
@@ -125,7 +137,9 @@ namespace WebApi.Test
             categoryId1 = categoriesToReturn.First();
             Exception exist = new ArgumentException();
             mock.Setup(p => p.Add(categoryId1)).Throws(exist);
+
             var result = controller.Post(categoryId1);
+
             mock.VerifyAll();
             Assert.IsInstanceOfType(result, typeof(BadRequestObjectResult));
         }
@@ -135,7 +149,9 @@ namespace WebApi.Test
             categoryId1 = categoriesToReturn.First();
             Exception exist = new Exception();
             mock.Setup(p => p.Add(categoryId1)).Throws(exist);
+
             var result = controller.Post(categoryId1);
+
             mock.VerifyAll();
             Assert.IsInstanceOfType(result, typeof(BadRequestObjectResult));
         }
@@ -144,7 +160,9 @@ namespace WebApi.Test
         {
             categoryId1 = categoriesToReturn.First();
             mock.Setup(m => m.Update(categoryId1));
+
             var result = controller.Put(categoryId1.Id, categoryId1);
+
             var okResult = result as CreatedAtRouteResult;
             mock.VerifyAll();
             Assert.IsNotNull(okResult);
@@ -157,7 +175,9 @@ namespace WebApi.Test
             categoryId1 = categoriesToReturn.First();
             Exception exist = new ArgumentException();
             mock.Setup(p => p.Update(categoryId1)).Throws(exist);
+
             var result = controller.Put(categoryId1.Id, categoryId1);
+
             mock.VerifyAll();
             Assert.IsInstanceOfType(result, typeof(BadRequestObjectResult));
         }
@@ -167,7 +187,9 @@ namespace WebApi.Test
             categoryId1 = categoriesToReturn.First();
             Exception exist = new Exception();
             mock.Setup(p => p.Update(categoryId1)).Throws(exist);
+
             var result = controller.Put(categoryId1.Id, categoryId1);
+
             mock.VerifyAll();
             Assert.IsInstanceOfType(result, typeof(BadRequestObjectResult));
         }
@@ -177,7 +199,9 @@ namespace WebApi.Test
             Category category = categoriesToReturn.First();
             mock.Setup(m => m.GetBy(category.Id)).Returns(category);
             mock.Setup(mock=> mock.Delete(category.Id));
+
             var result = controller.Delete(category.Id);
+
             Assert.IsNotNull(result);
         }
         [TestMethod]
@@ -187,7 +211,9 @@ namespace WebApi.Test
             Category categoryNull = null;
             mock.Setup(m => m.GetBy(category.Id)).Returns(categoryNull);
             mock.Setup(mock=> mock.Delete(category.Id));
+
             var result = controller.Delete(category.Id);
+
             Assert.IsInstanceOfType(result,typeof(NotFoundResult));
         }
 
@@ -195,7 +221,9 @@ namespace WebApi.Test
         public void TestDelete()
         {
             mock.Setup(mock=> mock.Delete());
+
             var result = controller.Delete();
+            
             Assert.IsNotNull(result);
         }
     }

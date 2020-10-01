@@ -71,7 +71,14 @@ namespace DataAccess.Tests
         public void TestAddFailExist()
         {
             Region region = regionsToReturn.First();
-            ArgumentException exception = new ArgumentException();
+
+            repository.Add(region);
+        }
+        [TestMethod]
+        [ExpectedException(typeof(ArgumentException))]
+        public void TestValidateFail()
+        {
+            Region region = new Region(){Name = ""};
 
             repository.Add(region);
         }
@@ -139,13 +146,12 @@ namespace DataAccess.Tests
         }
 
         [TestMethod]
+        [ExpectedException(typeof(ArgumentException))]
         public void TestFindFail()
         {
             Region region = new Region(){Id=232323};
 
             Region result = repository.Find(region.Id);
-
-            Assert.IsNull(result);
         }
         [TestMethod]
         public void TestUpdate()
@@ -178,10 +184,10 @@ namespace DataAccess.Tests
             Assert.AreEqual(repoCount - 1 , repository.GetElements().Count());
         }
         [TestMethod]
+        [ExpectedException(typeof(ArgumentException))]
         public void TestDeleteFailExist()
         {
-            Region region = regionsToReturn.First();
-            int lengthRegions = regionsToReturn.Count();
+            Region region = new Region(){Id = 2342342};
 
             repository.Delete(region);
         }

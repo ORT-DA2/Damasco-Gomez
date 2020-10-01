@@ -2,6 +2,7 @@ using DataAccessInterface.Repositories;
 using Microsoft.EntityFrameworkCore;
 using Domain;
 using System.Collections.Generic;
+using System;
 
 namespace DataAccess.Repositories
 {
@@ -14,7 +15,11 @@ namespace DataAccess.Repositories
 
         protected override void Validate(Region element)
         {
-            //throw new System.NotImplementedException();
+            bool nameNull = element.Name.Equals("");
+            if (nameNull)
+            {
+                throw new ArgumentException("Name should not be empty");
+            }
         }
     }
 }

@@ -143,13 +143,12 @@ namespace DataAccess.Tests.Test
         }
 
         [TestMethod]
+        [ExpectedException(typeof(ArgumentException))]
         public void TestFindFail()
         {
             TouristPoint touristPoint = new TouristPoint(){Id=232323};
 
             TouristPoint result = repository.Find(touristPoint.Id);
-
-            Assert.IsNull(result);
         }
         [TestMethod]
         public void TestUpdate()
@@ -182,10 +181,10 @@ namespace DataAccess.Tests.Test
             Assert.AreEqual(repoCount - 1 , repository.GetElements().Count());
         }
         [TestMethod]
+        [ExpectedException(typeof(ArgumentException))]
         public void TestDeleteFailExist()
         {
-            TouristPoint touristPoint = touristPointsToReturn.First();
-            int lengthTouristPoints = touristPointsToReturn.Count();
+            TouristPoint touristPoint = new TouristPoint(){Id = 2342342};
 
             repository.Delete(touristPoint);
         }
