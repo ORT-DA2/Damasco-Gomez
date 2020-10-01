@@ -187,10 +187,10 @@ namespace DataAccess.Tests.Test
             Assert.AreEqual(repoCount - 1 , repository.GetElements().Count());
         }
         [TestMethod]
+        [ExpectedException(typeof(ArgumentException))]
         public void TestDeleteFailExist()
         {
-            House house = housesToReturn.First();
-            int lengthHouses = housesToReturn.Count();
+            House house = new House(){Id = 2342342};
 
             repository.Delete(house);
         }

@@ -201,10 +201,10 @@ namespace DataAccess.Tests.Test
             Assert.AreEqual(repoCount - 1 , repository.GetElements().Count());
         }
         [TestMethod]
+        [ExpectedException(typeof(ArgumentException))]
         public void TestDeleteFailExist()
         {
-            Booking booking = bookingsToReturn.First();
-            int lengthBookings = bookingsToReturn.Count();
+            Booking booking = new Booking(){Id = 2342342};
 
             repository.Delete(booking);
         }

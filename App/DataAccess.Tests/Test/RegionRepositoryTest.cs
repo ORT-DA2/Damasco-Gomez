@@ -177,10 +177,10 @@ namespace DataAccess.Tests
             Assert.AreEqual(repoCount - 1 , repository.GetElements().Count());
         }
         [TestMethod]
+        [ExpectedException(typeof(ArgumentException))]
         public void TestDeleteFailExist()
         {
-            Region region = regionsToReturn.First();
-            int lengthRegions = regionsToReturn.Count();
+            Region region = new Region(){Id = 2342342};
 
             repository.Delete(region);
         }

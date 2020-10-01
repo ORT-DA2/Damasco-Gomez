@@ -181,10 +181,10 @@ namespace DataAccess.Tests.Test
             Assert.AreEqual(repoCount - 1 , repository.GetElements().Count());
         }
         [TestMethod]
+        [ExpectedException(typeof(ArgumentException))]
         public void TestDeleteFailExist()
         {
-            TouristPoint touristPoint = touristPointsToReturn.First();
-            int lengthTouristPoints = touristPointsToReturn.Count();
+            TouristPoint touristPoint = new TouristPoint(){Id = 2342342};
 
             repository.Delete(touristPoint);
         }

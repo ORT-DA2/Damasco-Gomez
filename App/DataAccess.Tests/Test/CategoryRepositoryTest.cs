@@ -73,7 +73,14 @@ namespace DataAccess.Tests.Test
         public void TestAddFailExist()
         {
             Category category = categoriesToReturn.First();
-            ArgumentException exception = new ArgumentException();
+
+            repository.Add(category);
+        }
+        [TestMethod]
+        [ExpectedException(typeof(ArgumentException))]
+        public void TestAddFailValidateNullName()
+        {
+            Category category = new Category(){Id = 123123123, Name=""};
 
             repository.Add(category);
         }
@@ -179,10 +186,10 @@ namespace DataAccess.Tests.Test
             Assert.AreEqual(repoCount - 1 , repository.GetElements().Count());
         }
         [TestMethod]
+        [ExpectedException(typeof(ArgumentException))]
         public void TestDeleteFailExist()
         {
-            Category category = categoriesToReturn.First();
-            int lengthCategorys = categoriesToReturn.Count();
+            Category category = new Category(){Id = 2342342};
 
             repository.Delete(category);
         }
