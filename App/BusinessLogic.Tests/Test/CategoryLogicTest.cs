@@ -38,7 +38,7 @@ namespace BusinessLogic.Tests.Test
             categoryLogic = new CategoryLogic(mock.Object);
         }
 
-         [TestMethod]
+        [TestMethod]
         public void DeleteTest()
         {
             Assert.IsTrue(true);
@@ -149,7 +149,7 @@ namespace BusinessLogic.Tests.Test
             mock.VerifyAll();
             Assert.IsFalse(result);
         }
-        //falta delete
+    
         
     }
 }
