@@ -16,7 +16,11 @@ namespace DataAccess.Repositories
 
         protected override void Validate(TouristPoint element)
         {
-            //throw new NotImplementedException();
+            bool regionIdNull = element.RegionId == 0;
+            if (regionIdNull)
+            {
+                throw new ArgumentException("The tourist point need a region");
+            }
         }
     }
 }
