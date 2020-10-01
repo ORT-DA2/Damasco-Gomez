@@ -19,7 +19,6 @@ namespace DataAccess.Tests.Test
         private DbContext context;
         private DbContextOptions options;
         private TouristPointRepository repository;
-        private List<TouristPoint> emptyTouristPoint;
         [TestInitialize]
         public void Setup()
         {

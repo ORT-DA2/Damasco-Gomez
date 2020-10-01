@@ -17,7 +17,6 @@ namespace DataAccess.Tests
         private DbContext context;
         private DbContextOptions options;
         private RegionRepository repository;
-        private List<Region> emptyRegion;
         [TestInitialize]
         public void Setup()
         {

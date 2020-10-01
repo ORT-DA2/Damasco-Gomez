@@ -19,7 +19,6 @@ namespace DataAccess.Tests.Test
         private DbContext context;
         private DbContextOptions options;
         private HouseRepository repository;
-        private List<House> emptyHouse;
         [TestInitialize]
         public void Setup()
         {
