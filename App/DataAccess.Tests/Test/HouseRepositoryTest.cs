@@ -64,7 +64,7 @@ namespace DataAccess.Tests.Test
         [ExpectedException(typeof(ArgumentException))]
         public void TestAddFailValidate()
         {
-            House house = new House(){Id = 1, Name="name new"};
+            House house = new House(){Id = 123, Name="name new",PricePerNight=11,Starts=0};
 
             repository.Add(house);
         }
@@ -72,7 +72,15 @@ namespace DataAccess.Tests.Test
         [ExpectedException(typeof(ArgumentException))]
         public void TestAddFailValidate2()
         {
-            House house = new House(){Id = 1, Name="name new",PricePerNight=3};
+            House house = new House(){Id = 123, Name="name new",PricePerNight=11,Starts=8};
+
+            repository.Add(house);
+        }
+        [TestMethod]
+        [ExpectedException(typeof(ArgumentException))]
+        public void TestAddFailValidate3()
+        {
+            House house = new House(){Id = 123, Name="name new",PricePerNight=0,Starts=2};
 
             repository.Add(house);
         }
@@ -149,13 +157,12 @@ namespace DataAccess.Tests.Test
         }
 
         [TestMethod]
+        [ExpectedException(typeof(ArgumentException))]
         public void TestFindFail()
         {
             House house = new House(){Id=232323};
 
             House result = repository.Find(house.Id);
-
-            Assert.IsNull(result);
         }
         [TestMethod]
         public void TestUpdate()
@@ -188,10 +195,10 @@ namespace DataAccess.Tests.Test
             Assert.AreEqual(repoCount - 1 , repository.GetElements().Count());
         }
         [TestMethod]
+        [ExpectedException(typeof(ArgumentException))]
         public void TestDeleteFailExist()
         {
-            House house = housesToReturn.First();
-            int lengthHouses = housesToReturn.Count();
+            House house = new House(){Id = 2342342};
 
             repository.Delete(house);
         }

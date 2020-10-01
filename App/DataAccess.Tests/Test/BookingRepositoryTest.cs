@@ -92,6 +92,14 @@ namespace DataAccess.Tests.Test
         }
         [TestMethod]
         [ExpectedException(typeof(ArgumentException))]
+        public void TestAddFailValidate4()
+        {
+            Booking booking = new Booking(){Id = 123, Name="name new", CheckIn = DateTime.Today, CheckOut= DateTime.Today};
+
+            repository.Add(booking);
+        }
+        [TestMethod]
+        [ExpectedException(typeof(ArgumentException))]
         public void TestAddFailExist()
         {
             Booking booking = bookingsToReturn.First();
@@ -163,13 +171,12 @@ namespace DataAccess.Tests.Test
         }
 
         [TestMethod]
+        [ExpectedException(typeof(ArgumentException))]
         public void TestFindFail()
         {
             Booking booking = new Booking(){Id=232323};
 
             Booking result = repository.Find(booking.Id);
-
-            Assert.IsNull(result);
         }
         [TestMethod]
         public void TestUpdate()
@@ -202,10 +209,10 @@ namespace DataAccess.Tests.Test
             Assert.AreEqual(repoCount - 1 , repository.GetElements().Count());
         }
         [TestMethod]
+        [ExpectedException(typeof(ArgumentException))]
         public void TestDeleteFailExist()
         {
-            Booking booking = bookingsToReturn.First();
-            int lengthBookings = bookingsToReturn.Count();
+            Booking booking = new Booking(){Id = 2342342};
 
             repository.Delete(booking);
         }

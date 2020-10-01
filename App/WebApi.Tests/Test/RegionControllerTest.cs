@@ -55,7 +55,9 @@ namespace WebApi.Test
         public void TestGetAllRegionsOk()
         {
             mock.Setup(m => m.GetAll()).Returns(regionsToReturn);
+
             var result = controller.Get();
+
             var okResult = result as OkObjectResult;
             var regions = okResult.Value as IEnumerable<Region>;
             mock.VerifyAll();
@@ -68,7 +70,9 @@ namespace WebApi.Test
             var mock = new Mock<IRegionLogic>(MockBehavior.Strict);
              mock.Setup(m => m.GetAll()).Returns(regionToReturnEmpty);
              var controller = new RegionController(mock.Object);
+
              var result = controller.Get();
+
              var okResult = result as OkObjectResult;
              var regions = okResult.Value as IEnumerable<Region>;
              mock.VerifyAll();
@@ -81,7 +85,9 @@ namespace WebApi.Test
             int id = 1;
             regionId1 = regionsToReturn.First();
             mock.Setup(m => m.GetBy(id)).Returns(regionId1);
+
             var result = controller.GetBy(id);
+
             var okResult = result as OkObjectResult;
             var region = okResult.Value as Region;
             mock.VerifyAll();
@@ -93,7 +99,9 @@ namespace WebApi.Test
             int id = 5;
             Region regionNull = null;
             mock.Setup(m => m.GetBy(id)).Returns(regionNull);
+
             var result = controller.GetBy(id);
+
             var okResult = result as OkObjectResult;
             var region = okResult.Value as Region;
             mock.VerifyAll();
@@ -103,7 +111,9 @@ namespace WebApi.Test
          public void TestPostOk ()
          {
             mock.Setup(m => m.Add(regionId1)).Returns(regionId1);
+
             var result = controller.Post(regionId1);
+
             var okResult = result as CreatedAtRouteResult;
             mock.VerifyAll();
             Assert.IsNotNull(okResult);
@@ -116,7 +126,9 @@ namespace WebApi.Test
             regionId1 = regionsToReturn.First();
             Exception exist = new AggregateException();
             mock.Setup(p => p.Add(regionId1)).Throws(exist);
+
             var result = controller.Post(regionId1);
+
             mock.VerifyAll();
             Assert.IsInstanceOfType(result, typeof(BadRequestObjectResult));
         }
@@ -126,7 +138,9 @@ namespace WebApi.Test
             regionId1 = regionsToReturn.First();
             Exception exist = new ArgumentException();
             mock.Setup(p => p.Add(regionId1)).Throws(exist);
+
             var result = controller.Post(regionId1);
+
             mock.VerifyAll();
             Assert.IsInstanceOfType(result, typeof(BadRequestObjectResult));
         }
@@ -136,7 +150,9 @@ namespace WebApi.Test
             regionId1 = regionsToReturn.First();
             Exception exist = new Exception();
             mock.Setup(p => p.Add(regionId1)).Throws(exist);
+
             var result = controller.Post(regionId1);
+
             mock.VerifyAll();
             Assert.IsInstanceOfType(result, typeof(BadRequestObjectResult));
         }
@@ -145,7 +161,9 @@ namespace WebApi.Test
         {
             regionId1 = regionsToReturn.First();
             mock.Setup(m => m.Update(regionId1));
+
             var result = controller.Put(regionId1.Id, regionId1);
+
             var okResult = result as CreatedAtRouteResult;
             mock.VerifyAll();
             Assert.IsNotNull(okResult);
@@ -158,7 +176,9 @@ namespace WebApi.Test
             regionId1 = regionsToReturn.First();
             Exception exist = new ArgumentException();
             mock.Setup(p => p.Update(regionId1)).Throws(exist);
+
             var result = controller.Put(regionId1.Id, regionId1);
+
             mock.VerifyAll();
             Assert.IsInstanceOfType(result, typeof(BadRequestObjectResult));
         }
@@ -168,7 +188,9 @@ namespace WebApi.Test
             regionId1 = regionsToReturn.First();
             Exception exist = new Exception();
             mock.Setup(p => p.Update(regionId1)).Throws(exist);
+
             var result = controller.Put(regionId1.Id, regionId1);
+
             mock.VerifyAll();
             Assert.IsInstanceOfType(result, typeof(BadRequestObjectResult));
         }
@@ -178,7 +200,9 @@ namespace WebApi.Test
             Region region = regionsToReturn.First();
             mock.Setup(m => m.GetBy(region.Id)).Returns(region);
             mock.Setup(mock=> mock.Delete(region.Id));
+
             var result = controller.Delete(region.Id);
+
             Assert.IsNotNull(result);
         }
         [TestMethod]
@@ -188,14 +212,18 @@ namespace WebApi.Test
             Region regionNull = null;
             mock.Setup(m => m.GetBy(region.Id)).Returns(regionNull);
             mock.Setup(mock=> mock.Delete(region.Id));
+
             var result = controller.Delete(region.Id);
+
             Assert.IsInstanceOfType(result,typeof(NotFoundResult));
         }
         [TestMethod]
         public void TestDelete()
         {
             mock.Setup(mock=> mock.Delete());
+            
             var result = controller.Delete();
+
             Assert.IsNotNull(result);
         }
 

@@ -69,9 +69,11 @@ namespace WebApi.Tests
         public void TestGetAllTouristPointsOk()
         {
             mock.Setup(m => m.GetAll()).Returns(touristPointsToReturn);
+
             var result = controller.Get();
             var okResult = result as OkObjectResult;
             var touristPoints = okResult.Value as IEnumerable<TouristPoint>;
+
             mock.VerifyAll();
             Assert.IsTrue(touristPointsToReturn.SequenceEqual(touristPoints));
         }
@@ -80,7 +82,9 @@ namespace WebApi.Tests
         public void TestGetAllTouristPointsVacia()
         {
             mock.Setup(m => m.GetAll()).Returns(touristPointsToReturnEmpty);
+
             var result = controller.Get();
+
             var okResult = result as OkObjectResult;
             var touristPoints = okResult.Value as IEnumerable<TouristPoint>;
             mock.VerifyAll();
@@ -91,7 +95,9 @@ namespace WebApi.Tests
         {
             int id = 1;
             mock.Setup(m => m.GetBy(id)).Returns(touristPointId1);
+
             var result = controller.GetBy(id);
+
             var okResult = result as OkObjectResult;
             var touristPoints = okResult.Value as TouristPoint;
             mock.VerifyAll();
@@ -103,7 +109,9 @@ namespace WebApi.Tests
             int id = 4;
             TouristPoint touristPointReturn = null;
             mock.Setup(m => m.GetBy(id)).Returns(touristPointReturn);
+
             var result = controller.GetBy(id);
+
             var okResult = result as OkObjectResult;
             var touristPoints = okResult.Value as TouristPoint;
             mock.VerifyAll();
@@ -113,13 +121,15 @@ namespace WebApi.Tests
         public void TestPostOk()
         {
             var touristPointId1 = touristPointsToReturn.First();
-            mock.Setup(m => m.Add(touristPointId1));
+            mock.Setup(m => m.Add(touristPointId1)).Returns(touristPointId1);
+
             var result = controller.Post(touristPointId1);
+
             var okResult = result as CreatedAtRouteResult;
             mock.VerifyAll();
-            // Assert.IsNotNull(okResult);
-            // Assert.AreEqual("GetTouristPoint", okResult.RouteName);
-            // Assert.AreEqual(okResult.Value, touristPointId1);
+            Assert.IsNotNull(okResult);
+            Assert.AreEqual("GetTouristPoint", okResult.RouteName);
+            Assert.AreEqual(okResult.Value, touristPointId1);
         }
         [TestMethod]
         public void TestPostFailSameTouristPoint()
@@ -127,7 +137,9 @@ namespace WebApi.Tests
             touristPointId1 = touristPointsToReturn.First();
             Exception exist = new AggregateException();
             mock.Setup(p => p.Add(touristPointId1)).Throws(exist);
+
             var result = controller.Post(touristPointId1);
+
             mock.VerifyAll();
             Assert.IsInstanceOfType(result, typeof(BadRequestObjectResult));
         }
@@ -137,7 +149,9 @@ namespace WebApi.Tests
             touristPointId1 = touristPointsToReturn.First();
             Exception exist = new ArgumentException();
             mock.Setup(p => p.Add(touristPointId1)).Throws(exist);
+
             var result = controller.Post(touristPointId1);
+
             mock.VerifyAll();
             Assert.IsInstanceOfType(result, typeof(BadRequestObjectResult));
         }
@@ -147,7 +161,9 @@ namespace WebApi.Tests
             touristPointId1 = touristPointsToReturn.First();
             Exception exist = new Exception();
             mock.Setup(p => p.Add(touristPointId1)).Throws(exist);
+
             var result = controller.Post(touristPointId1);
+
             mock.VerifyAll();
             Assert.IsInstanceOfType(result, typeof(BadRequestObjectResult));
         }
@@ -156,7 +172,9 @@ namespace WebApi.Tests
         {
             touristPointId1 = touristPointsToReturn.First();
             mock.Setup(m => m.Update(touristPointId1));
+
             var result = controller.Put(touristPointId1.Id, touristPointId1);
+
             var okResult = result as CreatedAtRouteResult;
             mock.VerifyAll();
             Assert.IsNotNull(okResult);
@@ -169,7 +187,9 @@ namespace WebApi.Tests
             touristPointId1 = touristPointsToReturn.First();
             Exception exist = new ArgumentException();
             mock.Setup(p => p.Update(touristPointId1)).Throws(exist);
+
             var result = controller.Put(touristPointId1.Id, touristPointId1);
+
             mock.VerifyAll();
             Assert.IsInstanceOfType(result, typeof(BadRequestObjectResult));
         }
@@ -179,7 +199,9 @@ namespace WebApi.Tests
             touristPointId1 = touristPointsToReturn.First();
             Exception exist = new Exception();
             mock.Setup(p => p.Update(touristPointId1)).Throws(exist);
+
             var result = controller.Put(touristPointId1.Id, touristPointId1);
+
             mock.VerifyAll();
             Assert.IsInstanceOfType(result, typeof(BadRequestObjectResult));
         }
@@ -189,7 +211,9 @@ namespace WebApi.Tests
             TouristPoint touristPoint = touristPointsToReturn.First();
             mock.Setup(m => m.GetBy(touristPoint.Id)).Returns(touristPoint);
             mock.Setup(mock=> mock.Delete(touristPoint.Id));
+
             var result = controller.Delete(touristPoint.Id);
+
             Assert.IsNotNull(result);
         }
         [TestMethod]
@@ -199,7 +223,9 @@ namespace WebApi.Tests
             TouristPoint touristPointNull = null;
             mock.Setup(m => m.GetBy(touristPoint.Id)).Returns(touristPointNull);
             mock.Setup(mock=> mock.Delete(touristPoint.Id));
+
             var result = controller.Delete(touristPoint.Id);
+
             Assert.IsInstanceOfType(result,typeof(NotFoundResult));
         }
 
@@ -207,7 +233,9 @@ namespace WebApi.Tests
         public void TestDelete()
         {
             mock.Setup(mock=> mock.Delete());
+
             var result = controller.Delete();
+            
             Assert.IsNotNull(result);
         }
     }
