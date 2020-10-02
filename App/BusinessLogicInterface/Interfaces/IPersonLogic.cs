@@ -9,7 +9,7 @@ namespace BusinessLogicInterface
         IEnumerable<Person> GetAll();
         Person GetBy(int id);
         Person Add(Person element);
-        void Update(Person element);
+        void Update(int id,Person element);
         void Delete(int id);
         void Delete();
         bool Exist(Person element);

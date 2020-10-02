@@ -34,9 +34,9 @@ namespace BusinessLogic
         {
             return this.personRepository.Add(Person);
         }
-        public void Update(Person Person)
+        public void Update(int id,Person Person)
         {
-            this.personRepository.Update(Person);
+            this.personRepository.Update(id, Person);
         }
         public void Delete(int id)
         {

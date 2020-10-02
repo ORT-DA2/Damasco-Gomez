@@ -101,9 +101,9 @@ namespace BusinessLogic.Tests.Test
         public void TestUdpateOk ()
         {
             House house = housesToReturn.First();
-            mock.Setup(m => m.Update(house));
+            mock.Setup(m => m.Update(house.Id,house));
 
-            houseLogic.Update(house);
+            houseLogic.Update(house.Id,house);
 
             mock.VerifyAll();
         }
@@ -111,9 +111,9 @@ namespace BusinessLogic.Tests.Test
         public void TestUpdateValidateError()
         {
             House house = housesToReturn.First();// House tiene que terner un formato erroneo despues para que la validación falle
-             mock.Setup(m => m.Update(house));
+             mock.Setup(m => m.Update(house.Id,house));
 
-            houseLogic.Update(house);
+            houseLogic.Update(house.Id,house);
 
             mock.VerifyAll();
         }
@@ -123,9 +123,9 @@ namespace BusinessLogic.Tests.Test
         {
             House house = housesToReturn.First();
             ArgumentException exception = new ArgumentException();
-            mock.Setup(m => m.Update(house)).Throws(exception);
+            mock.Setup(m => m.Update(house.Id,house)).Throws(exception);
             
-            houseLogic.Update(house);
+            houseLogic.Update(house.Id,house);
         }
           [TestMethod]
         public void TestExistOk()

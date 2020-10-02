@@ -9,7 +9,7 @@ namespace BusinessLogicInterface
         IEnumerable<Category> GetAll();
         Category GetBy(int id);
         Category Add(Category element);
-        void Update(Category element);
+        void Update(int id,Category element);
         void Delete(int id);
         void Delete();
         bool Exist(Category element);

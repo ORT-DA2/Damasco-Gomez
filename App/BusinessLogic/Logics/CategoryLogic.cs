@@ -34,9 +34,9 @@ namespace BusinessLogic
         {
             return this.categoryRepository.Add(Category);
         }
-        public void Update(Category Category)
+        public void Update(int id,Category Category)
         {
-            this.categoryRepository.Update(Category);
+            this.categoryRepository.Update(id, Category);
         }
         public void Delete(int id)
         {

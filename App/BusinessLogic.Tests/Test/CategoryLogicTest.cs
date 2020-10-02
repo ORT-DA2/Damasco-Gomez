@@ -103,9 +103,9 @@ namespace BusinessLogic.Tests.Test
         public void TestUdpateOk ()
         {
             Category category = categoriesToReturn.First();
-            mock.Setup(m => m.Update(category));
+            mock.Setup(m => m.Update(category.Id,category));
 
-            categoryLogic.Update(category);
+            categoryLogic.Update(category.Id,category);
 
             mock.VerifyAll();
         }
@@ -113,9 +113,9 @@ namespace BusinessLogic.Tests.Test
         public void TestUpdateValidateError()
         {
             Category category = categoriesToReturn.First();// Category tiene que terner un formato erroneo despues para que la validación falle
-             mock.Setup(m => m.Update(category));
+             mock.Setup(m => m.Update(category.Id,category));
 
-            categoryLogic.Update(category);
+            categoryLogic.Update(category.Id,category);
 
             mock.VerifyAll();
         }
@@ -125,9 +125,9 @@ namespace BusinessLogic.Tests.Test
         {
             Category category = categoriesToReturn.First();
             ArgumentException exception = new ArgumentException();
-            mock.Setup(m => m.Update(category)).Throws(exception);
+            mock.Setup(m => m.Update(category.Id,category)).Throws(exception);
             
-            categoryLogic.Update(category);
+            categoryLogic.Update(category.Id,category);
         }
           [TestMethod]
         public void TestExistOk()

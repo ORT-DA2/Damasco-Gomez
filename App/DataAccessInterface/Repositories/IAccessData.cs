@@ -11,7 +11,7 @@ namespace DataAccessInterface.Repositories
         void Delete(T element);
         void Delete(int id);
         T Find(int id);
-        void Update(T element);
+        void Update(int id, T element);
         List<T> GetElements();
     }
 }

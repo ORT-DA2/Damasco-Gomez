@@ -111,9 +111,9 @@ namespace BusinessLogic.Tests.Test
         public void TestUdpateOk ()
         {
             Person person = personsToReturn.First();
-            mock.Setup(m => m.Update(person));
+            mock.Setup(m => m.Update(person.Id,person));
 
-            personLogic.Update(person);
+            personLogic.Update(person.Id,person);
 
             mock.VerifyAll();
         }
@@ -121,9 +121,9 @@ namespace BusinessLogic.Tests.Test
         public void TestUpdateValidateError()
         {
             Person person = personsToReturn.First();// PERSON tiene que terner un formato erroneo despues para que la validación falle
-             mock.Setup(m => m.Update(person));
+             mock.Setup(m => m.Update(person.Id,person));
 
-            personLogic.Update(person);
+            personLogic.Update(person.Id,person);
 
             mock.VerifyAll();
         }
@@ -133,9 +133,9 @@ namespace BusinessLogic.Tests.Test
         {
             Person person = personsToReturn.First();
             ArgumentException exception = new ArgumentException();
-            mock.Setup(m => m.Update(person)).Throws(exception);
+            mock.Setup(m => m.Update(person.Id,person)).Throws(exception);
             
-            personLogic.Update(person);
+            personLogic.Update(person.Id,person);
         }
           [TestMethod]
         public void TestExistOk()

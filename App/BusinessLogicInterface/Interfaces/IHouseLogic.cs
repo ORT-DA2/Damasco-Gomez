@@ -10,7 +10,7 @@ namespace BusinessLogicInterface
         IEnumerable<House> GetAll();
         House GetBy(int id);
         House Add(House element);
-        void Update(House element);
+        void Update(int id,House element);
         void Delete(int id);
         void Delete();
         bool Exist(House element);

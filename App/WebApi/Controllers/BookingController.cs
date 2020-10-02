@@ -53,7 +53,7 @@ namespace WebApi.Controllers
         {
             try
             {
-                this.bookingLogic.Update(booking);
+                this.bookingLogic.Update(id, booking);
                 return CreatedAtRoute("GetBooking", booking.Id, booking);
                 //return Ok(booking);
             }

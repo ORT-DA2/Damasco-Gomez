@@ -55,7 +55,7 @@ namespace DataAccess.Repositories
             return elementFind;
         }
 
-        public void Update(T element)
+        public void Update(int id , T element)
         {
             // Validate(element);
             // if (!ExistElement(element))
