@@ -14,6 +14,6 @@ namespace BusinessLogicInterface
         void Delete(int id);
         void Delete();
         bool Exist(House element);
-        IEnumerable<House> GetHousesBy(int idTP,string checkIn,string checkOut,int cantA,int cantC,int cantB);
+        IEnumerable<House> GetHousesBy(int idTP,string checkIn, string checkOut, int cantA,int cantC,int cantB);
     }
 }

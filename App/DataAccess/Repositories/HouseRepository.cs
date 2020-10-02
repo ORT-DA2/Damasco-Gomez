@@ -1,4 +1,5 @@
 using System;
+using System.Collections.Generic;
 using DataAccessInterface.Repositories;
 using Domain;
 using Microsoft.EntityFrameworkCore;
@@ -27,6 +28,10 @@ namespace DataAccess.Repositories
             // bool touristPointNotNull = !element.Spot.Equals(null);
             // bool nameNotNull = element.Name.Equals("");
             // bool addressNotNull = !element.Equals("");
+        }
+        public IEnumerable<House> GetByIdTouristPoint(int idTP)
+        {
+            return this.repository.GetElementsInContext().FindAll(kz=>kz.TouristPointId==idTP);
         }
     }
 }
