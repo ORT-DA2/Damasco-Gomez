@@ -9,11 +9,9 @@ namespace BusinessLogic.Logics
     public class BookingLogic : IBookingLogic
     {
         private readonly IBookingRepository bookingRepository;
-        private readonly IHouseRepository houseRepository;
-        public BookingLogic(IBookingRepository bookingRepository, IHouseRepository houseRepository)
+        public BookingLogic(IBookingRepository bookingRepository)
         {
             this.bookingRepository = bookingRepository;
-            this.houseRepository = houseRepository;
         }
         public void Delete()
         {
