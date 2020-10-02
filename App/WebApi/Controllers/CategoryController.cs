@@ -56,7 +56,7 @@ namespace WebApi.Controllers
         {
             try
             {
-                this.categoryLogic.Update(category);
+                this.categoryLogic.Update(id,category);
                 return CreatedAtRoute("GetCategory", category.Id, category);
                 //return Ok(category);
             }

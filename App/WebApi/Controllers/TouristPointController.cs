@@ -54,7 +54,7 @@ namespace WebApi.Controllers
         {
             try
             {
-                this.touristPointLogic.Update(touristPoint);
+                this.touristPointLogic.Update(id,touristPoint);
                 return CreatedAtRoute("GetTouristPoint", new { Id = touristPoint.Id }, touristPoint);
                 //return Ok(touristPoint);
             }

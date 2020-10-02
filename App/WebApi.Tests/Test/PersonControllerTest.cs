@@ -154,7 +154,7 @@ namespace WebApi.Tests
         public void TestPutOk()
         {
             personId1 = personsToReturn.First();
-            mock.Setup(m => m.Update(personId1));
+            mock.Setup(m => m.Update(personId1.Id,personId1));
 
             var result = controller.Put(personId1.Id, personId1);
 
@@ -169,7 +169,7 @@ namespace WebApi.Tests
         {
             personId1 = personsToReturn.First();
             Exception exist = new ArgumentException();
-            mock.Setup(p => p.Update(personId1)).Throws(exist);
+            mock.Setup(p => p.Update(personId1.Id,personId1)).Throws(exist);
 
             var result = controller.Put(personId1.Id, personId1);
 
@@ -181,7 +181,7 @@ namespace WebApi.Tests
         {
             personId1 = personsToReturn.First();
             Exception exist = new Exception();
-            mock.Setup(p => p.Update(personId1)).Throws(exist);
+            mock.Setup(p => p.Update(personId1.Id,personId1)).Throws(exist);
 
             var result = controller.Put(personId1.Id, personId1);
 

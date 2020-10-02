@@ -53,7 +53,7 @@ namespace WebApi.Controllers
         {
             try
             {
-                this.houseLogic.Update(house);
+                this.houseLogic.Update(id,house);
                 return CreatedAtRoute("GetHouse", house.Id, house);
                 //return Ok(house);
             }
