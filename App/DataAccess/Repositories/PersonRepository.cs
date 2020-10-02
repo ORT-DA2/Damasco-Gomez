@@ -32,5 +32,10 @@ namespace DataAccess.Repositories
             }
             return findByEmail;
         }
+
+        protected override void Update(Person elementToUpdate, Person element)
+        {
+            throw new NotImplementedException();
+        }
     }
 }

@@ -13,6 +13,11 @@ namespace DataAccess.Repositories
             this.repository = repositoryMaster.Regions;
         }
 
+        protected override void Update(Region elementToUpdate, Region element)
+        {
+            throw new NotImplementedException();
+        }
+
         protected override void Validate(Region element)
         {
             bool nameNull = element.Name.Equals("");
