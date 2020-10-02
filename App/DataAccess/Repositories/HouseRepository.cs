@@ -12,6 +12,11 @@ namespace DataAccess.Repositories
             this.repository = repositoryMaster.Houses;
         }
 
+        protected override void Update(House elementToUpdate, House element)
+        {
+            throw new NotImplementedException();
+        }
+
         protected override void Validate(House element)
         {
             bool pricePerNight = element.PricePerNight <= 0;

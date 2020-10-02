@@ -11,6 +11,11 @@ namespace DataAccess.Repositories
             this.repository = repositoryMaster.Categories;
         }
 
+        protected override void Update(Category elementToUpdate, Category element)
+        {
+            throw new NotImplementedException();
+        }
+
         protected override void Validate(Category element)
         {
             if (element.Name.Equals(""))

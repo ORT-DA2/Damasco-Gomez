@@ -8,6 +8,7 @@ namespace DataAccess.Repositories
     {
         protected IRepository<T> repository;
         protected abstract void Validate(T element);
+        protected abstract void Update(T elementToUpdate, T element);
         public T Add(T element)
         {
             Validate(element);
@@ -57,12 +58,12 @@ namespace DataAccess.Repositories
 
         public void Update(int id , T element)
         {
-            // Validate(element);
-            // if (!ExistElement(element))
-            // {
-            //     throw new ArgumentException();
-            // }
-            //  repository.UpdateInContext(element);
+            T findElement = repository.FindInRepository(id);
+            if (findElement.Equals(null))
+            {
+                throw new ArgumentException("No element with that id");
+            }
+            Update(findElement,element);
         }
 
         public List<T> GetElements()
