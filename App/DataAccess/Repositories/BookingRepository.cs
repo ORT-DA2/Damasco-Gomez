@@ -29,5 +29,11 @@ namespace DataAccess.Repositories
                 throw new ArgumentException("There's no dates to create the booking");
             }
         }
+
+        protected override void Update(Booking elementToUpdate, Booking element)
+        {
+            Booking.Update(elementToUpdate,element);
+        }
+
     }
 }

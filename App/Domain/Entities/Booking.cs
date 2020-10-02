@@ -32,6 +32,16 @@ namespace Domain
             return result;
         }
 
+        public static void Update(Booking elementToUpdate, Booking element)
+        {
+            if(!element.Name.Equals("")) elementToUpdate.Name = element.Name;
+            if(!element.Email.Equals("")) elementToUpdate.Email = element.Email;
+            if(!element.State.Equals("")) elementToUpdate.State = element.State;
+            if(element.Price>0) elementToUpdate.Price = element.Price;
+            if(!element.CheckIn.Equals("")) elementToUpdate.CheckIn = element.CheckIn;
+            if(!element.CheckOut.Equals("")) elementToUpdate.CheckOut = element.CheckOut;
+
+        }
     }
 
 }
