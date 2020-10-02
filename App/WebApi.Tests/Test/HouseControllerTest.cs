@@ -257,5 +257,22 @@ namespace WebApi.Tests
 
             Assert.IsNotNull(result);
         }
+
+        [TestMethod]
+        public void GetHousesBy()
+        {
+            int idTP = 1;
+            string checkIn= "01/12/2020";
+            string checkOut= "21/12/2020";
+            int cantA = 2;
+            int cantC = 1;
+            int cantB = 0;
+            
+            mock.Setup(mock=> mock.GetHousesBy(idTP,checkIn,checkOut,cantA,cantC,cantB)).Returns(housesToReturn);
+          
+            var result = controller.GetHousesBy(idTP,checkIn,checkOut,cantA,cantC,cantB);
+
+            Assert.AreEqual(result ,housesToReturn);
+        }
     }
 }

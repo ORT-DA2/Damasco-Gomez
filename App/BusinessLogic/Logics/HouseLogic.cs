@@ -47,6 +47,10 @@ namespace BusinessLogic
         {
             return this.houseRepository.ExistElement(House);
         }
+        public IEnumerable<House> GetHousesBy(int idTP,string checkIn, string checkOut, int cantA,int cantC,int cantB)
+        {
+            return this.houseRepository.GetElements();
+        }
 
     }
 }

@@ -97,7 +97,7 @@ namespace BusinessLogic.Tests.Test
             var regionToReturn = regionLogic.Add(region);
         }
         [TestMethod]
-        public void TestGetBy()
+        public void TestGetByOk()
         {
             Region region = regionsToReturn.First();
             mock.Setup(m => m.Find(region.Id)).Returns(region);
@@ -128,18 +128,16 @@ namespace BusinessLogic.Tests.Test
             regionLogic.Update(region);
 
             mock.VerifyAll();
-            
         }
          [TestMethod]
         public void TestUpdateValidateError()
         {
-            Region region = regionsToReturn.First(); // este punto turistico tiene que terner un formato erroneo despues para que la validación falle
+            Region region = regionsToReturn.First(); // esta region tiene que terner un formato erroneo despues para que la validación falle
             mock.Setup(m => m.Update(region));
 
             regionLogic.Update(region);
 
             mock.VerifyAll();
-            
         }
         [TestMethod]
         [ExpectedException(typeof(ArgumentException))]
@@ -150,7 +148,6 @@ namespace BusinessLogic.Tests.Test
             mock.Setup(m => m.Update(region)).Throws(exception);
             
             regionLogic.Update(region);
-   
         }
         [TestMethod]
         public void TestExistOk()
