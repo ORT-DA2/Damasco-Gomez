@@ -35,7 +35,7 @@ namespace DataAccess.Repositories
 
         protected override void Update(Person elementToUpdate, Person element)
         {
-            throw new NotImplementedException();
+            Person.Update(elementToUpdate,element);
         }
     }
 }
