@@ -20,5 +20,9 @@ namespace Domain
             }
             return result;
         }
+        public static void Update(Region elementToUpdate, Region element)
+        {
+            if(element.Name != null) elementToUpdate.Name = element.Name;
+        }
     }
 }

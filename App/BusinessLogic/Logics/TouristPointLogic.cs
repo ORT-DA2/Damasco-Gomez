@@ -33,9 +33,9 @@ namespace BusinessLogic
         {
             return this.touristPointRepository.Add(TouristPoint);
         }
-        public void Update(TouristPoint TouristPoint)
+        public void Update(int id, TouristPoint TouristPoint)
         {
-            this.touristPointRepository.Update(TouristPoint);
+            this.touristPointRepository.Update(id, TouristPoint);
         }
         public void Delete(int id)
         {

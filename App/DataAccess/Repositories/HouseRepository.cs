@@ -1,4 +1,5 @@
 using System;
+using System.Collections.Generic;
 using DataAccessInterface.Repositories;
 using Domain;
 using Microsoft.EntityFrameworkCore;
@@ -10,6 +11,11 @@ namespace DataAccess.Repositories
         public HouseRepository(RepositoryMaster repositoryMaster)
         {
             this.repository = repositoryMaster.Houses;
+        }
+
+        protected override void Update(House elementToUpdate, House element)
+        {
+            House.Update(elementToUpdate,element);
         }
 
         protected override void Validate(House element)
@@ -28,5 +34,9 @@ namespace DataAccess.Repositories
             // bool nameNotNull = element.Name.Equals("");
             // bool addressNotNull = !element.Equals("");
         }
+        // public IEnumerable<HouseSearchResultModel> GetByIdTouristPoint(int idTP)
+        // {
+        //     return this.repository.GetElementsInContext().FindAll(kz=>kz.TouristPointId==idTP);
+        // }
     }
 }

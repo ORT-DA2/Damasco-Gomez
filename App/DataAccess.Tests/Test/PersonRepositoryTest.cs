@@ -151,22 +151,22 @@ namespace DataAccess.Tests.Test
         [TestMethod]
         public void TestUpdate()
         {
-            // Person person = personsToReturn.First();
-            // person.Email = "New name of person";
-            // string newEmail = person.Email;
+            Person person = personsToReturn.First();
+            person.Email = "New name of person";
+            string newEmail = person.Email;
 
-            // repository.Update(person);
+            repository.Update(person.Id,person);
 
-            // Assert.AreEqual(person.Email,newEmail);
+            Assert.AreEqual(person.Email,newEmail);
         }
         [TestMethod]
-        //[ExpectedException(typeof(ArgumentException))]
+        [ExpectedException(typeof(ArgumentException))]
         public void TestUpdateFail()
         {
-            // Person person = new Person(){Id = 13000};
-            // string newEmail = person.Email;
+            Person person = new Person(){Id = 13000};
+            string newEmail = person.Email;
 
-            //repository.Update(person);
+            repository.Update(person.Id,person);
         }
         [TestMethod]
         public void TestDelete()

@@ -14,6 +14,11 @@ namespace DataAccess.Repositories
             this.repository = repositoryMaster.TouristPoints;
        }
 
+        protected override void Update(TouristPoint elementToUpdate, TouristPoint element)
+        {
+            TouristPoint.Update(elementToUpdate,element);
+        }
+
         protected override void Validate(TouristPoint element)
         {
             bool regionIdNull = element.RegionId == 0;

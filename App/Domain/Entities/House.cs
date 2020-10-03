@@ -11,7 +11,8 @@ namespace Domain
         public bool Avaible {get ; set; }
         public int PricePerNight {get; set;}
 
-        public TouristPoint Spot {get ; set; }
+        public int TouristPointId {get ; set; }
+        public TouristPoint TouristPoint {get ; set; }
 
         public string Name {get ; set; }
 
@@ -35,6 +36,21 @@ namespace Domain
                 result = this.Id == house.Id ;
             }
             return result;
+        }
+
+        public static void Update(House elementToUpdate, House element)
+        {
+            //if(element.Avaible) 
+                elementToUpdate.Avaible = element.Avaible;
+            if(element.PricePerNight>0) elementToUpdate.PricePerNight = element.PricePerNight;
+            if(element.TouristPointId>0) elementToUpdate.TouristPointId = element.TouristPointId;
+            if(element.Name != null) elementToUpdate.Name = element.Name;
+            if(element.Starts>0) elementToUpdate.Starts = element.Starts;
+            if(element.Address != null) elementToUpdate.Address = element.Address;
+            if(element.Description != null) elementToUpdate.Description = element.Description;
+            if(element.Ilustrations != null) elementToUpdate.Ilustrations = element.Ilustrations;
+            if(element.Phone>0) elementToUpdate.Phone = element.Phone;
+            if(element.Contact != null) elementToUpdate.Contact = element.Contact;
         }
 
     }

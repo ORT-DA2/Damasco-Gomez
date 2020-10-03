@@ -53,7 +53,7 @@ namespace WebApi.Controllers
         {
             try
             {
-                this.regionLogic.Update(region);
+                this.regionLogic.Update(id,region);
                 var creationRoute = CreatedAtRoute("GetRegion", new {Id = region.Id} , region);
                 return creationRoute;
             }
