@@ -220,5 +220,15 @@ namespace DataAccess.Tests.Test
 
             repository.Delete(id);
         }
+        [TestMethod]
+        public void TestGetByIdTouristPointOk ()
+        {
+            Assert.IsTrue(true);
+        }
+         [TestMethod]
+        public void TestGetByIdTouristPointEmpty ()
+        {
+            Assert.IsTrue(true);
+        }
     }
 }

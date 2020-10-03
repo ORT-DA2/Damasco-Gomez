@@ -92,5 +92,5 @@ namespace WebApi.Controllers
             var result = varRet.Select(m => new HouseSearchResultModel(m,checkIn,checkOut,cantA,cantC,cantB));
             return Ok(result);
         }
-    
+    }
 }
