@@ -258,7 +258,12 @@ namespace Domain.Test.Test
         [TestMethod]
         public void TestCalculateTotalPrice()
         {
-            Assert.IsTrue(true);
+            double totalPriceToReturn = 200;
+            int cantAdults = 2; 
+            int cantChildrens = 0;
+            int cantBabys = 0;
+            double totalPriceResult = house.CalculateTotalPrice(cantAdults,cantChildrens,cantBabys);
+            Assert.AreEqual(totalPriceResult , totalPriceToReturn);
         }
     }
 }
