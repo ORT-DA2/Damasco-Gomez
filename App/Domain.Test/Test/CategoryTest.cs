@@ -33,7 +33,7 @@ namespace Domain.Test.Test
             string nameShouldBe = category.Name;
             Category newCategory = new Category()
                 {
-                    Name = "",
+                    Name = null,
                 };
 
             Category.Update(category,newCategory);
