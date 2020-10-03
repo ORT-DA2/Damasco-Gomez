@@ -147,6 +147,12 @@ namespace BusinessLogic.Tests.Test
             mock.VerifyAll();
             Assert.IsFalse(result);
         }
+
+        public void TestCalcualateTotalPrice()
+        {
+             Assert.IsTrue(true);
+            
+        }
         //falta delete
     }
 }
