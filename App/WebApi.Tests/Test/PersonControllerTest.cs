@@ -154,6 +154,7 @@ namespace WebApi.Tests
         public void TestPutOk()
         {
             personId1 = personsToReturn.First();
+            personId1.Email = "new email";
             mock.Setup(m => m.Update(personId1.Id,personId1));
 
             var result = controller.Put(personId1.Id, personId1);
