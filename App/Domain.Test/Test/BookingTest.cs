@@ -15,7 +15,7 @@ namespace Domain.Test.Test
                     Id = 2,
                     Name = "Other booking",
                     Email = "mail2@mail.com",
-                    House = null,
+                    HouseId = 0,
                     State = "Passed",
                     Price = 200,
                     CheckIn = new System.DateTime(),
@@ -28,9 +28,9 @@ namespace Domain.Test.Test
             Booking newBooking = new Booking()
                 {
                     Name = "new name booking",
-                    Email = "",
-                    House = null,
-                    State = "",
+                    Email = null,
+                    HouseId = 0,
+                    State = null,
                     Price = 0,
                     CheckIn = DateTime.MinValue,
                     CheckOut= DateTime.MinValue,
@@ -45,10 +45,10 @@ namespace Domain.Test.Test
         {
             Booking newBooking = new Booking()
                 {
-                    Name = "",
+                    Name = null,
                     Email = "new mail",
-                    House = null,
-                    State = "",
+                    HouseId = 0,
+                    State = null,
                     Price = 0,
                     CheckIn = DateTime.MinValue,
                     CheckOut= DateTime.MinValue,
@@ -59,14 +59,14 @@ namespace Domain.Test.Test
             Assert.AreEqual(newBooking.Email, booking.Email);
         }
         [TestMethod]
-        public void TestUpdateHouse()
+        public void TestUpdateHouseId()
         {
             Booking newBooking = new Booking()
                 {
-                    Name = "",
-                    Email = "",
-                    House = null,
-                    State = "",
+                    Name = null,
+                    Email = null,
+                    HouseId = 120,
+                    State = null,
                     Price = 0,
                     CheckIn = DateTime.MinValue,
                     CheckOut= DateTime.MinValue,
@@ -74,17 +74,17 @@ namespace Domain.Test.Test
 
             Booking.Update(booking,newBooking);
 
-            //Assert.AreEqual(newBooking.House, booking.House);
+            Assert.AreEqual(newBooking.HouseId, booking.HouseId);
         }
         [TestMethod]
         public void TestUpdatePrice()
         {
             Booking newBooking = new Booking()
                 {
-                    Name = "",
-                    Email = "",
-                    House = null,
-                    State = "",
+                    Name = null,
+                    Email = null,
+                    HouseId = 0,
+                    State = null,
                     Price = 110,
                     CheckIn = DateTime.MinValue,
                     CheckOut= DateTime.MinValue,
@@ -99,10 +99,10 @@ namespace Domain.Test.Test
         {
             Booking newBooking = new Booking()
                 {
-                    Name = "",
-                    Email = "",
-                    House = null,
-                    State = "",
+                    Name = null,
+                    Email = null,
+                    HouseId = 0,
+                    State = null,
                     Price = 0,
                     CheckIn = DateTime.Today,
                     CheckOut= DateTime.MinValue,
@@ -117,10 +117,10 @@ namespace Domain.Test.Test
         {
             Booking newBooking = new Booking()
                 {
-                    Name = "",
-                    Email = "",
-                    House = null,
-                    State = "",
+                    Name = null,
+                    Email = null,
+                    HouseId = 0,
+                    State = null,
                     Price = 0,
                     CheckIn = DateTime.MinValue,
                     CheckOut= DateTime.Today,

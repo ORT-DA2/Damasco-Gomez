@@ -12,6 +12,7 @@ namespace Domain
 
         public string Code {get; set;}
 
+        public int HouseId {get; set;}
         public House House {get; set;}
 
         public string State {get; set;}
@@ -38,6 +39,7 @@ namespace Domain
             if(element.Email != null) elementToUpdate.Email = element.Email;
             if(element.State != null) elementToUpdate.State = element.State;
             if(element.Price>0) elementToUpdate.Price = element.Price;
+            if(element.HouseId>0) elementToUpdate.HouseId = element.HouseId;
             if(element.CheckIn != null) elementToUpdate.CheckIn = element.CheckIn;
             if(element.CheckOut != null) elementToUpdate.CheckOut = element.CheckOut;
         }
