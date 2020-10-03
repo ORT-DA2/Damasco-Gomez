@@ -22,7 +22,7 @@ namespace Domain
         }
         public static void Update(Category elementToUpdate, Category element)
         {
-            if(!element.Name.Equals("")) elementToUpdate.Name = element.Name;
+            if(element.Name != null) elementToUpdate.Name = element.Name;
         }
     }
 }

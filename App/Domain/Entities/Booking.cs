@@ -34,12 +34,12 @@ namespace Domain
 
         public static void Update(Booking elementToUpdate, Booking element)
         {
-            if(!element.Name.Equals("")) elementToUpdate.Name = element.Name;
-            if(!element.Email.Equals("")) elementToUpdate.Email = element.Email;
-            if(!element.State.Equals("")) elementToUpdate.State = element.State;
+            if(element.Name != null) elementToUpdate.Name = element.Name;
+            if(element.Email != null) elementToUpdate.Email = element.Email;
+            if(element.State != null) elementToUpdate.State = element.State;
             if(element.Price>0) elementToUpdate.Price = element.Price;
-            if(!element.CheckIn.Equals(DateTime.MinValue)) elementToUpdate.CheckIn = element.CheckIn;
-            if(!element.CheckOut.Equals(DateTime.MinValue)) elementToUpdate.CheckOut = element.CheckOut;
+            if(element.CheckIn != null) elementToUpdate.CheckIn = element.CheckIn;
+            if(element.CheckOut != null) elementToUpdate.CheckOut = element.CheckOut;
         }
     }
 
