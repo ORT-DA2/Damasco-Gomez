@@ -1,8 +1,0 @@
-namespace Domain.Test
-{
-     [TestClass]
-    public class HouseTest
-    {
-        
-    }
-}
