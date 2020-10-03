@@ -37,7 +37,9 @@ namespace DataAccess.Repositories
         }
         public IEnumerable<House> GetByIdTouristPoint(int idTP)
         {
-             return this.repository.GetElementsInContext().FindAll(kz=>kz.TouristPointId==idTP);
+            var result = this.repository.GetElementsInContext();
+            var resultToReturn = result.FindAll(kz=>kz.TouristPointId==idTP);
+             return resultToReturn;
         }
     }
 }
