@@ -53,6 +53,5 @@ namespace BusinessLogic
         {
             return this.houseRepository.GetByIdTouristPoint(idTP);
         }
-       
     }
 }

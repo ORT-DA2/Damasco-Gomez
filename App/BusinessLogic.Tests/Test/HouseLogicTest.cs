@@ -54,7 +54,7 @@ namespace BusinessLogic.Tests.Test
 
             var result = houseLogic.GetBy(house.Id);
 
-            mock.VerifyAll();
+           
             Assert.AreEqual(result,house);
         }
          [TestMethod]
@@ -66,7 +66,7 @@ namespace BusinessLogic.Tests.Test
 
             var result = houseLogic.GetBy(house.Id);
 
-            mock.VerifyAll();
+            
             Assert.IsNull(result);
         }
         public void TestAddOk()
@@ -75,7 +75,7 @@ namespace BusinessLogic.Tests.Test
             mock.Setup(m => m.Add(house)).Returns(house);
             var result= houseLogic.Add(house);
         
-            Assert.AreEqual(house, result );
+            Assert.AreEqual(house, result);
         }
          [TestMethod]
         public void TestAddValidateError()
@@ -142,23 +142,46 @@ namespace BusinessLogic.Tests.Test
         public void TestNotExistOk()
         {
             House house = housesToReturn.First();
+
             mock.Setup(m => m.ExistElement(house)).Returns(false);
+
             var result = houseLogic.Exist(house);
-            mock.VerifyAll();
+
             Assert.IsFalse(result);
         }
         [TestMethod]
         public void TestGetHousesByOk()
         {
-            Assert.IsTrue(true);
+            List<House> houses = new List<House>()
+            {
+                housesToReturn.First()
+            };
+            int idTP = 1 ;
+            string checkIn = "30/11/2020" ;
+            string checkOut = "12/12/2020";
+            int cantA =2;
+            int cantB= 0;
+            int cantC = 0;
+            mock.Setup(m => m.GetByIdTouristPoint(idTP)).Returns(houses);
+    
+            var result = houseLogic.GetHousesBy(idTP, checkIn,checkOut,cantA,cantC, cantB);
+            Assert.AreEqual(houses, result); 
         }
         [TestMethod]
         public void TestGetHousesByEmpty()
         {
-            Assert.IsTrue(true);
+            List<House> emptyHouses = new List<House>();
+            int idTP = 3 ;
+            string checkIn = "30/11/2020" ;
+            string checkOut = "12/12/2020";
+            int cantA =2;
+            int cantB= 0;
+            int cantC = 0;
+            mock.Setup(m => m.GetByIdTouristPoint(idTP)).Returns(emptyHouses);
+    
+            var result = houseLogic.GetHousesBy(idTP, checkIn,checkOut,cantA,cantC, cantB);
+            Assert.AreEqual(emptyHouses, result); 
         }
-
-        
         //falta delete
     }
 }
