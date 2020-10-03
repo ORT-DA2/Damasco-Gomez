@@ -7,7 +7,7 @@ namespace BusinessLogicInterface.Interfaces
         IEnumerable<T> GetAll();
         T GetBy(int id);
         void Add(T element);
-        void Update(T element);
+        void Update(int id,T element);
         void Delete(int id);
         void Delete();
         bool Exist(T element);

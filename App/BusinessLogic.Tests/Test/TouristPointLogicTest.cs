@@ -136,8 +136,8 @@ namespace BusinessLogic.Tests.Test
         public void TestUdpateOk ()
         {
             TouristPoint touristPoint = touristPoints.First();
-            mock.Setup(m => m.Update(touristPoint));
-            touristPointLogic.Update(touristPoint);
+            mock.Setup(m => m.Update(touristPoint.Id,touristPoint));
+            touristPointLogic.Update(touristPoint.Id,touristPoint);
             mock.VerifyAll();
             
         }
@@ -145,8 +145,8 @@ namespace BusinessLogic.Tests.Test
         public void TestUpdateValidateError()
         {
             TouristPoint touristPoint = touristPoints.First(); // este punto turistico tiene que terner un formato erroneo despues para que la validación falle
-            mock.Setup(m => m.Update(touristPoint));
-            touristPointLogic.Update(touristPoint);
+            mock.Setup(m => m.Update(touristPoint.Id,touristPoint));
+            touristPointLogic.Update(touristPoint.Id,touristPoint);
             mock.VerifyAll();
             
         }
@@ -156,9 +156,9 @@ namespace BusinessLogic.Tests.Test
         {
             TouristPoint touristPoint = touristPoints.First();
             ArgumentException exception = new ArgumentException();
-            mock.Setup(m => m.Update(touristPoint)).Throws(exception);
+            mock.Setup(m => m.Update(touristPoint.Id,touristPoint)).Throws(exception);
             
-            touristPointLogic.Update(touristPoint);
+            touristPointLogic.Update(touristPoint.Id,touristPoint);
    
         }
         [TestMethod]

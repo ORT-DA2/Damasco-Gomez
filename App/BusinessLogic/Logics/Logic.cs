@@ -21,9 +21,9 @@ namespace BusinessLogic.Logics
         {
             this.myAccessData.Add(T);
         }
-        public void Update(T T)
+        public void Update(int id, T T)
         {
-            this.myAccessData.Update(T);
+            this.myAccessData.Update(id,T);
         }
         public void Delete(int id)
         {

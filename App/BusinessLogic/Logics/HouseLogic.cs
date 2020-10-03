@@ -37,9 +37,9 @@ namespace BusinessLogic
         {
             return this.houseRepository.Add(House);
         }
-        public void Update(House House)
+        public void Update(int id, House House)
         {
-            this.houseRepository.Update(House);
+            this.houseRepository.Update(id, House);
         }
         public void Delete(int id)
         {
@@ -49,21 +49,21 @@ namespace BusinessLogic
         {
             return this.houseRepository.ExistElement(House);
         }
-        public IEnumerable<HouseSearchResultModel> GetHousesBy(int idTP,string checkIn, string checkOut, int cantA,int cantC,int cantB)
-        {
-            return this.houseRepository.GetByIdTouristPoint(idTP);
-        }
-        public double  CalcualateTotalPrice(int CantA, int CantC, int CantB ,House house)
-        {
-            int pricePerNight =house.PricePerNight;
-            int  PriceAdults = CantA* pricePerNight;
-            const double percentChildrens = 0.5;
-            const double percentBabys = 0.5;
-            double  PriceChildrens = CantB* percentChildrens * pricePerNight;
-            double  PriceBabys = CantB* percentBabys * pricePerNight;
-            double TotalPrice= PriceAdults + PriceChildrens + PriceBabys;
-            return TotalPrice;
+        // public IEnumerable<HouseSearchResultModel> GetHousesBy(int idTP,string checkIn, string checkOut, int cantA,int cantC,int cantB)
+        // {
+        //     return this.houseRepository.GetByIdTouristPoint(idTP);
+        // }
+        // public double  CalcualateTotalPrice(int CantA, int CantC, int CantB ,House house)
+        // {
+        //     int pricePerNight =house.PricePerNight;
+        //     int  PriceAdults = CantA* pricePerNight;
+        //     const double percentChildrens = 0.5;
+        //     const double percentBabys = 0.5;
+        //     double  PriceChildrens = CantB* percentChildrens * pricePerNight;
+        //     double  PriceBabys = CantB* percentBabys * pricePerNight;
+        //     double TotalPrice= PriceAdults + PriceChildrens + PriceBabys;
+        //     return TotalPrice;
 
-        }
+        // }
     }
 }

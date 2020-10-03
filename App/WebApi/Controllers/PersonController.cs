@@ -53,9 +53,8 @@ namespace WebApi.Controllers
         {
             try
             {
-                this.personLogic.Update(person);
+                this.personLogic.Update(id,person);
                 return CreatedAtRoute("GetPerson", person.Id, person);
-                //return Ok(person);
             }
             catch(ArgumentException)
             {

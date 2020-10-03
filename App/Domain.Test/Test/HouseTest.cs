@@ -1,0 +1,259 @@
+using Microsoft.VisualStudio.TestTools.UnitTesting;
+
+namespace Domain.Test.Test
+{
+    [TestClass]
+    public class HouseTest
+    {
+        public House house;
+        [TestInitialize]
+        public void SetUp()
+        {
+            house = new House()
+                {
+                    Id = 1,
+                    Avaible = false ,
+                    PricePerNight = 100,
+                    TouristPointId = 1,
+                    Name = "Name house 1",
+                    Starts = 1,
+                    Address = "Address 1",
+                    Ilustrations = "Image here",
+                    Description = "Description house 1",
+                    Phone = 99898899 ,
+                    Contact = "Person Name1",
+                };
+        }
+        [TestMethod]
+        public void TestUpdateAvailable()
+        {
+            House newHouse = new House()
+                {
+                    Avaible = true ,
+                    PricePerNight = 0,
+                    TouristPointId = 0,
+                    Name = "",
+                    Starts = 0,
+                    Address = "",
+                    Ilustrations = "",
+                    Description = "",
+                    Phone = 0 ,
+                    Contact = "",
+                };
+
+            House.Update(house,newHouse);
+
+            Assert.AreEqual(newHouse.Avaible, house.Avaible);
+        }
+        [TestMethod]
+        public void TestUpdateAvailableFalse()
+        {
+            House newHouse = new House()
+                {
+                    Avaible = false ,
+                    PricePerNight = 0,
+                    TouristPointId = 0,
+                    Name = "",
+                    Starts = 0,
+                    Address = "",
+                    Ilustrations = "",
+                    Description = "",
+                    Phone = 0 ,
+                    Contact = "",
+                };
+
+            House.Update(house,newHouse);
+
+            Assert.AreEqual(newHouse.Avaible, house.Avaible);
+        }
+        [TestMethod]
+        public void TestUpdateName()
+        {
+            House newHouse = new House()
+                {
+                    Avaible = true ,
+                    PricePerNight = 0,
+                    TouristPointId = 0,
+                    Name = "New name",
+                    Starts = 0,
+                    Address = "",
+                    Ilustrations = "",
+                    Description = "",
+                    Phone = 0 ,
+                    Contact = "",
+                };
+
+            House.Update(house,newHouse);
+
+            Assert.AreEqual(newHouse.Name, house.Name);
+        }
+        [TestMethod]
+        public void TestUpdatePricePerNight()
+        {
+            House newHouse = new House()
+                {
+                    Avaible = true ,
+                    PricePerNight = 12220,
+                    TouristPointId = 0,
+                    Name = "",
+                    Starts = 0,
+                    Address = "",
+                    Ilustrations = "",
+                    Description = "",
+                    Phone = 0 ,
+                    Contact = "",
+                };
+
+            House.Update(house,newHouse);
+
+            Assert.AreEqual(newHouse.PricePerNight, house.PricePerNight);
+        }
+        [TestMethod]
+        public void TestUpdateTouristPointId()
+        {
+            House newHouse = new House()
+                {
+                    Avaible = true ,
+                    PricePerNight = 0,
+                    TouristPointId = 234234,
+                    Name = "",
+                    Starts = 0,
+                    Address = "",
+                    Ilustrations = "",
+                    Description = "",
+                    Phone = 0 ,
+                    Contact = "",
+                };
+
+            House.Update(house,newHouse);
+
+            Assert.AreEqual(newHouse.TouristPointId, house.TouristPointId);
+        }
+        [TestMethod]
+        public void TestUpdateStarts()
+        {
+            House newHouse = new House()
+                {
+                    Avaible = true ,
+                    PricePerNight = 0,
+                    TouristPointId = 0,
+                    Name = "",
+                    Starts = 5,
+                    Address = "",
+                    Ilustrations = "",
+                    Description = "",
+                    Phone = 0 ,
+                    Contact = "",
+                };
+
+            House.Update(house,newHouse);
+
+            Assert.AreEqual(newHouse.Starts, house.Starts);
+        }
+        [TestMethod]
+        public void TestUpdateAddress()
+        {
+            House newHouse = new House()
+                {
+                    Avaible = true ,
+                    PricePerNight = 0,
+                    TouristPointId = 0,
+                    Name = "",
+                    Starts = 0,
+                    Address = "new address",
+                    Ilustrations = "",
+                    Description = "",
+                    Phone = 0 ,
+                    Contact = "",
+                };
+
+            House.Update(house,newHouse);
+
+            Assert.AreEqual(newHouse.Address, house.Address);
+        }
+        [TestMethod]
+        public void TestUpdateIlustrations()
+        {
+            House newHouse = new House()
+                {
+                    Avaible = true ,
+                    PricePerNight = 0,
+                    TouristPointId = 0,
+                    Name = "",
+                    Starts = 0,
+                    Address = "",
+                    Ilustrations = "new ilust",
+                    Description = "",
+                    Phone = 0 ,
+                    Contact = "",
+                };
+
+            House.Update(house,newHouse);
+
+            Assert.AreEqual(newHouse.Ilustrations, house.Ilustrations);
+        }
+        [TestMethod]
+        public void TestUpdateDescription()
+        {
+            House newHouse = new House()
+                {
+                    Avaible = true ,
+                    PricePerNight = 0,
+                    TouristPointId = 0,
+                    Name = "",
+                    Starts = 0,
+                    Address = "",
+                    Ilustrations = "",
+                    Description = "new description",
+                    Phone = 0 ,
+                    Contact = "",
+                };
+
+            House.Update(house,newHouse);
+
+            Assert.AreEqual(newHouse.Description, house.Description);
+        }
+        [TestMethod]
+        public void TestUpdatePhone()
+        {
+            House newHouse = new House()
+                {
+                    Avaible = true ,
+                    PricePerNight = 0,
+                    TouristPointId = 0,
+                    Name = "",
+                    Starts = 0,
+                    Address = "",
+                    Ilustrations = "",
+                    Description = "",
+                    Phone = 3423240 ,
+                    Contact = "",
+                };
+
+            House.Update(house,newHouse);
+
+            Assert.AreEqual(newHouse.Phone, house.Phone);
+        }
+        [TestMethod]
+        public void TestUpdatContact()
+        {
+            House newHouse = new House()
+                {
+                    Avaible = true ,
+                    PricePerNight = 0,
+                    TouristPointId = 0,
+                    Name = "",
+                    Starts = 0,
+                    Address = "",
+                    Ilustrations = "",
+                    Description = "",
+                    Phone = 0 ,
+                    Contact = "new contact",
+                };
+
+            House.Update(house,newHouse);
+
+            Assert.AreEqual(newHouse.Contact, house.Contact);
+        }
+    }
+}

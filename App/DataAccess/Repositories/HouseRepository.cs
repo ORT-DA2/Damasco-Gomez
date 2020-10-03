@@ -13,6 +13,11 @@ namespace DataAccess.Repositories
             this.repository = repositoryMaster.Houses;
         }
 
+        protected override void Update(House elementToUpdate, House element)
+        {
+            House.Update(elementToUpdate,element);
+        }
+
         protected override void Validate(House element)
         {
             bool pricePerNight = element.PricePerNight <= 0;
@@ -29,9 +34,9 @@ namespace DataAccess.Repositories
             // bool nameNotNull = element.Name.Equals("");
             // bool addressNotNull = !element.Equals("");
         }
-        public IEnumerable<HouseSearchResultModel> GetByIdTouristPoint(int idTP)
-        {
-            return this.repository.GetElementsInContext().FindAll(kz=>kz.TouristPointId==idTP);
-        }
+        // public IEnumerable<HouseSearchResultModel> GetByIdTouristPoint(int idTP)
+        // {
+        //     return this.repository.GetElementsInContext().FindAll(kz=>kz.TouristPointId==idTP);
+        // }
     }
 }

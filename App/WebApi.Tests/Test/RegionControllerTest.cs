@@ -159,7 +159,7 @@ namespace WebApi.Test
         public void TestPutOk()
         {
             regionId1 = regionsToReturn.First();
-            mock.Setup(m => m.Update(regionId1));
+            mock.Setup(m => m.Update(regionId1.Id,regionId1));
 
             var result = controller.Put(regionId1.Id, regionId1);
 
@@ -174,7 +174,7 @@ namespace WebApi.Test
         {
             regionId1 = regionsToReturn.First();
             Exception exist = new ArgumentException();
-            mock.Setup(p => p.Update(regionId1)).Throws(exist);
+            mock.Setup(p => p.Update(regionId1.Id,regionId1)).Throws(exist);
 
             var result = controller.Put(regionId1.Id, regionId1);
 
@@ -186,7 +186,7 @@ namespace WebApi.Test
         {
             regionId1 = regionsToReturn.First();
             Exception exist = new Exception();
-            mock.Setup(p => p.Update(regionId1)).Throws(exist);
+            mock.Setup(p => p.Update(regionId1.Id,regionId1)).Throws(exist);
 
             var result = controller.Put(regionId1.Id, regionId1);
 

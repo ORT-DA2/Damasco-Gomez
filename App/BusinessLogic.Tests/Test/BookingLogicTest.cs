@@ -104,9 +104,9 @@ namespace BusinessLogic.Tests.Test
         public void TestUdpateOk ()
         {
             Booking booking = bookingsToReturn.First();
-            mock.Setup(m => m.Update(booking));
+            mock.Setup(m => m.Update(booking.Id,booking));
 
-            bookingLogic.Update(booking);
+            bookingLogic.Update(booking.Id, booking);
 
             mock.VerifyAll();
         }
@@ -114,9 +114,9 @@ namespace BusinessLogic.Tests.Test
         public void TestUpdateValidateError()
         {
             Booking booking = bookingsToReturn.First();// Booking tiene que terner un formato erroneo despues para que la validación falle
-             mock.Setup(m => m.Update(booking));
+             mock.Setup(m => m.Update(booking.Id,booking));
 
-            bookingLogic.Update(booking);
+            bookingLogic.Update(booking.Id,booking);
 
             mock.VerifyAll();
         }
@@ -126,9 +126,9 @@ namespace BusinessLogic.Tests.Test
         {
             Booking booking = bookingsToReturn.First();
             ArgumentException exception = new ArgumentException();
-            mock.Setup(m => m.Update(booking)).Throws(exception);
-            
-            bookingLogic.Update(booking);
+            mock.Setup(m => m.Update(booking.Id, booking)).Throws(exception);
+
+            bookingLogic.Update(booking.Id,booking);
         }
           [TestMethod]
         public void TestExistOk()

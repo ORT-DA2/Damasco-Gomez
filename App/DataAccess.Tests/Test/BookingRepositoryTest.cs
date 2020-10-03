@@ -181,22 +181,21 @@ namespace DataAccess.Tests.Test
         [TestMethod]
         public void TestUpdate()
         {
-            // Booking booking = bookingsToReturn.First();
-            // booking.Name = "New name of booking";
-            // string newName = booking.Name;
+            Booking booking = bookingsToReturn.First();
+            booking.Name = "New name of booking";
+            string newName = booking.Name;
 
-            // repository.Update(booking);
+            repository.Update(booking.Id,booking);
 
-            // Assert.AreEqual(booking.Name,newName);
+            Assert.AreEqual(booking.Name,newName);
         }
         [TestMethod]
-        //[ExpectedException(typeof(ArgumentException))]
+        [ExpectedException(typeof(ArgumentException))]
         public void TestUpdateFail()
         {
-            // Booking booking = new Booking(){Id = 13000};
-            // string newName = booking.Name;
-
-            //repository.Update(booking);
+            Booking booking = new Booking(){Id = 13000};
+            
+            repository.Update(booking.Id,booking);
         }
         [TestMethod]
         public void TestDelete()

@@ -171,7 +171,7 @@ namespace WebApi.Tests
         public void TestPutOk()
         {
             touristPointId1 = touristPointsToReturn.First();
-            mock.Setup(m => m.Update(touristPointId1));
+            mock.Setup(m => m.Update(touristPointId1.Id,touristPointId1));
 
             var result = controller.Put(touristPointId1.Id, touristPointId1);
 
@@ -186,7 +186,7 @@ namespace WebApi.Tests
         {
             touristPointId1 = touristPointsToReturn.First();
             Exception exist = new ArgumentException();
-            mock.Setup(p => p.Update(touristPointId1)).Throws(exist);
+            mock.Setup(p => p.Update(touristPointId1.Id,touristPointId1)).Throws(exist);
 
             var result = controller.Put(touristPointId1.Id, touristPointId1);
 
@@ -198,7 +198,7 @@ namespace WebApi.Tests
         {
             touristPointId1 = touristPointsToReturn.First();
             Exception exist = new Exception();
-            mock.Setup(p => p.Update(touristPointId1)).Throws(exist);
+            mock.Setup(p => p.Update(touristPointId1.Id,touristPointId1)).Throws(exist);
 
             var result = controller.Put(touristPointId1.Id, touristPointId1);
 
