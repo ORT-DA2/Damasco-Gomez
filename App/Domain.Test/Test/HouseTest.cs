@@ -32,13 +32,13 @@ namespace Domain.Test.Test
                     Avaible = true ,
                     PricePerNight = 0,
                     TouristPointId = 0,
-                    Name = "",
+                    Name = null,
                     Starts = 0,
-                    Address = "",
-                    Ilustrations = "",
-                    Description = "",
+                    Address = null,
+                    Ilustrations = null,
+                    Description = null,
                     Phone = 0 ,
-                    Contact = "",
+                    Contact = null,
                 };
 
             House.Update(house,newHouse);
@@ -53,13 +53,13 @@ namespace Domain.Test.Test
                     Avaible = false ,
                     PricePerNight = 0,
                     TouristPointId = 0,
-                    Name = "",
+                    Name = null,
                     Starts = 0,
-                    Address = "",
-                    Ilustrations = "",
-                    Description = "",
+                    Address = null,
+                    Ilustrations = null,
+                    Description = null,
                     Phone = 0 ,
-                    Contact = "",
+                    Contact = null,
                 };
 
             House.Update(house,newHouse);
@@ -76,11 +76,11 @@ namespace Domain.Test.Test
                     TouristPointId = 0,
                     Name = "New name",
                     Starts = 0,
-                    Address = "",
-                    Ilustrations = "",
-                    Description = "",
+                    Address = null,
+                    Ilustrations = null,
+                    Description = null,
                     Phone = 0 ,
-                    Contact = "",
+                    Contact = null,
                 };
 
             House.Update(house,newHouse);
@@ -95,13 +95,13 @@ namespace Domain.Test.Test
                     Avaible = true ,
                     PricePerNight = 12220,
                     TouristPointId = 0,
-                    Name = "",
+                    Name = null,
                     Starts = 0,
-                    Address = "",
-                    Ilustrations = "",
-                    Description = "",
+                    Address = null,
+                    Ilustrations = null,
+                    Description = null,
                     Phone = 0 ,
-                    Contact = "",
+                    Contact = null,
                 };
 
             House.Update(house,newHouse);
@@ -116,13 +116,13 @@ namespace Domain.Test.Test
                     Avaible = true ,
                     PricePerNight = 0,
                     TouristPointId = 234234,
-                    Name = "",
+                    Name = null,
                     Starts = 0,
-                    Address = "",
-                    Ilustrations = "",
-                    Description = "",
+                    Address = null,
+                    Ilustrations = null,
+                    Description = null,
                     Phone = 0 ,
-                    Contact = "",
+                    Contact = null,
                 };
 
             House.Update(house,newHouse);
@@ -137,13 +137,13 @@ namespace Domain.Test.Test
                     Avaible = true ,
                     PricePerNight = 0,
                     TouristPointId = 0,
-                    Name = "",
+                    Name = null,
                     Starts = 5,
-                    Address = "",
-                    Ilustrations = "",
-                    Description = "",
+                    Address = null,
+                    Ilustrations = null,
+                    Description = null,
                     Phone = 0 ,
-                    Contact = "",
+                    Contact = null,
                 };
 
             House.Update(house,newHouse);
@@ -158,13 +158,13 @@ namespace Domain.Test.Test
                     Avaible = true ,
                     PricePerNight = 0,
                     TouristPointId = 0,
-                    Name = "",
+                    Name = null,
                     Starts = 0,
                     Address = "new address",
-                    Ilustrations = "",
-                    Description = "",
+                    Ilustrations = null,
+                    Description = null,
                     Phone = 0 ,
-                    Contact = "",
+                    Contact = null,
                 };
 
             House.Update(house,newHouse);
@@ -179,13 +179,13 @@ namespace Domain.Test.Test
                     Avaible = true ,
                     PricePerNight = 0,
                     TouristPointId = 0,
-                    Name = "",
+                    Name = null,
                     Starts = 0,
-                    Address = "",
+                    Address = null,
                     Ilustrations = "new ilust",
-                    Description = "",
+                    Description = null,
                     Phone = 0 ,
-                    Contact = "",
+                    Contact = null,
                 };
 
             House.Update(house,newHouse);
@@ -200,13 +200,13 @@ namespace Domain.Test.Test
                     Avaible = true ,
                     PricePerNight = 0,
                     TouristPointId = 0,
-                    Name = "",
+                    Name = null,
                     Starts = 0,
-                    Address = "",
-                    Ilustrations = "",
+                    Address = null,
+                    Ilustrations = null,
                     Description = "new description",
                     Phone = 0 ,
-                    Contact = "",
+                    Contact = null,
                 };
 
             House.Update(house,newHouse);
@@ -221,13 +221,13 @@ namespace Domain.Test.Test
                     Avaible = true ,
                     PricePerNight = 0,
                     TouristPointId = 0,
-                    Name = "",
+                    Name = null,
                     Starts = 0,
-                    Address = "",
-                    Ilustrations = "",
-                    Description = "",
+                    Address = null,
+                    Ilustrations = null,
+                    Description = null,
                     Phone = 3423240 ,
-                    Contact = "",
+                    Contact = null,
                 };
 
             House.Update(house,newHouse);
@@ -242,11 +242,11 @@ namespace Domain.Test.Test
                     Avaible = true ,
                     PricePerNight = 0,
                     TouristPointId = 0,
-                    Name = "",
+                    Name = null,
                     Starts = 0,
-                    Address = "",
-                    Ilustrations = "",
-                    Description = "",
+                    Address = null,
+                    Ilustrations = null,
+                    Description = null,
                     Phone = 0 ,
                     Contact = "new contact",
                 };
