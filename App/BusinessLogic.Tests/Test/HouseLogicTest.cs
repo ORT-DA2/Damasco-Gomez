@@ -147,6 +147,18 @@ namespace BusinessLogic.Tests.Test
             mock.VerifyAll();
             Assert.IsFalse(result);
         }
+        [TestMethod]
+        public void TestGetHousesByOk()
+        {
+            Assert.IsTrue(true);
+        }
+        [TestMethod]
+        public void TestGetHousesByEmpty()
+        {
+            Assert.IsTrue(true);
+        }
+
+        
         //falta delete
     }
 }
