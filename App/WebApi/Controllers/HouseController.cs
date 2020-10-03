@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using BusinessLogicInterface;
 using Domain;
 using Microsoft.AspNetCore.Mvc;
@@ -87,7 +88,9 @@ namespace WebApi.Controllers
         [HttpGet("{idTP,checkIn,checkOut,cantA,cantC,cantB}") ]
         public IActionResult GetHousesBy([FromRoute] int idTP,[FromRoute]string checkIn,[FromRoute] string checkOut,[FromRoute] int cantA,[FromRoute] int cantC,[FromRoute] int cantB)
         {
-            return Ok(this.houseLogic.GetHousesBy(idTP,checkIn,checkOut,cantA,cantC,cantB).Select(m => new HouseSearchResultModel(m,checkIn,checkOut,cantA,cantC,cantB)));
+            var varRet = this.houseLogic.GetHousesBy(idTP,checkIn,checkOut,cantA,cantC,cantB);
+            var result = varRet.Select(m => new HouseSearchResultModel(m,checkIn,checkOut,cantA,cantC,cantB));
+            return Ok(result);
         }
     
 }

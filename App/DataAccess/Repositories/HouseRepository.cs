@@ -35,9 +35,10 @@ namespace DataAccess.Repositories
             // bool nameNotNull = element.Name.Equals("");
             // bool addressNotNull = !element.Equals("");
         }
-        // public IEnumerable<HouseSearchResultModel> GetByIdTouristPoint(int idTP)
-        // {
-        //     return this.repository.GetElementsInContext().FindAll(kz=>kz.TouristPointId==idTP);
-        // }
+        public IEnumerable<House> GetByIdTouristPoint(int idTP)
+        {
+             return this.repository.GetElementsInContext().FindAll(kz=>kz.TouristPointId==idTP);
+        }
     }
 }
+
