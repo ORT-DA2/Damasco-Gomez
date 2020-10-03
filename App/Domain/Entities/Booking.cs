@@ -38,9 +38,8 @@ namespace Domain
             if(!element.Email.Equals("")) elementToUpdate.Email = element.Email;
             if(!element.State.Equals("")) elementToUpdate.State = element.State;
             if(element.Price>0) elementToUpdate.Price = element.Price;
-            if(!element.CheckIn.Equals("")) elementToUpdate.CheckIn = element.CheckIn;
-            if(!element.CheckOut.Equals("")) elementToUpdate.CheckOut = element.CheckOut;
-
+            if(!element.CheckIn.Equals(DateTime.MinValue)) elementToUpdate.CheckIn = element.CheckIn;
+            if(!element.CheckOut.Equals(DateTime.MinValue)) elementToUpdate.CheckOut = element.CheckOut;
         }
     }
 
