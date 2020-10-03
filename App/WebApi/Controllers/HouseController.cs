@@ -82,12 +82,12 @@ namespace WebApi.Controllers
             this.houseLogic.Delete();
             return Ok();
         }
-        [HttpGet("{idTP,checkIn,checkOut,cantA,cantC,cantB}")]
-        public IActionResult GetHousesBy([FromRoute]int idTP,[FromRoute]string checkIn,[FromRoute] string checkOut,[FromRoute] int cantA,[FromRoute] int cantC,[FromRoute] int cantB)
-        {
+        // [HttpGet("{idTP,checkIn,checkOut,cantA,cantC,cantB}")]
+        // public IActionResult GetHousesBy([FromRoute]int idTP,[FromRoute]string checkIn,[FromRoute] string checkOut,[FromRoute] int cantA,[FromRoute] int cantC,[FromRoute] int cantB)
+        // {
 
-            var housesModel = this.houseLogic.GetHousesBy(idTP,checkIn,checkOut,cantA,cantC,cantB);
-            return Ok(housesModel);
-        }
+        //     var housesModel = this.houseLogic.GetHousesBy(idTP,checkIn,checkOut,cantA,cantC,cantB);
+        //     return Ok(housesModel);
+        // }
     }
 }

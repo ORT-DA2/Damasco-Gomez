@@ -271,9 +271,9 @@ namespace WebApi.Tests
             {
                 housesToReturn.First(),
             };
-            mock.Setup(mock=> mock.GetHousesBy(idTP,checkIn,checkOut,cantA,cantC,cantB)).Returns(housesWithIdTP);
+            // mock.Setup(mock=> mock.GetHousesBy(idTP,checkIn,checkOut,cantA,cantC,cantB)).Returns(housesWithIdTP);
           
-            var result = controller.GetHousesBy(idTP,checkIn,checkOut,cantA,cantC,cantB);
+            // var result = controller.GetHousesBy(idTP,checkIn,checkOut,cantA,cantC,cantB);
 
             Assert.AreEqual(result ,housesWithIdTP);
         }
