@@ -86,8 +86,8 @@ namespace WebApi.Controllers
         public IActionResult GetHousesBy([FromRoute]int idTP,[FromRoute]string checkIn,[FromRoute] string checkOut,[FromRoute] int cantA,[FromRoute] int cantC,[FromRoute] int cantB)
         {
 
-            var houses = this.houseLogic.GetHousesBy(idTP,checkIn,checkOut,cantA,cantC,cantB);
-            return Ok(houses);
+            var housesModel = this.houseLogic.GetHousesBy(idTP,checkIn,checkOut,cantA,cantC,cantB);
+            return Ok(housesModel);
         }
     }
 }

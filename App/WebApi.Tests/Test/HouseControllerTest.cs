@@ -70,7 +70,7 @@ namespace WebApi.Tests
                     Id = 4,
                     Avaible = true ,
                     PricePerNight = 400,
-                    TouristPointId = null,
+                    TouristPointId = 4,
                     Name = "Name house 4",
                     Starts = 4,
                     Address = "Address 4",
@@ -259,7 +259,7 @@ namespace WebApi.Tests
         }
 
         [TestMethod]
-        public void GetHousesBy()
+        public void TestGetHousesBy()
         {
             int idTP = 1;
             string checkIn= "01/12/2020";
