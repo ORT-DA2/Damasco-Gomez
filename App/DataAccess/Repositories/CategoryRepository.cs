@@ -13,7 +13,7 @@ namespace DataAccess.Repositories
 
         protected override void Update(Category elementToUpdate, Category element)
         {
-            throw new NotImplementedException();
+            Category.Update(elementToUpdate,element);
         }
 
         protected override void Validate(Category element)

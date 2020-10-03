@@ -158,22 +158,22 @@ namespace DataAccess.Tests.Test
         [TestMethod]
         public void TestUpdate()
         {
-            // Category category = categoriesToReturn.First();
-            // category.Name = "New name of category";
-            // string newName = category.Name;
+            Category category = categoriesToReturn.First();
+            category.Name = "New name of category";
+            string newName = category.Name;
 
-            // repository.Update(category);
+            repository.Update(category.Id,category);
 
-            // Assert.AreEqual(category.Name,newName);
+            Assert.AreEqual(category.Name,newName);
         }
         [TestMethod]
-        //[ExpectedException(typeof(ArgumentException))]
+        [ExpectedException(typeof(ArgumentException))]
         public void TestUpdateFail()
         {
-            // Category category = new Category(){Id = 13000};
-            // string newName = category.Name;
+            Category category = new Category(){Id = 13000};
+            string newName = category.Name;
 
-            //repository.Update(category);
+            repository.Update(category.Id,category);
         }
         [TestMethod]
         public void TestDelete()
