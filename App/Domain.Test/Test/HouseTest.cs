@@ -255,5 +255,10 @@ namespace Domain.Test.Test
 
             Assert.AreEqual(newHouse.Contact, house.Contact);
         }
+        [TestMethod]
+        public void TestCalculateTotalPrice()
+        {
+            Assert.IsTrue(true);
+        }
     }
 }

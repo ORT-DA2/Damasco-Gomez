@@ -37,6 +37,17 @@ namespace Domain
             }
             return result;
         }
+        public double CalculateTotalPrice(int cantAdults,int  cantChildrens, int cantBabys)
+        {
+            int priceNight = this.PricePerNight;
+            double  PriceAdults = cantAdults* priceNight;
+            const double percentChildrens = 0.5;
+            const double percentBabys = 0.5;
+            double  PriceChildrens = cantChildrens* percentChildrens * priceNight;
+            double  PriceBabys = cantBabys* percentBabys * priceNight;
+            double TotalPrice= PriceAdults + PriceChildrens + PriceBabys;
+            return TotalPrice ;
+        }
 
         public static void Update(House elementToUpdate, House element)
         {

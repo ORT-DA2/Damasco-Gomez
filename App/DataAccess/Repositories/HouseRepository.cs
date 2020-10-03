@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using DataAccessInterface.Repositories;
 using Domain;
 using Microsoft.EntityFrameworkCore;
+using Model;
 
 namespace DataAccess.Repositories
 {

@@ -6,6 +6,6 @@ namespace DataAccessInterface.Repositories
 {
     public interface IHouseRepository : IAccessData<House>
     {
-        //IEnumerable<HouseSearchResultModel> GetByIdTouristPoint(int idTP);
+        IEnumerable<House> GetByIdTouristPoint(int idTP);
     }
 }
