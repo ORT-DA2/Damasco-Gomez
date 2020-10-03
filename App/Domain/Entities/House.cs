@@ -11,7 +11,8 @@ namespace Domain
         public bool Avaible {get ; set; }
         public int PricePerNight {get; set;}
 
-        public TouristPoint Spot {get ; set; }
+        public int TouristPointId {get ; set; }
+        public TouristPoint TouristPoint {get ; set; }
 
         public string Name {get ; set; }
 

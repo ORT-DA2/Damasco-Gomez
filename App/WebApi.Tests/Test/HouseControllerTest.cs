@@ -28,7 +28,7 @@ namespace WebApi.Tests
                     Id = 1,
                     Avaible = true ,
                     PricePerNight = 100,
-                    Spot = null,
+                    TouristPointId = 1,
                     Name = "Name house 1",
                     Starts = 1,
                     Address = "Address 1",
@@ -42,7 +42,7 @@ namespace WebApi.Tests
                     Id = 2,
                     Avaible = false ,
                     PricePerNight = 200,
-                    Spot = null,
+                    TouristPointId = 2,
                     Name = "Name house 2",
                     Starts = 2,
                     Address = "Address 2",
@@ -56,7 +56,7 @@ namespace WebApi.Tests
                     Id = 3,
                     Avaible = true ,
                     PricePerNight = 300,
-                    Spot = null,
+                    TouristPointId = 3,
                     Name = "Name house 3",
                     Starts = 4,
                     Address = "Address 3",
@@ -70,7 +70,7 @@ namespace WebApi.Tests
                     Id = 4,
                     Avaible = true ,
                     PricePerNight = 400,
-                    Spot = null,
+                    TouristPointId = 4,
                     Name = "Name house 4",
                     Starts = 4,
                     Address = "Address 4",
@@ -256,6 +256,26 @@ namespace WebApi.Tests
             var result = controller.Delete();
 
             Assert.IsNotNull(result);
+        }
+
+        [TestMethod]
+        public void TestGetHousesBy()
+        {
+            int idTP = 1;
+            string checkIn= "01/12/2020";
+            string checkOut= "21/12/2020";
+            int cantA = 2;
+            int cantC = 1;
+            int cantB = 0;
+            List<House> housesWithIdTP = new List<House>()
+            {
+                housesToReturn.First(),
+            };
+            mock.Setup(mock=> mock.GetHousesBy(idTP,checkIn,checkOut,cantA,cantC,cantB)).Returns(housesWithIdTP);
+          
+            var result = controller.GetHousesBy(idTP,checkIn,checkOut,cantA,cantC,cantB);
+
+            Assert.AreEqual(result ,housesWithIdTP);
         }
     }
 }
