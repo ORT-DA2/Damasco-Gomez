@@ -159,6 +159,7 @@ namespace WebApi.Test
         public void TestPutOk()
         {
             categoryId1 = categoriesToReturn.First();
+            categoryId1.Name = "New name";
             mock.Setup(m => m.Update(categoryId1.Id,categoryId1));
 
             var result = controller.Put(categoryId1.Id, categoryId1);
