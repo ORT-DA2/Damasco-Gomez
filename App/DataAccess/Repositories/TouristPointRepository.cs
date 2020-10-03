@@ -16,7 +16,7 @@ namespace DataAccess.Repositories
 
         protected override void Update(TouristPoint elementToUpdate, TouristPoint element)
         {
-            throw new NotImplementedException();
+            TouristPoint.Update(elementToUpdate,element);
         }
 
         protected override void Validate(TouristPoint element)

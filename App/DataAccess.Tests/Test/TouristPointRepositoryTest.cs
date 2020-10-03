@@ -153,22 +153,22 @@ namespace DataAccess.Tests.Test
         [TestMethod]
         public void TestUpdate()
         {
-            // TouristPoint touristPoint = touristPointsToReturn.First();
-            // touristPoint.Name = "New name of touristPoint";
-            // string newName = touristPoint.Name;
+            TouristPoint touristPoint = touristPointsToReturn.First();
+            touristPoint.Name = "New name of touristPoint";
+            string newName = touristPoint.Name;
 
-            // repository.Update(touristPoint);
+            repository.Update(touristPoint.Id,touristPoint);
 
-            // Assert.AreEqual(touristPoint.Name,newName);
+            Assert.AreEqual(touristPoint.Name,newName);
         }
         [TestMethod]
-        //[ExpectedException(typeof(ArgumentException))]
+        [ExpectedException(typeof(ArgumentException))]
         public void TestUpdateFail()
         {
-            // TouristPoint touristPoint = new TouristPoint(){Id = 13000};
-            // string newName = touristPoint.Name;
+            TouristPoint touristPoint = new TouristPoint(){Id = 13000};
+            string newName = touristPoint.Name;
 
-            //repository.Update(touristPoint);
+            repository.Update(touristPoint.Id,touristPoint);
         }
         [TestMethod]
         public void TestDelete()
