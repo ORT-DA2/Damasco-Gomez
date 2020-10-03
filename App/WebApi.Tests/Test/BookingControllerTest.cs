@@ -178,6 +178,8 @@ namespace WebApi.Tests
         public void TestPutOk()
         {
             bookingId1 = bookingsToReturn.First();
+            string newName = "New name booking";
+            bookingId1.Name = newName;
             mock.Setup(m => m.Update(bookingId1.Id,bookingId1));
 
             var result = controller.Put(bookingId1.Id, bookingId1);
