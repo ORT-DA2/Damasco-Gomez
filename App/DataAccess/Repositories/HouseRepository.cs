@@ -15,7 +15,7 @@ namespace DataAccess.Repositories
 
         protected override void Update(House elementToUpdate, House element)
         {
-            throw new NotImplementedException();
+            House.Update(elementToUpdate,element);
         }
 
         protected override void Validate(House element)

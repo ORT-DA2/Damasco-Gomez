@@ -167,22 +167,22 @@ namespace DataAccess.Tests.Test
         [TestMethod]
         public void TestUpdate()
         {
-            // House house = housesToReturn.First();
-            // house.Name = "New name of house";
-            // string newName = house.Name;
+            House house = housesToReturn.First();
+            house.Name = "New name of house";
+            string newName = house.Name;
 
-            // repository.Update(house);
+            repository.Update(house.Id,house);
 
-            // Assert.AreEqual(house.Name,newName);
+            Assert.AreEqual(house.Name,newName);
         }
         [TestMethod]
-        //[ExpectedException(typeof(ArgumentException))]
+        [ExpectedException(typeof(ArgumentException))]
         public void TestUpdateFail()
         {
-            // House house = new House(){Id = 13000};
-            // string newName = house.Name;
+            House house = new House(){Id = 13000};
+            string newName = house.Name;
 
-            //repository.Update(house);
+            repository.Update(house.Id,house);
         }
         [TestMethod]
         public void TestDelete()

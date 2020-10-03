@@ -44,13 +44,13 @@ namespace Domain
                 elementToUpdate.Avaible = element.Avaible;
             if(element.PricePerNight>0) elementToUpdate.PricePerNight = element.PricePerNight;
             if(element.TouristPointId>0) elementToUpdate.TouristPointId = element.TouristPointId;
-            if(!element.Name.Equals("")) elementToUpdate.Name = element.Name;
+            if(element.Name != null) elementToUpdate.Name = element.Name;
             if(element.Starts>0) elementToUpdate.Starts = element.Starts;
-            if(!element.Address.Equals("")) elementToUpdate.Address = element.Address;
-            if(!element.Description.Equals("")) elementToUpdate.Description = element.Description;
-            if(!element.Ilustrations.Equals("")) elementToUpdate.Ilustrations = element.Ilustrations;
+            if(element.Address != null) elementToUpdate.Address = element.Address;
+            if(element.Description != null) elementToUpdate.Description = element.Description;
+            if(element.Ilustrations != null) elementToUpdate.Ilustrations = element.Ilustrations;
             if(element.Phone>0) elementToUpdate.Phone = element.Phone;
-            if(!element.Contact.Equals("")) elementToUpdate.Contact = element.Contact;
+            if(element.Contact != null) elementToUpdate.Contact = element.Contact;
         }
 
     }
