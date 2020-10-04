@@ -22,7 +22,7 @@ namespace Domain.Test.Test
             Person newPerson = new Person()
                 {
                     Email = "new mail",
-                    Password = "",
+                    Password = null,
                 };
 
             Person.Update(person,newPerson);
@@ -34,7 +34,7 @@ namespace Domain.Test.Test
         {
             Person newPerson = new Person()
                 {
-                    Email = "",
+                    Email = null,
                     Password = "new p",
                 };
 
