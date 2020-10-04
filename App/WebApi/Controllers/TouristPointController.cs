@@ -42,10 +42,6 @@ namespace WebApi.Controllers
                 var routePost = CreatedAtRoute("GetTouristPoint", new {Id = touristPointAdded.Id} , touristPointAdded);
                 return routePost;
             }
-            catch (AggregateException)
-            {
-                return BadRequest("The touristPoint was already added");
-            }
             catch (ArgumentException e)
             {
                 return BadRequest("Error while validate : "+ e.Message.ToString());
