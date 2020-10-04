@@ -3,6 +3,7 @@ using System.Linq;
 using BusinessLogicInterface;
 using Domain;
 using Microsoft.AspNetCore.Mvc;
+using Model.In;
 using Model.Out;
 
 namespace WebApi.Controllers
@@ -39,11 +40,8 @@ namespace WebApi.Controllers
             try
             {
                 var touristPointAdded = this.touristPointLogic.Add(touristPoint.ToEntity());
-                var routePost = CreatedAtRoute("GetTouristPoint", new {Id = touristPointAdded.Id} , touristPointAdded);
+                var routePost = CreatedAtRoute("GetTouristPoint", new {Id = touristPointAdded.Id} , new TouristPointDetailInfoModel(touristPointAdded));
                 return routePost;
-                /*var cateogry = this.categoriesLogic.Add(categoryModel.ToEntity());
-                return CreatedAtRoute("GetCategory", new {id = cateogry.Id },
-                    new CategoryDetailInfoModel(cateogry));*/
             }
             catch (ArgumentException e)
             {

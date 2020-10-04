@@ -10,9 +10,12 @@ namespace BusinessLogic
     public class TouristPointLogic : ITouristPointLogic
     {
         private readonly ITouristPointRepository touristPointRepository;
-        public TouristPointLogic(ITouristPointRepository touristPointRepository)
+
+        private readonly ICategoryLogic categoryLogic;
+        public TouristPointLogic(ITouristPointRepository touristPointRepository,ICategoryLogic categoryLogic )
         {
             this.touristPointRepository = touristPointRepository;
+            this.categoryLogic = categoryLogic;
         }
         public void Delete()
         {
@@ -30,9 +33,11 @@ namespace BusinessLogic
             return this.touristPointRepository.Find(id);
         }
 
-        public TouristPoint Add(TouristPoint TouristPoint)
+        public TouristPoint Add(TouristPoint touristPoint)
         {
-            return this.touristPointRepository.Add(TouristPoint);
+            var touristPointAdded = this.touristPointRepository.Add(touristPoint);
+            touristPointAdded.CategoriesTouristPoints.ForEach(m=>m.Category = this.categoryLogic.GetBy(m.CategoryId));
+            return touristPoint;
         }
         public void Update(int id, TouristPoint TouristPoint)
         {
