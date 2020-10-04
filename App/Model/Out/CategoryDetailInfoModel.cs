@@ -5,13 +5,13 @@ using Domain.Entities;
 
 namespace Model.Out
 {
-    public class CategoryBasicInfoModel
+    public class CategoryDetailInfoModel
     {
         public int Id {get; set;}
         public string Name {get; set;}
         public List<TouristPointBasicInfoModel> TouristPoints {get; set;}
 
-        public CategoryBasicInfoModel(Category category)
+        public CategoryDetailInfoModel(Category category)
         {
             this.Id = category.Id;
             this.Name = category.Name;
@@ -22,7 +22,7 @@ namespace Model.Out
         public override bool Equals(object obj)
         {
             var result = false;
-            if(obj is CategoryBasicInfoModel category)
+            if(obj is CategoryDetailInfoModel category)
             {
                 result = this.Id == category.Id ;
             }
