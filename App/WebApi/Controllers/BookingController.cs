@@ -38,16 +38,16 @@ namespace WebApi.Controllers
         {
             try
             {
-                this.bookingLogic.Add(booking);
-                return CreatedAtRoute("GetBooking", booking.Id, booking);
+                var bookingAdded = this.bookingLogic.Add(booking);
+                return CreatedAtRoute("GetBooking", new {Id = bookingAdded.Id} , bookingAdded);
             }
             catch (AggregateException)
             {
                 return BadRequest("The booking was already added");
             }
-            catch (ArgumentException)
+            catch (ArgumentException e )
             {
-                return BadRequest("Error while validate ");
+                return BadRequest("Error while validate : "+ e.Message.ToString());
             }
             catch (Exception)
             {
@@ -61,12 +61,12 @@ namespace WebApi.Controllers
             try
             {
                 this.bookingLogic.Update(id, booking);
-                return CreatedAtRoute("GetBooking", booking.Id, booking);
+                return CreatedAtRoute("GetBooking", new {Id = booking.Id} , booking);
                 //return Ok(booking);
             }
-            catch(ArgumentException)
+            catch(ArgumentException e)
             {
-                return BadRequest("Error while validate");
+                return BadRequest("Error while validate : "+ e.Message.ToString());
             }
             catch (Exception)
             {

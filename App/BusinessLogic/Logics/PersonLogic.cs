@@ -28,14 +28,7 @@ namespace BusinessLogic
         }
         public Person GetBy(int id)
         {
-            try
-            {
-                return this.personRepository.Find(id);
-            }
-            catch(ArgumentException)
-            {
-                return null;
-            }
+            return this.personRepository.Find(id);
         }
 
         public Person Add(Person Person)

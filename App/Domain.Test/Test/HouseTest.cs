@@ -265,5 +265,47 @@ namespace Domain.Test.Test
             double totalPriceResult = house.CalculateTotalPrice(cantAdults,cantChildrens,cantBabys);
             Assert.AreEqual(totalPriceResult , totalPriceToReturn);
         }
+        [TestMethod]
+        public void TestIsAvailable()
+        {
+            House newHouse = new House()
+                {
+                    Avaible = true ,
+                    PricePerNight = 0,
+                    TouristPointId = 0,
+                    Name = null,
+                    Starts = 0,
+                    Address = null,
+                    Ilustrations = null,
+                    Description = null,
+                    Phone = 0 ,
+                    Contact = "new contact",
+                };
+
+            bool result = House.IsAvailable(newHouse);
+
+            Assert.IsTrue(result);
+        }
+        [TestMethod]
+        public void TestIsAvailableFalse()
+        {
+            House newHouse = new House()
+                {
+                    Avaible = false ,
+                    PricePerNight = 0,
+                    TouristPointId = 0,
+                    Name = null,
+                    Starts = 0,
+                    Address = null,
+                    Ilustrations = null,
+                    Description = null,
+                    Phone = 0 ,
+                    Contact = "new contact",
+                };
+
+            bool result = House.IsAvailable(newHouse);
+
+            Assert.IsFalse(result);
+        }
     }
 }

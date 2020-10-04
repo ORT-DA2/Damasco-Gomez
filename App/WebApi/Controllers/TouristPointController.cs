@@ -18,7 +18,6 @@ namespace WebApi.Controllers
             var elementTouristPoint = this.touristPointLogic.GetAll();
             return Ok(elementTouristPoint);
         }
-
         [HttpGet("{id}",Name="GetTouristPoint")]
         public IActionResult GetBy([FromRoute]int id)
         {
@@ -29,7 +28,7 @@ namespace WebApi.Controllers
             }
             catch (ArgumentException)
             {
-                return BadRequest("There is not a booking with that id");
+                return BadRequest("There is not a tourist point with that id");
             }
         }
         [HttpPost()]
@@ -39,16 +38,12 @@ namespace WebApi.Controllers
             try
             {
                 var touristPointAdded = this.touristPointLogic.Add(touristPoint);
-                var routePost = CreatedAtRoute("GetTouristPoint", touristPoint.Id, touristPoint);
+                var routePost = CreatedAtRoute("GetTouristPoint", new {Id = touristPointAdded.Id} , touristPointAdded);
                 return routePost;
             }
-            catch (AggregateException)
+            catch (ArgumentException e)
             {
-                return BadRequest("The touristPoint was already added");
-            }
-            catch (ArgumentException)
-            {
-                return BadRequest("Error while validate ");
+                return BadRequest("Error while validate : "+ e.Message.ToString());
             }
             catch (Exception)
             {
@@ -62,11 +57,12 @@ namespace WebApi.Controllers
             try
             {
                 this.touristPointLogic.Update(id,touristPoint);
-                return CreatedAtRoute("GetTouristPoint", new { Id = touristPoint.Id }, touristPoint);
+                return CreatedAtRoute("GetTouristPoint", new {id =touristPoint.Id} ,touristPoint);
+                
             }
-            catch(ArgumentException)
+            catch(ArgumentException e )
             {
-                return BadRequest("Error while validate");
+                return BadRequest("Error while validate : "+ e.Message.ToString());
             }
             catch (Exception)
             {

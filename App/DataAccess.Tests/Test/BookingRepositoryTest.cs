@@ -58,7 +58,16 @@ namespace DataAccess.Tests.Test
         [TestMethod]
         public void TestAdd()
         {
-            Booking booking = new Booking(){Id = 123, Name="name new", House = new House(){Avaible=true}, CheckIn = DateTime.Today, CheckOut= DateTime.Today};
+            Booking booking = new Booking(){
+                Id = 123,
+                Name="name new",
+                HouseId = 100 ,
+                House = new House(){
+                    Id = 100,
+                    Avaible=true},
+                CheckIn = DateTime.Today,
+                CheckOut= DateTime.Today
+                };
             BookingRepository repo = new BookingRepository(this.repositoryMaster);
             int cantRepo = this.repository.GetElements().Count();
 
@@ -68,33 +77,58 @@ namespace DataAccess.Tests.Test
         }
         [TestMethod]
         [ExpectedException(typeof(ArgumentException))]
-        public void TestAddFailValidate()
+        public void TestAddFailValidateHouseId()
         {
-            Booking booking = new Booking(){Id = 123, Name="name new", House = new House(), CheckIn = DateTime.Today, CheckOut= DateTime.Today};
+            Booking booking = new Booking(){
+                Id = 123,
+                Name="name new",
+                HouseId = 0,
+                CheckIn = DateTime.Today,
+                CheckOut= DateTime.Today
+                };
 
             repository.Add(booking);
         }
         [TestMethod]
         [ExpectedException(typeof(ArgumentException))]
-        public void TestAddFailValidate2()
+        public void TestAddFailValidateHouseAvalaible()
         {
-            Booking booking = new Booking(){Id = 123, Name="name new", House = new House(){Avaible=true}, CheckIn = DateTime.Today};
+            Booking booking = new Booking(){
+                Id = 123,
+                Name="name new",
+                HouseId = 2,
+                House = new House(){
+                    Id = 2 ,
+                    Avaible=false},
+                CheckIn = DateTime.Today};
 
             repository.Add(booking);
         }
         [TestMethod]
         [ExpectedException(typeof(ArgumentException))]
-        public void TestAddFailValidate3()
+        public void TestAddFailValidateCheckIn()
         {
-            Booking booking = new Booking(){Id = 123, Name="name new", House = new House(){Avaible=true}, CheckOut= DateTime.Today};
+            Booking booking = new Booking(){
+                Id = 123,
+                Name="name new",
+                HouseId = 1,
+                House = new House(){
+                    Id = 1,
+                    Avaible=false
+                },
+                CheckOut= DateTime.Today};
 
             repository.Add(booking);
         }
         [TestMethod]
         [ExpectedException(typeof(ArgumentException))]
-        public void TestAddFailValidate4()
+        public void TestAddFailValidateCheckOut()
         {
-            Booking booking = new Booking(){Id = 123, Name="name new", CheckIn = DateTime.Today, CheckOut= DateTime.Today};
+            Booking booking = new Booking(){
+                Id = 123,
+                Name="name new",
+                CheckIn = DateTime.Today,
+                CheckOut= DateTime.Today};
 
             repository.Add(booking);
         }

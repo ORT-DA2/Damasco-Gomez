@@ -27,14 +27,7 @@ namespace BusinessLogic
         }
         public TouristPoint GetBy(int id)
         {
-            try
-            {
-                return this.touristPointRepository.Find(id);
-            }
-            catch(ArgumentException)
-            {
-                return null;
-            }
+            return this.touristPointRepository.Find(id);
         }
 
         public TouristPoint Add(TouristPoint TouristPoint)

@@ -13,21 +13,23 @@ namespace DataAccess.Repositories
 
         protected override void Validate(Booking element)
         {
-            bool houseAvailable = false;
-            if (element.House != null)
+            if (element.HouseId > 0)
             {
-                houseAvailable = element.House.Avaible;
+                if (!House.IsAvailable(element.House))
+                {
+                    throw new ArgumentException("House is not available");
+                }
             }
-            if (!houseAvailable)
+            else
             {
-                throw new ArgumentException("House is not available");
+                throw new ArgumentException("You need a house to create booking");
             }
-            bool checkInAndOut = !element.CheckIn.Equals(DateTime.MinValue)
-                && !element.CheckOut.Equals(DateTime.MinValue);
-            if (!checkInAndOut)
-            {
-                throw new ArgumentException("There's no dates to create the booking");
-            }
+            // bool checkInAndOut = !element.CheckIn.Equals(DateTime.MinValue)
+            //     && !element.CheckOut.Equals(DateTime.MinValue);
+            // if (!checkInAndOut)
+            // {
+            //     throw new ArgumentException("There's no dates to create the booking");
+            // }
         }
 
         protected override void Update(Booking elementToUpdate, Booking element)

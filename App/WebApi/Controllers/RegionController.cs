@@ -46,13 +46,13 @@ namespace WebApi.Controllers
             {
                 return BadRequest("The region was already added");
             }
-            catch (ArgumentException)
+            catch (ArgumentException e)
             {
-                return BadRequest("Error while validate ");
+                return BadRequest("Error while validate : "+ e.Message.ToString());
             }
-            catch (Exception)
+            catch (Exception e)
             {
-                return BadRequest("The server had an error");
+                return BadRequest("The server had an error : "+ e.Message.ToString());
             }
         }
         [HttpPut("{id}")]
@@ -64,13 +64,13 @@ namespace WebApi.Controllers
                 var creationRoute = CreatedAtRoute("GetRegion", new {Id = region.Id} , region);
                 return creationRoute;
             }
-            catch(ArgumentException)
+            catch(ArgumentException e)
             {
-                return BadRequest("Error while validate");
+                return BadRequest("Error while validate :"+ e.Message.ToString());
             }
-            catch (Exception)
+            catch (Exception e)
             {
-                return BadRequest("Internal server error");
+                return BadRequest("Internal server error : "+ e.Message.ToString());
             }
         }
         [HttpDelete("{id}")]

@@ -41,16 +41,16 @@ namespace WebApi.Controllers
         {
             try
             {
-                this.categoryLogic.Add(category);
-                return CreatedAtRoute("GetCategory", category.Id, category);
+                var categoryAdded = this.categoryLogic.Add(category);
+                return CreatedAtRoute("GetCategory", new {Id = categoryAdded.Id} , categoryAdded);
             }
             catch (AggregateException)
             {
                 return BadRequest("The category was already added");
             }
-            catch (ArgumentException)
+            catch (ArgumentException e)
             {
-                return BadRequest("Error while validate ");
+                return BadRequest("Error while validate : "+ e.Message.ToString());
             }
             catch (Exception)
             {
@@ -64,11 +64,11 @@ namespace WebApi.Controllers
             try
             {
                 this.categoryLogic.Update(id,category);
-                return CreatedAtRoute("GetCategory", category.Id, category);
+                return CreatedAtRoute("GetCategory", new {Id = category.Id} , category);
             }
-            catch(ArgumentException)
+            catch(ArgumentException e)
             {
-                return BadRequest("Error while validate");
+                return BadRequest("Error while validate : "+ e.Message.ToString());
             }
             catch (Exception)
             {

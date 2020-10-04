@@ -12,7 +12,7 @@ namespace Domain
         public int PricePerNight {get; set;}
 
         public int TouristPointId {get ; set; }
-        public TouristPoint TouristPoint {get ; set; }
+        public virtual TouristPoint TouristPoint {get ; set; }
 
         public string Name {get ; set; }
 
@@ -62,6 +62,11 @@ namespace Domain
             if(element.Ilustrations != null) elementToUpdate.Ilustrations = element.Ilustrations;
             if(element.Phone>0) elementToUpdate.Phone = element.Phone;
             if(element.Contact != null) elementToUpdate.Contact = element.Contact;
+        }
+
+        public static bool IsAvailable(House house)
+        {
+            return house.Avaible;
         }
 
     }
