@@ -1,0 +1,7 @@
+namespace .
+{
+    public class BookingBasicModel
+    {
+        
+    }
+}
