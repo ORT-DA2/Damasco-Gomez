@@ -33,7 +33,7 @@ namespace BusinessLogic.Logics
             }
             catch(ArgumentException)
             {
-                return null;
+                throw new ArgumentException();
             }
         }
 
