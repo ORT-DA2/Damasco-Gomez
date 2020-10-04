@@ -46,9 +46,9 @@ namespace WebApi.Controllers
             {
                 return BadRequest("The touristPoint was already added");
             }
-            catch (ArgumentException)
+            catch (ArgumentException e)
             {
-                return BadRequest("Error while validate ");
+                return BadRequest("Error while validate : "+ e.Message.ToString());
             }
             catch (Exception)
             {
@@ -64,9 +64,9 @@ namespace WebApi.Controllers
                 this.touristPointLogic.Update(id,touristPoint);
                 return CreatedAtRoute("GetTouristPoint", new { Id = touristPoint.Id }, touristPoint);
             }
-            catch(ArgumentException)
+            catch(ArgumentException e )
             {
-                return BadRequest("Error while validate");
+                return BadRequest("Error while validate : "+ e.Message.ToString());
             }
             catch (Exception)
             {

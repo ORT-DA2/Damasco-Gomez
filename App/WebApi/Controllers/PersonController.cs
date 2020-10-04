@@ -45,9 +45,9 @@ namespace WebApi.Controllers
             {
                 return BadRequest("The person was already added");
             }
-            catch (ArgumentException)
+            catch (ArgumentException e)
             {
-                return BadRequest("Error while validate ");
+                return BadRequest("Error while validate : "+ e.Message.ToString());
             }
             catch (Exception)
             {
@@ -63,9 +63,9 @@ namespace WebApi.Controllers
                 this.personLogic.Update(id,person);
                 return CreatedAtRoute("GetPerson", new {Id = person.Id} , person);
             }
-            catch(ArgumentException)
+            catch(ArgumentException e)
             {
-                return BadRequest("Error while validate");
+                return BadRequest("Error while validate : "+ e.Message.ToString());
             }
             catch (Exception)
             {

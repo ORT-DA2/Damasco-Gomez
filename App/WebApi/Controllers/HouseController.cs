@@ -67,9 +67,9 @@ namespace WebApi.Controllers
                 return CreatedAtRoute("GetHouse", new {Id = house.Id} , house);
                 //return Ok(house);
             }
-            catch(ArgumentException)
+            catch(ArgumentException e)
             {
-                return BadRequest("Error while validate");
+                return BadRequest("Error while validate : "+ e.Message.ToString());
             }
             catch (Exception)
             {

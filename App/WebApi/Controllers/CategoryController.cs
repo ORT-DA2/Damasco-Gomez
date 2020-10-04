@@ -48,9 +48,9 @@ namespace WebApi.Controllers
             {
                 return BadRequest("The category was already added");
             }
-            catch (ArgumentException)
+            catch (ArgumentException e)
             {
-                return BadRequest("Error while validate ");
+                return BadRequest("Error while validate : "+ e.Message.ToString());
             }
             catch (Exception)
             {
@@ -66,9 +66,9 @@ namespace WebApi.Controllers
                 this.categoryLogic.Update(id,category);
                 return CreatedAtRoute("GetCategory", new {Id = category.Id} , category);
             }
-            catch(ArgumentException)
+            catch(ArgumentException e)
             {
-                return BadRequest("Error while validate");
+                return BadRequest("Error while validate : "+ e.Message.ToString());
             }
             catch (Exception)
             {

@@ -45,9 +45,9 @@ namespace WebApi.Controllers
             {
                 return BadRequest("The booking was already added");
             }
-            catch (ArgumentException)
+            catch (ArgumentException e )
             {
-                return BadRequest("Error while validate ");
+                return BadRequest("Error while validate : "+ e.Message.ToString());
             }
             catch (Exception)
             {
@@ -64,9 +64,9 @@ namespace WebApi.Controllers
                 return CreatedAtRoute("GetBooking", new {Id = booking.Id} , booking);
                 //return Ok(booking);
             }
-            catch(ArgumentException)
+            catch(ArgumentException e)
             {
-                return BadRequest("Error while validate");
+                return BadRequest("Error while validate : "+ e.Message.ToString());
             }
             catch (Exception)
             {
