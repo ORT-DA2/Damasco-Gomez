@@ -28,7 +28,8 @@ namespace WebApi.Controllers
             try
             {
                 var elementCategory = this.categoryLogic.GetBy(id);
-                return Ok(elementCategory);
+                
+                return Ok(new CategoryBasicInfoModel(elementCategory));
             }
             catch (ArgumentException)
             {
