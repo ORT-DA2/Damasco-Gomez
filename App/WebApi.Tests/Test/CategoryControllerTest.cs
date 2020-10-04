@@ -96,15 +96,13 @@ namespace WebApi.Test
         public void TestGetByNotFound()
         {
             int id = 4;
-            Category categoryReturn = null;
-            mock.Setup(m => m.GetBy(id)).Returns(categoryReturn);
+            ArgumentException exist = new ArgumentException();
+            mock.Setup(m => m.GetBy(id)).Throws(exist);
 
             var result = controller.GetBy(id);
 
-            var okResult = result as OkObjectResult;
-            var categories = okResult.Value as Category;
             mock.VerifyAll();
-            Assert.IsNull(categories);
+            Assert.IsInstanceOfType(result, typeof(BadRequestObjectResult));
         }
         [TestMethod]
         public void TestPostOk()
