@@ -2,6 +2,7 @@ using System;
 using BusinessLogicInterface;
 using Domain;
 using Microsoft.AspNetCore.Mvc;
+using Model;
 
 namespace WebApi.Controllers
 {
@@ -34,11 +35,12 @@ namespace WebApi.Controllers
         }
         [HttpPost()]
         //The post should have BookingModel , but will leave it like this
-        public IActionResult Post([FromBody]Booking booking)
+        public IActionResult Post([FromBody]BookingModel booking)
         {
             try
             {
-                var bookingAdded = this.bookingLogic.Add(booking);
+                Booking newBooking = booking.ToEntity();
+                var bookingAdded = this.bookingLogic.Add(newBooking);
                 return CreatedAtRoute("GetBooking", new {Id = bookingAdded.Id} , bookingAdded);
             }
             catch (AggregateException)
