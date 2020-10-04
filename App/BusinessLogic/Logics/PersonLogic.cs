@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using BusinessLogic.Logics;
 using BusinessLogicInterface;
@@ -27,7 +28,14 @@ namespace BusinessLogic
         }
         public Person GetBy(int id)
         {
-            return this.personRepository.Find(id);
+            try
+            {
+                return this.personRepository.Find(id);
+            }
+            catch(ArgumentException)
+            {
+                return null;
+            }
         }
 
         public Person Add(Person Person)

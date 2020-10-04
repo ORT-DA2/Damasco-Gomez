@@ -95,16 +95,14 @@ namespace WebApi.Test
          [TestMethod]
          public void TestGetByNotFoud ()
          {
-            int id = 5;
-            Region regionNull = null;
-            mock.Setup(m => m.GetBy(id)).Returns(regionNull);
+            int id = 4;
+            ArgumentException exist = new ArgumentException();
+            mock.Setup(m => m.GetBy(id)).Throws(exist);
 
             var result = controller.GetBy(id);
 
-            var okResult = result as OkObjectResult;
-            var region = okResult.Value as Region;
             mock.VerifyAll();
-            Assert.IsNull(region);
+            Assert.IsInstanceOfType(result, typeof(BadRequestObjectResult));
          }
          [TestMethod]
          public void TestPostOk ()

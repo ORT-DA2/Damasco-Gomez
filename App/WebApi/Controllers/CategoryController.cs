@@ -25,8 +25,15 @@ namespace WebApi.Controllers
         [HttpGet("{id}",Name="GetCategory")]
         public IActionResult GetBy([FromRoute]int id)
         {
-            var elementCategory = this.categoryLogic.GetBy(id);
-            return Ok(elementCategory);
+            try
+            {
+                var elementCategory = this.categoryLogic.GetBy(id);
+                return Ok(elementCategory);
+            }
+            catch (ArgumentException)
+            {
+                return BadRequest("There is not a category with that id");
+            }
         }
         [HttpPost()]
         //The post should have CategoryModel , but will leave it like this

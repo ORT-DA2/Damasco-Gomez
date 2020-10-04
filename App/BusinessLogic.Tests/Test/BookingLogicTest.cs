@@ -52,7 +52,7 @@ namespace BusinessLogic.Tests.Test
         [TestMethod]
         public void GetByTestOk()
         {
-             Booking booking = bookingsToReturn.First();
+            Booking booking = bookingsToReturn.First();
             mock.Setup(m => m.Find(booking.Id)).Returns(booking);
 
             var result = bookingLogic.GetBy(booking.Id);
@@ -60,8 +60,8 @@ namespace BusinessLogic.Tests.Test
             mock.VerifyAll();
             Assert.AreEqual(result,booking);
         }
-         [TestMethod]
-         public void TestGetByFail()
+        [TestMethod]
+        public void TestGetByFail()
         {
             Booking booking = bookingsToReturn.First();
             Booking empty = null;
@@ -91,7 +91,7 @@ namespace BusinessLogic.Tests.Test
             Assert.AreEqual(booking, result); 
         }
         [TestMethod]
-         [ExpectedException(typeof(ArgumentException))]
+        [ExpectedException(typeof(ArgumentException))]
         public void TestAddExistError()
         {
             Booking booking = bookingsToReturn.First(); 

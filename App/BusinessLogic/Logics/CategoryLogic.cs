@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using BusinessLogic.Logics;
 using BusinessLogicInterface;
@@ -27,7 +28,14 @@ namespace BusinessLogic
         }
         public Category GetBy(int id)
         {
-            return this.categoryRepository.Find(id);
+            try
+            {
+                return this.categoryRepository.Find(id);
+            }
+            catch(ArgumentException)
+            {
+                return null;
+            }
         }
 
         public Category Add(Category Category)

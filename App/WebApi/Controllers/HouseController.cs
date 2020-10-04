@@ -22,8 +22,15 @@ namespace WebApi.Controllers
         [HttpGet("{id}",Name="GetHouse")]
         public IActionResult GetBy([FromRoute]int id)
         {
-            var elementHouse = this.houseLogic.GetBy(id);
-            return Ok(elementHouse);
+            try
+            {
+                var elementHouse = this.houseLogic.GetBy(id);
+                return Ok(elementHouse);
+            }
+            catch (ArgumentException)
+            {
+                return BadRequest("There is not a house with that id");
+            }
         }
         [HttpPost()]
         //The post should have HouseModel , but will leave it like this

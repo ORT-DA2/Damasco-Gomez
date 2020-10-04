@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using BusinessLogic.Logics;
 using BusinessLogicInterface;
@@ -26,7 +27,14 @@ namespace BusinessLogic
         }
         public TouristPoint GetBy(int id)
         {
-            return this.touristPointRepository.Find(id);
+            try
+            {
+                return this.touristPointRepository.Find(id);
+            }
+            catch(ArgumentException)
+            {
+                return null;
+            }
         }
 
         public TouristPoint Add(TouristPoint TouristPoint)

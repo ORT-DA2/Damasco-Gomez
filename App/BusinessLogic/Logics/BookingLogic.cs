@@ -1,4 +1,5 @@
 
+using System;
 using System.Collections.Generic;
 using BusinessLogicInterface;
 using DataAccessInterface.Repositories;
@@ -26,7 +27,14 @@ namespace BusinessLogic.Logics
         }
         public  Booking GetBy(int id)
         {
-            return this.bookingRepository.Find(id);
+            try
+            {
+                return this.bookingRepository.Find(id);
+            }
+            catch(ArgumentException)
+            {
+                return null;
+            }
         }
 
         public Booking Add(Booking Booking)
