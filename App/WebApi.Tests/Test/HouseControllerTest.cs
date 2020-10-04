@@ -281,5 +281,24 @@ namespace WebApi.Tests
             var houses = okResult.Value as IEnumerable<HouseSearchResultModel>;
             Assert.IsTrue(modelToReturn.SequenceEqual(houses));
         }
+        [TestMethod]
+        public void TestGetHousesByEmpty()
+        {
+            int idTP = 5;
+            string checkIn= "01/12/2020";
+            string checkOut= "21/12/2020";
+            int cantA = 2;
+            int cantC = 1;
+            int cantB = 0;
+            List<House> emptyHousesWithIdTP = new List<House>();
+            mock.Setup(mock=> mock.GetHousesBy(idTP,checkIn,checkOut,cantA,cantC,cantB)).Returns(emptyHousesWithIdTP);
+            IEnumerable<HouseSearchResultModel> emptyModelToReturn = emptyHousesWithIdTP.Select(m=>new HouseSearchResultModel(m,checkIn,checkOut,cantA,cantC,cantB)).ToList();
+            
+            var result = controller.GetHousesBy(idTP,checkIn,checkOut,cantA,cantC,cantB);
+            
+            var okResult = result as OkObjectResult;
+            var houses = okResult.Value as IEnumerable<HouseSearchResultModel>;
+            Assert.IsTrue(emptyModelToReturn.SequenceEqual(houses));
+        }
     }
 }
