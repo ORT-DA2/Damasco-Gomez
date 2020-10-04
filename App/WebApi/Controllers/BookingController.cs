@@ -22,8 +22,15 @@ namespace WebApi.Controllers
         [HttpGet("{id}",Name="GetBooking")]
         public IActionResult GetBy([FromRoute]int id)
         {
-            var elementBooking = this.bookingLogic.GetBy(id);
-            return Ok(elementBooking);
+            try
+            {
+                var elementBooking = this.bookingLogic.GetBy(id);
+                return Ok(elementBooking);
+            }
+            catch (ArgumentException)
+            {
+                return BadRequest("There is not a booking with that id");
+            }
         }
         [HttpPost()]
         //The post should have BookingModel , but will leave it like this
