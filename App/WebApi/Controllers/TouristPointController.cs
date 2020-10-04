@@ -2,6 +2,7 @@ using System;
 using BusinessLogicInterface;
 using Domain;
 using Microsoft.AspNetCore.Mvc;
+using Model.Out;
 
 namespace WebApi.Controllers
 {
@@ -24,7 +25,7 @@ namespace WebApi.Controllers
             try
             {
                 var elementTouristPoint = this.touristPointLogic.GetBy(id);
-                return Ok(elementTouristPoint);
+                return Ok(new TouristPointDetailInfoModel(elementTouristPoint));
             }
             catch (ArgumentException)
             {
