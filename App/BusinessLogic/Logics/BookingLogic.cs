@@ -27,14 +27,7 @@ namespace BusinessLogic.Logics
         }
         public  Booking GetBy(int id)
         {
-            try
-            {
-                return this.bookingRepository.Find(id);
-            }
-            catch(ArgumentException)
-            {
-                throw new ArgumentException();
-            }
+            return this.bookingRepository.Find(id);
         }
 
         public Booking Add(Booking Booking)

@@ -28,14 +28,7 @@ namespace BusinessLogic
         }
         public Category GetBy(int id)
         {
-            try
-            {
-                return this.categoryRepository.Find(id);
-            }
-            catch(ArgumentException)
-            {
-                return null;
-            }
+            return this.categoryRepository.Find(id);
         }
 
         public Category Add(Category Category)

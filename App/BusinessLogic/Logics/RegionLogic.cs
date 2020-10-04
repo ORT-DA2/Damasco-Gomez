@@ -27,14 +27,7 @@ namespace BusinessLogic
         }
         public Region GetBy(int id)
         {
-            try
-            {
-                return this.regionRepository.Find(id);
-            }
-            catch(ArgumentException)
-            {
-                return null;
-            }
+            return this.regionRepository.Find(id);
         }
 
         public Region Add(Region Region)
