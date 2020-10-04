@@ -112,13 +112,14 @@ namespace WebApi.Test
         {
             mock.Setup(m => m.Add(categoryId1)).Returns(categoryId1);
 
-            var result = controller.Post(categoryId1);
+            var result = controller.Post(categoryId1.ToEntity());
 
             var okResult = result as CreatedAtRouteResult;
             mock.VerifyAll();
             Assert.IsNotNull(okResult);
             Assert.AreEqual("GetCategory", okResult.RouteName);
-            Assert.AreEqual(okResult.Value, categoryId1);
+            Assert.AreEqual(okResult.Value,new CategoryDetailInfoModel(categoryId1) );
+            
         }
         [TestMethod]
         public void TestPostFailSameCategory()
