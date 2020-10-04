@@ -30,14 +30,15 @@ namespace DataAccess.Tests.Test
                 {
                     Id = 1,
                     Name = "House 1",
+                    TouristPointId= 1,
                 },
                 new House()
                 {
                     Id = 2,
                     Name = "House 2",
+                     TouristPointId= 2,
                 }
             };
-
             housesToReturn.ForEach(m => this.context.Add(m));
             this.context.SaveChanges();
             repositoryMaster = new RepositoryMaster(context);
@@ -219,6 +220,29 @@ namespace DataAccess.Tests.Test
             int id = 23123123;
 
             repository.Delete(id);
+        }
+        [TestMethod]
+        public void TestGetByIdTouristPointOk ()
+        {
+            int idTP = 1;
+             List <House> houses = new List<House>()
+            {
+                housesToReturn.First()
+            };
+
+            var result = repository.GetByIdTouristPoint(idTP);
+           
+            Assert.IsTrue(houses.SequenceEqual(result));
+        }
+        [TestMethod]
+        public void TestGetByIdTouristPointEmpty ()
+        {
+            int idTP = 3;
+            List <House> emptyHouses = new List<House>();
+
+            var result = repository.GetByIdTouristPoint(idTP);
+           
+            Assert.IsTrue(emptyHouses.SequenceEqual(result));
         }
     }
 }

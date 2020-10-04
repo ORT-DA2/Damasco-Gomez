@@ -12,7 +12,7 @@ namespace Model
 
          public int Id {get ; set ; }
 
-        public int TotalPrice {get; set;}
+        public double TotalPrice {get; set;}
 
         public int TouristPointId {get ; set; }
         public TouristPoint TouristPoint {get ; set; }
@@ -27,7 +27,7 @@ namespace Model
 
         public string Description {get ; set;}
 
-        public HouseSearchResultModel(House house) 
+        public HouseSearchResultModel(House house, string checkIn, string checkOut,int cantA, int cantC,int cantB) 
         {
             this.Id= house.Id;
             this.TouristPoint = house.TouristPoint;
@@ -37,6 +37,30 @@ namespace Model
             this.Address= house.Address;
             this.Ilustrations= house.Ilustrations;
             this.Description= house.Description;
+            this.TotalPrice= house.CalculateTotalPrice(cantA,cantC,cantB);
+            this.CheckIn= checkIn;
+            this.CheckOut = checkOut;
+        }
+        public override bool Equals(object obj)
+        {
+            var result = false;
+            
+            if(obj is HouseSearchResultModel house)
+            {
+                result = this.Id == house.Id ;
+            }
+
+            return result;
+        }
+
+        public override int GetHashCode()
+        {
+            return base.GetHashCode();
+        }
+
+        public override string ToString()
+        {
+            return base.ToString();
         }
 
     }

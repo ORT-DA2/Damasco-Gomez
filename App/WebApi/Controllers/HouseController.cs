@@ -1,7 +1,10 @@
 using System;
+using System.Collections.Generic;
+using System.Linq;
 using BusinessLogicInterface;
 using Domain;
 using Microsoft.AspNetCore.Mvc;
+using Model;
 
 namespace WebApi.Controllers
 {
@@ -82,12 +85,13 @@ namespace WebApi.Controllers
             this.houseLogic.Delete();
             return Ok();
         }
-        // [HttpGet("{idTP,checkIn,checkOut,cantA,cantC,cantB}")]
-        // public IActionResult GetHousesBy([FromRoute]int idTP,[FromRoute]string checkIn,[FromRoute] string checkOut,[FromRoute] int cantA,[FromRoute] int cantC,[FromRoute] int cantB)
-        // {
-
-        //     var housesModel = this.houseLogic.GetHousesBy(idTP,checkIn,checkOut,cantA,cantC,cantB);
-        //     return Ok(housesModel);
-        // }
+        [HttpGet("{idTP,checkIn,checkOut,cantA,cantC,cantB}") ]
+        public IActionResult GetHousesBy([FromRoute] int idTP,[FromRoute]string checkIn,[FromRoute] string checkOut,[FromRoute] int cantA,[FromRoute] int cantC,[FromRoute] int cantB)
+        {
+            var varRet = this.houseLogic.GetHousesBy(idTP,checkIn,checkOut,cantA,cantC,cantB);
+            var result = varRet.Select(m => new HouseSearchResultModel(m,checkIn,checkOut,cantA,cantC,cantB)).ToList();
+            return Ok(result);
+           
+        }
     }
 }

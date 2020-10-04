@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using DataAccessInterface.Repositories;
 using Domain;
 using Microsoft.EntityFrameworkCore;
+using Model;
 
 namespace DataAccess.Repositories
 {
@@ -34,9 +35,12 @@ namespace DataAccess.Repositories
             // bool nameNotNull = element.Name.Equals("");
             // bool addressNotNull = !element.Equals("");
         }
-        // public IEnumerable<HouseSearchResultModel> GetByIdTouristPoint(int idTP)
-        // {
-        //     return this.repository.GetElementsInContext().FindAll(kz=>kz.TouristPointId==idTP);
-        // }
+        public IEnumerable<House> GetByIdTouristPoint(int idTP)
+        {
+            var result = this.repository.GetElementsInContext();
+            var resultToReturn = result.FindAll(kz=>kz.TouristPointId==idTP);
+             return resultToReturn;
+        }
     }
 }
+

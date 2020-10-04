@@ -255,5 +255,15 @@ namespace Domain.Test.Test
 
             Assert.AreEqual(newHouse.Contact, house.Contact);
         }
+        [TestMethod]
+        public void TestCalculateTotalPrice()
+        {
+            double totalPriceToReturn = 200;
+            int cantAdults = 2; 
+            int cantChildrens = 0;
+            int cantBabys = 0;
+            double totalPriceResult = house.CalculateTotalPrice(cantAdults,cantChildrens,cantBabys);
+            Assert.AreEqual(totalPriceResult , totalPriceToReturn);
+        }
     }
 }
