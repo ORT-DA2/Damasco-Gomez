@@ -26,8 +26,8 @@ namespace DataAccess.Repositories
             {
                 throw new ArgumentException("Price per night should be bigger than 0");
             }
-            bool starts = element.Starts < 0 || element.Starts > 6  ;
-            if (starts)
+            bool startsCorrect = element.Starts > 0 && element.Starts < 6  ;
+            if (!startsCorrect)
             {
                 throw new ArgumentException("Starts number is between 1 and 5");
             }

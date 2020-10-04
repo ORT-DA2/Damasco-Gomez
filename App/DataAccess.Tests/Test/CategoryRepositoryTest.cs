@@ -64,7 +64,7 @@ namespace DataAccess.Tests.Test
         [ExpectedException(typeof(ArgumentException))]
         public void TestAddFailValidate()
         {
-            Category category = new Category(){Id = 1, Name="name new"};
+            Category category = new Category(){Id = 1, Name=""};
 
             repository.Add(category);
         }

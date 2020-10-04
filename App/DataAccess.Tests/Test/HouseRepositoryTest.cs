@@ -53,7 +53,13 @@ namespace DataAccess.Tests.Test
         [TestMethod]
         public void TestAdd()
         {
-            House house = new House(){Id = 123, Name="name new",PricePerNight=11,Starts=2};
+            House house = new House()
+            {
+                Id = 123,
+                Name="name new",
+                PricePerNight=11,
+                Starts=2
+            };
             HouseRepository repo = new HouseRepository(this.repositoryMaster);
             int cantRepo = this.repository.GetElements().Count();
 
@@ -63,17 +69,29 @@ namespace DataAccess.Tests.Test
         }
         [TestMethod]
         [ExpectedException(typeof(ArgumentException))]
-        public void TestAddFailValidate()
+        public void TestAddFailValidateStars0()
         {
-            House house = new House(){Id = 123, Name="name new",PricePerNight=11,Starts=0};
+            House house = new House()
+            {
+                Id = 123,
+                Name="name new",
+                PricePerNight=11,
+                Starts=0
+            };
 
             repository.Add(house);
         }
         [TestMethod]
         [ExpectedException(typeof(ArgumentException))]
-        public void TestAddFailValidate2()
+        public void TestAddFailValidateStars6()
         {
-            House house = new House(){Id = 123, Name="name new",PricePerNight=11,Starts=8};
+            House house = new House()
+            {
+                Id = 123,
+                Name="name new",
+                PricePerNight=11,
+                Starts=8
+            };
 
             repository.Add(house);
         }
