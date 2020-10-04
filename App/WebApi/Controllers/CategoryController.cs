@@ -3,6 +3,7 @@ using System.Linq;
 using BusinessLogicInterface;
 using Domain;
 using Microsoft.AspNetCore.Mvc;
+using Model.In;
 using Model.Out;
 
 namespace WebApi.Controllers
@@ -36,13 +37,12 @@ namespace WebApi.Controllers
             }
         }
         [HttpPost()]
-        //The post should have CategoryModel , but will leave it like this
-        public IActionResult Post([FromBody]Category category)
+        public IActionResult Post([FromBody]CategoryModel categoryModel)
         {
             try
             {
-                var categoryAdded = this.categoryLogic.Add(category);
-                return CreatedAtRoute("GetCategory", new {Id = categoryAdded.Id} , categoryAdded);
+                var categoryAdded = this.categoryLogic.Add(categoryModel.ToEntity());
+                return CreatedAtRoute("GetCategory", new {Id = categoryAdded.Id} ,new CategoryDetailInfoModel(categoryAdded));
             }
             catch (AggregateException)
             {
