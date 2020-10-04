@@ -33,7 +33,7 @@ namespace BusinessLogic.Logics
             }
             catch(ArgumentException)
             {
-                throw new ArgumentException("No booking with that id");
+                return null;
             }
         }
 
