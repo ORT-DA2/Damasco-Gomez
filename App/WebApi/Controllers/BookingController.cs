@@ -38,8 +38,8 @@ namespace WebApi.Controllers
         {
             try
             {
-                this.bookingLogic.Add(booking);
-                return CreatedAtRoute("GetBooking", booking.Id, booking);
+                var bookingAdded = this.bookingLogic.Add(booking);
+                return CreatedAtRoute("GetBooking", new {Id = bookingAdded.Id} , bookingAdded);
             }
             catch (AggregateException)
             {
@@ -61,7 +61,7 @@ namespace WebApi.Controllers
             try
             {
                 this.bookingLogic.Update(id, booking);
-                return CreatedAtRoute("GetBooking", booking.Id, booking);
+                return CreatedAtRoute("GetBooking", new {Id = booking.Id} , booking);
                 //return Ok(booking);
             }
             catch(ArgumentException)

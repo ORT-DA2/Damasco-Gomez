@@ -41,8 +41,8 @@ namespace WebApi.Controllers
         {
             try
             {
-                this.categoryLogic.Add(category);
-                return CreatedAtRoute("GetCategory", category.Id, category);
+                var categoryAdded = this.categoryLogic.Add(category);
+                return CreatedAtRoute("GetCategory", new {Id = categoryAdded.Id} , categoryAdded);
             }
             catch (AggregateException)
             {
@@ -64,7 +64,7 @@ namespace WebApi.Controllers
             try
             {
                 this.categoryLogic.Update(id,category);
-                return CreatedAtRoute("GetCategory", category.Id, category);
+                return CreatedAtRoute("GetCategory", new {Id = category.Id} , category);
             }
             catch(ArgumentException)
             {

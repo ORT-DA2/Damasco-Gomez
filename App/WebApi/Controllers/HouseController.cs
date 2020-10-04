@@ -64,7 +64,7 @@ namespace WebApi.Controllers
             try
             {
                 this.houseLogic.Update(id,house);
-                return CreatedAtRoute("GetHouse", house.Id, house);
+                return CreatedAtRoute("GetHouse", new {Id = house.Id} , house);
                 //return Ok(house);
             }
             catch(ArgumentException)
