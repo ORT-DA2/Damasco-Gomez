@@ -58,13 +58,14 @@ namespace WebApi.Controllers
             }
         }
         [HttpPut("{id}")]
-        //The put should have CategoryModel , but will leave it like this
-        public IActionResult Put([FromRoute]int id,[FromBody]Category category)
+        public IActionResult Put([FromRoute]int id,[FromBody]CategoryModel categoryModel)
         {
             try
             {
-                this.categoryLogic.Update(id,category);
-                return CreatedAtRoute("GetCategory", new {Id = category.Id} , category);
+                var newCategory = categoryModel.ToEntity();
+                this.categoryLogic.Update(id,newCategory);
+                return CreatedAtRoute("GetCategory", new {Id = newCategory.Id} ,new CategoryDetailInfoModel(newCategory)));
+
             }
             catch(ArgumentException e)
             {
