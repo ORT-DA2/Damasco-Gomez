@@ -12,7 +12,7 @@ namespace Domain
         public int PricePerNight {get; set;}
 
         public int TouristPointId {get ; set; }
-        public TouristPoint TouristPoint {get ; set; }
+        public virtual TouristPoint TouristPoint {get ; set; }
 
         public string Name {get ; set; }
 

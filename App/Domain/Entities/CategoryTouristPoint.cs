@@ -5,9 +5,9 @@ namespace Domain.Entities
         public int Id {get; set;}
 
         public int CategoryId {get; set;}
-        public Category Category {get; set;}
+        public virtual Category Category {get; set;}
         public int TouristPointId {get; set;}
-        public TouristPoint TouristPoint {get; set;}
+        public virtual TouristPoint TouristPoint {get; set;}
 
         public override bool Equals(object obj)
         {

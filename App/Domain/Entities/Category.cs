@@ -9,7 +9,7 @@ namespace Domain
 
         public string Name {get; set;}
 
-        public  List<CategoryTouristPoint>  CategoryTouristPoints {get; set;}
+        public virtual List<CategoryTouristPoint>  CategoryTouristPoints {get; set;}
         
         public override bool Equals(object obj)
         {

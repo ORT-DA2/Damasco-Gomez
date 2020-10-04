@@ -27,7 +27,8 @@ namespace DataAccess.Context
                 .AddJsonFile("appsettings.json")
                 .Build();
                 var connectionString = configuration.GetConnectionString(@"VidlyDB");
-                optionsBuilder.UseSqlServer(connectionString);
+                optionsBuilder.UseSqlServer(connectionString).UseLazyLoadingProxies();
+
             }
         }
     }

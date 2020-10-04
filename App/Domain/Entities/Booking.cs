@@ -13,7 +13,7 @@ namespace Domain
         public string Code {get; set;}
 
         public int HouseId {get; set;}
-        public House House {get; set;}
+        public virtual House House {get; set;}
 
         public string State {get; set;}
 
