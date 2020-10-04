@@ -8,19 +8,19 @@ using Moq;
 
 namespace BusinessLogic.Tests.Test
 {
-     [TestClass]
+    [TestClass]
     public class CategoryLogicTest
     {
         private  List<Category> categoryToReturn;
         private  List<Category>  emptyCategorys;
         private CategoryLogic categoryLogic;
-         private Mock<ICategoryRepository> mock;
+        private Mock<ICategoryRepository> mock;
         private List<Category> categoriesToReturn;
 
         [TestInitialize]
         public void initVariables()
         {
-             categoriesToReturn = new List<Category>()
+            categoriesToReturn = new List<Category>()
             {
                 new Category()
                 {
@@ -43,7 +43,7 @@ namespace BusinessLogic.Tests.Test
         {
             Assert.IsTrue(true);
         }
-         [TestMethod]
+        [TestMethod]
         public void DeleteTestByIdOk()
         {
             Assert.IsTrue(true);
@@ -51,7 +51,7 @@ namespace BusinessLogic.Tests.Test
         [TestMethod]
         public void GetByTestOk()
         {
-             Category category = categoriesToReturn.First();
+            Category category = categoriesToReturn.First();
             mock.Setup(m => m.Find(category.Id)).Returns(category);
 
             var result = categoryLogic.GetBy(category.Id);
@@ -59,7 +59,7 @@ namespace BusinessLogic.Tests.Test
             mock.VerifyAll();
             Assert.AreEqual(result,category);
         }
-         [TestMethod]
+        [TestMethod]
          public void TestGetByFail()
         {
             Category category = categoriesToReturn.First();
@@ -79,7 +79,7 @@ namespace BusinessLogic.Tests.Test
         
             Assert.AreEqual(category, result );
         }
-         [TestMethod]
+        [TestMethod]
         public void TestAddValidateError()
         {
             Category category = categoriesToReturn.First(); // Category tiene que terner un formato erroneo despues para que la validación falle
@@ -90,7 +90,7 @@ namespace BusinessLogic.Tests.Test
             Assert.AreEqual(category, result); 
         }
         [TestMethod]
-         [ExpectedException(typeof(ArgumentException))]
+        [ExpectedException(typeof(ArgumentException))]
         public void TestAddExistError()
         {
             Category category = categoriesToReturn.First(); 
@@ -109,7 +109,7 @@ namespace BusinessLogic.Tests.Test
 
             mock.VerifyAll();
         }
-         [TestMethod]
+        [TestMethod]
         public void TestUpdateValidateError()
         {
             Category category = categoriesToReturn.First();// Category tiene que terner un formato erroneo despues para que la validación falle
@@ -126,10 +126,10 @@ namespace BusinessLogic.Tests.Test
             Category category = categoriesToReturn.First();
             ArgumentException exception = new ArgumentException();
             mock.Setup(m => m.Update(category.Id,category)).Throws(exception);
-            
+
             categoryLogic.Update(category.Id,category);
         }
-          [TestMethod]
+        [TestMethod]
         public void TestExistOk()
         {
             Category category = categoriesToReturn.First();
@@ -149,7 +149,5 @@ namespace BusinessLogic.Tests.Test
             mock.VerifyAll();
             Assert.IsFalse(result);
         }
-    
-        
     }
 }

@@ -30,7 +30,14 @@ namespace BusinessLogic
         }
         public House GetBy(int id)
         {
-            return this.houseRepository.Find(id);
+            try
+            {
+                return this.houseRepository.Find(id);
+            }
+            catch(ArgumentException)
+            {
+                return null;
+            }
         }
 
         public House Add(House House)
