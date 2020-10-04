@@ -53,6 +53,9 @@ namespace WebApi.Test
             categoryId1 = categoriesToReturn.First();
             mock = new Mock<ICategoryLogic>(MockBehavior.Strict);
             controller = new CategoryController(mock.Object);
+
+           
+
         }
         [TestMethod]
         public void TestGetAllCategoriesOk()
@@ -62,9 +65,9 @@ namespace WebApi.Test
             var result = controller.Get();
 
             var okResult = result as OkObjectResult;
-            var categories = okResult.Value as IEnumerable<CategoryBasicInfoModel>;
+            var categories = okResult.Value as IEnumerable<CategoryDetailInfoModel>;
             mock.VerifyAll();
-            Assert.IsTrue(categoriesToReturn.Select(n => new CategoryBasicInfoModel(n)).SequenceEqual(categories));
+            Assert.IsTrue(categoriesToReturn.Select(n => new CategoryDetailInfoModel(n)).SequenceEqual(categories));
         }
 
         [TestMethod]
