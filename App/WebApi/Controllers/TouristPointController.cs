@@ -34,13 +34,16 @@ namespace WebApi.Controllers
             }
         }
         [HttpPost()]
-        public IActionResult Post([FromBody]TouristPoint touristPoint)
+        public IActionResult Post([FromBody]TouristPointModel touristPoint)
         {
             try
             {
-                var touristPointAdded = this.touristPointLogic.Add(touristPoint);
+                var touristPointAdded = this.touristPointLogic.Add(touristPoint.ToEntity());
                 var routePost = CreatedAtRoute("GetTouristPoint", new {Id = touristPointAdded.Id} , touristPointAdded);
                 return routePost;
+                /*var cateogry = this.categoriesLogic.Add(categoryModel.ToEntity());
+                return CreatedAtRoute("GetCategory", new {id = cateogry.Id },
+                    new CategoryDetailInfoModel(cateogry));*/
             }
             catch (ArgumentException e)
             {

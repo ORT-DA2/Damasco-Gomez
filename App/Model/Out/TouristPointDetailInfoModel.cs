@@ -1,3 +1,4 @@
+using System.Collections.Generic;
 using System.Linq;
 using Domain;
 
@@ -13,8 +14,8 @@ namespace Model.Out
         public string Description {get; set;}
 
         public int RegionId {get; set;}
-        //public virtual  List<CategoryTouristPoint> CategoriesTouristPoints {get; set;}
-        //public virtual  List<CategoryTouristPointDetailInfoModel> CategoriesTouristPoints {get; set;} ?????
+       public virtual  List<CategoryDetailInfoModel> Categories {get; set;}
+    
 
         public TouristPointDetailInfoModel(TouristPoint touristPoint)
         {
@@ -23,7 +24,7 @@ namespace Model.Out
             this.Image = touristPoint.Image;
             this.Description = touristPoint.Description;
             this.RegionId = touristPoint.RegionId;
-            //this.CategoriesTouristPoints = touristPoint.CategoriesTouristPoints.Select(m=>new TouristPointDetailInfoModel(m.TouristPoint)).ToList();
+            this.Categories = touristPoint.CategoriesTouristPoints.Select(m=>new CategoryDetailInfoModel(m.Category)).ToList();
 
         }
 
