@@ -22,8 +22,15 @@ namespace WebApi.Controllers
         [HttpGet("{id}",Name="GetPerson")]
         public IActionResult GetBy([FromRoute]int id)
         {
-            var elementPerson = this.personLogic.GetBy(id);
-            return Ok(elementPerson);
+            try
+            {
+                var elementPerson = this.personLogic.GetBy(id);
+                return Ok(elementPerson);
+            }
+            catch (ArgumentException)
+            {
+                return BadRequest("There is not a booking with that id");
+            }
         }
         [HttpPost()]
         //The post should have PersonModel , but will leave it like this
