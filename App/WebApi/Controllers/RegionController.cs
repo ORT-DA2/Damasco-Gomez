@@ -23,8 +23,15 @@ namespace WebApi.Controllers
         [HttpGet( "{id}" , Name="GetRegion" )]
         public IActionResult GetBy([FromRoute]int id)
         {
-            var elementRegion = this.regionLogic.GetBy(id);
-            return Ok(elementRegion);
+            try
+            {
+                var elementRegion = this.regionLogic.GetBy(id);
+                return Ok(elementRegion);
+            }
+            catch (ArgumentException)
+            {
+                return BadRequest("There is not a booking with that id");
+            }
         }
         [HttpPost()]
         public IActionResult Post([FromBody]Region region)
