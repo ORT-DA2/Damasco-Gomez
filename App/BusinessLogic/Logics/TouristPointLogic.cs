@@ -36,7 +36,7 @@ namespace BusinessLogic
         public TouristPoint Add(TouristPoint touristPoint)
         {
             var touristPointAdded = this.touristPointRepository.Add(touristPoint);
-            touristPointAdded.CategoriesTouristPoints.ForEach(m=>m.Category = this.categoryLogic.GetBy(m.CategoryId));
+            touristPointAdded.CategoriesTouristPoints.ForEach(m=>m.Category = this.categoryLogic.GetBy(m.CategoryId)); // revisar acáaaa
             return touristPoint;
         }
         public void Update(int id, TouristPoint TouristPoint)

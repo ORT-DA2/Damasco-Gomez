@@ -53,13 +53,13 @@ namespace WebApi.Controllers
             }
         }
         [HttpPut("{id}")]
-        //The put should have TouristPointModel , but will leave it like this
-        public IActionResult Put([FromRoute]int id,[FromBody]TouristPoint touristPoint)
+        public IActionResult Put([FromRoute]int id,[FromBody]TouristPointModel touristPoint)
         {
             try
             {
-                this.touristPointLogic.Update(id,touristPoint);
-                return CreatedAtRoute("GetTouristPoint", new {id =touristPoint.Id} ,touristPoint);
+                var touristPointAdded = touristPoint.ToEntity();
+                this.touristPointLogic.Update(id,touristPointAdded);
+                return CreatedAtRoute("GetTouristPoint", new {id =touristPointAdded.Id} ,new TouristPointDetailInfoModel(touristPointAdded));
                 
             }
             catch(ArgumentException e )
