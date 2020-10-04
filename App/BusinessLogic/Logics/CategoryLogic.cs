@@ -4,15 +4,18 @@ using BusinessLogic.Logics;
 using BusinessLogicInterface;
 using DataAccessInterface.Repositories;
 using Domain;
+using Model.Out;
 
 namespace BusinessLogic
 {
     public class CategoryLogic :  ICategoryLogic
     {
         private readonly ICategoryRepository categoryRepository;
-        public CategoryLogic(ICategoryRepository categoryRepository)
+        private readonly ITouristPointLogic touristPointLogic;
+        public CategoryLogic(ICategoryRepository categoryRepository,ITouristPointLogic touristPointLogic)
         {
             this.categoryRepository = categoryRepository;
+            this.touristPointLogic = touristPointLogic;
         }
 
          public void Delete()
@@ -33,7 +36,9 @@ namespace BusinessLogic
 
         public Category Add(Category Category)
         {
-            return this.categoryRepository.Add(Category);
+            var categoryAdded =  this.categoryRepository.Add(Category);
+            categoryAdded.CategoryTouristPoints.ForEach(m=>m.TouristPoint = this.touristPointLogic.GetBy(m.TouristPointId));
+            return Category;
         }
         public void Update(int id,Category Category)
         {
