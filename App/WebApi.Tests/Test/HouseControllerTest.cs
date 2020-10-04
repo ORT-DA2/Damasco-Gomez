@@ -5,6 +5,7 @@ using BusinessLogicInterface;
 using Domain;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
+using Model;
 using Moq;
 using WebApi.Controllers;
 
@@ -271,15 +272,14 @@ namespace WebApi.Tests
             {
                 housesToReturn.First(),
             };
-
             mock.Setup(mock=> mock.GetHousesBy(idTP,checkIn,checkOut,cantA,cantC,cantB)).Returns(housesWithIdTP);
-          
+            IEnumerable<HouseSearchResultModel> modelToReturn = housesWithIdTP.Select(m=>new HouseSearchResultModel(m,checkIn,checkOut,cantA,cantC,cantB)).ToList();
+            
             var result = controller.GetHousesBy(idTP,checkIn,checkOut,cantA,cantC,cantB);
-
+            
             var okResult = result as OkObjectResult;
-            var houses = okResult.Value as IEnumerable<House>;
-            mock.VerifyAll();
-            Assert.IsTrue(housesWithIdTP.Equals(houses));
+            var houses = okResult.Value as IEnumerable<HouseSearchResultModel>;
+            Assert.IsTrue(modelToReturn.SequenceEqual(houses));
         }
     }
 }

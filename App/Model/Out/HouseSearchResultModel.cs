@@ -41,6 +41,27 @@ namespace Model
             this.CheckIn= checkIn;
             this.CheckOut = checkOut;
         }
+        public override bool Equals(object obj)
+        {
+            var result = false;
+            
+            if(obj is HouseSearchResultModel house)
+            {
+                result = this.Id == house.Id ;
+            }
+
+            return result;
+        }
+
+        public override int GetHashCode()
+        {
+            return base.GetHashCode();
+        }
+
+        public override string ToString()
+        {
+            return base.ToString();
+        }
 
     }
 }
