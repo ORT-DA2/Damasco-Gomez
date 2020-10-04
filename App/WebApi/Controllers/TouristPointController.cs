@@ -1,4 +1,5 @@
 using System;
+using System.Linq;
 using BusinessLogicInterface;
 using Domain;
 using Microsoft.AspNetCore.Mvc;
@@ -17,7 +18,7 @@ namespace WebApi.Controllers
         public IActionResult Get()
         {
             var elementTouristPoint = this.touristPointLogic.GetAll();
-            return Ok(elementTouristPoint);
+            return Ok(elementTouristPoint.Select(m=> new TouristPointDetailInfoModel(m)).ToList());
         }
         [HttpGet("{id}",Name="GetTouristPoint")]
         public IActionResult GetBy([FromRoute]int id)
@@ -33,7 +34,6 @@ namespace WebApi.Controllers
             }
         }
         [HttpPost()]
-        //The post should have TouristPointModel , but will leave it like this
         public IActionResult Post([FromBody]TouristPoint touristPoint)
         {
             try
