@@ -29,7 +29,7 @@ namespace WebApi.Controllers
             }
             catch (ArgumentException)
             {
-                return BadRequest("There is not a booking with that id");
+                return BadRequest("There is not a tourist point with that id");
             }
         }
         [HttpPost()]
