@@ -93,7 +93,7 @@ namespace WebApi.Test
             var okResult = result as OkObjectResult;
             var categories = okResult.Value as Category;
             mock.VerifyAll();
-            Assert.IsTrue(categories.Equals(categoryId1));
+            Assert.IsTrue(new CategoryDetailInfoModel(categories).Equals(categoryId1));
         }
         [TestMethod]
         public void TestGetByNotFound()
