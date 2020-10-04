@@ -14,7 +14,7 @@ namespace DataAccess.Repositories
             Validate(element);
             if (ExistElement(element))
             {
-                throw new ArgumentException();
+                throw new ArgumentException("This element already exist");
             }
             return repository.AddInContext(element);
         }
