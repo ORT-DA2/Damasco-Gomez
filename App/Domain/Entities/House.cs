@@ -64,5 +64,10 @@ namespace Domain
             if(element.Contact != null) elementToUpdate.Contact = element.Contact;
         }
 
+        public static bool IsAvailable(House house)
+        {
+            return house.Avaible;
+        }
+
     }
 }
