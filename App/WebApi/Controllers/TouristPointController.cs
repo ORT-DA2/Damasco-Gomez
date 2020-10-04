@@ -18,7 +18,6 @@ namespace WebApi.Controllers
             var elementTouristPoint = this.touristPointLogic.GetAll();
             return Ok(elementTouristPoint);
         }
-
         [HttpGet("{id}",Name="GetTouristPoint")]
         public IActionResult GetBy([FromRoute]int id)
         {
@@ -58,7 +57,8 @@ namespace WebApi.Controllers
             try
             {
                 this.touristPointLogic.Update(id,touristPoint);
-                return CreatedAtRoute("GetTouristPoint", new { Id = touristPoint.Id }, touristPoint);
+                return CreatedAtRoute("GetTouristPoint", new {id =touristPoint.Id} ,touristPoint);
+                
             }
             catch(ArgumentException e )
             {
