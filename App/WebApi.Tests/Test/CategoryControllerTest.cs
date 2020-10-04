@@ -78,9 +78,9 @@ namespace WebApi.Test
             var result = controller.Get();
 
             var okResult = result as OkObjectResult;
-            var categories = okResult.Value as IEnumerable<CategoryBasicInfoModel>;
+            var categories = okResult.Value as IEnumerable<CategoryDetailInfoModel>;
             mock.VerifyAll();
-            Assert.IsTrue(categoriesToReturnEmpty.Select(n => new CategoryBasicInfoModel(n)).SequenceEqual(categories));
+            Assert.IsTrue(categoriesToReturnEmpty.Select(n => new CategoryDetailInfoModel(n)).SequenceEqual(categories));
         }
         [TestMethod]
         public void TestGetByOk()
