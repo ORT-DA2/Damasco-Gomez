@@ -54,7 +54,20 @@ namespace WebApi.Tests
                     Image = "Image2",
                     Description = "Description 2",
                     Region = null ,
-                    CategoriesTouristPoints = null,
+                    CategoriesTouristPoints = new List<CategoryTouristPoint>()
+                    {
+                        new CategoryTouristPoint()
+                        {
+                            Id = 1,
+                            CategoryId = 2,
+                            Category = new Category()
+                            {
+                                Id = 2,
+                            },
+                            TouristPointId = 1,
+                            TouristPoint = new TouristPoint(){ Id = 1}
+                        }
+                    },
                 },
                 new TouristPoint()
                 {
@@ -63,7 +76,20 @@ namespace WebApi.Tests
                     Image = "Image3",
                     Description = "Description 3",
                     Region = null ,
-                    CategoriesTouristPoints = null,
+                    CategoriesTouristPoints = new List<CategoryTouristPoint>()
+                    {
+                        new CategoryTouristPoint()
+                        {
+                            Id = 1,
+                            CategoryId = 2,
+                            Category = new Category()
+                            {
+                                Id = 2,
+                            },
+                            TouristPointId = 1,
+                            TouristPoint = new TouristPoint(){ Id = 1}
+                        }
+                    },
                 },
                 new TouristPoint()
                 {
@@ -72,7 +98,20 @@ namespace WebApi.Tests
                     Image = "Image4",
                     Description = "Description 4",
                     Region = null ,
-                    CategoriesTouristPoints = null,
+                    CategoriesTouristPoints = new List<CategoryTouristPoint>()
+                    {
+                        new CategoryTouristPoint()
+                        {
+                            Id = 1,
+                            CategoryId = 2,
+                            Category = new Category()
+                            {
+                                Id = 2,
+                            },
+                            TouristPointId = 1,
+                            TouristPoint = new TouristPoint(){ Id = 1}
+                        }
+                    },
                 }
             };
             touristPointsToReturnEmpty = new List<TouristPoint>();
@@ -84,13 +123,19 @@ namespace WebApi.Tests
         public void TestGetAllTouristPointsOk()
         {
             mock.Setup(m => m.GetAll()).Returns(touristPointsToReturn);
+            List<TouristPointDetailInfoModel> modelList = new List<TouristPointDetailInfoModel>();
+            foreach (var touristPoint in touristPointsToReturn)
+            {
+                var model = new TouristPointDetailInfoModel(touristPoint);
+                modelList.Add(model);
+            }
 
             var result = controller.Get();
             var okResult = result as OkObjectResult;
-            var touristPoints = okResult.Value as IEnumerable<TouristPoint>;
+            var touristPoints = okResult.Value as IEnumerable<TouristPointDetailInfoModel>;
 
             mock.VerifyAll();
-            Assert.IsTrue(touristPointsToReturn.SequenceEqual(touristPoints));
+            Assert.IsTrue(modelList.SequenceEqual(touristPoints));
         }
 
         [TestMethod]
