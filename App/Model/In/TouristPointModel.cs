@@ -14,7 +14,7 @@ namespace Model.In
         public string Description {get; set;}
 
         public int RegionId {get; set;}
-        public virtual  IEnumerable<int> CategoriesTouristPoints {get; set;}
+        public virtual  IEnumerable<int> Categories {get; set;}
 
         public TouristPoint ToEntity()
         {
@@ -24,7 +24,7 @@ namespace Model.In
                 Image = this.Image,
                 Description = this.Description,
                 RegionId = this.RegionId,
-                CategoriesTouristPoints = this.CategoriesTouristPoints.Select(m => new CategoryTouristPoint()
+                CategoriesTouristPoints = this.Categories.Select(m => new CategoryTouristPoint()
                 {
                     CategoryId = m
                 }).ToList()
