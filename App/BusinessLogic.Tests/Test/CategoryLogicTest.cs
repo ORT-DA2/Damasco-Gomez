@@ -1,7 +1,6 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using BusinessLogicInterface;
 using DataAccessInterface.Repositories;
 using Domain;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
@@ -36,7 +35,7 @@ namespace BusinessLogic.Tests.Test
             };
             emptyCategorys = new List<Category>();
             mock = new Mock<ICategoryRepository>(MockBehavior.Strict);
-            var mock2 = new Mock<ITouristPointLogic>(MockBehavior.Strict);
+            var mock2 = new Mock<ITouristPointRepository>(MockBehavior.Strict);
             categoryLogic = new CategoryLogic(mock.Object,mock2.Object);
         }
 

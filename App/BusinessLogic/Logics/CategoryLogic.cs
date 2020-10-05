@@ -1,6 +1,5 @@
 using System;
 using System.Collections.Generic;
-using BusinessLogic.Logics;
 using BusinessLogicInterface;
 using DataAccessInterface.Repositories;
 using Domain;
@@ -11,11 +10,11 @@ namespace BusinessLogic
     public class CategoryLogic :  ICategoryLogic
     {
         private readonly ICategoryRepository categoryRepository;
-        private readonly ITouristPointLogic touristPointLogic;
-        public CategoryLogic(ICategoryRepository categoryRepository,ITouristPointLogic touristPointLogic)
+        private readonly ITouristPointRepository touristPointRepository;
+        public CategoryLogic(ICategoryRepository categoryRepository,ITouristPointRepository touristPointRepository)
         {
             this.categoryRepository = categoryRepository;
-            this.touristPointLogic = touristPointLogic;
+            this.touristPointRepository = touristPointRepository;
         }
 
          public void Delete()
@@ -42,7 +41,7 @@ namespace BusinessLogic
                 if (category.CategoryTouristPoints != null)
                 {
                     categoryAdded.CategoryTouristPoints.ForEach(
-                    m => m.TouristPoint = this.touristPointLogic.GetBy(m.TouristPointId)
+                    m => m.TouristPoint = this.touristPointRepository.Find(m.TouristPointId)
                     );
                 }
                 return category;

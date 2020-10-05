@@ -2,7 +2,6 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using BusinessLogic.Logics;
-using BusinessLogicInterface;
 using DataAccessInterface.Repositories;
 using Domain;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
@@ -40,8 +39,8 @@ namespace BusinessLogic.Tests.Test
             House newHouse = new House() {Id = 1};
             emptyBookings = new List<Booking>();
             mock = new Mock<IBookingRepository>(MockBehavior.Strict);
-            var mock2 = new Mock<IHouseLogic>(MockBehavior.Strict);
-            mock2.Setup(c => c.GetBy(newHouse.Id)).Returns(newHouse);
+            var mock2 = new Mock<IHouseRepository>(MockBehavior.Strict);
+            mock2.Setup(c => c.Find(newHouse.Id)).Returns(newHouse);
             bookingLogic = new BookingLogic(mock.Object,mock2.Object);
         }
         [TestMethod]
@@ -115,7 +114,7 @@ namespace BusinessLogic.Tests.Test
             };
             mock.Setup(m => m.Update(id,booking.ToEntity()));
 
-            bookingLogic.Update(id, booking);
+            bookingLogic.Update(id, booking.ToEntity());
 
             mock.VerifyAll();
         }
@@ -129,7 +128,7 @@ namespace BusinessLogic.Tests.Test
             };// Booking tiene que terner un formato erroneo despues para que la validación falle
             mock.Setup(m => m.Update(id,booking.ToEntity()));
 
-            bookingLogic.Update(id,booking);
+            bookingLogic.Update(id,booking.ToEntity());
 
             mock.VerifyAll();
         }
@@ -145,7 +144,7 @@ namespace BusinessLogic.Tests.Test
             };
             mock.Setup(m => m.Update(id, booking.ToEntity())).Throws(exception);
 
-            bookingLogic.Update(id,booking);
+            bookingLogic.Update(id,booking.ToEntity());
         }
         [TestMethod]
         public void TestExistOk()

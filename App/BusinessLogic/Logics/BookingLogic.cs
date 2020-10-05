@@ -11,11 +11,11 @@ namespace BusinessLogic.Logics
     public class BookingLogic : IBookingLogic
     {
         private readonly IBookingRepository bookingRepository;
-        private readonly IHouseLogic houseLogic;
-        public BookingLogic(IBookingRepository bookingRepository, IHouseLogic houseLogic)
+        private readonly IHouseRepository houseRepository;
+        public BookingLogic(IBookingRepository bookingRepository, IHouseRepository houseRepository)
         {
             this.bookingRepository = bookingRepository;
-            this.houseLogic = houseLogic;
+            this.houseRepository = houseRepository;
         }
         public void Delete()
         {
@@ -40,7 +40,7 @@ namespace BusinessLogic.Logics
                 var bookingAdded =  this.bookingRepository.Add(booking);
                 if (booking.HouseId > 0)
                 {
-                    bookingAdded.House = this.houseLogic.GetBy(booking.HouseId);
+                    bookingAdded.House = this.houseRepository.Find(booking.HouseId);
                 }
                 return booking;
             }

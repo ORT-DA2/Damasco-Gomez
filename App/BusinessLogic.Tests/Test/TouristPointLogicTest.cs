@@ -1,11 +1,9 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using BusinessLogicInterface;
 using DataAccessInterface.Repositories;
 using Domain;
 using Domain.Entities;
-using Microsoft.AspNetCore.Mvc;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Moq;
 
@@ -66,7 +64,7 @@ namespace BusinessLogic.Tests.Test
                 }
             };
             mock = new Mock<ITouristPointRepository>(MockBehavior.Strict);
-            var mock2 = new Mock<ICategoryLogic>(MockBehavior.Strict);
+            var mock2 = new Mock<ICategoryRepository>(MockBehavior.Strict);
             touristPointLogic = new TouristPointLogic(mock.Object,mock2.Object);
             touristPointsEmpty = new List<TouristPoint>();
         }
