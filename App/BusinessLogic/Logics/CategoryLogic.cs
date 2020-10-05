@@ -46,7 +46,7 @@ namespace BusinessLogic
                         );
                     }
                     var categoryAdded =  this.categoryRepository.Add(category);
-                    return category;
+                    return categoryAdded;
                 }  
                 throw new ArgumentException("The category is empty");
             }
