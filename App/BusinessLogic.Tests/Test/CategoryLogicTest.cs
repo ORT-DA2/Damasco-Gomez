@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using BusinessLogicInterface;
 using DataAccessInterface.Repositories;
 using Domain;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
@@ -35,7 +36,8 @@ namespace BusinessLogic.Tests.Test
             };
             emptyCategorys = new List<Category>();
             mock = new Mock<ICategoryRepository>(MockBehavior.Strict);
-            categoryLogic = new CategoryLogic(mock.Object);
+            var mock2 = new Mock<ITouristPointLogic>(MockBehavior.Strict);
+            categoryLogic = new CategoryLogic(mock.Object,mock2.Object);
         }
 
         [TestMethod]
@@ -76,7 +78,7 @@ namespace BusinessLogic.Tests.Test
             Category category = categoriesToReturn.First();
             mock.Setup(m => m.Add(category)).Returns(category);
             var result= categoryLogic.Add(category);
-        
+
             Assert.AreEqual(category, result );
         }
         [TestMethod]
@@ -87,13 +89,13 @@ namespace BusinessLogic.Tests.Test
 
             var result = categoryLogic.Add(category);
 
-            Assert.AreEqual(category, result); 
+            Assert.AreEqual(category, result);
         }
         [TestMethod]
         [ExpectedException(typeof(ArgumentException))]
         public void TestAddExistError()
         {
-            Category category = categoriesToReturn.First(); 
+            Category category = categoriesToReturn.First();
             ArgumentException exception = new ArgumentException();
             mock.Setup(m => m.Add(category)).Throws(exception);
 

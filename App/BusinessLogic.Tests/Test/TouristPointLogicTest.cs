@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using BusinessLogicInterface;
 using DataAccessInterface.Repositories;
 using Domain;
 using Domain.Entities;
@@ -65,7 +66,8 @@ namespace BusinessLogic.Tests.Test
                 }
             };
             mock = new Mock<ITouristPointRepository>(MockBehavior.Strict);
-            touristPointLogic = new TouristPointLogic(mock.Object);
+            var mock2 = new Mock<ICategoryLogic>(MockBehavior.Strict);
+            touristPointLogic = new TouristPointLogic(mock.Object,mock2.Object);
             touristPointsEmpty = new List<TouristPoint>();
         }
         [TestMethod]

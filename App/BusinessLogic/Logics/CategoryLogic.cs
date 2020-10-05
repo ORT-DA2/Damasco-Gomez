@@ -34,11 +34,20 @@ namespace BusinessLogic
             return this.categoryRepository.Find(id);
         }
 
-        public Category Add(Category Category)
+        public Category Add(Category category)
         {
-            var categoryAdded =  this.categoryRepository.Add(Category);
-            categoryAdded.CategoryTouristPoints.ForEach(m=>m.TouristPoint = this.touristPointLogic.GetBy(m.TouristPointId));
-            return Category;
+            if (category != null)
+            {
+                var categoryAdded =  this.categoryRepository.Add(category);
+                if (category.CategoryTouristPoints != null)
+                {
+                    categoryAdded.CategoryTouristPoints.ForEach(
+                    m => m.TouristPoint = this.touristPointLogic.GetBy(m.TouristPointId)
+                    );
+                }
+                return category;
+            }
+            throw new ArgumentException("The category is empty");
         }
         public void Update(int id,Category Category)
         {
