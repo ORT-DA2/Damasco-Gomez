@@ -14,13 +14,16 @@ namespace Model.Out
         public  List<CategoryBasicInfoModel> Categories {get; set;}
         public TouristPointDetailInfoModel(TouristPoint touristPoint)
         {
-            this.Id = touristPoint.Id;
-            this.Name = touristPoint.Name;
-            this.Image = touristPoint.Image;
-            this.Description = touristPoint.Description;
-            this.RegionId = touristPoint.RegionId;
-            this.Categories = touristPoint.CategoriesTouristPoints.Select(
-                    m => new CategoryBasicInfoModel(m.Category)).ToList();
+            if ( touristPoint!= null)
+            {
+                this.Id = touristPoint.Id;
+                this.Name = touristPoint.Name;
+                this.Image = touristPoint.Image;
+                this.Description = touristPoint.Description;
+                this.RegionId = touristPoint.RegionId;
+                this.Categories = touristPoint.CategoriesTouristPoints.Select(
+                        m => new CategoryBasicInfoModel(m.Category)).ToList();
+            }
         }
         public override bool Equals(object obj)
         {
@@ -31,7 +34,5 @@ namespace Model.Out
             }
             return result;
         }
-
-
     }
 }

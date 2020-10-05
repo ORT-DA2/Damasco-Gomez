@@ -97,13 +97,14 @@ namespace WebApi.Tests
         public void TestGetAllTouristPointsVacia()
         {
             mock.Setup(m => m.GetAll()).Returns(touristPointsToReturnEmpty);
+            List<TouristPointDetailInfoModel> empty = new List<TouristPointDetailInfoModel>(){};
 
             var result = controller.Get();
 
             var okResult = result as OkObjectResult;
-            var touristPoints = okResult.Value as IEnumerable<TouristPoint>;
+            var touristPoints = okResult.Value as IEnumerable<TouristPointDetailInfoModel>;
             mock.VerifyAll();
-            Assert.IsTrue(touristPointsToReturnEmpty.SequenceEqual(touristPoints));
+            Assert.IsTrue(touristPoints.SequenceEqual(empty));
         }
         [TestMethod]
         public void TestGetByOk()
