@@ -41,8 +41,10 @@ namespace WebApi.Controllers
         {
             try
             {
-                var touristPointAdded = this.touristPointLogic.Add(touristPoint.ToEntity());
-                var routePost = CreatedAtRoute("GetTouristPoint", new {Id = touristPointAdded.Id} , new TouristPointDetailInfoModel(touristPointAdded));
+                var newTouristPoint = touristPoint.ToEntity();
+                var touristPointAdded = this.touristPointLogic.Add(newTouristPoint);
+                var touristPointModel = new TouristPointDetailInfoModel(touristPointAdded);
+                var routePost = CreatedAtRoute("GetTouristPoint", new {Id = touristPointAdded.Id} , touristPointModel);
                 return routePost;
             }
             catch (ArgumentException e)
