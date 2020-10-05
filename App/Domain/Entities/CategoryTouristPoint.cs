@@ -9,6 +9,8 @@ namespace Domain.Entities
         public int TouristPointId {get; set;}
         public virtual TouristPoint TouristPoint {get; set;}
 
+        public CategoryTouristPoint(){}
+
         public override bool Equals(object obj)
         {
             var result = false;

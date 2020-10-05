@@ -27,7 +27,8 @@ namespace WebApi.Controllers
             try
             {
                 var elementTouristPoint = this.touristPointLogic.GetBy(id);
-                return Ok(new TouristPointDetailInfoModel(elementTouristPoint));
+                var model = new TouristPointDetailInfoModel(elementTouristPoint);
+                return Ok(model);
             }
             catch (ArgumentException)
             {

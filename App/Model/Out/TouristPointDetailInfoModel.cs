@@ -8,15 +8,10 @@ namespace Model.Out
     {
         public int Id {get; set;}
         public string Name {get; set;}
-
-         public string Image {get; set;}
-
+        public string Image {get; set;}
         public string Description {get; set;}
-
         public int RegionId {get; set;}
-       public virtual  List<CategoryDetailInfoModel> Categories {get; set;}
-    
-
+        public  List<CategoryBasicInfoModel> Categories {get; set;}
         public TouristPointDetailInfoModel(TouristPoint touristPoint)
         {
             this.Id = touristPoint.Id;
@@ -24,10 +19,9 @@ namespace Model.Out
             this.Image = touristPoint.Image;
             this.Description = touristPoint.Description;
             this.RegionId = touristPoint.RegionId;
-            this.Categories = touristPoint.CategoriesTouristPoints.Select(m=>new CategoryDetailInfoModel(m.Category)).ToList();
-
+            this.Categories = touristPoint.CategoriesTouristPoints.Select(
+                    m => new CategoryBasicInfoModel(m.Category)).ToList();
         }
-
         public override bool Equals(object obj)
         {
             var result = false;
