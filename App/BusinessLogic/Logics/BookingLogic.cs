@@ -4,21 +4,24 @@ using System.Collections.Generic;
 using BusinessLogicInterface;
 using DataAccessInterface.Repositories;
 using Domain;
+using Model;
 
 namespace BusinessLogic.Logics
 {
     public class BookingLogic : IBookingLogic
     {
         private readonly IBookingRepository bookingRepository;
-        public BookingLogic(IBookingRepository bookingRepository)
+        private readonly IHouseLogic houseLogic;
+        public BookingLogic(IBookingRepository bookingRepository, IHouseLogic houseLogic)
         {
             this.bookingRepository = bookingRepository;
+            this.houseLogic = houseLogic;
         }
         public void Delete()
         {
-            foreach(Booking Booking in this.bookingRepository.GetElements())
+            foreach(Booking booking in this.bookingRepository.GetElements())
             {
-                this.Delete(Booking.Id);
+                this.Delete(booking.Id);
             }
         }
         public IEnumerable<Booking> GetAll()
@@ -30,21 +33,30 @@ namespace BusinessLogic.Logics
             return this.bookingRepository.Find(id);
         }
 
-        public Booking Add(Booking Booking)
+        public Booking Add(Booking booking)
         {
-            return this.bookingRepository.Add(Booking);
+            if (booking != null)
+            {
+                var bookingAdded =  this.bookingRepository.Add(booking);
+                if (booking.HouseId > 0)
+                {
+                    bookingAdded.House = this.houseLogic.GetBy(booking.HouseId);
+                }
+                return booking;
+            }
+            throw new ArgumentException("The booking is empty");
         }
-        public void Update(int id, Booking Booking)
+        public void Update(int id, Booking booking)
         {
-            this.bookingRepository.Update(id, Booking);
+            this.bookingRepository.Update(id, booking);
         }
         public void Delete(int id)
         {
             this.bookingRepository.Delete(id);
         }
-        public bool Exist(Booking Booking)
+        public bool Exist(Booking booking)
         {
-            return this.bookingRepository.ExistElement(Booking);
+            return this.bookingRepository.ExistElement(booking);
         }
     }
 }

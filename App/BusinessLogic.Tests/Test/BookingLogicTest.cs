@@ -2,10 +2,11 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using BusinessLogic.Logics;
-using DataAccess.Repositories;
+using BusinessLogicInterface;
 using DataAccessInterface.Repositories;
 using Domain;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
+using Model;
 using Moq;
 
 namespace BusinessLogic.Tests.Test
@@ -21,30 +22,34 @@ namespace BusinessLogic.Tests.Test
         [TestInitialize]
         public void initVariables()
         {
-             bookingsToReturn = new List<Booking>()
+            bookingsToReturn = new List<Booking>()
             {
                 new Booking()
                 {
                     Id = 1,
                     Name = "Booking 1",
+                    HouseId = 1,
                 },
                 new Booking()
                 {
                     Id = 2,
                     Name = "Booking 2",
+                    HouseId = 1,
                 }
             };
+            House newHouse = new House() {Id = 1};
             emptyBookings = new List<Booking>();
             mock = new Mock<IBookingRepository>(MockBehavior.Strict);
-            bookingLogic = new BookingLogic(mock.Object);
+            var mock2 = new Mock<IHouseLogic>(MockBehavior.Strict);
+            mock2.Setup(c => c.GetBy(newHouse.Id)).Returns(newHouse);
+            bookingLogic = new BookingLogic(mock.Object,mock2.Object);
         }
-
-         [TestMethod]
+        [TestMethod]
         public void DeleteTest()
         {
             Assert.IsTrue(true);
         }
-         [TestMethod]
+        [TestMethod]
         public void DeleteTestByIdOk()
         {
             Assert.IsTrue(true);
@@ -77,10 +82,10 @@ namespace BusinessLogic.Tests.Test
             Booking booking = bookingsToReturn.First();
             mock.Setup(m => m.Add(booking)).Returns(booking);
             var result= bookingLogic.Add(booking);
-        
+
             Assert.AreEqual(booking, result );
         }
-         [TestMethod]
+        [TestMethod]
         public void TestAddValidateError()
         {
             Booking booking = bookingsToReturn.First(); // Booking tiene que terner un formato erroneo despues para que la validación falle
@@ -88,13 +93,13 @@ namespace BusinessLogic.Tests.Test
 
             var result = bookingLogic.Add(booking);
 
-            Assert.AreEqual(booking, result); 
+            Assert.AreEqual(booking, result);
         }
         [TestMethod]
         [ExpectedException(typeof(ArgumentException))]
         public void TestAddExistError()
         {
-            Booking booking = bookingsToReturn.First(); 
+            Booking booking = bookingsToReturn.First();
             ArgumentException exception = new ArgumentException();
             mock.Setup(m => m.Add(booking)).Throws(exception);
 
@@ -103,20 +108,28 @@ namespace BusinessLogic.Tests.Test
          [TestMethod]
         public void TestUdpateOk ()
         {
-            Booking booking = bookingsToReturn.First();
-            mock.Setup(m => m.Update(booking.Id,booking));
+            int id = 1;
+            BookingModel booking = new BookingModel()
+            {
+                Name = "nombre"
+            };
+            mock.Setup(m => m.Update(id,booking.ToEntity()));
 
-            bookingLogic.Update(booking.Id, booking);
+            bookingLogic.Update(id, booking);
 
             mock.VerifyAll();
         }
-         [TestMethod]
+        [TestMethod]
         public void TestUpdateValidateError()
         {
-            Booking booking = bookingsToReturn.First();// Booking tiene que terner un formato erroneo despues para que la validación falle
-             mock.Setup(m => m.Update(booking.Id,booking));
+            int id = 1;
+            BookingModel booking = new BookingModel()
+            {
+                Name = "nombre"
+            };// Booking tiene que terner un formato erroneo despues para que la validación falle
+            mock.Setup(m => m.Update(id,booking.ToEntity()));
 
-            bookingLogic.Update(booking.Id,booking);
+            bookingLogic.Update(id,booking);
 
             mock.VerifyAll();
         }
@@ -124,13 +137,17 @@ namespace BusinessLogic.Tests.Test
         [ExpectedException(typeof(ArgumentException))]
         public void TestUpdateExistError()
         {
-            Booking booking = bookingsToReturn.First();
             ArgumentException exception = new ArgumentException();
-            mock.Setup(m => m.Update(booking.Id, booking)).Throws(exception);
+            int id = 1;
+            BookingModel booking = new BookingModel()
+            {
+                Name = "nombre"
+            };
+            mock.Setup(m => m.Update(id, booking.ToEntity())).Throws(exception);
 
-            bookingLogic.Update(booking.Id,booking);
+            bookingLogic.Update(id,booking);
         }
-          [TestMethod]
+        [TestMethod]
         public void TestExistOk()
         {
             Booking booking = bookingsToReturn.First();
