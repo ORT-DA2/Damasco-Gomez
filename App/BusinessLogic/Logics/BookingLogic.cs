@@ -37,10 +37,11 @@ namespace BusinessLogic.Logics
         {
             if (booking != null)
             {
-                var bookingAdded =  this.bookingRepository.Add(booking);
                 if (booking.HouseId > 0)
                 {
-                    bookingAdded.House = this.houseRepository.Find(booking.HouseId);
+                    House house = this.houseRepository.Find(booking.HouseId);
+                    booking.House = house ;
+                    booking =  this.bookingRepository.Add(booking);
                 }
                 return booking;
             }
