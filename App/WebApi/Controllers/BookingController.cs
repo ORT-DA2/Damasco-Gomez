@@ -34,7 +34,6 @@ namespace WebApi.Controllers
             }
         }
         [HttpPost()]
-        //The post should have BookingModel , but will leave it like this
         public IActionResult Post([FromBody]BookingModel booking)
         {
             try
@@ -57,7 +56,6 @@ namespace WebApi.Controllers
             }
         }
         [HttpPut("{id}")]
-        //The put should have BookingModel , but will leave it like this
         public IActionResult Put([FromRoute]int id,[FromBody]BookingModel booking)
         {
             try
@@ -65,7 +63,6 @@ namespace WebApi.Controllers
                 Booking newBooking = booking.ToEntity();
                 this.bookingLogic.Update(id, newBooking);
                 return CreatedAtRoute("GetBooking", new {Id = newBooking.Id} , newBooking);
-                //return Ok(booking);
             }
             catch(ArgumentException e)
             {
