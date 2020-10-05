@@ -41,7 +41,7 @@ namespace WebApi.Test
                             },
                             TouristPointId = 1,
                             TouristPoint = new TouristPoint(){ Id = 1}
-                        }
+                        }//HAY QUE TENER CUIDADO CON ESTO NULL, ROMPE TODO , HACER CHECK DE ESTA VAR
                     },
                 },
                 new Category()
