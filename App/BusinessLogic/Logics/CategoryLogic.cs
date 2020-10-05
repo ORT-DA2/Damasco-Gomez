@@ -35,18 +35,25 @@ namespace BusinessLogic
 
         public Category Add(Category category)
         {
-            if (category != null)
+            try 
             {
-                var categoryAdded =  this.categoryRepository.Add(category);
-                if (category.CategoryTouristPoints != null)
+                if (category != null)
                 {
-                    categoryAdded.CategoryTouristPoints.ForEach(
-                    m => m.TouristPoint = this.touristPointRepository.Find(m.TouristPointId)
-                    );
-                }
-                return category;
+                    if (category.CategoryTouristPoints != null)
+                    { 
+                        category.CategoryTouristPoints.ForEach(
+                        m => m.TouristPoint = this.touristPointRepository.Find(m.TouristPointId)
+                        );
+                    }
+                    var categoryAdded =  this.categoryRepository.Add(category);
+                    return category;
+                }  
+                throw new ArgumentException("The category is empty");
             }
-            throw new ArgumentException("The category is empty");
+            catch (ArgumentException e)
+            {
+                 throw new ArgumentException (e.Message.ToString());
+            }
         }
         public void Update(int id,Category Category)
         {
