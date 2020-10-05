@@ -33,7 +33,9 @@ namespace BusinessLogic
 
         public TouristPoint Add(TouristPoint touristPoint)
         {
-            if (touristPoint!=null)
+             try 
+            {
+                 if (touristPoint!=null)
             {
                 if (touristPoint.CategoriesTouristPoints!= null)
                 {
@@ -45,7 +47,11 @@ namespace BusinessLogic
                 return touristPointAdded;
             }
             throw new ArgumentException("The tourist point  is empty");
-            
+            }
+            catch (ArgumentException e)
+            {
+                 throw new ArgumentException (e.Message.ToString());
+            }
         }
         public void Update(int id, TouristPoint TouristPoint)
         {
