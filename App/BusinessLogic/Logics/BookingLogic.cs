@@ -35,21 +35,47 @@ namespace BusinessLogic.Logics
 
         public Booking Add(Booking booking)
         {
-            if (booking != null)
+            try
             {
-                if (booking.HouseId > 0)
+                if (booking != null)
                 {
-                    House house = this.houseRepository.Find(booking.HouseId);
-                    booking.House = house ;
-                    booking =  this.bookingRepository.Add(booking);
+                    if (booking.HouseId > 0)
+                    {
+                        House house = this.houseRepository.Find(booking.HouseId);
+                        booking.House = house ;
+                        booking =  this.bookingRepository.Add(booking);
+                    }
+                    return booking;
                 }
-                return booking;
+                throw new ArgumentException("The booking is empty");
             }
-            throw new ArgumentException("The booking is empty");
+            catch (ArgumentException e)
+            {
+                throw new ArgumentException(e.Message.ToString());
+            }
         }
         public void Update(int id, Booking booking)
         {
-            this.bookingRepository.Update(id, booking);
+            try
+            {
+                if (booking != null)
+                {
+                    if (booking.HouseId > 0)
+                    {
+                        House house = this.houseRepository.Find(booking.HouseId);
+                        booking.House = house ;
+                        this.bookingRepository.Update(id, booking);
+                    }
+                }
+                else
+                {
+                    throw new ArgumentException("The booking is empty");
+                }
+            }
+            catch(ArgumentException e)
+            {
+                throw new ArgumentException(e.Message.ToString());
+            }
         }
         public void Delete(int id)
         {
