@@ -5,6 +5,7 @@ using BusinessLogicInterface;
 using Domain;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
+using Model;
 using Moq;
 using WebApi.Controllers;
 
@@ -126,56 +127,88 @@ namespace WebApi.Tests
         [TestMethod]
         public void TestPostOk()
         {
-            mock.Setup(m => m.Add(bookingId1)).Returns(bookingId1);
+            BookingModel bookingModel = new BookingModel()
+            {
+                Name = "Name Booking",
+                Email = "Email ",
+                HouseId = 1,
+                State = "Checking",
+                Price = 100,
+                CheckIn = DateTime.Today,
+                CheckOut = DateTime.Today
+            };
+            mock.Setup(m => m.Add(bookingModel.ToEntity())).Returns(bookingModel.ToEntity());
 
-            var result = controller.Post(bookingId1);
+            var result = controller.Post(bookingModel);
 
             var okResult = result as CreatedAtRouteResult;
-            mock.VerifyAll();
             Assert.IsNotNull(okResult);
             Assert.AreEqual("GetBooking", okResult.RouteName);
-            Assert.AreEqual(okResult.Value, bookingId1);
+            Assert.AreEqual(okResult.Value, bookingModel.ToEntity());
         }
         [TestMethod]
         public void TestPostFailSameBooking()
         {
-            bookingId1 = bookingsToReturn.First();
             Exception exist = new AggregateException();
-            mock.Setup(p => p.Add(bookingId1)).Throws(exist);
+            BookingModel bookingModel = new BookingModel()
+            {
+                Name = "Name Booking",
+                Email = "Email ",
+                HouseId = 1,
+                State = "Checking",
+                Price = 100,
+                CheckIn = DateTime.Today,
+                CheckOut = DateTime.Today
+            };
+            mock.Setup(p => p.Add(bookingModel.ToEntity())).Throws(exist);
 
-            var result = controller.Post(bookingId1);
+            var result = controller.Post(bookingModel);
 
-            mock.VerifyAll();
             Assert.IsInstanceOfType(result, typeof(BadRequestObjectResult));
         }
         [TestMethod]
         public void TestPostFailValidation()
         {
-            bookingId1 = bookingsToReturn.First();
             Exception exist = new ArgumentException();
-            mock.Setup(p => p.Add(bookingId1)).Throws(exist);
+            BookingModel bookingModel = new BookingModel()
+            {
+                Name = "Name Booking",
+                Email = "Email ",
+                HouseId = 1,
+                State = "Checking",
+                Price = 100,
+                CheckIn = DateTime.Today,
+                CheckOut = DateTime.Today
+            };
+            mock.Setup(p => p.Add(bookingModel.ToEntity())).Throws(exist);
 
-            var result = controller.Post(bookingId1);
+            var result = controller.Post(bookingModel);
 
-            mock.VerifyAll();
             Assert.IsInstanceOfType(result, typeof(BadRequestObjectResult));
         }
         [TestMethod]
         public void TestPostFailServer()
         {
-            bookingId1 = bookingsToReturn.First();
             Exception exist = new Exception();
-            mock.Setup(p => p.Add(bookingId1)).Throws(exist);
+            BookingModel bookingModel = new BookingModel()
+            {
+                Name = "Name Booking",
+                Email = "Email ",
+                HouseId = 1,
+                State = "Checking",
+                Price = 100,
+                CheckIn = DateTime.Today,
+                CheckOut = DateTime.Today
+            };
+            mock.Setup(p => p.Add(bookingModel.ToEntity())).Throws(exist);
 
-            var result = controller.Post(bookingId1);
+            var result = controller.Post(bookingModel);
 
-            mock.VerifyAll();
             Assert.IsInstanceOfType(result, typeof(BadRequestObjectResult));
         }
         [TestMethod]
         public void TestPutOk()
         {
-            bookingId1 = bookingsToReturn.First();
             string newName = "New name booking";
             bookingId1.Name = newName;
             mock.Setup(m => m.Update(bookingId1.Id,bookingId1));
@@ -183,7 +216,6 @@ namespace WebApi.Tests
             var result = controller.Put(bookingId1.Id, bookingId1);
 
             var okResult = result as CreatedAtRouteResult;
-            mock.VerifyAll();
             Assert.IsNotNull(okResult);
             Assert.AreEqual("GetBooking", okResult.RouteName);
             Assert.AreEqual(okResult.Value, bookingId1);

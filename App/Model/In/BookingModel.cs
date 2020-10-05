@@ -7,7 +7,7 @@ namespace Model
     {
         public string Name {get; set;}
         public string Email {get; set;}
-        public string Code {get; set;}
+        //public string Code {get; set;}
         public int HouseId {get; set;}
         public string State {get; set;}
         public int Price {get; set;}
@@ -19,7 +19,7 @@ namespace Model
             {
                 Name = this.Name,
                 Email = this.Email,
-                Code = this.Code,
+                //Code = Booking.CreateCode(),
                 HouseId = this.HouseId,
                 State = this.State,
                 Price = this.Price,
