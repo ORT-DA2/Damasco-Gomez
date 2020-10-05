@@ -33,9 +33,19 @@ namespace BusinessLogic
 
         public TouristPoint Add(TouristPoint touristPoint)
         {
-            var touristPointAdded = this.touristPointRepository.Add(touristPoint);
-            touristPointAdded.CategoriesTouristPoints.ForEach(m=>m.Category = this.categoryRepository.Find(m.CategoryId)); // revisar acáaaa
-            return touristPoint;
+            if (touristPoint!=null)
+            {
+                if (touristPoint.CategoriesTouristPoints!= null)
+                {
+                    touristPoint.CategoriesTouristPoints.ForEach(
+                    m=>m.Category = this.categoryRepository.Find(m.CategoryId)
+                    );
+                }
+                var touristPointAdded = this.touristPointRepository.Add(touristPoint);
+                return touristPointAdded;
+            }
+            throw new ArgumentException("The tourist point  is empty");
+            
         }
         public void Update(int id, TouristPoint TouristPoint)
         {
