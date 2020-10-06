@@ -4,8 +4,8 @@ namespace Model.Out
 {
     public class CategoryBasicInfoModel
     {
-        public int Id { get; set; }
-        public string Name { get; set; }
+        public int Id { get; private set; }
+        public string Name { get; private set; }
         public CategoryBasicInfoModel(Category category)
          {
             this.Id = category.Id;

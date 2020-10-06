@@ -7,9 +7,9 @@ namespace Model.Out
 {
     public class CategoryDetailInfoModel
     {
-        public int Id {get; set;}
-        public string Name {get; set;}
-        public List<TouristPointDetailInfoModel> TouristPoints {get; set;}
+        public int Id {get; private set;}
+        public string Name {get; private set;}
+        public List<TouristPointDetailInfoModel> TouristPoints {get; private set;}
 
         public CategoryDetailInfoModel(Category category)
         {
