@@ -39,19 +39,16 @@ namespace BusinessLogic.Logics
             {
                 if (booking != null)
                 {
-                    if (booking.HouseId > 0)
-                    {
-                        House house = this.houseRepository.Find(booking.HouseId);
-                        booking.House = house ;
-                        booking =  this.bookingRepository.Add(booking);
-                    }
+                    House house = this.houseRepository.Find(booking.HouseId);
+                    booking.House = house ;
+                    booking =  this.bookingRepository.Add(booking);
                     return booking;
                 }
                 throw new ArgumentException("The booking is empty");
             }
             catch (ArgumentException e)
             {
-                throw new ArgumentException(e.Message.ToString());
+                throw e;
             }
         }
         public void Update(int id, Booking booking)
@@ -60,21 +57,18 @@ namespace BusinessLogic.Logics
             {
                 if (booking != null)
                 {
-                    if (booking.HouseId > 0)
-                    {
-                        House house = this.houseRepository.Find(booking.HouseId);
-                        booking.House = house ;
-                        this.bookingRepository.Update(id, booking);
-                    }
+                    House house = this.houseRepository.Find(booking.HouseId);
+                    booking.House = house ;
+                    this.bookingRepository.Update(id, booking);
                 }
                 else
                 {
-                    throw new ArgumentException("The booking is empty");
+                    throw new ArgumentException("Booking is empty");
                 }
             }
             catch(ArgumentException e)
             {
-                throw new ArgumentException(e.Message.ToString());
+                throw e;
             }
         }
         public void Delete(int id)
