@@ -33,15 +33,15 @@ namespace Domain
             return result;
         }
 
-        public static void Update(Booking elementToUpdate, Booking element)
+        public void Update(Booking element)
         {
-            if(element.Name != null) elementToUpdate.Name = element.Name;
-            if(element.Email != null) elementToUpdate.Email = element.Email;
-            if(element.State != null) elementToUpdate.State = element.State;
-            if(element.Price>0) elementToUpdate.Price = element.Price;
-            if(element.HouseId>0) elementToUpdate.HouseId = element.HouseId;
-            if(element.CheckIn != null) elementToUpdate.CheckIn = element.CheckIn;
-            if(element.CheckOut != null) elementToUpdate.CheckOut = element.CheckOut;
+            if(element.Name != null) this.Name = element.Name;
+            if(element.Email != null) this.Email = element.Email;
+            if(element.State != null) this.State = element.State;
+            if(element.Price>0) this.Price = element.Price;
+            if(element.HouseId>0) this.HouseId = element.HouseId;
+            if(element.CheckIn != null) this.CheckIn = element.CheckIn;
+            if(element.CheckOut != null) this.CheckOut = element.CheckOut;
         }
     }
 

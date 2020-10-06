@@ -21,7 +21,6 @@ namespace Model.Out
             this.Image = touristPoint.Image;
             this.Description = touristPoint.Description;
             this.RegionId = touristPoint.RegionId;
-
         }
     }
 }
