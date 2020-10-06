@@ -126,12 +126,13 @@ namespace BusinessLogic.Tests.Test
             };
             Booking booking = bookingModel.ToEntity();
             int id  = booking.Id;
-            mock.Setup(m => m.Find(id)).Returns(booking);
+            mock2.Setup(m => m.ExistElement(booking.HouseId)).Returns(true);
+            mock2.Setup(m => m.Find(booking.HouseId)).Returns(houseId1);
             mock.Setup(m => m.Update(booking.Id,booking));
 
             bookingLogic.Update(id, booking);
 
-            Assert.AreEqual(booking,bookingLogic.GetBy(id));
+            mock.VerifyAll();
         }
         [TestMethod]
         [ExpectedException(typeof(ArgumentException))]
@@ -148,16 +149,15 @@ namespace BusinessLogic.Tests.Test
         [ExpectedException(typeof(ArgumentException))]
         public void TestUpdateNullHouseId()
         {
-            int id = 1;
-            BookingModel booking = new BookingModel()
+            BookingModel bookingModel = new BookingModel()
             {
                 Name = "nombre",
+                HouseId = 12
             };
-            ArgumentException e = new ArgumentException();
-            mock2.Setup(m => m.Find(0)).Throws(e);
-            mock.Setup(m => m.Update(id,booking.ToEntity()));
+            Booking booking = bookingModel.ToEntity();
+            mock2.Setup(m => m.ExistElement(booking.HouseId)).Returns(false);
 
-            bookingLogic.Update(id,booking.ToEntity());
+            bookingLogic.Update(booking.Id,booking);
         }
         [TestMethod]
         public void TestExistOk()

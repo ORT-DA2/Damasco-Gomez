@@ -53,23 +53,10 @@ namespace BusinessLogic.Logics
         }
         public void Update(int id, Booking booking)
         {
-            try
-            {
-                if (booking != null)
-                {
-                    House house = this.houseRepository.Find(booking.HouseId);
-                    booking.House = house ;
-                    this.bookingRepository.Update(id, booking);
-                }
-                else
-                {
-                    throw new ArgumentException("Booking is empty");
-                }
-            }
-            catch(ArgumentException e)
-            {
-                throw e;
-            }
+            Validate(booking);
+            House house = this.houseRepository.Find(booking.HouseId);
+            booking.House = house;
+            this.bookingRepository.Update(id, booking);
         }
         public void Delete(int id)
         {
@@ -78,6 +65,17 @@ namespace BusinessLogic.Logics
         public bool Exist(Booking booking)
         {
             return this.bookingRepository.ExistElement(booking);
+        }
+        public void Validate(Booking booking)
+        {
+            if (booking == null)
+            {
+                throw new ArgumentException("Booking is empty");
+            }
+            if (!this.houseRepository.ExistElement(booking.HouseId))
+            {
+                throw new ArgumentException("There is no House with id : " + booking.HouseId);
+            }
         }
     }
 }
