@@ -35,6 +35,7 @@ namespace BusinessLogic
 
         public Category Add(Category category)
         {
+            //DO ALL THIS IN THE VALIDATE 
             try 
             {
                 if (category != null)
@@ -66,6 +67,10 @@ namespace BusinessLogic
         public bool Exist(Category Category)
         {
             return this.categoryRepository.ExistElement(Category);
+        }
+        public void Validate(Category category)
+        {
+
         }
 
     }
