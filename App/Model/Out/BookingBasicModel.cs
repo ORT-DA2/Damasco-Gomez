@@ -5,15 +5,15 @@ namespace Model
 {
     public class BookingBasicModel
     {
-        public int Id {get; set; }
-        public string Name {get; set;}
-        public string Email {get; set;}
-        public string Code {get; set;}
-        public int HouseId {get; set;}
-        public string State {get; set;}
-        public int Price {get; set;}
-        public  DateTime CheckIn {get; set;}
-        public DateTime CheckOut {get; set;}
+        public int Id {get; private set; }
+        public string Name {get; private set;}
+        public string Email {get; private set;}
+        public string Code {get; private set;}
+        public int HouseId {get; private set;}
+        public string State {get; private set;}
+        public int Price {get; private set;}
+        public  DateTime CheckIn {get; private set;}
+        public DateTime CheckOut {get; private set;}
         public BookingBasicModel(Booking booking)
         {
             this.Id = booking.Id;
