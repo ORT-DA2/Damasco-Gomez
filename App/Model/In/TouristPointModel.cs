@@ -7,15 +7,11 @@ namespace Model.In
 {
     public class TouristPointModel
     {
-         public string Name {get; set;}
-
-         public string Image {get; set;}
-
+        public string Name {get; set;}
+        public string Image {get; set;}
         public string Description {get; set;}
-
         public int RegionId {get; set;}
         public virtual  IEnumerable<int> Categories {get; set;}
-
         public TouristPoint ToEntity()
         {
             return new TouristPoint()
@@ -30,6 +26,5 @@ namespace Model.In
                 }).ToList()
             };
         }
-
     }
 }
