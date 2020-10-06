@@ -19,7 +19,7 @@ namespace Model
             {
                 Name = this.Name,
                 Email = this.Email,
-                //Code = Booking.CreateCode(),
+                Code = Booking.RandomString(),
                 HouseId = this.HouseId,
                 State = this.State,
                 Price = this.Price,

@@ -1,4 +1,6 @@
 using System;
+using System.Collections.Generic;
+using System.Linq;
 using BusinessLogicInterface;
 using Domain;
 using Microsoft.AspNetCore.Mvc;
@@ -16,8 +18,9 @@ namespace WebApi.Controllers
         }
         public IActionResult Get()
         {
-            var elementBooking = this.bookingLogic.GetAll();
-            return Ok(elementBooking);
+            IEnumerable<Booking> elementBookings = this.bookingLogic.GetAll();
+            IEnumerable<BookingBasicModel> bookingModels =  elementBookings.Select(m => new BookingBasicModel(m));
+            return Ok(bookingModels);
         }
 
         [HttpGet("{id}",Name="GetBooking")]
@@ -25,8 +28,9 @@ namespace WebApi.Controllers
         {
             try
             {
-                var elementBooking = this.bookingLogic.GetBy(id);
-                return Ok(elementBooking);
+                Booking elementBooking = this.bookingLogic.GetBy(id);
+                BookingDetailModel bookingModel = new BookingDetailModel(elementBooking);
+                return Ok(bookingModel);
             }
             catch (ArgumentException)
             {

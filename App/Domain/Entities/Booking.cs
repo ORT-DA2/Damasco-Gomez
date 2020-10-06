@@ -1,4 +1,5 @@
 using System;
+using System.Linq;
 
 namespace Domain
 {
@@ -42,6 +43,15 @@ namespace Domain
             if(element.HouseId>0) this.HouseId = element.HouseId;
             if(element.CheckIn != null) this.CheckIn = element.CheckIn;
             if(element.CheckOut != null) this.CheckOut = element.CheckOut;
+        }
+        private static Random random = new Random();
+        public static string RandomString()
+        {
+            int length = 10;
+            const string chars = "ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789";
+            var stringCode = new string(Enumerable.Repeat(chars, length)
+                .Select(s => s[random.Next(s.Length)]).ToArray());
+            return stringCode;
         }
     }
 
