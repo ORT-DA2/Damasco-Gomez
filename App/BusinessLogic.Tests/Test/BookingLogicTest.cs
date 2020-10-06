@@ -126,9 +126,10 @@ namespace BusinessLogic.Tests.Test
             };
             Booking booking = bookingModel.ToEntity();
             int id  = booking.Id;
+            mock.Setup(m => m.Update(booking.Id,booking));
+            mock.Setup(m => m.Find(booking.Id)).Returns(booking);
             mock2.Setup(m => m.ExistElement(booking.HouseId)).Returns(true);
             mock2.Setup(m => m.Find(booking.HouseId)).Returns(houseId1);
-            mock.Setup(m => m.Update(booking.Id,booking));
 
             bookingLogic.Update(id, booking);
 

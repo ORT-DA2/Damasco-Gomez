@@ -51,12 +51,14 @@ namespace BusinessLogic.Logics
                 throw e;
             }
         }
-        public void Update(int id, Booking booking)
+        public Booking Update(int id, Booking booking)
         {
             Validate(booking);
-            House house = this.houseRepository.Find(booking.HouseId);
-            booking.House = house;
-            this.bookingRepository.Update(id, booking);
+            Booking bookingBD = this.bookingRepository.Find(id);
+            bookingBD.Update(booking);
+            //bookingBD.House = this.houseRepository.Find(booking.HouseId);
+            this.bookingRepository.Update(id, bookingBD);
+            return bookingBD;
         }
         public void Delete(int id)
         {
