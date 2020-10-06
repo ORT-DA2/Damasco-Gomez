@@ -209,25 +209,35 @@ namespace WebApi.Tests
         [TestMethod]
         public void TestPutOk()
         {
-            string newName = "New name booking";
-            bookingId1.Name = newName;
-            mock.Setup(m => m.Update(bookingId1.Id,bookingId1));
+            BookingModel bookingModel = new BookingModel()
+            {
+                Name = "Name Booking",
+                Email = "Email ",
+                HouseId = 1,
+                State = "Checking",
+                Price = 100,
+                CheckIn = DateTime.Today,
+                CheckOut = DateTime.Today
+            };
+            Booking booking = bookingModel.ToEntity();
+            mock.Setup(m => m.Update(booking.Id,booking));
 
-            var result = controller.Put(bookingId1.Id, bookingId1);
+            var result = controller.Put(booking.Id, bookingModel);
 
             var okResult = result as CreatedAtRouteResult;
             Assert.IsNotNull(okResult);
             Assert.AreEqual("GetBooking", okResult.RouteName);
-            Assert.AreEqual(okResult.Value, bookingId1);
+            Assert.AreEqual(okResult.Value, booking);
         }
         [TestMethod]
         public void TestPutFailValidate()
         {
-            bookingId1 = bookingsToReturn.First();
+            BookingModel bookingModel = new BookingModel();
+            Booking booking = bookingModel.ToEntity();
             Exception exist = new ArgumentException();
-            mock.Setup(p => p.Update(bookingId1.Id,bookingId1)).Throws(exist);
+            mock.Setup(p => p.Update(booking.Id,booking)).Throws(exist);
 
-            var result = controller.Put(bookingId1.Id, bookingId1);
+            var result = controller.Put(booking.Id, bookingModel);
 
             mock.VerifyAll();
             Assert.IsInstanceOfType(result, typeof(BadRequestObjectResult));
@@ -235,13 +245,22 @@ namespace WebApi.Tests
         [TestMethod]
         public void TestPutFailServer()
         {
-            bookingId1 = bookingsToReturn.First();
             Exception exist = new Exception();
-            mock.Setup(p => p.Update(bookingId1.Id,bookingId1)).Throws(exist);
+            BookingModel bookingModel = new BookingModel()
+            {
+                Name = "Name Booking",
+                Email = "Email ",
+                HouseId = 1,
+                State = "Checking",
+                Price = 100,
+                CheckIn = DateTime.Today,
+                CheckOut = DateTime.Today
+            };
+            Booking booking = bookingModel.ToEntity();
+            mock.Setup(p => p.Update(booking.Id,booking)).Throws(exist);
 
-            var result = controller.Put(bookingId1.Id, bookingId1);
+            var result = controller.Put(booking.Id,bookingModel);
 
-            mock.VerifyAll();
             Assert.IsInstanceOfType(result, typeof(BadRequestObjectResult));
         }
         [TestMethod]
@@ -274,7 +293,7 @@ namespace WebApi.Tests
             mock.Setup(mock=> mock.Delete());
 
             var result = controller.Delete();
-            
+
             Assert.IsNotNull(result);
         }
     }
