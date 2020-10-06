@@ -130,5 +130,26 @@ namespace Domain.Test.Test
 
             Assert.AreEqual(newBooking.CheckOut, booking.CheckOut);
         }
+
+        [TestMethod]
+        public void TestRandom()
+        {
+            string random = Booking.RandomString();
+            Booking newBooking = new Booking()
+                {
+                    Name = null,
+                    Email = null,
+                    HouseId = 0,
+                    State = null,
+                    Price = 0,
+                    Code = random,
+                    CheckIn = DateTime.MinValue,
+                    CheckOut= DateTime.Today,
+                };
+
+            booking.Update(newBooking);
+
+            Assert.AreEqual(random,newBooking.Code);
+        }
     }
 }
