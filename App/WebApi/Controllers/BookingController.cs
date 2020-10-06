@@ -61,7 +61,7 @@ namespace WebApi.Controllers
             try
             {
                 Booking newBooking = booking.ToEntity();
-                this.bookingLogic.Update(id, newBooking);
+                newBooking = this.bookingLogic.Update(id, newBooking);
                 return CreatedAtRoute("GetBooking", new {Id = newBooking.Id} , newBooking);
             }
             catch(ArgumentException e)

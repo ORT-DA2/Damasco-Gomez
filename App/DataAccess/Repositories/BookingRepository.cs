@@ -34,7 +34,7 @@ namespace DataAccess.Repositories
 
         protected override void Update(Booking elementToUpdate, Booking element)
         {
-            Booking.Update(elementToUpdate,element);
+            elementToUpdate.Update(element);
         }
 
     }

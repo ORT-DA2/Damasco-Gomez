@@ -220,12 +220,12 @@ namespace WebApi.Tests
                 CheckOut = DateTime.Today
             };
             Booking booking = bookingModel.ToEntity();
-            mock.Setup(m => m.Update(booking.Id,booking));
+            mock.Setup(m => m.Update(booking.Id,booking)).Returns(booking);
 
             var result = controller.Put(booking.Id, bookingModel);
 
             var okResult = result as CreatedAtRouteResult;
-            Assert.IsNotNull(okResult);
+            Assert.IsNotNull(okResult.Value);
             Assert.AreEqual("GetBooking", okResult.RouteName);
             Assert.AreEqual(okResult.Value, booking);
         }
