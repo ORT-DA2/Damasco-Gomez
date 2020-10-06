@@ -6,7 +6,7 @@ namespace Model.In
     {
         public string CheckIn {get; private set;}
         public string CheckOut{get; private set;}
-         public TouristPoint TouristPoint {get ; private set; }
+        public int TouristPointId {get ; private set; }
          public int CantAdults {get; private set;}
          public int CantChildrens {get; private set;}
          public int CantBabys {get; private set;}
