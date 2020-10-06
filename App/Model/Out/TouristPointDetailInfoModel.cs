@@ -6,12 +6,12 @@ namespace Model.Out
 {
     public class TouristPointDetailInfoModel
     {
-        public int Id {get; set;}
-        public string Name {get; set;}
-        public string Image {get; set;}
-        public string Description {get; set;}
-        public int RegionId {get; set;}
-        public  List<CategoryBasicInfoModel> Categories {get; set;}
+        public int Id {get; private set;}
+        public string Name {get; private set;}
+        public string Image {get; private set;}
+        public string Description {get; private set;}
+        public int RegionId {get; private set;}
+        public  List<CategoryBasicInfoModel> Categories {get; private set;}
         public TouristPointDetailInfoModel(TouristPoint touristPoint)
         {
             if ( touristPoint!= null)
