@@ -17,7 +17,7 @@ namespace BusinessLogic
             this.touristPointRepository = touristPointRepository;
         }
 
-         public void Delete()
+        public void Delete()
         {
             foreach(Category Category in this.categoryRepository.GetElements())
             {
@@ -68,6 +68,5 @@ namespace BusinessLogic
                 throw new ArgumentException("Category is empty");
             }
         }
-
     }
 }

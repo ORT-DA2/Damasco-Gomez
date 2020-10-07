@@ -16,7 +16,7 @@ namespace BusinessLogic.Tests.Test
         private List<Region> regionsToReturn;
         private List<Region> regionsEmpty;
 
-         [TestInitialize]
+        [TestInitialize]
         public void Initialize ()
         {
                regionsToReturn = new List<Region>()
@@ -68,9 +68,10 @@ namespace BusinessLogic.Tests.Test
         {
             Region region = regionsToReturn.First();
             mock.Setup(m => m.Add(region)).Returns(region);
+
             var regionToReturn = regionLogic.Add(region);
-        
-            Assert.AreEqual(region, regionToReturn );
+
+            Assert.AreEqual(region, regionToReturn);
         }
          [TestMethod]
         public void TestAddValidateError()
@@ -80,10 +81,10 @@ namespace BusinessLogic.Tests.Test
 
             var regionToReturn = regionLogic.Add(region);
 
-            Assert.AreEqual(region, regionToReturn); 
+            Assert.AreEqual(region, regionToReturn);
         }
         [TestMethod]
-         [ExpectedException(typeof(ArgumentException))]
+        [ExpectedException(typeof(ArgumentException))]
         public void TestAddExistError()
         {
             Region region = regionsToReturn.First();
@@ -115,7 +116,7 @@ namespace BusinessLogic.Tests.Test
             mock.VerifyAll();
             Assert.IsNull(result);
         }
-         [TestMethod]
+        [TestMethod]
         public void TestUdpateOk ()
         {
             Region region = regionsToReturn.First();
@@ -124,9 +125,8 @@ namespace BusinessLogic.Tests.Test
             regionLogic.Update(region.Id,region);
 
             mock.VerifyAll();
-            
         }
-         [TestMethod]
+        [TestMethod]
         public void TestUpdateValidateError()
         {
             Region region = regionsToReturn.First(); // este punto turistico tiene que terner un formato erroneo despues para que la validación falle
@@ -135,7 +135,6 @@ namespace BusinessLogic.Tests.Test
             regionLogic.Update(region.Id,region);
 
             mock.VerifyAll();
-            
         }
         [TestMethod]
         [ExpectedException(typeof(ArgumentException))]
@@ -144,9 +143,9 @@ namespace BusinessLogic.Tests.Test
             Region region = regionsToReturn.First();
             ArgumentException exception = new ArgumentException();
             mock.Setup(m => m.Update(region.Id,region)).Throws(exception);
-            
+
             regionLogic.Update(region.Id,region);
-   
+
         }
         [TestMethod]
         public void TestExistOk()
