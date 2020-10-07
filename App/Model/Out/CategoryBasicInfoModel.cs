@@ -11,5 +11,15 @@ namespace Model.Out
             this.Id = category.Id;
             this.Name = category.Name;
         }
+
+        public override bool Equals(object obj)
+        {
+            var result = false;
+            if(obj is CategoryBasicInfoModel category)
+            {
+                result = this.Id == category.Id ;
+            }
+            return result;
+        }
     }
 }
