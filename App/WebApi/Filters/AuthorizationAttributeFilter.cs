@@ -7,6 +7,11 @@ namespace Filters
 {
     public class AuthorizationAttributeFilter : Attribute, IAuthorizationFilter
     {
+        private readonly ISessionLogic sessions;
+        public AuthorizationAttributeFilter (ISessionLogic sessionsLogic)
+        {
+            this.sessions =  sessionsLogic;
+        }
         public void OnAuthorization(AuthorizationFilterContext context)
         {
             string token = context.HttpContext.Request.Headers["Authorization"];
