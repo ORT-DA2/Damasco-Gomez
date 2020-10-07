@@ -18,10 +18,12 @@ namespace WebApi.Controllers
         {
             this.houseLogic = houseLogic;
         }
+        [HttpGet()]
         public IActionResult Get()
         {
-            var elementHouse = this.houseLogic.GetAll();
-            return Ok(elementHouse);
+            IEnumerable<House> elementHouse = this.houseLogic.GetAll();
+            IEnumerable<HouseBasicModel> basicModels = elementHouse.Select( m => new HouseBasicModel(m));
+            return Ok(basicModels);
         }
 
         [HttpGet("{id}",Name="GetHouse")]
@@ -94,6 +96,7 @@ namespace WebApi.Controllers
             this.houseLogic.Delete();
             return Ok();
         }
+        [Route("/touristpoint")]
         [HttpGet()]
         public IActionResult GetHousesBy([FromQuery]HouseSearchModel houseSearchModel)
         {
