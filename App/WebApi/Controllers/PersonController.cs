@@ -7,6 +7,7 @@ using Microsoft.AspNetCore.Mvc;
 using Model;
 using Model.In;
 using Model.Out;
+using Microsoft.Extensions.Logging;
 
 namespace WebApi.Controllers
 {
@@ -14,9 +15,11 @@ namespace WebApi.Controllers
     public class PersonController : VidlyControllerBase
     {
         private readonly IPersonLogic personLogic;
-        public PersonController(IPersonLogic personLogic)
+        private readonly ILogger<PersonController> logger;
+        public PersonController(IPersonLogic personLogic ,ILogger<PersonController> userLogger )
         {
             this.personLogic = personLogic;
+               logger = userLogger;
         }
         public IActionResult Get()
         {
