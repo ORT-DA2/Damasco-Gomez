@@ -2,7 +2,7 @@
 
 namespace Contracts
 {
-    public class ISessionLogic
+    public interface ISessionLogic
     {
         bool isCorrectionToken (string token);
     }
