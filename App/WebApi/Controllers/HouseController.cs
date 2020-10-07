@@ -31,8 +31,9 @@ namespace WebApi.Controllers
         {
             try
             {
-                var elementHouse = this.houseLogic.GetBy(id);
-                return Ok(elementHouse);
+                House elementHouse = this.houseLogic.GetBy(id);
+                HouseDetailModel modelHouse = new HouseDetailModel(elementHouse);
+                return Ok(modelHouse);
             }
             catch (ArgumentException)
             {
@@ -96,8 +97,7 @@ namespace WebApi.Controllers
             this.houseLogic.Delete();
             return Ok();
         }
-        [Route("/touristpoint")]
-        [HttpGet()]
+        [HttpGet("/touristpoint")]
         public IActionResult GetHousesBy([FromQuery]HouseSearchModel houseSearchModel)
         {
             HouseSearch houseSearch = houseSearchModel.ToEntity();
