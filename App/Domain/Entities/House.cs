@@ -49,19 +49,19 @@ namespace Domain
             return TotalPrice ;
         }
 
-        public static void Update(House elementToUpdate, House element)
+        public void Update(House element)
         {
-            //if(element.Avaible) 
-                elementToUpdate.Avaible = element.Avaible;
-            if(element.PricePerNight>0) elementToUpdate.PricePerNight = element.PricePerNight;
-            if(element.TouristPointId>0) elementToUpdate.TouristPointId = element.TouristPointId;
-            if(element.Name != null) elementToUpdate.Name = element.Name;
-            if(element.Starts>0) elementToUpdate.Starts = element.Starts;
-            if(element.Address != null) elementToUpdate.Address = element.Address;
-            if(element.Description != null) elementToUpdate.Description = element.Description;
-            if(element.Ilustrations != null) elementToUpdate.Ilustrations = element.Ilustrations;
-            if(element.Phone>0) elementToUpdate.Phone = element.Phone;
-            if(element.Contact != null) elementToUpdate.Contact = element.Contact;
+            //if(element.Avaible)
+               this.Avaible = element.Avaible;
+            if(element.PricePerNight>0) this.PricePerNight = element.PricePerNight;
+            if(element.TouristPointId>0) this.TouristPointId = element.TouristPointId;
+            if(element.Name != null) this.Name = element.Name;
+            if(element.Starts>0) this.Starts = element.Starts;
+            if(element.Address != null) this.Address = element.Address;
+            if(element.Description != null) this.Description = element.Description;
+            if(element.Ilustrations != null) this.Ilustrations = element.Ilustrations;
+            if(element.Phone>0) this.Phone = element.Phone;
+            if(element.Contact != null) this.Contact = element.Contact;
         }
 
         public static bool IsAvailable(House house)

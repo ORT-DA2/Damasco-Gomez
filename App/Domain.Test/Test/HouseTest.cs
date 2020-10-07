@@ -41,7 +41,7 @@ namespace Domain.Test.Test
                     Contact = null,
                 };
 
-            House.Update(house,newHouse);
+            house.Update(newHouse);
 
             Assert.AreEqual(newHouse.Avaible, house.Avaible);
         }
@@ -62,7 +62,7 @@ namespace Domain.Test.Test
                     Contact = null,
                 };
 
-            House.Update(house,newHouse);
+            house.Update(newHouse);
 
             Assert.AreEqual(newHouse.Avaible, house.Avaible);
         }
@@ -83,7 +83,7 @@ namespace Domain.Test.Test
                     Contact = null,
                 };
 
-            House.Update(house,newHouse);
+            house.Update(newHouse);
 
             Assert.AreEqual(newHouse.Name, house.Name);
         }
@@ -104,7 +104,7 @@ namespace Domain.Test.Test
                     Contact = null,
                 };
 
-            House.Update(house,newHouse);
+            house.Update(newHouse);
 
             Assert.AreEqual(newHouse.PricePerNight, house.PricePerNight);
         }
@@ -125,7 +125,7 @@ namespace Domain.Test.Test
                     Contact = null,
                 };
 
-            House.Update(house,newHouse);
+            house.Update(newHouse);
 
             Assert.AreEqual(newHouse.TouristPointId, house.TouristPointId);
         }
@@ -146,7 +146,7 @@ namespace Domain.Test.Test
                     Contact = null,
                 };
 
-            House.Update(house,newHouse);
+            house.Update(newHouse);
 
             Assert.AreEqual(newHouse.Starts, house.Starts);
         }
@@ -167,7 +167,7 @@ namespace Domain.Test.Test
                     Contact = null,
                 };
 
-            House.Update(house,newHouse);
+            house.Update(newHouse);
 
             Assert.AreEqual(newHouse.Address, house.Address);
         }
@@ -188,7 +188,7 @@ namespace Domain.Test.Test
                     Contact = null,
                 };
 
-            House.Update(house,newHouse);
+            house.Update(newHouse);
 
             Assert.AreEqual(newHouse.Ilustrations, house.Ilustrations);
         }
@@ -209,7 +209,7 @@ namespace Domain.Test.Test
                     Contact = null,
                 };
 
-            House.Update(house,newHouse);
+            house.Update(newHouse);
 
             Assert.AreEqual(newHouse.Description, house.Description);
         }
@@ -230,7 +230,7 @@ namespace Domain.Test.Test
                     Contact = null,
                 };
 
-            House.Update(house,newHouse);
+            house.Update(newHouse);
 
             Assert.AreEqual(newHouse.Phone, house.Phone);
         }
@@ -251,7 +251,7 @@ namespace Domain.Test.Test
                     Contact = "new contact",
                 };
 
-            House.Update(house,newHouse);
+            house.Update(newHouse);
 
             Assert.AreEqual(newHouse.Contact, house.Contact);
         }
