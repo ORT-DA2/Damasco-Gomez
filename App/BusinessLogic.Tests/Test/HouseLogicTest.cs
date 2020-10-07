@@ -16,11 +16,12 @@ namespace BusinessLogic.Tests.Test
         private  List<House> housesToReturn;
         private  List<House>  emptyHouses;
         private HouseLogic houseLogic;
-         private Mock<IHouseRepository> mock;
+        private Mock<IHouseRepository> mock;
+        private Mock<ITouristPointRepository> mock2;
         [TestInitialize]
         public void initVariables()
         {
-             housesToReturn = new List<House>()
+            housesToReturn = new List<House>()
             {
                 new House()
                 {
@@ -35,7 +36,8 @@ namespace BusinessLogic.Tests.Test
             };
             emptyHouses = new List<House>();
             mock = new Mock<IHouseRepository>(MockBehavior.Strict);
-            houseLogic = new HouseLogic(mock.Object);
+            mock2 = new Mock<ITouristPointRepository>(MockBehavior.Strict);
+            houseLogic = new HouseLogic(mock.Object,mock2.Object);
         }
 
         [TestMethod]
@@ -43,24 +45,23 @@ namespace BusinessLogic.Tests.Test
         {
             Assert.IsTrue(true);
         }
-         [TestMethod]
+        [TestMethod]
         public void DeleteTestByIdOk()
         {
             Assert.IsTrue(true);
         }
-        [TestMethod]
+         [TestMethod]
         public void GetByTestOk()
         {
-             House house = housesToReturn.First();
+            House house = housesToReturn.First();
             mock.Setup(m => m.Find(house.Id)).Returns(house);
 
             var result = houseLogic.GetBy(house.Id);
 
-           
             Assert.AreEqual(result,house);
         }
-         [TestMethod]
-         public void TestGetByFail()
+        [TestMethod]
+        public void TestGetByFail()
         {
             House house = housesToReturn.First();
             House empty = null;
@@ -68,52 +69,62 @@ namespace BusinessLogic.Tests.Test
 
             var result = houseLogic.GetBy(house.Id);
 
-            
             Assert.IsNull(result);
         }
         public void TestAddOk()
         {
             House house = housesToReturn.First();
+            mock2.Setup(m => m.ExistElement(house.TouristPointId)).Returns(true);
+            mock.Setup(m => m.Find(house.Id)).Returns(house);
             mock.Setup(m => m.Add(house)).Returns(house);
+
             var result= houseLogic.Add(house);
-        
+
             Assert.AreEqual(house, result);
         }
-         [TestMethod]
+        [TestMethod]
         public void TestAddValidateError()
         {
-            House house = housesToReturn.First(); // House tiene que terner un formato erroneo despues para que la validación falle
+            House house = housesToReturn.First();
+            mock2.Setup(m => m.ExistElement(house.TouristPointId)).Returns(true);
+            mock.Setup(m => m.Find(house.Id)).Returns(house);
             mock.Setup(m => m.Add(house)).Returns(house);
 
             var result = houseLogic.Add(house);
 
-            Assert.AreEqual(house, result); 
+            Assert.AreEqual(house, result);
         }
         [TestMethod]
-         [ExpectedException(typeof(ArgumentException))]
+        [ExpectedException(typeof(ArgumentException))]
         public void TestAddExistError()
         {
-            House house = housesToReturn.First(); 
+            House house = housesToReturn.First();
+            mock2.Setup(m => m.ExistElement(house.TouristPointId)).Returns(true);
             ArgumentException exception = new ArgumentException();
+            mock.Setup(m => m.Find(house.Id)).Returns(house);
             mock.Setup(m => m.Add(house)).Throws(exception);
 
             var reuslt = houseLogic.Add(house);
         }
-         [TestMethod]
+        [TestMethod]
         public void TestUdpateOk ()
         {
             House house = housesToReturn.First();
+            mock2.Setup(m => m.ExistElement(house.TouristPointId)).Returns(true);
+            mock.Setup(m => m.Find(house.Id)).Returns(house);
             mock.Setup(m => m.Update(house.Id,house));
 
             houseLogic.Update(house.Id,house);
 
             mock.VerifyAll();
         }
-         [TestMethod]
+        [TestMethod]
         public void TestUpdateValidateError()
         {
-            House house = housesToReturn.First();// House tiene que terner un formato erroneo despues para que la validación falle
-             mock.Setup(m => m.Update(house.Id,house));
+            House house = housesToReturn.First();
+            mock2.Setup(m => m.ExistElement(house.TouristPointId)).Returns(true);
+            mock.Setup(m => m.Find(house.Id)).Returns(house);
+            mock.Setup(m => m.Update(house.Id,house));
 
             houseLogic.Update(house.Id,house);
 
@@ -124,12 +135,14 @@ namespace BusinessLogic.Tests.Test
         public void TestUpdateExistError()
         {
             House house = housesToReturn.First();
+            mock2.Setup(m => m.ExistElement(house.TouristPointId)).Returns(true);
             ArgumentException exception = new ArgumentException();
+            mock.Setup(m => m.Find(house.Id)).Returns(house);
             mock.Setup(m => m.Update(house.Id,house)).Throws(exception);
-            
+
             houseLogic.Update(house.Id,house);
         }
-          [TestMethod]
+        [TestMethod]
         public void TestExistOk()
         {
             House house = housesToReturn.First();
@@ -169,7 +182,7 @@ namespace BusinessLogic.Tests.Test
             mock.Setup(m => m.GetByIdTouristPoint(houseSearch.TouristPointId)).Returns(houses);
 
             var result = houseLogic.GetHousesBy(houseSearch);
-            
+
             Assert.AreEqual(houses, result);
         }
         [TestMethod]
