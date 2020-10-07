@@ -16,7 +16,7 @@ namespace DataAccess.Repositories
 
         protected override void Update(House elementToUpdate, House element)
         {
-            House.Update(elementToUpdate,element);
+            elementToUpdate.Update(element);
         }
 
         protected override void Validate(House element)
