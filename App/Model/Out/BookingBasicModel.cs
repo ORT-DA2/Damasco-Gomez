@@ -26,5 +26,14 @@ namespace Model
             this.CheckIn = booking.CheckIn;
             this.CheckOut = booking.CheckOut;
         }
+        public override bool Equals(object obj)
+        {
+            var result = false;
+            if(obj is BookingBasicModel booking)
+            {
+                result = this.Id == booking.Id ;
+            }
+            return result;
+        }
     }
 }

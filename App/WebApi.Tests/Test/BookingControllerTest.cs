@@ -78,39 +78,42 @@ namespace WebApi.Tests
         public void TestGetAllBookingsOk()
         {
             mock.Setup(m => m.GetAll()).Returns(bookingsToReturn);
+            IEnumerable<BookingBasicModel> bookingModels = bookingsToReturn.Select(m => new BookingBasicModel(m));
 
             var result = controller.Get();
 
             var okResult = result as OkObjectResult;
-            var bookings = okResult.Value as IEnumerable<Booking>;
+            var bookings = okResult.Value as IEnumerable<BookingBasicModel>;
             mock.VerifyAll();
-            Assert.IsTrue(bookingsToReturn.SequenceEqual(bookings));
+            Assert.IsTrue(bookingModels.SequenceEqual(bookings));
         }
 
         [TestMethod]
         public void TestGetAllBookingsVacia()
         {
+            IEnumerable<BookingBasicModel> basicModelList = new List<BookingBasicModel>(){};
             mock.Setup(m => m.GetAll()).Returns(bookingsToReturnEmpty);
 
             var result = controller.Get();
 
             var okResult = result as OkObjectResult;
-            var bookings = okResult.Value as IEnumerable<Booking>;
+            var bookings = okResult.Value as IEnumerable<BookingBasicModel>;
             mock.VerifyAll();
-            Assert.IsTrue(bookingsToReturnEmpty.SequenceEqual(bookings));
+            Assert.IsTrue(basicModelList.SequenceEqual(bookings));
         }
         [TestMethod]
         public void TestGetByOk()
         {
             int id = 1;
             mock.Setup(m => m.GetBy(id)).Returns(bookingId1);
+            BookingDetailModel bookingDetailModel = new BookingDetailModel(bookingId1);
 
             var result = controller.GetBy(id);
 
             var okResult = result as OkObjectResult;
-            var bookings = okResult.Value as Booking;
+            var bookings = okResult.Value as BookingDetailModel;
             mock.VerifyAll();
-            Assert.IsTrue(bookings.Equals(bookingId1));
+            Assert.IsTrue(bookings.Equals(bookingDetailModel));
         }
         [TestMethod]
         public void TestGetByNotFound()
