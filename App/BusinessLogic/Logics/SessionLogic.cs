@@ -1,3 +1,4 @@
+using System;
 using Contracts;
 
 namespace BusinessLogic.Logics
@@ -6,7 +7,7 @@ namespace BusinessLogic.Logics
     {
         public bool isCorrectionToken (string token)
         {
-            return true;
+             throw new NotImplementedException();
         }
     }
 }

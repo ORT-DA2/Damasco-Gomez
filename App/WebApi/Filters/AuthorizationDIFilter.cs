@@ -1,4 +1,5 @@
 using Contracts;
+using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Filters;
 
 namespace Filters
@@ -11,7 +12,30 @@ namespace Filters
         {
             this.sessionsLogic = sessions;
         }
+        public void OnAuthorization(AuthorizationFilterContext context)
+        {
+            var token = context.HttpContext.Request.Headers["Authorization"];
 
+            if(string.IsNullOrEmpty(token))
+            {
+                context.Result = new ContentResult()
+                {
+                    StatusCode = 401,
+                    Content = "Authorization required"
+                };
+            }
+            else
+            {
+                if(!this.sessionsLogic.IsCorrectToken(token))
+                {
+                    context.Result = new ContentResult()
+                    {
+                        StatusCode = 403,
+                        Content = "you don't have permits"
+                    };
+                }
+            }
+        }
         
     }
 }
