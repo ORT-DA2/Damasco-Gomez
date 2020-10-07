@@ -10,7 +10,7 @@ namespace Model
         public string Email {get; private set;}
         public string Code {get; private set;}
         public int HouseId {get; private set;}
-        public virtual House House {get; private set;}
+        public HouseBasicModel House {get; private set;}
         public string State {get; private set;}
         public int Price {get; private set;}
         public  DateTime CheckIn {get; private set;}
@@ -22,7 +22,7 @@ namespace Model
             this.Email = booking.Email;
             this.Code = booking.Code;
             this.HouseId = booking.HouseId;
-            this.House = booking.House;
+            this.House = new HouseBasicModel(booking.House);
             this.State = booking.State;
             this.Price = booking.Price;
             this.CheckIn = booking.CheckIn;

@@ -1,5 +1,6 @@
 using System;
 using Domain;
+using Model.Out;
 
 namespace Model
 {
@@ -9,6 +10,7 @@ namespace Model
         public bool Avaible {get ; set; }
         public int PricePerNight {get; set;}
         public int TouristPointId {get ; set; }
+        public TouristPointBasicInfoModel TouristPoint {get ; set; }
         public string Name {get ; set; }
         public int Starts {get ; set; }
         public string Address {get ; set; }
@@ -34,6 +36,7 @@ namespace Model
             this.PricePerNight = house.PricePerNight;
             this.Phone = house.Phone;
             this.TouristPointId = house.TouristPointId;
+            this.TouristPoint = new TouristPointBasicInfoModel(house.TouristPoint);
             this.Name = house.Name;
             this.Starts = house.Starts;
             this.Ilustrations = house.Ilustrations;
