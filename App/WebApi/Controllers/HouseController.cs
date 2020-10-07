@@ -39,11 +39,12 @@ namespace WebApi.Controllers
         }
         [HttpPost()]
         //The post should have HouseModel , but will leave it like this
-        public IActionResult Post([FromBody]House house)
+        public IActionResult Post([FromBody]HouseModel houseModel)
         {
             try
             {
-                this.houseLogic.Add(house);
+                House house = houseModel.ToEntity();
+                house = this.houseLogic.Add(house);
                 return CreatedAtRoute("GetHouse", new {Id = house.Id}, house);
             }
             catch (AggregateException)
@@ -60,14 +61,13 @@ namespace WebApi.Controllers
             }
         }
         [HttpPut("{id}")]
-        //The put should have HouseModel , but will leave it like this
-        public IActionResult Put([FromRoute]int id,[FromBody]House house)
+        public IActionResult Put([FromRoute]int id,[FromBody]HouseModel houseModel)
         {
             try
             {
-                this.houseLogic.Update(id,house);
-                return CreatedAtRoute("GetHouse", new {Id = house.Id} , house);
-                //return Ok(house);
+                House house = houseModel.ToEntity();
+                House newHouse = this.houseLogic.Update(id,house);
+                return CreatedAtRoute("GetHouse", new {Id = newHouse.Id} , newHouse);
             }
             catch(ArgumentException e)
             {

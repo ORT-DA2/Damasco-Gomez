@@ -141,24 +141,41 @@ namespace WebApi.Tests
         [TestMethod]
         public void TestPostOk()
         {
-            mock.Setup(m => m.Add(houseId1)).Returns(houseId1);
+            HouseModel houseModel = new HouseModel()
+            {
+                Avaible = true ,
+                PricePerNight = 100,
+                TouristPointId = 1,
+                Name = "Name house 1",
+                Starts = 1,
+                Address = "Address 1",
+                Ilustrations = "Image here",
+                Description = "Description house 1",
+                Phone = 99898899 ,
+                Contact = "Person Name1",
+            };
+            House house = houseModel.ToEntity();
+            mock.Setup(m => m.Add(house)).Returns(house);
 
-            var result = controller.Post(houseId1);
+            var result = controller.Post(houseModel);
 
             var okResult = result as CreatedAtRouteResult;
             mock.VerifyAll();
             Assert.IsNotNull(okResult);
             Assert.AreEqual("GetHouse", okResult.RouteName);
-            Assert.AreEqual(okResult.Value, houseId1);
+            Assert.AreEqual(okResult.Value, house);
         }
         [TestMethod]
         public void TestPostFailSameHouse()
         {
-            houseId1 = housesToReturn.First();
+            HouseModel houseModel = new HouseModel()
+            {
+            };
+            House house = houseModel.ToEntity();
             Exception exist = new AggregateException();
-            mock.Setup(p => p.Add(houseId1)).Throws(exist);
+            mock.Setup(p => p.Add(house)).Throws(exist);
 
-            var result = controller.Post(houseId1);
+            var result = controller.Post(houseModel);
 
             mock.VerifyAll();
             Assert.IsInstanceOfType(result, typeof(BadRequestObjectResult));
@@ -166,11 +183,12 @@ namespace WebApi.Tests
         [TestMethod]
         public void TestPostFailValidation()
         {
-            houseId1 = housesToReturn.First();
+            HouseModel houseModel = new HouseModel();
+            House house = houseModel.ToEntity();
             Exception exist = new ArgumentException();
-            mock.Setup(p => p.Add(houseId1)).Throws(exist);
+            mock.Setup(p => p.Add(house)).Throws(exist);
 
-            var result = controller.Post(houseId1);
+            var result = controller.Post(houseModel);
 
             mock.VerifyAll();
             Assert.IsInstanceOfType(result, typeof(BadRequestObjectResult));
@@ -178,11 +196,12 @@ namespace WebApi.Tests
         [TestMethod]
         public void TestPostFailServer()
         {
-            houseId1 = housesToReturn.First();
+            HouseModel houseModel = new HouseModel();
+            House house = houseModel.ToEntity();
             Exception exist = new Exception();
-            mock.Setup(p => p.Add(houseId1)).Throws(exist);
+            mock.Setup(p => p.Add(house)).Throws(exist);
 
-            var result = controller.Post(houseId1);
+            var result = controller.Post(houseModel);
 
             mock.VerifyAll();
             Assert.IsInstanceOfType(result, typeof(BadRequestObjectResult));
