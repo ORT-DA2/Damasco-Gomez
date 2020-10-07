@@ -2,6 +2,7 @@ using System;
 using System.Linq;
 using BusinessLogicInterface;
 using Domain;
+using Filters;
 using Microsoft.AspNetCore.Mvc;
 using Model.In;
 using Model.Out;
@@ -9,6 +10,7 @@ using Model.Out;
 namespace WebApi.Controllers
 {
     [Route("api/touristpoints")]
+     [ServiceFilter(typeof(AuthorizationDIFilter))]
     public class TouristPointController : VidlyControllerBase
     {
         private readonly ITouristPointLogic touristPointLogic;
