@@ -1,6 +1,7 @@
 using Contracts;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Filters;
+using SessionInterface;
 
 namespace Filters
 {
@@ -26,7 +27,7 @@ namespace Filters
             }
             else
             {
-                if(!this.sessionsLogic.IsCorrectToken(token))
+                if(!this.sessionsLogic.isCorrectToken(token))
                 {
                     context.Result = new ContentResult()
                     {
@@ -35,6 +36,12 @@ namespace Filters
                     };
                 }
             }
+        }
+        private ISessionLogic GetSessionLogic(AuthorizationFilterContext context)
+        {
+            var sessionType = typeof(ISessionLogic);
+
+            return context.HttpContext.RequestServices.GetService(sessionType) as ISessionLogic;
         }
         
     }
