@@ -2,11 +2,13 @@ using System;
 using System.Collections.Generic;
 using BusinessLogicInterface;
 using Domain;
+using Filters;
 using Microsoft.AspNetCore.Mvc;
 
 namespace WebApi.Controllers
 {
     [Route("api/regions")]
+    [ServiceFilter(typeof(AuthorizationDIFilter))]
     public class RegionController : VidlyControllerBase
     {
        private readonly IRegionLogic regionLogic;
