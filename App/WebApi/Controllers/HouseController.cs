@@ -94,7 +94,7 @@ namespace WebApi.Controllers
             return Ok();
         }
         [HttpGet("{idTP,checkIn,checkOut,cantA,cantC,cantB}") ]
-        public IActionResult GetHousesBy([FromRoute] HouseSearchModel houseSearchModel)
+        public IActionResult GetHousesBy([FromBody] HouseSearchModel houseSearchModel)
         {
             var idTP = houseSearchModel.TouristPointId;
             var checkIn = houseSearchModel.CheckIn;
