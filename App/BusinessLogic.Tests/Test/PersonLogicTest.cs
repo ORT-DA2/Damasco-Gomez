@@ -59,7 +59,7 @@ namespace BusinessLogic.Tests.Test
         [TestMethod]
         public void GetByTestOk()
         {
-             Person person = personsToReturn.First();
+            Person person = personsToReturn.First();
             mock.Setup(m => m.Find(person.Id)).Returns(person);
 
             var result = personLogic.GetBy(person.Id);
@@ -67,8 +67,8 @@ namespace BusinessLogic.Tests.Test
             mock.VerifyAll();
             Assert.AreEqual(result,person);
         }
-         [TestMethod]
-         public void TestGetByFail()
+        [TestMethod]
+        public void TestGetByFail()
         {
             Person person = personsToReturn.First();
             Person empty = null;
@@ -79,15 +79,16 @@ namespace BusinessLogic.Tests.Test
             mock.VerifyAll();
             Assert.IsNull(result);
         }
+        [TestMethod]
         public void TestAddOk()
         {
             Person person = personsToReturn.First();
             mock.Setup(m => m.Add(person)).Returns(person);
             var result= personLogic.Add(person);
-        
+
             Assert.AreEqual(person, result );
         }
-         [TestMethod]
+        [TestMethod]
         public void TestAddValidateError()
         {
             Person person = personsToReturn.First(); // PERSON tiene que terner un formato erroneo despues para que la validación falle
@@ -98,7 +99,7 @@ namespace BusinessLogic.Tests.Test
             Assert.AreEqual(person, result); 
         }
         [TestMethod]
-         [ExpectedException(typeof(ArgumentException))]
+        [ExpectedException(typeof(ArgumentException))]
         public void TestAddExistError()
         {
             Person person = personsToReturn.First(); 
@@ -107,21 +108,23 @@ namespace BusinessLogic.Tests.Test
 
             var reuslt = personLogic.Add(person);
         }
-         [TestMethod]
-        public void TestUdpateOk ()
+        [TestMethod]
+        public void TestUpdateOk ()
         {
             Person person = personsToReturn.First();
+            mock.Setup(m => m.Find(person.Id)).Returns(person);
             mock.Setup(m => m.Update(person.Id,person));
 
-            personLogic.Update(person.Id,person);
+            Person newP = personLogic.Update(person.Id,person);
 
-            mock.VerifyAll();
+            Assert.AreEqual(person,newP);
         }
-         [TestMethod]
+        [TestMethod]
         public void TestUpdateValidateError()
         {
-            Person person = personsToReturn.First();// PERSON tiene que terner un formato erroneo despues para que la validación falle
-             mock.Setup(m => m.Update(person.Id,person));
+            Person person = personsToReturn.First();
+            mock.Setup(m => m.Find(person.Id)).Returns(person);
+            mock.Setup(m => m.Update(person.Id,person));
 
             personLogic.Update(person.Id,person);
 
@@ -133,11 +136,12 @@ namespace BusinessLogic.Tests.Test
         {
             Person person = personsToReturn.First();
             ArgumentException exception = new ArgumentException();
+            mock.Setup(m => m.Find(person.Id)).Returns(person);
             mock.Setup(m => m.Update(person.Id,person)).Throws(exception);
-            
+
             personLogic.Update(person.Id,person);
         }
-          [TestMethod]
+        [TestMethod]
         public void TestExistOk()
         {
             Person person = personsToReturn.First();

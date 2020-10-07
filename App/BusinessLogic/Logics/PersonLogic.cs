@@ -35,9 +35,12 @@ namespace BusinessLogic
         {
             return this.personRepository.Add(Person);
         }
-        public void Update(int id,Person Person)
+        public Person Update(int id, Person Person)
         {
-            this.personRepository.Update(id, Person);
+            Person personBd = this.personRepository.Find(id);
+            personBd.Update(personBd);
+            this.personRepository.Update(id,personBd);
+            return personBd;
         }
         public void Delete(int id)
         {
