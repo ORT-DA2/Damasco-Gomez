@@ -7,25 +7,16 @@ namespace Domain
     public class House
     {
         public int Id {get ; set ; }
-
         public bool Avaible {get ; set; }
         public int PricePerNight {get; set;}
-
         public int TouristPointId {get ; set; }
         public virtual TouristPoint TouristPoint {get ; set; }
-
         public string Name {get ; set; }
-
         public int Starts {get ; set; }
-
         public string Address {get ; set; }
-
         public string Ilustrations {get ; set; }
-
         public string Description {get ; set;}
-
         public int Phone {get; set; }
-
         public string Contact {get; set;}
 
         public override bool Equals(object obj)
