@@ -7,19 +7,18 @@ using Microsoft.AspNetCore.Mvc;
 using Model;
 using Model.In;
 using Model.Out;
-using Microsoft.Extensions.Logging;
-
 namespace WebApi.Controllers
 {
+     [ApiController]
     [Route("api/persons")]
+
     public class PersonController : VidlyControllerBase
     {
         private readonly IPersonLogic personLogic;
-        private readonly ILogger<PersonController> logger;
-        public PersonController(IPersonLogic personLogic ,ILogger<PersonController> userLogger )
+
+        public PersonController(IPersonLogic personLogic)
         {
-            this.personLogic = personLogic;
-               logger = userLogger;
+            this.personLogic = personLogic; 
         }
         public IActionResult Get()
         {
