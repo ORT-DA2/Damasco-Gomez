@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Generic;
 using System.Drawing;
+using Domain.Entities;
 
 namespace Domain
 {
@@ -28,14 +29,14 @@ namespace Domain
             }
             return result;
         }
-        public double CalculateTotalPrice(int cantAdults,int  cantChildrens, int cantBabys)
+        public double CalculateTotalPrice(HouseSearch houseSearch)
         {
             int priceNight = this.PricePerNight;
-            double  PriceAdults = cantAdults* priceNight;
+            double  PriceAdults = houseSearch.CantAdults * priceNight;
             const double percentChildrens = 0.5;
             const double percentBabys = 0.5;
-            double  PriceChildrens = cantChildrens* percentChildrens * priceNight;
-            double  PriceBabys = cantBabys* percentBabys * priceNight;
+            double  PriceChildrens = houseSearch.CantChildrens* percentChildrens * priceNight;
+            double  PriceBabys = houseSearch.CantBabys * percentBabys * priceNight;
             double TotalPrice= PriceAdults + PriceChildrens + PriceBabys;
             return TotalPrice ;
         }

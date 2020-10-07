@@ -5,12 +5,9 @@ namespace Model
 {
     public class HouseSearchResultModel
     {
-        public string CheckIn {get; private set;}
-        public string CheckOut{get; private set;}
         public int CantPersons {get; private set;}
-        public int Id {get ; private set ; }
+        public int HouseId {get ; private set ; }
         public double TotalPrice {get; private set;}
-        public int TouristPointId {get ;  private set; }
         public string Name {get ; private set; }
         public int Starts {get ; private set; }
         public string Address {get ; private set; }
@@ -18,23 +15,21 @@ namespace Model
         public string Description {get ; private set;}
         public HouseSearchResultModel(House house, HouseSearch houseSearch)
         {
-            this.Id= house.Id;
-            this.TouristPointId = house.TouristPointId;
+            this.HouseId= house.Id;
+            this.CantPersons = houseSearch.CantAdults + houseSearch.CantBabys + houseSearch.CantChildrens;
             this.Name= house.Name;
             this.Starts = house.Starts;
             this.Address= house.Address;
             this.Ilustrations= house.Ilustrations;
             this.Description= house.Description;
-            this.TotalPrice= house.CalculateTotalPrice(houseSearch.CantAdults,houseSearch.CantChildrens,houseSearch.CantBabys);
-            this.CheckIn= houseSearch.CheckIn;
-            this.CheckOut = houseSearch.CheckOut;
+            this.TotalPrice= house.CalculateTotalPrice(houseSearch);
         }
         public override bool Equals(object obj)
         {
             var result = false;
             if(obj is HouseSearchResultModel house)
             {
-                result = this.Id == house.Id ;
+                result = this.HouseId == house.HouseId ;
             }
             return result;
         }
