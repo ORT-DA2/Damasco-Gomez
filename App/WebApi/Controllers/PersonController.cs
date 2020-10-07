@@ -1,8 +1,12 @@
 using System;
+using System.Collections.Generic;
+using System.Linq;
 using BusinessLogicInterface;
 using Domain;
 using Microsoft.AspNetCore.Mvc;
+using Model;
 using Model.In;
+using Model.Out;
 
 namespace WebApi.Controllers
 {
@@ -16,8 +20,9 @@ namespace WebApi.Controllers
         }
         public IActionResult Get()
         {
-            var elementPerson = this.personLogic.GetAll();
-            return Ok(elementPerson);
+            IEnumerable<Person> elementPerson = this.personLogic.GetAll();
+            IEnumerable<PersonBasicModel> personBasicModels = elementPerson.Select(m => new PersonBasicModel(m));
+            return Ok(personBasicModels);
         }
 
         [HttpGet("{id}",Name="GetPerson")]
@@ -25,8 +30,9 @@ namespace WebApi.Controllers
         {
             try
             {
-                var elementPerson = this.personLogic.GetBy(id);
-                return Ok(elementPerson);
+                Person elementPerson = this.personLogic.GetBy(id);
+                PersonBasicModel personBasicModel = new PersonBasicModel(elementPerson);
+                return Ok(personBasicModel);
             }
             catch (ArgumentException)
             {
@@ -34,7 +40,6 @@ namespace WebApi.Controllers
             }
         }
         [HttpPost()]
-        //The post should have PersonModel , but will leave it like this
         public IActionResult Post([FromBody]PersonModel personModel)
         {
             try
@@ -57,11 +62,11 @@ namespace WebApi.Controllers
             }
         }
         [HttpPut("{id}")]
-        //The put should have PersonModel , but will leave it like this
-        public IActionResult Put([FromRoute]int id,[FromBody]Person person)
+        public IActionResult Put([FromRoute]int id,[FromBody]PersonModel personModel)
         {
             try
             {
+                Person person = personModel.ToEntity();
                 this.personLogic.Update(id,person);
                 return CreatedAtRoute("GetPerson", new {Id = person.Id} , person);
             }
