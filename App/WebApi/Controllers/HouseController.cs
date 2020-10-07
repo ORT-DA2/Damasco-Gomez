@@ -94,7 +94,7 @@ namespace WebApi.Controllers
             this.houseLogic.Delete();
             return Ok();
         }
-        [HttpGet() ]
+        [HttpGet("{CheckIn,CheckOut,TouristPointId,CantAdults,CantChildrens,CantBabys}") ]
         public IActionResult GetHousesBy([FromQuery] HouseSearchModel houseSearchModel)
         {
            
