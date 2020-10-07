@@ -11,16 +11,14 @@ namespace Model
         public int Id {get ; private set ; }
         public double TotalPrice {get; private set;}
         public int TouristPointId {get ;  private set; }
-        public TouristPoint TouristPoint {get ; private set; }
         public string Name {get ; private set; }
         public int Starts {get ; private set; }
         public string Address {get ; private set; }
         public string Ilustrations {get ; private set; }
         public string Description {get ; private set;}
-        public HouseSearchResultModel(House house, HouseSearch houseSearch) 
+        public HouseSearchResultModel(House house, HouseSearch houseSearch)
         {
             this.Id= house.Id;
-            this.TouristPoint = house.TouristPoint;
             this.TouristPointId = house.TouristPointId;
             this.Name= house.Name;
             this.Starts = house.Starts;

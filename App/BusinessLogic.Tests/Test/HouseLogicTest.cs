@@ -3,7 +3,9 @@ using System.Collections.Generic;
 using System.Linq;
 using DataAccessInterface.Repositories;
 using Domain;
+using Domain.Entities;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
+using Model.In;
 using Moq;
 
 namespace BusinessLogic.Tests.Test
@@ -156,31 +158,37 @@ namespace BusinessLogic.Tests.Test
             {
                 housesToReturn.First()
             };
-            int idTP = 1 ;
-            string checkIn = "30/11/2020" ;
-            string checkOut = "12/12/2020";
-            int cantA =2;
-            int cantB= 0;
-            int cantC = 0;
-            mock.Setup(m => m.GetByIdTouristPoint(idTP)).Returns(houses);
-    
-            var result = houseLogic.GetHousesBy(idTP, checkIn,checkOut,cantA,cantC, cantB);
-            Assert.AreEqual(houses, result); 
+            HouseSearch houseSearch = new HouseSearch(){
+                TouristPointId = 100,
+                CheckIn= "01/12/2020",
+                CheckOut= "21/12/2020",
+                CantAdults = 2,
+                CantChildrens = 1,
+                CantBabys = 0,
+            };
+            mock.Setup(m => m.GetByIdTouristPoint(houseSearch.TouristPointId)).Returns(houses);
+
+            var result = houseLogic.GetHousesBy(houseSearch);
+            
+            Assert.AreEqual(houses, result);
         }
         [TestMethod]
         public void TestGetHousesByEmpty()
         {
             List<House> emptyHouses = new List<House>();
-            int idTP = 3 ;
-            string checkIn = "30/11/2020" ;
-            string checkOut = "12/12/2020";
-            int cantA =2;
-            int cantB= 0;
-            int cantC = 0;
-            mock.Setup(m => m.GetByIdTouristPoint(idTP)).Returns(emptyHouses);
-    
-            var result = houseLogic.GetHousesBy(idTP, checkIn,checkOut,cantA,cantC, cantB);
-            Assert.AreEqual(emptyHouses, result); 
+            HouseSearch houseSearch = new HouseSearch(){
+                TouristPointId = 100,
+                CheckIn= "01/12/2020",
+                CheckOut= "21/12/2020",
+                CantAdults = 2,
+                CantChildrens = 1,
+                CantBabys = 0,
+            };
+            mock.Setup(m => m.GetByIdTouristPoint(houseSearch.TouristPointId)).Returns(emptyHouses);
+
+            var result = houseLogic.GetHousesBy(houseSearch);
+
+            Assert.AreEqual(emptyHouses, result);
         }
         //falta delete
     }

@@ -50,7 +50,7 @@ namespace BusinessLogic
         {
             return this.houseRepository.ExistElement(House);
         }
-        public IEnumerable<House>  GetHousesBy(HouseSearch houseSearch)
+        public IEnumerable<House> GetHousesBy(HouseSearch houseSearch)
         {
             return this.houseRepository.GetByIdTouristPoint(houseSearch.TouristPointId);
         }

@@ -94,15 +94,14 @@ namespace WebApi.Controllers
             this.houseLogic.Delete();
             return Ok();
         }
-        [HttpGet("{CheckIn,CheckOut,TouristPointId,CantAdults,CantChildrens,CantBabys}") ]
-        public IActionResult GetHousesBy([FromQuery] HouseSearchModel houseSearchModel)
+        [HttpGet()]
+        public IActionResult GetHousesBy([FromQuery]HouseSearchModel houseSearchModel)
         {
-           
-            var houseSearch = houseSearchModel.ToEntity();
-            var varRet = this.houseLogic.GetHousesBy(houseSearch);
-            var result = varRet.Select(m => new HouseSearchResultModel(m,houseSearch)).ToList();
+            HouseSearch houseSearch = houseSearchModel.ToEntity();
+            IEnumerable<House> varRet = this.houseLogic.GetHousesBy(houseSearch);
+            IEnumerable<HouseSearchResultModel> result = varRet.
+                Select(m => new HouseSearchResultModel(m , houseSearch)).ToList();
             return Ok(result);
-           
         }
     }
 }

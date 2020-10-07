@@ -5,14 +5,13 @@ namespace Model.In
 {
     public class HouseSearchModel
     {
-        public string CheckIn {get; private set;}
-        public string CheckOut{get; private set;}
-        public int TouristPointId {get ; private set; }
-         public int CantAdults {get; private set;}
-         public int CantChildrens {get; private set;}
-         public int CantBabys {get; private set;}
-
-          public HouseSearch ToEntity()
+        public string CheckIn {get; set;}
+        public string CheckOut{get; set;}
+        public int TouristPointId {get ; set; }
+        public int CantAdults {get; set;}
+        public int CantChildrens {get; set;}
+        public int CantBabys {get; set;}
+        public HouseSearch ToEntity()
         {
             return new HouseSearch()
             {
