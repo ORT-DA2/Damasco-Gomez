@@ -25,7 +25,7 @@ namespace Domain.Test.Test
                     Password = null,
                 };
 
-            Person.Update(person,newPerson);
+            person.Update(newPerson);
 
             Assert.AreEqual(newPerson.Email, person.Email);
         }
@@ -38,7 +38,7 @@ namespace Domain.Test.Test
                     Password = "new p",
                 };
 
-            Person.Update(person,newPerson);
+            person.Update(newPerson);
 
             Assert.AreEqual(newPerson.Password, person.Password);
         }

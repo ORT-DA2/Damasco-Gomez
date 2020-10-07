@@ -67,7 +67,7 @@ namespace WebApi.Controllers
             try
             {
                 Person person = personModel.ToEntity();
-                this.personLogic.Update(id,person);
+                person = this.personLogic.Update(id,person);
                 return CreatedAtRoute("GetPerson", new {Id = person.Id} , person);
             }
             catch(ArgumentException e)

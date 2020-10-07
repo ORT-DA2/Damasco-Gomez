@@ -35,7 +35,7 @@ namespace DataAccess.Repositories
 
         protected override void Update(Person elementToUpdate, Person element)
         {
-            Person.Update(elementToUpdate,element);
+            elementToUpdate.Update(element);
         }
     }
 }

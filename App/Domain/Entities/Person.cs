@@ -18,10 +18,10 @@ namespace Domain
             }
             return result;
         }
-        public static void Update(Person elementToUpdate, Person element)
+        public void Update(Person element)
         {
-            if(element.Password != null) elementToUpdate.Password = element.Password;
-            if(element.Email != null) elementToUpdate.Email = element.Email;
+            if(element.Password != null) this.Password = element.Password;
+            if(element.Email != null) this.Email = element.Email;
         }
 
     }
