@@ -12,7 +12,7 @@ namespace WebApi.Controllers
 {
     [ApiController]
     [Route("api/persons")]
-     [ServiceFilter(typeof(AuthorizationDIFilter))]
+    [ServiceFilter(typeof(AuthorizationDIFilter))]
     public class PersonController : VidlyControllerBase
     {
         private readonly IPersonLogic personLogic;
