@@ -5,6 +5,7 @@ using BusinessLogicInterface;
 using Domain;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
+using Model.In;
 using Moq;
 using WebApi.Controllers;
 
@@ -104,12 +105,17 @@ namespace WebApi.Test
             mock.VerifyAll();
             Assert.IsInstanceOfType(result, typeof(BadRequestObjectResult));
          }
-         [TestMethod]
-         public void TestPostOk ()
-         {
+        [TestMethod]
+        public void TestPostOk ()
+        {
+            RegionModel regionModel = new RegionModel()
+            {
+                Name = "name region",
+            };
+            regionId1 = regionModel.ToEntity();
             mock.Setup(m => m.Add(regionId1)).Returns(regionId1);
 
-            var result = controller.Post(regionId1);
+            var result = controller.Post(regionModel);
 
             var okResult = result as CreatedAtRouteResult;
             mock.VerifyAll();
@@ -120,23 +126,31 @@ namespace WebApi.Test
          [TestMethod]
           public void TestPostFailSameRegion()
         {
-            regionId1 = regionsToReturn.First();
+            RegionModel regionModel = new RegionModel()
+            {
+                Name = "name region",
+            };
+            regionId1 = regionModel.ToEntity();
             Exception exist = new AggregateException();
             mock.Setup(p => p.Add(regionId1)).Throws(exist);
 
-            var result = controller.Post(regionId1);
+            var result = controller.Post(regionModel);
 
             mock.VerifyAll();
             Assert.IsInstanceOfType(result, typeof(BadRequestObjectResult));
         }
         [TestMethod]
-          public void TestPostFailValidation()
+        public void TestPostFailValidation()
         {
-            regionId1 = regionsToReturn.First();
+            RegionModel regionModel = new RegionModel()
+            {
+                Name = "name region",
+            };
+            regionId1 = regionModel.ToEntity();
             Exception exist = new ArgumentException();
             mock.Setup(p => p.Add(regionId1)).Throws(exist);
 
-            var result = controller.Post(regionId1);
+            var result = controller.Post(regionModel);
 
             mock.VerifyAll();
             Assert.IsInstanceOfType(result, typeof(BadRequestObjectResult));
@@ -144,11 +158,15 @@ namespace WebApi.Test
         [TestMethod]
         public void TestPostFailServer()
         {
-            regionId1 = regionsToReturn.First();
+            RegionModel regionModel = new RegionModel()
+            {
+                Name = "name region",
+            };
+            regionId1 = regionModel.ToEntity();
             Exception exist = new Exception();
             mock.Setup(p => p.Add(regionId1)).Throws(exist);
 
-            var result = controller.Post(regionId1);
+            var result = controller.Post(regionModel);
 
             mock.VerifyAll();
             Assert.IsInstanceOfType(result, typeof(BadRequestObjectResult));
