@@ -13,6 +13,7 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
+using Filters;
 
 namespace WebApi
 {
@@ -32,6 +33,7 @@ namespace WebApi
             services.AddControllers();
             factory.AddCustomServices();
             factory.AddDbContextService();
+            services.AddScoped<AuthorizationAttributeFilter>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
