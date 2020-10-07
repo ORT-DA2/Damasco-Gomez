@@ -66,8 +66,8 @@ namespace WebApi.Controllers
             try
             {
                 House house = houseModel.ToEntity();
-                House newHouse = this.houseLogic.Update(id,house);
-                return CreatedAtRoute("GetHouse", new {Id = newHouse.Id} , newHouse);
+                house = this.houseLogic.Update(id,house);
+                return CreatedAtRoute("GetHouse", new {Id = house.Id} , house);
             }
             catch(ArgumentException e)
             {

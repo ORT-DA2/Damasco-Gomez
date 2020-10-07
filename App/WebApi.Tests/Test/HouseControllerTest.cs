@@ -209,10 +209,23 @@ namespace WebApi.Tests
         [TestMethod]
         public void TestPutOk()
         {
-            houseId1 = housesToReturn.First();
-            mock.Setup(m => m.Update(houseId1.Id,houseId1));
+            HouseModel houseModel = new HouseModel()
+            {
+                Avaible = true ,
+                PricePerNight = 100,
+                TouristPointId = 1,
+                Name = "Name house 1",
+                Starts = 1,
+                Address = "Address 1",
+                Ilustrations = "Image here",
+                Description = "Description house 1",
+                Phone = 99898899 ,
+                Contact = "Person Name1",
+            };
+            houseId1 = houseModel.ToEntity();
+            mock.Setup(m => m.Update(houseId1.Id,houseId1)).Returns(houseId1);
 
-            var result = controller.Put(houseId1.Id, houseId1);
+            var result = controller.Put(houseId1.Id, houseModel);
 
             var okResult = result as CreatedAtRouteResult;
             mock.VerifyAll();
@@ -223,11 +236,24 @@ namespace WebApi.Tests
         [TestMethod]
         public void TestPutFailValidate()
         {
-            houseId1 = housesToReturn.First();
+            HouseModel houseModel = new HouseModel()
+            {
+                Avaible = true ,
+                PricePerNight = 100,
+                TouristPointId = 1,
+                Name = "Name house 1",
+                Starts = 1,
+                Address = "Address 1",
+                Ilustrations = "Image here",
+                Description = "Description house 1",
+                Phone = 99898899 ,
+                Contact = "Person Name1",
+            };
+            houseId1 = houseModel.ToEntity();
             Exception exist = new ArgumentException();
             mock.Setup(p => p.Update(houseId1.Id,houseId1)).Throws(exist);
 
-            var result = controller.Put(houseId1.Id, houseId1);
+            var result = controller.Put(houseId1.Id, houseModel);
 
             mock.VerifyAll();
             Assert.IsInstanceOfType(result, typeof(BadRequestObjectResult));
@@ -235,11 +261,24 @@ namespace WebApi.Tests
         [TestMethod]
         public void TestPutFailServer()
         {
-            houseId1 = housesToReturn.First();
+            HouseModel houseModel = new HouseModel()
+            {
+                Avaible = true ,
+                PricePerNight = 100,
+                TouristPointId = 1,
+                Name = "Name house 1",
+                Starts = 1,
+                Address = "Address 1",
+                Ilustrations = "Image here",
+                Description = "Description house 1",
+                Phone = 99898899 ,
+                Contact = "Person Name1",
+            };
+            houseId1 = houseModel.ToEntity();
             Exception exist = new Exception();
             mock.Setup(p => p.Update(houseId1.Id,houseId1)).Throws(exist);
 
-            var result = controller.Put(houseId1.Id, houseId1);
+            var result = controller.Put(houseId1.Id, houseModel);
 
             mock.VerifyAll();
             Assert.IsInstanceOfType(result, typeof(BadRequestObjectResult));
