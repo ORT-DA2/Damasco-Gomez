@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using BusinessLogicInterface;
 using Domain;
+using Filters;
 using Microsoft.AspNetCore.Mvc;
 using Model;
 using Model.In;
@@ -11,6 +12,7 @@ namespace WebApi.Controllers
 {
     [ApiController]
     [Route("api/persons")]
+     [ServiceFilter(typeof(AuthorizationDIFilter))]
     public class PersonController : VidlyControllerBase
     {
         private readonly IPersonLogic personLogic;
