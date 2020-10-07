@@ -35,30 +35,23 @@ namespace BusinessLogic
 
         public Category Add(Category category)
         {
-            //DO ALL THIS IN THE VALIDATE 
-            try 
-            {
-                if (category != null)
-                {
-                    if (category.CategoryTouristPoints != null)
-                    { 
-                        category.CategoryTouristPoints.ForEach(
-                        m => m.TouristPoint = this.touristPointRepository.Find(m.TouristPointId)
-                        );
-                    }
-                    var categoryAdded =  this.categoryRepository.Add(category);
-                    return categoryAdded;
-                }  
-                throw new ArgumentException("The category is empty");
-            }
-            catch (ArgumentException e)
-            {
-                 throw new ArgumentException (e.Message.ToString());
-            }
+            Validate(category);
+            category.CategoryTouristPoints.ForEach
+            (
+                m => m.TouristPoint = this.touristPointRepository.Find(m.TouristPointId)
+            );
+            Category categoryAdded =  this.categoryRepository.Add(category);
+            return categoryAdded;
         }
-        public void Update(int id,Category Category)
+        public Category Update(int id, Category category)
         {
-            this.categoryRepository.Update(id, Category);
+            Validate(category);
+            category.CategoryTouristPoints.ForEach
+            (
+                m => m.TouristPoint = this.touristPointRepository.Find(m.TouristPointId)
+            );
+            this.categoryRepository.Update(id, category);
+            return category;
         }
         public void Delete(int id)
         {
@@ -70,7 +63,10 @@ namespace BusinessLogic
         }
         public void Validate(Category category)
         {
-
+            if (category == null)
+            {
+                throw new ArgumentException("Category is empty");
+            }
         }
 
     }

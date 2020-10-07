@@ -33,29 +33,21 @@ namespace BusinessLogic
 
         public TouristPoint Add(TouristPoint touristPoint)
         {
-             try 
-            {
-                 if (touristPoint!=null)
-            {
-                if (touristPoint.CategoriesTouristPoints!= null)
-                {
-                    touristPoint.CategoriesTouristPoints.ForEach(
-                    m=>m.Category = this.categoryRepository.Find(m.CategoryId)
-                    );
-                }
-                var touristPointAdded = this.touristPointRepository.Add(touristPoint);
-                return touristPointAdded;
-            }
-            throw new ArgumentException("The tourist point  is empty");
-            }
-            catch (ArgumentException e)
-            {
-                 throw new ArgumentException (e.Message.ToString());
-            }
+            touristPoint.CategoriesTouristPoints.ForEach
+            (
+                m => m.Category = this.categoryRepository.Find(m.CategoryId)
+            );
+            TouristPoint touristPointAdded = this.touristPointRepository.Add(touristPoint);
+            return touristPointAdded;
         }
-        public void Update(int id, TouristPoint TouristPoint)
+        public TouristPoint Update(int id, TouristPoint touristPoint)
         {
-            this.touristPointRepository.Update(id, TouristPoint);
+            touristPoint.CategoriesTouristPoints.ForEach
+            (
+                m => m.Category = this.categoryRepository.Find(m.CategoryId)
+            );
+            this.touristPointRepository.Update(id, touristPoint);
+            return touristPoint;
         }
         public void Delete(int id)
         {
@@ -64,6 +56,10 @@ namespace BusinessLogic
         public bool Exist(TouristPoint TouristPoint)
         {
             return this.touristPointRepository.ExistElement(TouristPoint);
+        }
+        public void Validate(TouristPoint touristPoint)
+        {
+            if (touristPoint==null) throw new ArgumentException("Tourist Point is empty");
         }
     }
 }
