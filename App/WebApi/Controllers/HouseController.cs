@@ -11,6 +11,7 @@ using Model.In;
 
 namespace WebApi.Controllers
 {
+    [ApiController]
     [Route("api/houses")]
     [ServiceFilter(typeof(AuthorizationDIFilter))]
     public class HouseController : VidlyControllerBase
