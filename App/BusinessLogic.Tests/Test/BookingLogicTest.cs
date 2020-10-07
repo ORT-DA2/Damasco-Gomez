@@ -111,8 +111,7 @@ namespace BusinessLogic.Tests.Test
                 HouseId = 0
             };
             Booking booking = bookingModel.ToEntity();
-            ArgumentException exception = new ArgumentException();
-            mock2.Setup(m => m.Find(bookingModel.HouseId)).Throws(exception);
+            mock2.Setup(m => m.ExistElement(booking.HouseId)).Returns(false);
 
             var result = bookingLogic.Add(booking);
         }
