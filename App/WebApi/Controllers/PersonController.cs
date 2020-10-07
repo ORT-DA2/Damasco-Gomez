@@ -2,6 +2,7 @@ using System;
 using BusinessLogicInterface;
 using Domain;
 using Microsoft.AspNetCore.Mvc;
+using Model.In;
 
 namespace WebApi.Controllers
 {
@@ -34,12 +35,13 @@ namespace WebApi.Controllers
         }
         [HttpPost()]
         //The post should have PersonModel , but will leave it like this
-        public IActionResult Post([FromBody]Person person)
+        public IActionResult Post([FromBody]PersonModel personModel)
         {
             try
             {
-                var personAdded = this.personLogic.Add(person);
-                return CreatedAtRoute("GetPerson", new {Id = personAdded.Id} , personAdded);
+                Person person = personModel.ToEntity();
+                person = this.personLogic.Add(person);
+                return CreatedAtRoute("GetPerson", new {Id = person.Id} , person);
             }
             catch (AggregateException)
             {

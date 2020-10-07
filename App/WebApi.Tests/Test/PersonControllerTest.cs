@@ -5,6 +5,7 @@ using BusinessLogicInterface;
 using Domain;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
+using Model.In;
 using Moq;
 using WebApi.Controllers;
 
@@ -102,9 +103,15 @@ namespace WebApi.Tests
         [TestMethod]
         public void TestPostOk()
         {
+            PersonModel personModel = new PersonModel()
+            {
+                Email = "email",
+                Password = "psswd"
+            };
+            personId1 = personModel.ToEntity();
             mock.Setup(m => m.Add(personId1)).Returns(personId1);
 
-            var result = controller.Post(personId1);
+            var result = controller.Post(personModel);
 
             var okResult = result as CreatedAtRouteResult;
             mock.VerifyAll();
@@ -115,11 +122,16 @@ namespace WebApi.Tests
         [TestMethod]
         public void TestPostFailSamePerson()
         {
-            personId1 = personsToReturn.First();
+            PersonModel personModel = new PersonModel()
+            {
+                Email = "email",
+                Password = "psswd"
+            };
+            personId1 = personModel.ToEntity();
             Exception exist = new AggregateException();
             mock.Setup(p => p.Add(personId1)).Throws(exist);
 
-            var result = controller.Post(personId1);
+            var result = controller.Post(personModel);
 
             mock.VerifyAll();
             Assert.IsInstanceOfType(result, typeof(BadRequestObjectResult));
@@ -127,11 +139,16 @@ namespace WebApi.Tests
         [TestMethod]
         public void TestPostFailValidation()
         {
-            personId1 = personsToReturn.First();
+            PersonModel personModel = new PersonModel()
+            {
+                Email = "email",
+                Password = "psswd"
+            };
+            personId1 = personModel.ToEntity();
             Exception exist = new ArgumentException();
             mock.Setup(p => p.Add(personId1)).Throws(exist);
 
-            var result = controller.Post(personId1);
+            var result = controller.Post(personModel);
 
             mock.VerifyAll();
             Assert.IsInstanceOfType(result, typeof(BadRequestObjectResult));
@@ -139,11 +156,16 @@ namespace WebApi.Tests
         [TestMethod]
         public void TestPostFailServer()
         {
-            personId1 = personsToReturn.First();
+            PersonModel personModel = new PersonModel()
+            {
+                Email = "email",
+                Password = "psswd"
+            };
+            personId1 = personModel.ToEntity();
             Exception exist = new Exception();
             mock.Setup(p => p.Add(personId1)).Throws(exist);
 
-            var result = controller.Post(personId1);
+            var result = controller.Post(personModel);
 
             mock.VerifyAll();
             Assert.IsInstanceOfType(result, typeof(BadRequestObjectResult));
