@@ -9,6 +9,7 @@ using Model.Out;
 
 namespace WebApi.Controllers
 {
+    [ApiController]
     [Route("api/categories")]
     [ServiceFilter(typeof(AuthorizationDIFilter))]
     public class CategoryController : VidlyControllerBase
