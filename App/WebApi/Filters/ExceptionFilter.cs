@@ -23,6 +23,7 @@ namespace Filters
                     Content = "Server error"
                 };
             }
+            // falta cachear el resto de las exceptions del sistema 
         }
     }
 }
