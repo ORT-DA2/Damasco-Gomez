@@ -41,33 +41,33 @@ namespace Domain.Test.Test
 
             Assert.AreEqual(nameShouldBe, region.Name);
         }
-        [TestMethod]
-        public void TestUpdateTouristPoints()
-        {
-            List<TouristPoint> listTouristPoint = new List<TouristPoint>();
-            Region newRegion = new Region()
-                {
-                    Name = null,
-                    TouristPoints = listTouristPoint
-                };
+        // [TestMethod]
+        // public void TestUpdateTouristPoints()
+        // {
+        //     List<TouristPoint> listTouristPoint = new List<TouristPoint>();
+        //     Region newRegion = new Region()
+        //         {
+        //             Name = null,
+        //             TouristPoints = listTouristPoint
+        //         };
 
-            region.Update(newRegion);
+        //     region.Update(newRegion);
 
-            Assert.AreEqual(listTouristPoint, region.TouristPoints);
-        }
-        [TestMethod]
-        public void TestUpdateTouristPointsNull()
-        {
-            List<TouristPoint> listTouristPoint = null;
-            Region newRegion = new Region()
-                {
-                    Name = null,
-                    TouristPoints = listTouristPoint
-                };
+        //     Assert.AreEqual(listTouristPoint, region.TouristPoints);
+        // }
+        // [TestMethod]
+        // public void TestUpdateTouristPointsNull()
+        // {
+        //     List<TouristPoint> listTouristPoint = null;
+        //     Region newRegion = new Region()
+        //         {
+        //             Name = null,
+        //             TouristPoints = listTouristPoint
+        //         };
 
-            region.Update(newRegion);
+        //     region.Update(newRegion);
 
-            Assert.IsNull(region.TouristPoints);
-        }
+        //     Assert.IsNull(region.TouristPoints);
+        // }
     }
 }

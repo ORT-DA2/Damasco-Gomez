@@ -7,7 +7,7 @@ namespace Domain
     {
         public int Id {get; set; }
         public string Name {get; set;}
-        public List<TouristPoint> TouristPoints {get; set;}
+        //public virtual List<TouristPoint> TouristPoints {get; set;}
 
         public override bool Equals(object obj)
         {
@@ -21,7 +21,7 @@ namespace Domain
         public void Update(Region element)
         {
             if(element.Name != null) this.Name = element.Name;
-            if(element.TouristPoints != null)  this.TouristPoints = element.TouristPoints;
+            //if(element.TouristPoints != null)  this.TouristPoints = element.TouristPoints;
         }
     }
 }
