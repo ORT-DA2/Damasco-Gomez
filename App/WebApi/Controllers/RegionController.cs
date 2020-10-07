@@ -7,6 +7,7 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace WebApi.Controllers
 {
+    [ApiController]
     [Route("api/regions")]
     [ServiceFilter(typeof(AuthorizationDIFilter))]
     public class RegionController : VidlyControllerBase
