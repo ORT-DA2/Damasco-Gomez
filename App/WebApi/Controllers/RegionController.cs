@@ -58,11 +58,12 @@ namespace WebApi.Controllers
             }
         }
         [HttpPut("{id}")]
-        public IActionResult Put([FromRoute]int id,[FromBody]Region region)
+        public IActionResult Put([FromRoute]int id,[FromBody]RegionModel regionModel)
         {
             try
             {
-                this.regionLogic.Update(id,region);
+                Region region = regionModel.ToEntity();
+                region = this.regionLogic.Update(id,region);
                 var creationRoute = CreatedAtRoute("GetRegion", new {Id = region.Id} , region);
                 return creationRoute;
             }

@@ -15,7 +15,7 @@ namespace DataAccess.Repositories
 
         protected override void Update(Region elementToUpdate, Region element)
         {
-            throw new NotImplementedException();
+            elementToUpdate.Update(element);
         }
 
         protected override void Validate(Region element)

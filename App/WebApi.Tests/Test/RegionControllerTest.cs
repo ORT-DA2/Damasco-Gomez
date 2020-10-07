@@ -174,10 +174,14 @@ namespace WebApi.Test
         [TestMethod]
         public void TestPutOk()
         {
-            regionId1 = regionsToReturn.First();
-            mock.Setup(m => m.Update(regionId1.Id,regionId1));
+            RegionModel regionModel = new RegionModel()
+            {
+                Name = "name region",
+            };
+            regionId1 = regionModel.ToEntity();
+            mock.Setup(m => m.Update(regionId1.Id,regionId1)).Returns(regionId1);
 
-            var result = controller.Put(regionId1.Id, regionId1);
+            var result = controller.Put(regionId1.Id, regionModel);
 
             var okResult = result as CreatedAtRouteResult;
             mock.VerifyAll();
@@ -188,11 +192,15 @@ namespace WebApi.Test
          [TestMethod]
         public void TestPutFailValidate()
         {
-            regionId1 = regionsToReturn.First();
+            RegionModel regionModel = new RegionModel()
+            {
+                Name = "name region",
+            };
+            regionId1 = regionModel.ToEntity();
             Exception exist = new ArgumentException();
             mock.Setup(p => p.Update(regionId1.Id,regionId1)).Throws(exist);
 
-            var result = controller.Put(regionId1.Id, regionId1);
+            var result = controller.Put(regionId1.Id, regionModel);
 
             mock.VerifyAll();
             Assert.IsInstanceOfType(result, typeof(BadRequestObjectResult));
@@ -200,11 +208,15 @@ namespace WebApi.Test
         [TestMethod]
         public void TestPutFailServer()
         {
-            regionId1 = regionsToReturn.First();
+            RegionModel regionModel = new RegionModel()
+            {
+                Name = "name region",
+            };
+            regionId1 = regionModel.ToEntity();
             Exception exist = new Exception();
             mock.Setup(p => p.Update(regionId1.Id,regionId1)).Throws(exist);
 
-            var result = controller.Put(regionId1.Id, regionId1);
+            var result = controller.Put(regionId1.Id, regionModel);
 
             mock.VerifyAll();
             Assert.IsInstanceOfType(result, typeof(BadRequestObjectResult));
