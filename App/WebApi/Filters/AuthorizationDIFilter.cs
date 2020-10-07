@@ -27,12 +27,12 @@ namespace Filters
             }
             else
             {
-                if(!this.sessionsLogic.isCorrectToken(token))
+                if(!this.sessionsLogic.IsCorrectToken(token))
                 {
                     context.Result = new ContentResult()
                     {
                         StatusCode = 403,
-                        Content = "you don't have permits"
+                        Content = "Not authorized"
                     };
                 }
             }

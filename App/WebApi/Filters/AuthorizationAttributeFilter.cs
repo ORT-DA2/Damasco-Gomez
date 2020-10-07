@@ -22,7 +22,7 @@ namespace Filters
             else
             {
                 var sessions = this.GetSessionLogic(context);
-                if(!sessions.isCorrectToken(token))
+                if(!sessions.IsCorrectToken(token))
                 {
                     context.Result = new ContentResult()
                     {
