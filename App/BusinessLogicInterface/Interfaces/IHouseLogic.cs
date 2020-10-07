@@ -2,6 +2,7 @@ using System;
 using System.Collections.Generic;
 using BusinessLogicInterface.Interfaces;
 using Domain;
+using Domain.Entities;
 using Model;
 
 namespace BusinessLogicInterface
@@ -15,6 +16,6 @@ namespace BusinessLogicInterface
         void Delete(int id);
         void Delete();
         bool Exist(House element);
-        IEnumerable<House> GetHousesBy(int idTP,string checkIn, string checkOut, int cantA,int cantC,int cantB);
+        IEnumerable<House> GetHousesBy(HouseSearch houseSearch);
     }
 }

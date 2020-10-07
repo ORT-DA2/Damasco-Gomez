@@ -1,4 +1,5 @@
 using Domain;
+using Domain.Entities;
 
 namespace Model
 {
@@ -16,7 +17,7 @@ namespace Model
         public string Address {get ; private set; }
         public string Ilustrations {get ; private set; }
         public string Description {get ; private set;}
-        public HouseSearchResultModel(House house, string checkIn, string checkOut,int cantA, int cantC,int cantB) 
+        public HouseSearchResultModel(House house, HouseSearch houseSearch) 
         {
             this.Id= house.Id;
             this.TouristPoint = house.TouristPoint;
@@ -26,9 +27,9 @@ namespace Model
             this.Address= house.Address;
             this.Ilustrations= house.Ilustrations;
             this.Description= house.Description;
-            this.TotalPrice= house.CalculateTotalPrice(cantA,cantC,cantB);
-            this.CheckIn= checkIn;
-            this.CheckOut = checkOut;
+            this.TotalPrice= house.CalculateTotalPrice(houseSearch.CantAdults,houseSearch.CantChildrens,houseSearch.CantBabys);
+            this.CheckIn= houseSearch.CheckIn;
+            this.CheckOut = houseSearch.CheckOut;
         }
         public override bool Equals(object obj)
         {

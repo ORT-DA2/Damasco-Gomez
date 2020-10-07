@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using BusinessLogicInterface;
 using Domain;
+using Domain.Entities;
 using Microsoft.AspNetCore.Mvc;
 using Model;
 using Model.In;
@@ -93,17 +94,13 @@ namespace WebApi.Controllers
             this.houseLogic.Delete();
             return Ok();
         }
-        [HttpGet("{idTP,checkIn,checkOut,cantA,cantC,cantB}") ]
-        public IActionResult GetHousesBy([FromBody] HouseSearchModel houseSearchModel)
+        [HttpGet() ]
+        public IActionResult GetHousesBy([FromQuery] HouseSearchModel houseSearchModel)
         {
-            var idTP = houseSearchModel.TouristPointId;
-            var checkIn = houseSearchModel.CheckIn;
-            var checkOut= houseSearchModel.CheckOut;
-            var cantA = houseSearchModel.CantAdults;
-            var cantC = houseSearchModel.CantChildrens;
-            var cantB = houseSearchModel.CantBabys;
-            var varRet = this.houseLogic.GetHousesBy(idTP,checkIn,checkOut,cantA,cantC,cantB);
-            var result = varRet.Select(m => new HouseSearchResultModel(m,checkIn,checkOut,cantA,cantC,cantB)).ToList();
+           
+            var houseSearch = houseSearchModel.ToEntity();
+            var varRet = this.houseLogic.GetHousesBy(houseSearch);
+            var result = varRet.Select(m => new HouseSearchResultModel(m,houseSearch)).ToList();
             return Ok(result);
            
         }
