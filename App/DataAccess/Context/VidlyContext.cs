@@ -1,4 +1,5 @@
 using Domain;
+using Domain.Entities;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using System.IO;
@@ -13,6 +14,7 @@ namespace DataAccess.Context
         public DbSet<Booking> Bookings {get; set;}
         public DbSet<Person> Persons {get; set;}
         public DbSet<Region> Regions {get; set;}
+        public DbSet<SessionUser> Sessions {get; set;}
 
         public VidlyContext(){}
         public VidlyContext(DbContextOptions options) : base(options){}

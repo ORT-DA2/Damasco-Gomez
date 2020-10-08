@@ -2,11 +2,13 @@ using System;
 using System.Collections.Generic;
 using BusinessLogicInterface;
 using Domain;
+using Filters;
 using Microsoft.AspNetCore.Mvc;
 using Model.In;
 
 namespace WebApi.Controllers
 {
+    [ApiController]
     [Route("api/regions")]
     public class RegionController : VidlyControllerBase
     {
@@ -35,7 +37,8 @@ namespace WebApi.Controllers
             }
         }
         [HttpPost()]
-        public IActionResult Post([FromBody]RegionModel regionModel)
+        [ServiceFilter(typeof(AuthorizationDIFilter))]
+        public IActionResult Post([FromBody]Region region)
         {
             try
             {
@@ -58,7 +61,8 @@ namespace WebApi.Controllers
             }
         }
         [HttpPut("{id}")]
-        public IActionResult Put([FromRoute]int id,[FromBody]RegionModel regionModel)
+        [ServiceFilter(typeof(AuthorizationDIFilter))]
+        public IActionResult Put([FromRoute]int id,[FromBody]Region region)
         {
             try
             {
@@ -77,6 +81,7 @@ namespace WebApi.Controllers
             }
         }
         [HttpDelete("{id}")]
+        [ServiceFilter(typeof(AuthorizationDIFilter))]
         public IActionResult Delete([FromRoute]int id)
         {
             if (this.regionLogic.GetBy(id) == null)
@@ -87,6 +92,7 @@ namespace WebApi.Controllers
             return Ok();
         }
         [HttpDelete()]
+        [ServiceFilter(typeof(AuthorizationDIFilter))]
         public IActionResult Delete()
         {
             this.regionLogic.Delete();

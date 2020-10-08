@@ -1,6 +1,7 @@
 using BusinessLogic;
 using BusinessLogic.Logics;
 using BusinessLogicInterface;
+using Contracts;
 using DataAccess.Context;
 using DataAccess.Repositories;
 using DataAccessInterface.Repositories;
@@ -31,6 +32,7 @@ namespace Factory.Factories
             services.AddScoped<IHouseLogic, HouseLogic>();
             services.AddScoped<IPersonLogic, PersonLogic>();
             services.AddScoped<IRegionLogic, RegionLogic>();
+            services.AddScoped<ISessionLogic, SessionLogic>();
         }
         public void AddDbContextService()
         {

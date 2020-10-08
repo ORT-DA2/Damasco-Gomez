@@ -4,12 +4,14 @@ using System.Linq;
 using BusinessLogicInterface;
 using Domain;
 using Domain.Entities;
+using Filters;
 using Microsoft.AspNetCore.Mvc;
 using Model;
 using Model.In;
 
 namespace WebApi.Controllers
 {
+    [ApiController]
     [Route("api/houses")]
     public class HouseController : VidlyControllerBase
     {
@@ -41,6 +43,7 @@ namespace WebApi.Controllers
             }
         }
         [HttpPost()]
+        [ServiceFilter(typeof(AuthorizationDIFilter))]
         //The post should have HouseModel , but will leave it like this
         public IActionResult Post([FromBody]HouseModel houseModel)
         {
@@ -64,6 +67,7 @@ namespace WebApi.Controllers
             }
         }
         [HttpPut("{id}")]
+        [ServiceFilter(typeof(AuthorizationDIFilter))]
         public IActionResult Put([FromRoute]int id,[FromBody]HouseModel houseModel)
         {
             try
@@ -82,6 +86,7 @@ namespace WebApi.Controllers
             }
         }
         [HttpDelete("{id}")]
+        [ServiceFilter(typeof(AuthorizationDIFilter))]
         public IActionResult Delete([FromRoute]int id)
         {
             if (this.houseLogic.GetBy(id) == null)
@@ -92,6 +97,7 @@ namespace WebApi.Controllers
             return Ok();
         }
         [HttpDelete()]
+        [ServiceFilter(typeof(AuthorizationDIFilter))]
         public IActionResult Delete()
         {
             this.houseLogic.Delete();
