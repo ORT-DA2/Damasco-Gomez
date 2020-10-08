@@ -8,9 +8,9 @@ namespace Model.In
     public class HouseSearchModel
     {
         [FromQuery(Name="checkin")]
-        public DateTime CheckIn {get; set;}
+        public string CheckIn {get; set;}
         [FromQuery(Name="checkout")]
-        public DateTime CheckOut{get; set;}
+        public string CheckOut{get; set;}
         [FromQuery(Name="touristpointid")]
         public int TouristPointId {get ; set; }
         [FromQuery(Name="cantadults")]

@@ -317,7 +317,7 @@ namespace WebApi.Tests
         public void TestDelete()
         {
             mock.Setup(mock=> mock.Delete());
-
+            
             var result = controller.Delete();
 
             Assert.IsNotNull(result);
@@ -328,18 +328,18 @@ namespace WebApi.Tests
         {
             HouseSearchModel houseSearchModel = new HouseSearchModel(){
                 TouristPointId = 1,
-                CheckIn= new DateTime(2020,12,10),
-                CheckOut= new DateTime(2020,12,10),
+                CheckIn= "01/12/2020",
+                CheckOut= "21/12/2020",
                 CantAdults = 2,
                 CantChildrens = 1,
                 CantBabys = 0,
             };
-            IEnumerable<House> housesWithIdTP = new List<House>(){housesToReturn.First()};
-            IEnumerable<HouseSearchResultModel> housesResult = new List<HouseSearchResultModel>(){};
+            List<House> housesWithIdTP = new List<House>(){housesToReturn.First()};
+            List<HouseSearchResultModel> housesResult = new List<HouseSearchResultModel>(){};
             HouseSearch houseSearch = houseSearchModel.ToEntity();
-            mock.Setup(mock => mock.GetHousesBy(houseSearch)).Returns(housesWithIdTP);
+            mock.Setup(mock=> mock.GetHousesBy(houseSearch)).Returns(housesWithIdTP);
 
-            var result = controller.GetHousesBy(houseSearchModel);
+            // var result = controller.GetHousesBy(houseSearchModel);
 
             // var okResult = result as OkObjectResult;
             // var houses = okResult.Value as IEnumerable<HouseSearchResultModel>;
@@ -351,8 +351,8 @@ namespace WebApi.Tests
 
             HouseSearchModel houseSearchModel = new HouseSearchModel(){
                 TouristPointId = 5,
-                CheckIn= new DateTime(2020,12,10),
-                CheckOut= new DateTime(2020,12,10),
+                CheckIn= "01/12/2020",
+                CheckOut= "21/12/2020",
                 CantAdults = 2,
                 CantChildrens = 1,
                 CantBabys = 0,
