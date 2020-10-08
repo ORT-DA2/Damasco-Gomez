@@ -3,7 +3,7 @@ using Contracts;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Filters;
 
-namespace Filters
+namespace WebApi.Filters
 {
     public class AuthorizationAttributeFilter : Attribute, IAuthorizationFilter
     {
