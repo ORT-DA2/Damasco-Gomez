@@ -32,11 +32,12 @@ namespace Domain
         public double CalculateTotalPrice(HouseSearch houseSearch)
         {
             int priceNight = this.PricePerNight;
-            double  PriceAdults = houseSearch.CantAdults * priceNight;
+            int nights = (houseSearch.CheckOut - houseSearch.CheckIn).Days;
+            double  PriceAdults = houseSearch.CantAdults * priceNight * nights;
             const double percentChildrens = 0.5;
             const double percentBabys = 0.5;
-            double  PriceChildrens = houseSearch.CantChildrens* percentChildrens * priceNight;
-            double  PriceBabys = houseSearch.CantBabys * percentBabys * priceNight;
+            double  PriceChildrens = houseSearch.CantChildrens* percentChildrens * priceNight * nights;
+            double  PriceBabys = houseSearch.CantBabys * percentBabys * priceNight * nights;
             double TotalPrice= PriceAdults + PriceChildrens + PriceBabys;
             return TotalPrice ;
         }
