@@ -8,8 +8,7 @@ using Model.In;
 using Model.Out;
 
 namespace WebApi.Controllers
-{
-    [ApiController]
+{   [ApiController]
     [Route("api/touristpoints")]
     [ServiceFilter(typeof(AuthorizationDIFilter))]
     public class TouristPointController : VidlyControllerBase
