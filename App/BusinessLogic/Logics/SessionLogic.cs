@@ -7,7 +7,7 @@ namespace BusinessLogic.Logics
     {
         public bool IsCorrectToken (string token)
         {
-             throw new NotImplementedException();
+             return true; //hacer
         }
     }
 }
