@@ -36,7 +36,7 @@ namespace Domain.Test.Test
                     CheckOut= DateTime.MinValue,
                 };
 
-            Booking.Update(booking,newBooking);
+            booking.Update(newBooking);
 
             Assert.AreEqual(newBooking.Name, booking.Name);
         }
@@ -54,7 +54,7 @@ namespace Domain.Test.Test
                     CheckOut= DateTime.MinValue,
                 };
 
-            Booking.Update(booking,newBooking);
+            booking.Update(newBooking);
 
             Assert.AreEqual(newBooking.Email, booking.Email);
         }
@@ -72,7 +72,7 @@ namespace Domain.Test.Test
                     CheckOut= DateTime.MinValue,
                 };
 
-            Booking.Update(booking,newBooking);
+            booking.Update(newBooking);
 
             Assert.AreEqual(newBooking.HouseId, booking.HouseId);
         }
@@ -90,7 +90,7 @@ namespace Domain.Test.Test
                     CheckOut= DateTime.MinValue,
                 };
 
-            Booking.Update(booking,newBooking);
+            booking.Update(newBooking);
 
             Assert.AreEqual(newBooking.Price, booking.Price);
         }
@@ -108,7 +108,7 @@ namespace Domain.Test.Test
                     CheckOut= DateTime.MinValue,
                 };
 
-            Booking.Update(booking,newBooking);
+            booking.Update(newBooking);
 
             Assert.AreEqual(newBooking.CheckIn, booking.CheckIn);
         }
@@ -126,9 +126,30 @@ namespace Domain.Test.Test
                     CheckOut= DateTime.Today,
                 };
 
-            Booking.Update(booking,newBooking);
+            booking.Update(newBooking);
 
             Assert.AreEqual(newBooking.CheckOut, booking.CheckOut);
+        }
+
+        [TestMethod]
+        public void TestRandom()
+        {
+            string random = Booking.RandomString();
+            Booking newBooking = new Booking()
+                {
+                    Name = null,
+                    Email = null,
+                    HouseId = 0,
+                    State = null,
+                    Price = 0,
+                    Code = random,
+                    CheckIn = DateTime.MinValue,
+                    CheckOut= DateTime.Today,
+                };
+
+            booking.Update(newBooking);
+
+            Assert.AreEqual(random,newBooking.Code);
         }
     }
 }

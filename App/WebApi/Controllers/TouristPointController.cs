@@ -1,7 +1,10 @@
 using System;
+using System.Linq;
 using BusinessLogicInterface;
 using Domain;
 using Microsoft.AspNetCore.Mvc;
+using Model.In;
+using Model.Out;
 
 namespace WebApi.Controllers
 {
@@ -16,7 +19,8 @@ namespace WebApi.Controllers
         public IActionResult Get()
         {
             var elementTouristPoint = this.touristPointLogic.GetAll();
-            return Ok(elementTouristPoint);
+            var model = elementTouristPoint.Select(m => new TouristPointDetailInfoModel(m)).ToList();
+            return Ok(model);
         }
         [HttpGet("{id}",Name="GetTouristPoint")]
         public IActionResult GetBy([FromRoute]int id)
@@ -24,7 +28,8 @@ namespace WebApi.Controllers
             try
             {
                 var elementTouristPoint = this.touristPointLogic.GetBy(id);
-                return Ok(elementTouristPoint);
+                var model = new TouristPointDetailInfoModel(elementTouristPoint);
+                return Ok(model);
             }
             catch (ArgumentException)
             {
@@ -32,13 +37,14 @@ namespace WebApi.Controllers
             }
         }
         [HttpPost()]
-        //The post should have TouristPointModel , but will leave it like this
-        public IActionResult Post([FromBody]TouristPoint touristPoint)
+        public IActionResult Post([FromBody]TouristPointModel touristPoint)
         {
             try
             {
-                var touristPointAdded = this.touristPointLogic.Add(touristPoint);
-                var routePost = CreatedAtRoute("GetTouristPoint", new {Id = touristPointAdded.Id} , touristPointAdded);
+                var newTouristPoint = touristPoint.ToEntity();
+                var touristPointAdded = this.touristPointLogic.Add(newTouristPoint);
+                var touristPointModel = new TouristPointDetailInfoModel(touristPointAdded);
+                var routePost = CreatedAtRoute("GetTouristPoint", new {Id = touristPointAdded.Id} , touristPointModel);
                 return routePost;
             }
             catch (ArgumentException e)
@@ -51,13 +57,13 @@ namespace WebApi.Controllers
             }
         }
         [HttpPut("{id}")]
-        //The put should have TouristPointModel , but will leave it like this
-        public IActionResult Put([FromRoute]int id,[FromBody]TouristPoint touristPoint)
+        public IActionResult Put([FromRoute]int id,[FromBody]TouristPointModel touristPoint)
         {
             try
             {
-                this.touristPointLogic.Update(id,touristPoint);
-                return CreatedAtRoute("GetTouristPoint", new {id =touristPoint.Id} ,touristPoint);
+                var touristPointAdded = touristPoint.ToEntity();
+                this.touristPointLogic.Update(id,touristPointAdded);
+                return CreatedAtRoute("GetTouristPoint", new {id =touristPointAdded.Id} ,new TouristPointDetailInfoModel(touristPointAdded));
                 
             }
             catch(ArgumentException e )

@@ -35,7 +35,8 @@ namespace BusinessLogic.Tests.Test
             };
             emptyCategorys = new List<Category>();
             mock = new Mock<ICategoryRepository>(MockBehavior.Strict);
-            categoryLogic = new CategoryLogic(mock.Object);
+            var mock2 = new Mock<ITouristPointRepository>(MockBehavior.Strict);
+            categoryLogic = new CategoryLogic(mock.Object,mock2.Object);
         }
 
         [TestMethod]
@@ -76,7 +77,7 @@ namespace BusinessLogic.Tests.Test
             Category category = categoriesToReturn.First();
             mock.Setup(m => m.Add(category)).Returns(category);
             var result= categoryLogic.Add(category);
-        
+
             Assert.AreEqual(category, result );
         }
         [TestMethod]
@@ -87,19 +88,19 @@ namespace BusinessLogic.Tests.Test
 
             var result = categoryLogic.Add(category);
 
-            Assert.AreEqual(category, result); 
+            Assert.AreEqual(category, result);
         }
         [TestMethod]
         [ExpectedException(typeof(ArgumentException))]
         public void TestAddExistError()
         {
-            Category category = categoriesToReturn.First(); 
+            Category category = categoriesToReturn.First();
             ArgumentException exception = new ArgumentException();
             mock.Setup(m => m.Add(category)).Throws(exception);
 
             var reuslt = categoryLogic.Add(category);
         }
-         [TestMethod]
+        [TestMethod]
         public void TestUdpateOk ()
         {
             Category category = categoriesToReturn.First();

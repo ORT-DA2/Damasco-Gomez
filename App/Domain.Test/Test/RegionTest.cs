@@ -1,3 +1,4 @@
+using System.Collections.Generic;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 
 namespace Domain.Test.Test
@@ -23,7 +24,7 @@ namespace Domain.Test.Test
                     Name = "new name region",
                 };
 
-            Region.Update(region,newRegion);
+            region.Update(newRegion);
 
             Assert.AreEqual(newRegion.Name, region.Name);
         }
@@ -36,9 +37,37 @@ namespace Domain.Test.Test
                     Name = null,
                 };
 
-            Region.Update(region,newRegion);
+            region.Update(newRegion);
 
             Assert.AreEqual(nameShouldBe, region.Name);
         }
+        // [TestMethod]
+        // public void TestUpdateTouristPoints()
+        // {
+        //     List<TouristPoint> listTouristPoint = new List<TouristPoint>();
+        //     Region newRegion = new Region()
+        //         {
+        //             Name = null,
+        //             TouristPoints = listTouristPoint
+        //         };
+
+        //     region.Update(newRegion);
+
+        //     Assert.AreEqual(listTouristPoint, region.TouristPoints);
+        // }
+        // [TestMethod]
+        // public void TestUpdateTouristPointsNull()
+        // {
+        //     List<TouristPoint> listTouristPoint = null;
+        //     Region newRegion = new Region()
+        //         {
+        //             Name = null,
+        //             TouristPoints = listTouristPoint
+        //         };
+
+        //     region.Update(newRegion);
+
+        //     Assert.IsNull(region.TouristPoints);
+        // }
     }
 }

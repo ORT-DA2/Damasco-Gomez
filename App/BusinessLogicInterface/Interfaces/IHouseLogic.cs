@@ -1,8 +1,6 @@
-using System;
 using System.Collections.Generic;
-using BusinessLogicInterface.Interfaces;
 using Domain;
-using Model;
+using Domain.Entities;
 
 namespace BusinessLogicInterface
 {
@@ -11,10 +9,10 @@ namespace BusinessLogicInterface
         IEnumerable<House> GetAll();
         House GetBy(int id);
         House Add(House element);
-        void Update(int id,House element);
+        House Update(int id,House element);
         void Delete(int id);
         void Delete();
         bool Exist(House element);
-        IEnumerable<House> GetHousesBy(int idTP,string checkIn, string checkOut, int cantA,int cantC,int cantB);
+        IEnumerable<House> GetHousesBy(HouseSearch houseSearch);
     }
 }

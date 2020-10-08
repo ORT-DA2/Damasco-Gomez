@@ -9,7 +9,7 @@ namespace BusinessLogicInterface
         IEnumerable<Region> GetAll();
         Region GetBy(int id);
         Region Add(Region element);
-        void Update(int id,Region element);
+        Region Update(int id,Region element);
         void Delete(int id);
         void Delete();
         bool Exist(Region element);

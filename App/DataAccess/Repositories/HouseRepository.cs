@@ -16,7 +16,7 @@ namespace DataAccess.Repositories
 
         protected override void Update(House elementToUpdate, House element)
         {
-            House.Update(elementToUpdate,element);
+            elementToUpdate.Update(element);
         }
 
         protected override void Validate(House element)
@@ -31,9 +31,6 @@ namespace DataAccess.Repositories
             {
                 throw new ArgumentException("Starts number is between 1 and 5");
             }
-            // bool touristPointNotNull = !element.Spot.Equals(null);
-            // bool nameNotNull = element.Name.Equals("");
-            // bool addressNotNull = !element.Equals("");
         }
         public IEnumerable<House> GetByIdTouristPoint(int idTP)
         {

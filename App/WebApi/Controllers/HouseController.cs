@@ -3,8 +3,10 @@ using System.Collections.Generic;
 using System.Linq;
 using BusinessLogicInterface;
 using Domain;
+using Domain.Entities;
 using Microsoft.AspNetCore.Mvc;
 using Model;
+using Model.In;
 
 namespace WebApi.Controllers
 {
@@ -16,10 +18,12 @@ namespace WebApi.Controllers
         {
             this.houseLogic = houseLogic;
         }
+        [HttpGet()]
         public IActionResult Get()
         {
-            var elementHouse = this.houseLogic.GetAll();
-            return Ok(elementHouse);
+            IEnumerable<House> elementHouse = this.houseLogic.GetAll();
+            IEnumerable<HouseBasicModel> basicModels = elementHouse.Select( m => new HouseBasicModel(m));
+            return Ok(basicModels);
         }
 
         [HttpGet("{id}",Name="GetHouse")]
@@ -27,8 +31,9 @@ namespace WebApi.Controllers
         {
             try
             {
-                var elementHouse = this.houseLogic.GetBy(id);
-                return Ok(elementHouse);
+                House elementHouse = this.houseLogic.GetBy(id);
+                HouseDetailModel modelHouse = new HouseDetailModel(elementHouse);
+                return Ok(modelHouse);
             }
             catch (ArgumentException)
             {
@@ -37,11 +42,12 @@ namespace WebApi.Controllers
         }
         [HttpPost()]
         //The post should have HouseModel , but will leave it like this
-        public IActionResult Post([FromBody]House house)
+        public IActionResult Post([FromBody]HouseModel houseModel)
         {
             try
             {
-                this.houseLogic.Add(house);
+                House house = houseModel.ToEntity();
+                house = this.houseLogic.Add(house);
                 return CreatedAtRoute("GetHouse", new {Id = house.Id}, house);
             }
             catch (AggregateException)
@@ -58,14 +64,13 @@ namespace WebApi.Controllers
             }
         }
         [HttpPut("{id}")]
-        //The put should have HouseModel , but will leave it like this
-        public IActionResult Put([FromRoute]int id,[FromBody]House house)
+        public IActionResult Put([FromRoute]int id,[FromBody]HouseModel houseModel)
         {
             try
             {
-                this.houseLogic.Update(id,house);
+                House house = houseModel.ToEntity();
+                house = this.houseLogic.Update(id,house);
                 return CreatedAtRoute("GetHouse", new {Id = house.Id} , house);
-                //return Ok(house);
             }
             catch(ArgumentException e)
             {
@@ -92,13 +97,15 @@ namespace WebApi.Controllers
             this.houseLogic.Delete();
             return Ok();
         }
-        [HttpGet("{idTP,checkIn,checkOut,cantA,cantC,cantB}") ]
-        public IActionResult GetHousesBy([FromRoute] int idTP,[FromRoute]string checkIn,[FromRoute] string checkOut,[FromRoute] int cantA,[FromRoute] int cantC,[FromRoute] int cantB)
+        [Route("touristpoint")]
+        [HttpGet()]
+        public IActionResult GetHousesBy([FromQuery]HouseSearchModel houseSearchModel)
         {
-            var varRet = this.houseLogic.GetHousesBy(idTP,checkIn,checkOut,cantA,cantC,cantB);
-            var result = varRet.Select(m => new HouseSearchResultModel(m,checkIn,checkOut,cantA,cantC,cantB)).ToList();
+            HouseSearch houseSearch = houseSearchModel.ToEntity();
+            IEnumerable<House> varRet = this.houseLogic.GetHousesBy(houseSearch);
+            IEnumerable<HouseSearchResultModel> result = varRet.
+                Select(m => new HouseSearchResultModel(m , houseSearch)).ToList();
             return Ok(result);
-           
         }
     }
 }

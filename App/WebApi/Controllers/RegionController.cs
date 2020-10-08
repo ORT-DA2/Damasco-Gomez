@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using BusinessLogicInterface;
 using Domain;
 using Microsoft.AspNetCore.Mvc;
+using Model.In;
 
 namespace WebApi.Controllers
 {
@@ -34,12 +35,13 @@ namespace WebApi.Controllers
             }
         }
         [HttpPost()]
-        public IActionResult Post([FromBody]Region region)
+        public IActionResult Post([FromBody]RegionModel regionModel)
         {
             try
             {
-                var addedRegion = this.regionLogic.Add(region);
-                var creationRoute = CreatedAtRoute("GetRegion", new {Id = addedRegion.Id} , addedRegion);
+                Region region = regionModel.ToEntity();
+                region = this.regionLogic.Add(region);
+                var creationRoute = CreatedAtRoute("GetRegion", new {Id = region.Id} , region);
                 return creationRoute;
             }
             catch (AggregateException)
@@ -56,11 +58,12 @@ namespace WebApi.Controllers
             }
         }
         [HttpPut("{id}")]
-        public IActionResult Put([FromRoute]int id,[FromBody]Region region)
+        public IActionResult Put([FromRoute]int id,[FromBody]RegionModel regionModel)
         {
             try
             {
-                this.regionLogic.Update(id,region);
+                Region region = regionModel.ToEntity();
+                region = this.regionLogic.Update(id,region);
                 var creationRoute = CreatedAtRoute("GetRegion", new {Id = region.Id} , region);
                 return creationRoute;
             }

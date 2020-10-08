@@ -3,6 +3,7 @@ using System.Linq;
 using BusinessLogicInterface;
 using Domain;
 using Microsoft.AspNetCore.Mvc;
+using Model.In;
 using Model.Out;
 
 namespace WebApi.Controllers
@@ -18,7 +19,7 @@ namespace WebApi.Controllers
         [HttpGet]
         public IActionResult Get()
         {
-            var elementCategory = this.categoryLogic.GetAll().Select(m => new CategoryBasicInfoModel(m));
+            var elementCategory = this.categoryLogic.GetAll().Select(m => new CategoryBasicInfoModel(m)).ToList();
             return Ok(elementCategory);
         }
 
@@ -28,8 +29,7 @@ namespace WebApi.Controllers
             try
             {
                 var elementCategory = this.categoryLogic.GetBy(id);
-                
-                return Ok(new CategoryBasicInfoModel(elementCategory));
+                return Ok(new CategoryDetailInfoModel(elementCategory));
             }
             catch (ArgumentException)
             {
@@ -37,13 +37,12 @@ namespace WebApi.Controllers
             }
         }
         [HttpPost()]
-        //The post should have CategoryModel , but will leave it like this
-        public IActionResult Post([FromBody]Category category)
+        public IActionResult Post([FromBody]CategoryModel categoryModel)
         {
             try
             {
-                var categoryAdded = this.categoryLogic.Add(category);
-                return CreatedAtRoute("GetCategory", new {Id = categoryAdded.Id} , categoryAdded);
+                var categoryAdded = this.categoryLogic.Add(categoryModel.ToEntity());
+                return CreatedAtRoute("GetCategory", new {Id = categoryAdded.Id} ,new CategoryDetailInfoModel(categoryAdded));
             }
             catch (AggregateException)
             {
@@ -59,13 +58,14 @@ namespace WebApi.Controllers
             }
         }
         [HttpPut("{id}")]
-        //The put should have CategoryModel , but will leave it like this
-        public IActionResult Put([FromRoute]int id,[FromBody]Category category)
+        public IActionResult Put([FromRoute]int id,[FromBody]CategoryModel categoryModel)
         {
             try
             {
-                this.categoryLogic.Update(id,category);
-                return CreatedAtRoute("GetCategory", new {Id = category.Id} , category);
+                var newCategory = categoryModel.ToEntity();
+                this.categoryLogic.Update(id,newCategory);
+                return CreatedAtRoute("GetCategory", new {Id = newCategory.Id} ,new CategoryDetailInfoModel(newCategory));
+
             }
             catch(ArgumentException e)
             {

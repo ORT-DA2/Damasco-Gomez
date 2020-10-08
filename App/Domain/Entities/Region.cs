@@ -6,8 +6,8 @@ namespace Domain
     public class Region
     {
         public int Id {get; set; }
-
         public string Name {get; set;}
+        //public virtual List<TouristPoint> TouristPoints {get; set;}
 
         public override bool Equals(object obj)
         {
@@ -18,9 +18,10 @@ namespace Domain
             }
             return result;
         }
-        public static void Update(Region elementToUpdate, Region element)
+        public void Update(Region element)
         {
-            if(element.Name != null) elementToUpdate.Name = element.Name;
+            if(element.Name != null) this.Name = element.Name;
+            //if(element.TouristPoints != null)  this.TouristPoints = element.TouristPoints;
         }
     }
 }

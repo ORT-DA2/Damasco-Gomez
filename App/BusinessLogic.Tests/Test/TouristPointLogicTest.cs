@@ -4,7 +4,6 @@ using System.Linq;
 using DataAccessInterface.Repositories;
 using Domain;
 using Domain.Entities;
-using Microsoft.AspNetCore.Mvc;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Moq;
 
@@ -65,7 +64,8 @@ namespace BusinessLogic.Tests.Test
                 }
             };
             mock = new Mock<ITouristPointRepository>(MockBehavior.Strict);
-            touristPointLogic = new TouristPointLogic(mock.Object);
+            var mock2 = new Mock<ICategoryRepository>(MockBehavior.Strict);
+            touristPointLogic = new TouristPointLogic(mock.Object,mock2.Object);
             touristPointsEmpty = new List<TouristPoint>();
         }
         [TestMethod]
@@ -76,7 +76,8 @@ namespace BusinessLogic.Tests.Test
             mock.VerifyAll();
             Assert.IsTrue(result.SequenceEqual(touristPoints));
         }
-         public void TestGetEmptyGetAll()
+        [TestMethod]
+        public void TestGetEmptyGetAll()
         {
             List<TouristPoint> touristPointEmpty = new List<TouristPoint>();
             mock.Setup(m => m.GetElements()).Returns(touristPointEmpty);
@@ -108,7 +109,7 @@ namespace BusinessLogic.Tests.Test
         {
             TouristPoint touristPoint = touristPoints.First();
             mock.Setup(m => m.Add(touristPoint)).Returns(touristPoint);
-            
+
             var touristPointToReturn = touristPointLogic.Add(touristPoint);
 
             Assert.AreEqual(touristPoint, touristPointToReturn );
@@ -116,11 +117,13 @@ namespace BusinessLogic.Tests.Test
         [TestMethod]
         public void TestAddValidateError()
         {
-            TouristPoint touristPoint = touristPoints.First(); // este punto turistico tiene que terner un formato erroneo despues para que la validación falle
+            TouristPoint touristPoint = touristPoints.First();
             mock.Setup(m => m.Add(touristPoint)).Returns(touristPoint);
+
             var touristPointToReturn = touristPointLogic.Add(touristPoint);
+
             mock.VerifyAll();
-            Assert.AreEqual(touristPoint, touristPointToReturn); 
+            Assert.AreEqual(touristPoint, touristPointToReturn);
         }
         [TestMethod]
         [ExpectedException(typeof(ArgumentException))]
@@ -137,18 +140,20 @@ namespace BusinessLogic.Tests.Test
         {
             TouristPoint touristPoint = touristPoints.First();
             mock.Setup(m => m.Update(touristPoint.Id,touristPoint));
+
             touristPointLogic.Update(touristPoint.Id,touristPoint);
+
             mock.VerifyAll();
-            
         }
-         [TestMethod]
+        [TestMethod]
         public void TestUpdateValidateError()
         {
-            TouristPoint touristPoint = touristPoints.First(); // este punto turistico tiene que terner un formato erroneo despues para que la validación falle
+            TouristPoint touristPoint = touristPoints.First();
             mock.Setup(m => m.Update(touristPoint.Id,touristPoint));
+
             touristPointLogic.Update(touristPoint.Id,touristPoint);
+
             mock.VerifyAll();
-            
         }
         [TestMethod]
         [ExpectedException(typeof(ArgumentException))]
@@ -157,16 +162,17 @@ namespace BusinessLogic.Tests.Test
             TouristPoint touristPoint = touristPoints.First();
             ArgumentException exception = new ArgumentException();
             mock.Setup(m => m.Update(touristPoint.Id,touristPoint)).Throws(exception);
-            
+
             touristPointLogic.Update(touristPoint.Id,touristPoint);
-   
         }
         [TestMethod]
         public void TestExistOk()
         {
             TouristPoint touristPoint = touristPoints.First();
             mock.Setup(m => m.ExistElement(touristPoint)).Returns(true);
+
             var touristPointToReturn = touristPointLogic.Exist(touristPoint);
+
             mock.VerifyAll();
             Assert.IsTrue(touristPointToReturn);
         }
@@ -175,7 +181,9 @@ namespace BusinessLogic.Tests.Test
         {
             TouristPoint touristPoint = touristPoints.First();
             mock.Setup(m => m.ExistElement(touristPoint)).Returns(false);
+
             var touristPointToReturn = touristPointLogic.Exist(touristPoint);
+
             mock.VerifyAll();
             Assert.IsFalse(touristPointToReturn);
         }

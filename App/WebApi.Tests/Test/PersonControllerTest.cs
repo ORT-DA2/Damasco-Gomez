@@ -5,6 +5,8 @@ using BusinessLogicInterface;
 using Domain;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
+using Model.In;
+using Model.Out;
 using Moq;
 using WebApi.Controllers;
 
@@ -53,39 +55,39 @@ namespace WebApi.Tests
         public void TestGetAllPersonsOk()
         {
             mock.Setup(m => m.GetAll()).Returns(personsToReturn);
+            IEnumerable<PersonBasicModel> personBasicModels = personsToReturn.Select(m => new PersonBasicModel(m));
 
             var result = controller.Get();
 
             var okResult = result as OkObjectResult;
-            var persons = okResult.Value as IEnumerable<Person>;
+            var persons = okResult.Value as IEnumerable<PersonBasicModel>;
             mock.VerifyAll();
-            Assert.IsTrue(personsToReturn.SequenceEqual(persons));
+            Assert.IsTrue(personBasicModels.SequenceEqual(persons));
         }
 
         [TestMethod]
         public void TestGetAllPersonsVacia()
         {
             mock.Setup(m => m.GetAll()).Returns(personsToReturnEmpty);
+            IEnumerable<PersonBasicModel> personBasicModels = personsToReturnEmpty.Select(m => new PersonBasicModel(m));
 
             var result = controller.Get();
 
             var okResult = result as OkObjectResult;
-            var persons = okResult.Value as IEnumerable<Person>;
-            mock.VerifyAll();
-            Assert.IsTrue(personsToReturnEmpty.SequenceEqual(persons));
+            var persons = okResult.Value as IEnumerable<PersonBasicModel>;
+            Assert.IsTrue(personBasicModels.SequenceEqual(persons));
         }
         [TestMethod]
         public void TestGetByOk()
         {
-            int id = 1;
-            mock.Setup(m => m.GetBy(id)).Returns(personId1);
+            mock.Setup(m => m.GetBy(personId1.Id)).Returns(personId1);
+            PersonBasicModel personBasicModel = new PersonBasicModel(personId1);
 
-            var result = controller.GetBy(id);
+            var result = controller.GetBy(personId1.Id);
 
             var okResult = result as OkObjectResult;
-            var persons = okResult.Value as Person;
-            mock.VerifyAll();
-            Assert.IsTrue(persons.Equals(personId1));
+            var persons = okResult.Value as PersonBasicModel;
+            Assert.IsTrue(persons.Equals(personBasicModel));
         }
         [TestMethod]
         public void TestGetByNotFound()
@@ -102,9 +104,15 @@ namespace WebApi.Tests
         [TestMethod]
         public void TestPostOk()
         {
+            PersonModel personModel = new PersonModel()
+            {
+                Email = "email",
+                Password = "psswd"
+            };
+            personId1 = personModel.ToEntity();
             mock.Setup(m => m.Add(personId1)).Returns(personId1);
 
-            var result = controller.Post(personId1);
+            var result = controller.Post(personModel);
 
             var okResult = result as CreatedAtRouteResult;
             mock.VerifyAll();
@@ -115,11 +123,16 @@ namespace WebApi.Tests
         [TestMethod]
         public void TestPostFailSamePerson()
         {
-            personId1 = personsToReturn.First();
+            PersonModel personModel = new PersonModel()
+            {
+                Email = "email",
+                Password = "psswd"
+            };
+            personId1 = personModel.ToEntity();
             Exception exist = new AggregateException();
             mock.Setup(p => p.Add(personId1)).Throws(exist);
 
-            var result = controller.Post(personId1);
+            var result = controller.Post(personModel);
 
             mock.VerifyAll();
             Assert.IsInstanceOfType(result, typeof(BadRequestObjectResult));
@@ -127,11 +140,16 @@ namespace WebApi.Tests
         [TestMethod]
         public void TestPostFailValidation()
         {
-            personId1 = personsToReturn.First();
+            PersonModel personModel = new PersonModel()
+            {
+                Email = "email",
+                Password = "psswd"
+            };
+            personId1 = personModel.ToEntity();
             Exception exist = new ArgumentException();
             mock.Setup(p => p.Add(personId1)).Throws(exist);
 
-            var result = controller.Post(personId1);
+            var result = controller.Post(personModel);
 
             mock.VerifyAll();
             Assert.IsInstanceOfType(result, typeof(BadRequestObjectResult));
@@ -139,11 +157,16 @@ namespace WebApi.Tests
         [TestMethod]
         public void TestPostFailServer()
         {
-            personId1 = personsToReturn.First();
+            PersonModel personModel = new PersonModel()
+            {
+                Email = "email",
+                Password = "psswd"
+            };
+            personId1 = personModel.ToEntity();
             Exception exist = new Exception();
             mock.Setup(p => p.Add(personId1)).Throws(exist);
 
-            var result = controller.Post(personId1);
+            var result = controller.Post(personModel);
 
             mock.VerifyAll();
             Assert.IsInstanceOfType(result, typeof(BadRequestObjectResult));
@@ -151,14 +174,18 @@ namespace WebApi.Tests
         [TestMethod]
         public void TestPutOk()
         {
-            personId1 = personsToReturn.First();
+            PersonModel personModel = new PersonModel()
+            {
+                Email = "email",
+                Password = "psw"
+            };
+            personId1 = personModel.ToEntity();
             personId1.Email = "new email";
-            mock.Setup(m => m.Update(personId1.Id,personId1));
+            mock.Setup(m => m.Update(personId1.Id,personId1)).Returns(personId1);
 
-            var result = controller.Put(personId1.Id, personId1);
+            var result = controller.Put(personId1.Id, personModel);
 
             var okResult = result as CreatedAtRouteResult;
-            mock.VerifyAll();
             Assert.IsNotNull(okResult);
             Assert.AreEqual("GetPerson", okResult.RouteName);
             Assert.AreEqual(okResult.Value, personId1);
@@ -166,11 +193,16 @@ namespace WebApi.Tests
         [TestMethod]
         public void TestPutFailValidate()
         {
-            personId1 = personsToReturn.First();
+            PersonModel personModel = new PersonModel()
+            {
+                Email = "email",
+                Password = "psw"
+            };
+            personId1 = personModel.ToEntity();
             Exception exist = new ArgumentException();
             mock.Setup(p => p.Update(personId1.Id,personId1)).Throws(exist);
 
-            var result = controller.Put(personId1.Id, personId1);
+            var result = controller.Put(personId1.Id, personModel);
 
             mock.VerifyAll();
             Assert.IsInstanceOfType(result, typeof(BadRequestObjectResult));
@@ -178,11 +210,16 @@ namespace WebApi.Tests
         [TestMethod]
         public void TestPutFailServer()
         {
-            personId1 = personsToReturn.First();
+            PersonModel personModel = new PersonModel()
+            {
+                Email = "email",
+                Password = "psw"
+            };
+            personId1 = personModel.ToEntity();
             Exception exist = new Exception();
             mock.Setup(p => p.Update(personId1.Id,personId1)).Throws(exist);
 
-            var result = controller.Put(personId1.Id, personId1);
+            var result = controller.Put(personId1.Id, personModel);
 
             mock.VerifyAll();
             Assert.IsInstanceOfType(result, typeof(BadRequestObjectResult));

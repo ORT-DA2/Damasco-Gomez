@@ -1,3 +1,5 @@
+using System;
+using Domain.Entities;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 
 namespace Domain.Test.Test
@@ -41,7 +43,7 @@ namespace Domain.Test.Test
                     Contact = null,
                 };
 
-            House.Update(house,newHouse);
+            house.Update(newHouse);
 
             Assert.AreEqual(newHouse.Avaible, house.Avaible);
         }
@@ -62,7 +64,7 @@ namespace Domain.Test.Test
                     Contact = null,
                 };
 
-            House.Update(house,newHouse);
+            house.Update(newHouse);
 
             Assert.AreEqual(newHouse.Avaible, house.Avaible);
         }
@@ -83,7 +85,7 @@ namespace Domain.Test.Test
                     Contact = null,
                 };
 
-            House.Update(house,newHouse);
+            house.Update(newHouse);
 
             Assert.AreEqual(newHouse.Name, house.Name);
         }
@@ -104,7 +106,7 @@ namespace Domain.Test.Test
                     Contact = null,
                 };
 
-            House.Update(house,newHouse);
+            house.Update(newHouse);
 
             Assert.AreEqual(newHouse.PricePerNight, house.PricePerNight);
         }
@@ -125,7 +127,7 @@ namespace Domain.Test.Test
                     Contact = null,
                 };
 
-            House.Update(house,newHouse);
+            house.Update(newHouse);
 
             Assert.AreEqual(newHouse.TouristPointId, house.TouristPointId);
         }
@@ -146,7 +148,7 @@ namespace Domain.Test.Test
                     Contact = null,
                 };
 
-            House.Update(house,newHouse);
+            house.Update(newHouse);
 
             Assert.AreEqual(newHouse.Starts, house.Starts);
         }
@@ -167,7 +169,7 @@ namespace Domain.Test.Test
                     Contact = null,
                 };
 
-            House.Update(house,newHouse);
+            house.Update(newHouse);
 
             Assert.AreEqual(newHouse.Address, house.Address);
         }
@@ -188,7 +190,7 @@ namespace Domain.Test.Test
                     Contact = null,
                 };
 
-            House.Update(house,newHouse);
+            house.Update(newHouse);
 
             Assert.AreEqual(newHouse.Ilustrations, house.Ilustrations);
         }
@@ -209,7 +211,7 @@ namespace Domain.Test.Test
                     Contact = null,
                 };
 
-            House.Update(house,newHouse);
+            house.Update(newHouse);
 
             Assert.AreEqual(newHouse.Description, house.Description);
         }
@@ -230,7 +232,7 @@ namespace Domain.Test.Test
                     Contact = null,
                 };
 
-            House.Update(house,newHouse);
+            house.Update(newHouse);
 
             Assert.AreEqual(newHouse.Phone, house.Phone);
         }
@@ -251,19 +253,25 @@ namespace Domain.Test.Test
                     Contact = "new contact",
                 };
 
-            House.Update(house,newHouse);
+            house.Update(newHouse);
 
             Assert.AreEqual(newHouse.Contact, house.Contact);
         }
         [TestMethod]
         public void TestCalculateTotalPrice()
         {
-            double totalPriceToReturn = 200;
-            int cantAdults = 2; 
-            int cantChildrens = 0;
-            int cantBabys = 0;
-            double totalPriceResult = house.CalculateTotalPrice(cantAdults,cantChildrens,cantBabys);
-            Assert.AreEqual(totalPriceResult , totalPriceToReturn);
+            house.PricePerNight = 100;
+            HouseSearch houseSearch = new HouseSearch()
+            {
+                CheckIn = DateTime.Today,
+                CheckOut = DateTime.Today.AddDays(6),
+                CantAdults = 2,
+                CantChildrens = 0,
+                CantBabys = 0,
+            };
+            double priceResult = 100*2*6;
+            double totalPriceResult = house.CalculateTotalPrice(houseSearch);
+            Assert.AreEqual(totalPriceResult , priceResult);
         }
         [TestMethod]
         public void TestIsAvailable()

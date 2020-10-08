@@ -4,21 +4,24 @@ using System.Collections.Generic;
 using BusinessLogicInterface;
 using DataAccessInterface.Repositories;
 using Domain;
+using Model;
 
 namespace BusinessLogic.Logics
 {
     public class BookingLogic : IBookingLogic
     {
         private readonly IBookingRepository bookingRepository;
-        public BookingLogic(IBookingRepository bookingRepository)
+        private readonly IHouseRepository houseRepository;
+        public BookingLogic(IBookingRepository bookingRepository, IHouseRepository houseRepository)
         {
             this.bookingRepository = bookingRepository;
+            this.houseRepository = houseRepository;
         }
         public void Delete()
         {
-            foreach(Booking Booking in this.bookingRepository.GetElements())
+            foreach(Booking booking in this.bookingRepository.GetElements())
             {
-                this.Delete(Booking.Id);
+                this.Delete(booking.Id);
             }
         }
         public IEnumerable<Booking> GetAll()
@@ -30,21 +33,40 @@ namespace BusinessLogic.Logics
             return this.bookingRepository.Find(id);
         }
 
-        public Booking Add(Booking Booking)
+        public Booking Add(Booking booking)
         {
-            return this.bookingRepository.Add(Booking);
+            Validate(booking);
+            Booking bookingBD = this.bookingRepository.Add(booking);
+            //bookingBD.House = this.houseRepository.Find(booking.HouseId);
+            return bookingBD;
         }
-        public void Update(int id, Booking Booking)
+        public Booking Update(int id, Booking booking)
         {
-            this.bookingRepository.Update(id, Booking);
+            Validate(booking);
+            Booking bookingBD = this.bookingRepository.Find(id);
+            bookingBD.Update(booking);
+            //bookingBD.House = this.houseRepository.Find(booking.HouseId);
+            this.bookingRepository.Update(id, bookingBD);
+            return bookingBD;
         }
         public void Delete(int id)
         {
             this.bookingRepository.Delete(id);
         }
-        public bool Exist(Booking Booking)
+        public bool Exist(Booking booking)
         {
-            return this.bookingRepository.ExistElement(Booking);
+            return this.bookingRepository.ExistElement(booking);
+        }
+        public void Validate(Booking booking)
+        {
+            if (booking == null)
+            {
+                throw new ArgumentException("Booking is empty");
+            }
+            if (!this.houseRepository.ExistElement(booking.HouseId))
+            {
+                throw new ArgumentException("There is no House with id : " + booking.HouseId);
+            }
         }
     }
 }

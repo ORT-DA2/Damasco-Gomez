@@ -1,7 +1,10 @@
 using System;
+using System.Collections.Generic;
+using System.Linq;
 using BusinessLogicInterface;
 using Domain;
 using Microsoft.AspNetCore.Mvc;
+using Model;
 
 namespace WebApi.Controllers
 {
@@ -15,8 +18,9 @@ namespace WebApi.Controllers
         }
         public IActionResult Get()
         {
-            var elementBooking = this.bookingLogic.GetAll();
-            return Ok(elementBooking);
+            IEnumerable<Booking> elementBookings = this.bookingLogic.GetAll();
+            IEnumerable<BookingBasicModel> bookingModels =  elementBookings.Select(m => new BookingBasicModel(m));
+            return Ok(bookingModels);
         }
 
         [HttpGet("{id}",Name="GetBooking")]
@@ -24,8 +28,9 @@ namespace WebApi.Controllers
         {
             try
             {
-                var elementBooking = this.bookingLogic.GetBy(id);
-                return Ok(elementBooking);
+                Booking elementBooking = this.bookingLogic.GetBy(id);
+                BookingDetailModel bookingModel = new BookingDetailModel(elementBooking);
+                return Ok(bookingModel);
             }
             catch (ArgumentException)
             {
@@ -33,12 +38,12 @@ namespace WebApi.Controllers
             }
         }
         [HttpPost()]
-        //The post should have BookingModel , but will leave it like this
-        public IActionResult Post([FromBody]Booking booking)
+        public IActionResult Post([FromBody]BookingModel booking)
         {
             try
             {
-                var bookingAdded = this.bookingLogic.Add(booking);
+                Booking newBooking = booking.ToEntity();
+                var bookingAdded = this.bookingLogic.Add(newBooking);
                 return CreatedAtRoute("GetBooking", new {Id = bookingAdded.Id} , bookingAdded);
             }
             catch (AggregateException)
@@ -55,14 +60,13 @@ namespace WebApi.Controllers
             }
         }
         [HttpPut("{id}")]
-        //The put should have BookingModel , but will leave it like this
-        public IActionResult Put([FromRoute]int id,[FromBody]Booking booking)
+        public IActionResult Put([FromRoute]int id,[FromBody]BookingModel booking)
         {
             try
             {
-                this.bookingLogic.Update(id, booking);
-                return CreatedAtRoute("GetBooking", new {Id = booking.Id} , booking);
-                //return Ok(booking);
+                Booking newBooking = booking.ToEntity();
+                newBooking = this.bookingLogic.Update(id, newBooking);
+                return CreatedAtRoute("GetBooking", new {Id = newBooking.Id} , newBooking);
             }
             catch(ArgumentException e)
             {

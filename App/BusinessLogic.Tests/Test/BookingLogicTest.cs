@@ -2,10 +2,10 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using BusinessLogic.Logics;
-using DataAccess.Repositories;
 using DataAccessInterface.Repositories;
 using Domain;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
+using Model;
 using Moq;
 
 namespace BusinessLogic.Tests.Test
@@ -17,34 +17,40 @@ namespace BusinessLogic.Tests.Test
         private  List<Booking>  emptyBookings;
         private BookingLogic bookingLogic;
         private Mock<IBookingRepository> mock;
+        private Mock<IHouseRepository> mock2;
+        private House houseId1;
 
         [TestInitialize]
         public void initVariables()
         {
-             bookingsToReturn = new List<Booking>()
+            bookingsToReturn = new List<Booking>()
             {
                 new Booking()
                 {
                     Id = 1,
                     Name = "Booking 1",
+                    HouseId = 1,
                 },
                 new Booking()
                 {
                     Id = 2,
                     Name = "Booking 2",
+                    HouseId = 1,
                 }
             };
+            houseId1 = new House() {Id = 1, Avaible=true};
             emptyBookings = new List<Booking>();
             mock = new Mock<IBookingRepository>(MockBehavior.Strict);
-            bookingLogic = new BookingLogic(mock.Object);
+            mock2 = new Mock<IHouseRepository>(MockBehavior.Strict);
+            mock2.Setup(c => c.Find(houseId1.Id)).Returns(houseId1);
+            bookingLogic = new BookingLogic(mock.Object,mock2.Object);
         }
-
-         [TestMethod]
+        [TestMethod]
         public void DeleteTest()
         {
             Assert.IsTrue(true);
         }
-         [TestMethod]
+        [TestMethod]
         public void DeleteTestByIdOk()
         {
             Assert.IsTrue(true);
@@ -74,63 +80,86 @@ namespace BusinessLogic.Tests.Test
         }
         public void TestAddOk()
         {
-            Booking booking = bookingsToReturn.First();
+            BookingModel bookingModel = new BookingModel()
+            {
+                Name = "nombre",
+                HouseId = 1
+            };
+            Booking booking = bookingModel.ToEntity();
             mock.Setup(m => m.Add(booking)).Returns(booking);
-            var result= bookingLogic.Add(booking);
-        
-            Assert.AreEqual(booking, result );
-        }
-         [TestMethod]
-        public void TestAddValidateError()
-        {
-            Booking booking = bookingsToReturn.First(); // Booking tiene que terner un formato erroneo despues para que la validación falle
-            mock.Setup(m => m.Add(booking)).Returns(booking);
-
             var result = bookingLogic.Add(booking);
 
-            Assert.AreEqual(booking, result); 
+            Assert.AreEqual(booking, result);
         }
         [TestMethod]
         [ExpectedException(typeof(ArgumentException))]
-        public void TestAddExistError()
+        public void TestAddNull()
         {
-            Booking booking = bookingsToReturn.First(); 
-            ArgumentException exception = new ArgumentException();
-            mock.Setup(m => m.Add(booking)).Throws(exception);
+            Booking booking = null;
+            ArgumentException e = new ArgumentException();
+            mock.Setup(m => m.Add(booking)).Throws(e);
 
-            var reuslt = bookingLogic.Add(booking);
+            var result = bookingLogic.Add(booking);
         }
-         [TestMethod]
-        public void TestUdpateOk ()
+        [TestMethod]
+        [ExpectedException(typeof(ArgumentException))]
+        public void TestAddNullHouseId()
         {
-            Booking booking = bookingsToReturn.First();
+            BookingModel bookingModel = new BookingModel()
+            {
+                Name = "nombre",
+                HouseId = 0
+            };
+            Booking booking = bookingModel.ToEntity();
+            mock2.Setup(m => m.ExistElement(booking.HouseId)).Returns(false);
+
+            var result = bookingLogic.Add(booking);
+        }
+        [TestMethod]
+        public void TestUpdateOk ()
+        {
+            BookingModel bookingModel = new BookingModel()
+            {
+                Name = "new name",
+                HouseId = 1
+            };
+            Booking booking = bookingModel.ToEntity();
+            int id  = booking.Id;
             mock.Setup(m => m.Update(booking.Id,booking));
+            mock.Setup(m => m.Find(booking.Id)).Returns(booking);
+            mock2.Setup(m => m.ExistElement(booking.HouseId)).Returns(true);
+            mock2.Setup(m => m.Find(booking.HouseId)).Returns(houseId1);
 
-            bookingLogic.Update(booking.Id, booking);
-
-            mock.VerifyAll();
-        }
-         [TestMethod]
-        public void TestUpdateValidateError()
-        {
-            Booking booking = bookingsToReturn.First();// Booking tiene que terner un formato erroneo despues para que la validación falle
-             mock.Setup(m => m.Update(booking.Id,booking));
-
-            bookingLogic.Update(booking.Id,booking);
+            bookingLogic.Update(id, booking);
 
             mock.VerifyAll();
         }
         [TestMethod]
         [ExpectedException(typeof(ArgumentException))]
-        public void TestUpdateExistError()
+        public void TestUpdateNull()
         {
-            Booking booking = bookingsToReturn.First();
-            ArgumentException exception = new ArgumentException();
-            mock.Setup(m => m.Update(booking.Id, booking)).Throws(exception);
+            int id = 10000;
+            Booking nullBooking = null;
+
+            bookingLogic.Update(id,nullBooking);
+
+            mock.VerifyAll();
+        }
+        [TestMethod]
+        [ExpectedException(typeof(ArgumentException))]
+        public void TestUpdateNullHouseId()
+        {
+            BookingModel bookingModel = new BookingModel()
+            {
+                Name = "nombre",
+                HouseId = 12
+            };
+            Booking booking = bookingModel.ToEntity();
+            mock2.Setup(m => m.ExistElement(booking.HouseId)).Returns(false);
 
             bookingLogic.Update(booking.Id,booking);
         }
-          [TestMethod]
+        [TestMethod]
         public void TestExistOk()
         {
             Booking booking = bookingsToReturn.First();

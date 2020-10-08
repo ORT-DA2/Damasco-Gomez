@@ -1,6 +1,5 @@
 using System;
 using System.Collections.Generic;
-using BusinessLogic.Logics;
 using BusinessLogicInterface;
 using DataAccessInterface.Repositories;
 using Domain;
@@ -10,9 +9,11 @@ namespace BusinessLogic
     public class TouristPointLogic : ITouristPointLogic
     {
         private readonly ITouristPointRepository touristPointRepository;
-        public TouristPointLogic(ITouristPointRepository touristPointRepository)
+        private readonly ICategoryRepository categoryRepository;
+        public TouristPointLogic(ITouristPointRepository touristPointRepository,ICategoryRepository categoryRepository )
         {
             this.touristPointRepository = touristPointRepository;
+            this.categoryRepository = categoryRepository;
         }
         public void Delete()
         {
@@ -30,13 +31,23 @@ namespace BusinessLogic
             return this.touristPointRepository.Find(id);
         }
 
-        public TouristPoint Add(TouristPoint TouristPoint)
+        public TouristPoint Add(TouristPoint touristPoint)
         {
-            return this.touristPointRepository.Add(TouristPoint);
+            touristPoint.CategoriesTouristPoints.ForEach
+            (
+                m => m.Category = this.categoryRepository.Find(m.CategoryId)
+            );
+            TouristPoint touristPointAdded = this.touristPointRepository.Add(touristPoint);
+            return touristPointAdded;
         }
-        public void Update(int id, TouristPoint TouristPoint)
+        public TouristPoint Update(int id, TouristPoint touristPoint)
         {
-            this.touristPointRepository.Update(id, TouristPoint);
+            touristPoint.CategoriesTouristPoints.ForEach
+            (
+                m => m.Category = this.categoryRepository.Find(m.CategoryId)
+            );
+            this.touristPointRepository.Update(id, touristPoint);
+            return touristPoint;
         }
         public void Delete(int id)
         {
@@ -45,6 +56,10 @@ namespace BusinessLogic
         public bool Exist(TouristPoint TouristPoint)
         {
             return this.touristPointRepository.ExistElement(TouristPoint);
+        }
+        public void Validate(TouristPoint touristPoint)
+        {
+            if (touristPoint==null) throw new ArgumentException("Tourist Point is empty");
         }
     }
 }
