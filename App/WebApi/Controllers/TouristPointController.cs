@@ -2,12 +2,13 @@ using System;
 using System.Linq;
 using BusinessLogicInterface;
 using Domain;
+using Filters;
 using Microsoft.AspNetCore.Mvc;
 using Model.In;
 using Model.Out;
 
 namespace WebApi.Controllers
-{
+{   [ApiController]
     [Route("api/touristpoints")]
     public class TouristPointController : VidlyControllerBase
     {
@@ -37,6 +38,7 @@ namespace WebApi.Controllers
             }
         }
         [HttpPost()]
+         [ServiceFilter(typeof(AuthorizationDIFilter))]
         public IActionResult Post([FromBody]TouristPointModel touristPoint)
         {
             try
@@ -57,6 +59,7 @@ namespace WebApi.Controllers
             }
         }
         [HttpPut("{id}")]
+         [ServiceFilter(typeof(AuthorizationDIFilter))]
         public IActionResult Put([FromRoute]int id,[FromBody]TouristPointModel touristPoint)
         {
             try
@@ -64,7 +67,6 @@ namespace WebApi.Controllers
                 var touristPointAdded = touristPoint.ToEntity();
                 this.touristPointLogic.Update(id,touristPointAdded);
                 return CreatedAtRoute("GetTouristPoint", new {id =touristPointAdded.Id} ,new TouristPointDetailInfoModel(touristPointAdded));
-                
             }
             catch(ArgumentException e )
             {
@@ -76,6 +78,7 @@ namespace WebApi.Controllers
             }
         }
         [HttpDelete("{id}")]
+        [ServiceFilter(typeof(AuthorizationDIFilter))]
         public IActionResult Delete([FromRoute]int id)
         {
             if (this.touristPointLogic.GetBy(id) == null)
@@ -86,6 +89,7 @@ namespace WebApi.Controllers
             return Ok();
         }
         [HttpDelete()]
+        [ServiceFilter(typeof(AuthorizationDIFilter))]
         public IActionResult Delete()
         {
             this.touristPointLogic.Delete();

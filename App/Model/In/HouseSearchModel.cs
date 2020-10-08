@@ -1,3 +1,4 @@
+using System;
 using Domain;
 using Domain.Entities;
 
@@ -15,13 +16,24 @@ namespace Model.In
         {
             return new HouseSearch()
             {
-                CheckIn = this.CheckIn,
-                CheckOut = this.CheckOut,
+                CheckIn = ParseDateTime(this.CheckIn),
+                CheckOut = ParseDateTime(this.CheckOut),
                 TouristPointId = this.TouristPointId,
                 CantAdults = this.CantAdults,
                 CantChildrens = this.CantChildrens,
                 CantBabys = this.CantBabys
             };
+        }
+
+        public DateTime ParseDateTime(string dateString)
+        {
+            string[] parse = dateString.Split('/');
+            if (parse.Length != 3 && !dateString.Contains("/")) throw new ArgumentException("Date is not in the right format");
+            int year = int.Parse(parse[2]);
+            int month = int.Parse(parse[1]);
+            int day = int.Parse(parse[0]);
+            DateTime date = new DateTime(year,month,day);
+            return date;
         }
 
     }
