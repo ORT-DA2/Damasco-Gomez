@@ -11,7 +11,6 @@ namespace WebApi.Controllers
 {
     [ApiController]
     [Route("api/categories")]
-    [ServiceFilter(typeof(AuthorizationDIFilter))]
     public class CategoryController : VidlyControllerBase
     {
         private readonly ICategoryLogic categoryLogic;
@@ -40,6 +39,7 @@ namespace WebApi.Controllers
             }
         }
         [HttpPost()]
+        [ServiceFilter(typeof(AuthorizationDIFilter))]
         public IActionResult Post([FromBody]CategoryModel categoryModel)
         {
             try
@@ -61,6 +61,7 @@ namespace WebApi.Controllers
             }
         }
         [HttpPut("{id}")]
+        [ServiceFilter(typeof(AuthorizationDIFilter))]
         public IActionResult Put([FromRoute]int id,[FromBody]CategoryModel categoryModel)
         {
             try
@@ -80,6 +81,7 @@ namespace WebApi.Controllers
             }
         }
         [HttpDelete("{id}")]
+        [ServiceFilter(typeof(AuthorizationDIFilter))]
         public IActionResult Delete([FromRoute]int id)
         {
             if (this.categoryLogic.GetBy(id) == null)
@@ -90,6 +92,7 @@ namespace WebApi.Controllers
             return Ok();
         }
         [HttpDelete()]
+        [ServiceFilter(typeof(AuthorizationDIFilter))]
         public IActionResult Delete()
         {
             this.categoryLogic.Delete();
