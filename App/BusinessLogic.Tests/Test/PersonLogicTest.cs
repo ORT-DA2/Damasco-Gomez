@@ -8,16 +8,16 @@ using Moq;
 
 namespace BusinessLogic.Tests.Test
 {
-     [TestClass]
+    [TestClass]
     public class PersonLogicTest
     {
-        private List<Person> personsToReturn;   
-        private PersonLogic personLogic; 
+        private List<Person> personsToReturn;
+        private PersonLogic personLogic;
         private Mock<IPersonRepository> mock;
         private List<Person> emptyPersons;
 
-         [TestInitialize]
-         public void initVariables()
+        [TestInitialize]
+        public void initVariables()
         {
             personsToReturn = new List<Person>()
             {
@@ -44,14 +44,14 @@ namespace BusinessLogic.Tests.Test
             };
             emptyPersons = new List<Person>();
             mock = new Mock<IPersonRepository>(MockBehavior.Strict);
-            personLogic = new PersonLogic(mock.Object); 
+            personLogic = new PersonLogic(mock.Object);
         }
         [TestMethod]
         public void DeleteTest()
         {
             Assert.IsTrue(true);
         }
-         [TestMethod]
+        [TestMethod]
         public void DeleteTestByIdOk()
         {
             Assert.IsTrue(true);
@@ -96,13 +96,13 @@ namespace BusinessLogic.Tests.Test
 
             var result = personLogic.Add(person);
 
-            Assert.AreEqual(person, result); 
+            Assert.AreEqual(person, result);
         }
         [TestMethod]
         [ExpectedException(typeof(ArgumentException))]
         public void TestAddExistError()
         {
-            Person person = personsToReturn.First(); 
+            Person person = personsToReturn.First();
             ArgumentException exception = new ArgumentException();
             mock.Setup(m => m.Add(person)).Throws(exception);
 

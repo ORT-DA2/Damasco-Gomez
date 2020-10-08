@@ -100,7 +100,7 @@ namespace BusinessLogic.Tests.Test
 
             var reuslt = categoryLogic.Add(category);
         }
-         [TestMethod]
+        [TestMethod]
         public void TestUdpateOk ()
         {
             Category category = categoriesToReturn.First();

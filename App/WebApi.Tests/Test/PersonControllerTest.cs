@@ -181,7 +181,7 @@ namespace WebApi.Tests
             };
             personId1 = personModel.ToEntity();
             personId1.Email = "new email";
-            mock.Setup(m => m.Update(personId1.Id,personId1));
+            mock.Setup(m => m.Update(personId1.Id,personId1)).Returns(personId1);
 
             var result = controller.Put(personId1.Id, personModel);
 

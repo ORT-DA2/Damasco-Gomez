@@ -103,7 +103,8 @@ namespace WebApi.Controllers
             this.houseLogic.Delete();
             return Ok();
         }
-        [HttpGet("/touristpoint")]
+        [Route("touristpoint")]
+        [HttpGet()]
         public IActionResult GetHousesBy([FromQuery]HouseSearchModel houseSearchModel)
         {
             HouseSearch houseSearch = houseSearchModel.ToEntity();

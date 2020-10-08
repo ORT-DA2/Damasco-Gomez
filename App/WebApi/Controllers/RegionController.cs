@@ -4,6 +4,7 @@ using BusinessLogicInterface;
 using Domain;
 using Filters;
 using Microsoft.AspNetCore.Mvc;
+using Model.In;
 
 namespace WebApi.Controllers
 {
@@ -41,8 +42,9 @@ namespace WebApi.Controllers
         {
             try
             {
-                var addedRegion = this.regionLogic.Add(region);
-                var creationRoute = CreatedAtRoute("GetRegion", new {Id = addedRegion.Id} , addedRegion);
+                Region region = regionModel.ToEntity();
+                region = this.regionLogic.Add(region);
+                var creationRoute = CreatedAtRoute("GetRegion", new {Id = region.Id} , region);
                 return creationRoute;
             }
             catch (AggregateException)
@@ -64,7 +66,8 @@ namespace WebApi.Controllers
         {
             try
             {
-                this.regionLogic.Update(id,region);
+                Region region = regionModel.ToEntity();
+                region = this.regionLogic.Update(id,region);
                 var creationRoute = CreatedAtRoute("GetRegion", new {Id = region.Id} , region);
                 return creationRoute;
             }
