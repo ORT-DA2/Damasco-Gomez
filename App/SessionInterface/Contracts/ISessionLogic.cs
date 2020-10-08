@@ -4,6 +4,6 @@ namespace Contracts
 {
     public interface ISessionLogic
     {
-        bool isCorrectionToken (string token);
+        bool IsCorrectToken(string token);
     }
 }
