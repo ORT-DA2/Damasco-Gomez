@@ -9,7 +9,7 @@ namespace Domain.Entities
         public string Password {get; set;}
         public Guid Token   {get; set;}
         public int PersonId  {get; set;}
-        public Person User {get; set;}
+        public virtual Person User {get; set;}
 
     }
 }
