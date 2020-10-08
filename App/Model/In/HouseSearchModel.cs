@@ -1,16 +1,23 @@
 using System;
 using Domain;
 using Domain.Entities;
+using Microsoft.AspNetCore.Mvc;
 
 namespace Model.In
 {
     public class HouseSearchModel
     {
-        public string CheckIn {get; set;}
-        public string CheckOut{get; set;}
+        [FromQuery(Name="checkin")]
+        public DateTime CheckIn {get; set;}
+        [FromQuery(Name="checkout")]
+        public DateTime CheckOut{get; set;}
+        [FromQuery(Name="touristpointid")]
         public int TouristPointId {get ; set; }
+        [FromQuery(Name="cantadults")]
         public int CantAdults {get; set;}
+        [FromQuery(Name="cantchildrens")]
         public int CantChildrens {get; set;}
+        [FromQuery(Name="cantbabys")]
         public int CantBabys {get; set;}
         public HouseSearch ToEntity()
         {
