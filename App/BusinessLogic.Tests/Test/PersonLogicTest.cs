@@ -47,14 +47,39 @@ namespace BusinessLogic.Tests.Test
             personLogic = new PersonLogic(mock.Object);
         }
         [TestMethod]
-        public void DeleteTest()
+        public void TestDeleteById()
         {
-            Assert.IsTrue(true);
+            int lengthTouristPoint = personsToReturn.Count;
+            mock.Setup(m => m.Delete(personsToReturn.First().Id));
+
+            personLogic.Delete(personsToReturn.First().Id);
+
+            mock.VerifyAll();
+        }
+
+        [TestMethod]
+        public void TestDelete()
+        {
+            int lengthRegions = personsToReturn.Count;
+            mock.Setup(m => m.GetElements()).Returns(personsToReturn);
+            foreach (Person t in personsToReturn)
+            {
+                mock.Setup(m => m.Delete(t.Id));
+            }
+
+            personLogic.Delete();
+
+            mock.VerifyAll();
         }
         [TestMethod]
-        public void DeleteTestByIdOk()
+        public void TestDeleteEmpty()
         {
-            Assert.IsTrue(true);
+            List<Person> emptyListPersons = new List<Person>();
+            mock.Setup(m => m.GetElements()).Returns(emptyListPersons);
+
+            personLogic.Delete();
+
+            mock.VerifyAll();
         }
         [TestMethod]
         public void GetByTestOk()
