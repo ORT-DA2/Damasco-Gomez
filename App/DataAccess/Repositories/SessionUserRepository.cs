@@ -9,17 +9,7 @@ namespace DataAccess.Repositories
         public SessionUserRepository(RepositoryMaster repositoryMaster)
         {
             this.repository = repositoryMaster.Sessions;
-       }
-        protected override void Update(SessionUser elementToUpdate, SessionUser element)
-        {
-            throw new System.NotImplementedException();
         }
-
-        protected override void Validate(SessionUser element)
-        {
-            throw new System.NotImplementedException();
-        }
-
         public bool IsCorrectToken(Guid token)
         {
             var result = this.repository.GetElementsInContext();
@@ -29,6 +19,16 @@ namespace DataAccess.Repositories
                 throw new ArgumentException("No user with that id ");
             }
             return true;
+        }
+
+        protected override void Update(SessionUser elementToUpdate, SessionUser element)
+        {
+            throw new NotImplementedException();
+        }
+
+        protected override void Validate(SessionUser element)
+        {
+            throw new NotImplementedException();
         }
     }
 }
