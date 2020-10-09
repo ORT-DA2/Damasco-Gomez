@@ -1,3 +1,4 @@
+using System;
 using Contracts;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Filters;
@@ -14,18 +15,9 @@ namespace Filters
         }
         public void OnAuthorization(AuthorizationFilterContext context)
         {
-            var token = context.HttpContext.Request.Headers["Authorization"];
-
-            if(string.IsNullOrEmpty(token))
+            try
             {
-                context.Result = new ContentResult()
-                {
-                    StatusCode = 401,
-                    Content = "Authorization required"
-                };
-            }
-            else
-            {
+                Guid token = Guid.Parse(context.HttpContext.Request.Headers["Authorization"]);
                 if(!this.sessionsLogic.IsCorrectToken(token))
                 {
                     context.Result = new ContentResult()
@@ -35,6 +27,22 @@ namespace Filters
                     };
                 }
             }
+            catch (ArgumentNullException)
+            {
+                context.Result = new ContentResult()
+                {
+                    StatusCode = 401,
+                    Content = "Authorization required"
+                };
+            }
+            catch (Exception)
+            {
+                context.Result = new ContentResult()
+                {
+                    StatusCode = 401,
+                    Content = "Problem with parse"
+                };
+            }
         }
         private ISessionLogic GetSessionLogic(AuthorizationFilterContext context)
         {
@@ -42,6 +50,5 @@ namespace Filters
 
             return context.HttpContext.RequestServices.GetService(sessionType) as ISessionLogic;
         }
-        
     }
 }
