@@ -1,13 +1,21 @@
 using System;
 using Contracts;
+using DataAccessInterface.Repositories;
 
 namespace BusinessLogic.Logics
 {
+  
     public class SessionLogic : ISessionLogic
     {
-        public bool IsCorrectToken (string token)
+        private readonly ISessionUserRepository sessionUserRepository;
+       public SessionLogic(ISessionUserRepository sessionUserRepository)
+       {
+           this.sessionUserRepository = sessionUserRepository;
+      }
+
+        public bool IsCorrectToken(string token)
         {
-             return true; //hacer
+            return true;
         }
     }
 }
