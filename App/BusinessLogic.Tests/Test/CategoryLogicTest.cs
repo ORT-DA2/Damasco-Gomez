@@ -40,14 +40,38 @@ namespace BusinessLogic.Tests.Test
         }
 
         [TestMethod]
-        public void DeleteTest()
+        public void TestDeleteById()
         {
-            Assert.IsTrue(true);
+            int lengthTouristPoint = categoriesToReturn.Count;
+            mock.Setup(m => m.Delete(categoriesToReturn.First().Id));
+
+            categoryLogic.Delete(categoriesToReturn.First().Id);
+
+            mock.VerifyAll();
+        }
+
+        [TestMethod]
+        public void TestDelete()
+        {
+            int lengthRegions = categoriesToReturn.Count;
+            mock.Setup(m => m.GetElements()).Returns(categoriesToReturn);
+            foreach (Category t in categoriesToReturn)
+            {
+                mock.Setup(m => m.Delete(t.Id));
+            }
+
+            categoryLogic.Delete();
+
+            mock.VerifyAll();
         }
         [TestMethod]
-        public void DeleteTestByIdOk()
+        public void TestDeleteEmpty()
         {
-            Assert.IsTrue(true);
+            mock.Setup(m => m.GetElements()).Returns(emptyCategorys);
+
+            categoryLogic.Delete();
+
+            mock.VerifyAll();
         }
         [TestMethod]
         public void GetByTestOk()
