@@ -64,7 +64,6 @@ namespace BusinessLogic.Tests.Test
 
             var result = personLogic.GetBy(person.Id);
 
-            mock.VerifyAll();
             Assert.AreEqual(result,person);
         }
         [TestMethod]
@@ -84,14 +83,15 @@ namespace BusinessLogic.Tests.Test
         {
             Person person = personsToReturn.First();
             mock.Setup(m => m.Add(person)).Returns(person);
-            var result= personLogic.Add(person);
+
+            Person result= personLogic.Add(person);
 
             Assert.AreEqual(person, result );
         }
         [TestMethod]
         public void TestAddValidateError()
         {
-            Person person = personsToReturn.First(); // PERSON tiene que terner un formato erroneo despues para que la validación falle
+            Person person = personsToReturn.First();
             mock.Setup(m => m.Add(person)).Returns(person);
 
             var result = personLogic.Add(person);
@@ -107,6 +107,8 @@ namespace BusinessLogic.Tests.Test
             mock.Setup(m => m.Add(person)).Throws(exception);
 
             var reuslt = personLogic.Add(person);
+
+            mock.VerifyAll();
         }
         [TestMethod]
         public void TestUpdateOk ()
@@ -140,6 +142,8 @@ namespace BusinessLogic.Tests.Test
             mock.Setup(m => m.Update(person.Id,person)).Throws(exception);
 
             personLogic.Update(person.Id,person);
+
+            mock.VerifyAll();
         }
         [TestMethod]
         public void TestExistOk()
@@ -149,7 +153,6 @@ namespace BusinessLogic.Tests.Test
 
             var result = personLogic.Exist(person);
 
-            mock.VerifyAll();
             Assert.IsTrue(result);
         }
         [TestMethod]
@@ -158,9 +161,10 @@ namespace BusinessLogic.Tests.Test
             Person person = personsToReturn.First();
             mock.Setup(m => m.ExistElement(person)).Returns(false);
             var result = personLogic.Exist(person);
+
             mock.VerifyAll();
+
             Assert.IsFalse(result);
         }
-        //falta delete
     }
 }
