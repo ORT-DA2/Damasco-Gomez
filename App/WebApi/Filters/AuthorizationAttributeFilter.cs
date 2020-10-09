@@ -14,18 +14,9 @@ namespace WebApi.Filters
         }
         public void OnAuthorization(AuthorizationFilterContext context)
         {
-            string token = context.HttpContext.Request.Headers["Authorization"];
-
-            if(String.IsNullOrEmpty(token))
+            try
             {
-                context.Result = new ContentResult()
-                {
-                    StatusCode = 401,
-                    Content = "Unauthorized : A token is required"
-                };
-            }
-            else
-            {
+                Guid token = Guid.Parse(context.HttpContext.Request.Headers["Authorization"]);
                 var sessions = this.GetSessionLogic(context);
                 if(!sessions.IsCorrectToken(token))
                 {
@@ -36,7 +27,25 @@ namespace WebApi.Filters
                     };
                 }
             }
+            catch (ArgumentNullException)
+            {
+                context.Result = new ContentResult()
+                {
+                    StatusCode = 401,
+                    Content = "Unauthorized : A token is required"
+                };
+            }
+            catch (Exception)
+            {
+                context.Result = new ContentResult()
+                {
+                    StatusCode = 401,
+                    Content = "Problem with parse"
+                };
+            }
         }
+            
+          
 
         private ISessionLogic GetSessionLogic(AuthorizationFilterContext context)
         {
