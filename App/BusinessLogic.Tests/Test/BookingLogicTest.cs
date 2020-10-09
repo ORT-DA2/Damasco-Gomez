@@ -63,7 +63,6 @@ namespace BusinessLogic.Tests.Test
 
             var result = bookingLogic.GetBy(booking.Id);
 
-            mock.VerifyAll();
             Assert.AreEqual(result,booking);
         }
         [TestMethod]
@@ -75,7 +74,6 @@ namespace BusinessLogic.Tests.Test
 
             var result = bookingLogic.GetBy(booking.Id);
 
-            mock.VerifyAll();
             Assert.IsNull(result);
         }
         public void TestAddOk()
@@ -87,7 +85,8 @@ namespace BusinessLogic.Tests.Test
             };
             Booking booking = bookingModel.ToEntity();
             mock.Setup(m => m.Add(booking)).Returns(booking);
-            var result = bookingLogic.Add(booking);
+
+            Booking result = bookingLogic.Add(booking);
 
             Assert.AreEqual(booking, result);
         }
@@ -100,6 +99,8 @@ namespace BusinessLogic.Tests.Test
             mock.Setup(m => m.Add(booking)).Throws(e);
 
             var result = bookingLogic.Add(booking);
+
+            mock.VerifyAll();
         }
         [TestMethod]
         [ExpectedException(typeof(ArgumentException))]
@@ -114,6 +115,8 @@ namespace BusinessLogic.Tests.Test
             mock2.Setup(m => m.ExistElement(booking.HouseId)).Returns(false);
 
             var result = bookingLogic.Add(booking);
+
+            mock.VerifyAll();
         }
         [TestMethod]
         public void TestUpdateOk ()
@@ -130,9 +133,9 @@ namespace BusinessLogic.Tests.Test
             mock2.Setup(m => m.ExistElement(booking.HouseId)).Returns(true);
             mock2.Setup(m => m.Find(booking.HouseId)).Returns(houseId1);
 
-            bookingLogic.Update(id, booking);
+            Booking result = bookingLogic.Update(id, booking);
 
-            mock.VerifyAll();
+            Assert.AreEqual(result, booking);
         }
         [TestMethod]
         [ExpectedException(typeof(ArgumentException))]
@@ -158,6 +161,8 @@ namespace BusinessLogic.Tests.Test
             mock2.Setup(m => m.ExistElement(booking.HouseId)).Returns(false);
 
             bookingLogic.Update(booking.Id,booking);
+
+            mock.VerifyAll();
         }
         [TestMethod]
         public void TestExistOk()
@@ -167,7 +172,6 @@ namespace BusinessLogic.Tests.Test
 
             var result = bookingLogic.Exist(booking);
 
-            mock.VerifyAll();
             Assert.IsTrue(result);
         }
         [TestMethod]
@@ -175,8 +179,9 @@ namespace BusinessLogic.Tests.Test
         {
             Booking booking = bookingsToReturn.First();
             mock.Setup(m => m.ExistElement(booking)).Returns(false);
+
             var result = bookingLogic.Exist(booking);
-            mock.VerifyAll();
+
             Assert.IsFalse(result);
         }
     }
