@@ -202,33 +202,39 @@ namespace BusinessLogic.Tests.Test
 
             Assert.IsFalse(touristPointToReturn);
         }
-        /*[TestMethod]*/
-        /*public void TestDeleteById ()
-        {
-            int id= 1;
-            TouristPoint touristPoint = touristPoints.First();
-            TouristPoint touristPoint2 = touristPoints.Second();
-            int lengthTouristPoint = touristPoints.Count();
-            mock.Setup(m => m.Add(id)).Returns(touristPoint);
-            mock.Setup(m => m.Add(id)).Returns(touristPoint);
-            mock.Setup(m => m.Delete(id));
-            touristPointLogic.Delete(touristPoint);
-            mock.VerifyAll();
-            Assert.AreEqual(touristPoints.Count, lengthTouristPoint - 1 );
-        }*/
-/*
         [TestMethod]
-        public void TestDeleteFail ()
+        public void TestDeleteById()
         {
-            var int id= 1;
-            TouristPoint touristPoint = touristPoints.First();
-            mock.Setup(m => m.Delete(id));
-            touristPointLogic.Delete(touristPoint);
+            int lengthTouristPoint = touristPoints.Count;
+            mock.Setup(m => m.Delete(touristPoints.First().Id));
+
+            touristPointLogic.Delete(touristPoints.First().Id);
+
             mock.VerifyAll();
-           // Assert.IsInstanceOfType(touristPointToReturn, typeof(ArgumentException));
+        }
 
-        }*/
+        [TestMethod]
+        public void TestDelete()
+        {
+            int lengthTouristPoint = touristPoints.Count;
+            mock.Setup(m => m.GetElements()).Returns(touristPoints);
+            foreach (TouristPoint t in touristPoints)
+            {
+                mock.Setup(m => m.Delete(t.Id));
+            }
 
+            touristPointLogic.Delete();
 
+            mock.VerifyAll();
+        }
+        [TestMethod]
+        public void TestDeleteEmpty()
+        {
+            mock.Setup(m => m.GetElements()).Returns(touristPointsEmpty);
+
+            touristPointLogic.Delete();
+
+            mock.VerifyAll();
+        }
     }
 }
