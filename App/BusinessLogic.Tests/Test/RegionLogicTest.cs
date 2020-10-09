@@ -50,8 +50,9 @@ namespace BusinessLogic.Tests.Test
         public void TestGetAll()
         {
             mock.Setup(m => m.GetElements()).Returns(regionsToReturn);
-            var result = regionLogic.GetAll();
-            mock.VerifyAll();
+
+            IEnumerable<Region> result = regionLogic.GetAll();
+
             Assert.IsTrue(result.SequenceEqual(regionsToReturn));
         }
         [TestMethod]
@@ -59,8 +60,9 @@ namespace BusinessLogic.Tests.Test
         {
             List<Region> regionEmpty = new List<Region>();
             mock.Setup(m => m.GetElements()).Returns(regionEmpty);
-            var result = regionLogic.GetAll();
-            mock.VerifyAll();
+
+            IEnumerable<Region> result = regionLogic.GetAll();
+
             Assert.AreEqual(regionEmpty, result);
         }
         [TestMethod]
@@ -69,14 +71,14 @@ namespace BusinessLogic.Tests.Test
             Region region = regionsToReturn.First();
             mock.Setup(m => m.Add(region)).Returns(region);
 
-            var regionToReturn = regionLogic.Add(region);
+            Region regionToReturn = regionLogic.Add(region);
 
             Assert.AreEqual(region, regionToReturn);
         }
-         [TestMethod]
+        [TestMethod]
         public void TestAddValidateError()
         {
-            Region region = regionsToReturn.First(); // esta region tiene que terner un formato erroneo despues para que la validación falle
+            Region region = regionsToReturn.First();
             mock.Setup(m => m.Add(region)).Returns(region);
 
             var regionToReturn = regionLogic.Add(region);
@@ -92,6 +94,8 @@ namespace BusinessLogic.Tests.Test
             mock.Setup(m => m.Add(region)).Throws(exception);
 
             var regionToReturn = regionLogic.Add(region);
+
+            mock.VerifyAll();
         }
         [TestMethod]
         public void TestGetBy()
@@ -101,7 +105,6 @@ namespace BusinessLogic.Tests.Test
 
             var result = regionLogic.GetBy(region.Id);
 
-            mock.VerifyAll();
             Assert.AreEqual(result,region);
         }
         [TestMethod]
@@ -148,6 +151,7 @@ namespace BusinessLogic.Tests.Test
 
             regionLogic.Update(region.Id,region);
 
+            mock.VerifyAll();
         }
         [TestMethod]
         public void TestExistOk()
@@ -155,7 +159,7 @@ namespace BusinessLogic.Tests.Test
             Region region = regionsToReturn.First();
             mock.Setup(m => m.ExistElement(region)).Returns(true);
 
-            var result = regionLogic.Exist(region);
+            bool result = regionLogic.Exist(region);
 
             mock.VerifyAll();
             Assert.IsTrue(result);
@@ -165,10 +169,10 @@ namespace BusinessLogic.Tests.Test
         {
             Region region = regionsToReturn.First();
             mock.Setup(m => m.ExistElement(region)).Returns(false);
-            var result = regionLogic.Exist(region);
-            mock.VerifyAll();
+
+            bool result = regionLogic.Exist(region);
+
             Assert.IsFalse(result);
         }
-        //falta delete
     }
 }
