@@ -173,8 +173,8 @@ namespace BusinessLogic.Tests.Test
             };
             HouseSearch houseSearch = new HouseSearch(){
                 TouristPointId = 100,
-                CheckIn= "01/12/2020",
-                CheckOut= "21/12/2020",
+                CheckIn= new DateTime(2020,12,02),
+                CheckOut= new DateTime(2020,12,02),
                 CantAdults = 2,
                 CantChildrens = 1,
                 CantBabys = 0,
@@ -191,8 +191,8 @@ namespace BusinessLogic.Tests.Test
             List<House> emptyHouses = new List<House>();
             HouseSearch houseSearch = new HouseSearch(){
                 TouristPointId = 100,
-                CheckIn= "01/12/2020",
-                CheckOut= "21/12/2020",
+                CheckIn= new DateTime(2020,12,02),
+                CheckOut= new DateTime(2020,12,02),
                 CantAdults = 2,
                 CantChildrens = 1,
                 CantBabys = 0,
