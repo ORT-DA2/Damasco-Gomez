@@ -4,6 +4,7 @@ using BusinessLogicInterface;
 using Domain;
 using Filters;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc.Filters;
 using Model.In;
 
 namespace WebApi.Controllers
