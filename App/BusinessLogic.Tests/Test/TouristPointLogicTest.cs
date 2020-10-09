@@ -80,8 +80,9 @@ namespace BusinessLogic.Tests.Test
         public void TestGetAll()
         {
             mock.Setup(m => m.GetElements()).Returns(touristPoints);
+            
             var result = touristPointLogic.GetAll();
-            mock.VerifyAll();
+
             Assert.IsTrue(result.SequenceEqual(touristPoints));
         }
         [TestMethod]
@@ -89,8 +90,9 @@ namespace BusinessLogic.Tests.Test
         {
             List<TouristPoint> touristPointEmpty = new List<TouristPoint>();
             mock.Setup(m => m.GetElements()).Returns(touristPointEmpty);
+
             var result = touristPointLogic.GetAll();
-            mock.VerifyAll();
+
             Assert.AreEqual(touristPointEmpty, result);
         }
         [TestMethod]
@@ -98,8 +100,9 @@ namespace BusinessLogic.Tests.Test
         {
             TouristPoint touristPoint = touristPoints.First();
             mock.Setup(m => m.Find(touristPoint.Id)).Returns(touristPoint);
+
             var result = touristPointLogic.GetBy(touristPoint.Id);
-            mock.VerifyAll();
+
             Assert.AreEqual(result,touristPoint);
         }
         [TestMethod]
@@ -108,8 +111,9 @@ namespace BusinessLogic.Tests.Test
             TouristPoint touristPoint = touristPoints.First();
             TouristPoint empty = null;
             mock.Setup(m => m.Find(touristPoint.Id)).Returns(empty);
+
             var result = touristPointLogic.GetBy(touristPoint.Id);
-            mock.VerifyAll();
+
             Assert.IsNull(result);
         }
         [TestMethod]
@@ -118,7 +122,7 @@ namespace BusinessLogic.Tests.Test
             TouristPoint touristPoint = touristPoints.Last();
             mock.Setup(m => m.Add(touristPoint)).Returns(touristPoint);
 
-            var touristPointToReturn = touristPointLogic.Add(touristPoint);
+            TouristPoint touristPointToReturn = touristPointLogic.Add(touristPoint);
 
             Assert.AreEqual(touristPoint, touristPointToReturn );
         }
@@ -128,7 +132,7 @@ namespace BusinessLogic.Tests.Test
             TouristPoint touristPoint = touristPoints.Last();
             mock.Setup(m => m.Add(touristPoint)).Returns(touristPoint);
 
-            var touristPointToReturn = touristPointLogic.Add(touristPoint);
+            TouristPoint touristPointToReturn = touristPointLogic.Add(touristPoint);
 
             Assert.AreEqual(touristPoint, touristPointToReturn);
         }
@@ -140,10 +144,12 @@ namespace BusinessLogic.Tests.Test
             ArgumentException exception = new ArgumentException();
             mock.Setup(m => m.Add(touristPoint)).Throws(exception);
 
-            var touristPointToReturn = touristPointLogic.Add(touristPoint);
+            touristPointLogic.Add(touristPoint);
+
+            mock.VerifyAll();
         }
         [TestMethod]
-        public void TestUdpateOk ()
+        public void TestUpdateOk ()
         {
             TouristPoint touristPoint = touristPoints.First();
             Category category = new Category(){Id = 1};
@@ -152,7 +158,7 @@ namespace BusinessLogic.Tests.Test
 
             TouristPoint result =  touristPointLogic.Update(touristPoint.Id,touristPoint);
 
-            mock.VerifyAll();
+            Assert.AreEqual(result, touristPoint);
         }
         [TestMethod]
         public void TestUpdateValidateError()
@@ -173,6 +179,8 @@ namespace BusinessLogic.Tests.Test
             mock.Setup(m => m.Update(touristPoint.Id,touristPoint)).Throws(exception);
 
             touristPointLogic.Update(touristPoint.Id,touristPoint);
+
+            mock.VerifyAll();
         }
         [TestMethod]
         public void TestExistOk()
@@ -180,9 +188,8 @@ namespace BusinessLogic.Tests.Test
             TouristPoint touristPoint = touristPoints.First();
             mock.Setup(m => m.ExistElement(touristPoint)).Returns(true);
 
-            var touristPointToReturn = touristPointLogic.Exist(touristPoint);
+            bool touristPointToReturn = touristPointLogic.Exist(touristPoint);
 
-            mock.VerifyAll();
             Assert.IsTrue(touristPointToReturn);
         }
         [TestMethod]
@@ -191,9 +198,8 @@ namespace BusinessLogic.Tests.Test
             TouristPoint touristPoint = touristPoints.First();
             mock.Setup(m => m.ExistElement(touristPoint)).Returns(false);
 
-            var touristPointToReturn = touristPointLogic.Exist(touristPoint);
+            bool touristPointToReturn = touristPointLogic.Exist(touristPoint);
 
-            mock.VerifyAll();
             Assert.IsFalse(touristPointToReturn);
         }
         /*[TestMethod]*/
@@ -211,7 +217,7 @@ namespace BusinessLogic.Tests.Test
             Assert.AreEqual(touristPoints.Count, lengthTouristPoint - 1 );
         }*/
 /*
-         [TestMethod]
+        [TestMethod]
         public void TestDeleteFail ()
         {
             var int id= 1;
@@ -220,7 +226,7 @@ namespace BusinessLogic.Tests.Test
             touristPointLogic.Delete(touristPoint);
             mock.VerifyAll();
            // Assert.IsInstanceOfType(touristPointToReturn, typeof(ArgumentException));
-            
+
         }*/
 
 
