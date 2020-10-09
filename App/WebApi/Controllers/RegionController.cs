@@ -38,7 +38,7 @@ namespace WebApi.Controllers
         }
         [HttpPost()]
         [ServiceFilter(typeof(AuthorizationDIFilter))]
-        public IActionResult Post([FromBody]Region region)
+        public IActionResult Post([FromBody]RegionModel regionModel)
         {
             try
             {
@@ -62,7 +62,7 @@ namespace WebApi.Controllers
         }
         [HttpPut("{id}")]
         [ServiceFilter(typeof(AuthorizationDIFilter))]
-        public IActionResult Put([FromRoute]int id,[FromBody]Region region)
+        public IActionResult Put([FromRoute]int id,[FromBody]RegionModel regionModel)
         {
             try
             {

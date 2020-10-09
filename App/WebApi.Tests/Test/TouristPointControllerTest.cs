@@ -6,6 +6,7 @@ using Domain;
 using Domain.Entities;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
+using Model.In;
 using Model.Out;
 using Moq;
 using WebApi.Controllers;
@@ -179,16 +180,24 @@ namespace WebApi.Tests
         [TestMethod]
         public void TestPostOk()
         {
-            var touristPointId1 = touristPointsToReturn.First();
+            TouristPointModel touristPointModel = new TouristPointModel()
+            {
+                Name = "name tourist point",
+                Image = "image",
+                Description = "description",
+                RegionId = 1,
+                Categories = new List<int>(){1}
+            };
+            touristPointId1 = touristPointModel.ToEntity();
             mock.Setup(m => m.Add(touristPointId1)).Returns(touristPointId1);
 
-            // var result = controller.Post(touristPointId1);
+            var result = controller.Post(touristPointModel);
 
-            // var okResult = result as CreatedAtRouteResult;
-            // mock.VerifyAll();
-            // Assert.IsNotNull(okResult);
-            // Assert.AreEqual("GetTouristPoint", okResult.RouteName);
-            // Assert.AreEqual(okResult.Value, touristPointId1);
+            var okResult = result as CreatedAtRouteResult;
+            mock.VerifyAll();
+            Assert.IsNotNull(okResult);
+            Assert.AreEqual("GetTouristPoint", okResult.RouteName);
+            Assert.AreEqual(okResult.Value, touristPointId1);
         }
         [TestMethod]
         public void TestPostFailSameTouristPoint()
