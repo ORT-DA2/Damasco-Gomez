@@ -174,5 +174,39 @@ namespace BusinessLogic.Tests.Test
 
             Assert.IsFalse(result);
         }
+        [TestMethod]
+        public void TestDeleteById()
+        {
+            int lengthTouristPoint = regionsToReturn.Count;
+            mock.Setup(m => m.Delete(regionsToReturn.First().Id));
+
+            regionLogic.Delete(regionsToReturn.First().Id);
+
+            mock.VerifyAll();
+        }
+
+        [TestMethod]
+        public void TestDelete()
+        {
+            int lengthRegions = regionsToReturn.Count;
+            mock.Setup(m => m.GetElements()).Returns(regionsToReturn);
+            foreach (Region t in regionsToReturn)
+            {
+                mock.Setup(m => m.Delete(t.Id));
+            }
+
+            regionLogic.Delete();
+
+            mock.VerifyAll();
+        }
+        [TestMethod]
+        public void TestDeleteEmpty()
+        {
+            mock.Setup(m => m.GetElements()).Returns(regionsEmpty);
+
+            regionLogic.Delete();
+
+            mock.VerifyAll();
+        }
     }
 }
