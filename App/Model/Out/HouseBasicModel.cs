@@ -1,5 +1,6 @@
 using System;
 using Domain;
+using Domain.Entities;
 using Model.Out;
 
 namespace Model
@@ -17,6 +18,7 @@ namespace Model
         public string Description {get ; set;}
         public int Phone {get; set; }
         public string Contact {get; set;}
+        public double TotalPrice {get; set; }
 
         public override bool Equals(object obj)
         {
@@ -27,7 +29,7 @@ namespace Model
             }
             return result;
         }
-        public HouseBasicModel(House house)
+        public HouseBasicModel(House house, HouseSearch houseSearch = null)
         {
             this.Id = house.Id;
             this.Avaible = house.Avaible;
@@ -40,6 +42,7 @@ namespace Model
             this.Ilustrations = house.Ilustrations;
             this.Description = house.Description;
             this.Contact = house.Contact;
+            if(houseSearch!=null) this.TotalPrice = house.CalculateTotalPrice(houseSearch);
         }
     }
 }

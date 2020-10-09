@@ -31,14 +31,18 @@ namespace Domain
         }
         public double CalculateTotalPrice(HouseSearch houseSearch)
         {
-            int priceNight = this.PricePerNight;
-            int nights = (houseSearch.CheckOut - houseSearch.CheckIn).Days;
-            double  PriceAdults = houseSearch.CantAdults * priceNight * nights;
-            const double percentChildrens = 0.5;
-            const double percentBabys = 0.5;
-            double  PriceChildrens = houseSearch.CantChildrens* percentChildrens * priceNight * nights;
-            double  PriceBabys = houseSearch.CantBabys * percentBabys * priceNight * nights;
-            double TotalPrice= PriceAdults + PriceChildrens + PriceBabys;
+            double TotalPrice = 0;
+            if (houseSearch != null)
+            {
+                int priceNight = this.PricePerNight;
+                int nights = (houseSearch.CheckOut - houseSearch.CheckIn).Days;
+                double  PriceAdults = houseSearch.CantAdults * priceNight * nights;
+                const double percentChildrens = 0.5;
+                const double percentBabys = 0.5;
+                double  PriceChildrens = houseSearch.CantChildrens* percentChildrens * priceNight * nights;
+                double  PriceBabys = houseSearch.CantBabys * percentBabys * priceNight * nights;
+                TotalPrice = PriceAdults + PriceChildrens + PriceBabys;
+            }
             return TotalPrice ;
         }
 
