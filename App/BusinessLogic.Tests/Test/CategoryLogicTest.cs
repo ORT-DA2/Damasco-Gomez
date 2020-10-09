@@ -99,6 +99,8 @@ namespace BusinessLogic.Tests.Test
             mock.Setup(m => m.Add(category)).Throws(exception);
 
             var reuslt = categoryLogic.Add(category);
+
+            mock.VerifyAll();
         }
         [TestMethod]
         public void TestUdpateOk ()

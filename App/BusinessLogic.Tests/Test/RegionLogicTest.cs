@@ -113,23 +113,24 @@ namespace BusinessLogic.Tests.Test
 
             var result = regionLogic.GetBy(region.Id);
 
-            mock.VerifyAll();
             Assert.IsNull(result);
         }
         [TestMethod]
         public void TestUdpateOk ()
         {
             Region region = regionsToReturn.First();
+            mock.Setup(m => m.Find(region.Id)).Returns(region);
             mock.Setup(m => m.Update(region.Id,region));
 
-            regionLogic.Update(region.Id,region);
+            Region result = regionLogic.Update(region.Id,region);
 
-            mock.VerifyAll();
+            Assert.AreEqual(result,region);
         }
         [TestMethod]
         public void TestUpdateValidateError()
         {
-            Region region = regionsToReturn.First(); // este punto turistico tiene que terner un formato erroneo despues para que la validación falle
+            Region region = regionsToReturn.First();
+            mock.Setup(m => m.Find(region.Id)).Returns(region);
             mock.Setup(m => m.Update(region.Id,region));
 
             regionLogic.Update(region.Id,region);
@@ -140,8 +141,9 @@ namespace BusinessLogic.Tests.Test
         [ExpectedException(typeof(ArgumentException))]
         public void TestUpdateExistError()
         {
-            Region region = regionsToReturn.First();
+            Region region = regionsToReturn.Last();
             ArgumentException exception = new ArgumentException();
+            mock.Setup(m => m.Find(region.Id)).Returns(region);
             mock.Setup(m => m.Update(region.Id,region)).Throws(exception);
 
             regionLogic.Update(region.Id,region);

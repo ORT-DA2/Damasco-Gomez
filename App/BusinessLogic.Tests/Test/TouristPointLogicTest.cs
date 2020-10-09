@@ -48,7 +48,7 @@ namespace BusinessLogic.Tests.Test
                     Description = "two",
                     RegionId = 1,
                     Region = null,
-                     CategoriesTouristPoints = null,
+                    CategoriesTouristPoints = null,
                 },
                 new TouristPoint()
                 {
@@ -115,7 +115,7 @@ namespace BusinessLogic.Tests.Test
         [TestMethod]
         public void TestAdd()
         {
-            TouristPoint touristPoint = touristPoints.First();
+            TouristPoint touristPoint = touristPoints.Last();
             mock.Setup(m => m.Add(touristPoint)).Returns(touristPoint);
 
             var touristPointToReturn = touristPointLogic.Add(touristPoint);
@@ -125,7 +125,7 @@ namespace BusinessLogic.Tests.Test
         [TestMethod]
         public void TestAddValidateError()
         {
-            TouristPoint touristPoint = touristPoints.First();
+            TouristPoint touristPoint = touristPoints.Last();
             mock.Setup(m => m.Add(touristPoint)).Returns(touristPoint);
 
             var touristPointToReturn = touristPointLogic.Add(touristPoint);
