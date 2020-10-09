@@ -36,20 +36,26 @@ namespace BusinessLogic
         public Category Add(Category category)
         {
             Validate(category);
-            category.CategoryTouristPoints.ForEach
-            (
-                m => m.TouristPoint = this.touristPointRepository.Find(m.TouristPointId)
-            );
+            if (category.CategoryTouristPoints != null)
+            {
+                category.CategoryTouristPoints.ForEach
+                (
+                    m => m.TouristPoint = this.touristPointRepository.Find(m.TouristPointId)
+                );
+            }
             Category categoryAdded =  this.categoryRepository.Add(category);
             return categoryAdded;
         }
         public Category Update(int id, Category category)
         {
             Validate(category);
-            category.CategoryTouristPoints.ForEach
-            (
-                m => m.TouristPoint = this.touristPointRepository.Find(m.TouristPointId)
-            );
+            if (category.CategoryTouristPoints != null)
+            {
+                category.CategoryTouristPoints.ForEach
+                (
+                    m => m.TouristPoint = this.touristPointRepository.Find(m.TouristPointId)
+                );
+            }
             this.categoryRepository.Update(id, category);
             return category;
         }
