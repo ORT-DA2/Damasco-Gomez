@@ -42,6 +42,12 @@ namespace Model.In
             DateTime date = new DateTime(year,month,day);
             return date;
         }
+        public bool NotNull()
+        {
+            bool notNull;
+            notNull = this.CheckIn != null && this.CheckOut!=null && this.TouristPointId > 0;
+            return notNull;
+        }
 
     }
 }
