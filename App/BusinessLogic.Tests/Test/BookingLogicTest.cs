@@ -46,14 +46,38 @@ namespace BusinessLogic.Tests.Test
             bookingLogic = new BookingLogic(mock.Object,mock2.Object);
         }
         [TestMethod]
-        public void DeleteTest()
+        public void TestDeleteById()
         {
-            Assert.IsTrue(true);
+            int lengthTouristPoint = bookingsToReturn.Count;
+            mock.Setup(m => m.Delete(bookingsToReturn.First().Id));
+
+            bookingLogic.Delete(bookingsToReturn.First().Id);
+
+            mock.VerifyAll();
+        }
+
+        [TestMethod]
+        public void TestDelete()
+        {
+            int lengthRegions = bookingsToReturn.Count;
+            mock.Setup(m => m.GetElements()).Returns(bookingsToReturn);
+            foreach (Booking t in bookingsToReturn)
+            {
+                mock.Setup(m => m.Delete(t.Id));
+            }
+
+            bookingLogic.Delete();
+
+            mock.VerifyAll();
         }
         [TestMethod]
-        public void DeleteTestByIdOk()
+        public void TestDeleteEmpty()
         {
-            Assert.IsTrue(true);
+            mock.Setup(m => m.GetElements()).Returns(emptyBookings);
+
+            bookingLogic.Delete();
+
+            mock.VerifyAll();
         }
         [TestMethod]
         public void GetByTestOk()
