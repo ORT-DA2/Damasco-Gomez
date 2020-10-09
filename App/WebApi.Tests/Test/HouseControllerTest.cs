@@ -21,6 +21,7 @@ namespace WebApi.Tests
         private House houseId1;
         private Mock<IHouseLogic> mock;
         private HouseController controller ;
+        private HouseSearchModel houseSearchModelNull;
         [TestInitialize]
         public void initVariables()
         {
@@ -46,8 +47,8 @@ namespace WebApi.Tests
                     Id = 2,
                     Avaible = false ,
                     PricePerNight = 200,
-                    TouristPointId = 1,
-                    TouristPoint = new TouristPoint(){Id = 1, Name = "touriste point hose"},
+                    TouristPointId = 2,
+                    TouristPoint = new TouristPoint(){Id = 2, Name = "touriste point hose"},
                     Name = "Name house 2",
                     Starts = 2,
                     Address = "Address 2",
@@ -61,8 +62,8 @@ namespace WebApi.Tests
                     Id = 3,
                     Avaible = true ,
                     PricePerNight = 300,
-                    TouristPointId = 1,
-                    TouristPoint = new TouristPoint(){Id = 1, Name = "touriste point hose"},
+                    TouristPointId = 2,
+                    TouristPoint = new TouristPoint(){Id = 2, Name = "touriste point hose"},
                     Name = "Name house 3",
                     Starts = 4,
                     Address = "Address 3",
@@ -76,8 +77,8 @@ namespace WebApi.Tests
                     Id = 4,
                     Avaible = true ,
                     PricePerNight = 400,
-                    TouristPointId = 1,
-                    TouristPoint = new TouristPoint(){Id = 1, Name = "touriste point hose"},
+                    TouristPointId = 2,
+                    TouristPoint = new TouristPoint(){Id = 2, Name = "touriste point hose"},
                     Name = "Name house 4",
                     Starts = 4,
                     Address = "Address 4",
@@ -91,6 +92,7 @@ namespace WebApi.Tests
             houseId1 = housesToReturn.First();
             mock = new Mock<IHouseLogic>(MockBehavior.Strict);
             controller = new HouseController(mock.Object);
+            houseSearchModelNull = new HouseSearchModel();
         }
         [TestMethod]
         public void TestGetAllHousesOk()
@@ -98,7 +100,7 @@ namespace WebApi.Tests
             IEnumerable<HouseBasicModel> houseBasicModels = housesToReturn.Select(m => new HouseBasicModel(m));
             mock.Setup(m => m.GetAll()).Returns(housesToReturn);
 
-            var result = controller.Get();
+            var result = controller.GetHousesBy(houseSearchModelNull);
 
             var okResult = result as OkObjectResult;
             var houses = okResult.Value as IEnumerable<HouseBasicModel>;
@@ -112,7 +114,7 @@ namespace WebApi.Tests
             IEnumerable<HouseBasicModel> houseBasicModels = housesToReturnEmpty.Select(m => new HouseBasicModel(m));
             mock.Setup(m => m.GetAll()).Returns(housesToReturnEmpty);
 
-            var result = controller.Get();
+            var result = controller.GetHousesBy(houseSearchModelNull);
 
             var okResult = result as OkObjectResult;
             var houses = okResult.Value as IEnumerable<HouseBasicModel>;
@@ -334,16 +336,18 @@ namespace WebApi.Tests
                 CantChildrens = 1,
                 CantBabys = 0,
             };
-            List<House> housesWithIdTP = new List<House>(){housesToReturn.First()};
-            List<HouseSearchResultModel> housesResult = new List<HouseSearchResultModel>(){};
             HouseSearch houseSearch = houseSearchModel.ToEntity();
-            mock.Setup(mock=> mock.GetHousesBy(houseSearch)).Returns(housesWithIdTP);
+            IEnumerable<House> housesWithIdTP = new List<House>()
+            {
+                housesToReturn.First()
+            };
+            mock.Setup(m => m.GetHousesBy(It.IsAny<HouseSearch>())).Returns(housesWithIdTP);
 
-            // var result = controller.GetHousesBy(houseSearchModel);
+            var result = controller.GetHousesBy(houseSearchModel);
 
-            // var okResult = result as OkObjectResult;
-            // var houses = okResult.Value as IEnumerable<HouseSearchResultModel>;
-            // Assert.IsTrue(housesResult.SequenceEqual(houses));
+            var okResult = result as OkObjectResult;
+            var houses = okResult.Value as IEnumerable<HouseSearchResultModel>;
+            //Assert.IsTrue(housesResult.SequenceEqual(houses));
         }
         [TestMethod]
         public void TestGetHousesByEmpty()
@@ -360,13 +364,13 @@ namespace WebApi.Tests
             List<House> emptyHousesWithIdTP = new List<House>();
             List<HouseSearchResultModel> housesResult = new List<HouseSearchResultModel>(){};
             HouseSearch houseSearch = houseSearchModel.ToEntity();
-            mock.Setup(mock=> mock.GetHousesBy(houseSearch)).Returns(emptyHousesWithIdTP);
+            mock.Setup(mock=> mock.GetHousesBy(It.IsAny<HouseSearch>())).Returns(emptyHousesWithIdTP);
 
-            // var result = controller.GetHousesBy(houseSearchModel);
+            var result = controller.GetHousesBy(houseSearchModel);
 
-            // var okResult = result as OkObjectResult;
-            // var houses = okResult.Value as IEnumerable<HouseSearchResultModel>;
-            // Assert.IsTrue(housesResult.SequenceEqual(houses));
+            var okResult = result as OkObjectResult;
+            var houses = okResult.Value as IEnumerable<HouseSearchResultModel>;
+            Assert.IsTrue(housesResult.SequenceEqual(houses));
         }
     }
 }
