@@ -20,14 +20,30 @@ namespace WebApi.Controllers
         {
             this.houseLogic = houseLogic;
         }
-        [HttpGet()]
-        public IActionResult Get()
+        //..api/houses
+        //..api/house?idTP=1
+        [HttpGet]
+        public IActionResult GetHousesBy([FromQuery]HouseSearchModel houseSearchModel)
         {
-            IEnumerable<House> elementHouse = this.houseLogic.GetAll();
-            IEnumerable<HouseBasicModel> basicModels = elementHouse.Select( m => new HouseBasicModel(m));
+            IEnumerable<House> varRet ;
+            IEnumerable<HouseBasicModel> basicModels;
+            if(houseSearchModel.NotNull())
+            {
+                HouseSearch houseSearch = houseSearchModel.ToEntity();
+                // Get houses by tourist points
+                varRet = this.houseLogic.GetHousesBy(houseSearch);
+                basicModels = varRet.
+                    Select(m => new HouseBasicModel(m,houseSearch)).ToList();
+            }
+            else
+            {
+                //Get ALL houses 
+                varRet = this.houseLogic.GetAll();
+                basicModels = varRet.Select( m => new HouseBasicModel(m));
+            }
             return Ok(basicModels);
         }
-
+        //...api/houses/{id}
         [HttpGet("{id}",Name="GetHouse")]
         public IActionResult GetBy([FromRoute]int id)
         {
@@ -103,15 +119,7 @@ namespace WebApi.Controllers
             this.houseLogic.Delete();
             return Ok();
         }
-        [Route("touristpoint")]
-        [HttpGet()]
-        public IActionResult GetHousesBy([FromQuery]HouseSearchModel houseSearchModel)
-        {
-            HouseSearch houseSearch = houseSearchModel.ToEntity();
-            IEnumerable<House> varRet = this.houseLogic.GetHousesBy(houseSearch);
-            IEnumerable<HouseSearchResultModel> result = varRet.
-                Select(m => new HouseSearchResultModel(m , houseSearch)).ToList();
-            return Ok(result);
-        }
+
+        
     }
 }
