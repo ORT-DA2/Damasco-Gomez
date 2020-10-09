@@ -2,6 +2,7 @@ using System;
 using DataAccess.Context;
 using DataAccessInterface.Repositories;
 using Domain;
+using Domain.Entities;
 using Microsoft.EntityFrameworkCore;
 
 namespace DataAccess.Repositories
@@ -15,6 +16,7 @@ namespace DataAccess.Repositories
         private IRepository<Person> persons;
         private IRepository<Region> regions;
         private IRepository<TouristPoint> touristPoints;
+        private IRepository<SessionUser> sessions;
         private bool isDispose = false;
         public RepositoryMaster(DbContext masterContext)
         {
@@ -88,6 +90,17 @@ namespace DataAccess.Repositories
                     this.touristPoints = new Repository<TouristPoint>(context);
                 }
                 return this.touristPoints;
+            }
+        }
+        public  IRepository<SessionUser> Sessions
+        {
+            get
+            {
+                if (sessions == null)
+                {
+                    this.sessions = new Repository<SessionUser>(context);
+                }
+                return this.sessions;
             }
         }
     }
