@@ -37,7 +37,7 @@ namespace WebApi.Controllers
             }
             else
             {
-                //Get ALL houses 
+                //Get ALL houses
                 varRet = this.houseLogic.GetAll();
                 basicModels = varRet.Select( m => new HouseBasicModel(m));
             }

@@ -41,22 +41,46 @@ namespace BusinessLogic.Tests.Test
         }
 
         [TestMethod]
-        public void DeleteTest()
+        public void TestDeleteById()
         {
-            Assert.IsTrue(true);
+            int lengthTouristPoint = housesToReturn.Count;
+            mock.Setup(m => m.Delete(housesToReturn.First().Id));
+
+            houseLogic.Delete(housesToReturn.First().Id);
+
+            mock.VerifyAll();
+        }
+
+        [TestMethod]
+        public void TestDelete()
+        {
+            int lengthRegions = housesToReturn.Count;
+            mock.Setup(m => m.GetElements()).Returns(housesToReturn);
+            foreach (House t in housesToReturn)
+            {
+                mock.Setup(m => m.Delete(t.Id));
+            }
+
+            houseLogic.Delete();
+
+            mock.VerifyAll();
         }
         [TestMethod]
-        public void DeleteTestByIdOk()
+        public void TestDeleteEmpty()
         {
-            Assert.IsTrue(true);
+            mock.Setup(m => m.GetElements()).Returns(emptyHouses);
+
+            houseLogic.Delete();
+
+            mock.VerifyAll();
         }
-         [TestMethod]
+        [TestMethod]
         public void GetByTestOk()
         {
             House house = housesToReturn.First();
             mock.Setup(m => m.Find(house.Id)).Returns(house);
 
-            var result = houseLogic.GetBy(house.Id);
+            House result = houseLogic.GetBy(house.Id);
 
             Assert.AreEqual(result,house);
         }
@@ -78,7 +102,7 @@ namespace BusinessLogic.Tests.Test
             mock.Setup(m => m.Find(house.Id)).Returns(house);
             mock.Setup(m => m.Add(house)).Returns(house);
 
-            var result= houseLogic.Add(house);
+            House result = houseLogic.Add(house);
 
             Assert.AreEqual(house, result);
         }
@@ -105,18 +129,20 @@ namespace BusinessLogic.Tests.Test
             mock.Setup(m => m.Add(house)).Throws(exception);
 
             var reuslt = houseLogic.Add(house);
+
+            mock.VerifyAll();
         }
         [TestMethod]
-        public void TestUdpateOk ()
+        public void TestUpdateOk ()
         {
             House house = housesToReturn.First();
             mock2.Setup(m => m.ExistElement(house.TouristPointId)).Returns(true);
             mock.Setup(m => m.Find(house.Id)).Returns(house);
             mock.Setup(m => m.Update(house.Id,house));
 
-            houseLogic.Update(house.Id,house);
+            House result = houseLogic.Update(house.Id,house);
 
-            mock.VerifyAll();
+            Assert.AreEqual(result,house);
         }
         [TestMethod]
         public void TestUpdateValidateError()
@@ -141,6 +167,8 @@ namespace BusinessLogic.Tests.Test
             mock.Setup(m => m.Update(house.Id,house)).Throws(exception);
 
             houseLogic.Update(house.Id,house);
+
+            mock.VerifyAll();
         }
         [TestMethod]
         public void TestExistOk()
@@ -150,14 +178,12 @@ namespace BusinessLogic.Tests.Test
 
             var result = houseLogic.Exist(house);
 
-            mock.VerifyAll();
             Assert.IsTrue(result);
         }
         [TestMethod]
         public void TestNotExistOk()
         {
             House house = housesToReturn.First();
-
             mock.Setup(m => m.ExistElement(house)).Returns(false);
 
             var result = houseLogic.Exist(house);
@@ -181,7 +207,7 @@ namespace BusinessLogic.Tests.Test
             };
             mock.Setup(m => m.GetByIdTouristPoint(houseSearch.TouristPointId)).Returns(houses);
 
-            var result = houseLogic.GetHousesBy(houseSearch);
+            IEnumerable<House> result = houseLogic.GetHousesBy(houseSearch);
 
             Assert.AreEqual(houses, result);
         }
@@ -199,10 +225,9 @@ namespace BusinessLogic.Tests.Test
             };
             mock.Setup(m => m.GetByIdTouristPoint(houseSearch.TouristPointId)).Returns(emptyHouses);
 
-            var result = houseLogic.GetHousesBy(houseSearch);
+            IEnumerable<House> result = houseLogic.GetHousesBy(houseSearch);
 
             Assert.AreEqual(emptyHouses, result);
         }
-        //falta delete
     }
 }
