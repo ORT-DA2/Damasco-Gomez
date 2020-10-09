@@ -57,11 +57,10 @@ namespace BusinessLogic.Tests.Test
 
             var result = categoryLogic.GetBy(category.Id);
 
-            mock.VerifyAll();
             Assert.AreEqual(result,category);
         }
         [TestMethod]
-         public void TestGetByFail()
+        public void TestGetByFail()
         {
             Category category = categoriesToReturn.First();
             Category empty = null;
@@ -69,14 +68,14 @@ namespace BusinessLogic.Tests.Test
 
             var result = categoryLogic.GetBy(category.Id);
 
-            mock.VerifyAll();
             Assert.IsNull(result);
         }
         public void TestAddOk()
         {
             Category category = categoriesToReturn.First();
             mock.Setup(m => m.Add(category)).Returns(category);
-            var result= categoryLogic.Add(category);
+
+            Category result= categoryLogic.Add(category);
 
             Assert.AreEqual(category, result );
         }
@@ -86,7 +85,7 @@ namespace BusinessLogic.Tests.Test
             Category category = categoriesToReturn.First(); // Category tiene que terner un formato erroneo despues para que la validación falle
             mock.Setup(m => m.Add(category)).Returns(category);
 
-            var result = categoryLogic.Add(category);
+            Category result = categoryLogic.Add(category);
 
             Assert.AreEqual(category, result);
         }
@@ -108,15 +107,15 @@ namespace BusinessLogic.Tests.Test
             Category category = categoriesToReturn.First();
             mock.Setup(m => m.Update(category.Id,category));
 
-            categoryLogic.Update(category.Id,category);
+            Category result = categoryLogic.Update(category.Id,category);
 
-            mock.VerifyAll();
+            Assert.AreEqual(result,category);
         }
         [TestMethod]
         public void TestUpdateValidateError()
         {
-            Category category = categoriesToReturn.First();// Category tiene que terner un formato erroneo despues para que la validación falle
-             mock.Setup(m => m.Update(category.Id,category));
+            Category category = categoriesToReturn.First();
+            mock.Setup(m => m.Update(category.Id,category));
 
             categoryLogic.Update(category.Id,category);
 
@@ -131,6 +130,8 @@ namespace BusinessLogic.Tests.Test
             mock.Setup(m => m.Update(category.Id,category)).Throws(exception);
 
             categoryLogic.Update(category.Id,category);
+
+            mock.VerifyAll();
         }
         [TestMethod]
         public void TestExistOk()
@@ -140,7 +141,6 @@ namespace BusinessLogic.Tests.Test
 
             var result = categoryLogic.Exist(category);
 
-            mock.VerifyAll();
             Assert.IsTrue(result);
         }
         [TestMethod]
@@ -148,8 +148,9 @@ namespace BusinessLogic.Tests.Test
         {
             Category category = categoriesToReturn.First();
             mock.Setup(m => m.ExistElement(category)).Returns(false);
+
             var result = categoryLogic.Exist(category);
-            mock.VerifyAll();
+
             Assert.IsFalse(result);
         }
     }
