@@ -26,7 +26,7 @@ namespace Domain.Test.Test
                     Name = "new name category",
                 };
 
-            Category.Update(category,newCategory);
+            category.Update(newCategory);
 
             Assert.AreEqual(newCategory.Name, category.Name);
         }
@@ -39,7 +39,7 @@ namespace Domain.Test.Test
                     Name = null,
                 };
 
-            Category.Update(category,newCategory);
+            category.Update(newCategory);
 
             Assert.AreEqual(nameShouldBe, category.Name);
         }
@@ -53,7 +53,7 @@ namespace Domain.Test.Test
                 CategoryTouristPoints = new List<CategoryTouristPoint>() { newCate },
             };
 
-            Category.Update(category, newCategory);
+            category.Update( newCategory);
 
             Assert.IsNull(category.CategoryTouristPoints);
         }
@@ -67,7 +67,7 @@ namespace Domain.Test.Test
                 Name = null,
             };
 
-            Category.Update(category, newCategory);
+            category.Update( newCategory);
 
             Assert.AreEqual(newCategory.Id, id);
         }

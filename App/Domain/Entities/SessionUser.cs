@@ -10,7 +10,7 @@ namespace Domain.Entities
         public virtual Person User {get; set;}
         public void Update(Guid token)
         {
-             this.Token = token;
+            this.Token = token;
         }
 
     }

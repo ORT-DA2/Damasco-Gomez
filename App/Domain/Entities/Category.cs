@@ -21,9 +21,9 @@ namespace Domain
             }
             return result;
         }
-        public static void Update(Category elementToUpdate, Category element)
+        public void Update(Category element)
         {
-            if(element.Name != null) elementToUpdate.Name = element.Name;
+            if(element.Name != null) this.Name = element.Name;
         }
     }
 }

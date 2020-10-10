@@ -13,7 +13,7 @@ namespace DataAccess.Repositories
 
         protected override void Update(Category elementToUpdate, Category element)
         {
-            Category.Update(elementToUpdate,element);
+            elementToUpdate.Update(element);
         }
 
         protected override void Validate(Category element)
