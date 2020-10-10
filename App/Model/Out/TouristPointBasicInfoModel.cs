@@ -4,11 +4,11 @@ namespace Model.Out
 {
     public class TouristPointBasicInfoModel
     {
-          public int Id {get; private set;}
+        public int Id {get; private set;}
 
-         public string Name {get; private set;}
+        public string Name {get; private set;}
 
-         public string Image {get; private set;}
+        public string Image {get; private set;}
 
         public string Description {get; private set;}
 
