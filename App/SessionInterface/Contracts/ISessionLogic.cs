@@ -1,4 +1,5 @@
 ﻿using System;
+using Domain;
 
 namespace Contracts
 {
@@ -6,6 +7,6 @@ namespace Contracts
     {
         bool IsCorrectToken(Guid token);
 
-        void Login(string userName , string password) ;
+        void Login(Person person) ;
     }
 }
