@@ -37,13 +37,10 @@ namespace WebApi.Filters
                 context.Result = new ContentResult()
                 {
                     StatusCode = 401,
-                    Content = " token is not valid"
+                    Content = "not valid token "
                 };
             }
         }
-            
-          
-
         private ISessionLogic GetSessionLogic(AuthorizationFilterContext context)
         {
             var sessionType = typeof(ISessionLogic);
