@@ -17,5 +17,9 @@ namespace BusinessLogic.Logics
              return this.sessionUserRepository.IsCorrectToken(token);
 
         }
+        public void Login(string userName , string password)  
+        {
+            // crear session y generar token 
+        }
     }
 }
