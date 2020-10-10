@@ -21,10 +21,9 @@ namespace DataAccess.Repositories
             }
             return true;
         }
-
+        [ExcludeFromCodeCoverage]
         protected override void Update(SessionUser elementToUpdate, SessionUser element)
         {
-            element.Update(elementToUpdate);
         }
         [ExcludeFromCodeCoverage]
         protected override void Validate(SessionUser element)
