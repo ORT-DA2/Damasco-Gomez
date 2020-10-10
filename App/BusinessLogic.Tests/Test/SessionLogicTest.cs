@@ -10,5 +10,11 @@ namespace BusinessLogic.Tests.Test
         {
             Assert.IsTrue(true);
         }
+        [TestMethod]
+        public void TestLoginOk()
+        {
+            Assert.IsTrue(true);
+        }
+        
     }
 }
