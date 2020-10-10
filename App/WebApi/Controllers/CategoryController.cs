@@ -6,6 +6,7 @@ using Filters;
 using Microsoft.AspNetCore.Mvc;
 using Model.In;
 using Model.Out;
+using WebApi.Filters;
 
 namespace WebApi.Controllers
 {
@@ -39,7 +40,7 @@ namespace WebApi.Controllers
             }
         }
         [HttpPost()]
-        [ServiceFilter(typeof(AuthorizationDIFilter))]
+        [AuthorizationFilter]
         public IActionResult Post([FromBody]CategoryModel categoryModel)
         {
             try
@@ -61,7 +62,7 @@ namespace WebApi.Controllers
             }
         }
         [HttpPut("{id}")]
-        [ServiceFilter(typeof(AuthorizationDIFilter))]
+        [AuthorizationFilter]
         public IActionResult Put([FromRoute]int id,[FromBody]CategoryModel categoryModel)
         {
             try
@@ -81,7 +82,7 @@ namespace WebApi.Controllers
             }
         }
         [HttpDelete("{id}")]
-        [ServiceFilter(typeof(AuthorizationDIFilter))]
+        [AuthorizationFilter]
         public IActionResult Delete([FromRoute]int id)
         {
             if (this.categoryLogic.GetBy(id) == null)
@@ -92,7 +93,7 @@ namespace WebApi.Controllers
             return Ok();
         }
         [HttpDelete()]
-        [ServiceFilter(typeof(AuthorizationDIFilter))]
+        [AuthorizationFilter]
         public IActionResult Delete()
         {
             this.categoryLogic.Delete();
