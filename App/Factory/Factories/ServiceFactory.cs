@@ -1,3 +1,4 @@
+using System.Diagnostics.CodeAnalysis;
 using BusinessLogic;
 using BusinessLogic.Logics;
 using BusinessLogicInterface;
@@ -10,6 +11,7 @@ using Microsoft.Extensions.DependencyInjection;
 
 namespace Factory.Factories
 {
+    [ExcludeFromCodeCoverage]
     public class ServiceFactory
     {
         private readonly IServiceCollection services;
