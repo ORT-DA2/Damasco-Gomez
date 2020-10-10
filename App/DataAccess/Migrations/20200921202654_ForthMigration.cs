@@ -1,9 +1,12 @@
-﻿using Microsoft.EntityFrameworkCore.Migrations;
+﻿using System.Diagnostics.CodeAnalysis;
+using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace DataAccess.Migrations
 {
     public partial class ForthMigration : Migration
     {
+
+        [ExcludeFromCodeCoverage]
         protected override void Up(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.DropForeignKey(
