@@ -47,14 +47,39 @@ namespace BusinessLogic.Tests.Test
             personLogic = new PersonLogic(mock.Object);
         }
         [TestMethod]
-        public void DeleteTest()
+        public void TestDeleteById()
         {
-            Assert.IsTrue(true);
+            int lengthTouristPoint = personsToReturn.Count;
+            mock.Setup(m => m.Delete(personsToReturn.First().Id));
+
+            personLogic.Delete(personsToReturn.First().Id);
+
+            mock.VerifyAll();
+        }
+
+        [TestMethod]
+        public void TestDelete()
+        {
+            int lengthRegions = personsToReturn.Count;
+            mock.Setup(m => m.GetElements()).Returns(personsToReturn);
+            foreach (Person t in personsToReturn)
+            {
+                mock.Setup(m => m.Delete(t.Id));
+            }
+
+            personLogic.Delete();
+
+            mock.VerifyAll();
         }
         [TestMethod]
-        public void DeleteTestByIdOk()
+        public void TestDeleteEmpty()
         {
-            Assert.IsTrue(true);
+            List<Person> emptyListPersons = new List<Person>();
+            mock.Setup(m => m.GetElements()).Returns(emptyListPersons);
+
+            personLogic.Delete();
+
+            mock.VerifyAll();
         }
         [TestMethod]
         public void GetByTestOk()
@@ -64,7 +89,6 @@ namespace BusinessLogic.Tests.Test
 
             var result = personLogic.GetBy(person.Id);
 
-            mock.VerifyAll();
             Assert.AreEqual(result,person);
         }
         [TestMethod]
@@ -84,14 +108,15 @@ namespace BusinessLogic.Tests.Test
         {
             Person person = personsToReturn.First();
             mock.Setup(m => m.Add(person)).Returns(person);
-            var result= personLogic.Add(person);
+
+            Person result= personLogic.Add(person);
 
             Assert.AreEqual(person, result );
         }
         [TestMethod]
         public void TestAddValidateError()
         {
-            Person person = personsToReturn.First(); // PERSON tiene que terner un formato erroneo despues para que la validación falle
+            Person person = personsToReturn.First();
             mock.Setup(m => m.Add(person)).Returns(person);
 
             var result = personLogic.Add(person);
@@ -107,6 +132,8 @@ namespace BusinessLogic.Tests.Test
             mock.Setup(m => m.Add(person)).Throws(exception);
 
             var reuslt = personLogic.Add(person);
+
+            mock.VerifyAll();
         }
         [TestMethod]
         public void TestUpdateOk ()
@@ -140,6 +167,8 @@ namespace BusinessLogic.Tests.Test
             mock.Setup(m => m.Update(person.Id,person)).Throws(exception);
 
             personLogic.Update(person.Id,person);
+
+            mock.VerifyAll();
         }
         [TestMethod]
         public void TestExistOk()
@@ -149,7 +178,6 @@ namespace BusinessLogic.Tests.Test
 
             var result = personLogic.Exist(person);
 
-            mock.VerifyAll();
             Assert.IsTrue(result);
         }
         [TestMethod]
@@ -158,9 +186,10 @@ namespace BusinessLogic.Tests.Test
             Person person = personsToReturn.First();
             mock.Setup(m => m.ExistElement(person)).Returns(false);
             var result = personLogic.Exist(person);
+
             mock.VerifyAll();
+
             Assert.IsFalse(result);
         }
-        //falta delete
     }
 }
