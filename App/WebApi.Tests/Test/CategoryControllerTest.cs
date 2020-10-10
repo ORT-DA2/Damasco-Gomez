@@ -172,7 +172,7 @@ namespace WebApi.Test
             };
             categoryId1 = categoryModel.ToEntity();
             mock.Setup(m => m.Add(categoryId1)).Returns(categoryId1);
-            CategoryDetailInfoModel modelOut  = new CategoryDetailInfoModel(categoryId1);
+            CategoryBasicInfoModel modelOut  = new CategoryBasicInfoModel(categoryId1);
 
             var result = controller.Post(categoryModel);
 
@@ -244,7 +244,7 @@ namespace WebApi.Test
             categoryId1 = categoryModel.ToEntity();
             categoryId1.Name = "New name";
             mock.Setup(m => m.Update(categoryId1.Id,categoryId1)).Returns(categoryId1);
-            CategoryDetailInfoModel modelOut  = new CategoryDetailInfoModel(categoryId1);
+            CategoryBasicInfoModel modelOut  = new CategoryBasicInfoModel(categoryId1);
 
             var result = controller.Put(categoryId1.Id, categoryModel);
 

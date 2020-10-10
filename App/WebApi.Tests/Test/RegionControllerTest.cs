@@ -6,6 +6,7 @@ using Domain;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Model.In;
+using Model.Out;
 using Moq;
 using WebApi.Controllers;
 
@@ -55,47 +56,50 @@ namespace WebApi.Test
         public void TestGetAllRegionsOk()
         {
             mock.Setup(m => m.GetAll()).Returns(regionsToReturn);
+            IEnumerable<RegionDetailModel> regionsBasic = regionsToReturn.Select(m => new RegionDetailModel(m));
 
             var result = controller.Get();
 
             var okResult = result as OkObjectResult;
-            var regions = okResult.Value as IEnumerable<Region>;
+            var regions = okResult.Value as IEnumerable<RegionDetailModel>;
             mock.VerifyAll();
-            Assert.IsTrue(regionsToReturn.SequenceEqual(regions));
+            Assert.IsTrue(regionsBasic.SequenceEqual(regions));
         }
 
         [TestMethod]
         public void TestGetAllEmptyRegions ()
         {
             var mock = new Mock<IRegionLogic>(MockBehavior.Strict);
-             mock.Setup(m => m.GetAll()).Returns(regionToReturnEmpty);
-             var controller = new RegionController(mock.Object);
+            mock.Setup(m => m.GetAll()).Returns(regionToReturnEmpty);
+            IEnumerable<RegionDetailModel> regionsBasic = regionToReturnEmpty.Select(m => new RegionDetailModel(m));
+            var controller = new RegionController(mock.Object);
 
-             var result = controller.Get();
+            var result = controller.Get();
 
-             var okResult = result as OkObjectResult;
-             var regions = okResult.Value as IEnumerable<Region>;
-             mock.VerifyAll();
-             Assert.IsTrue(regionToReturnEmpty.SequenceEqual(regions));
+            var okResult = result as OkObjectResult;
+            var regions = okResult.Value as IEnumerable<RegionDetailModel>;
+            mock.VerifyAll();
+            Assert.IsTrue(regionsBasic.SequenceEqual(regions));
 
         }
         [TestMethod]
-         public void TestGetByOk()
+        public void TestGetByOk()
         {
             int id = 1;
             regionId1 = regionsToReturn.First();
             mock.Setup(m => m.GetBy(id)).Returns(regionId1);
+            RegionDetailModel regionsBasic = new RegionDetailModel(regionId1);
 
             var result = controller.GetBy(id);
 
             var okResult = result as OkObjectResult;
-            var region = okResult.Value as Region;
+            var region = okResult.Value as RegionDetailModel;
             mock.VerifyAll();
-            Assert.IsTrue(region.Equals(regionId1));
+            Assert.IsTrue(region.Equals(regionsBasic));
         }
-         [TestMethod]
-         public void TestGetByNotFoud ()
-         {
+        [TestMethod]
+        public void TestGetByNotFoud ()
+        {
             int id = 4;
             ArgumentException exist = new ArgumentException();
             mock.Setup(m => m.GetBy(id)).Throws(exist);
@@ -104,7 +108,7 @@ namespace WebApi.Test
 
             mock.VerifyAll();
             Assert.IsInstanceOfType(result, typeof(BadRequestObjectResult));
-         }
+        }
         [TestMethod]
         public void TestPostOk ()
         {
@@ -114,6 +118,7 @@ namespace WebApi.Test
             };
             regionId1 = regionModel.ToEntity();
             mock.Setup(m => m.Add(regionId1)).Returns(regionId1);
+            RegionDetailModel regionsBasic = new RegionDetailModel(regionId1);
 
             var result = controller.Post(regionModel);
 
@@ -121,10 +126,10 @@ namespace WebApi.Test
             mock.VerifyAll();
             Assert.IsNotNull(okResult);
             Assert.AreEqual("GetRegion", okResult.RouteName);
-            Assert.AreEqual(okResult.Value, regionId1);
-         }
-         [TestMethod]
-          public void TestPostFailSameRegion()
+            Assert.AreEqual(okResult.Value, regionsBasic);
+        }
+        [TestMethod]
+        public void TestPostFailSameRegion()
         {
             RegionModel regionModel = new RegionModel()
             {
@@ -179,6 +184,7 @@ namespace WebApi.Test
                 Name = "name region",
             };
             regionId1 = regionModel.ToEntity();
+            RegionDetailModel regionsBasic = new RegionDetailModel(regionId1);
             mock.Setup(m => m.Update(regionId1.Id,regionId1)).Returns(regionId1);
 
             var result = controller.Put(regionId1.Id, regionModel);
@@ -187,9 +193,9 @@ namespace WebApi.Test
             mock.VerifyAll();
             Assert.IsNotNull(okResult);
             Assert.AreEqual("GetRegion", okResult.RouteName);
-            Assert.AreEqual(okResult.Value, regionId1);
+            Assert.AreEqual(okResult.Value, regionsBasic);
         }
-         [TestMethod]
+        [TestMethod]
         public void TestPutFailValidate()
         {
             RegionModel regionModel = new RegionModel()

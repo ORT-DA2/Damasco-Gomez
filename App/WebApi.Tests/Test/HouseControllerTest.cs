@@ -164,6 +164,7 @@ namespace WebApi.Tests
             };
             House house = houseModel.ToEntity();
             mock.Setup(m => m.Add(house)).Returns(house);
+            HouseBasicModel houseBasicModel = new HouseBasicModel(house);
 
             var result = controller.Post(houseModel);
 
@@ -171,7 +172,7 @@ namespace WebApi.Tests
             mock.VerifyAll();
             Assert.IsNotNull(okResult);
             Assert.AreEqual("GetHouse", okResult.RouteName);
-            Assert.AreEqual(okResult.Value, house);
+            Assert.AreEqual(okResult.Value, houseBasicModel);
         }
         [TestMethod]
         public void TestPostFailSameHouse()
@@ -232,6 +233,7 @@ namespace WebApi.Tests
             };
             houseId1 = houseModel.ToEntity();
             mock.Setup(m => m.Update(houseId1.Id,houseId1)).Returns(houseId1);
+            HouseBasicModel basicModel = new HouseBasicModel(houseId1);
 
             var result = controller.Put(houseId1.Id, houseModel);
 
@@ -239,7 +241,7 @@ namespace WebApi.Tests
             mock.VerifyAll();
             Assert.IsNotNull(okResult);
             Assert.AreEqual("GetHouse", okResult.RouteName);
-            Assert.AreEqual(okResult.Value, houseId1);
+            Assert.AreEqual(okResult.Value, basicModel);
         }
         [TestMethod]
         public void TestPutFailValidate()
