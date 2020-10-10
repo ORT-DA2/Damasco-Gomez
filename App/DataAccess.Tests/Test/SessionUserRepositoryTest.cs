@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using DataAccess.Context;
 using DataAccess.Repositories;
 using Domain.Entities;
@@ -12,6 +13,7 @@ namespace DataAccess.Tests.Test
     public class SessionUserRepositoryTest
     {
         private List<SessionUser> sessions;
+        private SessionUser elementToUpdate;
         private RepositoryMaster repositoryMaster;
         private DbContext context;
         private DbContextOptions options;
@@ -40,20 +42,12 @@ namespace DataAccess.Tests.Test
             repositoryMaster = new RepositoryMaster(context);
             repository = new SessionUserRepository(repositoryMaster);
         }
-
-        [TestMethod]
-        public void TestUpdateOk ()
-        {
-            // protected override void Update(SessionUser elementToUpdate, SessionUser element)
-        
-           // element.Update(elementToUpdate);
-        
-        }
-        
         [TestMethod]
         public void TestIsCorrectTokenOk ()
         {
-            Assert.IsTrue(true);
+            Guid correctToken = sessions.First().Token;
+            bool result = repository.IsCorrectToken(correctToken);
+            Assert.IsTrue(result);
         }
     }
 }
