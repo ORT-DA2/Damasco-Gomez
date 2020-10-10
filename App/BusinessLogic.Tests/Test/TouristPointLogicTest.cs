@@ -155,6 +155,7 @@ namespace BusinessLogic.Tests.Test
             Category category = new Category(){Id = 1};
             mock.Setup(m => m.Update(touristPoint.Id,touristPoint));
             mock2.Setup(m => m.Find(category.Id)).Returns(category);
+            mock.Setup(m => m.Find(touristPoint.Id)).Returns(touristPoint);
 
             TouristPoint result =  touristPointLogic.Update(touristPoint.Id,touristPoint);
 
@@ -165,6 +166,7 @@ namespace BusinessLogic.Tests.Test
         {
             TouristPoint touristPoint = touristPoints.Last();
             mock.Setup(m => m.Update(touristPoint.Id,touristPoint));
+            mock.Setup(m => m.Find(touristPoint.Id)).Returns(touristPoint);
 
             touristPointLogic.Update(touristPoint.Id,touristPoint);
 
@@ -177,6 +179,7 @@ namespace BusinessLogic.Tests.Test
             TouristPoint touristPoint = touristPoints.Last();
             ArgumentException exception = new ArgumentException();
             mock.Setup(m => m.Update(touristPoint.Id,touristPoint)).Throws(exception);
+            mock.Setup(m => m.Find(touristPoint.Id)).Returns(touristPoint);
 
             touristPointLogic.Update(touristPoint.Id,touristPoint);
 

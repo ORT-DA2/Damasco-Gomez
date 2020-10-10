@@ -38,3 +38,4 @@ App/DataAccess.Tests/bin
 App/WebApi.Tests/TestResults
 App/WebApi.Tests/coverage.json
 App/SessionInterface/bin
+App/BusinessLogic.Tests/coverage.json
