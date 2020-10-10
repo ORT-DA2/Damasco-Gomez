@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using BusinessLogic.Logics;
 using DataAccessInterface.Repositories;
+using Domain;
 using Domain.Entities;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Moq;
@@ -15,8 +16,11 @@ namespace BusinessLogic.Tests.Test
         private SessionLogic sessionUserLogic;
         private Mock<ISessionUserRepository> mock;
         private Mock<IPersonRepository> mock2;
+        private Mock<SessionUser> mock3;
         private List<SessionUser> sessions;
+         private List<SessionUser> session2;
         private List<SessionUser> sessionUserEmpty;
+        private List <Person> personResult;
         [TestInitialize]
         public void Initialize ()
         {
@@ -34,15 +38,10 @@ namespace BusinessLogic.Tests.Test
                     Token = Guid.NewGuid(),
                     PersonId   = 2,
                 },
-                new SessionUser()
-                {
-                    Id = 3,
-                    Token = Guid.NewGuid(),
-                    PersonId   = 3,
-                }
             };
             mock = new Mock<ISessionUserRepository>(MockBehavior.Strict);
             mock2 = new Mock<IPersonRepository>(MockBehavior.Strict);
+            mock3 = new Mock<SessionUser>(MockBehavior.Strict);
             sessionUserLogic = new SessionLogic(mock.Object, mock2.Object);
             sessionUserEmpty = new List<SessionUser>();
         }
@@ -63,33 +62,49 @@ namespace BusinessLogic.Tests.Test
            Assert.IsFalse(result);
         }
         [TestMethod]
-        public void TestLoginOk()
+        public void TestLoginNotExistSessionPreviously ()
         {
-            /* public void Login(Person person)  
-        {
-            List<Person> personResult = this.personRepository.GetElements().FindAll(kz=>kz.Email == person.Email);
-            if (personResult.Count==0)
-            {
-                throw new ArgumentException("User was not created");
-            }
-            person = personResult.First();
-            Guid guid = Guid.NewGuid();
-            List <SessionUser> sessions = this.sessionUserRepository.GetElements().FindAll(m=>m.PersonId==person.Id)
-            if(sessions.Count==0)
-            {
-                SessionUser newSession = new SessionUser ()
+            List<Person> personResult = new List<Person> () 
+            {   new Person()
                 {
-                    Token = guid,
-                    PersonId = person.Id
-                };
-                this.sessionUserRepository.Add(newSession);
-            }
-            else 
+                    Id = 3,
+                    Email= "soyyuliana@gmail.com",
+                    Password = "soyyo"
+                }
+            };
+            mock2.Setup(m=>m.GetElements()).Returns(personResult);
+            List <SessionUser> sessions = new List<SessionUser>();
+            mock.Setup(mock=>mock.GetElements()).Returns(sessions);
+            mock.Setup(mock=>mock.Add(It.IsAny<SessionUser>()));
+            //sessionUserLogic.Login(personResult.First()); 
+            //mock.VerifyAll();
+       }
+        [TestMethod]
+        public void TestLoginExistPreviouslySession ()
+        {
+             List<Person> personResult = new List<Person> () 
+            {   new Person()
+                {
+                    Id = 1,
+                    Email= "soyyuliana@gmail.com",
+                    Password = "soyyo"
+                }
+            };
+            session2 = new List<SessionUser>()
             {
-                sessions.First().Update(guid);
-            }*/
-            Assert.IsTrue(true);
+                new SessionUser()
+                {
+                    Id = 1,
+                    Token = Guid.NewGuid(),
+                    PersonId   = 1,
+                },
+            };
+            Guid newGuid = Guid.NewGuid();
+            mock2.Setup(m=>m.GetElements()).Returns(personResult);
+            mock.Setup(mock=>mock.GetElements()).Returns(session2);
+            mock3.Setup(mock=>mock.Update(newGuid));
+           // sessionUserLogic.Login(personResult.First()); 
+          //  mock.VerifyAll();
         }
-        
     }
 }
