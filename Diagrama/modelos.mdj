@@ -37571,6 +37571,30 @@
 						"$ref": "AAAAAAFF+qBWK6M3Z8Y="
 					},
 					"name": "ISessionLogic"
+				},
+				{
+					"_type": "UMLClassDiagram",
+					"_id": "AAAAAAF1FC8+ufH+3Rc=",
+					"_parent": {
+						"$ref": "AAAAAAFF+qBWK6M3Z8Y="
+					},
+					"name": "DataAccessInterface"
+				},
+				{
+					"_type": "UMLClassDiagram",
+					"_id": "AAAAAAF1FC+jefIUz+Y=",
+					"_parent": {
+						"$ref": "AAAAAAFF+qBWK6M3Z8Y="
+					},
+					"name": "DomainInterface"
+				},
+				{
+					"_type": "UMLClassDiagram",
+					"_id": "AAAAAAF1FC/IJfIpM3E=",
+					"_parent": {
+						"$ref": "AAAAAAFF+qBWK6M3Z8Y="
+					},
+					"name": "Model"
 				}
 			]
 		}
