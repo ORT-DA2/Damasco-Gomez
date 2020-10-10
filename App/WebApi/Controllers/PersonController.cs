@@ -8,11 +8,12 @@ using Microsoft.AspNetCore.Mvc;
 using Model;
 using Model.In;
 using Model.Out;
+using WebApi.Filters;
+
 namespace WebApi.Controllers
 {
     [ApiController]
     [Route("api/persons")]
-    [ServiceFilter(typeof(AuthorizationDIFilter))]
     public class PersonController : VidlyControllerBase
     {
         private readonly IPersonLogic personLogic;
