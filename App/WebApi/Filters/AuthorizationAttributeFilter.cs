@@ -5,13 +5,10 @@ using Microsoft.AspNetCore.Mvc.Filters;
 
 namespace WebApi.Filters
 {
-    public class AuthorizationAttributeFilter : Attribute, IAuthorizationFilter
+    public class AuthorizationFilter : Attribute, IAuthorizationFilter
     {
         private readonly ISessionLogic sessions;
-        public AuthorizationAttributeFilter (ISessionLogic sessionsLogic)
-        {
-            this.sessions =  sessionsLogic;
-        }
+       
         public void OnAuthorization(AuthorizationFilterContext context)
         {
             try
