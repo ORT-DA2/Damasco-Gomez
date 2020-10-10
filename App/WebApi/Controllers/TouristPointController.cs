@@ -21,7 +21,7 @@ namespace WebApi.Controllers
         public IActionResult Get()
         {
             var elementTouristPoint = this.touristPointLogic.GetAll();
-            var model = elementTouristPoint.Select(m => new TouristPointDetailInfoModel(m)).ToList();
+            var model = elementTouristPoint.Select(m => new TouristPointBasicInfoModel(m)).ToList();
             return Ok(model);
         }
         [HttpGet("{id}",Name="GetTouristPoint")]

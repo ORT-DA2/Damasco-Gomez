@@ -68,7 +68,7 @@ namespace WebApi.Controllers
         {
             try
             {
-                var newCategory = categoryModel.ToEntity();
+                Category newCategory = categoryModel.ToEntity();
                 newCategory = this.categoryLogic.Update(id,newCategory);
                 CategoryBasicInfoModel categoryInfoModel = new CategoryBasicInfoModel(newCategory);
                 return CreatedAtRoute("GetCategory", new {Id = categoryInfoModel.Id} ,categoryInfoModel);
