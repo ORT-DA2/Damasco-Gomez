@@ -16,7 +16,7 @@ namespace DataAccess.Repositories
 
         protected override void Update(TouristPoint elementToUpdate, TouristPoint element)
         {
-            TouristPoint.Update(elementToUpdate,element);
+            elementToUpdate.Update(element);
         }
 
         protected override void Validate(TouristPoint element)

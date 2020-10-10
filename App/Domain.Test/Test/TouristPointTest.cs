@@ -30,7 +30,7 @@ namespace Domain.Test.Test
                     RegionId = 0,
                 };
 
-            TouristPoint.Update(touristPoint,newTouristPoint);
+            touristPoint.Update(newTouristPoint);
 
             Assert.AreEqual(newTouristPoint.Name, touristPoint.Name);
         }
@@ -45,7 +45,7 @@ namespace Domain.Test.Test
                     RegionId = 0,
                 };
 
-            TouristPoint.Update(touristPoint,newTouristPoint);
+            touristPoint.Update(newTouristPoint);
 
             Assert.AreEqual(newTouristPoint.Image, touristPoint.Image);
         }
@@ -60,7 +60,7 @@ namespace Domain.Test.Test
                     RegionId = 0,
                 };
 
-            TouristPoint.Update(touristPoint,newTouristPoint);
+            touristPoint.Update(newTouristPoint);
 
             Assert.AreEqual(newTouristPoint.Description, touristPoint.Description);
         }
@@ -75,7 +75,7 @@ namespace Domain.Test.Test
                     RegionId = 330,
                 };
 
-            TouristPoint.Update(touristPoint,newTouristPoint);
+            touristPoint.Update(newTouristPoint);
 
             Assert.AreEqual(newTouristPoint.RegionId, touristPoint.RegionId);
         }
