@@ -1,4 +1,5 @@
 using System;
+using System.Diagnostics.CodeAnalysis;
 using DataAccessInterface.Repositories;
 using Domain.Entities;
 
@@ -23,8 +24,9 @@ namespace DataAccess.Repositories
 
         protected override void Update(SessionUser elementToUpdate, SessionUser element)
         {
+            element.Update(elementToUpdate);
         }
-
+        [ExcludeFromCodeCoverage]
         protected override void Validate(SessionUser element)
         {
         }
