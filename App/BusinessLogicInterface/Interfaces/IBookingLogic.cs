@@ -1,7 +1,5 @@
 using System.Collections.Generic;
-using BusinessLogicInterface.Interfaces;
 using Domain;
-using Model;
 
 namespace BusinessLogicInterface
 {
