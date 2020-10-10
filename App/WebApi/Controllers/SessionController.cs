@@ -1,7 +1,9 @@
 using System;
 using Contracts;
+using Domain;
 using Domain.Entities;
 using Microsoft.AspNetCore.Mvc;
+using Model.In;
 
 namespace WebApi.Controllers
 {
@@ -16,11 +18,12 @@ namespace WebApi.Controllers
             this.sessionLogic = sessionLogic;
         }
         [HttpPost()]
-        public IActionResult Post([FromBody]string userName , string password)
+        public IActionResult Post([FromBody] PersonModel personModel)
         {
             try
             {
-                this.sessionLogic.Login(userName,password);
+                Person newPerson = personModel.ToEntity();
+                this.sessionLogic.Login(newPerson);
                 return Ok();
             }
             catch (AggregateException)
