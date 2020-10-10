@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using System.Diagnostics.CodeAnalysis;
 using System.Linq;
 using DataAccess.Context;
 using DataAccessInterface.Repositories;
@@ -24,6 +25,7 @@ namespace DataAccess.Repositories
             this.context.SaveChanges();
             return element;
         }
+        [ExcludeFromCodeCoverage]
         public void UpdateInContext(T element)
         {
             this.dbSet.Update(element);
