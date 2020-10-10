@@ -61,7 +61,7 @@ namespace WebApi.Controllers
         }
         [HttpPut("{id}")]
         [AuthorizationFilter]
-        public IActionResult Put([FromRoute]int id,[FromBody]TouristPointModel touristPoint)
+        public IActionResult Put([FromRoute]int id,[FromBody]TouristPointModel touristPointModel)
         {
             try
             {
