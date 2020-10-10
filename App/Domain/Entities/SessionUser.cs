@@ -8,9 +8,9 @@ namespace Domain.Entities
         public Guid Token   {get; set;}
         public int PersonId  {get; set;}
         public virtual Person User {get; set;}
-        public void Update(SessionUser elementToUpdate)
+        public void Update(Guid token)
         {
-            if(elementToUpdate.Token != null) this.Token = elementToUpdate.Token;
+             this.Token = token;
         }
 
     }
