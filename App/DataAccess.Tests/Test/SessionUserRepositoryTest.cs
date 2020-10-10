@@ -42,19 +42,27 @@ namespace DataAccess.Tests.Test
             repositoryMaster = new RepositoryMaster(context);
             repository = new SessionUserRepository(repositoryMaster);
         }
+        [TestCleanup]
+        public void TestCleanup()
+        {
+            this.context.Database.EnsureDeleted();
+        }
         [TestMethod]
         public void TestIsCorrectTokenOk ()
         {
             Guid correctToken = sessions.First().Token;
+
             bool result = repository.IsCorrectToken(correctToken);
+
             Assert.IsTrue(result);
         }
-         [TestMethod]
+        [TestMethod]
+        [ExpectedException(typeof(ArgumentException))]
         public void TestNotValidToken()
         {
             Guid notExistToken = Guid.NewGuid();
+
             bool result = repository.IsCorrectToken(notExistToken);
-            Assert.IsFalse(result);
         }
     }
 }

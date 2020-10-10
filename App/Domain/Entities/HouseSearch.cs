@@ -1,7 +1,9 @@
 using System;
+using System.Diagnostics.CodeAnalysis;
 
 namespace Domain.Entities
 {
+    [ExcludeFromCodeCoverage]
     public class HouseSearch
     {
         public DateTime CheckIn {get;  set;}

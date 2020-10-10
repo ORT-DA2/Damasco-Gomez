@@ -1,9 +1,11 @@
 using System.Collections.Generic;
+using System.Diagnostics.CodeAnalysis;
 using BusinessLogicInterface.Interfaces;
 using DataAccessInterface.Repositories;
 
 namespace BusinessLogic.Logics
 {
+    [ExcludeFromCodeCoverage]
     public abstract class Logic<T> : ILogic<T> where T : class
     {
         protected IAccessData<T> myAccessData;

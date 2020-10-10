@@ -33,7 +33,7 @@ namespace BusinessLogic.Logics
             }
             person = personResult.First();
             Guid guid = Guid.NewGuid();
-            List <SessionUser> sessions = this.sessionUserRepository.GetElements().FindAll(m=>m.PersonId==person.Id)
+            List <SessionUser> sessions = this.sessionUserRepository.GetElements().FindAll(m=>m.PersonId==person.Id);
             if(sessions.Count==0)
             {
                 SessionUser newSession = new SessionUser ()
@@ -43,7 +43,7 @@ namespace BusinessLogic.Logics
                 };
                 this.sessionUserRepository.Add(newSession);
             }
-            else 
+            else
             {
                 sessions.First().Update(guid);
             }

@@ -1,4 +1,6 @@
 using System;
+using System.Collections.Generic;
+using Domain.Entities;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 
 namespace Domain.Test.Test
@@ -78,6 +80,54 @@ namespace Domain.Test.Test
             touristPoint.Update(newTouristPoint);
 
             Assert.AreEqual(newTouristPoint.RegionId, touristPoint.RegionId);
+        }
+        [TestMethod]
+        public void TestGetId()
+        {
+            int id = 1;
+
+            TouristPoint newTouristPoint = new TouristPoint()
+            {
+                Id = id,
+                Name = "",
+                Image = null,
+                Description = null,
+                RegionId = 330,
+            };
+
+            Assert.AreEqual(id, newTouristPoint.Id);
+        }
+        [TestMethod]
+        public void TestGetRegion()
+        {
+            Region region = new Region();
+
+            TouristPoint newTouristPoint = new TouristPoint()
+            {
+                Region = region,
+                Name = "",
+                Image = null,
+                Description = null,
+                RegionId = 330,
+            };
+
+            Assert.AreEqual(region, newTouristPoint.Region);
+        }
+        [TestMethod]
+        public void TestGetCategories()
+        {
+            List<CategoryTouristPoint> categories = new List<CategoryTouristPoint>() { };
+
+            TouristPoint newTouristPoint = new TouristPoint()
+            {
+                CategoriesTouristPoints = categories,
+                Name = "",
+                Image = null,
+                Description = null,
+                RegionId = 330,
+            };
+
+            Assert.AreEqual(categories, newTouristPoint.CategoriesTouristPoints);
         }
     }
 }

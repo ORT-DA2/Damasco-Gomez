@@ -147,9 +147,68 @@ namespace Domain.Test.Test
                     CheckOut= DateTime.Today,
                 };
 
-            booking.Update(newBooking);
 
             Assert.AreEqual(random,newBooking.Code);
+        }
+        [TestMethod]
+        public void TestState()
+        {
+            string stateNew = "state";
+            Booking newBooking = new Booking()
+            {
+                Name = null,
+                Email = null,
+                HouseId = 0,
+                State = stateNew,
+                Price = 0,
+                Code = null,
+                CheckIn = DateTime.MinValue,
+                CheckOut = DateTime.Today,
+            };
+
+            booking.Update(newBooking);
+
+            Assert.AreEqual(stateNew, newBooking.State);
+        }
+        [TestMethod]
+        public void TestId()
+        {
+            int id = 1;
+
+            Booking newBooking = new Booking()
+            {
+                Name = null,
+                Email = null,
+                HouseId = 0,
+                Id = 1,
+                Price = 0,
+                Code = null,
+                CheckIn = DateTime.MinValue,
+                CheckOut = DateTime.Today,
+            };
+
+
+            Assert.AreEqual(id, newBooking.Id);
+        }
+        [TestMethod]
+        public void TestTouristPoint()
+        {
+            House house = new House();
+
+            Booking newBooking = new Booking()
+            {
+                Name = null,
+                Email = null,
+                HouseId = 0,
+                House = house,
+                Price = 0,
+                Code = null,
+                CheckIn = DateTime.MinValue,
+                CheckOut = DateTime.Today,
+            };
+
+
+            Assert.AreEqual(house, newBooking.House);
         }
     }
 }

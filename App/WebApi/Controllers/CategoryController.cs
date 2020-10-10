@@ -46,8 +46,8 @@ namespace WebApi.Controllers
             try
             {
                 Category categoryAdded = this.categoryLogic.Add(categoryModel.ToEntity());
-                CategoryDetailInfoModel categoryDetailInfoModel = new CategoryDetailInfoModel(categoryAdded);
-                return CreatedAtRoute("GetCategory", new {Id = categoryDetailInfoModel.Id} ,categoryDetailInfoModel);
+                CategoryBasicInfoModel categoryInfoModel = new CategoryBasicInfoModel(categoryAdded);
+                return CreatedAtRoute("GetCategory", new {Id = categoryInfoModel.Id} ,categoryInfoModel);
             }
             catch (AggregateException)
             {
@@ -69,8 +69,9 @@ namespace WebApi.Controllers
             try
             {
                 var newCategory = categoryModel.ToEntity();
-                this.categoryLogic.Update(id,newCategory);
-                return CreatedAtRoute("GetCategory", new {Id = newCategory.Id} ,new CategoryDetailInfoModel(newCategory));
+                newCategory = this.categoryLogic.Update(id,newCategory);
+                CategoryBasicInfoModel categoryInfoModel = new CategoryBasicInfoModel(newCategory);
+                return CreatedAtRoute("GetCategory", new {Id = categoryInfoModel.Id} ,categoryInfoModel);
 
             }
             catch(ArgumentException e)

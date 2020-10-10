@@ -1,8 +1,0 @@
-﻿using System;
-
-namespace Factory
-{
-    public class Class1
-    {
-    }
-}

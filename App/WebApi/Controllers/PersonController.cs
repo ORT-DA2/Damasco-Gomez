@@ -50,7 +50,8 @@ namespace WebApi.Controllers
             {
                 Person person = personModel.ToEntity();
                 person = this.personLogic.Add(person);
-                return CreatedAtRoute("GetPerson", new {Id = person.Id} , person);
+                PersonBasicModel personBasicModel = new PersonBasicModel(person);
+                return CreatedAtRoute("GetPerson", new {Id = personBasicModel.Id} , personBasicModel);
             }
             catch (AggregateException)
             {
@@ -72,7 +73,8 @@ namespace WebApi.Controllers
             {
                 Person person = personModel.ToEntity();
                 person = this.personLogic.Update(id,person);
-                return CreatedAtRoute("GetPerson", new {Id = person.Id} , person);
+                PersonBasicModel personBasicModel = new PersonBasicModel(person);
+                return CreatedAtRoute("GetPerson", new {Id = personBasicModel.Id} , personBasicModel);
             }
             catch(ArgumentException e)
             {

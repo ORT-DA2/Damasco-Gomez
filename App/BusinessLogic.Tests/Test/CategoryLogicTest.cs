@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using DataAccessInterface.Repositories;
 using Domain;
+using Domain.Entities;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Moq;
 
@@ -15,6 +16,7 @@ namespace BusinessLogic.Tests.Test
         private  List<Category>  emptyCategorys;
         private CategoryLogic categoryLogic;
         private Mock<ICategoryRepository> mock;
+        private Mock<ITouristPointRepository> mock2;
         private List<Category> categoriesToReturn;
 
         [TestInitialize]
@@ -26,6 +28,15 @@ namespace BusinessLogic.Tests.Test
                 {
                     Id = 1,
                     Name = "Category 1",
+                    CategoryTouristPoints = new List<CategoryTouristPoint>()
+                    {
+                        new CategoryTouristPoint()
+                        {
+                            Id = 1,
+                            TouristPoint = new TouristPoint(){Id = 1},
+                            CategoryId = 1
+                        }
+                    }
                 },
                 new Category()
                 {
@@ -35,7 +46,7 @@ namespace BusinessLogic.Tests.Test
             };
             emptyCategorys = new List<Category>();
             mock = new Mock<ICategoryRepository>(MockBehavior.Strict);
-            var mock2 = new Mock<ITouristPointRepository>(MockBehavior.Strict);
+            mock2 = new Mock<ITouristPointRepository>(MockBehavior.Strict);
             categoryLogic = new CategoryLogic(mock.Object,mock2.Object);
         }
 
@@ -74,6 +85,15 @@ namespace BusinessLogic.Tests.Test
             mock.VerifyAll();
         }
         [TestMethod]
+        public void GetAll()
+        {
+            mock.Setup(m => m.GetElements()).Returns(categoriesToReturn);
+
+            var result = categoryLogic.GetAll();
+
+            Assert.IsTrue(result.SequenceEqual(categoriesToReturn));
+        }
+        [TestMethod]
         public void GetByTestOk()
         {
             Category category = categoriesToReturn.First();
@@ -94,19 +114,31 @@ namespace BusinessLogic.Tests.Test
 
             Assert.IsNull(result);
         }
+        [TestMethod]
         public void TestAddOk()
         {
             Category category = categoriesToReturn.First();
             mock.Setup(m => m.Add(category)).Returns(category);
+            //this.touristPointRepository.Find(m.TouristPointId)
+            mock2.Setup(m => m.Find(category.CategoryTouristPoints.First().TouristPointId)).Returns(category.CategoryTouristPoints.First().TouristPoint);
 
-            Category result= categoryLogic.Add(category);
+            Category result = categoryLogic.Add(category);
 
             Assert.AreEqual(category, result );
         }
         [TestMethod]
+        [ExpectedException(typeof(ArgumentException))]
+        public void TestAddNull()
+        {
+            Category category = null;
+
+            Category result = categoryLogic.Add(category);
+
+        }
+        [TestMethod]
         public void TestAddValidateError()
         {
-            Category category = categoriesToReturn.First(); // Category tiene que terner un formato erroneo despues para que la validación falle
+            Category category = categoriesToReturn.Last(); // Category tiene que terner un formato erroneo despues para que la validación falle
             mock.Setup(m => m.Add(category)).Returns(category);
 
             Category result = categoryLogic.Add(category);
@@ -117,7 +149,7 @@ namespace BusinessLogic.Tests.Test
         [ExpectedException(typeof(ArgumentException))]
         public void TestAddExistError()
         {
-            Category category = categoriesToReturn.First();
+            Category category = categoriesToReturn.Last();
             ArgumentException exception = new ArgumentException();
             mock.Setup(m => m.Add(category)).Throws(exception);
 
@@ -130,6 +162,7 @@ namespace BusinessLogic.Tests.Test
         {
             Category category = categoriesToReturn.First();
             mock.Setup(m => m.Update(category.Id,category));
+            mock2.Setup(m => m.Find(category.CategoryTouristPoints.First().TouristPointId)).Returns(category.CategoryTouristPoints.First().TouristPoint);
 
             Category result = categoryLogic.Update(category.Id,category);
 
@@ -138,7 +171,7 @@ namespace BusinessLogic.Tests.Test
         [TestMethod]
         public void TestUpdateValidateError()
         {
-            Category category = categoriesToReturn.First();
+            Category category = categoriesToReturn.Last();
             mock.Setup(m => m.Update(category.Id,category));
 
             categoryLogic.Update(category.Id,category);
@@ -149,7 +182,7 @@ namespace BusinessLogic.Tests.Test
         [ExpectedException(typeof(ArgumentException))]
         public void TestUpdateExistError()
         {
-            Category category = categoriesToReturn.First();
+            Category category = categoriesToReturn.Last();
             ArgumentException exception = new ArgumentException();
             mock.Setup(m => m.Update(category.Id,category)).Throws(exception);
 
@@ -160,7 +193,7 @@ namespace BusinessLogic.Tests.Test
         [TestMethod]
         public void TestExistOk()
         {
-            Category category = categoriesToReturn.First();
+            Category category = categoriesToReturn.Last();
             mock.Setup(m => m.ExistElement(category)).Returns(true);
 
             var result = categoryLogic.Exist(category);
@@ -170,7 +203,7 @@ namespace BusinessLogic.Tests.Test
         [TestMethod]
         public void TestNotExistOk()
         {
-            Category category = categoriesToReturn.First();
+            Category category = categoriesToReturn.Last();
             mock.Setup(m => m.ExistElement(category)).Returns(false);
 
             var result = categoryLogic.Exist(category);

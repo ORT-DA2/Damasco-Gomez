@@ -1,4 +1,5 @@
 using System;
+using System.Diagnostics.CodeAnalysis;
 using DataAccess.Context;
 using DataAccessInterface.Repositories;
 using Domain;
@@ -22,6 +23,7 @@ namespace DataAccess.Repositories
         {
             this.context = masterContext;
         }
+        [ExcludeFromCodeCoverage]
         public void Dispose()
         {
             this.context.Dispose();

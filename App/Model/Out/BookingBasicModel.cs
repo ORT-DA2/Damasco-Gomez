@@ -1,18 +1,28 @@
 using System;
+using System.Diagnostics.CodeAnalysis;
 using Domain;
 
 namespace Model
 {
     public class BookingBasicModel
     {
+        [ExcludeFromCodeCoverageAttribute]
         public int Id {get; private set; }
+        [ExcludeFromCodeCoverageAttribute]
         public string Name {get; private set;}
+        [ExcludeFromCodeCoverageAttribute]
         public string Email {get; private set;}
+        [ExcludeFromCodeCoverageAttribute]
         public string Code {get; private set;}
+        [ExcludeFromCodeCoverageAttribute]
         public int HouseId {get; private set;}
+        [ExcludeFromCodeCoverageAttribute]
         public string State {get; private set;}
+        [ExcludeFromCodeCoverageAttribute]
         public int Price {get; private set;}
+        [ExcludeFromCodeCoverageAttribute]
         public  DateTime CheckIn {get; private set;}
+        [ExcludeFromCodeCoverageAttribute]
         public DateTime CheckOut {get; private set;}
         public BookingBasicModel(Booking booking)
         {

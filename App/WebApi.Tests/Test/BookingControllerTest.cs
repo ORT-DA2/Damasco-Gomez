@@ -144,14 +144,16 @@ namespace WebApi.Tests
                 CheckIn = DateTime.Today,
                 CheckOut = DateTime.Today
             };
+            Booking booking = bookingModel.ToEntity();
             mock.Setup(m => m.Add(bookingModel.ToEntity())).Returns(bookingModel.ToEntity());
+            BookingBasicModel bookingBasic = new BookingBasicModel(booking);
 
             var result = controller.Post(bookingModel);
 
             var okResult = result as CreatedAtRouteResult;
             Assert.IsNotNull(okResult);
             Assert.AreEqual("GetBooking", okResult.RouteName);
-            Assert.AreEqual(okResult.Value, bookingModel.ToEntity());
+            Assert.AreEqual(okResult.Value,bookingBasic);
         }
         [TestMethod]
         public void TestPostFailSameBooking()
@@ -228,13 +230,14 @@ namespace WebApi.Tests
             };
             Booking booking = bookingModel.ToEntity();
             mock.Setup(m => m.Update(booking.Id,booking)).Returns(booking);
+            BookingBasicModel bookingBasic = new BookingBasicModel(booking);
 
             var result = controller.Put(booking.Id, bookingModel);
 
             var okResult = result as CreatedAtRouteResult;
             Assert.IsNotNull(okResult.Value);
             Assert.AreEqual("GetBooking", okResult.RouteName);
-            Assert.AreEqual(okResult.Value, booking);
+            Assert.AreEqual(okResult.Value, bookingBasic);
         }
         [TestMethod]
         public void TestPutFailValidate()

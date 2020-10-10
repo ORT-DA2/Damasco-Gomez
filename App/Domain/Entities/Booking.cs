@@ -1,4 +1,5 @@
 using System;
+using System.Diagnostics.CodeAnalysis;
 using System.Linq;
 
 namespace Domain
@@ -23,7 +24,7 @@ namespace Domain
         public  DateTime CheckIn {get; set;}
 
         public DateTime CheckOut {get; set;}
-
+        [ExcludeFromCodeCoverage]
         public override bool Equals(object obj)
         {
             var result = false;
