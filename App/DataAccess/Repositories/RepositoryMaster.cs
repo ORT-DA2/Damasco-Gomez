@@ -20,10 +20,10 @@ namespace DataAccess.Repositories
         {
             this.context = masterContext;
         }
-        public void Dispose()
-        {
-            this.context.Dispose();
-        }
+        //public void Dispose()
+        //{
+        //    this.context.Dispose();
+        //}
         public IRepository<Category> Categories
         {
             get
