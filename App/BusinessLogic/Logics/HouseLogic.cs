@@ -37,16 +37,15 @@ namespace BusinessLogic
 
         public House Add(House house)
         {
-            Validate(house);
+            //Validate(house);
             House houseAdded = this.houseRepository.Add(house);
             return houseAdded;
         }
         public House Update(int id, House house)
         {
-            Validate(house);
+            ValidateTouristPoint(house.TouristPointId);
             House houseBD = this.houseRepository.Find(id);
             houseBD.Update(house);
-            //houseBD.House = this.houseRepository.Find(house.HouseId);
             this.houseRepository.Update(id, houseBD);
             return houseBD;
         }
@@ -62,15 +61,11 @@ namespace BusinessLogic
         {
             return this.houseRepository.GetByIdTouristPoint(houseSearch.TouristPointId);
         }
-        public void Validate(House house)
+        public void ValidateTouristPoint(int touristPointId)
         {
-            if (house == null)
+            if (!this.touristPointRepository.ExistElement(touristPointId))
             {
-                throw new ArgumentException("House is empty");
-            }
-            if (!this.touristPointRepository.ExistElement(house.TouristPointId))
-            {
-                throw new ArgumentException("There is no Tourist point with id  " + house.TouristPointId);
+                throw new ArgumentException("There is no Tourist point with id  " + touristPointId);
             }
         }
     }

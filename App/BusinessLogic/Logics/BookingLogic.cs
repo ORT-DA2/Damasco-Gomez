@@ -35,17 +35,15 @@ namespace BusinessLogic.Logics
 
         public Booking Add(Booking booking)
         {
-            Validate(booking);
+            ValidateHouse(booking.HouseId);
             Booking bookingBD = this.bookingRepository.Add(booking);
-            //bookingBD.House = this.houseRepository.Find(booking.HouseId);
             return bookingBD;
         }
         public Booking Update(int id, Booking booking)
         {
-            Validate(booking);
+            ValidateHouse(booking.HouseId);
             Booking bookingBD = this.bookingRepository.Find(id);
             bookingBD.Update(booking);
-            //bookingBD.House = this.houseRepository.Find(booking.HouseId);
             this.bookingRepository.Update(id, bookingBD);
             return bookingBD;
         }
@@ -57,15 +55,11 @@ namespace BusinessLogic.Logics
         {
             return this.bookingRepository.ExistElement(booking);
         }
-        public void Validate(Booking booking)
+        public void ValidateHouse(int houseId)
         {
-            if (booking == null)
+            if (!this.houseRepository.ExistElement(houseId))
             {
-                throw new ArgumentException("Booking is empty");
-            }
-            if (!this.houseRepository.ExistElement(booking.HouseId))
-            {
-                throw new ArgumentException("There is no House with id : " + booking.HouseId);
+                throw new ArgumentException("There is no House with id : " + houseId);
             }
         }
     }

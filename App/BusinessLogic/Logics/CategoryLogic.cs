@@ -35,7 +35,7 @@ namespace BusinessLogic
 
         public Category Add(Category category)
         {
-            Validate(category);
+            //Validate(category);
             if (category.CategoryTouristPoints != null)
             {
                 category.CategoryTouristPoints.ForEach
@@ -48,16 +48,18 @@ namespace BusinessLogic
         }
         public Category Update(int id, Category category)
         {
-            Validate(category);
+            //Validate(category);
+            Category categoryBd = this.categoryRepository.Find(id);
             if (category.CategoryTouristPoints != null)
             {
                 category.CategoryTouristPoints.ForEach
                 (
                     m => m.TouristPoint = this.touristPointRepository.Find(m.TouristPointId)
                 );
+                categoryBd.CategoryTouristPoints = category.CategoryTouristPoints;
             }
-            this.categoryRepository.Update(id, category);
-            return category;
+            this.categoryRepository.Update(id, categoryBd);
+            return categoryBd;
         }
         public void Delete(int id)
         {
@@ -67,12 +69,12 @@ namespace BusinessLogic
         {
             return this.categoryRepository.ExistElement(Category);
         }
-        public void Validate(Category category)
-        {
-            if (category == null)
-            {
-                throw new ArgumentException("Category is empty");
-            }
-        }
+        // public void Validate(Category category)
+        // {
+        //     if (category == null)
+        //     {
+        //         throw new ArgumentException("Category is empty");
+        //     }
+        // }
     }
 }
