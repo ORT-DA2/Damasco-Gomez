@@ -14,15 +14,22 @@ namespace Model.Out
         public  List<CategoryBasicInfoModel> Categories {get; private set;}
         public TouristPointDetailInfoModel(TouristPoint touristPoint)
         {
-            if ( touristPoint!= null)
+            if (touristPoint!= null)
             {
                 this.Id = touristPoint.Id;
                 this.Name = touristPoint.Name;
                 this.Image = touristPoint.Image;
                 this.Description = touristPoint.Description;
                 this.RegionId = touristPoint.RegionId;
-                this.Categories = touristPoint.CategoriesTouristPoints.Select(
-                        m => new CategoryBasicInfoModel(m.Category)).ToList();
+                if (Categories != null)
+                {
+                    this.Categories = touristPoint.CategoriesTouristPoints.
+                    Select(m => new CategoryBasicInfoModel(m.Category)).ToList();
+                }
+                else
+                {
+                    this.Categories = null;
+                }
             }
         }
         public override bool Equals(object obj)
