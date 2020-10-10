@@ -186,9 +186,10 @@ namespace WebApi.Tests
                 Image = "image",
                 Description = "description",
                 RegionId = 1,
-                Categories = new List<int>(){1}
+                Categories = new List<int>() { 1 }
             };
             touristPointId1 = touristPointModel.ToEntity();
+            TouristPointDetailInfoModel detailInfoModel = new TouristPointDetailInfoModel(touristPointId1);
             mock.Setup(m => m.Add(touristPointId1)).Returns(touristPointId1);
 
             var result = controller.Post(touristPointModel);
@@ -197,81 +198,131 @@ namespace WebApi.Tests
             mock.VerifyAll();
             Assert.IsNotNull(okResult);
             Assert.AreEqual("GetTouristPoint", okResult.RouteName);
-            Assert.AreEqual(okResult.Value, touristPointId1);
+            Assert.AreEqual(okResult.Value, detailInfoModel);
         }
         [TestMethod]
         public void TestPostFailSameTouristPoint()
         {
-            touristPointId1 = touristPointsToReturn.First();
+            TouristPointModel touristPointModel = new TouristPointModel()
+            {
+                Name = "name",
+                Image = "image",
+                Description = "description",
+                RegionId = 1,
+                Categories = new List<int>(){1}
+            };
+            touristPointId1 = touristPointModel.ToEntity();
             Exception exist = new AggregateException();
             mock.Setup(p => p.Add(touristPointId1)).Throws(exist);
 
-            // var result = controller.Post(touristPointId1);
+            var result = controller.Post(touristPointModel);
 
-            // mock.VerifyAll();
-            // Assert.IsInstanceOfType(result, typeof(BadRequestObjectResult));
+            mock.VerifyAll();
+            Assert.IsInstanceOfType(result, typeof(BadRequestObjectResult));
         }
         [TestMethod]
         public void TestPostFailValidation()
         {
-            touristPointId1 = touristPointsToReturn.First();
+            TouristPointModel touristPointModel = new TouristPointModel()
+            {
+                Name = "name",
+                Image = "image",
+                Description = "description",
+                RegionId = 1,
+                Categories = new List<int>(){1}
+            };
+            touristPointId1 = touristPointModel.ToEntity();
             Exception exist = new ArgumentException();
             mock.Setup(p => p.Add(touristPointId1)).Throws(exist);
 
-            // var result = controller.Post(touristPointId1);
+            var result = controller.Post(touristPointModel);
 
-            // mock.VerifyAll();
-            // Assert.IsInstanceOfType(result, typeof(BadRequestObjectResult));
+            mock.VerifyAll();
+            Assert.IsInstanceOfType(result, typeof(BadRequestObjectResult));
         }
         [TestMethod]
         public void TestPostFailServer()
         {
-            touristPointId1 = touristPointsToReturn.First();
+            TouristPointModel touristPointModel = new TouristPointModel()
+            {
+                Name = "name",
+                Image = "image",
+                Description = "description",
+                RegionId = 1,
+                Categories = new List<int>(){1}
+            };
+            touristPointId1 = touristPointModel.ToEntity();
             Exception exist = new Exception();
             mock.Setup(p => p.Add(touristPointId1)).Throws(exist);
 
-            // var result = controller.Post(touristPointId1);
+            var result = controller.Post(touristPointModel);
 
-            // mock.VerifyAll();
-            // Assert.IsInstanceOfType(result, typeof(BadRequestObjectResult));
+            mock.VerifyAll();
+            Assert.IsInstanceOfType(result, typeof(BadRequestObjectResult));
         }
         [TestMethod]
         public void TestPutOk()
         {
-            touristPointId1 = touristPointsToReturn.First();
-            mock.Setup(m => m.Update(touristPointId1.Id,touristPointId1));
+            int id = touristPointId1.Id;
+            TouristPointModel touristPointModel = new TouristPointModel()
+            {
+                Name = "new name",
+                Image = "image",
+                Description = "description",
+                RegionId = 1,
+                Categories = new List<int>(){1}
+            };
+            touristPointId1 = touristPointModel.ToEntity();
+            TouristPointDetailInfoModel touristPointDetailInfoModel = new TouristPointDetailInfoModel(touristPointId1);
+            mock.Setup(m => m.Update(id,touristPointId1)).Returns(touristPointId1);
 
-            // var result = controller.Put(touristPointId1.Id, touristPointId1);
+            var result = controller.Put(id, touristPointModel);
 
-            // var okResult = result as CreatedAtRouteResult;
-            // mock.VerifyAll();
-            // Assert.IsNotNull(okResult);
-            // Assert.AreEqual("GetTouristPoint", okResult.RouteName);
-            // Assert.AreEqual(okResult.Value, touristPointId1);
+            var okResult = result as CreatedAtRouteResult;
+            mock.VerifyAll();
+            Assert.IsNotNull(okResult);
+            Assert.AreEqual("GetTouristPoint", okResult.RouteName);
+            Assert.AreEqual(okResult.Value, touristPointDetailInfoModel);
         }
         [TestMethod]
         public void TestPutFailValidate()
         {
-            touristPointId1 = touristPointsToReturn.First();
+            TouristPointModel touristPointModel = new TouristPointModel()
+            {
+                Name = "new name",
+                Image = "image",
+                Description = "description",
+                RegionId = 1,
+                Categories = new List<int>(){1}
+            };
+            touristPointId1 = touristPointModel.ToEntity();
             Exception exist = new ArgumentException();
             mock.Setup(p => p.Update(touristPointId1.Id,touristPointId1)).Throws(exist);
 
-            // var result = controller.Put(touristPointId1.Id, touristPointId1);
+            var result = controller.Put(touristPointId1.Id, touristPointModel);
 
-            // mock.VerifyAll();
-            // Assert.IsInstanceOfType(result, typeof(BadRequestObjectResult));
+            mock.VerifyAll();
+            Assert.IsInstanceOfType(result, typeof(BadRequestObjectResult));
         }
         [TestMethod]
         public void TestPutFailServer()
         {
-            touristPointId1 = touristPointsToReturn.First();
+            TouristPointModel touristPointModel = new TouristPointModel()
+            {
+                Name = "new name",
+                Image = "image",
+                Description = "description",
+                RegionId = 1,
+                Categories = new List<int>(){1}
+            };
+            touristPointId1 = touristPointModel.ToEntity();
             Exception exist = new Exception();
             mock.Setup(p => p.Update(touristPointId1.Id,touristPointId1)).Throws(exist);
 
-            // var result = controller.Put(touristPointId1.Id, touristPointId1);
+            var result = controller.Put(touristPointId1.Id, touristPointModel);
 
-            // mock.VerifyAll();
-            // Assert.IsInstanceOfType(result, typeof(BadRequestObjectResult));
+            mock.VerifyAll();
+            Assert.IsInstanceOfType(result, typeof(BadRequestObjectResult));
         }
         [TestMethod]
         public void TestDeleteWithId()

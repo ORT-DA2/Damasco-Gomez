@@ -362,14 +362,14 @@ namespace WebApi.Tests
                 CantBabys = 0,
             };
             List<House> emptyHousesWithIdTP = new List<House>();
-            List<HouseSearchResultModel> housesResult = new List<HouseSearchResultModel>(){};
+            List<HouseBasicModel> housesResult = new List<HouseBasicModel>(){};
             HouseSearch houseSearch = houseSearchModel.ToEntity();
             mock.Setup(mock=> mock.GetHousesBy(It.IsAny<HouseSearch>())).Returns(emptyHousesWithIdTP);
 
             var result = controller.GetHousesBy(houseSearchModel);
 
             var okResult = result as OkObjectResult;
-            var houses = okResult.Value as IEnumerable<HouseSearchResultModel>;
+            var houses = okResult.Value as IEnumerable<HouseBasicModel>;
             Assert.IsTrue(housesResult.SequenceEqual(houses));
         }
     }

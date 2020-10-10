@@ -6,6 +6,7 @@ using Domain;
 using Domain.Entities;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
+using Model.In;
 using Model.Out;
 using Moq;
 using WebApi.Controllers;
@@ -107,47 +108,47 @@ namespace WebApi.Test
             mock = new Mock<ICategoryLogic>(MockBehavior.Strict);
             controller = new CategoryController(mock.Object);
 
-           
+
 
         }
         [TestMethod]
         public void TestGetAllCategoriesOk()
         {
             mock.Setup(m => m.GetAll()).Returns(categoriesToReturn);
+            IEnumerable<CategoryBasicInfoModel> categoriesModels = categoriesToReturn.Select(m => new CategoryBasicInfoModel(m));
 
             var result = controller.Get();
 
             var okResult = result as OkObjectResult;
-            // var categories = okResult.Value as IEnumerable<CategoryDetailInfoModel>;
-            // mock.VerifyAll();
-            // Assert.IsTrue(categoriesToReturn.Select(n => new CategoryDetailInfoModel(n)).SequenceEqual(categories));
+            var categories = okResult.Value as IEnumerable<CategoryBasicInfoModel>;
+            Assert.IsTrue(categoriesModels.SequenceEqual(categories));
         }
 
         [TestMethod]
         public void TestGetAllCategoriesVacia()
         {
             mock.Setup(m => m.GetAll()).Returns(categoriesToReturnEmpty);
-            List<CategoryDetailInfoModel> emptyListModel = new List<CategoryDetailInfoModel>();
+            IEnumerable<CategoryBasicInfoModel> categoriesModels = categoriesToReturnEmpty.Select(m => new CategoryBasicInfoModel(m));
 
             var result = controller.Get();
 
             var okResult = result as OkObjectResult;
-            // var categories = okResult.Value as IEnumerable<CategoryDetailInfoModel>;
-            // mock.VerifyAll();
-            // Assert.IsTrue(emptyListModel.SequenceEqual(categories));
+            var categories = okResult.Value as IEnumerable<CategoryBasicInfoModel>;
+            mock.VerifyAll();
+            Assert.IsTrue(categoriesModels.SequenceEqual(categories));
         }
         [TestMethod]
         public void TestGetByOk()
         {
             int id = 1;
             mock.Setup(m => m.GetBy(id)).Returns(categoryId1);
+            CategoryDetailInfoModel categoriesModels = new CategoryDetailInfoModel(categoryId1);
 
             var result = controller.GetBy(id);
 
             var okResult = result as OkObjectResult;
-            // var categories = okResult.Value as CategoryDetailInfoModel;
-            // mock.VerifyAll();
-            // Assert.IsTrue(categories.Equals(categoryId1));
+            var categories = okResult.Value as CategoryDetailInfoModel;
+            Assert.IsTrue(categoriesModels.Equals(categories));
         }
         [TestMethod]
         public void TestGetByNotFound()
@@ -164,91 +165,128 @@ namespace WebApi.Test
         [TestMethod]
         public void TestPostOk()
         {
+            CategoryModel categoryModel = new CategoryModel()
+            {
+                Name = categoryId1.Name,
+                TouristPoints = new List<int>()
+            };
+            categoryId1 = categoryModel.ToEntity();
             mock.Setup(m => m.Add(categoryId1)).Returns(categoryId1);
+            CategoryDetailInfoModel modelOut  = new CategoryDetailInfoModel(categoryId1);
 
-            // var result = controller.Post(categoryId1.ToEntity());
+            var result = controller.Post(categoryModel);
 
-            // var okResult = result as CreatedAtRouteResult;
-            // mock.VerifyAll();
-            // Assert.IsNotNull(okResult);
-            // Assert.AreEqual("GetCategory", okResult.RouteName);
-            // Assert.AreEqual(okResult.Value,new CategoryDetailInfoModel(categoryId1) );
-            
+            var okResult = result as CreatedAtRouteResult;
+            mock.VerifyAll();
+            Assert.IsNotNull(okResult);
+            Assert.AreEqual("GetCategory", okResult.RouteName);
+            Assert.AreEqual(okResult.Value, modelOut);
         }
         [TestMethod]
         public void TestPostFailSameCategory()
         {
-            categoryId1 = categoriesToReturn.First();
+            CategoryModel categoryModel = new CategoryModel()
+            {
+                Name = categoryId1.Name,
+                TouristPoints = new List<int>()
+            };
+            categoryId1 = categoryModel.ToEntity();
             Exception exist = new AggregateException();
             mock.Setup(p => p.Add(categoryId1)).Throws(exist);
 
-            // var result = controller.Post(categoryId1);
+            var result = controller.Post(categoryModel);
 
-            // mock.VerifyAll();
-            // Assert.IsInstanceOfType(result, typeof(BadRequestObjectResult));
+            mock.VerifyAll();
+            Assert.IsInstanceOfType(result, typeof(BadRequestObjectResult));
         }
         [TestMethod]
         public void TestPostFailValidation()
         {
-            categoryId1 = categoriesToReturn.First();
+            CategoryModel categoryModel = new CategoryModel()
+            {
+                Name = categoryId1.Name,
+                TouristPoints = new List<int>()
+            };
+            categoryId1 = categoryModel.ToEntity();
             Exception exist = new ArgumentException();
             mock.Setup(p => p.Add(categoryId1)).Throws(exist);
 
-            // var result = controller.Post(categoryId1);
+            var result = controller.Post(categoryModel);
 
-            // mock.VerifyAll();
-            // Assert.IsInstanceOfType(result, typeof(BadRequestObjectResult));
+            mock.VerifyAll();
+            Assert.IsInstanceOfType(result, typeof(BadRequestObjectResult));
         }
         [TestMethod]
         public void TestPostFailServer()
         {
-            categoryId1 = categoriesToReturn.First();
+            CategoryModel categoryModel = new CategoryModel()
+            {
+                Name = categoryId1.Name,
+                TouristPoints = new List<int>()
+            };
+            categoryId1 = categoryModel.ToEntity();
             Exception exist = new Exception();
             mock.Setup(p => p.Add(categoryId1)).Throws(exist);
 
-            // var result = controller.Post(categoryId1);
+            var result = controller.Post(categoryModel);
 
-            // mock.VerifyAll();
-            // Assert.IsInstanceOfType(result, typeof(BadRequestObjectResult));
+            mock.VerifyAll();
+            Assert.IsInstanceOfType(result, typeof(BadRequestObjectResult));
         }
         [TestMethod]
         public void TestPutOk()
         {
-            categoryId1 = categoriesToReturn.First();
+            CategoryModel categoryModel = new CategoryModel()
+            {
+                Name = categoryId1.Name,
+                TouristPoints = new List<int>()
+            };
+            categoryId1 = categoryModel.ToEntity();
             categoryId1.Name = "New name";
-            mock.Setup(m => m.Update(categoryId1.Id,categoryId1));
+            mock.Setup(m => m.Update(categoryId1.Id,categoryId1)).Returns(categoryId1);
+            CategoryDetailInfoModel modelOut  = new CategoryDetailInfoModel(categoryId1);
 
-            // var result = controller.Put(categoryId1.Id, categoryId1);
+            var result = controller.Put(categoryId1.Id, categoryModel);
 
-            // var okResult = result as CreatedAtRouteResult;
-            // mock.VerifyAll();
-            // Assert.IsNotNull(okResult);
-            // Assert.AreEqual("GetCategory", okResult.RouteName);
-            // Assert.AreEqual(okResult.Value, categoryId1);
+            var okResult = result as CreatedAtRouteResult;
+            mock.VerifyAll();
+            Assert.IsNotNull(okResult);
+            Assert.AreEqual("GetCategory", okResult.RouteName);
+            Assert.AreEqual(okResult.Value, modelOut);
         }
         [TestMethod]
         public void TestPutFailValidate()
         {
-            categoryId1 = categoriesToReturn.First();
+            CategoryModel categoryModel = new CategoryModel()
+            {
+                Name = categoryId1.Name,
+                TouristPoints = new List<int>()
+            };
+            categoryId1 = categoryModel.ToEntity();
             Exception exist = new ArgumentException();
             mock.Setup(p => p.Update(categoryId1.Id,categoryId1)).Throws(exist);
 
-            // var result = controller.Put(categoryId1.Id, categoryId1);
+            var result = controller.Put(categoryId1.Id, categoryModel);
 
-            // mock.VerifyAll();
-            // Assert.IsInstanceOfType(result, typeof(BadRequestObjectResult));
+            mock.VerifyAll();
+            Assert.IsInstanceOfType(result, typeof(BadRequestObjectResult));
         }
         [TestMethod]
         public void TestPutFailServer()
         {
-            categoryId1 = categoriesToReturn.First();
+            CategoryModel categoryModel = new CategoryModel()
+            {
+                Name = categoryId1.Name,
+                TouristPoints = new List<int>()
+            };
+            categoryId1 = categoryModel.ToEntity();
             Exception exist = new Exception();
             mock.Setup(p => p.Update(categoryId1.Id,categoryId1)).Throws(exist);
 
-            // var result = controller.Put(categoryId1.Id, categoryId1);
+            var result = controller.Put(categoryId1.Id, categoryModel);
 
-            // mock.VerifyAll();
-            // Assert.IsInstanceOfType(result, typeof(BadRequestObjectResult));
+            mock.VerifyAll();
+            Assert.IsInstanceOfType(result, typeof(BadRequestObjectResult));
         }
         [TestMethod]
         public void TestDeleteWithId()
