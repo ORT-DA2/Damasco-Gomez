@@ -13,13 +13,13 @@ namespace Model.Out
         [ExcludeFromCodeCoverageAttribute]
         public string Name {get; private set;}
         [ExcludeFromCodeCoverageAttribute]
-        public List<TouristPointDetailInfoModel> TouristPoints {get; private set;}
+        public List<TouristPointBasicInfoModel> TouristPoints {get; private set;}
 
         public CategoryDetailInfoModel(Category category)
         {
             this.Id = category.Id;
             this.Name = category.Name;
-            this.TouristPoints = category.CategoryTouristPoints.Select(m=>new TouristPointDetailInfoModel(m.TouristPoint)).ToList();
+            this.TouristPoints = category.CategoryTouristPoints.Select(m=>new TouristPointBasicInfoModel(m.TouristPoint)).ToList();
         }
 
         public override bool Equals(object obj)

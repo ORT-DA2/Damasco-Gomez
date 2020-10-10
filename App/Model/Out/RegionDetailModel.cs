@@ -8,6 +8,7 @@ namespace Model.Out
         public string Name {get; set;}
         public RegionDetailModel(Region region)
         {
+            this.Id = region.Id;
             this.Name = region.Name;
         }
         public override bool Equals(object obj)

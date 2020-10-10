@@ -21,15 +21,8 @@ namespace Model.Out
                 this.Image = touristPoint.Image;
                 this.Description = touristPoint.Description;
                 this.RegionId = touristPoint.RegionId;
-                if (Categories != null)
-                {
-                    this.Categories = touristPoint.CategoriesTouristPoints.
+                this.Categories = touristPoint.CategoriesTouristPoints.
                     Select(m => new CategoryBasicInfoModel(m.Category)).ToList();
-                }
-                else
-                {
-                    this.Categories = null;
-                }
             }
         }
         public override bool Equals(object obj)
