@@ -95,7 +95,7 @@ namespace Domain.Test.Test
                 RegionId = 330,
             };
 
-            Assert.AreEqual(id, touristPoint.Id);
+            Assert.AreEqual(id, newTouristPoint.Id);
         }
         [TestMethod]
         public void TestGetRegion()
@@ -111,7 +111,7 @@ namespace Domain.Test.Test
                 RegionId = 330,
             };
 
-            Assert.AreEqual(region, touristPoint.Region);
+            Assert.AreEqual(region, newTouristPoint.Region);
         }
         [TestMethod]
         public void TestGetCategories()
@@ -127,7 +127,7 @@ namespace Domain.Test.Test
                 RegionId = 330,
             };
 
-            Assert.AreEqual(categories, touristPoint.CategoriesTouristPoints);
+            Assert.AreEqual(categories, newTouristPoint.CategoriesTouristPoints);
         }
     }
 }

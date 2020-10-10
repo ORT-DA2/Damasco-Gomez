@@ -53,7 +53,7 @@ namespace Domain.Test.Test
                 Password = "new p",
             };
 
-            Assert.AreEqual(id, person.Id);
+            Assert.AreEqual(id, newPerson.Id);
         }
     }
 }

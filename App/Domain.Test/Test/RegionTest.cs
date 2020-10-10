@@ -51,7 +51,7 @@ namespace Domain.Test.Test
                 Name = null,
             };
 
-            Assert.AreEqual(id, region.Id);
+            Assert.AreEqual(id, newRegion.Id);
         }
         // [TestMethod]
         // public void TestUpdateTouristPoints()

@@ -55,7 +55,7 @@ namespace Domain.Test.Test
 
             Category.Update(category, newCategory);
 
-            Assert.AreEqual(newCate, category.CategoryTouristPoints.First());
+            Assert.IsNull(category.CategoryTouristPoints);
         }
         [TestMethod]
         public void TestId()
