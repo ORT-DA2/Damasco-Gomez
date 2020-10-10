@@ -33,7 +33,6 @@ namespace BusinessLogic
 
         public Person Add(Person person)
         {
-            Validate(person);
             return this.personRepository.Add(person);
         }
         public Person Update(int id, Person Person)
@@ -50,15 +49,6 @@ namespace BusinessLogic
         public bool Exist(Person Person)
         {
             return this.personRepository.ExistElement(Person);
-        }
-        protected void Validate(Person element)
-        {
-            if (element.Email==null) throw new ArgumentException("You need an email to log in");
-            Person emailUniq = this.personRepository.FindInRepository(element.Email);
-            if (emailUniq!=null)
-            {
-                throw new ArgumentException("The email is already in the database");
-            }
         }
     }
 }

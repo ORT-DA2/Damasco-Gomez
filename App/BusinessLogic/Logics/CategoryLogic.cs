@@ -69,12 +69,5 @@ namespace BusinessLogic
         {
             return this.categoryRepository.ExistElement(Category);
         }
-        // public void Validate(Category category)
-        // {
-        //     if (category == null)
-        //     {
-        //         throw new ArgumentException("Category is empty");
-        //     }
-        // }
     }
 }
