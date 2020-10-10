@@ -8,6 +8,7 @@ using Filters;
 using Microsoft.AspNetCore.Mvc;
 using Model;
 using Model.In;
+using WebApi.Filters;
 
 namespace WebApi.Controllers
 {
@@ -59,7 +60,7 @@ namespace WebApi.Controllers
             }
         }
         [HttpPost()]
-        [ServiceFilter(typeof(AuthorizationDIFilter))]
+        [AuthorizationFilter]
         //The post should have HouseModel , but will leave it like this
         public IActionResult Post([FromBody]HouseModel houseModel)
         {
@@ -83,7 +84,7 @@ namespace WebApi.Controllers
             }
         }
         [HttpPut("{id}")]
-        [ServiceFilter(typeof(AuthorizationDIFilter))]
+        [AuthorizationFilter]
         public IActionResult Put([FromRoute]int id,[FromBody]HouseModel houseModel)
         {
             try
@@ -102,7 +103,7 @@ namespace WebApi.Controllers
             }
         }
         [HttpDelete("{id}")]
-        [ServiceFilter(typeof(AuthorizationDIFilter))]
+        [AuthorizationFilter]
         public IActionResult Delete([FromRoute]int id)
         {
             if (this.houseLogic.GetBy(id) == null)
@@ -113,13 +114,11 @@ namespace WebApi.Controllers
             return Ok();
         }
         [HttpDelete()]
-        [ServiceFilter(typeof(AuthorizationDIFilter))]
+        [AuthorizationFilter]
         public IActionResult Delete()
         {
             this.houseLogic.Delete();
             return Ok();
         }
-
-        
     }
 }
