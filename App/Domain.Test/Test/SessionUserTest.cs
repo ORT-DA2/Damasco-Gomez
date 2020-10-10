@@ -21,12 +21,9 @@ namespace Domain.Test.Test
         }
         public void TestUpdateToken()
         {
-            SessionUser newSession= new SessionUser()
-                {
-                    Token = Guid.NewGuid(),
-                };
-            sessionUser.Update(newSession);
-            Assert.AreEqual(newSession.Token, sessionUser.Token);
+            Guid token = Guid.NewGuid();
+            sessionUser.Update(token);
+            Assert.AreEqual(token, sessionUser.Token);
         }
     }
 }
