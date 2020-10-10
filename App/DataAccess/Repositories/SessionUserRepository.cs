@@ -23,12 +23,10 @@ namespace DataAccess.Repositories
 
         protected override void Update(SessionUser elementToUpdate, SessionUser element)
         {
-            throw new NotImplementedException();
         }
 
         protected override void Validate(SessionUser element)
         {
-            throw new NotImplementedException();
         }
     }
 }
