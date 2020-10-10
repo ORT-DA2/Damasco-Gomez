@@ -37,7 +37,7 @@ namespace WebApi.Filters
                 context.Result = new ContentResult()
                 {
                     StatusCode = 401,
-                    Content = "Problem with parse"
+                    Content = " token is not valid"
                 };
             }
         }
