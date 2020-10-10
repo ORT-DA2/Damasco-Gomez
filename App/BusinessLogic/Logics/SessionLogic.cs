@@ -33,12 +33,21 @@ namespace BusinessLogic.Logics
             }
             person = personResult.First();
             Guid guid = Guid.NewGuid();
-            SessionUser newSession = new SessionUser ()
+            List <SessionUser> sessions = this.sessionUserRepository.GetElements().FindAll(m=>m.PersonId==person.Id)
+            if(sessions.Count==0)
             {
-                Token = guid,
-                PersonId = person.Id
-            };
-            this.sessionUserRepository.Add(newSession);
+                SessionUser newSession = new SessionUser ()
+                {
+                    Token = guid,
+                    PersonId = person.Id
+                };
+                this.sessionUserRepository.Add(newSession);
+            }
+            else 
+            {
+                sessions.First().Update(guid);
+            }
+          
         }
     }
 }
