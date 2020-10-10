@@ -62,9 +62,9 @@ namespace Domain
             if(element.Contact != null) this.Contact = element.Contact;
         }
 
-        public static bool IsAvailable(House house)
+        public bool IsAvailable()
         {
-            return house.Avaible;
+            return this.Avaible;
         }
 
     }

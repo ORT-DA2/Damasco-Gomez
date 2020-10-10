@@ -290,7 +290,7 @@ namespace Domain.Test.Test
                     Contact = "new contact",
                 };
 
-            bool result = House.IsAvailable(newHouse);
+            bool result = newHouse.IsAvailable();
 
             Assert.IsTrue(result);
         }
@@ -311,7 +311,7 @@ namespace Domain.Test.Test
                     Contact = "new contact",
                 };
 
-            bool result = House.IsAvailable(newHouse);
+            bool result = newHouse.IsAvailable();
 
             Assert.IsFalse(result);
         }
