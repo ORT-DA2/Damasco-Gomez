@@ -47,7 +47,6 @@ namespace BusinessLogic.Logics
             {
                 sessions.First().Update(guid);
             }
-          
         }
     }
 }

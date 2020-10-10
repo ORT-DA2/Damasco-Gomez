@@ -8,7 +8,6 @@ namespace WebApi.Filters
     public class AuthorizationFilter : Attribute, IAuthorizationFilter
     {
         private readonly ISessionLogic sessions;
-       
         public void OnAuthorization(AuthorizationFilterContext context)
         {
             try
