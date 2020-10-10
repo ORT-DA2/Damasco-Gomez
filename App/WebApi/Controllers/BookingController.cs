@@ -6,6 +6,7 @@ using Domain;
 using Filters;
 using Microsoft.AspNetCore.Mvc;
 using Model;
+using WebApi.Filters;
 
 namespace WebApi.Controllers
 {
@@ -40,6 +41,7 @@ namespace WebApi.Controllers
             }
         }
         [HttpPost()]
+        [AuthorizationFilter]
         public IActionResult Post([FromBody]BookingModel booking)
         {
             try
@@ -62,6 +64,7 @@ namespace WebApi.Controllers
             }
         }
         [HttpPut("{id}")]
+        [AuthorizationFilter]
         public IActionResult Put([FromRoute]int id,[FromBody]BookingModel booking)
         {
             try
@@ -80,6 +83,7 @@ namespace WebApi.Controllers
             }
         }
         [HttpDelete("{id}")]
+        [AuthorizationFilter]
         public IActionResult Delete([FromRoute]int id)
         {
             if (this.bookingLogic.GetBy(id) == null)
@@ -90,6 +94,7 @@ namespace WebApi.Controllers
             return Ok();
         }
         [HttpDelete()]
+        [AuthorizationFilter]
         public IActionResult Delete()
         {
             this.bookingLogic.Delete();
