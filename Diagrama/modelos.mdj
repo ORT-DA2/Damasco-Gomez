@@ -19980,7 +19980,7 @@
 											"font": "Arial;13;1",
 											"left": 37,
 											"top": 150,
-											"width": 1239,
+											"width": 1415,
 											"height": 13,
 											"text": "WebApi"
 										},
@@ -20015,7 +20015,7 @@
 									"font": "Arial;13;0",
 									"left": 32,
 									"top": 143,
-									"width": 1249,
+									"width": 1425,
 									"height": 25,
 									"stereotypeLabel": {
 										"$ref": "AAAAAAF0mPLjWxU5uys="
@@ -20061,7 +20061,7 @@
 							"containerChangeable": true,
 							"left": 32,
 							"top": 128,
-							"width": 1249,
+							"width": 1425,
 							"height": 937,
 							"nameCompartment": {
 								"$ref": "AAAAAAF0mPLjWxU4Hnc="
