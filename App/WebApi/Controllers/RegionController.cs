@@ -12,7 +12,6 @@ namespace WebApi.Controllers
 {
     [ApiController]
     [Route("api/regions")]
-    [AuthorizationFilter]
     public class RegionController : VidlyControllerBase
     {
        private readonly IRegionLogic regionLogic;
@@ -40,6 +39,7 @@ namespace WebApi.Controllers
             }
         }
         [HttpPost()]
+        [AuthorizationFilter]
         public IActionResult Post([FromBody]RegionModel regionModel)
         {
             try
@@ -63,6 +63,7 @@ namespace WebApi.Controllers
             }
         }
         [HttpPut("{id}")]
+        [AuthorizationFilter]
         public IActionResult Put([FromRoute]int id,[FromBody]RegionModel regionModel)
         {
             try
@@ -82,6 +83,7 @@ namespace WebApi.Controllers
             }
         }
         [HttpDelete("{id}")]
+        [AuthorizationFilter]
         public IActionResult Delete([FromRoute]int id)
         {
             if (this.regionLogic.GetBy(id) == null)
@@ -92,6 +94,7 @@ namespace WebApi.Controllers
             return Ok();
         }
         [HttpDelete()]
+        [AuthorizationFilter]
         public IActionResult Delete()
         {
             this.regionLogic.Delete();
