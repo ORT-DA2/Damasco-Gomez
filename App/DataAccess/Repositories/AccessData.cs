@@ -11,7 +11,7 @@ namespace DataAccess.Repositories
         protected abstract void Update(T elementToUpdate, T element);
         public T Add(T element)
         {
-            //Validate(element);
+            Validate(element);
             if (ExistElement(element))
             {
                 throw new ArgumentException("This element already exist");

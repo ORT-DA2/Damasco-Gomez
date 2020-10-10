@@ -21,6 +21,10 @@ namespace DataAccess.Repositories
 
         protected override void Validate(House element)
         {
+            if (element == null) 
+            {
+                throw new ArgumentException("House is empty");
+            }
             bool pricePerNight = element.PricePerNight <= 0;
             if (pricePerNight)
             {

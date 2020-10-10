@@ -18,6 +18,10 @@ namespace DataAccess.Repositories
 
         protected override void Validate(Category element)
         {
+            if (element == null)
+            {
+                throw new ArgumentException("Category is empty");
+            }
             if (element.Name.Equals(""))
             {
                 throw new ArgumentException("Name of category should not be null");
