@@ -15,9 +15,11 @@ using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
 using Filters;
 using WebApi.Filters;
+using System.Diagnostics.CodeAnalysis;
 
 namespace WebApi
 {
+    [ExcludeFromCodeCoverage]
     public class Startup
     {
         public Startup(IConfiguration configuration)
