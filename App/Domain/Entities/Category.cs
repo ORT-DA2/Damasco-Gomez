@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using System.Diagnostics.CodeAnalysis;
 using Domain.Entities;
 
 namespace Domain
@@ -10,7 +11,7 @@ namespace Domain
         public string Name {get; set;}
 
         public virtual List<CategoryTouristPoint>  CategoryTouristPoints {get; set;}
-        
+        [ExcludeFromCodeCoverage]
         public override bool Equals(object obj)
         {
             var result = false;

@@ -1,4 +1,6 @@
 using System;
+using System.Diagnostics.CodeAnalysis;
+
 namespace Domain
 {
     public class Person
@@ -8,7 +10,7 @@ namespace Domain
         public string Email {get; set;}
 
         public string Password {get; set;}
-
+        [ExcludeFromCodeCoverage]
         public override bool Equals(object obj)
         {
             var result = false;

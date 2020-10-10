@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using System.Diagnostics.CodeAnalysis;
 using System.Drawing;
 using Domain.Entities;
 
@@ -19,7 +20,7 @@ namespace Domain
         public string Description {get ; set;}
         public int Phone {get; set; }
         public string Contact {get; set;}
-
+        [ExcludeFromCodeCoverage]
         public override bool Equals(object obj)
         {
             var result = false;

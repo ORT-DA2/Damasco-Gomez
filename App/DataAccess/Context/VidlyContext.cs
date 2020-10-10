@@ -2,10 +2,12 @@ using Domain;
 using Domain.Entities;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
+using System.Diagnostics.CodeAnalysis;
 using System.IO;
 
 namespace DataAccess.Context
 {
+    [ExcludeFromCodeCoverage]
     public class VidlyContext : DbContext
     {
         public DbSet<TouristPoint> TouristPoints {get; set;}

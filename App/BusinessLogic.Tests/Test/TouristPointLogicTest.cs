@@ -36,7 +36,8 @@ namespace BusinessLogic.Tests.Test
                         {
                             Id = 1,
                             CategoryId = 1,
-                            TouristPointId = 1
+                            TouristPointId = 1,
+                            Category = new Category() {Id = 1}
                         }
                     }
                 },
@@ -96,6 +97,15 @@ namespace BusinessLogic.Tests.Test
             Assert.AreEqual(touristPointEmpty, result);
         }
         [TestMethod]
+        public void GetAll()
+        {
+            mock.Setup(m => m.GetElements()).Returns(touristPoints);
+
+            var result = touristPointLogic.GetAll();
+
+            Assert.IsTrue(result.SequenceEqual(touristPoints));
+        }
+        [TestMethod]
         public void TestGetBy()
         {
             TouristPoint touristPoint = touristPoints.First();
@@ -119,8 +129,11 @@ namespace BusinessLogic.Tests.Test
         [TestMethod]
         public void TestAdd()
         {
-            TouristPoint touristPoint = touristPoints.Last();
+            TouristPoint touristPoint = touristPoints.First();
             mock.Setup(m => m.Add(touristPoint)).Returns(touristPoint);
+            //this.categoryRepository.Find(m.CategoryId)
+            mock2.Setup(m => m.Find(touristPoint.CategoriesTouristPoints.First().CategoryId))
+                .Returns(touristPoint.CategoriesTouristPoints.First().Category);
 
             TouristPoint touristPointToReturn = touristPointLogic.Add(touristPoint);
 
@@ -143,6 +156,16 @@ namespace BusinessLogic.Tests.Test
             TouristPoint touristPoint = touristPoints.Last();
             ArgumentException exception = new ArgumentException();
             mock.Setup(m => m.Add(touristPoint)).Throws(exception);
+
+            touristPointLogic.Add(touristPoint);
+
+            mock.VerifyAll();
+        }
+        [TestMethod]
+        [ExpectedException(typeof(ArgumentException))]
+        public void TestAddNull()
+        {
+            TouristPoint touristPoint = null;
 
             touristPointLogic.Add(touristPoint);
 

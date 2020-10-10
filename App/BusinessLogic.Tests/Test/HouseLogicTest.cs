@@ -75,6 +75,15 @@ namespace BusinessLogic.Tests.Test
             mock.VerifyAll();
         }
         [TestMethod]
+        public void GetAll()
+        {
+            mock.Setup(m => m.GetElements()).Returns(housesToReturn);
+
+            var result = houseLogic.GetAll();
+
+            Assert.IsTrue(result.SequenceEqual(housesToReturn));
+        }
+        [TestMethod]
         public void GetByTestOk()
         {
             House house = housesToReturn.First();
@@ -95,6 +104,7 @@ namespace BusinessLogic.Tests.Test
 
             Assert.IsNull(result);
         }
+        [TestMethod]
         public void TestAddOk()
         {
             House house = housesToReturn.First();
@@ -228,6 +238,27 @@ namespace BusinessLogic.Tests.Test
             IEnumerable<House> result = houseLogic.GetHousesBy(houseSearch);
 
             Assert.AreEqual(emptyHouses, result);
+        }
+        [TestMethod]
+        [ExpectedException(typeof(ArgumentException))]
+        public void TestValidateHouseNull()
+        {
+            House house = null;
+
+            houseLogic.Update(1, house);
+
+            mock.VerifyAll();
+        }
+        [TestMethod]
+        [ExpectedException(typeof(ArgumentException))]
+        public void TestValidateNotExistHouse()
+        {
+            House house = housesToReturn.First();
+            mock2.Setup(m => m.ExistElement(house.TouristPointId)).Returns(false);
+
+            House result = houseLogic.Add(house);
+
+            Assert.AreEqual(house, result);
         }
     }
 }

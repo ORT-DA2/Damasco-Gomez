@@ -80,6 +80,15 @@ namespace BusinessLogic.Tests.Test
             mock.VerifyAll();
         }
         [TestMethod]
+        public void GetAll()
+        {
+            mock.Setup(m => m.GetElements()).Returns(bookingsToReturn);
+
+            var result = bookingLogic.GetAll();
+
+            Assert.IsTrue(result.SequenceEqual(bookingsToReturn));
+        }
+        [TestMethod]
         public void GetByTestOk()
         {
             Booking booking = bookingsToReturn.First();
@@ -100,6 +109,7 @@ namespace BusinessLogic.Tests.Test
 
             Assert.IsNull(result);
         }
+        [TestMethod]
         public void TestAddOk()
         {
             BookingModel bookingModel = new BookingModel()
@@ -109,6 +119,7 @@ namespace BusinessLogic.Tests.Test
             };
             Booking booking = bookingModel.ToEntity();
             mock.Setup(m => m.Add(booking)).Returns(booking);
+            mock2.Setup(m => m.ExistElement(booking.HouseId)).Returns(true);
 
             Booking result = bookingLogic.Add(booking);
 

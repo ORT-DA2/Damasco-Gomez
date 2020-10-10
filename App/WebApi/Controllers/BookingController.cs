@@ -58,9 +58,9 @@ namespace WebApi.Controllers
             {
                 return BadRequest("Error while validate : "+ e.Message.ToString());
             }
-            catch (Exception)
+            catch (Exception e)
             {
-                return BadRequest("The server had an error");
+                return BadRequest("The server had an error"+ e.Message.ToString() );
             }
         }
         [HttpPut("{id}")]

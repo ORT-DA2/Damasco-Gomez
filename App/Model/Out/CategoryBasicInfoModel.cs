@@ -1,10 +1,13 @@
+using System.Diagnostics.CodeAnalysis;
 using Domain;
 
 namespace Model.Out
 {
     public class CategoryBasicInfoModel
     {
+        [ExcludeFromCodeCoverageAttribute]
         public int Id { get; private set; }
+        [ExcludeFromCodeCoverageAttribute]
         public string Name { get; private set; }
         public CategoryBasicInfoModel(Category category)
         {

@@ -1,5 +1,8 @@
+using System.Diagnostics.CodeAnalysis;
+
 namespace Domain.Entities
 {
+    [ExcludeFromCodeCoverage]
     public class CategoryTouristPoint
     {
         public int Id {get; set;}
