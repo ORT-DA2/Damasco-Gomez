@@ -156,22 +156,13 @@ namespace DataAccess.Tests
         [TestMethod]
         public void TestUpdate()
         {
-            // Region region = regionsToReturn.First();
-            // region.Name = "New name of region";
-            // string newName = region.Name;
+            Region region = regionsToReturn.First();
+            region.Name = "New name of region";
+            string newName = region.Name;
 
-            // repository.Update(region);
+            repository.Update(region.Id, region);
 
-            // Assert.AreEqual(region.Name,newName);
-        }
-        [TestMethod]
-        //[ExpectedException(typeof(ArgumentException))]
-        public void TestUpdateFail()
-        {
-            // Region region = new Region(){Id = 13000};
-            // string newName = region.Name;
-
-            //repository.Update(region);
+            Assert.AreEqual(region.Name, newName);
         }
         [TestMethod]
         public void TestDelete()
