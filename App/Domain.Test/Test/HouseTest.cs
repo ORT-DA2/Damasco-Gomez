@@ -290,7 +290,7 @@ namespace Domain.Test.Test
                     Contact = "new contact",
                 };
 
-            bool result = House.IsAvailable(newHouse);
+            bool result = newHouse.IsAvailable();
 
             Assert.IsTrue(result);
         }
@@ -311,9 +311,51 @@ namespace Domain.Test.Test
                     Contact = "new contact",
                 };
 
-            bool result = House.IsAvailable(newHouse);
+            bool result = newHouse.IsAvailable();
 
             Assert.IsFalse(result);
+        }
+        [TestMethod]
+        public void TestId()
+        {
+            int id = 1;
+            House newHouse = new House()
+            {
+                Id = id,
+                Avaible = false,
+                PricePerNight = 0,
+                TouristPointId = 0,
+                Name = null,
+                Starts = 0,
+                Address = null,
+                Ilustrations = null,
+                Description = null,
+                Phone = 0,
+                Contact = "new contact",
+            };
+
+            Assert.AreEqual(id,newHouse.Id);
+        }
+        [TestMethod]
+        public void TestTouristPoint()
+        {
+            TouristPoint tourist = new TouristPoint();
+            House newHouse = new House()
+            {
+                Avaible = false,
+                PricePerNight = 0,
+                TouristPointId = 0,
+                TouristPoint = tourist,
+                Name = null,
+                Starts = 0,
+                Address = null,
+                Ilustrations = null,
+                Description = null,
+                Phone = 0,
+                Contact = "new contact",
+            };
+
+            Assert.AreEqual(tourist, newHouse.TouristPoint);
         }
     }
 }

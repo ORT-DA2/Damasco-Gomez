@@ -68,7 +68,8 @@ namespace WebApi.Controllers
             {
                 House house = houseModel.ToEntity();
                 house = this.houseLogic.Add(house);
-                return CreatedAtRoute("GetHouse", new {Id = house.Id}, house);
+                HouseBasicModel basicModel = new HouseBasicModel(house);
+                return CreatedAtRoute("GetHouse", new {Id = basicModel.Id}, basicModel);
             }
             catch (AggregateException)
             {
@@ -91,7 +92,8 @@ namespace WebApi.Controllers
             {
                 House house = houseModel.ToEntity();
                 house = this.houseLogic.Update(id,house);
-                return CreatedAtRoute("GetHouse", new {Id = house.Id} , house);
+                HouseBasicModel basicModel = new HouseBasicModel(house);
+                return CreatedAtRoute("GetHouse", new {Id = basicModel.Id} , basicModel);
             }
             catch(ArgumentException e)
             {

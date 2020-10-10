@@ -36,7 +36,7 @@ namespace DataAccess.Repositories
         {
             var result = this.repository.GetElementsInContext();
             var resultToReturn = result.FindAll(kz=>kz.TouristPointId==idTP && kz.Avaible);
-             return resultToReturn;
+            return resultToReturn;
         }
     }
 }

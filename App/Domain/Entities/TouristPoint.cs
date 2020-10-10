@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using System.Diagnostics.CodeAnalysis;
 using Domain.Entities;
 
 namespace Domain
@@ -12,7 +13,7 @@ namespace Domain
         public int RegionId {get; set;}
         public virtual Region Region {get; set;}
         public virtual  List<CategoryTouristPoint> CategoriesTouristPoints {get; set;}
-
+        [ExcludeFromCodeCoverage]
         public override bool Equals(object obj)
         {
             var result = false;
@@ -22,12 +23,12 @@ namespace Domain
             }
             return result;
         }
-        public static void Update(TouristPoint elementToUpdate, TouristPoint element)
+        public void Update(TouristPoint element)
         {
-            if(element.Name != null) elementToUpdate.Name = element.Name;
-            if(element.Image != null) elementToUpdate.Image = element.Image;
-            if(element.Description != null) elementToUpdate.Description = element.Description;
-            if(element.RegionId>0) elementToUpdate.RegionId = element.RegionId;
+            if(element.Name != null) this.Name = element.Name;
+            if(element.Image != null) this.Image = element.Image;
+            if(element.Description != null) this.Description = element.Description;
+            if(element.RegionId>0) this.RegionId = element.RegionId;
         }
     }
 }

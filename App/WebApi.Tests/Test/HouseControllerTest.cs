@@ -164,6 +164,7 @@ namespace WebApi.Tests
             };
             House house = houseModel.ToEntity();
             mock.Setup(m => m.Add(house)).Returns(house);
+            HouseBasicModel houseBasicModel = new HouseBasicModel(house);
 
             var result = controller.Post(houseModel);
 
@@ -171,7 +172,7 @@ namespace WebApi.Tests
             mock.VerifyAll();
             Assert.IsNotNull(okResult);
             Assert.AreEqual("GetHouse", okResult.RouteName);
-            Assert.AreEqual(okResult.Value, house);
+            Assert.AreEqual(okResult.Value, houseBasicModel);
         }
         [TestMethod]
         public void TestPostFailSameHouse()
@@ -232,6 +233,7 @@ namespace WebApi.Tests
             };
             houseId1 = houseModel.ToEntity();
             mock.Setup(m => m.Update(houseId1.Id,houseId1)).Returns(houseId1);
+            HouseBasicModel basicModel = new HouseBasicModel(houseId1);
 
             var result = controller.Put(houseId1.Id, houseModel);
 
@@ -239,7 +241,7 @@ namespace WebApi.Tests
             mock.VerifyAll();
             Assert.IsNotNull(okResult);
             Assert.AreEqual("GetHouse", okResult.RouteName);
-            Assert.AreEqual(okResult.Value, houseId1);
+            Assert.AreEqual(okResult.Value, basicModel);
         }
         [TestMethod]
         public void TestPutFailValidate()
@@ -341,13 +343,14 @@ namespace WebApi.Tests
             {
                 housesToReturn.First()
             };
+            IEnumerable<HouseBasicModel> housesDetail = housesWithIdTP.Select(m => new HouseBasicModel(m));
             mock.Setup(m => m.GetHousesBy(It.IsAny<HouseSearch>())).Returns(housesWithIdTP);
 
             var result = controller.GetHousesBy(houseSearchModel);
 
             var okResult = result as OkObjectResult;
-            var houses = okResult.Value as IEnumerable<HouseSearchResultModel>;
-            //Assert.IsTrue(housesResult.SequenceEqual(houses));
+            var houses = okResult.Value as IEnumerable<HouseBasicModel>;
+            Assert.IsTrue(housesDetail.SequenceEqual(houses));
         }
         [TestMethod]
         public void TestGetHousesByEmpty()
@@ -362,14 +365,14 @@ namespace WebApi.Tests
                 CantBabys = 0,
             };
             List<House> emptyHousesWithIdTP = new List<House>();
-            List<HouseSearchResultModel> housesResult = new List<HouseSearchResultModel>(){};
+            List<HouseBasicModel> housesResult = new List<HouseBasicModel>(){};
             HouseSearch houseSearch = houseSearchModel.ToEntity();
             mock.Setup(mock=> mock.GetHousesBy(It.IsAny<HouseSearch>())).Returns(emptyHousesWithIdTP);
 
             var result = controller.GetHousesBy(houseSearchModel);
 
             var okResult = result as OkObjectResult;
-            var houses = okResult.Value as IEnumerable<HouseSearchResultModel>;
+            var houses = okResult.Value as IEnumerable<HouseBasicModel>;
             Assert.IsTrue(housesResult.SequenceEqual(houses));
         }
     }

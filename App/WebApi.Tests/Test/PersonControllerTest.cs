@@ -111,6 +111,7 @@ namespace WebApi.Tests
             };
             personId1 = personModel.ToEntity();
             mock.Setup(m => m.Add(personId1)).Returns(personId1);
+            PersonBasicModel personBasicModel = new PersonBasicModel(personId1);
 
             var result = controller.Post(personModel);
 
@@ -118,7 +119,7 @@ namespace WebApi.Tests
             mock.VerifyAll();
             Assert.IsNotNull(okResult);
             Assert.AreEqual("GetPerson", okResult.RouteName);
-            Assert.AreEqual(okResult.Value, personId1);
+            Assert.AreEqual(okResult.Value, personBasicModel);
         }
         [TestMethod]
         public void TestPostFailSamePerson()
@@ -182,13 +183,14 @@ namespace WebApi.Tests
             personId1 = personModel.ToEntity();
             personId1.Email = "new email";
             mock.Setup(m => m.Update(personId1.Id,personId1)).Returns(personId1);
+            PersonBasicModel personBasicModel = new PersonBasicModel(personId1);
 
             var result = controller.Put(personId1.Id, personModel);
 
             var okResult = result as CreatedAtRouteResult;
             Assert.IsNotNull(okResult);
             Assert.AreEqual("GetPerson", okResult.RouteName);
-            Assert.AreEqual(okResult.Value, personId1);
+            Assert.AreEqual(okResult.Value, personBasicModel);
         }
         [TestMethod]
         public void TestPutFailValidate()

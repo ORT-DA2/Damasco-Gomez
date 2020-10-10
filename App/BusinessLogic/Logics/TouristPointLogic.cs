@@ -33,6 +33,7 @@ namespace BusinessLogic
 
         public TouristPoint Add(TouristPoint touristPoint)
         {
+            Validate(touristPoint);
             if (touristPoint.CategoriesTouristPoints != null)
             {
                 touristPoint.CategoriesTouristPoints.ForEach
@@ -45,6 +46,8 @@ namespace BusinessLogic
         }
         public TouristPoint Update(int id, TouristPoint touristPoint)
         {
+            Validate(touristPoint);
+            TouristPoint touristPointBD = this.touristPointRepository.Find(id);
             if (touristPoint.CategoriesTouristPoints != null)
             {
                 touristPoint.CategoriesTouristPoints.ForEach
@@ -52,8 +55,9 @@ namespace BusinessLogic
                     m => m.Category = this.categoryRepository.Find(m.CategoryId)
                 );
             }
-            this.touristPointRepository.Update(id, touristPoint);
-            return touristPoint;
+            this.touristPointRepository.Update(id, touristPointBD);
+            touristPointBD.Update(touristPoint);
+            return touristPointBD;
         }
         public void Delete(int id)
         {
@@ -65,7 +69,7 @@ namespace BusinessLogic
         }
         public void Validate(TouristPoint touristPoint)
         {
-            if (touristPoint==null) throw new ArgumentException("Tourist Point is empty");
+            if (touristPoint == null) throw new ArgumentException("Tourist Point is empty");
         }
     }
 }

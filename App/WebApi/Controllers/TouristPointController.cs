@@ -61,13 +61,13 @@ namespace WebApi.Controllers
         }
         [HttpPut("{id}")]
         [AuthorizationFilter]
-        public IActionResult Put([FromRoute]int id,[FromBody]TouristPointModel touristPoint)
+        public IActionResult Put([FromRoute]int id,[FromBody]TouristPointModel touristPointModel)
         {
             try
             {
-                var touristPointAdded = touristPoint.ToEntity();
-                this.touristPointLogic.Update(id,touristPointAdded);
-                return CreatedAtRoute("GetTouristPoint", new {id =touristPointAdded.Id} ,new TouristPointDetailInfoModel(touristPointAdded));
+                TouristPoint touristPoint = touristPointModel.ToEntity();
+                touristPoint = this.touristPointLogic.Update(id,touristPoint);
+                return CreatedAtRoute("GetTouristPoint", new {id =touristPoint.Id} ,new TouristPointDetailInfoModel(touristPoint));
             }
             catch(ArgumentException e )
             {

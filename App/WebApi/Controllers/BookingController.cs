@@ -40,7 +40,7 @@ namespace WebApi.Controllers
                 return BadRequest("There is not a booking with that id");
             }
         }
-        [HttpPost()]
+        [HttpPost]
         [AuthorizationFilter]
         public IActionResult Post([FromBody]BookingModel booking)
         {
@@ -48,7 +48,8 @@ namespace WebApi.Controllers
             {
                 Booking newBooking = booking.ToEntity();
                 var bookingAdded = this.bookingLogic.Add(newBooking);
-                return CreatedAtRoute("GetBooking", new {Id = bookingAdded.Id} , bookingAdded);
+                BookingBasicModel basicModel = new BookingBasicModel(bookingAdded);
+                return CreatedAtRoute("GetBooking", new {Id = basicModel.Id} , basicModel);
             }
             catch (AggregateException)
             {
@@ -58,9 +59,9 @@ namespace WebApi.Controllers
             {
                 return BadRequest("Error while validate : "+ e.Message.ToString());
             }
-            catch (Exception)
+            catch (Exception e)
             {
-                return BadRequest("The server had an error");
+                return BadRequest("The server had an error"+ e.Message.ToString() );
             }
         }
         [HttpPut("{id}")]
@@ -71,7 +72,8 @@ namespace WebApi.Controllers
             {
                 Booking newBooking = booking.ToEntity();
                 newBooking = this.bookingLogic.Update(id, newBooking);
-                return CreatedAtRoute("GetBooking", new {Id = newBooking.Id} , newBooking);
+                BookingBasicModel basicModel = new BookingBasicModel(newBooking);
+                return CreatedAtRoute("GetBooking", new {Id = basicModel.Id} , basicModel);
             }
             catch(ArgumentException e)
             {
@@ -93,7 +95,7 @@ namespace WebApi.Controllers
             this.bookingLogic.Delete(id);
             return Ok();
         }
-        [HttpDelete()]
+        [HttpDelete]
         [AuthorizationFilter]
         public IActionResult Delete()
         {

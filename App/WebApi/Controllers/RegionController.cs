@@ -1,11 +1,13 @@
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using BusinessLogicInterface;
 using Domain;
 using Filters;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Filters;
 using Model.In;
+using Model.Out;
 using WebApi.Filters;
 
 namespace WebApi.Controllers
@@ -23,7 +25,9 @@ namespace WebApi.Controllers
         [HttpGet]
         public IActionResult Get()
         {
-            return Ok(this.regionLogic.GetAll());
+            IEnumerable<Region> regions = this.regionLogic.GetAll();
+            IEnumerable<RegionDetailModel> regionsBasic = regions.Select(m => new RegionDetailModel(m));
+            return Ok(regionsBasic);
         }
         [HttpGet( "{id}" , Name="GetRegion" )]
         public IActionResult GetBy([FromRoute]int id)
@@ -31,7 +35,8 @@ namespace WebApi.Controllers
             try
             {
                 var elementRegion = this.regionLogic.GetBy(id);
-                return Ok(elementRegion);
+                RegionDetailModel regionsBasic = new RegionDetailModel(elementRegion);
+                return Ok(regionsBasic);
             }
             catch (ArgumentException)
             {
@@ -46,7 +51,8 @@ namespace WebApi.Controllers
             {
                 Region region = regionModel.ToEntity();
                 region = this.regionLogic.Add(region);
-                var creationRoute = CreatedAtRoute("GetRegion", new {Id = region.Id} , region);
+                RegionDetailModel regionsBasic = new RegionDetailModel(region);
+                var creationRoute = CreatedAtRoute("GetRegion", new {Id = regionsBasic.Id} , regionsBasic);
                 return creationRoute;
             }
             catch (AggregateException)
@@ -70,7 +76,8 @@ namespace WebApi.Controllers
             {
                 Region region = regionModel.ToEntity();
                 region = this.regionLogic.Update(id,region);
-                var creationRoute = CreatedAtRoute("GetRegion", new {Id = region.Id} , region);
+                RegionDetailModel regionsBasic = new RegionDetailModel(region);
+                var creationRoute = CreatedAtRoute("GetRegion", new {Id = regionsBasic.Id} , regionsBasic);
                 return creationRoute;
             }
             catch(ArgumentException e)

@@ -31,12 +31,13 @@ namespace DataAccess.Tests.Test
                     Id = 1,
                     Name = "House 1",
                     TouristPointId= 1,
+                    Avaible = true,
                 },
                 new House()
                 {
                     Id = 2,
                     Name = "House 2",
-                     TouristPointId= 2,
+                    TouristPointId= 2,
                 }
             };
             housesToReturn.ForEach(m => this.context.Add(m));
@@ -243,13 +244,13 @@ namespace DataAccess.Tests.Test
         public void TestGetByIdTouristPointOk ()
         {
             int idTP = 1;
-             List <House> houses = new List<House>()
+            List <House> houses = new List<House>()
             {
                 housesToReturn.First()
             };
 
             var result = repository.GetByIdTouristPoint(idTP);
-           
+
             Assert.IsTrue(houses.SequenceEqual(result));
         }
         [TestMethod]
