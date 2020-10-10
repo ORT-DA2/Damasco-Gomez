@@ -82,6 +82,15 @@ namespace BusinessLogic.Tests.Test
             mock.VerifyAll();
         }
         [TestMethod]
+        public void GetAll()
+        {
+            mock.Setup(m => m.GetElements()).Returns(personsToReturn);
+
+            var result = personLogic.GetAll();
+
+            Assert.IsTrue(result.SequenceEqual(personsToReturn));
+        }
+        [TestMethod]
         public void GetByTestOk()
         {
             Person person = personsToReturn.First();
