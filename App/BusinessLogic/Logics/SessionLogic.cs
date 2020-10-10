@@ -4,18 +4,18 @@ using DataAccessInterface.Repositories;
 
 namespace BusinessLogic.Logics
 {
-  
     public class SessionLogic : ISessionLogic
     {
         private readonly ISessionUserRepository sessionUserRepository;
        public SessionLogic(ISessionUserRepository sessionUserRepository)
        {
            this.sessionUserRepository = sessionUserRepository;
-      }
+       }
 
-        public bool IsCorrectToken(string token)
+        public bool IsCorrectToken(Guid token)
         {
-            return true;
+             return this.sessionUserRepository.IsCorrectToken(token);
+
         }
     }
 }
