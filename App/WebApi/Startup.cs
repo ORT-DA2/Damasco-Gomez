@@ -35,7 +35,7 @@ namespace WebApi
             services.AddControllers();
             factory.AddCustomServices();
             factory.AddDbContextService();
-            services.AddScoped<AuthorizationAttributeFilter>();
+          //  services.AddScoped<AuthorizationAttributeFilter>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
