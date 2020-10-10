@@ -15,7 +15,7 @@ namespace DataAccess.Repositories
         {
             if (element.HouseId > 0)
             {
-                if (!House.IsAvailable(element.House))
+                if (!element.House.IsAvailable())
                 {
                     throw new ArgumentException("House is not available");
                 }
