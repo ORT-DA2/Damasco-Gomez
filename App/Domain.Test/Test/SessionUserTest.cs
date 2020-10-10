@@ -1,3 +1,5 @@
+using System;
+using Domain.Entities;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 
 namespace Domain.Test.Test
@@ -5,14 +7,23 @@ namespace Domain.Test.Test
     [TestClass]
     public class SessionUserTest
     {
-        public void TestUpdateName()
+        public SessionUser sessionUser;
+        [TestInitialize]
+        public void SetUp()
         {
-             Assert.IsTrue(true);
+            sessionUser = new SessionUser()
+                {
+                    Id = 1,
+                    Token = Guid.NewGuid(),
+                    PersonId = 1
+
+                };
         }
-        [TestMethod]
-        public void TestUpdateNameEmpty()
+        public void TestUpdateToken()
         {
-            Assert.IsTrue(true);
+            Guid token = Guid.NewGuid();
+            sessionUser.Update(token);
+            Assert.AreEqual(token, sessionUser.Token);
         }
     }
 }

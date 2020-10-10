@@ -15,6 +15,15 @@ namespace Filters
             {
                 throw context.Exception;
             }
+            catch (ArgumentException e)
+            {
+                context.Result = new ContentResult()
+                {
+                    StatusCode = 400,
+                    Content = e.Message.ToString()
+                };
+                
+            }
             catch(Exception)
             {
                 context.Result = new ContentResult()
@@ -25,5 +34,7 @@ namespace Filters
             }
             // falta cachear el resto de las exceptions del sistema 
         }
+         
+
     }
 }

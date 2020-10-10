@@ -6,6 +6,7 @@ using Filters;
 using Microsoft.AspNetCore.Mvc;
 using Model.In;
 using Model.Out;
+using WebApi.Filters;
 
 namespace WebApi.Controllers
 {   [ApiController]
@@ -38,7 +39,7 @@ namespace WebApi.Controllers
             }
         }
         [HttpPost()]
-         [ServiceFilter(typeof(AuthorizationDIFilter))]
+        [AuthorizationFilter]
         public IActionResult Post([FromBody]TouristPointModel touristPoint)
         {
             try
@@ -59,8 +60,8 @@ namespace WebApi.Controllers
             }
         }
         [HttpPut("{id}")]
-         [ServiceFilter(typeof(AuthorizationDIFilter))]
-        public IActionResult Put([FromRoute]int id,[FromBody]TouristPointModel touristPointModel)
+        [AuthorizationFilter]
+        public IActionResult Put([FromRoute]int id,[FromBody]TouristPointModel touristPoint)
         {
             try
             {
@@ -78,7 +79,7 @@ namespace WebApi.Controllers
             }
         }
         [HttpDelete("{id}")]
-        [ServiceFilter(typeof(AuthorizationDIFilter))]
+        [AuthorizationFilter]
         public IActionResult Delete([FromRoute]int id)
         {
             if (this.touristPointLogic.GetBy(id) == null)
@@ -89,7 +90,7 @@ namespace WebApi.Controllers
             return Ok();
         }
         [HttpDelete()]
-        [ServiceFilter(typeof(AuthorizationDIFilter))]
+        [AuthorizationFilter]
         public IActionResult Delete()
         {
             this.touristPointLogic.Delete();

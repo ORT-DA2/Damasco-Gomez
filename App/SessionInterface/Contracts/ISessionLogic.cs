@@ -1,9 +1,12 @@
 ﻿using System;
+using Domain;
 
 namespace Contracts
 {
     public interface ISessionLogic
     {
-        bool IsCorrectToken(string token);
+        bool IsCorrectToken(Guid token);
+
+        void Login(Person person) ;
     }
 }
