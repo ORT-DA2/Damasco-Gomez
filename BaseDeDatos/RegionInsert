@@ -1,0 +1,26 @@
+set IDENTITY_INSERT Regions ON
+INSERT INTO Regions (Id, Name)
+VALUES (1, 'Name region 1');
+INSERT INTO Regions (Id, Name)
+VALUES (2, 'Name region 2');
+INSERT INTO Regions (Id, Name)
+VALUES (3, 'Name region 3');
+INSERT INTO Regions (Id, Name)
+VALUES (4, 'Name region 4');
+INSERT INTO Regions (Id, Name)
+VALUES (5, 'Name region 5');
+INSERT INTO Regions (Id, Name)
+VALUES (6, 'Name region 6');
+INSERT INTO Regions (Id, Name)
+VALUES (7, 'Name region 7');
+INSERT INTO Regions (Id, Name)
+VALUES (8, 'Name region 8');
+INSERT INTO Regions (Id, Name)
+VALUES (9, 'Name region 9');
+INSERT INTO Regions (Id, Name)
+VALUES (10, 'Name region 10');
+INSERT INTO Regions (Id, Name)
+VALUES (11, 'Name region 11');
+INSERT INTO Regions (Id, Name)
+VALUES (12, 'Name region 12');
+set IDENTITY_INSERT Regions OFF

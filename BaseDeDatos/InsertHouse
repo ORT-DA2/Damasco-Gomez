@@ -1,0 +1,34 @@
+set IDENTITY_INSERT Houses ON
+INSERT INTO Houses (Id, Avaible, PricePerNight, Starts, Address, Ilustrations, Description, Phone, Contact, Name, TouristPointId)
+VALUES (1, 1, 10, 1, 'Address House 1', 'Ilustrations', 'Description', 099199399, 'Contact House 1', 'Name contact house 1', 1);
+INSERT INTO Houses (Id, Avaible, PricePerNight, Starts, Address, Ilustrations, Description, Phone, Contact, Name, TouristPointId)
+VALUES (2, 1, 20, 2, 'Address House 2', 'Ilustrations', 'Description', 099299399, 'Contact House 2', 'Name contact house 2', 2);
+INSERT INTO Houses (Id, Avaible, PricePerNight, Starts, Address, Ilustrations, Description, Phone, Contact, Name, TouristPointId)
+VALUES (3, 1, 30, 3, 'Address House 3', 'Ilustrations', 'Description', 099399399, 'Contact House 3', 'Name contact house 3', 3);
+INSERT INTO Houses (Id, Avaible, PricePerNight, Starts, Address, Ilustrations, Description, Phone, Contact, Name, TouristPointId)
+VALUES (4, 1, 40, 4, 'Address House 4', 'Ilustrations', 'Description', 099499399, 'Contact House 4', 'Name contact house 4', 4);
+INSERT INTO Houses (Id, Avaible, PricePerNight, Starts, Address, Ilustrations, Description, Phone, Contact, Name, TouristPointId)
+VALUES (5, 1, 50, 5, 'Address House 5', 'Ilustrations', 'Description', 099599399, 'Contact House 5', 'Name contact house 5', 5);
+INSERT INTO Houses (Id, Avaible, PricePerNight, Starts, Address, Ilustrations, Description, Phone, Contact, Name, TouristPointId)
+VALUES (6, 1, 60, 1, 'Address House 6', 'Ilustrations', 'Description', 099699399, 'Contact House 6', 'Name contact house 6', 6);
+INSERT INTO Houses (Id, Avaible, PricePerNight, Starts, Address, Ilustrations, Description, Phone, Contact, Name, TouristPointId)
+VALUES (7, 1, 70, 2, 'Address House 7', 'Ilustrations', 'Description', 099799399, 'Contact House 7', 'Name contact house 7', 7);
+INSERT INTO Houses (Id, Avaible, PricePerNight, Starts, Address, Ilustrations, Description, Phone, Contact, Name, TouristPointId)
+VALUES (8, 0, 80, 3, 'Address House 8', 'Ilustrations', 'Description', 099899399, 'Contact House 8', 'Name contact house 8', 8);
+INSERT INTO Houses (Id, Avaible, PricePerNight, Starts, Address, Ilustrations, Description, Phone, Contact, Name, TouristPointId)
+VALUES (9, 1, 10, 4, 'Address House 9', 'Ilustrations', 'Description', 099199399, 'Contact House 9', 'Name contact house 9', 1);
+INSERT INTO Houses (Id, Avaible, PricePerNight, Starts, Address, Ilustrations, Description, Phone, Contact, Name, TouristPointId)
+VALUES (10, 0, 20, 5, 'Address House 10', 'Ilustrations', 'Description', 099299399, 'Contact House 10', 'Name contact house 10', 2);
+INSERT INTO Houses (Id, Avaible, PricePerNight, Starts, Address, Ilustrations, Description, Phone, Contact, Name, TouristPointId)
+VALUES (11, 0, 30, 1, 'Address House 11', 'Ilustrations', 'Description', 099399399, 'Contact House 11', 'Name contact house 11', 3);
+INSERT INTO Houses (Id, Avaible, PricePerNight, Starts, Address, Ilustrations, Description, Phone, Contact, Name, TouristPointId)
+VALUES (12, 1, 40, 2, 'Address House 12', 'Ilustrations', 'Description', 099499399, 'Contact House 12', 'Name contact house 12', 4);
+INSERT INTO Houses (Id, Avaible, PricePerNight, Starts, Address, Ilustrations, Description, Phone, Contact, Name, TouristPointId)
+VALUES (13, 0, 50, 3, 'Address House 13', 'Ilustrations', 'Description', 099599399, 'Contact House 13', 'Name contact house 13', 5);
+INSERT INTO Houses (Id, Avaible, PricePerNight, Starts, Address, Ilustrations, Description, Phone, Contact, Name, TouristPointId)
+VALUES (14, 1, 60, 4, 'Address House 14', 'Ilustrations', 'Description', 099699399, 'Contact House 14', 'Name contact house 14', 6);
+INSERT INTO Houses (Id, Avaible, PricePerNight, Starts, Address, Ilustrations, Description, Phone, Contact, Name, TouristPointId)
+VALUES (15, 0, 70, 5, 'Address House 15', 'Ilustrations', 'Description', 099799399, 'Contact House 15', 'Name contact house 15', 7);
+INSERT INTO Houses (Id, Avaible, PricePerNight, Starts, Address, Ilustrations, Description, Phone, Contact, Name, TouristPointId)
+VALUES (16, 1, 80, 1, 'Address House 16', 'Ilustrations', 'Description', 099899399, 'Contact House 16', 'Name contact house 16', 8);
+set IDENTITY_INSERT Houses OFF
