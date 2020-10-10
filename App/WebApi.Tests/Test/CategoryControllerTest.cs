@@ -42,7 +42,7 @@ namespace WebApi.Test
                             },
                             TouristPointId = 1,
                             TouristPoint = new TouristPoint(){ Id = 1}
-                        }//HAY QUE TENER CUIDADO CON ESTO NULL, ROMPE TODO , HACER CHECK DE ESTA VAR
+                        }
                     },
                 },
                 new Category()
@@ -168,7 +168,7 @@ namespace WebApi.Test
             CategoryModel categoryModel = new CategoryModel()
             {
                 Name = categoryId1.Name,
-                TouristPoints = new List<int>()
+                TouristPoints = new List<int>(){}
             };
             categoryId1 = categoryModel.ToEntity();
             mock.Setup(m => m.Add(categoryId1)).Returns(categoryId1);
@@ -188,7 +188,7 @@ namespace WebApi.Test
             CategoryModel categoryModel = new CategoryModel()
             {
                 Name = categoryId1.Name,
-                TouristPoints = new List<int>()
+                TouristPoints = new List<int>(){1}
             };
             categoryId1 = categoryModel.ToEntity();
             Exception exist = new AggregateException();
