@@ -45,16 +45,22 @@ namespace BusinessLogic.Tests.Test
             mock2 = new Mock<IPersonRepository>(MockBehavior.Strict);
             sessionUserLogic = new SessionLogic(mock.Object, mock2.Object);
             sessionUserEmpty = new List<SessionUser>();
-
-        
         }
         [TestMethod]
-        public void TestisCorrectionToken()
+        public void TestIsCorrectionToken()
         {
             Guid correctToken = sessions.First().Token;
             mock.Setup(m => m.IsCorrectToken(correctToken)).Returns(true);
-            var result = sessionUserLogic.IsCorrectToken(correctToken);
+            bool result = sessionUserLogic.IsCorrectToken(correctToken);
             Assert.IsTrue(result);
+        }
+        [TestMethod]
+        public void TestNotValidToken()
+        {
+           Guid notExistToken = Guid.NewGuid();
+           mock.Setup(m => m.IsCorrectToken(notExistToken)).Returns(false);
+           bool result = sessionUserLogic.IsCorrectToken(notExistToken);
+           Assert.IsFalse(result);
         }
         [TestMethod]
         public void TestLoginOk()
