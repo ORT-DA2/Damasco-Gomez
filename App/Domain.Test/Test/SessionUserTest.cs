@@ -28,10 +28,5 @@ namespace Domain.Test.Test
             sessionUser.Update(newSession);
             Assert.AreEqual(newSession.Token, sessionUser.Token);
         }
-        [TestMethod]
-        public void TestUpdateTokenEmpty()
-        {
-            Assert.IsTrue(true);
-        }
     }
 }
