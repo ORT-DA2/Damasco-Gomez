@@ -49,5 +49,12 @@ namespace DataAccess.Tests.Test
             bool result = repository.IsCorrectToken(correctToken);
             Assert.IsTrue(result);
         }
+         [TestMethod]
+        public void TestNotValidToken()
+        {
+            Guid notExistToken = Guid.NewGuid();
+            bool result = repository.IsCorrectToken(notExistToken);
+            Assert.IsFalse(result);
+        }
     }
 }
