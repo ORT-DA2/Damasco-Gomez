@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using System.Diagnostics.CodeAnalysis;
 using System.Linq;
 using Domain;
 using Domain.Entities;
@@ -7,8 +8,11 @@ namespace Model.Out
 {
     public class CategoryDetailInfoModel
     {
+        [ExcludeFromCodeCoverageAttribute]
         public int Id {get; private set;}
+        [ExcludeFromCodeCoverageAttribute]
         public string Name {get; private set;}
+        [ExcludeFromCodeCoverageAttribute]
         public List<TouristPointDetailInfoModel> TouristPoints {get; private set;}
 
         public CategoryDetailInfoModel(Category category)
