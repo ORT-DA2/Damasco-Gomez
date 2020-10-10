@@ -151,5 +151,25 @@ namespace Domain.Test.Test
 
             Assert.AreEqual(random,newBooking.Code);
         }
+        [TestMethod]
+        public void TestState()
+        {
+            string stateNew = "state";
+            Booking newBooking = new Booking()
+            {
+                Name = null,
+                Email = null,
+                HouseId = 0,
+                State = stateNew,
+                Price = 0,
+                Code = null,
+                CheckIn = DateTime.MinValue,
+                CheckOut = DateTime.Today,
+            };
+
+            booking.Update(newBooking);
+
+            Assert.AreEqual(stateNew, newBooking.State);
+        }
     }
 }

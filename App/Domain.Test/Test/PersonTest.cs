@@ -42,5 +42,18 @@ namespace Domain.Test.Test
 
             Assert.AreEqual(newPerson.Password, person.Password);
         }
+        [TestMethod]
+        public void TestId()
+        {
+            int id = 1;
+            Person newPerson = new Person()
+            {
+                Id = id,
+                Email = null,
+                Password = "new p",
+            };
+
+            Assert.AreEqual(id, person.Id);
+        }
     }
 }

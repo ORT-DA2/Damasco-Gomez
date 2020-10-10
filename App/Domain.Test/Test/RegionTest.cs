@@ -41,6 +41,18 @@ namespace Domain.Test.Test
 
             Assert.AreEqual(nameShouldBe, region.Name);
         }
+        [TestMethod]
+        public void TestId()
+        {
+            int id = 1;
+            Region newRegion = new Region()
+            {
+                Id = id,
+                Name = null,
+            };
+
+            Assert.AreEqual(id, region.Id);
+        }
         // [TestMethod]
         // public void TestUpdateTouristPoints()
         // {
