@@ -19,7 +19,7 @@ namespace DataAccess.Repositories
 
         protected override void Validate(House element)
         {
-            if (element == null) 
+            if (element == null)
             {
                 throw new ArgumentException("House is empty");
             }
