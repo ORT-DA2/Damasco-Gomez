@@ -61,6 +61,10 @@ namespace BusinessLogic.Logics
             {
                 throw new ArgumentException("There is no House with id : " + houseId);
             }
+            if(!this.houseRepository.Find(houseId).IsAvailable())
+            {
+                throw new ArgumentException("The house is not available");
+            }
         }
     }
 }
