@@ -25,7 +25,6 @@ namespace DataAccess.Repositories
             this.context.SaveChanges();
             return element;
         }
-        [ExcludeFromCodeCoverage]
         public void UpdateInContext(T element)
         {
             this.dbSet.Update(element);

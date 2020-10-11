@@ -48,7 +48,6 @@ namespace BusinessLogic
         }
         public Category Update(int id, Category category)
         {
-            //Validate(category);
             Category categoryBd = this.categoryRepository.Find(id);
             if (category.CategoryTouristPoints != null)
             {

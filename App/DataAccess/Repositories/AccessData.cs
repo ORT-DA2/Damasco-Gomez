@@ -58,12 +58,7 @@ namespace DataAccess.Repositories
 
         public void Update(int id , T element)
         {
-            T findElement = repository.FindInRepository(id);
-            if (findElement == null)
-            {
-                throw new ArgumentException("No element with that id");
-            }
-            Update(findElement,element);
+           repository.UpdateInContext(element);
         }
 
         public List<T> GetElements()
