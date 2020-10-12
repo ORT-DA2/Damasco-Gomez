@@ -1,7 +1,9 @@
+using System.Diagnostics.CodeAnalysis;
 using Domain;
 
 namespace Model.Out
 {
+    [ExcludeFromCodeCoverage]
     public class TouristPointBasicInfoModel
     {
         public int Id {get; private set;}

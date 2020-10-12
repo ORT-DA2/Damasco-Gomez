@@ -6,13 +6,11 @@ using Domain.Entities;
 
 namespace Model.Out
 {
+    [ExcludeFromCodeCoverage]
     public class CategoryDetailInfoModel
     {
-        [ExcludeFromCodeCoverageAttribute]
         public int Id {get; private set;}
-        [ExcludeFromCodeCoverageAttribute]
         public string Name {get; private set;}
-        [ExcludeFromCodeCoverageAttribute]
         public List<TouristPointBasicInfoModel> TouristPoints {get; private set;}
 
         public CategoryDetailInfoModel(Category category)

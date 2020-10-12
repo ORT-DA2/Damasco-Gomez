@@ -1,8 +1,10 @@
 using System;
+using System.Diagnostics.CodeAnalysis;
 using Domain;
 
 namespace Model
 {
+    [ExcludeFromCodeCoverage]
     public class BookingModel
     {
         public string Name {get; set;}
