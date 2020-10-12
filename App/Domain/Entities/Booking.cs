@@ -62,7 +62,7 @@ namespace Domain
             bool priceZero = Price == 0;
             bool checkInEmpty = CheckIn == DateTime.MinValue;
             bool checkOutEmpty = CheckOut == DateTime.MinValue;
-            return nameNull || emailNull || houseIdZero || priceZero || checkInEmpty || checkOutEmpty ;
+            return nameNull && emailNull && houseIdZero && priceZero && checkInEmpty && checkOutEmpty ;
         }
     }
 

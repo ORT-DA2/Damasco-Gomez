@@ -244,7 +244,7 @@ namespace Domain.Test.Test
             
             bool empty = newBooking.IsEmpty();
 
-            Assert.IsTrue(empty);
+            Assert.IsFalse(empty);
         }
         [TestMethod]
         public void TestIsEmptyWithEmail()
@@ -262,7 +262,7 @@ namespace Domain.Test.Test
             
             bool empty = newBooking.IsEmpty();
 
-            Assert.IsTrue(empty);
+            Assert.IsFalse(empty);
         }
         [TestMethod]
         public void TestIsEmptyWithHouseId()
@@ -280,7 +280,7 @@ namespace Domain.Test.Test
             
             bool empty = newBooking.IsEmpty();
 
-            Assert.IsTrue(empty);
+            Assert.IsFalse(empty);
         }
         [TestMethod]
         public void TestIsEmptyWithPrice()
@@ -298,7 +298,7 @@ namespace Domain.Test.Test
             
             bool empty = newBooking.IsEmpty();
 
-            Assert.IsTrue(empty);
+            Assert.IsFalse(empty);
         }
         [TestMethod]
         public void TestIsEmptyWithCheckIn()
@@ -315,7 +315,7 @@ namespace Domain.Test.Test
             
             bool empty = newBooking.IsEmpty();
 
-            Assert.IsTrue(empty);
+            Assert.IsFalse(empty);
         }
         [TestMethod]
         public void TestIsEmptyWithCheckOut()
@@ -332,7 +332,7 @@ namespace Domain.Test.Test
             
             bool empty = newBooking.IsEmpty();
 
-            Assert.IsTrue(empty);
+            Assert.IsFalse(empty);
         }
         [TestMethod]
         public void TestIsEmptyFalse()
