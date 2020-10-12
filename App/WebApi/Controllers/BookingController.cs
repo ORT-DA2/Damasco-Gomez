@@ -46,7 +46,7 @@ namespace WebApi.Controllers
         [AuthorizationFilter]
         public IActionResult Put([FromRoute]int id,[FromBody]BookingModel booking)
         {
-            Booking newBooking = booking.ToEntity();
+            Booking newBooking = booking.ToEntity(false);
             newBooking = this.bookingLogic.Update(id, newBooking);
             BookingBasicModel basicModel = new BookingBasicModel(newBooking);
             return CreatedAtRoute("GetBooking", new {Id = basicModel.Id} , basicModel);

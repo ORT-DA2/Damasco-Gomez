@@ -4,6 +4,7 @@ using System.Linq;
 using DataAccess.Context;
 using DataAccess.Repositories;
 using Domain;
+using Domain.Entities;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 
@@ -30,7 +31,8 @@ namespace DataAccess.Tests.Test
                     Name = "Booking 1",
                     Email = "mail1@mail.com",
                     House = new House(){Avaible=true},
-                    State = "Init",
+                    StateId = 1,
+                    State = new State(){Id=1},
                     Price = 100,
                     CheckIn = new System.DateTime(),
                     CheckOut= new System.DateTime(),

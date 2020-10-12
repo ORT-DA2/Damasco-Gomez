@@ -18,6 +18,7 @@ namespace DataAccess.Repositories
         private IRepository<Region> regions;
         private IRepository<TouristPoint> touristPoints;
         private IRepository<SessionUser> sessions;
+        private IRepository<State> states;
         private bool isDispose = false;
         public RepositoryMaster(DbContext masterContext)
         {
@@ -103,6 +104,17 @@ namespace DataAccess.Repositories
                     this.sessions = new Repository<SessionUser>(context);
                 }
                 return this.sessions;
+            }
+        }
+        public  IRepository<State> States
+        {
+            get
+            {
+                if (states == null)
+                {
+                    this.states = new Repository<State>(context);
+                }
+                return this.states;
             }
         }
     }

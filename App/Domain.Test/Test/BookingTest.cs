@@ -16,7 +16,7 @@ namespace Domain.Test.Test
                     Name = "Other booking",
                     Email = "mail2@mail.com",
                     HouseId = 0,
-                    State = "Passed",
+                    StateId = 1,
                     Price = 200,
                     CheckIn = new System.DateTime(),
                     CheckOut= new System.DateTime(),
@@ -30,7 +30,7 @@ namespace Domain.Test.Test
                     Name = "new name booking",
                     Email = null,
                     HouseId = 0,
-                    State = null,
+                    StateId = 1,
                     Price = 0,
                     CheckIn = DateTime.MinValue,
                     CheckOut= DateTime.MinValue,
@@ -48,7 +48,7 @@ namespace Domain.Test.Test
                     Name = null,
                     Email = "new mail",
                     HouseId = 0,
-                    State = null,
+                    StateId = 1,
                     Price = 0,
                     CheckIn = DateTime.MinValue,
                     CheckOut= DateTime.MinValue,
@@ -66,7 +66,7 @@ namespace Domain.Test.Test
                     Name = null,
                     Email = null,
                     HouseId = 120,
-                    State = null,
+                    StateId = 1,
                     Price = 0,
                     CheckIn = DateTime.MinValue,
                     CheckOut= DateTime.MinValue,
@@ -84,7 +84,7 @@ namespace Domain.Test.Test
                     Name = null,
                     Email = null,
                     HouseId = 0,
-                    State = null,
+                    StateId = 1,
                     Price = 110,
                     CheckIn = DateTime.MinValue,
                     CheckOut= DateTime.MinValue,
@@ -102,7 +102,7 @@ namespace Domain.Test.Test
                     Name = null,
                     Email = null,
                     HouseId = 0,
-                    State = null,
+                    StateId = 1,
                     Price = 0,
                     CheckIn = DateTime.Today,
                     CheckOut= DateTime.MinValue,
@@ -120,7 +120,7 @@ namespace Domain.Test.Test
                     Name = null,
                     Email = null,
                     HouseId = 0,
-                    State = null,
+                    StateId = 1,
                     Price = 0,
                     CheckIn = DateTime.MinValue,
                     CheckOut= DateTime.Today,
@@ -140,7 +140,7 @@ namespace Domain.Test.Test
                     Name = null,
                     Email = null,
                     HouseId = 0,
-                    State = null,
+                    StateId = 1,
                     Price = 0,
                     Code = random,
                     CheckIn = DateTime.MinValue,
@@ -151,15 +151,15 @@ namespace Domain.Test.Test
             Assert.AreEqual(random,newBooking.Code);
         }
         [TestMethod]
-        public void TestState()
+        public void TestUpdateStateId()
         {
-            string stateNew = "state";
+            int stateNew = 2;
             Booking newBooking = new Booking()
             {
                 Name = null,
                 Email = null,
                 HouseId = 0,
-                State = stateNew,
+                StateId = stateNew,
                 Price = 0,
                 Code = null,
                 CheckIn = DateTime.MinValue,
@@ -168,7 +168,7 @@ namespace Domain.Test.Test
 
             booking.Update(newBooking);
 
-            Assert.AreEqual(stateNew, newBooking.State);
+            Assert.AreEqual(stateNew, newBooking.StateId);
         }
         [TestMethod]
         public void TestId()

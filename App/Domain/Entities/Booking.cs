@@ -1,6 +1,7 @@
 using System;
 using System.Diagnostics.CodeAnalysis;
 using System.Linq;
+using Domain.Entities;
 
 namespace Domain
 {
@@ -16,13 +17,10 @@ namespace Domain
 
         public int HouseId {get; set;}
         public virtual House House {get; set;}
-
-        public string State {get; set;}
-
+        public int StateId {get; set;}
+        public virtual State State {get; set;}
         public int Price {get; set;}
-
         public  DateTime CheckIn {get; set;}
-
         public DateTime CheckOut {get; set;}
         [ExcludeFromCodeCoverage]
         public override bool Equals(object obj)
@@ -39,9 +37,9 @@ namespace Domain
         {
             if(element.Name != null) this.Name = element.Name;
             if(element.Email != null) this.Email = element.Email;
-            if(element.State != null) this.State = element.State;
-            if(element.Price>0) this.Price = element.Price;
-            if(element.HouseId>0) this.HouseId = element.HouseId;
+            if(element.StateId > 0) this.StateId = element.StateId;
+            if(element.Price > 0) this.Price = element.Price;
+            if(element.HouseId > 0 ) this.HouseId = element.HouseId;
             if(element.CheckIn != null) this.CheckIn = element.CheckIn;
             if(element.CheckOut != null) this.CheckOut = element.CheckOut;
         }
