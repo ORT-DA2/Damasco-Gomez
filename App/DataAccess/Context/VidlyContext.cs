@@ -30,7 +30,7 @@ namespace DataAccess.Context
                 .SetBasePath(directory)
                 .AddJsonFile("appsettings.json")
                 .Build();
-                var connectionString = configuration.GetConnectionString(@"VidlyDB");
+                var connectionString = configuration.GetConnectionString(@"UruguayNaturalDB");
                 optionsBuilder.UseSqlServer(connectionString).UseLazyLoadingProxies();
 
             }
