@@ -66,6 +66,21 @@ namespace Domain
         {
             return this.Avaible;
         }
+        public bool IsEmpty()
+        {
+            bool nameNull = Name == null;
+            bool pricePerNightZero = PricePerNight == 0;
+            bool touristPointIdZero = TouristPointId == 0;
+            bool startsZero = Starts == 0;
+            bool addressNull = Address == null;
+            bool ilustrationsNull = Ilustrations == null;
+            bool descriptionNull = Description == null;
+            bool phoneZero = Phone == 0;
+            bool contactNull = Contact == null;
+            return nameNull && pricePerNightZero && touristPointIdZero && startsZero
+                && addressNull && ilustrationsNull && descriptionNull && phoneZero
+                && contactNull;
+        }
 
     }
 }

@@ -210,5 +210,146 @@ namespace Domain.Test.Test
 
             Assert.AreEqual(house, newBooking.House);
         }
+        [TestMethod]
+        public void TestIsEmpty()
+        {
+            Booking newBooking = new Booking()
+            {
+                Name = null,
+                Email = null,
+                HouseId = 0,
+                Price = 0,
+                Code = null,
+                CheckIn = DateTime.MinValue,
+                CheckOut = DateTime.MinValue,
+            };
+            
+            bool empty = newBooking.IsEmpty();
+
+            Assert.IsTrue(empty);
+        }
+        [TestMethod]
+        public void TestIsEmptyWithName()
+        {
+            Booking newBooking = new Booking()
+            {
+                Name = "name",
+                Email = null,
+                HouseId = 0,
+                Price = 0,
+                Code = null,
+                CheckIn = DateTime.MinValue,
+                CheckOut = DateTime.MinValue,
+            };
+            
+            bool empty = newBooking.IsEmpty();
+
+            Assert.IsFalse(empty);
+        }
+        [TestMethod]
+        public void TestIsEmptyWithEmail()
+        {
+            Booking newBooking = new Booking()
+            {
+                Name = null,
+                Email = "email",
+                HouseId = 0,
+                Price = 0,
+                Code = null,
+                CheckIn = DateTime.MinValue,
+                CheckOut = DateTime.MinValue,
+            };
+            
+            bool empty = newBooking.IsEmpty();
+
+            Assert.IsFalse(empty);
+        }
+        [TestMethod]
+        public void TestIsEmptyWithHouseId()
+        {
+            Booking newBooking = new Booking()
+            {
+                Name = null,
+                Email = null,
+                HouseId = 1,
+                Price = 0,
+                Code = null,
+                CheckIn = DateTime.MinValue,
+                CheckOut = DateTime.MinValue,
+            };
+            
+            bool empty = newBooking.IsEmpty();
+
+            Assert.IsFalse(empty);
+        }
+        [TestMethod]
+        public void TestIsEmptyWithPrice()
+        {
+            Booking newBooking = new Booking()
+            {
+                Name = null,
+                Email = null,
+                HouseId = 0,
+                Price = 120,
+                Code = null,
+                CheckIn = DateTime.MinValue,
+                CheckOut = DateTime.MinValue,
+            };
+            
+            bool empty = newBooking.IsEmpty();
+
+            Assert.IsFalse(empty);
+        }
+        [TestMethod]
+        public void TestIsEmptyWithCheckIn()
+        {
+            Booking newBooking = new Booking()
+            {
+                Name = null,
+                Email = null,
+                HouseId = 0,
+                Price = 0,
+                CheckIn = DateTime.Today,
+                CheckOut = DateTime.MinValue,
+            };
+            
+            bool empty = newBooking.IsEmpty();
+
+            Assert.IsFalse(empty);
+        }
+        [TestMethod]
+        public void TestIsEmptyWithCheckOut()
+        {
+            Booking newBooking = new Booking()
+            {
+                Name = null,
+                Email = null,
+                HouseId = 0,
+                Price = 0,
+                CheckIn = DateTime.MinValue,
+                CheckOut = DateTime.Today,
+            };
+            
+            bool empty = newBooking.IsEmpty();
+
+            Assert.IsFalse(empty);
+        }
+        [TestMethod]
+        public void TestIsEmptyFalse()
+        {
+            Booking newBooking = new Booking()
+            {
+                Name = "Name",
+                Email = "Email",
+                HouseId = 1,
+                Price = 10,
+                CheckIn = DateTime.Today,
+                CheckOut = DateTime.Today,
+            };
+            
+            bool empty = newBooking.IsEmpty();
+
+            Assert.IsFalse(empty);
+        }
     }
 }

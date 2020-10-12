@@ -5,7 +5,7 @@ select * from Categories ;
 select * from CategoryTouristPoint ;
 select * from TouristPoints;
 select * from Persons;
--- select * from Sessions;
+select * from Sessions;
 -- INSERT INTO Regions (Id, Name)
 -- VALUES (1, 'Name region 1');
 -- INSERT INTO Bookings (Id, Name, Email, Code, HouseId, State , Price , CheckIn , CheckOut)

@@ -3,11 +3,9 @@ using System.Collections.Generic;
 using System.Linq;
 using DataAccess.Context;
 using DataAccess.Repositories;
-using DataAccess.Tests.Utils;
 using Domain;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
-using Moq;
 
 namespace DataAccess.Tests.Test
 {
@@ -62,6 +60,7 @@ namespace DataAccess.Tests.Test
                 Id = 123,
                 Name="name new",
                 HouseId = 100 ,
+                Price = 10,
                 House = new House(){
                     Id = 100,
                     Avaible=true},
@@ -77,26 +76,13 @@ namespace DataAccess.Tests.Test
         }
         [TestMethod]
         [ExpectedException(typeof(ArgumentException))]
-        public void TestAddFailValidateHouseId()
-        {
-            Booking booking = new Booking(){
-                Id = 123,
-                Name="name new",
-                HouseId = 0,
-                CheckIn = DateTime.Today,
-                CheckOut= DateTime.Today
-                };
-
-            repository.Add(booking);
-        }
-        [TestMethod]
-        [ExpectedException(typeof(ArgumentException))]
         public void TestAddFailValidateHouseAvalaible()
         {
             Booking booking = new Booking(){
                 Id = 123,
                 Name="name new",
                 HouseId = 2,
+                Price = 10,
                 House = new House(){
                     Id = 2 ,
                     Avaible=false},
@@ -111,12 +97,15 @@ namespace DataAccess.Tests.Test
             Booking booking = new Booking(){
                 Id = 123,
                 Name="name new",
+                Price = 10,
                 HouseId = 1,
                 House = new House(){
                     Id = 1,
                     Avaible=false
                 },
-                CheckOut= DateTime.Today};
+                CheckIn = DateTime.MinValue,
+                CheckOut= DateTime.Today
+                };
 
             repository.Add(booking);
         }
@@ -127,8 +116,37 @@ namespace DataAccess.Tests.Test
             Booking booking = new Booking(){
                 Id = 123,
                 Name="name new",
+                Price = 10,
                 CheckIn = DateTime.Today,
-                CheckOut= DateTime.Today};
+                CheckOut= DateTime.MinValue};
+
+            repository.Add(booking);
+        }
+        [TestMethod]
+        [ExpectedException(typeof(ArgumentException))]
+        public void TestAddFailValidateName()
+        {
+            Booking booking = new Booking(){
+                Id = 123,
+                Name=null,
+                HouseId = 10,
+                CheckIn = DateTime.Today,
+                CheckOut= DateTime.Today
+                };
+
+            repository.Add(booking);
+        }
+        [TestMethod]
+        [ExpectedException(typeof(ArgumentException))]
+        public void TestAddFailValidatePrice()
+        {
+            Booking booking = new Booking(){
+                Id = 123,
+                Name="name new",
+                Price = 0,
+                CheckIn = DateTime.Today,
+                CheckOut= DateTime.Today
+                };
 
             repository.Add(booking);
         }
@@ -222,14 +240,6 @@ namespace DataAccess.Tests.Test
             repository.Update(booking.Id,booking);
 
             Assert.AreEqual(booking.Name,newName);
-        }
-        [TestMethod]
-        [ExpectedException(typeof(ArgumentException))]
-        public void TestUpdateFail()
-        {
-            Booking booking = new Booking(){Id = 13000};
-            
-            repository.Update(booking.Id,booking);
         }
         [TestMethod]
         public void TestDelete()
