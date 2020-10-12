@@ -29,68 +29,30 @@ namespace WebApi.Controllers
         [HttpGet("{id}",Name="GetCategory")]
         public IActionResult GetBy([FromRoute]int id)
         {
-            try
-            {
-                var elementCategory = this.categoryLogic.GetBy(id);
-                return Ok(new CategoryDetailInfoModel(elementCategory));
-            }
-            catch (ArgumentException)
-            {
-                return BadRequest("There is not a category with that id");
-            }
+            Category elementCategory = this.categoryLogic.GetBy(id);
+            return Ok(new CategoryDetailInfoModel(elementCategory));
         }
         [HttpPost()]
         [AuthorizationFilter]
         public IActionResult Post([FromBody]CategoryModel categoryModel)
         {
-            try
-            {
-                Category categoryAdded = this.categoryLogic.Add(categoryModel.ToEntity());
-                CategoryBasicInfoModel categoryInfoModel = new CategoryBasicInfoModel(categoryAdded);
-                return CreatedAtRoute("GetCategory", new {Id = categoryInfoModel.Id} ,categoryInfoModel);
-            }
-            catch (AggregateException)
-            {
-                return BadRequest("The category was already added");
-            }
-            catch (ArgumentException e)
-            {
-                return BadRequest("Error while validate : "+ e.Message.ToString());
-            }
-            catch (Exception)
-            {
-                return BadRequest("The server had an error");
-            }
+            Category categoryAdded = this.categoryLogic.Add(categoryModel.ToEntity());
+            CategoryBasicInfoModel categoryInfoModel = new CategoryBasicInfoModel(categoryAdded);
+            return CreatedAtRoute("GetCategory", new {Id = categoryInfoModel.Id} ,categoryInfoModel);
         }
         [HttpPut("{id}")]
         [AuthorizationFilter]
         public IActionResult Put([FromRoute]int id,[FromBody]CategoryModel categoryModel)
         {
-            try
-            {
-                Category newCategory = categoryModel.ToEntity();
-                newCategory = this.categoryLogic.Update(id,newCategory);
-                CategoryBasicInfoModel categoryInfoModel = new CategoryBasicInfoModel(newCategory);
-                return CreatedAtRoute("GetCategory", new {Id = categoryInfoModel.Id} ,categoryInfoModel);
-
-            }
-            catch(ArgumentException e)
-            {
-                return BadRequest("Error while validate : "+ e.Message.ToString());
-            }
-            catch (Exception)
-            {
-                return BadRequest("Internal server error");
-            }
+            Category newCategory = categoryModel.ToEntity();
+            newCategory = this.categoryLogic.Update(id,newCategory);
+            CategoryBasicInfoModel categoryInfoModel = new CategoryBasicInfoModel(newCategory);
+            return CreatedAtRoute("GetCategory", new {Id = categoryInfoModel.Id} ,categoryInfoModel);
         }
         [HttpDelete("{id}")]
         [AuthorizationFilter]
         public IActionResult Delete([FromRoute]int id)
         {
-            if (this.categoryLogic.GetBy(id) == null)
-            {
-                return NotFound();
-            }
             this.categoryLogic.Delete(id);
             return Ok();
         }

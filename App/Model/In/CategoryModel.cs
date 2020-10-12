@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using Domain;
@@ -11,7 +12,8 @@ namespace Model.In
         public  IEnumerable<int> TouristPoints {get; set;}
         public Category ToEntity()
         {
-            return new Category()
+            Category category =
+            new Category()
             {
                 Name= this.Name,
                 CategoryTouristPoints = this.TouristPoints.Select(m => new CategoryTouristPoint()
@@ -19,6 +21,8 @@ namespace Model.In
                     TouristPointId = m
                 }).ToList()
             };
+            if(category.IsEmpty()) throw new ArgumentException("No values");
+            return category;
         }
     }
 }

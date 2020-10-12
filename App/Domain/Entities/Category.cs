@@ -25,5 +25,10 @@ namespace Domain
         {
             if(element.Name != null) this.Name = element.Name;
         }
+        public bool IsEmpty()
+        {
+            bool nameNull = Name == null;
+            return nameNull;
+        }
     }
 }
