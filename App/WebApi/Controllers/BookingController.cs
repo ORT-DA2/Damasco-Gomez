@@ -55,10 +55,6 @@ namespace WebApi.Controllers
         [AuthorizationFilter]
         public IActionResult Delete([FromRoute]int id)
         {
-            if (this.bookingLogic.GetBy(id) == null)
-            {
-                return NotFound();
-            }
             this.bookingLogic.Delete(id);
             return Ok();
         }

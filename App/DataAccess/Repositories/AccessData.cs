@@ -41,7 +41,7 @@ namespace DataAccess.Repositories
         {
             if (!ExistElement(id))
             {
-                throw new ArgumentException();
+                throw new ArgumentException("There's not element with id "+id);
             }
             repository.Delete(id);
         }
