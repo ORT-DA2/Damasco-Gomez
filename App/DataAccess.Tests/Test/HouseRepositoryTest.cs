@@ -196,15 +196,6 @@ namespace DataAccess.Tests.Test
             Assert.AreEqual(house.Name,newName);
         }
         [TestMethod]
-        [ExpectedException(typeof(ArgumentException))]
-        public void TestUpdateFail()
-        {
-            House house = new House(){Id = 13000};
-            string newName = house.Name;
-
-            repository.Update(house.Id,house);
-        }
-        [TestMethod]
         public void TestDelete()
         {
             House house = housesToReturn.First();

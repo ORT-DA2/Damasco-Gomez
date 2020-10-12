@@ -167,15 +167,6 @@ namespace DataAccess.Tests.Test
             Assert.AreEqual(category.Name,newName);
         }
         [TestMethod]
-        [ExpectedException(typeof(ArgumentException))]
-        public void TestUpdateFail()
-        {
-            Category category = new Category(){Id = 13000};
-            string newName = category.Name;
-
-            repository.Update(category.Id,category);
-        }
-        [TestMethod]
         public void TestDelete()
         {
             Category category = categoriesToReturn.First();
