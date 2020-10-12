@@ -51,7 +51,7 @@ namespace DataAccess.Repositories
             var elementFind = repository.FindInRepository(id);
             if (elementFind == null)
             {
-                throw new ArgumentException("No element with that id "+ id);
+                throw new ArgumentException("No element with id "+ id);
             }
             return elementFind;
         }
