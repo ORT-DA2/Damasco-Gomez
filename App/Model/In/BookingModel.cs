@@ -7,7 +7,6 @@ namespace Model
     {
         public string Name {get; set;}
         public string Email {get; set;}
-        //public string Code {get; set;}
         public int HouseId {get; set;}
         public string State {get; set;}
         public int Price {get; set;}
@@ -15,7 +14,7 @@ namespace Model
         public DateTime CheckOut {get; set;}
         public Booking ToEntity()
         {
-            return new Booking()
+            Booking booking = new Booking()
             {
                 Name = this.Name,
                 Email = this.Email,
@@ -26,6 +25,8 @@ namespace Model
                 CheckIn = this.CheckIn,
                 CheckOut = this.CheckOut
             };
+            if(booking.IsEmpty()) throw new ArgumentException("No values");
+            return booking;
         }
     }
 }
