@@ -357,5 +357,209 @@ namespace Domain.Test.Test
 
             Assert.AreEqual(tourist, newHouse.TouristPoint);
         }
+        [TestMethod]
+        public void TestIsEmpty()
+        {
+            House newHouse = new House()
+                {
+                    PricePerNight = 0,
+                    TouristPointId = 0,
+                    Name = null,
+                    Starts = 0,
+                    Address = null,
+                    Ilustrations = null,
+                    Description = null,
+                    Phone = 0 ,
+                    Contact = null,
+                };
+
+            bool empty = newHouse.IsEmpty();
+
+            Assert.IsTrue(empty);
+        }
+        [TestMethod]
+        public void TestIsEmptyNotName()
+        {
+            House newHouse = new House()
+                {
+                    PricePerNight = 0,
+                    TouristPointId = 0,
+                    Name = "name",
+                    Starts = 0,
+                    Address = null,
+                    Ilustrations = null,
+                    Description = null,
+                    Phone = 0 ,
+                    Contact = null,
+                };
+
+            bool empty = newHouse.IsEmpty();
+
+            Assert.IsFalse(empty);
+        }
+
+        [TestMethod]
+        public void TestIsEmptyNotPricePerNight()
+        {
+            House newHouse = new House()
+                {
+                    PricePerNight = 10,
+                    TouristPointId = 0,
+                    Name = null,
+                    Starts = 0,
+                    Address = null,
+                    Ilustrations = null,
+                    Description = null,
+                    Phone = 0 ,
+                    Contact = null,
+                };
+
+            bool empty = newHouse.IsEmpty();
+
+            Assert.IsFalse(empty);
+        }
+
+        [TestMethod]
+        public void TestIsEmptyNotTouristPointId()
+        {
+            House newHouse = new House()
+                {
+                    PricePerNight = 0,
+                    TouristPointId = 20,
+                    Name = null,
+                    Starts = 0,
+                    Address = null,
+                    Ilustrations = null,
+                    Description = null,
+                    Phone = 0 ,
+                    Contact = null,
+                };
+
+            bool empty = newHouse.IsEmpty();
+
+            Assert.IsFalse(empty);
+        }
+        
+
+        [TestMethod]
+        public void TestIsEmptyNotStarts()
+        {
+            House newHouse = new House()
+                {
+                    PricePerNight = 0,
+                    TouristPointId = 0,
+                    Name = null,
+                    Starts = 10,
+                    Address = null,
+                    Ilustrations = null,
+                    Description = null,
+                    Phone = 0 ,
+                    Contact = null,
+                };
+
+            bool empty = newHouse.IsEmpty();
+
+            Assert.IsFalse(empty);
+        }
+        [TestMethod]
+        public void TestIsEmptyNotAddress()
+        {
+            House newHouse = new House()
+                {
+                    PricePerNight = 0,
+                    TouristPointId = 0,
+                    Name = null,
+                    Starts = 0,
+                    Address = "address",
+                    Ilustrations = null,
+                    Description = null,
+                    Phone = 0 ,
+                    Contact = null,
+                };
+
+            bool empty = newHouse.IsEmpty();
+
+            Assert.IsFalse(empty);
+        }
+        [TestMethod]
+        public void TestIsEmptyNotIlustration()
+        {
+            House newHouse = new House()
+                {
+                    PricePerNight = 0,
+                    TouristPointId = 0,
+                    Name = null,
+                    Starts = 0,
+                    Address = null,
+                    Ilustrations = "ilustrations",
+                    Description = null,
+                    Phone = 0 ,
+                    Contact = null,
+                };
+
+            bool empty = newHouse.IsEmpty();
+
+            Assert.IsFalse(empty);
+        }
+        [TestMethod]
+        public void TestIsEmptyNotDescription()
+        {
+            House newHouse = new House()
+                {
+                    PricePerNight = 0,
+                    TouristPointId = 0,
+                    Name = null,
+                    Starts = 0,
+                    Address = null,
+                    Ilustrations = null,
+                    Description = "description",
+                    Phone = 0 ,
+                    Contact = null,
+                };
+
+            bool empty = newHouse.IsEmpty();
+
+            Assert.IsFalse(empty);
+        }
+        [TestMethod]
+        public void TestIsEmptyNotPhone()
+        {
+            House newHouse = new House()
+                {
+                    PricePerNight = 0,
+                    TouristPointId = 0,
+                    Name = null,
+                    Starts = 0,
+                    Address = null,
+                    Ilustrations = null,
+                    Description = null,
+                    Phone = 10 ,
+                    Contact = null,
+                };
+
+            bool empty = newHouse.IsEmpty();
+
+            Assert.IsFalse(empty);
+        }
+        [TestMethod]
+        public void TestIsEmptyNotContact()
+        {
+            House newHouse = new House()
+                {
+                    PricePerNight = 0,
+                    TouristPointId = 0,
+                    Name = null,
+                    Starts = 0,
+                    Address = null,
+                    Ilustrations = null,
+                    Description = null,
+                    Phone = 0 ,
+                    Contact = "contact",
+                };
+
+            bool empty = newHouse.IsEmpty();
+
+            Assert.IsFalse(empty);
+        }
     }
 }

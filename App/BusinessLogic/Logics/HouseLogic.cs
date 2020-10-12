@@ -37,7 +37,7 @@ namespace BusinessLogic
 
         public House Add(House house)
         {
-            //Validate(house);
+            ValidateTouristPoint(house.TouristPointId);
             House houseAdded = this.houseRepository.Add(house);
             return houseAdded;
         }
