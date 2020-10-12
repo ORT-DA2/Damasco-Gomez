@@ -17,7 +17,7 @@ namespace Model
         public string Description {get ; set;}
         public int Phone {get; set; }
         public string Contact {get; set;}
-        public House ToEntity()
+        public House ToEntity(bool post = true)
         {
             House newHouse = new House()
             {
@@ -32,7 +32,7 @@ namespace Model
                 Phone = this.Phone,
                 Contact = this.Contact
             };
-            if (newHouse.IsEmpty()) throw new ArgumentException("The values are all empty");
+            if (post && newHouse.IsEmpty()) throw new ArgumentException("The values are all empty");
             return newHouse;
         }
     }

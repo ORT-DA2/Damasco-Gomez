@@ -66,7 +66,7 @@ namespace WebApi.Controllers
         [AuthorizationFilter]
         public IActionResult Put([FromRoute]int id,[FromBody]HouseModel houseModel)
         {
-            House house = houseModel.ToEntity();
+            House house = houseModel.ToEntity(false);
             house = this.houseLogic.Update(id,house);
             HouseBasicModel basicModel = new HouseBasicModel(house);
             return CreatedAtRoute("GetHouse", new {Id = basicModel.Id} , basicModel);

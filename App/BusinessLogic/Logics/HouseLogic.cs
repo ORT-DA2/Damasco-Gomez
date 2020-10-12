@@ -43,7 +43,7 @@ namespace BusinessLogic
         }
         public House Update(int id, House house)
         {
-            ValidateTouristPoint(house.TouristPointId);
+            if(house.TouristPointId > 0) ValidateTouristPoint(house.TouristPointId);
             House houseBD = this.houseRepository.Find(id);
             houseBD.Update(house);
             this.houseRepository.Update(id, houseBD);
