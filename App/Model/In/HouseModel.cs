@@ -1,8 +1,10 @@
 using System;
+using System.Diagnostics.CodeAnalysis;
 using Domain;
 
 namespace Model
 {
+    [ExcludeFromCodeCoverage]
     public class HouseModel
     {
         public bool Avaible {get ; set; }
@@ -15,9 +17,9 @@ namespace Model
         public string Description {get ; set;}
         public int Phone {get; set; }
         public string Contact {get; set;}
-        public House ToEntity()
+        public House ToEntity(bool post = true)
         {
-            return new House()
+            House newHouse = new House()
             {
                 Avaible = this.Avaible,
                 PricePerNight = this.PricePerNight,
@@ -30,6 +32,8 @@ namespace Model
                 Phone = this.Phone,
                 Contact = this.Contact
             };
+            if (post && newHouse.IsEmpty()) throw new ArgumentException("The values are all empty");
+            return newHouse;
         }
     }
 }

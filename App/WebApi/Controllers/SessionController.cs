@@ -20,24 +20,9 @@ namespace WebApi.Controllers
         [HttpPost()]
         public IActionResult Post([FromBody] PersonModel personModel)
         {
-            try
-            {
-                Person newPerson = personModel.ToEntity();
-                this.sessionLogic.Login(newPerson);
-                return Ok();
-            }
-            catch (AggregateException)
-            {
-                return BadRequest("The session was already added");
-            }
-            catch (ArgumentException e )
-            {
-                return BadRequest("Error while validate : "+ e.Message.ToString());
-            }
-            catch (Exception)
-            {
-                return BadRequest("The server had an error");
-            }
+            Person newPerson = personModel.ToEntity();
+            this.sessionLogic.Login(newPerson);
+            return Ok("User logged");
         }
     }
 }

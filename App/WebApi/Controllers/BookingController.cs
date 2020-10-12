@@ -29,78 +29,41 @@ namespace WebApi.Controllers
         [HttpGet("{id}",Name="GetBooking")]
         public IActionResult GetBy([FromRoute]int id)
         {
-            try
-            {
-                Booking elementBooking = this.bookingLogic.GetBy(id);
-                BookingDetailModel bookingModel = new BookingDetailModel(elementBooking);
-                return Ok(bookingModel);
-            }
-            catch (ArgumentException)
-            {
-                return BadRequest("There is not a booking with that id");
-            }
+            Booking elementBooking = this.bookingLogic.GetBy(id);
+            BookingDetailModel bookingModel = new BookingDetailModel(elementBooking);
+            return Ok(bookingModel);
         }
         [HttpPost]
         [AuthorizationFilter]
         public IActionResult Post([FromBody]BookingModel booking)
         {
-            try
-            {
-                Booking newBooking = booking.ToEntity();
-                var bookingAdded = this.bookingLogic.Add(newBooking);
-                BookingBasicModel basicModel = new BookingBasicModel(bookingAdded);
-                return CreatedAtRoute("GetBooking", new {Id = basicModel.Id} , basicModel);
-            }
-            catch (AggregateException)
-            {
-                return BadRequest("The booking was already added");
-            }
-            catch (ArgumentException e )
-            {
-                return BadRequest("Error while validate : "+ e.Message.ToString());
-            }
-            catch (Exception e)
-            {
-                return BadRequest("The server had an error"+ e.Message.ToString() );
-            }
+            Booking newBooking = booking.ToEntity();
+            newBooking = this.bookingLogic.Add(newBooking);
+            BookingBasicModel basicModel = new BookingBasicModel(newBooking);
+            return CreatedAtRoute("GetBooking", new {Id = basicModel.Id} , basicModel);
         }
         [HttpPut("{id}")]
         [AuthorizationFilter]
         public IActionResult Put([FromRoute]int id,[FromBody]BookingModel booking)
         {
-            try
-            {
-                Booking newBooking = booking.ToEntity();
-                newBooking = this.bookingLogic.Update(id, newBooking);
-                BookingBasicModel basicModel = new BookingBasicModel(newBooking);
-                return CreatedAtRoute("GetBooking", new {Id = basicModel.Id} , basicModel);
-            }
-            catch(ArgumentException e)
-            {
-                return BadRequest("Error while validate : "+ e.Message.ToString());
-            }
-            catch (Exception)
-            {
-                return BadRequest("Internal server error");
-            }
+            Booking newBooking = booking.ToEntity();
+            newBooking = this.bookingLogic.Update(id, newBooking);
+            BookingBasicModel basicModel = new BookingBasicModel(newBooking);
+            return CreatedAtRoute("GetBooking", new {Id = basicModel.Id} , basicModel);
         }
         [HttpDelete("{id}")]
         [AuthorizationFilter]
         public IActionResult Delete([FromRoute]int id)
         {
-            if (this.bookingLogic.GetBy(id) == null)
-            {
-                return NotFound();
-            }
             this.bookingLogic.Delete(id);
-            return Ok();
+            return Ok("Element was delete with id "+id);
         }
         [HttpDelete]
         [AuthorizationFilter]
         public IActionResult Delete()
         {
             this.bookingLogic.Delete();
-            return Ok();
+            return Ok("All data from Booking was");
         }
     }
 

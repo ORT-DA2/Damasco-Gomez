@@ -71,5 +71,29 @@ namespace Domain.Test.Test
 
             Assert.AreEqual(newCategory.Id, id);
         }
+        [TestMethod]
+        public void TestIsEmpty()
+        {
+            Category newCategory = new Category()
+            {
+                Name = null,
+            };
+            
+            bool empty = newCategory.IsEmpty();
+
+            Assert.IsTrue(empty);
+        }
+        [TestMethod]
+        public void TestIsEmptyWithName()
+        {
+            Category newCategory = new Category()
+            {
+                Name = "name",
+            };
+            
+            bool empty = newCategory.IsEmpty();
+
+            Assert.IsFalse(empty);
+        }
     }
 }

@@ -37,13 +37,13 @@ namespace BusinessLogic
 
         public House Add(House house)
         {
-            //Validate(house);
+            ValidateTouristPoint(house.TouristPointId);
             House houseAdded = this.houseRepository.Add(house);
             return houseAdded;
         }
         public House Update(int id, House house)
         {
-            ValidateTouristPoint(house.TouristPointId);
+            if(house.TouristPointId > 0) ValidateTouristPoint(house.TouristPointId);
             House houseBD = this.houseRepository.Find(id);
             houseBD.Update(house);
             this.houseRepository.Update(id, houseBD);

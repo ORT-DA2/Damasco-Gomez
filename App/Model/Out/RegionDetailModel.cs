@@ -1,7 +1,9 @@
+using System.Diagnostics.CodeAnalysis;
 using Domain;
 
 namespace Model.Out
 {
+    [ExcludeFromCodeCoverage]
     public class RegionDetailModel
     {
         public int Id {get; set;}

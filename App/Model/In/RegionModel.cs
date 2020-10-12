@@ -1,13 +1,11 @@
-using System.Collections.Generic;
 using System.Diagnostics.CodeAnalysis;
-using System.Linq;
 using Domain;
 
 namespace Model.In
 {
+    [ExcludeFromCodeCoverage]
     public class RegionModel
     {
-        [ExcludeFromCodeCoverageAttribute]
         public string Name {get; set;}
         //public List<int> TouristPoints {get; set;}
         public Region ToEntity()

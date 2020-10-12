@@ -162,15 +162,6 @@ namespace DataAccess.Tests.Test
             Assert.AreEqual(touristPoint.Name,newName);
         }
         [TestMethod]
-        [ExpectedException(typeof(ArgumentException))]
-        public void TestUpdateFail()
-        {
-            TouristPoint touristPoint = new TouristPoint(){Id = 13000};
-            string newName = touristPoint.Name;
-
-            repository.Update(touristPoint.Id,touristPoint);
-        }
-        [TestMethod]
         public void TestDelete()
         {
             TouristPoint touristPoint = touristPointsToReturn.First();

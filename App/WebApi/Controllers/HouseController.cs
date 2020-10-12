@@ -30,8 +30,9 @@ namespace WebApi.Controllers
             IEnumerable<HouseBasicModel> basicModels;
             if(houseSearchModel.NotNull())
             {
+                houseSearchModel.CheckAllParameters();
                 HouseSearch houseSearch = houseSearchModel.ToEntity();
-                // Get houses by tourist points
+                // Get houses by tourist point
                 varRet = this.houseLogic.GetHousesBy(houseSearch);
                 basicModels = varRet.
                     Select(m => new HouseBasicModel(m,houseSearch)).ToList();
@@ -48,79 +49,41 @@ namespace WebApi.Controllers
         [HttpGet("{id}",Name="GetHouse")]
         public IActionResult GetBy([FromRoute]int id)
         {
-            try
-            {
-                House elementHouse = this.houseLogic.GetBy(id);
-                HouseDetailModel modelHouse = new HouseDetailModel(elementHouse);
-                return Ok(modelHouse);
-            }
-            catch (ArgumentException)
-            {
-                return BadRequest("There is not a house with that id");
-            }
+            House elementHouse = this.houseLogic.GetBy(id);
+            HouseDetailModel modelHouse = new HouseDetailModel(elementHouse);
+            return Ok(modelHouse);
         }
-        [HttpPost()]
+        [HttpPost]
         [AuthorizationFilter]
-        //The post should have HouseModel , but will leave it like this
         public IActionResult Post([FromBody]HouseModel houseModel)
         {
-            try
-            {
-                House house = houseModel.ToEntity();
-                house = this.houseLogic.Add(house);
-                HouseBasicModel basicModel = new HouseBasicModel(house);
-                return CreatedAtRoute("GetHouse", new {Id = basicModel.Id}, basicModel);
-            }
-            catch (AggregateException)
-            {
-                return BadRequest("The house was already added");
-            }
-            catch (ArgumentException e)
-            {
-                return BadRequest("Error while validate " +  e.ToString());
-            }
-            catch (Exception e)
-            {
-                return BadRequest("The server had an error" +  e.ToString());
-            }
+            House house = houseModel.ToEntity();
+            house = this.houseLogic.Add(house);
+            HouseBasicModel basicModel = new HouseBasicModel(house);
+            return CreatedAtRoute("GetHouse", new {Id = basicModel.Id}, basicModel);
         }
         [HttpPut("{id}")]
         [AuthorizationFilter]
         public IActionResult Put([FromRoute]int id,[FromBody]HouseModel houseModel)
         {
-            try
-            {
-                House house = houseModel.ToEntity();
-                house = this.houseLogic.Update(id,house);
-                HouseBasicModel basicModel = new HouseBasicModel(house);
-                return CreatedAtRoute("GetHouse", new {Id = basicModel.Id} , basicModel);
-            }
-            catch(ArgumentException e)
-            {
-                return BadRequest("Error while validate : "+ e.Message.ToString());
-            }
-            catch (Exception e)
-            {
-                return BadRequest("Internal server error"  + e.Message.ToString());
-            }
+            House house = houseModel.ToEntity(false);
+            house = this.houseLogic.Update(id,house);
+            HouseBasicModel basicModel = new HouseBasicModel(house);
+            return CreatedAtRoute("GetHouse", new {Id = basicModel.Id} , basicModel);
         }
         [HttpDelete("{id}")]
         [AuthorizationFilter]
         public IActionResult Delete([FromRoute]int id)
         {
-            if (this.houseLogic.GetBy(id) == null)
-            {
-                return NotFound();
-            }
             this.houseLogic.Delete(id);
-            return Ok();
+            return Ok("Element was delete with id "+id);
         }
-        [HttpDelete()]
+        [HttpDelete]
         [AuthorizationFilter]
         public IActionResult Delete()
         {
             this.houseLogic.Delete();
-            return Ok();
+            return Ok("All data from House was");
         }
     }
 }
