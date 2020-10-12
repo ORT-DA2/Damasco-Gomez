@@ -1,8 +1,10 @@
 using System;
+using System.Diagnostics.CodeAnalysis;
 using Domain.Entities;
 
 namespace Model.In
 {
+    [ExcludeFromCodeCoverage]
     public class HouseSearchModel
     {
         public string CheckIn {get; set;}
@@ -26,8 +28,8 @@ namespace Model.In
 
         public DateTime ParseDateTime(string dateString)
         {
+            if (dateString.Length != 10 && !dateString.Contains("/")) throw new ArgumentException("Date is not in the right format");
             string[] parse = dateString.Split('/');
-            if (parse.Length != 3 && !dateString.Contains("/")) throw new ArgumentException("Date is not in the right format");
             int year = int.Parse(parse[2]);
             int month = int.Parse(parse[1]);
             int day = int.Parse(parse[0]);
@@ -37,8 +39,15 @@ namespace Model.In
         public bool NotNull()
         {
             bool notNull;
-            notNull = this.CheckIn != null && this.CheckOut!=null && this.TouristPointId > 0;
+            notNull = this.CheckIn != null || this.CheckOut!=null || this.TouristPointId > 0 ||
+                this.CantAdults > 0 || this.CantBabys > 0 || this.CantChildrens > 0;
             return notNull;
+        }
+        public void CheckAllParameters()
+        {
+            bool allParams;
+            allParams = this.CheckIn != null && this.CheckOut!=null && this.TouristPointId > 0;
+            if (!allParams) throw new ArgumentException("You need to put dates and tourist point id at least");
         }
 
     }
