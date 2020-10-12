@@ -82,19 +82,15 @@ namespace WebApi.Controllers
         [AuthorizationFilter]
         public IActionResult Delete([FromRoute]int id)
         {
-            if (this.touristPointLogic.GetBy(id) == null)
-            {
-                return NotFound();
-            }
             this.touristPointLogic.Delete(id);
-            return Ok();
+            return Ok("Element was delete with id "+id);
         }
-        [HttpDelete()]
+        [HttpDelete]
         [AuthorizationFilter]
         public IActionResult Delete()
         {
             this.touristPointLogic.Delete();
-            return Ok();
+            return Ok("All data from TouristPoint was");
         }
     }
 }

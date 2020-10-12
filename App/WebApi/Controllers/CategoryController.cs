@@ -54,14 +54,14 @@ namespace WebApi.Controllers
         public IActionResult Delete([FromRoute]int id)
         {
             this.categoryLogic.Delete(id);
-            return Ok();
+            return Ok("Element was delete with id "+id);
         }
-        [HttpDelete()]
+        [HttpDelete]
         [AuthorizationFilter]
         public IActionResult Delete()
         {
             this.categoryLogic.Delete();
-            return Ok();
+            return Ok("All data from Category was");
         }
     }
 }

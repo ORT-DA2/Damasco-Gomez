@@ -75,19 +75,15 @@ namespace WebApi.Controllers
         [AuthorizationFilter]
         public IActionResult Delete([FromRoute]int id)
         {
-            if (this.houseLogic.GetBy(id) == null)
-            {
-                return NotFound();
-            }
             this.houseLogic.Delete(id);
-            return Ok();
+            return Ok("Element was delete with id "+id);
         }
         [HttpDelete]
         [AuthorizationFilter]
         public IActionResult Delete()
         {
             this.houseLogic.Delete();
-            return Ok();
+            return Ok("All data from House was");
         }
     }
 }
