@@ -1,0 +1,145 @@
+--ALL 
+set IDENTITY_INSERT Regions ON
+INSERT INTO Regions (Id, Name)
+VALUES (1, 'Región metropolitana');
+INSERT INTO Regions (Id, Name)
+VALUES (2, 'Región Centro Sur');
+INSERT INTO Regions (Id, Name)
+VALUES (3, 'Región Este');
+INSERT INTO Regions (Id, Name)
+VALUES (4, 'Región Litoral Norte');
+INSERT INTO Regions (Id, Name)
+VALUES (5, 'Región “Corredor Pájaros Pintados”');
+set IDENTITY_INSERT Regions OFF
+set IDENTITY_INSERT Categories ON
+INSERT INTO Categories (Id,Name)
+VALUES (1,'Ciudad');
+INSERT INTO Categories (Id,Name)
+VALUES (2,'Pueblo');
+INSERT INTO Categories (Id,Name)
+VALUES (3,'Áreas protegida');
+INSERT INTO Categories (Id,Name)
+VALUES (4,'Playa');
+INSERT INTO Categories (Id,Name)
+VALUES (5,'Monte');
+INSERT INTO Categories (Id,Name)
+VALUES (6,'Montaña');
+INSERT INTO Categories (Id,Name)
+VALUES (7,'Desierto');
+INSERT INTO Categories (Id,Name)
+VALUES (8,'Laguna');
+INSERT INTO Categories (Id,Name)
+VALUES (9,'Puerto');
+set IDENTITY_INSERT Categories OFF
+set IDENTITY_INSERT Persons ON
+INSERT INTO Persons (Id,Email,[Password])
+VALUES (1,'emailPerson1','password1');
+INSERT INTO Persons (Id,Email,[Password])
+VALUES (2,'emailPerson2','password2');
+INSERT INTO Persons (Id,Email,[Password])
+VALUES (3,'emailPerson3','password3');
+INSERT INTO Persons (Id,Email,[Password])
+VALUES (4,'emailPerson4','password4');
+INSERT INTO Persons (Id,Email,[Password])
+VALUES (5,'emailPerson5','password5');
+INSERT INTO Persons (Id,Email,[Password])
+VALUES (6,'emailPerson6','password6');
+set IDENTITY_INSERT Persons OFF
+set IDENTITY_INSERT TouristPoints ON
+INSERT INTO TouristPoints (Id, Name,[Image],[Description],RegionId)
+VALUES (1, 'Name tourist point1', 'image', 'descripcion tourist point 1',1);
+INSERT INTO TouristPoints (Id, Name,[Image],[Description],RegionId)
+VALUES (2, 'Name tourist point2', 'image', 'descripcion tourist point 2',2);
+INSERT INTO TouristPoints (Id, Name,[Image],[Description],RegionId)
+VALUES (3, 'Name tourist point3', 'image', 'descripcion tourist point 3',3);
+INSERT INTO TouristPoints (Id, Name,[Image],[Description],RegionId)
+VALUES (4, 'Name tourist point4', 'image', 'descripcion tourist point 4',4);
+INSERT INTO TouristPoints (Id, Name,[Image],[Description],RegionId)
+VALUES (5, 'Name tourist point5', 'image', 'descripcion tourist point 5',1);
+INSERT INTO TouristPoints (Id, Name,[Image],[Description],RegionId)
+VALUES (6, 'Name tourist point6', 'image', 'descripcion tourist point 6',2);
+INSERT INTO TouristPoints (Id, Name,[Image],[Description],RegionId)
+VALUES (7, 'Name tourist point7', 'image', 'descripcion tourist point 7',3);
+INSERT INTO TouristPoints (Id, Name,[Image],[Description],RegionId)
+VALUES (8, 'Name tourist point8', 'image', 'descripcion tourist point 8',4);
+INSERT INTO TouristPoints (Id, Name,[Image],[Description],RegionId)
+VALUES (9, 'Name tourist point9', 'image', 'descripcion tourist point 9',1);
+set IDENTITY_INSERT TouristPoints OFF
+set IDENTITY_INSERT Houses ON
+INSERT INTO Houses (Id, Avaible, PricePerNight, Starts, Address, Ilustrations, Description, Phone, Contact, Name, TouristPointId)
+VALUES (1, 1, 10, 1, 'Address House 1', 'Ilustrations', 'Description', 099199399, 'Contact House 1', 'Name contact house 1', 1);
+INSERT INTO Houses (Id, Avaible, PricePerNight, Starts, Address, Ilustrations, Description, Phone, Contact, Name, TouristPointId)
+VALUES (2, 1, 20, 2, 'Address House 2', 'Ilustrations', 'Description', 099299399, 'Contact House 2', 'Name contact house 2', 2);
+INSERT INTO Houses (Id, Avaible, PricePerNight, Starts, Address, Ilustrations, Description, Phone, Contact, Name, TouristPointId)
+VALUES (3, 1, 30, 3, 'Address House 3', 'Ilustrations', 'Description', 099399399, 'Contact House 3', 'Name contact house 3', 3);
+INSERT INTO Houses (Id, Avaible, PricePerNight, Starts, Address, Ilustrations, Description, Phone, Contact, Name, TouristPointId)
+VALUES (4, 1, 40, 4, 'Address House 4', 'Ilustrations', 'Description', 099499399, 'Contact House 4', 'Name contact house 4', 4);
+INSERT INTO Houses (Id, Avaible, PricePerNight, Starts, Address, Ilustrations, Description, Phone, Contact, Name, TouristPointId)
+VALUES (5, 1, 50, 5, 'Address House 5', 'Ilustrations', 'Description', 099599399, 'Contact House 5', 'Name contact house 5', 5);
+INSERT INTO Houses (Id, Avaible, PricePerNight, Starts, Address, Ilustrations, Description, Phone, Contact, Name, TouristPointId)
+VALUES (6, 1, 60, 1, 'Address House 6', 'Ilustrations', 'Description', 099699399, 'Contact House 6', 'Name contact house 6', 6);
+INSERT INTO Houses (Id, Avaible, PricePerNight, Starts, Address, Ilustrations, Description, Phone, Contact, Name, TouristPointId)
+VALUES (7, 1, 70, 2, 'Address House 7', 'Ilustrations', 'Description', 099799399, 'Contact House 7', 'Name contact house 7', 7);
+INSERT INTO Houses (Id, Avaible, PricePerNight, Starts, Address, Ilustrations, Description, Phone, Contact, Name, TouristPointId)
+VALUES (8, 0, 80, 3, 'Address House 8', 'Ilustrations', 'Description', 099899399, 'Contact House 8', 'Name contact house 8', 8);
+INSERT INTO Houses (Id, Avaible, PricePerNight, Starts, Address, Ilustrations, Description, Phone, Contact, Name, TouristPointId)
+VALUES (9, 1, 10, 4, 'Address House 9', 'Ilustrations', 'Description', 099199399, 'Contact House 9', 'Name contact house 9', 1);
+INSERT INTO Houses (Id, Avaible, PricePerNight, Starts, Address, Ilustrations, Description, Phone, Contact, Name, TouristPointId)
+VALUES (10, 0, 20, 5, 'Address House 10', 'Ilustrations', 'Description', 099299399, 'Contact House 10', 'Name contact house 10', 2);
+INSERT INTO Houses (Id, Avaible, PricePerNight, Starts, Address, Ilustrations, Description, Phone, Contact, Name, TouristPointId)
+VALUES (11, 0, 30, 1, 'Address House 11', 'Ilustrations', 'Description', 099399399, 'Contact House 11', 'Name contact house 11', 3);
+INSERT INTO Houses (Id, Avaible, PricePerNight, Starts, Address, Ilustrations, Description, Phone, Contact, Name, TouristPointId)
+VALUES (12, 1, 40, 2, 'Address House 12', 'Ilustrations', 'Description', 099499399, 'Contact House 12', 'Name contact house 12', 4);
+INSERT INTO Houses (Id, Avaible, PricePerNight, Starts, Address, Ilustrations, Description, Phone, Contact, Name, TouristPointId)
+VALUES (13, 0, 50, 3, 'Address House 13', 'Ilustrations', 'Description', 099599399, 'Contact House 13', 'Name contact house 13', 5);
+INSERT INTO Houses (Id, Avaible, PricePerNight, Starts, Address, Ilustrations, Description, Phone, Contact, Name, TouristPointId)
+VALUES (14, 1, 60, 4, 'Address House 14', 'Ilustrations', 'Description', 099699399, 'Contact House 14', 'Name contact house 14', 6);
+INSERT INTO Houses (Id, Avaible, PricePerNight, Starts, Address, Ilustrations, Description, Phone, Contact, Name, TouristPointId)
+VALUES (15, 0, 70, 5, 'Address House 15', 'Ilustrations', 'Description', 099799399, 'Contact House 15', 'Name contact house 15', 7);
+INSERT INTO Houses (Id, Avaible, PricePerNight, Starts, Address, Ilustrations, Description, Phone, Contact, Name, TouristPointId)
+VALUES (16, 1, 80, 1, 'Address House 16', 'Ilustrations', 'Description', 099899399, 'Contact House 16', 'Name contact house 16', 8);
+set IDENTITY_INSERT Houses OFF
+set IDENTITY_INSERT CategoryTouristPoint ON
+INSERT INTO CategoryTouristPoint (Id, CategoryId, TouristPointId)
+VALUES (1,1,1);
+INSERT INTO CategoryTouristPoint (Id, CategoryId, TouristPointId)
+VALUES (2,1,2);
+INSERT INTO CategoryTouristPoint (Id, CategoryId, TouristPointId)
+VALUES (3,1,3);
+INSERT INTO CategoryTouristPoint (Id, CategoryId, TouristPointId)
+VALUES (4,1,4);
+INSERT INTO CategoryTouristPoint (Id, CategoryId, TouristPointId)
+VALUES (5,1,5);
+INSERT INTO CategoryTouristPoint (Id, CategoryId, TouristPointId)
+VALUES (6,1,6);
+INSERT INTO CategoryTouristPoint (Id, CategoryId, TouristPointId)
+VALUES (7,1,7);
+INSERT INTO CategoryTouristPoint (Id, CategoryId, TouristPointId)
+VALUES (8,2,1);
+INSERT INTO CategoryTouristPoint (Id, CategoryId, TouristPointId)
+VALUES (9,3,1);
+INSERT INTO CategoryTouristPoint (Id, CategoryId, TouristPointId)
+VALUES (10,4,1);
+INSERT INTO CategoryTouristPoint (Id, CategoryId, TouristPointId)
+VALUES (11,5,1);
+set IDENTITY_INSERT CategoryTouristPoint OFF
+set IDENTITY_INSERT Bookings ON
+INSERT INTO Bookings (Id, Name, Email, Code, HouseId, State , Price , CheckIn , CheckOut)
+VALUES (1, 'Name booking 1', 'emailBooking1@gmail.com', 'KFNRH8BOB9', 1, 'Checking data', 100,'2020-01-01 00:00:00.0000000','2020-01-09 00:00:00.0000000');
+INSERT INTO Bookings (Id, Name, Email, Code, HouseId, State , Price , CheckIn , CheckOut)
+VALUES (2, 'Name booking 2', 'emailBooking2@gmail.com', 'KFNRH8BOB9', 2, 'Checking data', 200,'2020-02-02 00:00:00.0000000','2020-02-09 00:00:00.0000000');
+INSERT INTO Bookings (Id, Name, Email, Code, HouseId, State , Price , CheckIn , CheckOut)
+VALUES (3, 'Name booking 3', 'emailBooking3@gmail.com', 'KFNRH8BOB9', 3, 'Checking data', 300,'2020-03-03 00:00:00.0000000','2020-03-09 00:00:00.0000000');
+INSERT INTO Bookings (Id, Name, Email, Code, HouseId, State , Price , CheckIn , CheckOut)
+VALUES (4, 'Name booking 4', 'emailBooking4@gmail.com', 'KFNRH8BOB9', 4, 'Checking data', 400,'2020-04-04 00:00:00.0000000','2020-04-09 00:00:00.0000000');
+INSERT INTO Bookings (Id, Name, Email, Code, HouseId, State , Price , CheckIn , CheckOut)
+VALUES (5, 'Name booking 5', 'emailBooking5@gmail.com', 'KFNRH8BOB9', 5, 'Checking data', 500,'2020-05-05 00:00:00.0000000','2020-05-09 00:00:00.0000000');
+INSERT INTO Bookings (Id, Name, Email, Code, HouseId, State , Price , CheckIn , CheckOut)
+VALUES (6, 'Name booking 6', 'emailBooking6@gmail.com', 'KFNRH8BOB9', 6, 'Checking data', 600,'2020-06-06 00:00:00.0000000','2020-06-09 00:00:00.0000000');
+INSERT INTO Bookings (Id, Name, Email, Code, HouseId, State , Price , CheckIn , CheckOut)
+VALUES (7, 'Name booking 7', 'emailBooking7@gmail.com', 'KFNRH8BOB9', 7, 'Checking data', 700,'2020-07-07 00:00:00.0000000','2020-07-09 00:00:00.0000000');
+INSERT INTO Bookings (Id, Name, Email, Code, HouseId, State , Price , CheckIn , CheckOut)
+VALUES (8, 'Name booking 8', 'emailBooking8@gmail.com', 'KFNRH8BOB9', 8, 'Checking data', 800,'2020-08-08 00:00:00.0000000','2020-08-09 00:00:00.0000000');
+INSERT INTO Bookings (Id, Name, Email, Code, HouseId, State , Price , CheckIn , CheckOut)
+VALUES (9, 'Name booking 9', 'emailBooking9@gmail.com', 'KFNRH8BOB9', 9, 'Checking data', 900,'2020-09-09 00:00:00.0000000','2020-09-09 00:00:00.0000000');
+set IDENTITY_INSERT Bookings OFF

@@ -1,0 +1,14 @@
+set IDENTITY_INSERT Persons ON
+INSERT INTO Persons (Id,Email,[Password])
+VALUES (1,'emailPerson1','password1');
+INSERT INTO Persons (Id,Email,[Password])
+VALUES (2,'emailPerson2','password2');
+INSERT INTO Persons (Id,Email,[Password])
+VALUES (3,'emailPerson3','password3');
+INSERT INTO Persons (Id,Email,[Password])
+VALUES (4,'emailPerson4','password4');
+INSERT INTO Persons (Id,Email,[Password])
+VALUES (5,'emailPerson5','password5');
+INSERT INTO Persons (Id,Email,[Password])
+VALUES (6,'emailPerson6','password6');
+set IDENTITY_INSERT Persons OFF

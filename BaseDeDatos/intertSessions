@@ -1,4 +1,0 @@
-set IDENTITY_INSERT Sessions ON
-INSERT INTO Sessions (Id,PersonId,Token)
-VALUES (1,1,'AGASd-ASDFASdf-DASDf');
-set IDENTITY_INSERT Sessions OFF
