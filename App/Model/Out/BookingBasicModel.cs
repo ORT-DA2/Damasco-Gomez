@@ -12,7 +12,7 @@ namespace Model
         public string Email {get; private set;}
         public string Code {get; private set;}
         public int HouseId {get; private set;}
-        public string State {get; private set;}
+        public int StateId {get; private set;}
         public int Price {get; private set;}
         public  DateTime CheckIn {get; private set;}
         public DateTime CheckOut {get; private set;}
@@ -23,7 +23,7 @@ namespace Model
             this.Email = booking.Email;
             this.Code = booking.Code;
             this.HouseId = booking.HouseId;
-            this.State = booking.State;
+            this.StateId = booking.StateId;
             this.Price = booking.Price;
             this.CheckIn = booking.CheckIn;
             this.CheckOut = booking.CheckOut;

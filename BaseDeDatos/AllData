@@ -1,4 +1,16 @@
 --ALL 
+set IDENTITY_INSERT State ON
+INSERT INTO State (Id, Name)
+VALUES (1, 'Creada');
+INSERT INTO State (Id, Name)
+VALUES (2, 'Pendiente Pago');
+INSERT INTO State (Id, Name)
+VALUES (3, 'Aceptada');
+INSERT INTO State (Id, Name)
+VALUES (4, 'Rechazada');
+INSERT INTO State (Id, Name)
+VALUES (5, 'Expirada');
+set IDENTITY_INSERT State OFF
 set IDENTITY_INSERT Regions ON
 INSERT INTO Regions (Id, Name)
 VALUES (1, 'Región metropolitana');
@@ -134,22 +146,22 @@ INSERT INTO CategoryTouristPoint (Id, CategoryId, TouristPointId)
 VALUES (11,5,1);
 set IDENTITY_INSERT CategoryTouristPoint OFF
 set IDENTITY_INSERT Bookings ON
-INSERT INTO Bookings (Id, Name, Email, Code, HouseId, State , Price , CheckIn , CheckOut)
-VALUES (1, 'Name booking 1', 'emailBooking1@gmail.com', 'KFNRH8BOB9', 1, 'Checking data', 100,'2020-01-01 00:00:00.0000000','2020-01-09 00:00:00.0000000');
-INSERT INTO Bookings (Id, Name, Email, Code, HouseId, State , Price , CheckIn , CheckOut)
-VALUES (2, 'Name booking 2', 'emailBooking2@gmail.com', 'KFNRH8BOB9', 2, 'Checking data', 200,'2020-02-02 00:00:00.0000000','2020-02-09 00:00:00.0000000');
-INSERT INTO Bookings (Id, Name, Email, Code, HouseId, State , Price , CheckIn , CheckOut)
-VALUES (3, 'Name booking 3', 'emailBooking3@gmail.com', 'KFNRH8BOB9', 3, 'Checking data', 300,'2020-03-03 00:00:00.0000000','2020-03-09 00:00:00.0000000');
-INSERT INTO Bookings (Id, Name, Email, Code, HouseId, State , Price , CheckIn , CheckOut)
-VALUES (4, 'Name booking 4', 'emailBooking4@gmail.com', 'KFNRH8BOB9', 4, 'Checking data', 400,'2020-04-04 00:00:00.0000000','2020-04-09 00:00:00.0000000');
-INSERT INTO Bookings (Id, Name, Email, Code, HouseId, State , Price , CheckIn , CheckOut)
-VALUES (5, 'Name booking 5', 'emailBooking5@gmail.com', 'KFNRH8BOB9', 5, 'Checking data', 500,'2020-05-05 00:00:00.0000000','2020-05-09 00:00:00.0000000');
-INSERT INTO Bookings (Id, Name, Email, Code, HouseId, State , Price , CheckIn , CheckOut)
-VALUES (6, 'Name booking 6', 'emailBooking6@gmail.com', 'KFNRH8BOB9', 6, 'Checking data', 600,'2020-06-06 00:00:00.0000000','2020-06-09 00:00:00.0000000');
-INSERT INTO Bookings (Id, Name, Email, Code, HouseId, State , Price , CheckIn , CheckOut)
-VALUES (7, 'Name booking 7', 'emailBooking7@gmail.com', 'KFNRH8BOB9', 7, 'Checking data', 700,'2020-07-07 00:00:00.0000000','2020-07-09 00:00:00.0000000');
-INSERT INTO Bookings (Id, Name, Email, Code, HouseId, State , Price , CheckIn , CheckOut)
-VALUES (8, 'Name booking 8', 'emailBooking8@gmail.com', 'KFNRH8BOB9', 8, 'Checking data', 800,'2020-08-08 00:00:00.0000000','2020-08-09 00:00:00.0000000');
-INSERT INTO Bookings (Id, Name, Email, Code, HouseId, State , Price , CheckIn , CheckOut)
-VALUES (9, 'Name booking 9', 'emailBooking9@gmail.com', 'KFNRH8BOB9', 9, 'Checking data', 900,'2020-09-09 00:00:00.0000000','2020-09-09 00:00:00.0000000');
+INSERT INTO Bookings (Id, Name, Email, Code, HouseId, StateId , Price , CheckIn , CheckOut)
+VALUES (1, 'Name booking 1', 'emailBooking1@gmail.com', 'KFNRH8BOB9', 1, 1, 100,'2020-01-01 00:00:00.0000000','2020-01-09 00:00:00.0000000');
+INSERT INTO Bookings (Id, Name, Email, Code, HouseId, StateId , Price , CheckIn , CheckOut)
+VALUES (2, 'Name booking 2', 'emailBooking2@gmail.com', 'KFNRH8BOB9', 2, 2, 200,'2020-02-02 00:00:00.0000000','2020-02-09 00:00:00.0000000');
+INSERT INTO Bookings (Id, Name, Email, Code, HouseId, StateId , Price , CheckIn , CheckOut)
+VALUES (3, 'Name booking 3', 'emailBooking3@gmail.com', 'KFNRH8BOB9', 3, 3, 300,'2020-03-03 00:00:00.0000000','2020-03-09 00:00:00.0000000');
+INSERT INTO Bookings (Id, Name, Email, Code, HouseId, StateId , Price , CheckIn , CheckOut)
+VALUES (4, 'Name booking 4', 'emailBooking4@gmail.com', 'KFNRH8BOB9', 4, 4, 400,'2020-04-04 00:00:00.0000000','2020-04-09 00:00:00.0000000');
+INSERT INTO Bookings (Id, Name, Email, Code, HouseId, StateId , Price , CheckIn , CheckOut)
+VALUES (5, 'Name booking 5', 'emailBooking5@gmail.com', 'KFNRH8BOB9', 5, 1, 500,'2020-05-05 00:00:00.0000000','2020-05-09 00:00:00.0000000');
+INSERT INTO Bookings (Id, Name, Email, Code, HouseId, StateId , Price , CheckIn , CheckOut)
+VALUES (6, 'Name booking 6', 'emailBooking6@gmail.com', 'KFNRH8BOB9', 6, 2, 600,'2020-06-06 00:00:00.0000000','2020-06-09 00:00:00.0000000');
+INSERT INTO Bookings (Id, Name, Email, Code, HouseId, StateId , Price , CheckIn , CheckOut)
+VALUES (7, 'Name booking 7', 'emailBooking7@gmail.com', 'KFNRH8BOB9', 7, 3, 700,'2020-07-07 00:00:00.0000000','2020-07-09 00:00:00.0000000');
+INSERT INTO Bookings (Id, Name, Email, Code, HouseId, StateId , Price , CheckIn , CheckOut)
+VALUES (8, 'Name booking 8', 'emailBooking8@gmail.com', 'KFNRH8BOB9', 8, 4, 800,'2020-08-08 00:00:00.0000000','2020-08-09 00:00:00.0000000');
+INSERT INTO Bookings (Id, Name, Email, Code, HouseId, StateId , Price , CheckIn , CheckOut)
+VALUES (9, 'Name booking 9', 'emailBooking9@gmail.com', 'KFNRH8BOB9', 9, 1, 900,'2020-09-09 00:00:00.0000000','2020-09-09 00:00:00.0000000');
 set IDENTITY_INSERT Bookings OFF

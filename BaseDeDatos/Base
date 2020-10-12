@@ -3,6 +3,7 @@ select * from Bookings ;
 select * from Houses ;
 select * from Categories ;
 select * from CategoryTouristPoint ;
+select * from State;
 select * from TouristPoints;
 select * from Persons;
 select * from Sessions;
@@ -23,11 +24,11 @@ select * from Sessions;
 -- INSERT INTO Sessions (Id,PersonId,Token)
 -- VALUES (1,1,'AGASd-ASDFASdf-DASDf');
 
--- DELETE FROM Regions;
--- DELETE FROM Bookings;
--- DELETE FROM Houses;
--- DELETE FROM Categories;
--- DELETE FROM CategoryTouristPoint;
--- DELETE FROM TouristPoints;
--- DELETE FROM Persons;
--- DELETE FROM Sessions;
+DELETE FROM Regions;
+DELETE FROM Bookings;
+DELETE FROM Houses;
+DELETE FROM Categories;
+DELETE FROM CategoryTouristPoint;
+DELETE FROM TouristPoints;
+DELETE FROM Persons;
+DELETE FROM Sessions;

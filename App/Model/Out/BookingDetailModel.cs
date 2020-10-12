@@ -1,6 +1,8 @@
 using System;
 using System.Diagnostics.CodeAnalysis;
 using Domain;
+using Domain.Entities;
+using Model.Out;
 
 namespace Model
 {
@@ -14,7 +16,8 @@ namespace Model
         public string Code {get; private set;}
         public int HouseId {get; private set;}
         public HouseBasicModel House {get; private set;}
-        public string State {get; private set;}
+        public StateBasicModel State {get; private set;}
+        public int StateId {get; private set;}
         public int Price {get; private set;}
         public  DateTime CheckIn {get; private set;}
         public DateTime CheckOut {get; private set;}
@@ -26,7 +29,8 @@ namespace Model
             this.Code = booking.Code;
             this.HouseId = booking.HouseId;
             this.House = new HouseBasicModel(booking.House);
-            this.State = booking.State;
+            this.StateId = booking.StateId;
+            this.State = new StateBasicModel(booking.State);
             this.Price = booking.Price;
             this.CheckIn = booking.CheckIn;
             this.CheckOut = booking.CheckOut;
