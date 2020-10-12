@@ -30,7 +30,7 @@ namespace BusinessLogic.Logics
             if (personResult.Count==0)
             {
                 throw new ArgumentException("Email or password was not valid ");
-            
+            }
             person = personResult.First();
             Guid guid = Guid.NewGuid();
             List <SessionUser> sessions = this.sessionUserRepository.GetElements().FindAll(m=>m.PersonId==person.Id);
