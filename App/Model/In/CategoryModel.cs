@@ -12,15 +12,17 @@ namespace Model.In
         public  IEnumerable<int> TouristPoints {get; set;}
         public Category ToEntity()
         {
-            Category category =
-            new Category()
+            Category category = new Category()
             {
                 Name= this.Name,
-                CategoryTouristPoints = this.TouristPoints.Select(m => new CategoryTouristPoint()
+            };
+            if (this.TouristPoints != null)
+            {
+                category.CategoryTouristPoints = this.TouristPoints.Select(m => new CategoryTouristPoint()
                 {
                     TouristPointId = m
-                }).ToList()
-            };
+                }).ToList();
+            }
             if(category.IsEmpty()) throw new ArgumentException("No values");
             return category;
         }
