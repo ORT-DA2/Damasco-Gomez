@@ -13,6 +13,16 @@ namespace DataAccess.Repositories
 
         protected override void Validate(Booking element)
         {
+            bool priceZero = element.Price == 0;
+            if (priceZero)
+            {
+                throw new ArgumentException("Price should not be zero");
+            }
+            bool nameNull = element.Name==null;
+            if (nameNull)
+            {
+                throw new ArgumentException("Can't create a Booking without name");
+            }
             bool checkInAndOut = !element.CheckIn.Equals(DateTime.MinValue)
                 && !element.CheckOut.Equals(DateTime.MinValue);
             if (!checkInAndOut)
