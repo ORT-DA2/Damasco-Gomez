@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using DataAccessInterface.Repositories;
 using Domain;
 
@@ -37,7 +38,7 @@ namespace DataAccess.Repositories
         public IEnumerable<House> GetByIdTouristPoint(int idTP)
         {
             var result = this.repository.GetElementsInContext();
-            var resultToReturn = result.FindAll(kz=>kz.TouristPointId==idTP && kz.Avaible);
+            var resultToReturn = result.Where(house=> house.TouristPointId == idTP && house.Avaible);
             return resultToReturn;
         }
     }
