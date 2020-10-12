@@ -20,7 +20,7 @@ namespace WebApi.Controllers
 
         public PersonController(IPersonLogic personLogic)
         {
-            this.personLogic = personLogic; 
+            this.personLogic = personLogic;
         }
         public IActionResult Get()
         {
@@ -32,18 +32,11 @@ namespace WebApi.Controllers
         [HttpGet("{id}",Name="GetPerson")]
         public IActionResult GetBy([FromRoute]int id)
         {
-            try
-            {
-                Person elementPerson = this.personLogic.GetBy(id);
-                PersonBasicModel personBasicModel = new PersonBasicModel(elementPerson);
-                return Ok(personBasicModel);
-            }
-            catch (ArgumentException)
-            {
-                return BadRequest("There is not a booking with that id");
-            }
+            Person elementPerson = this.personLogic.GetBy(id);
+            PersonBasicModel personBasicModel = new PersonBasicModel(elementPerson);
+            return Ok(personBasicModel);
         }
-        [HttpPost()]
+        [HttpPost]
         public IActionResult Post([FromBody]PersonModel personModel)
         {
             try
@@ -69,37 +62,22 @@ namespace WebApi.Controllers
         [HttpPut("{id}")]
         public IActionResult Put([FromRoute]int id,[FromBody]PersonModel personModel)
         {
-            try
-            {
-                Person person = personModel.ToEntity();
-                person = this.personLogic.Update(id,person);
-                PersonBasicModel personBasicModel = new PersonBasicModel(person);
-                return CreatedAtRoute("GetPerson", new {Id = personBasicModel.Id} , personBasicModel);
-            }
-            catch(ArgumentException e)
-            {
-                return BadRequest("Error while validate : "+ e.Message.ToString());
-            }
-            catch (Exception)
-            {
-                return BadRequest("Internal server error");
-            }
+            Person person = personModel.ToEntity();
+            person = this.personLogic.Update(id,person);
+            PersonBasicModel personBasicModel = new PersonBasicModel(person);
+            return CreatedAtRoute("GetPerson", new {Id = personBasicModel.Id} , personBasicModel);
         }
         [HttpDelete("{id}")]
         public IActionResult Delete([FromRoute]int id)
         {
-            if (this.personLogic.GetBy(id) == null)
-            {
-                return NotFound();
-            }
             this.personLogic.Delete(id);
-            return Ok();
+            return Ok("Element was delete with id "+id);
         }
-        [HttpDelete()]
+        [HttpDelete]
         public IActionResult Delete()
         {
             this.personLogic.Delete();
-            return Ok();
+            return Ok("All data from Person was");
         }
     }
 }
