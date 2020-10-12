@@ -26,11 +26,11 @@ namespace BusinessLogic.Logics
         }
         public void Login(Person person)  
         {
-            List<Person> personResult = this.personRepository.GetElements().FindAll(kz=>kz.Email == person.Email);
+            List<Person> personResult = this.personRepository.GetElements().FindAll((p=>p.Email == person.Email && p.Password == person.Password));
             if (personResult.Count==0)
             {
-                throw new ArgumentException("User was not created");
-            }
+                throw new ArgumentException("Email or password was not valid ");
+            
             person = personResult.First();
             Guid guid = Guid.NewGuid();
             List <SessionUser> sessions = this.sessionUserRepository.GetElements().FindAll(m=>m.PersonId==person.Id);
