@@ -1,4 +1,5 @@
 using System;
+using Domain.Entities;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 
 namespace Domain.Test.Test
@@ -350,6 +351,25 @@ namespace Domain.Test.Test
             bool empty = newBooking.IsEmpty();
 
             Assert.IsFalse(empty);
+        }
+
+        [TestMethod]
+        public void TestState()
+        {
+            State state = new State() { Id = 1 };
+            Booking newBooking = new Booking()
+            {
+                Name = "Name",
+                Email = "Email",
+                HouseId = 1,
+                StateId = state.Id,
+                State = state,
+                Price = 10,
+                CheckIn = DateTime.Today,
+                CheckOut = DateTime.Today,
+            };
+
+            Assert.AreEqual(state, newBooking.State);
         }
     }
 }
