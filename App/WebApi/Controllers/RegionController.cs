@@ -9,7 +9,7 @@ using WebApi.Filters;
 
 namespace WebApi.Controllers
 {
-    [ApiController]
+
     [Route("api/regions")]
     public class RegionController : VidlyControllerBase
     {

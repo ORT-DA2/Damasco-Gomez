@@ -5,7 +5,6 @@ using Model.In;
 
 namespace WebApi.Controllers
 {
-    [ApiController]
     [Route("api/sessions")]
     public class SessionController : VidlyControllerBase
     {

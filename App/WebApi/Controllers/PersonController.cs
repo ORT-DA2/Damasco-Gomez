@@ -9,7 +9,6 @@ using Model.Out;
 
 namespace WebApi.Controllers
 {
-    [ApiController]
     [Route("api/persons")]
     public class PersonController : VidlyControllerBase
     {

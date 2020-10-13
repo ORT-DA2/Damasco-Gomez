@@ -8,7 +8,6 @@ using WebApi.Filters;
 
 namespace WebApi.Controllers
 {
-    [ApiController]
     [Route("api/bookings")]
     public class BookingController : VidlyControllerBase
     {
