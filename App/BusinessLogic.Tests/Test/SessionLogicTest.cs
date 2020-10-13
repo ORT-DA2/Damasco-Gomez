@@ -72,12 +72,16 @@ namespace BusinessLogic.Tests.Test
                     Password = "soyyo"
                 }
             };
+            SessionUser sessionToReturn = new SessionUser()
+            {
+
+            };
             mock2.Setup(m=>m.GetElements()).Returns(personResult);
             List <SessionUser> sessions = new List<SessionUser>();
             mock.Setup(mock=>mock.GetElements()).Returns(sessions);
-            mock.Setup(mock=>mock.Add(It.IsAny<SessionUser>()));
-            //sessionUserLogic.Login(personResult.First()); 
-            //mock.VerifyAll();
+            mock.Setup(mock=>mock.Add(It.IsAny<SessionUser>())).Returns(sessionToReturn);
+            sessionUserLogic.Login(personResult.First()); 
+            mock.VerifyAll();
        }
         [TestMethod]
         public void TestLoginExistPreviouslySession ()
@@ -100,11 +104,11 @@ namespace BusinessLogic.Tests.Test
                 },
             };
             Guid newGuid = Guid.NewGuid();
-            // mock2.Setup(m=>m.GetElements()).Returns(personResult);
-            // mock.Setup(mock=>mock.GetElements()).Returns(session2);
-            // mock3.Setup(mock=>mock.Update(newGuid));
-           // sessionUserLogic.Login(personResult.First()); 
-          //  mock.VerifyAll();
+            mock2.Setup(m=>m.GetElements()).Returns(personResult);
+            mock.Setup(mock=>mock.GetElements()).Returns(session2);
+            mock3.Setup(mock=>mock.Update(newGuid));
+           sessionUserLogic.Login(personResult.First()); 
+           mock.VerifyAll();
         }
     }
 }
