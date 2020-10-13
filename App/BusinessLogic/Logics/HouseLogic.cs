@@ -1,11 +1,9 @@
 using System;
 using System.Collections.Generic;
-using BusinessLogic.Logics;
 using BusinessLogicInterface;
 using DataAccessInterface.Repositories;
 using Domain;
 using Domain.Entities;
-using Model;
 
 namespace BusinessLogic
 {

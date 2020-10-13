@@ -1,10 +1,7 @@
-using System;
 using System.Collections.Generic;
 using BusinessLogicInterface;
 using DataAccessInterface.Repositories;
 using Domain;
-using Model.Out;
-
 namespace BusinessLogic
 {
     public class CategoryLogic :  ICategoryLogic

@@ -1,11 +1,8 @@
-
 using System;
 using System.Collections.Generic;
 using BusinessLogicInterface;
 using DataAccessInterface.Repositories;
 using Domain;
-using Model;
-
 namespace BusinessLogic.Logics
 {
     public class BookingLogic : IBookingLogic
