@@ -1,3 +1,4 @@
+using System;
 using Contracts;
 using Domain;
 using Microsoft.AspNetCore.Mvc;
@@ -14,7 +15,7 @@ namespace WebApi.Controllers
         {
             this.sessionLogic = sessionLogic;
         }
-        [HttpPost()]
+        [HttpPost]
         public IActionResult Post([FromBody] PersonModel personModel)
         {
             Person newPerson = personModel.ToEntity();
