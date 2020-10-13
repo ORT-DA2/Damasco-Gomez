@@ -2,7 +2,6 @@ using System;
 using System.Linq;
 using BusinessLogicInterface;
 using Domain;
-using Filters;
 using Microsoft.AspNetCore.Mvc;
 using Model.In;
 using Model.Out;

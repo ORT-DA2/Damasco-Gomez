@@ -1,11 +1,8 @@
-using System;
 using System.Collections.Generic;
 using System.Linq;
 using BusinessLogicInterface;
 using Domain;
-using Filters;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.AspNetCore.Mvc.Filters;
 using Model.In;
 using Model.Out;
 using WebApi.Filters;

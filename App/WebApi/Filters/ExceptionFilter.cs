@@ -1,10 +1,6 @@
 using System;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Filters;
-
-
-
-
 namespace Filters
 {
     public class ExceptionFilter : IExceptionFilter 
@@ -22,7 +18,6 @@ namespace Filters
                     StatusCode = 400,
                     Content = e.Message.ToString()
                 };
-                
             }
             catch(Exception)
             {
@@ -34,7 +29,5 @@ namespace Filters
             }
             // falta cachear el resto de las exceptions del sistema 
         }
-         
-
     }
 }
