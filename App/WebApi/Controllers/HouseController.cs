@@ -10,7 +10,6 @@ using WebApi.Filters;
 
 namespace WebApi.Controllers
 {
-    [ApiController]
     [Route("api/houses")]
     public class HouseController : VidlyControllerBase
     {

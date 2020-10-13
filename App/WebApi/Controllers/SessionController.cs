@@ -18,8 +18,8 @@ namespace WebApi.Controllers
         public IActionResult Post([FromBody] PersonModel personModel)
         {
             Person newPerson = personModel.ToEntity();
-            this.sessionLogic.Login(newPerson);
-            return Ok("User logged");
+            Guid token =this.sessionLogic.Login(newPerson);
+            return Ok(token);
         }
     }
 }
