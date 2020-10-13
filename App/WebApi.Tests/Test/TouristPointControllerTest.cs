@@ -124,16 +124,16 @@ namespace WebApi.Tests
         public void TestGetAllTouristPointsOk()
         {
             mock.Setup(m => m.GetAll()).Returns(touristPointsToReturn);
-            List<TouristPointDetailInfoModel> modelList = new List<TouristPointDetailInfoModel>();
+            List<TouristPointBasicInfoModel> modelList = new List<TouristPointBasicInfoModel>();
             foreach (var touristPoint in touristPointsToReturn)
             {
-                var model = new TouristPointDetailInfoModel(touristPoint);
+                var model = new TouristPointBasicInfoModel(touristPoint);
                 modelList.Add(model);
             }
 
             var result = controller.Get();
             var okResult = result as OkObjectResult;
-            var touristPoints = okResult.Value as IEnumerable<TouristPointDetailInfoModel>;
+            var touristPoints = okResult.Value as IEnumerable<TouristPointBasicInfoModel>;
 
             mock.VerifyAll();
             Assert.IsTrue(modelList.SequenceEqual(touristPoints));
@@ -143,12 +143,12 @@ namespace WebApi.Tests
         public void TestGetAllTouristPointsVacia()
         {
             mock.Setup(m => m.GetAll()).Returns(touristPointsToReturnEmpty);
-            List<TouristPointDetailInfoModel> empty = new List<TouristPointDetailInfoModel>(){};
+            List<TouristPointBasicInfoModel> empty = new List<TouristPointBasicInfoModel>(){};
 
             var result = controller.Get();
 
             var okResult = result as OkObjectResult;
-            var touristPoints = okResult.Value as IEnumerable<TouristPointDetailInfoModel>;
+            var touristPoints = okResult.Value as List<TouristPointBasicInfoModel>;
             mock.VerifyAll();
             Assert.IsTrue(touristPoints.SequenceEqual(empty));
         }
@@ -166,6 +166,7 @@ namespace WebApi.Tests
             Assert.IsTrue(touristPointId1.Equals(touristPointId1));
         }
         [TestMethod]
+        [ExpectedException(typeof(ArgumentException))]
         public void TestGetByNotFound()
         {
             int id = 4;
@@ -175,7 +176,7 @@ namespace WebApi.Tests
             var result = controller.GetBy(id);
 
             mock.VerifyAll();
-            Assert.IsInstanceOfType(result, typeof(BadRequestObjectResult));
+            //Assert.IsInstanceOfType(result, typeof(BadRequestObjectResult));
         }
         [TestMethod]
         public void TestPostOk()
@@ -189,7 +190,7 @@ namespace WebApi.Tests
                 Categories = new List<int>() { 1 }
             };
             touristPointId1 = touristPointModel.ToEntity();
-            TouristPointDetailInfoModel detailInfoModel = new TouristPointDetailInfoModel(touristPointId1);
+            TouristPointBasicInfoModel detailInfoModel = new TouristPointBasicInfoModel(touristPointId1);
             mock.Setup(m => m.Add(touristPointId1)).Returns(touristPointId1);
 
             var result = controller.Post(touristPointModel);
@@ -201,6 +202,7 @@ namespace WebApi.Tests
             Assert.AreEqual(okResult.Value, detailInfoModel);
         }
         [TestMethod]
+        [ExpectedException(typeof(AggregateException))]
         public void TestPostFailSameTouristPoint()
         {
             TouristPointModel touristPointModel = new TouristPointModel()
@@ -212,15 +214,16 @@ namespace WebApi.Tests
                 Categories = new List<int>(){1}
             };
             touristPointId1 = touristPointModel.ToEntity();
-            Exception exist = new AggregateException();
+            AggregateException exist = new AggregateException();
             mock.Setup(p => p.Add(touristPointId1)).Throws(exist);
 
             var result = controller.Post(touristPointModel);
 
             mock.VerifyAll();
-            Assert.IsInstanceOfType(result, typeof(BadRequestObjectResult));
+            //Assert.IsInstanceOfType(result, typeof(BadRequestObjectResult));
         }
         [TestMethod]
+        [ExpectedException(typeof(ArgumentException))]
         public void TestPostFailValidation()
         {
             TouristPointModel touristPointModel = new TouristPointModel()
@@ -238,9 +241,10 @@ namespace WebApi.Tests
             var result = controller.Post(touristPointModel);
 
             mock.VerifyAll();
-            Assert.IsInstanceOfType(result, typeof(BadRequestObjectResult));
+            //Assert.IsInstanceOfType(result, typeof(BadRequestObjectResult));
         }
         [TestMethod]
+        [ExpectedException(typeof(Exception))]
         public void TestPostFailServer()
         {
             TouristPointModel touristPointModel = new TouristPointModel()
@@ -258,7 +262,7 @@ namespace WebApi.Tests
             var result = controller.Post(touristPointModel);
 
             mock.VerifyAll();
-            Assert.IsInstanceOfType(result, typeof(BadRequestObjectResult));
+            //Assert.IsInstanceOfType(result, typeof(BadRequestObjectResult));
         }
         [TestMethod]
         public void TestPutOk()
@@ -273,7 +277,7 @@ namespace WebApi.Tests
                 Categories = new List<int>(){1}
             };
             touristPointId1 = touristPointModel.ToEntity();
-            TouristPointDetailInfoModel touristPointDetailInfoModel = new TouristPointDetailInfoModel(touristPointId1);
+            TouristPointBasicInfoModel touristPointBasicModel = new TouristPointBasicInfoModel(touristPointId1);
             mock.Setup(m => m.Update(id,touristPointId1)).Returns(touristPointId1);
 
             var result = controller.Put(id, touristPointModel);
@@ -282,9 +286,10 @@ namespace WebApi.Tests
             mock.VerifyAll();
             Assert.IsNotNull(okResult);
             Assert.AreEqual("GetTouristPoint", okResult.RouteName);
-            Assert.AreEqual(okResult.Value, touristPointDetailInfoModel);
+            Assert.AreEqual(okResult.Value, touristPointBasicModel);
         }
         [TestMethod]
+        [ExpectedException(typeof(ArgumentException))]
         public void TestPutFailValidate()
         {
             TouristPointModel touristPointModel = new TouristPointModel()
@@ -302,9 +307,10 @@ namespace WebApi.Tests
             var result = controller.Put(touristPointId1.Id, touristPointModel);
 
             mock.VerifyAll();
-            Assert.IsInstanceOfType(result, typeof(BadRequestObjectResult));
+            //Assert.IsInstanceOfType(result, typeof(BadRequestObjectResult));
         }
         [TestMethod]
+        [ExpectedException(typeof(ArgumentException))]
         public void TestPutFailServer()
         {
             TouristPointModel touristPointModel = new TouristPointModel()
@@ -316,13 +322,13 @@ namespace WebApi.Tests
                 Categories = new List<int>(){1}
             };
             touristPointId1 = touristPointModel.ToEntity();
-            Exception exist = new Exception();
+            ArgumentException exist = new ArgumentException();
             mock.Setup(p => p.Update(touristPointId1.Id,touristPointId1)).Throws(exist);
 
             var result = controller.Put(touristPointId1.Id, touristPointModel);
 
             mock.VerifyAll();
-            Assert.IsInstanceOfType(result, typeof(BadRequestObjectResult));
+            //Assert.IsInstanceOfType(result, typeof(BadRequestObjectResult));
         }
         [TestMethod]
         public void TestDeleteWithId()
@@ -352,7 +358,7 @@ namespace WebApi.Tests
             mock.Setup(mock=> mock.Delete());
 
             var result = controller.Delete();
-            
+
             Assert.IsNotNull(result);
         }
     }

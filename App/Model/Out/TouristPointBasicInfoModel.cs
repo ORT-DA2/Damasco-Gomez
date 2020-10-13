@@ -24,5 +24,14 @@ namespace Model.Out
             this.Description = touristPoint.Description;
             this.RegionId = touristPoint.RegionId;
         }
+        public override bool Equals(object obj)
+        {
+            var result = false;
+            if(obj is TouristPointBasicInfoModel touristPoint)
+            {
+                result = this.Id == touristPoint.Id ;
+            }
+            return result;
+        }
     }
 }
