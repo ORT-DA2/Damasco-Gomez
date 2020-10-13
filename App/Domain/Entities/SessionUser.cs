@@ -1,7 +1,9 @@
 using System;
+using System.Diagnostics.CodeAnalysis;
 
 namespace Domain.Entities
 {
+    [ExcludeFromCodeCoverage]
     public class SessionUser
     {
         public int Id {get; set;}
