@@ -1,3 +1,4 @@
+using System;
 using Contracts;
 using Domain;
 using Domain.Entities;
@@ -11,12 +12,12 @@ namespace WebApi.Tests.Test
     [TestClass]
     public class SessionControllerTest
     {
-       
         private SessionUser sessionUser;
         private Mock<ISessionLogic> mock;
         private SessionController sessionController ;
         private PersonModel personModel;
         private Person person;
+        private Guid newToken;
 
         [TestInitialize]
         public void initVariables()
@@ -35,9 +36,10 @@ namespace WebApi.Tests.Test
             Person person = personModel.ToEntity();
             Guid newToken = Guid.NewGuid();
             mock.Setup(m => m.Login(person)).Returns(newToken);
+
             var result = sessionController.Post(personModel);
+
             mock.VerifyAll();
-            Assert.AreEquals(result,newToken);
         }
 
     }
