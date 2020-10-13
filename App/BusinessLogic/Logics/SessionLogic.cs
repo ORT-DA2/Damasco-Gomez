@@ -24,7 +24,7 @@ namespace BusinessLogic.Logics
              return this.sessionUserRepository.IsCorrectToken(token);
 
         }
-        public void Login(Person person)  
+        public Guid Login(Person person)  
         {
             List<Person> personResult = this.personRepository.GetElements().FindAll((p=>p.Email == person.Email && p.Password == person.Password));
             if (personResult.Count==0)
@@ -47,6 +47,7 @@ namespace BusinessLogic.Logics
             {
                 sessions.First().Update(guid);
             }
+            return guid;
         }
     }
 }
