@@ -26,56 +26,28 @@ namespace WebApi.Controllers
         [HttpGet("{id}",Name="GetTouristPoint")]
         public IActionResult GetBy([FromRoute]int id)
         {
-            try
-            {
-                var elementTouristPoint = this.touristPointLogic.GetBy(id);
-                var model = new TouristPointDetailInfoModel(elementTouristPoint);
-                return Ok(model);
-            }
-            catch (ArgumentException)
-            {
-                return BadRequest("There is not a tourist point with that id");
-            }
+            var elementTouristPoint = this.touristPointLogic.GetBy(id);
+            var model = new TouristPointDetailInfoModel(elementTouristPoint);
+            return Ok(model);
         }
         [HttpPost()]
         [AuthorizationFilter]
         public IActionResult Post([FromBody]TouristPointModel touristPoint)
         {
-            try
-            {
-                var newTouristPoint = touristPoint.ToEntity();
-                var touristPointAdded = this.touristPointLogic.Add(newTouristPoint);
-                var touristPointModel = new TouristPointDetailInfoModel(touristPointAdded);
-                var routePost = CreatedAtRoute("GetTouristPoint", new {Id = touristPointAdded.Id} , touristPointModel);
-                return routePost;
-            }
-            catch (ArgumentException e)
-            {
-                return BadRequest("Error while validate : "+ e.Message.ToString());
-            }
-            catch (Exception)
-            {
-                return BadRequest("The server had an error");
-            }
+            var newTouristPoint = touristPoint.ToEntity();
+            var touristPointAdded = this.touristPointLogic.Add(newTouristPoint);
+            var touristPointModel = new TouristPointBasicInfoModel(touristPointAdded);
+            var routePost = CreatedAtRoute("GetTouristPoint", new {Id = touristPointAdded.Id} , touristPointModel);
+            return routePost;
         }
         [HttpPut("{id}")]
         [AuthorizationFilter]
         public IActionResult Put([FromRoute]int id,[FromBody]TouristPointModel touristPointModel)
         {
-            try
-            {
-                TouristPoint touristPoint = touristPointModel.ToEntity();
-                touristPoint = this.touristPointLogic.Update(id,touristPoint);
-                return CreatedAtRoute("GetTouristPoint", new {id =touristPoint.Id} ,new TouristPointDetailInfoModel(touristPoint));
-            }
-            catch(ArgumentException e )
-            {
-                return BadRequest("Error while validate : "+ e.Message.ToString());
-            }
-            catch (Exception)
-            {
-                return BadRequest("Internal server error");
-            }
+            TouristPoint touristPoint = touristPointModel.ToEntity();
+            touristPoint = this.touristPointLogic.Update(id,touristPoint);
+            TouristPointBasicInfoModel basicModel = new TouristPointBasicInfoModel(touristPoint);
+            return CreatedAtRoute("GetTouristPoint", new {id =basicModel.Id} ,basicModel);
         }
         [HttpDelete("{id}")]
         [AuthorizationFilter]
