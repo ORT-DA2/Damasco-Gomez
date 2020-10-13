@@ -29,6 +29,7 @@ namespace Factory.Factories
             services.AddScoped<IPersonRepository, PersonRepository>();
             services.AddScoped<IRegionRepository, RegionRepository>();
             services.AddScoped<ISessionUserRepository, SessionUserRepository>();
+            services.AddScoped<IStateRepository, StateRepository>();
             services.AddScoped<ITouristPointLogic, TouristPointLogic>();
             services.AddScoped<IBookingLogic, BookingLogic>();
             services.AddScoped<ICategoryLogic, CategoryLogic>();
