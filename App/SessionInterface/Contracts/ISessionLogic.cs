@@ -7,6 +7,6 @@ namespace Contracts
     {
         bool IsCorrectToken(Guid token);
 
-        void Login(Person person) ;
+        Guid Login(Person person) ;
     }
 }
