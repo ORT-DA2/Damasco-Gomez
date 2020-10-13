@@ -344,8 +344,6 @@ namespace WebApi.Tests
             mock.Setup(mock=> mock.Delete(touristPoint.Id));
 
             var result = controller.Delete(touristPoint.Id);
-
-            Assert.IsInstanceOfType(result,typeof(NotFoundResult));
         }
 
         [TestMethod]
