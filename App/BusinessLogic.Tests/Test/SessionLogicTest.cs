@@ -74,13 +74,15 @@ namespace BusinessLogic.Tests.Test
             };
             SessionUser sessionToReturn = new SessionUser()
             {
-
+                Token = Guid.NewGuid(),
             };
             mock2.Setup(m=>m.GetElements()).Returns(personResult);
             List <SessionUser> sessions = new List<SessionUser>();
             mock.Setup(mock=>mock.GetElements()).Returns(sessions);
             mock.Setup(mock=>mock.Add(It.IsAny<SessionUser>())).Returns(sessionToReturn);
-            sessionUserLogic.Login(personResult.First()); 
+            
+            Guid guidToReturn = sessionUserLogic.Login(personResult.First()); 
+
             mock.VerifyAll();
        }
         [TestMethod]
@@ -107,8 +109,10 @@ namespace BusinessLogic.Tests.Test
             mock2.Setup(m=>m.GetElements()).Returns(personResult);
             mock.Setup(mock=>mock.GetElements()).Returns(session2);
             mock3.Setup(mock=>mock.Update(newGuid));
-           sessionUserLogic.Login(personResult.First()); 
-           mock.VerifyAll();
+
+            Guid tokenAdded = sessionUserLogic.Login(personResult.First()); 
+
+            mock.VerifyAll();
         }
     }
 }
