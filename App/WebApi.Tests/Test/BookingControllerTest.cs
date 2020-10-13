@@ -30,8 +30,8 @@ namespace WebApi.Tests
                     Name = "New booking",
                     Email = "mail1@mail.com",
                     HouseId = 1,
-                    House = new House(){Id=1,Name="house in booking"},
-                    State = "Init",
+                    House = new House(){ Id=1, Name="house in booking"},
+                    StateId = 1,
                     Price = 100,
                     CheckIn = new System.DateTime(),
                     CheckOut= new System.DateTime(),
@@ -43,7 +43,7 @@ namespace WebApi.Tests
                     Email = "mail2@mail.com",
                     HouseId = 1,
                     House = new House(){Id=1,Name="house in booking"},
-                    State = "Passed",
+                    StateId = 1,
                     Price = 200,
                     CheckIn = new System.DateTime(),
                     CheckOut= new System.DateTime(),
@@ -55,7 +55,7 @@ namespace WebApi.Tests
                     Email = "mail3@mail.com",
                     HouseId = 1,
                     House = new House(){Id=1,Name="house in booking"},
-                    State = "Init",
+                    StateId = 1,
                     Price = 300,
                     CheckIn = new System.DateTime(),
                     CheckOut= new System.DateTime(),
@@ -67,7 +67,7 @@ namespace WebApi.Tests
                     Email = "mail4@mail.com",
                     HouseId = 1,
                     House = new House(){Id=1,Name="house in booking"},
-                    State = "Init",
+                    StateId = 3,
                     Price = 400,
                     CheckIn = new System.DateTime(),
                     CheckOut= new System.DateTime(),
@@ -139,13 +139,13 @@ namespace WebApi.Tests
                 Name = "Name Booking",
                 Email = "Email ",
                 HouseId = 1,
-                State = "Checking",
+                StateId = 1,
                 Price = 100,
                 CheckIn = DateTime.Today,
                 CheckOut = DateTime.Today
             };
             Booking booking = bookingModel.ToEntity();
-            mock.Setup(m => m.Add(bookingModel.ToEntity())).Returns(bookingModel.ToEntity());
+            mock.Setup(m => m.Add(bookingModel.ToEntity(true))).Returns(bookingModel.ToEntity());
             BookingBasicModel bookingBasic = new BookingBasicModel(booking);
 
             var result = controller.Post(bookingModel);
@@ -164,12 +164,12 @@ namespace WebApi.Tests
                 Name = "Name Booking",
                 Email = "Email ",
                 HouseId = 1,
-                State = "Checking",
+                StateId = 1,
                 Price = 100,
                 CheckIn = DateTime.Today,
                 CheckOut = DateTime.Today
             };
-            mock.Setup(p => p.Add(bookingModel.ToEntity())).Throws(exist);
+            mock.Setup(p => p.Add(bookingModel.ToEntity(true))).Throws(exist);
 
             var result = controller.Post(bookingModel);
 
@@ -184,12 +184,12 @@ namespace WebApi.Tests
                 Name = "Name Booking",
                 Email = "Email ",
                 HouseId = 1,
-                State = "Checking",
+                StateId = 1,
                 Price = 100,
                 CheckIn = DateTime.Today,
                 CheckOut = DateTime.Today
             };
-            mock.Setup(p => p.Add(bookingModel.ToEntity())).Throws(exist);
+            mock.Setup(p => p.Add(bookingModel.ToEntity(true))).Throws(exist);
 
             var result = controller.Post(bookingModel);
 
@@ -204,12 +204,12 @@ namespace WebApi.Tests
                 Name = "Name Booking",
                 Email = "Email ",
                 HouseId = 1,
-                State = "Checking",
+                StateId = 1,
                 Price = 100,
                 CheckIn = DateTime.Today,
                 CheckOut = DateTime.Today
             };
-            mock.Setup(p => p.Add(bookingModel.ToEntity())).Throws(exist);
+            mock.Setup(p => p.Add(bookingModel.ToEntity(true))).Throws(exist);
 
             var result = controller.Post(bookingModel);
 
@@ -223,12 +223,12 @@ namespace WebApi.Tests
                 Name = "Name Booking",
                 Email = "Email ",
                 HouseId = 1,
-                State = "Checking",
+                StateId = 1,
                 Price = 100,
                 CheckIn = DateTime.Today,
                 CheckOut = DateTime.Today
             };
-            Booking booking = bookingModel.ToEntity();
+            Booking booking = bookingModel.ToEntity(false);
             mock.Setup(m => m.Update(booking.Id,booking)).Returns(booking);
             BookingBasicModel bookingBasic = new BookingBasicModel(booking);
 
@@ -243,7 +243,7 @@ namespace WebApi.Tests
         public void TestPutFailValidate()
         {
             BookingModel bookingModel = new BookingModel();
-            Booking booking = bookingModel.ToEntity();
+            Booking booking = bookingModel.ToEntity(false);
             Exception exist = new ArgumentException();
             mock.Setup(p => p.Update(booking.Id,booking)).Throws(exist);
 
@@ -261,12 +261,12 @@ namespace WebApi.Tests
                 Name = "Name Booking",
                 Email = "Email ",
                 HouseId = 1,
-                State = "Checking",
+                StateId = 1,
                 Price = 100,
                 CheckIn = DateTime.Today,
                 CheckOut = DateTime.Today
             };
-            Booking booking = bookingModel.ToEntity();
+            Booking booking = bookingModel.ToEntity(false);
             mock.Setup(p => p.Update(booking.Id,booking)).Throws(exist);
 
             var result = controller.Put(booking.Id,bookingModel);
