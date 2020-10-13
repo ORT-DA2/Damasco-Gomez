@@ -3,7 +3,6 @@ using System.Collections.Generic;
 using System.Linq;
 using DataAccess.Context;
 using DataAccess.Repositories;
-using DataAccess.Tests.Utils;
 using Domain;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
