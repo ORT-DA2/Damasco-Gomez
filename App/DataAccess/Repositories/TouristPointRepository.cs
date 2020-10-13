@@ -1,10 +1,6 @@
 using System;
-using System.Collections.Generic;
-using System.Linq;
 using DataAccessInterface.Repositories;
 using Domain;
-using Microsoft.EntityFrameworkCore;
-
 namespace DataAccess.Repositories
 {
     public class TouristPointRepository : AccessData<TouristPoint> , ITouristPointRepository
