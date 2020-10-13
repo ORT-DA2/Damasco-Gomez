@@ -1,8 +1,10 @@
 using System;
+using System.Diagnostics.CodeAnalysis;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Filters;
 namespace Filters
 {
+    [ExcludeFromCodeCoverage]
     public class ExceptionFilter : IExceptionFilter 
     {
         public void OnException(ExceptionContext context)
