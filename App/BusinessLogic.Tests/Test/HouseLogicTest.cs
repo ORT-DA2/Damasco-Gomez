@@ -5,7 +5,6 @@ using DataAccessInterface.Repositories;
 using Domain;
 using Domain.Entities;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
-using Model.In;
 using Moq;
 
 namespace BusinessLogic.Tests.Test
