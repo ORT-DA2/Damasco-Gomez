@@ -162,16 +162,6 @@ namespace BusinessLogic.Tests.Test
             mock.VerifyAll();
         }
         [TestMethod]
-        [ExpectedException(typeof(ArgumentException))]
-        public void TestAddNull()
-        {
-            TouristPoint touristPoint = null;
-
-            touristPointLogic.Add(touristPoint);
-
-            mock.VerifyAll();
-        }
-        [TestMethod]
         public void TestUpdateOk ()
         {
             TouristPoint touristPoint = touristPoints.First();

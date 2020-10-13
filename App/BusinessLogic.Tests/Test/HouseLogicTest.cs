@@ -240,16 +240,6 @@ namespace BusinessLogic.Tests.Test
         }
         [TestMethod]
         [ExpectedException(typeof(ArgumentException))]
-        public void TestValidateHouseNull()
-        {
-            House house = null;
-
-            houseLogic.Update(1, house);
-
-            mock.VerifyAll();
-        }
-        [TestMethod]
-        [ExpectedException(typeof(ArgumentException))]
         public void TestValidateNotExistHouse()
         {
             House house = housesToReturn.First();

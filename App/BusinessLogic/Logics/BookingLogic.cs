@@ -9,10 +9,13 @@ namespace BusinessLogic.Logics
     {
         private readonly IBookingRepository bookingRepository;
         private readonly IHouseRepository houseRepository;
-        public BookingLogic(IBookingRepository bookingRepository, IHouseRepository houseRepository)
+        private readonly IStateRepository stateRepository;
+        public BookingLogic(IBookingRepository bookingRepository, IHouseRepository houseRepository,
+            IStateRepository stateRepository)
         {
             this.bookingRepository = bookingRepository;
             this.houseRepository = houseRepository;
+            this.stateRepository = stateRepository;
         }
         public void Delete()
         {
@@ -38,7 +41,8 @@ namespace BusinessLogic.Logics
         }
         public Booking Update(int id, Booking booking)
         {
-            ValidateHouse(booking.HouseId);
+            if(booking.HouseId > 0) ValidateHouse(booking.HouseId);
+            if(booking.StateId >0) ValidateState(booking.StateId);
             Booking bookingBD = this.bookingRepository.Find(id);
             bookingBD.Update(booking);
             this.bookingRepository.Update(id, bookingBD);
@@ -61,6 +65,13 @@ namespace BusinessLogic.Logics
             if(!this.houseRepository.Find(houseId).IsAvailable())
             {
                 throw new ArgumentException("The house is not available");
+            }
+        }
+        public void ValidateState(int stateId)
+        {
+            if (!this.stateRepository.ExistElement(stateId))
+            {
+                throw new ArgumentException("State is not correct");
             }
         }
     }

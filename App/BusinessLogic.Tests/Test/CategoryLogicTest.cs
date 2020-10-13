@@ -127,15 +127,6 @@ namespace BusinessLogic.Tests.Test
             Assert.AreEqual(category, result );
         }
         [TestMethod]
-        [ExpectedException(typeof(ArgumentException))]
-        public void TestAddNull()
-        {
-            Category category = null;
-
-            Category result = categoryLogic.Add(category);
-
-        }
-        [TestMethod]
         public void TestAddValidateError()
         {
             Category category = categoriesToReturn.Last(); // Category tiene que terner un formato erroneo despues para que la validación falle
@@ -158,10 +149,11 @@ namespace BusinessLogic.Tests.Test
             mock.VerifyAll();
         }
         [TestMethod]
-        public void TestUdpateOk ()
+        public void TestUpdateOk ()
         {
             Category category = categoriesToReturn.First();
             mock.Setup(m => m.Update(category.Id,category));
+            mock.Setup(m => m.Find(category.Id)).Returns(category);
             mock2.Setup(m => m.Find(category.CategoryTouristPoints.First().TouristPointId)).Returns(category.CategoryTouristPoints.First().TouristPoint);
 
             Category result = categoryLogic.Update(category.Id,category);
@@ -169,21 +161,12 @@ namespace BusinessLogic.Tests.Test
             Assert.AreEqual(result,category);
         }
         [TestMethod]
-        public void TestUpdateValidateError()
-        {
-            Category category = categoriesToReturn.Last();
-            mock.Setup(m => m.Update(category.Id,category));
-
-            categoryLogic.Update(category.Id,category);
-
-            mock.VerifyAll();
-        }
-        [TestMethod]
         [ExpectedException(typeof(ArgumentException))]
         public void TestUpdateExistError()
         {
             Category category = categoriesToReturn.Last();
             ArgumentException exception = new ArgumentException();
+            mock.Setup(m => m.Find(category.Id)).Returns(category);
             mock.Setup(m => m.Update(category.Id,category)).Throws(exception);
 
             categoryLogic.Update(category.Id,category);

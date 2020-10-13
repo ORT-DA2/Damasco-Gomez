@@ -100,9 +100,9 @@ namespace BusinessLogic.Tests.Test
                 },
             };
             Guid newGuid = Guid.NewGuid();
-            mock2.Setup(m=>m.GetElements()).Returns(personResult);
-            mock.Setup(mock=>mock.GetElements()).Returns(session2);
-            mock3.Setup(mock=>mock.Update(newGuid));
+            // mock2.Setup(m=>m.GetElements()).Returns(personResult);
+            // mock.Setup(mock=>mock.GetElements()).Returns(session2);
+            // mock3.Setup(mock=>mock.Update(newGuid));
            // sessionUserLogic.Login(personResult.First()); 
           //  mock.VerifyAll();
         }

@@ -28,7 +28,7 @@ namespace Model
             booking.Code = Booking.RandomString();
             if(post) booking.StateId = 1;
             else booking.StateId = this.StateId;
-            if(booking.IsEmpty()) throw new ArgumentException("No values");
+            if(post && booking.IsEmpty()) throw new ArgumentException("No values");
             return booking;
         }
     }
