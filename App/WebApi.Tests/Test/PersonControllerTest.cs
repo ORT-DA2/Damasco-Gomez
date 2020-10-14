@@ -123,6 +123,7 @@ namespace WebApi.Tests
             Assert.AreEqual(okResult.Value, personBasicModel);
         }
         [TestMethod]
+        [ExpectedException(typeof(AggregateException))]
         public void TestPostFailSamePerson()
         {
             PersonModel personModel = new PersonModel()
@@ -140,6 +141,7 @@ namespace WebApi.Tests
             //Assert.IsInstanceOfType(result, typeof(BadRequestObjectResult));
         }
         [TestMethod]
+        [ExpectedException(typeof(ArgumentException))]
         public void TestPostFailValidation()
         {
             PersonModel personModel = new PersonModel()
@@ -148,7 +150,7 @@ namespace WebApi.Tests
                 Password = "psswd"
             };
             personId1 = personModel.ToEntity();
-            Exception exist = new ArgumentException();
+            ArgumentException exist = new ArgumentException();
             mock.Setup(p => p.Add(personId1)).Throws(exist);
 
             var result = controller.Post(personModel);
@@ -157,6 +159,7 @@ namespace WebApi.Tests
             //Assert.IsInstanceOfType(result, typeof(BadRequestObjectResult));
         }
         [TestMethod]
+        [ExpectedException(typeof(Exception))]
         public void TestPostFailServer()
         {
             PersonModel personModel = new PersonModel()
