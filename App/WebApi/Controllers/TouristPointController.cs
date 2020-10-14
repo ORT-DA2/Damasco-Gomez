@@ -17,6 +17,10 @@ namespace WebApi.Controllers
         {
             this.touristPointLogic = touristPointLogic;
         }
+        /// <summary>
+        /// Permite a un usuario obtener información de todas los puntos turisticos del sistema
+        /// </summary>
+        /// <response code="200">Se devuelve la información requerida</response>
         [HttpGet]
         public IActionResult Get()
         {
@@ -24,6 +28,12 @@ namespace WebApi.Controllers
             var model = elementTouristPoint.Select(m => new TouristPointBasicInfoModel(m)).ToList();
             return Ok(model);
         }
+        /// <summary>
+        /// Permite a un ususario ver un punto turistico del sistema
+        /// </summary>
+        /// <param name="id">Este parámetro contiene el identificador del punto turistico</param>
+        /// <response code="200">Se devuelve la información requerida.</response>
+        /// <response code="400">Reserva no existente con ese identificador</response>
         [HttpGet("{id}",Name="GetTouristPoint")]
         public IActionResult GetBy([FromRoute]int id)
         {
@@ -31,16 +41,29 @@ namespace WebApi.Controllers
             var model = new TouristPointDetailInfoModel(elementTouristPoint);
             return Ok(model);
         }
+        /// <summary>
+        /// Permite a un administrador realizar un punto turisticos
+        /// </summary>
+        /// <param name="touristPointModel">Este modelo contiene la información del punto turistico</param>
+        /// <response code="200">Se devuelve la información requerida.</response>
+        /// <response code="400">Reserva no existente con ese identificador</response>
         [HttpPost]
         [AuthorizationFilter]
-        public IActionResult Post([FromBody]TouristPointModel touristPoint)
+        public IActionResult Post([FromBody]TouristPointModel touristPointModel)
         {
-            var newTouristPoint = touristPoint.ToEntity();
+            var newTouristPoint = touristPointModel.ToEntity();
             var touristPointAdded = this.touristPointLogic.Add(newTouristPoint);
-            var touristPointModel = new TouristPointBasicInfoModel(touristPointAdded);
-            var routePost = CreatedAtRoute("GetTouristPoint", new {Id = touristPointAdded.Id} , touristPointModel);
+            var touristPointModelOut = new TouristPointBasicInfoModel(touristPointAdded);
+            var routePost = CreatedAtRoute("GetTouristPoint", new {Id = touristPointAdded.Id} , touristPointModelOut);
             return routePost;
         }
+        /// <summary>
+        /// Permite a un administrador modificar un punto turistico
+        /// </summary>
+        /// <param name="id">Este parámetro contiene el identificador del punto turistico</param>
+        /// <param name="touristPointModel">Este modelo contiene la información del punto turistico</param>
+        /// <response code="200">Se devuelve la información requerida.</response>
+        /// <response code="400">Reserva no existente con ese identificador</response>
         [HttpPut("{id}")]
         [AuthorizationFilter]
         public IActionResult Put([FromRoute]int id,[FromBody]TouristPointModel touristPointModel)
@@ -50,6 +73,12 @@ namespace WebApi.Controllers
             TouristPointBasicInfoModel basicModel = new TouristPointBasicInfoModel(touristPoint);
             return CreatedAtRoute("GetTouristPoint", new {id =basicModel.Id} ,basicModel);
         }
+        /// <summary>
+        /// Permite a un administrador eliminar un punto turistico
+        /// </summary>
+        /// <param name="id">Este parámetro contiene el identificador del punto turistico</param>
+        /// <response code="200">Se devuelve la información requerida.</response>
+        /// <response code="400">Reserva no existente con ese identificador</response>
         [HttpDelete("{id}")]
         [AuthorizationFilter]
         public IActionResult Delete([FromRoute]int id)
@@ -57,6 +86,10 @@ namespace WebApi.Controllers
             this.touristPointLogic.Delete(id);
             return Ok("Element was delete with id "+id);
         }
+        /// <summary>
+        /// Permite a un administrador eliminar todos los punto turisticos
+        /// </summary>
+        /// <response code="200">Se devuelve la información requerida.</response>
         [HttpDelete]
         [AuthorizationFilter]
         public IActionResult Delete()
