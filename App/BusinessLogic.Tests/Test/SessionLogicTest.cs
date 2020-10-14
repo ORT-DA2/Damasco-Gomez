@@ -84,7 +84,7 @@ namespace BusinessLogic.Tests.Test
             Guid guidToReturn = sessionUserLogic.Login(personResult.First()); 
 
             mock.VerifyAll();
-       }
+        }
         [TestMethod]
         public void TestLoginExistPreviouslySession ()
         {
@@ -110,6 +110,18 @@ namespace BusinessLogic.Tests.Test
             mock.Setup(mock=>mock.GetElements()).Returns(session2);
 
             Guid tokenAdded = sessionUserLogic.Login(personResult.First()); 
+
+            mock.VerifyAll();
+        }
+        [TestMethod]
+        [ExpectedException(typeof(ArgumentException))]
+        public void TestLoginNoPerson()
+        {
+            List<Person> personResult = new List<Person>();
+            Person person = new Person();
+            mock2.Setup(m=>m.GetElements()).Returns(personResult);
+            
+            Guid guidToReturn = sessionUserLogic.Login(person); 
 
             mock.VerifyAll();
         }
