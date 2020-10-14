@@ -69,6 +69,14 @@ namespace DataAccess.Tests.Test
         }
         [TestMethod]
         [ExpectedException(typeof(ArgumentException))]
+        public void TestAddFailValidateNull()
+        {
+            Category category = null;
+
+            repository.Add(category);
+        }
+        [TestMethod]
+        [ExpectedException(typeof(ArgumentException))]
         public void TestAddFailExist()
         {
             Category category = categoriesToReturn.First();
