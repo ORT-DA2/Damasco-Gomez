@@ -1,0 +1,1844 @@
+{
+	"id": "fb35cabd-9e86-45c7-b9f8-06a5728c0951",
+	"name": "ControllerTest-v2",
+	"timestamp": "2020-10-12T21:16:29.910Z",
+	"collection_id": "a22d2100-0df9-4186-84ec-330b05a016fd",
+	"folder_id": 0,
+	"environment_id": "afa16084-c957-4caf-b6e9-a696504ce099",
+	"totalPass": 0,
+	"totalFail": 0,
+	"results": [
+		{
+			"id": "7e68daa7-0437-4563-93a5-22c252b2704a",
+			"name": "GetElements",
+			"url": "http://localhost:5000/api/bookings",
+			"time": 20,
+			"responseCode": {
+				"code": 200,
+				"name": "OK"
+			},
+			"tests": {},
+			"testPassFailCounts": {},
+			"times": [
+				20
+			],
+			"allTests": [
+				{}
+			]
+		},
+		{
+			"id": "f09d460d-4b48-4c0a-af25-6523edd34b11",
+			"name": "GetElementById",
+			"url": "http://localhost:5000/api/bookings/1",
+			"time": 22,
+			"responseCode": {
+				"code": 200,
+				"name": "OK"
+			},
+			"tests": {},
+			"testPassFailCounts": {},
+			"times": [
+				22
+			],
+			"allTests": [
+				{}
+			]
+		},
+		{
+			"id": "4d6e2b23-dd6b-4863-9006-d5ca37e5e61e",
+			"name": "GetElementById Wrong ID",
+			"url": "http://localhost:5000/api/bookings/10000",
+			"time": 25,
+			"responseCode": {
+				"code": 400,
+				"name": "Bad Request"
+			},
+			"tests": {},
+			"testPassFailCounts": {},
+			"times": [
+				25
+			],
+			"allTests": [
+				{}
+			]
+		},
+		{
+			"id": "07b0882d-189e-43de-950b-3fd8b8ee5098",
+			"name": "PostElement",
+			"url": "http://localhost:5000/api/bookings/",
+			"time": 59,
+			"responseCode": {
+				"code": 201,
+				"name": "Created"
+			},
+			"tests": {},
+			"testPassFailCounts": {},
+			"times": [
+				59
+			],
+			"allTests": [
+				{}
+			]
+		},
+		{
+			"id": "45ba94d8-8319-41ab-be7b-7522a6b58314",
+			"name": "PostElement Empty",
+			"url": "http://localhost:5000/api/bookings/",
+			"time": 17,
+			"responseCode": {
+				"code": 400,
+				"name": "Bad Request"
+			},
+			"tests": {},
+			"testPassFailCounts": {},
+			"times": [
+				17
+			],
+			"allTests": [
+				{}
+			]
+		},
+		{
+			"id": "a66c41d0-ad36-4c58-be03-b24490725190",
+			"name": "PostHouseNotAvailable",
+			"url": "http://localhost:5000/api/bookings/",
+			"time": 26,
+			"responseCode": {
+				"code": 400,
+				"name": "Bad Request"
+			},
+			"tests": {},
+			"testPassFailCounts": {},
+			"times": [
+				26
+			],
+			"allTests": [
+				{}
+			]
+		},
+		{
+			"id": "6a7b599e-4a9b-4d05-921b-2f2c439520b1",
+			"name": "PostHouse No name",
+			"url": "http://localhost:5000/api/bookings/",
+			"time": 26,
+			"responseCode": {
+				"code": 400,
+				"name": "Bad Request"
+			},
+			"tests": {},
+			"testPassFailCounts": {},
+			"times": [
+				26
+			],
+			"allTests": [
+				{}
+			]
+		},
+		{
+			"id": "aec75f1e-46bd-4f58-9550-3d00b306ea28",
+			"name": "PostErrorNotHouse",
+			"url": "http://localhost:5000/api/bookings",
+			"time": 22,
+			"responseCode": {
+				"code": 400,
+				"name": "Bad Request"
+			},
+			"tests": {},
+			"testPassFailCounts": {},
+			"times": [
+				22
+			],
+			"allTests": [
+				{}
+			]
+		},
+		{
+			"id": "62da203c-3412-48cd-9b8b-3ddbfac7066f",
+			"name": "PostErrorNotHouse Validate Dates",
+			"url": "http://localhost:5000/api/bookings",
+			"time": 27,
+			"responseCode": {
+				"code": 400,
+				"name": "Bad Request"
+			},
+			"tests": {},
+			"testPassFailCounts": {},
+			"times": [
+				27
+			],
+			"allTests": [
+				{}
+			]
+		},
+		{
+			"id": "edcfbca2-ed2e-4c8a-bf36-b8ed07214e71",
+			"name": "PostError Empty",
+			"url": "http://localhost:5000/api/bookings",
+			"time": 11,
+			"responseCode": {
+				"code": 400,
+				"name": "Bad Request"
+			},
+			"tests": {},
+			"testPassFailCounts": {},
+			"times": [
+				11
+			],
+			"allTests": [
+				{}
+			]
+		},
+		{
+			"id": "9ae0f55b-8191-475c-bc82-e8d464655d6c",
+			"name": "PostErrorNoAuth",
+			"url": "http://localhost:5000/api/bookings",
+			"time": 3,
+			"responseCode": {
+				"code": 401,
+				"name": "Unauthorized"
+			},
+			"tests": {},
+			"testPassFailCounts": {},
+			"times": [
+				3
+			],
+			"allTests": [
+				{}
+			]
+		},
+		{
+			"id": "15b735c4-fa3c-4342-bc4b-31e91beae173",
+			"name": "PutElement",
+			"url": "http://localhost:5000/api/bookings/1",
+			"time": 98,
+			"responseCode": {
+				"code": 201,
+				"name": "Created"
+			},
+			"tests": {},
+			"testPassFailCounts": {},
+			"times": [
+				98
+			],
+			"allTests": [
+				{}
+			]
+		},
+		{
+			"id": "fa6c4846-debe-42c8-abed-ada63a88f195",
+			"name": "PutElement Empty",
+			"url": "http://localhost:5000/api/bookings/1",
+			"time": 26,
+			"responseCode": {
+				"code": 400,
+				"name": "Bad Request"
+			},
+			"tests": {},
+			"testPassFailCounts": {},
+			"times": [
+				26
+			],
+			"allTests": [
+				{}
+			]
+		},
+		{
+			"id": "b392b669-cfbc-4d4d-bdc8-e3115522cb5e",
+			"name": "PutErorArgument",
+			"url": "http://localhost:5000/api/bookings/100",
+			"time": 14,
+			"responseCode": {
+				"code": 400,
+				"name": "Bad Request"
+			},
+			"tests": {},
+			"testPassFailCounts": {},
+			"times": [
+				14
+			],
+			"allTests": [
+				{}
+			]
+		},
+		{
+			"id": "3f93f6c2-8470-47a6-b083-497618d6155c",
+			"name": "PutErrorAuth",
+			"url": "http://localhost:5000/api/bookings/10000",
+			"time": 8,
+			"responseCode": {
+				"code": 401,
+				"name": "Unauthorized"
+			},
+			"tests": {},
+			"testPassFailCounts": {},
+			"times": [
+				8
+			],
+			"allTests": [
+				{}
+			]
+		},
+		{
+			"id": "8d07887c-7494-4810-8975-b9b77c9c7407",
+			"name": "DeleteById",
+			"url": "http://localhost:5000/api/bookings/1",
+			"time": 52,
+			"responseCode": {
+				"code": 200,
+				"name": "OK"
+			},
+			"tests": {},
+			"testPassFailCounts": {},
+			"times": [
+				52
+			],
+			"allTests": [
+				{}
+			]
+		},
+		{
+			"id": "ce2af4a3-7a6d-4d1d-a2cf-312e389721bf",
+			"name": "DeleteByIdError",
+			"url": "http://localhost:5000/api/bookings/1000",
+			"time": 27,
+			"responseCode": {
+				"code": 400,
+				"name": "Bad Request"
+			},
+			"tests": {},
+			"testPassFailCounts": {},
+			"times": [
+				27
+			],
+			"allTests": [
+				{}
+			]
+		},
+		{
+			"id": "4b9e62c9-96e8-4744-965b-ebd7d698acbb",
+			"name": "DeleteNoAuth",
+			"url": "http://localhost:5000/api/bookings/1",
+			"time": 3,
+			"responseCode": {
+				"code": 401,
+				"name": "Unauthorized"
+			},
+			"tests": {},
+			"testPassFailCounts": {},
+			"times": [
+				3
+			],
+			"allTests": [
+				{}
+			]
+		},
+		{
+			"id": "f96d6f33-a66b-4d10-ae55-a579ef7df272",
+			"name": "GetElements",
+			"url": "http://localhost:5000/api/categories",
+			"time": 8,
+			"responseCode": {
+				"code": 200,
+				"name": "OK"
+			},
+			"tests": {},
+			"testPassFailCounts": {},
+			"times": [
+				8
+			],
+			"allTests": [
+				{}
+			]
+		},
+		{
+			"id": "67057b45-10bb-4507-a6c8-83b79d9cf369",
+			"name": "GetElementById",
+			"url": "http://localhost:5000/api/categories/1",
+			"time": 122,
+			"responseCode": {
+				"code": 200,
+				"name": "OK"
+			},
+			"tests": {},
+			"testPassFailCounts": {},
+			"times": [
+				122
+			],
+			"allTests": [
+				{}
+			]
+		},
+		{
+			"id": "e2c0ac3f-b5ea-4497-8be0-224a36ff7c4b",
+			"name": "PostElement",
+			"url": "http://localhost:5000/api/categories",
+			"time": 172,
+			"responseCode": {
+				"code": 201,
+				"name": "Created"
+			},
+			"tests": {},
+			"testPassFailCounts": {},
+			"times": [
+				172
+			],
+			"allTests": [
+				{}
+			]
+		},
+		{
+			"id": "2a47bc02-52c5-4315-8aaf-865deb9d1c07",
+			"name": "PostElement Copy",
+			"url": "http://localhost:5000/api/categories",
+			"time": 9,
+			"responseCode": {
+				"code": 400,
+				"name": "Bad Request"
+			},
+			"tests": {},
+			"testPassFailCounts": {},
+			"times": [
+				9
+			],
+			"allTests": [
+				{}
+			]
+		},
+		{
+			"id": "fb77c511-d2ea-4395-a34c-b94136488d37",
+			"name": "PostErrorNoTouristPointId",
+			"url": "http://localhost:5000/api/categories",
+			"time": 33,
+			"responseCode": {
+				"code": 400,
+				"name": "Bad Request"
+			},
+			"tests": {},
+			"testPassFailCounts": {},
+			"times": [
+				33
+			],
+			"allTests": [
+				{}
+			]
+		},
+		{
+			"id": "303d3e83-7063-48c6-b74d-d041c96b10db",
+			"name": "PostErrorNull",
+			"url": "http://localhost:5000/api/categories",
+			"time": 8,
+			"responseCode": {
+				"code": 400,
+				"name": "Bad Request"
+			},
+			"tests": {},
+			"testPassFailCounts": {},
+			"times": [
+				8
+			],
+			"allTests": [
+				{}
+			]
+		},
+		{
+			"id": "97a91777-8119-4aae-a07e-92c921cf9217",
+			"name": "PostErorNoAuth",
+			"url": "http://localhost:5000/api/categories",
+			"time": 4,
+			"responseCode": {
+				"code": 401,
+				"name": "Unauthorized"
+			},
+			"tests": {},
+			"testPassFailCounts": {},
+			"times": [
+				4
+			],
+			"allTests": [
+				{}
+			]
+		},
+		{
+			"id": "71212f70-930e-452d-bd88-c6b9c9e50308",
+			"name": "PostError Bad Token",
+			"url": "http://localhost:5000/api/categories",
+			"time": 3,
+			"responseCode": {
+				"code": 401,
+				"name": "Unauthorized"
+			},
+			"tests": {},
+			"testPassFailCounts": {},
+			"times": [
+				3
+			],
+			"allTests": [
+				{}
+			]
+		},
+		{
+			"id": "5cbf82f0-82b3-4e13-a098-c1f191e42873",
+			"name": "PutElement",
+			"url": "http://localhost:5000/api/categories/1",
+			"time": 126,
+			"responseCode": {
+				"code": 201,
+				"name": "Created"
+			},
+			"tests": {},
+			"testPassFailCounts": {},
+			"times": [
+				126
+			],
+			"allTests": [
+				{}
+			]
+		},
+		{
+			"id": "d5b89b95-efff-4727-b23e-bb8a7f468775",
+			"name": "PutElement Empty",
+			"url": "http://localhost:5000/api/categories/1",
+			"time": 16,
+			"responseCode": {
+				"code": 400,
+				"name": "Bad Request"
+			},
+			"tests": {},
+			"testPassFailCounts": {},
+			"times": [
+				16
+			],
+			"allTests": [
+				{}
+			]
+		},
+		{
+			"id": "78433827-23ed-497d-9aa4-1010b20658ae",
+			"name": "PutErorArgument",
+			"url": "http://localhost:5000/api/categories/1",
+			"time": 45,
+			"responseCode": {
+				"code": 400,
+				"name": "Bad Request"
+			},
+			"tests": {},
+			"testPassFailCounts": {},
+			"times": [
+				45
+			],
+			"allTests": [
+				{}
+			]
+		},
+		{
+			"id": "d29db6df-b106-45d9-a9d7-7e544ef2dbcd",
+			"name": "PutErrorNoParams",
+			"url": "http://localhost:5000/api/categories/1",
+			"time": 19,
+			"responseCode": {
+				"code": 400,
+				"name": "Bad Request"
+			},
+			"tests": {},
+			"testPassFailCounts": {},
+			"times": [
+				19
+			],
+			"allTests": [
+				{}
+			]
+		},
+		{
+			"id": "d1d3b434-fccf-4e86-8353-d2ba55140c06",
+			"name": "DeleteById",
+			"url": "http://localhost:5000/api/categories/1",
+			"time": 67,
+			"responseCode": {
+				"code": 200,
+				"name": "OK"
+			},
+			"tests": {},
+			"testPassFailCounts": {},
+			"times": [
+				67
+			],
+			"allTests": [
+				{}
+			]
+		},
+		{
+			"id": "b1f438a0-e058-4b57-8de4-31e6db7efbfa",
+			"name": "DeleteByIdError",
+			"url": "http://localhost:5000/api/categories/1",
+			"time": 19,
+			"responseCode": {
+				"code": 400,
+				"name": "Bad Request"
+			},
+			"tests": {},
+			"testPassFailCounts": {},
+			"times": [
+				19
+			],
+			"allTests": [
+				{}
+			]
+		},
+		{
+			"id": "49425966-bd7b-4b24-8b72-8333370be47b",
+			"name": "DeleteNoAuth",
+			"url": "http://localhost:5000/api/categories/1",
+			"time": 2,
+			"responseCode": {
+				"code": 401,
+				"name": "Unauthorized"
+			},
+			"tests": {},
+			"testPassFailCounts": {},
+			"times": [
+				2
+			],
+			"allTests": [
+				{}
+			]
+		},
+		{
+			"id": "0c78f95c-051d-48ea-9c14-7a058f469ccb",
+			"name": "GetElements",
+			"url": "http://localhost:5000/api/houses",
+			"time": 25,
+			"responseCode": {
+				"code": 200,
+				"name": "OK"
+			},
+			"tests": {},
+			"testPassFailCounts": {},
+			"times": [
+				25
+			],
+			"allTests": [
+				{}
+			]
+		},
+		{
+			"id": "3e6cb689-7936-48bd-a250-715e5f397691",
+			"name": "GetElementById",
+			"url": "http://localhost:5000/api/houses/1",
+			"time": 17,
+			"responseCode": {
+				"code": 200,
+				"name": "OK"
+			},
+			"tests": {},
+			"testPassFailCounts": {},
+			"times": [
+				17
+			],
+			"allTests": [
+				{}
+			]
+		},
+		{
+			"id": "bde7aa4e-b088-4274-b0a2-e5b5dd8343c9",
+			"name": "PostElement",
+			"url": "http://localhost:5000/api/houses",
+			"time": 72,
+			"responseCode": {
+				"code": 201,
+				"name": "Created"
+			},
+			"tests": {},
+			"testPassFailCounts": {},
+			"times": [
+				72
+			],
+			"allTests": [
+				{}
+			]
+		},
+		{
+			"id": "87c6f279-048f-4d56-b4a1-4ed8ff9c0e7a",
+			"name": "PostErrorNoTouristPointId",
+			"url": "http://localhost:5000/api/houses",
+			"time": 16,
+			"responseCode": {
+				"code": 400,
+				"name": "Bad Request"
+			},
+			"tests": {},
+			"testPassFailCounts": {},
+			"times": [
+				16
+			],
+			"allTests": [
+				{}
+			]
+		},
+		{
+			"id": "a8dbda38-0663-4218-a5ba-a470784e3f47",
+			"name": "PostErrorNoBody",
+			"url": "http://localhost:5000/api/houses",
+			"time": 22,
+			"responseCode": {
+				"code": 400,
+				"name": "Bad Request"
+			},
+			"tests": {},
+			"testPassFailCounts": {},
+			"times": [
+				22
+			],
+			"allTests": [
+				{}
+			]
+		},
+		{
+			"id": "473bcc29-f558-4132-a1f6-a49090f0f802",
+			"name": "PostErrorNoAuth",
+			"url": "http://localhost:5000/api/houses",
+			"time": 4,
+			"responseCode": {
+				"code": 401,
+				"name": "Unauthorized"
+			},
+			"tests": {},
+			"testPassFailCounts": {},
+			"times": [
+				4
+			],
+			"allTests": [
+				{}
+			]
+		},
+		{
+			"id": "ae3a51eb-d279-4e13-a4e9-0c6d71dbb1f3",
+			"name": "PutElement",
+			"url": "http://localhost:5000/api/houses/1",
+			"time": 81,
+			"responseCode": {
+				"code": 201,
+				"name": "Created"
+			},
+			"tests": {},
+			"testPassFailCounts": {},
+			"times": [
+				81
+			],
+			"allTests": [
+				{}
+			]
+		},
+		{
+			"id": "5f75bfed-158b-431c-8897-aedcf1c16c13",
+			"name": "PutElement Empty",
+			"url": "http://localhost:5000/api/houses/1",
+			"time": 12,
+			"responseCode": {
+				"code": 400,
+				"name": "Bad Request"
+			},
+			"tests": {},
+			"testPassFailCounts": {},
+			"times": [
+				12
+			],
+			"allTests": [
+				{}
+			]
+		},
+		{
+			"id": "18424960-3843-4ee3-8bfb-2855b3e1ccb5",
+			"name": "PutErorArgument",
+			"url": "http://localhost:5000/api/houses/1000",
+			"time": 29,
+			"responseCode": {
+				"code": 400,
+				"name": "Bad Request"
+			},
+			"tests": {},
+			"testPassFailCounts": {},
+			"times": [
+				29
+			],
+			"allTests": [
+				{}
+			]
+		},
+		{
+			"id": "7eaab9a9-34e5-47b5-baf8-571509bf76be",
+			"name": "PutErrorException",
+			"url": "http://localhost:5000/api/houses/2",
+			"time": 2,
+			"responseCode": {
+				"code": 401,
+				"name": "Unauthorized"
+			},
+			"tests": {},
+			"testPassFailCounts": {},
+			"times": [
+				2
+			],
+			"allTests": [
+				{}
+			]
+		},
+		{
+			"id": "b87d59b7-3803-44cc-849e-f82f78faa5dd",
+			"name": "DeleteById",
+			"url": "http://localhost:5000/api/houses/11",
+			"time": 69,
+			"responseCode": {
+				"code": 200,
+				"name": "OK"
+			},
+			"tests": {},
+			"testPassFailCounts": {},
+			"times": [
+				69
+			],
+			"allTests": [
+				{}
+			]
+		},
+		{
+			"id": "31e73766-569f-46c8-9355-79fa9000c3e5",
+			"name": "DeleteByIdError",
+			"url": "http://localhost:5000/api/houses/1",
+			"time": 69,
+			"responseCode": {
+				"code": 200,
+				"name": "OK"
+			},
+			"tests": {},
+			"testPassFailCounts": {},
+			"times": [
+				69
+			],
+			"allTests": [
+				{}
+			]
+		},
+		{
+			"id": "f5467004-5456-4e38-b273-3ad04abf54af",
+			"name": "GetSearch - CU1",
+			"url": "http://localhost:5000/api/houses?checkin=20/2/2020&checkout=27/2/2020&touristpointId=1&cantadults=1&cantchildrens=1&cantbabys=1",
+			"time": 33,
+			"responseCode": {
+				"code": 200,
+				"name": "OK"
+			},
+			"tests": {},
+			"testPassFailCounts": {},
+			"times": [
+				33
+			],
+			"allTests": [
+				{}
+			]
+		},
+		{
+			"id": "5e145cdc-9fa9-4eba-935d-1fd2eac19db3",
+			"name": "GetSearch Only cant - CU1 ",
+			"url": "http://localhost:5000/api/houses?cantadults=1&cantchildrens=1&cantbabys=1",
+			"time": 6,
+			"responseCode": {
+				"code": 400,
+				"name": "Bad Request"
+			},
+			"tests": {},
+			"testPassFailCounts": {},
+			"times": [
+				6
+			],
+			"allTests": [
+				{}
+			]
+		},
+		{
+			"id": "c75bb6bc-f9d6-4679-b4fc-5ff566e19063",
+			"name": "GetSearch Only Dates - CU1",
+			"url": "http://localhost:5000/api/houses?checkout=27/2/2020&touristpointId=1",
+			"time": 4,
+			"responseCode": {
+				"code": 400,
+				"name": "Bad Request"
+			},
+			"tests": {},
+			"testPassFailCounts": {},
+			"times": [
+				4
+			],
+			"allTests": [
+				{}
+			]
+		},
+		{
+			"id": "91c4723b-4a40-40e4-8886-7d1a9a3099a0",
+			"name": "GetSearch No toristPointId- CU1 ",
+			"url": "http://localhost:5000/api/houses?checkin=20/2/2020&checkout=27/2/2020&cantadults=1&cantchildrens=1&cantbabys=1",
+			"time": 9,
+			"responseCode": {
+				"code": 400,
+				"name": "Bad Request"
+			},
+			"tests": {},
+			"testPassFailCounts": {},
+			"times": [
+				9
+			],
+			"allTests": [
+				{}
+			]
+		},
+		{
+			"id": "531c6d51-7718-48c7-9fb6-c7b8300155cb",
+			"name": "GetSearch No People - CU1",
+			"url": "http://localhost:5000/api/houses?checkin=20/2/2020&checkout=27/2/2020&touristpointId=1",
+			"time": 10,
+			"responseCode": {
+				"code": 200,
+				"name": "OK"
+			},
+			"tests": {},
+			"testPassFailCounts": {},
+			"times": [
+				10
+			],
+			"allTests": [
+				{}
+			]
+		},
+		{
+			"id": "d0aacb69-e511-470d-8deb-7b3d8a26a093",
+			"name": "GetElements",
+			"url": "http://localhost:5000/api/persons",
+			"time": 14,
+			"responseCode": {
+				"code": 200,
+				"name": "OK"
+			},
+			"tests": {},
+			"testPassFailCounts": {},
+			"times": [
+				14
+			],
+			"allTests": [
+				{}
+			]
+		},
+		{
+			"id": "ab75ca1e-ea43-4e52-aca0-79b00649fa99",
+			"name": "GetElementById",
+			"url": "http://localhost:5000/api/persons/1",
+			"time": 14,
+			"responseCode": {
+				"code": 200,
+				"name": "OK"
+			},
+			"tests": {},
+			"testPassFailCounts": {},
+			"times": [
+				14
+			],
+			"allTests": [
+				{}
+			]
+		},
+		{
+			"id": "2be6d4d7-3e68-470f-83ef-eb3976f342cd",
+			"name": "PostElement",
+			"url": "http://localhost:5000/api/persons",
+			"time": 48,
+			"responseCode": {
+				"code": 201,
+				"name": "Created"
+			},
+			"tests": {},
+			"testPassFailCounts": {},
+			"times": [
+				48
+			],
+			"allTests": [
+				{}
+			]
+		},
+		{
+			"id": "bd7a3e21-e0cc-4bf9-915b-2a3a3d06b6ab",
+			"name": "PostErrorSameEmail",
+			"url": "http://localhost:5000/api/persons",
+			"time": 55,
+			"responseCode": {
+				"code": 201,
+				"name": "Created"
+			},
+			"tests": {},
+			"testPassFailCounts": {},
+			"times": [
+				55
+			],
+			"allTests": [
+				{}
+			]
+		},
+		{
+			"id": "d9c712e3-9fb0-4c81-9d61-c8bf8d4f1d86",
+			"name": "PostErrorNoEmail",
+			"url": "http://localhost:5000/api/persons",
+			"time": 49,
+			"responseCode": {
+				"code": 201,
+				"name": "Created"
+			},
+			"tests": {},
+			"testPassFailCounts": {},
+			"times": [
+				49
+			],
+			"allTests": [
+				{}
+			]
+		},
+		{
+			"id": "b6f54553-0628-4597-9ef3-0dd7fdb63aed",
+			"name": "PostErrorNoAuth",
+			"url": "http://localhost:5000/api/persons",
+			"time": 4,
+			"responseCode": {
+				"code": 415,
+				"name": "Unsupported Media Type"
+			},
+			"tests": {},
+			"testPassFailCounts": {},
+			"times": [
+				4
+			],
+			"allTests": [
+				{}
+			]
+		},
+		{
+			"id": "290c2066-a4c6-4a89-b1dd-58695d3d0344",
+			"name": "PutElement",
+			"url": "http://localhost:5000/api/persons/1",
+			"time": 40,
+			"responseCode": {
+				"code": 201,
+				"name": "Created"
+			},
+			"tests": {},
+			"testPassFailCounts": {},
+			"times": [
+				40
+			],
+			"allTests": [
+				{}
+			]
+		},
+		{
+			"id": "6183921d-608d-4b37-bf31-4d48f54cf6bc",
+			"name": "PutNoArg",
+			"url": "http://localhost:5000/api/persons/3",
+			"time": 55,
+			"responseCode": {
+				"code": 201,
+				"name": "Created"
+			},
+			"tests": {},
+			"testPassFailCounts": {},
+			"times": [
+				55
+			],
+			"allTests": [
+				{}
+			]
+		},
+		{
+			"id": "7f965356-1155-4876-934c-0939f7bb1949",
+			"name": "PutErrorNoAuth",
+			"url": "http://localhost:5000/api/persons/",
+			"time": 9,
+			"responseCode": {
+				"code": 200,
+				"name": "OK"
+			},
+			"tests": {},
+			"testPassFailCounts": {},
+			"times": [
+				9
+			],
+			"allTests": [
+				{}
+			]
+		},
+		{
+			"id": "ae36914b-5e21-4487-adcc-1323d8033648",
+			"name": "DeleteById",
+			"url": "http://localhost:5000/api/persons/2",
+			"time": 49,
+			"responseCode": {
+				"code": 200,
+				"name": "OK"
+			},
+			"tests": {},
+			"testPassFailCounts": {},
+			"times": [
+				49
+			],
+			"allTests": [
+				{}
+			]
+		},
+		{
+			"id": "87f4dc56-55cc-414a-8af6-9a99a5bdce7f",
+			"name": "DeleteByIdError",
+			"url": "http://localhost:5000/api/persons/4",
+			"time": 46,
+			"responseCode": {
+				"code": 200,
+				"name": "OK"
+			},
+			"tests": {},
+			"testPassFailCounts": {},
+			"times": [
+				46
+			],
+			"allTests": [
+				{}
+			]
+		},
+		{
+			"id": "f66d581e-ae1b-46db-8a1d-8bef0a3c56ce",
+			"name": "GetElements",
+			"url": "http://localhost:5000/api/regions",
+			"time": 11,
+			"responseCode": {
+				"code": 200,
+				"name": "OK"
+			},
+			"tests": {},
+			"testPassFailCounts": {},
+			"times": [
+				11
+			],
+			"allTests": [
+				{}
+			]
+		},
+		{
+			"id": "c94be888-3dc0-40b4-9bd6-ec408b07a4ce",
+			"name": "GetElementById",
+			"url": "http://localhost:5000/api/regions/3",
+			"time": 25,
+			"responseCode": {
+				"code": 200,
+				"name": "OK"
+			},
+			"tests": {},
+			"testPassFailCounts": {},
+			"times": [
+				25
+			],
+			"allTests": [
+				{}
+			]
+		},
+		{
+			"id": "6c82cfb5-48b5-4646-9275-ca20a49b0269",
+			"name": "PostElement",
+			"url": "http://localhost:5000/api/regions",
+			"time": 74,
+			"responseCode": {
+				"code": 201,
+				"name": "Created"
+			},
+			"tests": {},
+			"testPassFailCounts": {},
+			"times": [
+				74
+			],
+			"allTests": [
+				{}
+			]
+		},
+		{
+			"id": "0a8e474a-77c2-49ee-94cf-bc8032f9f111",
+			"name": "PostError No paramas",
+			"url": "http://localhost:5000/api/regions",
+			"time": 11,
+			"responseCode": {
+				"code": 500,
+				"name": "Internal Server Error"
+			},
+			"tests": {},
+			"testPassFailCounts": {},
+			"times": [
+				11
+			],
+			"allTests": [
+				{}
+			]
+		},
+		{
+			"id": "fcbb3db5-7e5e-4f37-8f5c-494f48c68cf1",
+			"name": "PostErrorNoAuth",
+			"url": "http://localhost:5000/api/regions",
+			"time": 5,
+			"responseCode": {
+				"code": 401,
+				"name": "Unauthorized"
+			},
+			"tests": {},
+			"testPassFailCounts": {},
+			"times": [
+				5
+			],
+			"allTests": [
+				{}
+			]
+		},
+		{
+			"id": "de0e4964-a1e2-4f54-88e5-5e554cc0b16c",
+			"name": "PutElement",
+			"url": "http://localhost:5000/api/regions/1",
+			"time": 66,
+			"responseCode": {
+				"code": 201,
+				"name": "Created"
+			},
+			"tests": {},
+			"testPassFailCounts": {},
+			"times": [
+				66
+			],
+			"allTests": [
+				{}
+			]
+		},
+		{
+			"id": "a9ddedd7-bd30-4c14-b730-06371d60dc55",
+			"name": "PutNoArgument",
+			"url": "http://localhost:5000/api/regions/3",
+			"time": 75,
+			"responseCode": {
+				"code": 201,
+				"name": "Created"
+			},
+			"tests": {},
+			"testPassFailCounts": {},
+			"times": [
+				75
+			],
+			"allTests": [
+				{}
+			]
+		},
+		{
+			"id": "8a8bb5ae-e7ce-4aa7-ba59-29f2e0fa0998",
+			"name": "PutErrorException",
+			"url": "http://localhost:5000/api/regions/4",
+			"time": 14,
+			"responseCode": {
+				"code": 415,
+				"name": "Unsupported Media Type"
+			},
+			"tests": {},
+			"testPassFailCounts": {},
+			"times": [
+				14
+			],
+			"allTests": [
+				{}
+			]
+		},
+		{
+			"id": "906ad43f-c965-4aa6-ae7e-78dd7a9c3575",
+			"name": "DeleteById",
+			"url": "http://localhost:5000/api/regions/3",
+			"time": 112,
+			"responseCode": {
+				"code": 200,
+				"name": "OK"
+			},
+			"tests": {},
+			"testPassFailCounts": {},
+			"times": [
+				112
+			],
+			"allTests": [
+				{}
+			]
+		},
+		{
+			"id": "a7c1b978-ac8e-4fab-8c58-5afed5b0f6a3",
+			"name": "DeleteByIdError",
+			"url": "http://localhost:5000/api/regions",
+			"time": 190,
+			"responseCode": {
+				"code": 200,
+				"name": "OK"
+			},
+			"tests": {},
+			"testPassFailCounts": {},
+			"times": [
+				190
+			],
+			"allTests": [
+				{}
+			]
+		},
+		{
+			"id": "e0716b31-ac9d-4b0d-a7d4-d83252ef35af",
+			"name": "getElements",
+			"url": "http://localhost:5000/api/touristpoints",
+			"time": 25,
+			"responseCode": {
+				"code": 200,
+				"name": "OK"
+			},
+			"tests": {},
+			"testPassFailCounts": {},
+			"times": [
+				25
+			],
+			"allTests": [
+				{}
+			]
+		},
+		{
+			"id": "ae5bd72e-b5eb-4063-a40e-3c7401e892da",
+			"name": "GetElementById",
+			"url": "http://localhost:5000/api/touristpoints/1",
+			"time": 14,
+			"responseCode": {
+				"code": 400,
+				"name": "Bad Request"
+			},
+			"tests": {},
+			"testPassFailCounts": {},
+			"times": [
+				14
+			],
+			"allTests": [
+				{}
+			]
+		},
+		{
+			"id": "a0a6c609-7a54-464c-bb12-505682ab0be5",
+			"name": "PostElement",
+			"url": "http://localhost:5000/api/touristpoints",
+			"time": 31,
+			"responseCode": {
+				"code": 400,
+				"name": "Bad Request"
+			},
+			"tests": {},
+			"testPassFailCounts": {},
+			"times": [
+				31
+			],
+			"allTests": [
+				{}
+			]
+		},
+		{
+			"id": "e09008d0-cd08-4d1a-b7e6-1dd449812e18",
+			"name": "PostErrorNoCategoryWithId",
+			"url": "http://localhost:5000/api/touristpoints",
+			"time": 17,
+			"responseCode": {
+				"code": 400,
+				"name": "Bad Request"
+			},
+			"tests": {},
+			"testPassFailCounts": {},
+			"times": [
+				17
+			],
+			"allTests": [
+				{}
+			]
+		},
+		{
+			"id": "cf9e5594-b4cc-4df8-9fcf-61e28e63173b",
+			"name": "PostErrorException",
+			"url": "http://localhost:5000/api/touristpoints",
+			"time": 13,
+			"responseCode": {
+				"code": 400,
+				"name": "Bad Request"
+			},
+			"tests": {},
+			"testPassFailCounts": {},
+			"times": [
+				13
+			],
+			"allTests": [
+				{}
+			]
+		},
+		{
+			"id": "b1aa66b6-c6b7-49b1-9054-0b95198294bc",
+			"name": "PostErrorNoAuth",
+			"url": "http://localhost:5000/api/touristpoints",
+			"time": 2,
+			"responseCode": {
+				"code": 401,
+				"name": "Unauthorized"
+			},
+			"tests": {},
+			"testPassFailCounts": {},
+			"times": [
+				2
+			],
+			"allTests": [
+				{}
+			]
+		},
+		{
+			"id": "709ff684-b188-40e9-a22a-38a402263651",
+			"name": "PutElement",
+			"url": "http://localhost:5000/api/touristpoints/1",
+			"time": 30,
+			"responseCode": {
+				"code": 400,
+				"name": "Bad Request"
+			},
+			"tests": {},
+			"testPassFailCounts": {},
+			"times": [
+				30
+			],
+			"allTests": [
+				{}
+			]
+		},
+		{
+			"id": "c6df6e5e-e28a-43e4-82f7-00bf6f38b3f7",
+			"name": "PutErorArgument",
+			"url": "http://localhost:5000/api/touristpoints/1000",
+			"time": 20,
+			"responseCode": {
+				"code": 400,
+				"name": "Bad Request"
+			},
+			"tests": {},
+			"testPassFailCounts": {},
+			"times": [
+				20
+			],
+			"allTests": [
+				{}
+			]
+		},
+		{
+			"id": "36d74f47-9aa8-4c1e-9d51-4faf9ff95c84",
+			"name": "PutErrorException",
+			"url": "http://localhost:5000/api/touristpoints",
+			"time": 29,
+			"responseCode": {
+				"code": 200,
+				"name": "OK"
+			},
+			"tests": {},
+			"testPassFailCounts": {},
+			"times": [
+				29
+			],
+			"allTests": [
+				{}
+			]
+		},
+		{
+			"id": "61e8c7be-1f4e-4f21-9a81-8a1f38612028",
+			"name": "DeleteById",
+			"url": "http://localhost:5000/api/touristpoints/2",
+			"time": 30,
+			"responseCode": {
+				"code": 400,
+				"name": "Bad Request"
+			},
+			"tests": {},
+			"testPassFailCounts": {},
+			"times": [
+				30
+			],
+			"allTests": [
+				{}
+			]
+		},
+		{
+			"id": "cfe408be-d7c3-4b43-9593-9c4c4ffc385d",
+			"name": "DeleteByIdError",
+			"url": "http://localhost:5000/api/touristpoints/1000",
+			"time": 22,
+			"responseCode": {
+				"code": 400,
+				"name": "Bad Request"
+			},
+			"tests": {},
+			"testPassFailCounts": {},
+			"times": [
+				22
+			],
+			"allTests": [
+				{}
+			]
+		},
+		{
+			"id": "9a567145-99bb-4ee3-baa4-3b7bc4bbade6",
+			"name": "Post",
+			"url": "http://localhost:5000/api/sessions/",
+			"time": 23,
+			"responseCode": {
+				"code": 200,
+				"name": "OK"
+			},
+			"tests": {},
+			"testPassFailCounts": {},
+			"times": [
+				23
+			],
+			"allTests": [
+				{}
+			]
+		}
+	],
+	"count": 1,
+	"totalTime": 2841,
+	"collection": {
+		"requests": [
+			{
+				"id": "7e68daa7-0437-4563-93a5-22c252b2704a",
+				"method": "GET"
+			},
+			{
+				"id": "f09d460d-4b48-4c0a-af25-6523edd34b11",
+				"method": "GET"
+			},
+			{
+				"id": "4d6e2b23-dd6b-4863-9006-d5ca37e5e61e",
+				"method": "GET"
+			},
+			{
+				"id": "07b0882d-189e-43de-950b-3fd8b8ee5098",
+				"method": "POST"
+			},
+			{
+				"id": "45ba94d8-8319-41ab-be7b-7522a6b58314",
+				"method": "POST"
+			},
+			{
+				"id": "a66c41d0-ad36-4c58-be03-b24490725190",
+				"method": "POST"
+			},
+			{
+				"id": "6a7b599e-4a9b-4d05-921b-2f2c439520b1",
+				"method": "POST"
+			},
+			{
+				"id": "aec75f1e-46bd-4f58-9550-3d00b306ea28",
+				"method": "POST"
+			},
+			{
+				"id": "62da203c-3412-48cd-9b8b-3ddbfac7066f",
+				"method": "POST"
+			},
+			{
+				"id": "edcfbca2-ed2e-4c8a-bf36-b8ed07214e71",
+				"method": "POST"
+			},
+			{
+				"id": "9ae0f55b-8191-475c-bc82-e8d464655d6c",
+				"method": "POST"
+			},
+			{
+				"id": "15b735c4-fa3c-4342-bc4b-31e91beae173",
+				"method": "PUT"
+			},
+			{
+				"id": "fa6c4846-debe-42c8-abed-ada63a88f195",
+				"method": "PUT"
+			},
+			{
+				"id": "b392b669-cfbc-4d4d-bdc8-e3115522cb5e",
+				"method": "PUT"
+			},
+			{
+				"id": "3f93f6c2-8470-47a6-b083-497618d6155c",
+				"method": "PUT"
+			},
+			{
+				"id": "8d07887c-7494-4810-8975-b9b77c9c7407",
+				"method": "DELETE"
+			},
+			{
+				"id": "ce2af4a3-7a6d-4d1d-a2cf-312e389721bf",
+				"method": "DELETE"
+			},
+			{
+				"id": "4b9e62c9-96e8-4744-965b-ebd7d698acbb",
+				"method": "DELETE"
+			},
+			{
+				"id": "f96d6f33-a66b-4d10-ae55-a579ef7df272",
+				"method": "GET"
+			},
+			{
+				"id": "67057b45-10bb-4507-a6c8-83b79d9cf369",
+				"method": "GET"
+			},
+			{
+				"id": "e2c0ac3f-b5ea-4497-8be0-224a36ff7c4b",
+				"method": "POST"
+			},
+			{
+				"id": "2a47bc02-52c5-4315-8aaf-865deb9d1c07",
+				"method": "POST"
+			},
+			{
+				"id": "fb77c511-d2ea-4395-a34c-b94136488d37",
+				"method": "POST"
+			},
+			{
+				"id": "303d3e83-7063-48c6-b74d-d041c96b10db",
+				"method": "POST"
+			},
+			{
+				"id": "97a91777-8119-4aae-a07e-92c921cf9217",
+				"method": "POST"
+			},
+			{
+				"id": "71212f70-930e-452d-bd88-c6b9c9e50308",
+				"method": "POST"
+			},
+			{
+				"id": "5cbf82f0-82b3-4e13-a098-c1f191e42873",
+				"method": "PUT"
+			},
+			{
+				"id": "d5b89b95-efff-4727-b23e-bb8a7f468775",
+				"method": "PUT"
+			},
+			{
+				"id": "78433827-23ed-497d-9aa4-1010b20658ae",
+				"method": "PUT"
+			},
+			{
+				"id": "d29db6df-b106-45d9-a9d7-7e544ef2dbcd",
+				"method": "PUT"
+			},
+			{
+				"id": "d1d3b434-fccf-4e86-8353-d2ba55140c06",
+				"method": "DELETE"
+			},
+			{
+				"id": "b1f438a0-e058-4b57-8de4-31e6db7efbfa",
+				"method": "DELETE"
+			},
+			{
+				"id": "49425966-bd7b-4b24-8b72-8333370be47b",
+				"method": "DELETE"
+			},
+			{
+				"id": "0c78f95c-051d-48ea-9c14-7a058f469ccb",
+				"method": "GET"
+			},
+			{
+				"id": "3e6cb689-7936-48bd-a250-715e5f397691",
+				"method": "GET"
+			},
+			{
+				"id": "bde7aa4e-b088-4274-b0a2-e5b5dd8343c9",
+				"method": "POST"
+			},
+			{
+				"id": "87c6f279-048f-4d56-b4a1-4ed8ff9c0e7a",
+				"method": "POST"
+			},
+			{
+				"id": "a8dbda38-0663-4218-a5ba-a470784e3f47",
+				"method": "POST"
+			},
+			{
+				"id": "473bcc29-f558-4132-a1f6-a49090f0f802",
+				"method": "POST"
+			},
+			{
+				"id": "ae3a51eb-d279-4e13-a4e9-0c6d71dbb1f3",
+				"method": "PUT"
+			},
+			{
+				"id": "5f75bfed-158b-431c-8897-aedcf1c16c13",
+				"method": "PUT"
+			},
+			{
+				"id": "18424960-3843-4ee3-8bfb-2855b3e1ccb5",
+				"method": "PUT"
+			},
+			{
+				"id": "7eaab9a9-34e5-47b5-baf8-571509bf76be",
+				"method": "PUT"
+			},
+			{
+				"id": "b87d59b7-3803-44cc-849e-f82f78faa5dd",
+				"method": "DELETE"
+			},
+			{
+				"id": "31e73766-569f-46c8-9355-79fa9000c3e5",
+				"method": "DELETE"
+			},
+			{
+				"id": "f5467004-5456-4e38-b273-3ad04abf54af",
+				"method": "GET"
+			},
+			{
+				"id": "5e145cdc-9fa9-4eba-935d-1fd2eac19db3",
+				"method": "GET"
+			},
+			{
+				"id": "c75bb6bc-f9d6-4679-b4fc-5ff566e19063",
+				"method": "GET"
+			},
+			{
+				"id": "91c4723b-4a40-40e4-8886-7d1a9a3099a0",
+				"method": "GET"
+			},
+			{
+				"id": "531c6d51-7718-48c7-9fb6-c7b8300155cb",
+				"method": "GET"
+			},
+			{
+				"id": "d0aacb69-e511-470d-8deb-7b3d8a26a093",
+				"method": "GET"
+			},
+			{
+				"id": "ab75ca1e-ea43-4e52-aca0-79b00649fa99",
+				"method": "GET"
+			},
+			{
+				"id": "2be6d4d7-3e68-470f-83ef-eb3976f342cd",
+				"method": "POST"
+			},
+			{
+				"id": "bd7a3e21-e0cc-4bf9-915b-2a3a3d06b6ab",
+				"method": "POST"
+			},
+			{
+				"id": "d9c712e3-9fb0-4c81-9d61-c8bf8d4f1d86",
+				"method": "POST"
+			},
+			{
+				"id": "b6f54553-0628-4597-9ef3-0dd7fdb63aed",
+				"method": "POST"
+			},
+			{
+				"id": "290c2066-a4c6-4a89-b1dd-58695d3d0344",
+				"method": "PUT"
+			},
+			{
+				"id": "6183921d-608d-4b37-bf31-4d48f54cf6bc",
+				"method": "PUT"
+			},
+			{
+				"id": "7f965356-1155-4876-934c-0939f7bb1949",
+				"method": "PUT"
+			},
+			{
+				"id": "ae36914b-5e21-4487-adcc-1323d8033648",
+				"method": "DELETE"
+			},
+			{
+				"id": "87f4dc56-55cc-414a-8af6-9a99a5bdce7f",
+				"method": "DELETE"
+			},
+			{
+				"id": "f66d581e-ae1b-46db-8a1d-8bef0a3c56ce",
+				"method": "GET"
+			},
+			{
+				"id": "c94be888-3dc0-40b4-9bd6-ec408b07a4ce",
+				"method": "GET"
+			},
+			{
+				"id": "6c82cfb5-48b5-4646-9275-ca20a49b0269",
+				"method": "POST"
+			},
+			{
+				"id": "0a8e474a-77c2-49ee-94cf-bc8032f9f111",
+				"method": "POST"
+			},
+			{
+				"id": "fcbb3db5-7e5e-4f37-8f5c-494f48c68cf1",
+				"method": "POST"
+			},
+			{
+				"id": "de0e4964-a1e2-4f54-88e5-5e554cc0b16c",
+				"method": "PUT"
+			},
+			{
+				"id": "a9ddedd7-bd30-4c14-b730-06371d60dc55",
+				"method": "PUT"
+			},
+			{
+				"id": "8a8bb5ae-e7ce-4aa7-ba59-29f2e0fa0998",
+				"method": "PUT"
+			},
+			{
+				"id": "906ad43f-c965-4aa6-ae7e-78dd7a9c3575",
+				"method": "DELETE"
+			},
+			{
+				"id": "a7c1b978-ac8e-4fab-8c58-5afed5b0f6a3",
+				"method": "DELETE"
+			},
+			{
+				"id": "e0716b31-ac9d-4b0d-a7d4-d83252ef35af",
+				"method": "GET"
+			},
+			{
+				"id": "ae5bd72e-b5eb-4063-a40e-3c7401e892da",
+				"method": "GET"
+			},
+			{
+				"id": "a0a6c609-7a54-464c-bb12-505682ab0be5",
+				"method": "POST"
+			},
+			{
+				"id": "e09008d0-cd08-4d1a-b7e6-1dd449812e18",
+				"method": "POST"
+			},
+			{
+				"id": "cf9e5594-b4cc-4df8-9fcf-61e28e63173b",
+				"method": "POST"
+			},
+			{
+				"id": "b1aa66b6-c6b7-49b1-9054-0b95198294bc",
+				"method": "POST"
+			},
+			{
+				"id": "709ff684-b188-40e9-a22a-38a402263651",
+				"method": "PUT"
+			},
+			{
+				"id": "c6df6e5e-e28a-43e4-82f7-00bf6f38b3f7",
+				"method": "PUT"
+			},
+			{
+				"id": "36d74f47-9aa8-4c1e-9d51-4faf9ff95c84",
+				"method": "PUT"
+			},
+			{
+				"id": "61e8c7be-1f4e-4f21-9a81-8a1f38612028",
+				"method": "DELETE"
+			},
+			{
+				"id": "cfe408be-d7c3-4b43-9593-9c4c4ffc385d",
+				"method": "DELETE"
+			},
+			{
+				"id": "9a567145-99bb-4ee3-baa4-3b7bc4bbade6",
+				"method": "POST"
+			}
+		]
+	}
+}

@@ -1,0 +1,20 @@
+set IDENTITY_INSERT TouristPoints ON
+INSERT INTO TouristPoints (Id, Name,[Image],[Description],RegionId)
+VALUES (1, 'Name tourist point1', 'image', 'descripcion tourist point 1',1);
+INSERT INTO TouristPoints (Id, Name,[Image],[Description],RegionId)
+VALUES (2, 'Name tourist point2', 'image', 'descripcion tourist point 2',2);
+INSERT INTO TouristPoints (Id, Name,[Image],[Description],RegionId)
+VALUES (3, 'Name tourist point3', 'image', 'descripcion tourist point 3',3);
+INSERT INTO TouristPoints (Id, Name,[Image],[Description],RegionId)
+VALUES (4, 'Name tourist point4', 'image', 'descripcion tourist point 4',4);
+INSERT INTO TouristPoints (Id, Name,[Image],[Description],RegionId)
+VALUES (5, 'Name tourist point5', 'image', 'descripcion tourist point 5',1);
+INSERT INTO TouristPoints (Id, Name,[Image],[Description],RegionId)
+VALUES (6, 'Name tourist point6', 'image', 'descripcion tourist point 6',2);
+INSERT INTO TouristPoints (Id, Name,[Image],[Description],RegionId)
+VALUES (7, 'Name tourist point7', 'image', 'descripcion tourist point 7',3);
+INSERT INTO TouristPoints (Id, Name,[Image],[Description],RegionId)
+VALUES (8, 'Name tourist point8', 'image', 'descripcion tourist point 8',4);
+INSERT INTO TouristPoints (Id, Name,[Image],[Description],RegionId)
+VALUES (9, 'Name tourist point9', 'image', 'descripcion tourist point 9',1);
+set IDENTITY_INSERT TouristPoints OFF

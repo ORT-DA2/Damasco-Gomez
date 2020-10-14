@@ -1,0 +1,212 @@
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using DataAccessInterface.Repositories;
+using Domain;
+using Microsoft.VisualStudio.TestTools.UnitTesting;
+using Moq;
+
+namespace BusinessLogic.Tests.Test
+{
+    [TestClass]
+    public class RegionLogicTest
+    {
+        private RegionLogic regionLogic; 
+        private Mock<IRegionRepository> mock;
+        private List<Region> regionsToReturn;
+        private List<Region> regionsEmpty;
+
+        [TestInitialize]
+        public void Initialize ()
+        {
+               regionsToReturn = new List<Region>()
+            {
+                new Region()
+                {
+                    Id = 1,
+                    Name = "New region",
+                },
+                new Region()
+                {
+                    Id = 2,
+                    Name = "Other region",
+                },
+                new Region()
+                {
+                    Id = 3,
+                    Name = "And other region",
+                },
+                new Region()
+                {
+                    Id = 4,
+                    Name = "And one more region",
+                }
+            };
+            mock = new Mock<IRegionRepository>(MockBehavior.Strict);
+            regionLogic = new RegionLogic(mock.Object);
+            regionsEmpty = new List<Region>();
+        }
+        [TestMethod]
+        public void TestGetAll()
+        {
+            mock.Setup(m => m.GetElements()).Returns(regionsToReturn);
+
+            IEnumerable<Region> result = regionLogic.GetAll();
+
+            Assert.IsTrue(result.SequenceEqual(regionsToReturn));
+        }
+        [TestMethod]
+        public void TestGetEmptyGetAll()
+        {
+            List<Region> regionEmpty = new List<Region>();
+            mock.Setup(m => m.GetElements()).Returns(regionEmpty);
+
+            IEnumerable<Region> result = regionLogic.GetAll();
+
+            Assert.AreEqual(regionEmpty, result);
+        }
+        [TestMethod]
+        public void TestAdd()
+        {
+            Region region = regionsToReturn.First();
+            mock.Setup(m => m.Add(region)).Returns(region);
+
+            Region regionToReturn = regionLogic.Add(region);
+
+            Assert.AreEqual(region, regionToReturn);
+        }
+        [TestMethod]
+        public void TestAddValidateError()
+        {
+            Region region = regionsToReturn.First();
+            mock.Setup(m => m.Add(region)).Returns(region);
+
+            var regionToReturn = regionLogic.Add(region);
+
+            Assert.AreEqual(region, regionToReturn);
+        }
+        [TestMethod]
+        [ExpectedException(typeof(ArgumentException))]
+        public void TestAddExistError()
+        {
+            Region region = regionsToReturn.First();
+            ArgumentException exception = new ArgumentException();
+            mock.Setup(m => m.Add(region)).Throws(exception);
+
+            var regionToReturn = regionLogic.Add(region);
+
+            mock.VerifyAll();
+        }
+        [TestMethod]
+        public void TestGetBy()
+        {
+            Region region = regionsToReturn.First();
+            mock.Setup(m => m.Find(region.Id)).Returns(region);
+
+            var result = regionLogic.GetBy(region.Id);
+
+            Assert.AreEqual(result,region);
+        }
+        [TestMethod]
+        public void TestGetByFail()
+        {
+            Region region = regionsToReturn.First();
+            Region empty = null;
+            mock.Setup(m => m.Find(region.Id)).Returns(empty);
+
+            var result = regionLogic.GetBy(region.Id);
+
+            Assert.IsNull(result);
+        }
+        [TestMethod]
+        public void TestUdpateOk ()
+        {
+            Region region = regionsToReturn.First();
+            mock.Setup(m => m.Find(region.Id)).Returns(region);
+            mock.Setup(m => m.Update(region.Id,region));
+
+            Region result = regionLogic.Update(region.Id,region);
+
+            Assert.AreEqual(result,region);
+        }
+        [TestMethod]
+        public void TestUpdateValidateError()
+        {
+            Region region = regionsToReturn.First();
+            mock.Setup(m => m.Find(region.Id)).Returns(region);
+            mock.Setup(m => m.Update(region.Id,region));
+
+            regionLogic.Update(region.Id,region);
+
+            mock.VerifyAll();
+        }
+        [TestMethod]
+        [ExpectedException(typeof(ArgumentException))]
+        public void TestUpdateExistError()
+        {
+            Region region = regionsToReturn.Last();
+            ArgumentException exception = new ArgumentException();
+            mock.Setup(m => m.Find(region.Id)).Returns(region);
+            mock.Setup(m => m.Update(region.Id,region)).Throws(exception);
+
+            regionLogic.Update(region.Id,region);
+
+            mock.VerifyAll();
+        }
+        [TestMethod]
+        public void TestExistOk()
+        {
+            Region region = regionsToReturn.First();
+            mock.Setup(m => m.ExistElement(region)).Returns(true);
+
+            bool result = regionLogic.Exist(region);
+
+            mock.VerifyAll();
+            Assert.IsTrue(result);
+        }
+        [TestMethod]
+        public void TestNotExistOk()
+        {
+            Region region = regionsToReturn.First();
+            mock.Setup(m => m.ExistElement(region)).Returns(false);
+
+            bool result = regionLogic.Exist(region);
+
+            Assert.IsFalse(result);
+        }
+        [TestMethod]
+        public void TestDeleteById()
+        {
+            int lengthTouristPoint = regionsToReturn.Count;
+            mock.Setup(m => m.Delete(regionsToReturn.First().Id));
+
+            regionLogic.Delete(regionsToReturn.First().Id);
+
+            mock.VerifyAll();
+        }
+
+        [TestMethod]
+        public void TestDelete()
+        {
+            int lengthRegions = regionsToReturn.Count;
+            mock.Setup(m => m.GetElements()).Returns(regionsToReturn);
+            foreach (Region t in regionsToReturn)
+            {
+                mock.Setup(m => m.Delete(t.Id));
+            }
+
+            regionLogic.Delete();
+
+            mock.VerifyAll();
+        }
+        [TestMethod]
+        public void TestDeleteEmpty()
+        {
+            mock.Setup(m => m.GetElements()).Returns(regionsEmpty);
+
+            regionLogic.Delete();
+
+            mock.VerifyAll();
+        }
+    }
+}
