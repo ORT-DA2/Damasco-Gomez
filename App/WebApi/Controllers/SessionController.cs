@@ -3,6 +3,7 @@ using Contracts;
 using Domain;
 using Microsoft.AspNetCore.Mvc;
 using Model.In;
+using Model.Out;
 
 namespace WebApi.Controllers
 {
@@ -20,7 +21,8 @@ namespace WebApi.Controllers
         {
             Person newPerson = personModel.ToEntity();
             Guid token =this.sessionLogic.Login(newPerson);
-            return Ok(token);
+            SessionBasicModel sessionModel = new SessionBasicModel(token);
+            return Ok(sessionModel);
         }
     }
 }
