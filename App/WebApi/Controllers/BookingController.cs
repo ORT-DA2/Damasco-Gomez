@@ -32,7 +32,7 @@ namespace WebApi.Controllers
         /// </summary>
         /// <param name="id">Este parámetro contiene el identificador de la reserva</param>
         /// <response code="200">Se devuelve la información requerida.</response>
-        /// <response code="400">Rerva no existente con ese identificador</response>
+        /// <response code="400">Reserva no existente con ese identificador</response>
         [HttpGet("{id}",Name="GetBooking")]
         public IActionResult GetBy([FromRoute]int id)
         {
@@ -43,14 +43,14 @@ namespace WebApi.Controllers
         /// <summary>
         /// Permite a un administrador realizar una reserva
         /// </summary>
-        /// <param name="id">Este parámetro contiene el identificador de la reserva</param>
+        /// <param name="bookingModel">Este modelo contiene la información de la reserva</param>
         /// <response code="200">Se devuelve la información requerida.</response>
-        /// <response code="400">Rerva no existente con ese identificador</response>
+        /// <response code="400">Reserva no existente con ese identificador</response>
         [HttpPost]
         [AuthorizationFilter]
-        public IActionResult Post([FromBody]BookingModel booking)
+        public IActionResult Post([FromBody]BookingModel bookingModel)
         {
-            Booking newBooking = booking.ToEntity();
+            Booking newBooking = bookingModel.ToEntity();
             newBooking = this.bookingLogic.Add(newBooking);
             BookingBasicModel basicModel = new BookingBasicModel(newBooking);
             return CreatedAtRoute("GetBooking", new {Id = basicModel.Id} , basicModel);
@@ -59,13 +59,14 @@ namespace WebApi.Controllers
         /// Permite a un administrador modificar una reserva
         /// </summary>
         /// <param name="id">Este parámetro contiene el identificador de la reserva</param>
+        /// <param name="bookingModel">Este modelo contiene la información de la reserva</param>
         /// <response code="200">Se devuelve la información requerida.</response>
-        /// <response code="400">Rerva no existente con ese identificador</response>
+        /// <response code="400">Reserva no existente con ese identificador</response>
         [HttpPut("{id}")]
         [AuthorizationFilter]
-        public IActionResult Put([FromRoute]int id,[FromBody]BookingModel booking)
+        public IActionResult Put([FromRoute]int id,[FromBody]BookingModel bookingModel)
         {
-            Booking newBooking = booking.ToEntity(false);
+            Booking newBooking = bookingModel.ToEntity(false);
             newBooking = this.bookingLogic.Update(id, newBooking);
             BookingBasicModel basicModel = new BookingBasicModel(newBooking);
             return CreatedAtRoute("GetBooking", new {Id = basicModel.Id} , basicModel);
@@ -75,7 +76,7 @@ namespace WebApi.Controllers
         /// </summary>
         /// <param name="id">Este parámetro contiene el identificador de la reserva</param>
         /// <response code="200">Se devuelve la información requerida.</response>
-        /// <response code="400">Rerva no existente con ese identificador</response>
+        /// <response code="400">Reserva no existente con ese identificador</response>
         [HttpDelete("{id}")]
         [AuthorizationFilter]
         public IActionResult Delete([FromRoute]int id)
