@@ -5,7 +5,7 @@ using Microsoft.AspNetCore.Mvc.Filters;
 namespace Filters
 {
     [ExcludeFromCodeCoverage]
-    public class ExceptionFilter : IExceptionFilter 
+    public class ExceptionFilter : IExceptionFilter
     {
         public void OnException(ExceptionContext context)
         {
@@ -21,6 +21,14 @@ namespace Filters
                     Content = e.Message.ToString()
                 };
             }
+            catch (AggregateException e)
+            {
+                context.Result = new ContentResult()
+                {
+                    StatusCode = 401,
+                    Content = e.Message.ToString()
+                };
+            }
             catch(Exception)
             {
                 context.Result = new ContentResult()
@@ -29,7 +37,6 @@ namespace Filters
                     Content = "Server error"
                 };
             }
-            // falta cachear el resto de las exceptions del sistema 
         }
     }
 }
