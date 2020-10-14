@@ -10,7 +10,7 @@ namespace DataAccess.Context
     {
         public DbSet<Booking> Bookings {get; set;}
         public DbSet<Category> Categories {get; set;}
-        public DbSet<CategoryTouristPoint> CategoryTouristPoints {get; set;}
+        public DbSet<CategoryTouristPoint> CategoriesTouristicPoints {get; set;}
         public DbSet<House> Houses {get; set;}
         public DbSet<Person> Persons {get; set;}
         public DbSet<Region> Regions {get; set;}
