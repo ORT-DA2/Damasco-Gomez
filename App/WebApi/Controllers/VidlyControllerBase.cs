@@ -1,9 +1,10 @@
+using Microsoft.AspNetCore.Cors;
 using Microsoft.AspNetCore.Mvc;
 
 namespace WebApi.Controllers
 {
-    [ApiExplorerSettings(IgnoreApi=true)]
 
+    [EnableCors("CorsPolicy")]
     [ApiController]
     public class VidlyControllerBase : ControllerBase
     {
