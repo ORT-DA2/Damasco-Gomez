@@ -1,6 +1,7 @@
 using DataAccessInterface.Repositories;
 using Domain;
 using System;
+using System.Diagnostics.CodeAnalysis;
 
 namespace DataAccess.Repositories
 {
@@ -10,7 +11,7 @@ namespace DataAccess.Repositories
         {
             this.repository = repositoryMaster.Regions;
         }
-
+        [ExcludeFromCodeCoverage]
         protected override void Update(Region elementToUpdate, Region element)
         {
             elementToUpdate.Update(element);

@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using System.Diagnostics.CodeAnalysis;
 using System.Linq;
 using DataAccessInterface.Repositories;
 using Domain;
@@ -12,7 +13,7 @@ namespace DataAccess.Repositories
         {
             this.repository = repositoryMaster.Houses;
         }
-
+        [ExcludeFromCodeCoverage]
         protected override void Update(House elementToUpdate, House element)
         {
             elementToUpdate.Update(element);

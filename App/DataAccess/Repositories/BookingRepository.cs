@@ -1,4 +1,5 @@
 using System;
+using System.Diagnostics.CodeAnalysis;
 using DataAccessInterface.Repositories;
 using Domain;
 
@@ -30,7 +31,7 @@ namespace DataAccess.Repositories
                 throw new ArgumentException("There's no dates to create the booking");
             }
         }
-
+        [ExcludeFromCodeCoverage]
         protected override void Update(Booking elementToUpdate, Booking element)
         {
             elementToUpdate.Update(element);

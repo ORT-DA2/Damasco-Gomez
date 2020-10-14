@@ -1,15 +1,16 @@
 using System;
+using System.Diagnostics.CodeAnalysis;
 using DataAccessInterface.Repositories;
 using Domain;
 namespace DataAccess.Repositories
 {
     public class TouristPointRepository : AccessData<TouristPoint> , ITouristPointRepository
     {
-       public TouristPointRepository(RepositoryMaster repositoryMaster)
+        public TouristPointRepository(RepositoryMaster repositoryMaster)
         {
-            this.repository = repositoryMaster.TouristPoints;
-       }
-
+                this.repository = repositoryMaster.TouristPoints;
+        }
+        [ExcludeFromCodeCoverage]
         protected override void Update(TouristPoint elementToUpdate, TouristPoint element)
         {
             elementToUpdate.Update(element);

@@ -167,6 +167,48 @@ namespace BusinessLogic.Tests.Test
             Assert.AreEqual(result, booking);
         }
         [TestMethod]
+        public void TestUpdateOkNoHouseId ()
+        {
+            BookingModel bookingModel = new BookingModel()
+            {
+                Name = "new name",
+                HouseId = 0,
+                StateId = 1,
+            };
+            Booking booking = bookingModel.ToEntity();
+            int id  = booking.Id;
+            mock.Setup(m => m.Update(booking.Id,booking));
+            mock.Setup(m => m.Find(booking.Id)).Returns(booking);
+            mock2.Setup(m => m.ExistElement(booking.HouseId)).Returns(true);
+            mock3.Setup(m => m.ExistElement(booking.StateId)).Returns(true);
+            mock2.Setup(m => m.Find(booking.HouseId)).Returns(houseId1);
+
+            Booking result = bookingLogic.Update(id, booking);
+
+            Assert.AreEqual(result, booking);
+        }
+        [TestMethod]
+        public void TestUpdateOkStateId ()
+        {
+            BookingModel bookingModel = new BookingModel()
+            {
+                Name = "new name",
+                HouseId = 1,
+                StateId = 0,
+            };
+            Booking booking = bookingModel.ToEntity();
+            int id  = booking.Id;
+            mock.Setup(m => m.Update(booking.Id,booking));
+            mock.Setup(m => m.Find(booking.Id)).Returns(booking);
+            mock2.Setup(m => m.ExistElement(booking.HouseId)).Returns(true);
+            mock3.Setup(m => m.ExistElement(booking.StateId)).Returns(true);
+            mock2.Setup(m => m.Find(booking.HouseId)).Returns(houseId1);
+
+            Booking result = bookingLogic.Update(id, booking);
+
+            Assert.AreEqual(result, booking);
+        }
+        [TestMethod]
         [ExpectedException(typeof(ArgumentException))]
         public void TestUpdateNullHouseId()
         {
@@ -208,11 +250,42 @@ namespace BusinessLogic.Tests.Test
         {
             Booking booking = bookingsToReturn.First();
             ArgumentException exception = new ArgumentException();
+            mock3.Setup(m => m.ExistElement(booking.StateId)).Returns(false);
             mock2.Setup(m => m.ExistElement(booking.HouseId)).Returns(true);
-            mock2.Setup(m => m.Find(booking.HouseId)).Returns(houseId1);
-            mock3.Setup(m => m.ExistElement(booking.StateId)).Throws(exception);
 
             var result = bookingLogic.Update(booking.Id,booking);
+        }
+        [TestMethod]
+        public void TestValidateStateOk()
+        {
+            Booking booking = bookingsToReturn.First();
+            mock2.Setup(m => m.ExistElement(booking.HouseId)).Returns(true);
+            mock2.Setup(m => m.Find(booking.HouseId)).Returns(houseId1);
+            mock3.Setup(m => m.ExistElement(booking.StateId)).Returns(true);
+            mock.Setup(m => m.Update(booking.Id,booking));
+            mock.Setup(m => m.Find(booking.Id)).Returns(booking);
+
+            var result = bookingLogic.Update(booking.Id, booking);
+        }
+        [TestMethod]
+        [ExpectedException(typeof(ArgumentException))]
+        public void TestValidateHouseNotAvailable ()
+        {
+            BookingModel bookingModel = new BookingModel()
+            {
+                Name = "new name",
+                HouseId = 1,
+                StateId = 1,
+            };
+            Booking booking = bookingModel.ToEntity();
+            House house = new House(){Id=1 , Avaible=false};
+            int id  = booking.Id;
+            mock.Setup(m => m.Update(booking.Id,booking));
+            mock.Setup(m => m.Find(booking.Id)).Returns(booking);
+            mock2.Setup(m => m.ExistElement(booking.HouseId)).Returns(true);
+            mock2.Setup(m => m.Find(booking.HouseId)).Returns(house);
+
+            Booking result = bookingLogic.Update(id, booking);
         }
     }
 }
