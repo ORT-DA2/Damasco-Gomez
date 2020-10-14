@@ -1,16 +1,16 @@
 --ALL 
-set IDENTITY_INSERT State ON
-INSERT INTO State (Id, Name)
+set IDENTITY_INSERT States ON
+INSERT INTO States (Id, Name)
 VALUES (1, 'Creada');
-INSERT INTO State (Id, Name)
+INSERT INTO States (Id, Name)
 VALUES (2, 'Pendiente Pago');
-INSERT INTO State (Id, Name)
+INSERT INTO States (Id, Name)
 VALUES (3, 'Aceptada');
-INSERT INTO State (Id, Name)
+INSERT INTO States (Id, Name)
 VALUES (4, 'Rechazada');
-INSERT INTO State (Id, Name)
+INSERT INTO States (Id, Name)
 VALUES (5, 'Expirada');
-set IDENTITY_INSERT State OFF
+set IDENTITY_INSERT States OFF
 set IDENTITY_INSERT Regions ON
 INSERT INTO Regions (Id, Name)
 VALUES (1, 'Región metropolitana');

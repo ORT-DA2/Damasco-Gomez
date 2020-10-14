@@ -8,13 +8,15 @@ namespace DataAccess.Context
     [ExcludeFromCodeCoverage]
     public class VidlyContext : DbContext
     {
-        public DbSet<TouristPoint> TouristPoints {get; set;}
-        public DbSet<Category> Categories {get; set;}
-        public DbSet<House> Houses {get; set;}
         public DbSet<Booking> Bookings {get; set;}
+        public DbSet<Category> Categories {get; set;}
+        public DbSet<CategoryTouristPoint> CategoriesTouristicPoints {get; set;}
+        public DbSet<House> Houses {get; set;}
         public DbSet<Person> Persons {get; set;}
         public DbSet<Region> Regions {get; set;}
         public DbSet<SessionUser> Sessions {get; set;}
+        public DbSet<State> States {get; set;}
+        public DbSet<TouristPoint> TouristPoints {get; set;}
 
         public VidlyContext(){}
         public VidlyContext(DbContextOptions options) : base(options){}
