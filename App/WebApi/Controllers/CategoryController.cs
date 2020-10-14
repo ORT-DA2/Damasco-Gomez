@@ -82,7 +82,7 @@ namespace WebApi.Controllers
             return Ok("Element was delete with id "+id);
         }
         /// <summary>
-        /// Permite a un administrador eliminar todas las categoria
+        /// Permite a un administrador eliminar todas las categorias
         /// </summary>
         /// <response code="200">Se devuelve la información requerida.</response>
         [HttpDelete]
