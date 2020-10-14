@@ -26,7 +26,6 @@ namespace WebApi.Controllers
         /// dentro de ciertas fechas, con cantidad de personas y le devuelve ademas de los
         /// hospedajes, un precio para dicho hospedaje segun las noches
         /// </summary>
-        /// <param name="id">Este parámetro contiene el identificador de los hospedajes</param>
         /// <response code="200">Se devuelve la información requerida</response>
         [HttpGet]
         public IActionResult GetHousesBy([FromQuery]HouseSearchModel houseSearchModel)

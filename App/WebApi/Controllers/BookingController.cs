@@ -17,7 +17,7 @@ namespace WebApi.Controllers
             this.bookingLogic = bookingLogic;
         }
         /// <summary>
-        /// Permite a un usuario obtener información de todas las del sistema
+        /// Permite a un usuario obtener información de todas las reservas del sistema
         /// </summary>
         /// <response code="200">Se devuelve la información requerida</response>
         [HttpGet]
@@ -85,7 +85,7 @@ namespace WebApi.Controllers
             return Ok("Element was delete with id "+id);
         }
         /// <summary>
-        /// Permite a un administrador eliminar todas las reserva
+        /// Permite a un administrador eliminar todas las reservas
         /// </summary>
         /// <response code="200">Se devuelve la información requerida.</response>
         [HttpDelete]
