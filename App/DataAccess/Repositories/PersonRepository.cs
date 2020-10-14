@@ -1,4 +1,5 @@
 using System;
+using System.Diagnostics.CodeAnalysis;
 using DataAccessInterface.Repositories;
 using Domain;
 
@@ -32,7 +33,7 @@ namespace DataAccess.Repositories
             }
             return findByEmail;
         }
-
+        [ExcludeFromCodeCoverage]
         protected override void Update(Person elementToUpdate, Person element)
         {
             elementToUpdate.Update(element);

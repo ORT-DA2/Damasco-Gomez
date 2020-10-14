@@ -69,6 +69,14 @@ namespace DataAccess.Tests.Test
         }
         [TestMethod]
         [ExpectedException(typeof(ArgumentException))]
+        public void TestAddFailValidateNull()
+        {
+            House house = null;
+
+            repository.Add(house);
+        }
+        [TestMethod]
+        [ExpectedException(typeof(ArgumentException))]
         public void TestAddFailValidateStars0()
         {
             House house = new House()

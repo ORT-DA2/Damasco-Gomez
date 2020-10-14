@@ -167,6 +167,18 @@ namespace BusinessLogic.Tests.Test
         }
         [TestMethod]
         [ExpectedException(typeof(ArgumentException))]
+        public void TestUpdateValidateTouristPointId()
+        {
+            House house = housesToReturn.First();
+            house.TouristPointId = 1;
+            mock2.Setup(m => m.ExistElement(house.TouristPointId)).Returns(false);
+
+            houseLogic.Update(house.Id, house);
+
+            mock.VerifyAll();
+        }
+        [TestMethod]
+        [ExpectedException(typeof(ArgumentException))]
         public void TestUpdateExistError()
         {
             House house = housesToReturn.First();

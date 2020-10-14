@@ -132,6 +132,7 @@ namespace DataAccess.Tests.Test
                 Id = 123,
                 Name=null,
                 HouseId = 10,
+                Price = 23,
                 CheckIn = DateTime.Today,
                 CheckOut= DateTime.Today
                 };

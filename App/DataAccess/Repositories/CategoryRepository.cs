@@ -1,4 +1,5 @@
 using System;
+using System.Diagnostics.CodeAnalysis;
 using DataAccessInterface.Repositories;
 using Domain;
 
@@ -10,7 +11,7 @@ namespace DataAccess.Repositories
         {
             this.repository = repositoryMaster.Categories;
         }
-
+        [ExcludeFromCodeCoverage]
         protected override void Update(Category elementToUpdate, Category element)
         {
             elementToUpdate.Update(element);
