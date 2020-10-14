@@ -16,6 +16,12 @@ namespace WebApi.Controllers
         {
             this.sessionLogic = sessionLogic;
         }
+        /// <summary>
+        /// Permite a un ususario logguearse al sistema
+        /// </summary>
+        /// <param name="personModel">Este modelo contiene la información del usuario</param>
+        /// <response code="200">Se devuelve la información requerida</response>
+        /// <response code="400">Reserva no existente con ese identificador</response>
         [HttpPost]
         public IActionResult Post([FromBody] PersonModel personModel)
         {
