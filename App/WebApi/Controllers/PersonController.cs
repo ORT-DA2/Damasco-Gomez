@@ -36,25 +36,10 @@ namespace WebApi.Controllers
         [HttpPost]
         public IActionResult Post([FromBody]PersonModel personModel)
         {
-            try
-            {
-                Person person = personModel.ToEntity();
-                person = this.personLogic.Add(person);
-                PersonBasicModel personBasicModel = new PersonBasicModel(person);
-                return CreatedAtRoute("GetPerson", new {Id = personBasicModel.Id} , personBasicModel);
-            }
-            catch (AggregateException)
-            {
-                return BadRequest("The person was already added");
-            }
-            catch (ArgumentException e)
-            {
-                return BadRequest("Error while validate : "+ e.Message.ToString());
-            }
-            catch (Exception)
-            {
-                return BadRequest("The server had an error");
-            }
+            Person person = personModel.ToEntity();
+            person = this.personLogic.Add(person);
+            PersonBasicModel personBasicModel = new PersonBasicModel(person);
+            return CreatedAtRoute("GetPerson", new {Id = personBasicModel.Id} , personBasicModel);
         }
         [HttpPut("{id}")]
         public IActionResult Put([FromRoute]int id,[FromBody]PersonModel personModel)
