@@ -16,13 +16,23 @@ namespace WebApi.Controllers
         {
             this.bookingLogic = bookingLogic;
         }
+        /// <summary>
+        /// Permite a un usuario obtener información de todos los bookings del sistema
+        /// </summary>
+        /// <response code="200">Se devuelve la información requerida.</response>
+        [HttpGet]
         public IActionResult Get()
         {
             IEnumerable<Booking> elementBookings = this.bookingLogic.GetAll();
             IEnumerable<BookingBasicModel> bookingModels =  elementBookings.Select(m => new BookingBasicModel(m));
             return Ok(bookingModels);
         }
-
+        /// <summary>
+        /// Permite a un ususario ver una reserva del sistema
+        /// </summary>
+        /// <param name="id">Este parámetro contiene el identificador de la reserva</param>
+        /// <response code="200">Se devuelve la información requerida.</response>
+        /// <response code="400">Booking no existente.</response>
         [HttpGet("{id}",Name="GetBooking")]
         public IActionResult GetBy([FromRoute]int id)
         {

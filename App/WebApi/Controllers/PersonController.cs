@@ -18,6 +18,7 @@ namespace WebApi.Controllers
         {
             this.personLogic = personLogic;
         }
+        [HttpGet]
         public IActionResult Get()
         {
             IEnumerable<Person> elementPerson = this.personLogic.GetAll();

@@ -17,6 +17,7 @@ namespace WebApi.Controllers
         {
             this.touristPointLogic = touristPointLogic;
         }
+        [HttpGet]
         public IActionResult Get()
         {
             var elementTouristPoint = this.touristPointLogic.GetAll();
@@ -30,7 +31,7 @@ namespace WebApi.Controllers
             var model = new TouristPointDetailInfoModel(elementTouristPoint);
             return Ok(model);
         }
-        [HttpPost()]
+        [HttpPost]
         [AuthorizationFilter]
         public IActionResult Post([FromBody]TouristPointModel touristPoint)
         {

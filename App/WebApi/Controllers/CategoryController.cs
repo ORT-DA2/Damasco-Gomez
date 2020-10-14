@@ -29,7 +29,7 @@ namespace WebApi.Controllers
             Category elementCategory = this.categoryLogic.GetBy(id);
             return Ok(new CategoryDetailInfoModel(elementCategory));
         }
-        [HttpPost()]
+        [HttpPost]
         [AuthorizationFilter]
         public IActionResult Post([FromBody]CategoryModel categoryModel)
         {
