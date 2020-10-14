@@ -11,5 +11,14 @@ namespace Model.Out
             this.Id = state.Id;
             this.Name = state.Name;
         }
+        public override bool Equals(object obj)
+        {
+            var result = false;
+            if(obj is RegionDetailModel region)
+            {
+                result = this.Id == region.Id ;
+            }
+            return result;
+        }
     }
 }

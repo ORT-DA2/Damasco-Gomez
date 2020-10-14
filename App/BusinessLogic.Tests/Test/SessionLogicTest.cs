@@ -108,7 +108,6 @@ namespace BusinessLogic.Tests.Test
             Guid newGuid = Guid.NewGuid();
             mock2.Setup(m=>m.GetElements()).Returns(personResult);
             mock.Setup(mock=>mock.GetElements()).Returns(session2);
-            mock3.Setup(mock=>mock.Update(newGuid));
 
             Guid tokenAdded = sessionUserLogic.Login(personResult.First()); 
 
