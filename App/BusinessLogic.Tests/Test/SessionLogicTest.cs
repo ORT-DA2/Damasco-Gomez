@@ -74,21 +74,24 @@ namespace BusinessLogic.Tests.Test
             };
             SessionUser sessionToReturn = new SessionUser()
             {
+                Id = 1,
                 Token = Guid.NewGuid(),
+                PersonId = 3
             };
             mock2.Setup(m=>m.GetElements()).Returns(personResult);
             List <SessionUser> sessions = new List<SessionUser>();
             mock.Setup(mock=>mock.GetElements()).Returns(sessions);
             mock.Setup(mock=>mock.Add(It.IsAny<SessionUser>())).Returns(sessionToReturn);
+            mock.Setup(mock=>mock.Find(sessionToReturn.Id)).Returns(sessionToReturn);
+            mock.Setup(mock=>mock.Update(sessionToReturn.Id,sessionToReturn));
             
             Guid guidToReturn = sessionUserLogic.Login(personResult.First()); 
 
-            mock.VerifyAll();
         }
         [TestMethod]
         public void TestLoginExistPreviouslySession ()
         {
-             List<Person> personResult = new List<Person> () 
+            List<Person> personResult = new List<Person> ()
             {   new Person()
                 {
                     Id = 1,
@@ -108,6 +111,8 @@ namespace BusinessLogic.Tests.Test
             Guid newGuid = Guid.NewGuid();
             mock2.Setup(m=>m.GetElements()).Returns(personResult);
             mock.Setup(mock=>mock.GetElements()).Returns(session2);
+            mock.Setup(mock=>mock.Find(session2.First().Id)).Returns(session2.First());
+            mock.Setup(mock=>mock.Update(session2.First().Id,session2.First()));
 
             Guid tokenAdded = sessionUserLogic.Login(personResult.First()); 
 

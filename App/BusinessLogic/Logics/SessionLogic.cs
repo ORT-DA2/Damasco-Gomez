@@ -45,7 +45,9 @@ namespace BusinessLogic.Logics
             }
             else
             {
-                sessions.First().Update(guid);
+                SessionUser session = this.sessionUserRepository.Find(sessions.First().Id);
+                session.Token = guid;
+                this.sessionUserRepository.Update(session.Id, session);
             }
             return guid;
         }
