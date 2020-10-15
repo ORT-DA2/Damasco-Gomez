@@ -35,8 +35,8 @@ namespace BusinessLogic
         public Region Update(int id,Region region)
         {
             Region regionBd = this.regionRepository.Find(id);
-            this.regionRepository.Update(id, regionBd);
-            return regionBd;
+            this.regionRepository.Update(regionBd.Id, region);
+            return region;
         }
         public void Delete(int id)
         {
