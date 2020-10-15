@@ -26,15 +26,15 @@ namespace BusinessLogic.Logics
         }
         public Guid Login(Person person)  
         {
-            List<Person> personResult = this.personRepository.GetElements().FindAll((p=>p.Email == person.Email && p.Password == person.Password));
-            if (personResult.Count==0)
+            IEnumerable<Person> personResult = this.personRepository.GetElements().Where(p=>p.Email == person.Email && p.Password == person.Password);
+            if (personResult.Count()==0)
             {
                 throw new ArgumentException("Email or password was not valid ");
             }
             person = personResult.First();
             Guid guid = Guid.NewGuid();
-            List <SessionUser> sessions = this.sessionUserRepository.GetElements().FindAll(m=>m.PersonId==person.Id);
-            if(sessions.Count==0)
+            IEnumerable<SessionUser> sessions = this.sessionUserRepository.GetElements().Where(m=>m.PersonId==person.Id);
+            if(sessions.Count()==0)
             {
                 SessionUser newSession = new SessionUser ()
                 {

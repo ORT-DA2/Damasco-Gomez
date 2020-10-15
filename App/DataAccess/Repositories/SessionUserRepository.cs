@@ -1,5 +1,6 @@
 using System;
 using System.Diagnostics.CodeAnalysis;
+using System.Linq;
 using DataAccessInterface.Repositories;
 using Domain.Entities;
 
@@ -14,8 +15,8 @@ namespace DataAccess.Repositories
         public bool IsCorrectToken(Guid token)
         {
             var result = this.repository.GetElementsInContext();
-            var resultToReturn = result.FindAll(kz=>kz.Token==token);
-            if (resultToReturn.Count==0)
+            var resultToReturn = result.Where(kz=>kz.Token==token);
+            if (resultToReturn.Count() == 0)
             {
                 throw new ArgumentException("No user with that id ");
             }
