@@ -15,7 +15,6 @@ namespace Domain.Test.Test
                 {
                     Id = 2,
                     Name = "Other touristPoint",
-                    Image = "mail2@mail.com",
                     Description = "Passed",
                     RegionId = 200,
                 };
@@ -41,7 +40,7 @@ namespace Domain.Test.Test
             TouristPoint newTouristPoint = new TouristPoint()
                 {
                     Name = null,
-                    Image = "new image",
+                    // Image = "new image",
                     Description = null,
                     RegionId = 0,
                 };
