@@ -7,7 +7,6 @@ namespace Model.Out
     [ExcludeFromCodeCoverage]
     public class HouseBookingReportBasicModel
     {
-        public int Id {get ; set; }
         public string HouseName {get ; set; }
         public int cantBooking {get ; set; }
 
