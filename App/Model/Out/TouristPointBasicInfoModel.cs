@@ -11,7 +11,7 @@ namespace Model.Out
 
         public string Name {get; private set;}
 
-        public ImageBasicModel Image {get; private set;}
+        public ImageTouristPointBasicModel Image {get; private set;}
 
         public string Description {get; private set;}
 
