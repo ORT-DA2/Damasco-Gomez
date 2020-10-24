@@ -4,14 +4,16 @@ using DataAccess.Context;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace DataAccess.Migrations
 {
     [DbContext(typeof(VidlyContext))]
-    partial class VidlyContextModelSnapshot : ModelSnapshot
+    [Migration("20201024211748_TweentyThreeMigration")]
+    partial class TweentyThreeMigration
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -256,7 +258,7 @@ namespace DataAccess.Migrations
                     b.Property<string>("Description")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<int>("ImageTouristPointId")
+                    b.Property<int>("ImageId")
                         .HasColumnType("int");
 
                     b.Property<string>("Name")
@@ -267,7 +269,7 @@ namespace DataAccess.Migrations
 
                     b.HasKey("Id");
 
-                    b.HasIndex("ImageTouristPointId");
+                    b.HasIndex("ImageId");
 
                     b.HasIndex("RegionId");
 
@@ -307,7 +309,7 @@ namespace DataAccess.Migrations
             modelBuilder.Entity("Domain.Entities.ImageHouse", b =>
                 {
                     b.HasOne("Domain.House", null)
-                        .WithMany("ImagesHouse")
+                        .WithMany("Images")
                         .HasForeignKey("HouseId");
                 });
 
@@ -331,9 +333,9 @@ namespace DataAccess.Migrations
 
             modelBuilder.Entity("Domain.TouristPoint", b =>
                 {
-                    b.HasOne("Domain.Entities.ImageTouristPoint", "ImageTouristPoint")
+                    b.HasOne("Domain.Entities.ImageTouristPoint", "Image")
                         .WithMany()
-                        .HasForeignKey("ImageTouristPointId")
+                        .HasForeignKey("ImageId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 

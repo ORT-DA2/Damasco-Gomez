@@ -25,7 +25,7 @@ namespace Domain.Test.Test
             TouristPoint newTouristPoint = new TouristPoint()
                 {
                     Name = "new name touristPoint",
-                    Image = null,
+                    ImageTouristPoint = null,
                     Description = null,
                     RegionId = 0,
                 };
@@ -35,19 +35,19 @@ namespace Domain.Test.Test
             Assert.AreEqual(newTouristPoint.Name, touristPoint.Name);
         }
         [TestMethod]
-        public void TestUpdateImage()
+        public void TestUpdateImageTouristPoint()
         {
             TouristPoint newTouristPoint = new TouristPoint()
                 {
                     Name = null,
-                    // Image = "new image",
+                    // ImageTouristPoint = "new image",
                     Description = null,
                     RegionId = 0,
                 };
 
             touristPoint.Update(newTouristPoint);
 
-            Assert.AreEqual(newTouristPoint.Image, touristPoint.Image);
+            Assert.AreEqual(newTouristPoint.ImageTouristPoint, touristPoint.ImageTouristPoint);
         }
         [TestMethod]
         public void TestUpdateDescription()
@@ -55,7 +55,7 @@ namespace Domain.Test.Test
             TouristPoint newTouristPoint = new TouristPoint()
                 {
                     Name = null,
-                    Image = null,
+                    ImageTouristPoint = null,
                     Description = "new description",
                     RegionId = 0,
                 };
@@ -70,7 +70,7 @@ namespace Domain.Test.Test
             TouristPoint newTouristPoint = new TouristPoint()
                 {
                     Name = "",
-                    Image = null,
+                    ImageTouristPoint = null,
                     Description = null,
                     RegionId = 330,
                 };
@@ -88,7 +88,7 @@ namespace Domain.Test.Test
             {
                 Id = id,
                 Name = "",
-                Image = null,
+                ImageTouristPoint = null,
                 Description = null,
                 RegionId = 330,
             };
@@ -104,7 +104,7 @@ namespace Domain.Test.Test
             {
                 Region = region,
                 Name = "",
-                Image = null,
+                ImageTouristPoint = null,
                 Description = null,
                 RegionId = 330,
             };
@@ -120,7 +120,7 @@ namespace Domain.Test.Test
             {
                 CategoriesTouristPoints = categories,
                 Name = "",
-                Image = null,
+                ImageTouristPoint = null,
                 Description = null,
                 RegionId = 330,
             };

@@ -15,7 +15,7 @@ namespace Domain
         public string Name {get ; set; }
         public int Starts {get ; set; }
         public string Address {get ; set; }
-        public virtual List<Image> Images {get ; set; }
+        public virtual List<ImageHouse> ImagesHouse {get ; set; }
         public string Description {get ; set;}
         public int Phone {get; set; }
         public string Contact {get; set;}
