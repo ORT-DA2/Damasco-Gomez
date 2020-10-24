@@ -1,3 +1,5 @@
+using System.Collections.Generic;
+using Domain.Entities;
 using Microsoft.AspNetCore.Mvc;
 using Model.In;
 using WebApi.Filters;
@@ -11,7 +13,8 @@ namespace WebApi.Controllers
         [AuthorizationFilter]
         public IActionResult GetHousesReportBy([FromQuery]int idTp, string dateFrom, string dateOn)
         {
-            return Ok("ok");
+            IEnumerable <Report> reportsToReturn;
+            return Ok("reportsToReturn");
         }
     }
 }
