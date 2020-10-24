@@ -19,7 +19,7 @@ namespace DataAccess.Repositories
 
         }
 
-        public List<Report> FilterCantBookigsByHouse (DateTime dateFrom, DateTime dateOn,int  idTp)
+        public List<Report> FilterCantBookigsByHouse (DateTime dateFrom, DateTime dateOut,int  idTp)
         {
             List <Report> housesAndCantBookings   = houses
             .Where(h => h.TouristPointId == idTp)
@@ -29,7 +29,9 @@ namespace DataAccess.Repositories
                         CantBookings = h.Booking
                         .Where(b => 
                             b.State.Name!="Rechazada" && 
-                            b.CheckIn >= dateFrom ).Count()}).ToList();
+                            b.State.Name!="Expirada" && 
+                            ((b.CheckIn <= dateFrom && b.CheckOut>=dateOut)|| (b.CheckIn > dateFrom && b.CheckOut>=dateOut) || (b.CheckIn <=dateFrom && b.CheckOut< dateOut) ))
+                            .Count()}).ToList();
            
             return housesAndCantBookings;
         }
