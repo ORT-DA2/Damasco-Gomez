@@ -20,6 +20,7 @@ namespace DataAccess.Repositories
         private IRepository<State> states;
         private IRepository<ImageHouse> imagesHouses;
         private IRepository<ImageTouristPoint> imagesTouristPoints;
+        private IRepository<Review> reviews;
         private bool isDispose = false;
         public RepositoryMaster(DbContext masterContext)
         {
@@ -138,6 +139,17 @@ namespace DataAccess.Repositories
                     this.imagesTouristPoints = new Repository<ImageTouristPoint>(context);
                 }
                 return this.imagesTouristPoints;
+            }
+        }
+        public  IRepository<Review> Reviews
+        {
+            get
+            {
+                if (reviews == null)
+                {
+                    this.reviews = new Repository<Review>(context);
+                }
+                return this.reviews;
             }
         }
     }
