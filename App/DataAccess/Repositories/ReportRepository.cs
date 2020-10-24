@@ -9,12 +9,12 @@ namespace DataAccess.Repositories
 {
     public class ReportRepository : IReportRepository 
     {
-        public readonly DbSet<Booking> dbSet;
+        public readonly DbSet<House> dbSet;
         public readonly DbContext context;
         public ReportRepository(DbContext context)
         {
             this.context = context;
-            this.dbSet = context.Set<Booking>();
+            this.dbSet = context.Set<House>();
 
         }
 
