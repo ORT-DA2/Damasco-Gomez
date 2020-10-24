@@ -1,5 +1,6 @@
 using Microsoft.AspNetCore.Mvc;
 using Model.In;
+using WebApi.Filters;
 
 namespace WebApi.Controllers
 {
@@ -8,24 +9,9 @@ namespace WebApi.Controllers
     {
         [HttpGet]
         [AuthorizationFilter]
-        public IActionResult GetHousesReportBy([FromQuery]TourisPointReportModel touristPointReport)
+        public IActionResult GetHousesReportBy([FromQuery]int idTp, string dateFrom, string dateOn)
         {
-            IEnumerable<Report> varRet ;
-            IEnumerable<HouseBookingReportBasicModel> basicModelHousesReport;
-
-            if(bookingReportModel.NotNull())
-            {
-                bookingReportModel.CheckAllParameters();
-                TourisPointReport touristPointReport = touristPointReport.ToEntity();
-                varRet = this.reportLogic.GetHousesReportBy(touristPointReport);
-                basicModelHousesReport = varRet.
-                    Select(m => new HouseBookingReportBasicModel(m,report)).ToList();
-            }
-            else
-            {
-               
-            }
-            return Ok(basicModelHousesReport);
+            return Ok("ok");
         }
     }
 }
