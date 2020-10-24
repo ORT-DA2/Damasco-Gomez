@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using DataAccessInterface.Repositories;
 using Domain;
 using Domain.Entities;
@@ -9,23 +10,27 @@ namespace DataAccess.Repositories
 {
     public class ReportRepository : IReportRepository 
     {
-        public readonly DbSet<House> dbSet;
-        public readonly DbContext context;
+        private readonly DbSet<House> houses;
+        private readonly DbContext context;
         public ReportRepository(DbContext context)
         {
             this.context = context;
-            this.dbSet = context.Set<House>();
+            this.houses = context.Set<House>();
 
         }
 
         public List<Report> FilterCantBookigsByHouse (DateTime dateFrom, DateTime dateOn,int  idTp)
         {
-           /* List <Report> housesAndCantBookings = Select count(*) as CantBooking , h.Name, h.Id 
-                                                from Booking b, House h , State s
-                                                where (h.Id= b.HouseId) and (b.CheckIn > = dateFrom) and (b.CheckOut <= dateOn) and (b.StateId <> ) and (b.StateId<> ) 
-                                                and (s.Id = b.StateId) and (s.Name <> "Expirada") and s.Name <> ("Rechazada") */
-
-            List <Report> housesAndCantBookings = new  List <Report>();
+            List <Report> housesAndCantBookings   = houses
+            .Where(h => h.TouristPointId == idTp)
+                .Select(
+                    h => new Report(){ 
+                        NameHouse = h.Name, 
+                        CantBookings = h.Booking
+                        .Where(b => 
+                            b.State.Name!="Rechazada" && 
+                            b.CheckIn >= dateFrom ).Count()}).ToList();
+           
             return housesAndCantBookings;
         }
     }
