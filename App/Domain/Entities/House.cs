@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using System.Diagnostics.CodeAnalysis;
 using Domain.Entities;
@@ -38,9 +39,12 @@ namespace Domain
                 double  PriceAdults = houseSearch.CantAdults * priceNight * nights;
                 const double percentChildrens = 0.5;
                 const double percentBabys = 0.5;
+                const double percentSeniors = 0.3;
                 double  PriceChildrens = houseSearch.CantChildrens* percentChildrens * priceNight * nights;
                 double  PriceBabys = houseSearch.CantBabys * percentBabys * priceNight * nights;
-                TotalPrice = PriceAdults + PriceChildrens + PriceBabys;
+                double  discountSeniors = (double)Math.Ceiling(Convert.ToDecimal(houseSearch.CantSeniors) / 2);
+                double PriceSeniors = discountSeniors * percentSeniors * priceNight * nights;             
+                TotalPrice = PriceAdults + PriceChildrens + PriceBabys + PriceSeniors;
             }
             return TotalPrice ;
         }
