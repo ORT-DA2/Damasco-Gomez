@@ -11,9 +11,9 @@ namespace Model.In
         public  string DateFrom {get; set;}
         public string DateTo {get; set;}
 
-        public TourisPointReportModel ToEntity()
+        public TourisPointReport ToEntity()
         {
-            return new TourisPointReportModel()
+            return new TourisPointReport()
             {
                 DateFrom = ParseDateTime(this.DateFrom),
                 DateTo = ParseDateTime(this.DateTo),
