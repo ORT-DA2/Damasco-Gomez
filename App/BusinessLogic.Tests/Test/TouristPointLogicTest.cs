@@ -27,7 +27,7 @@ namespace BusinessLogic.Tests.Test
                 {
                     Id = 1,
                     Name = "New pointTurist",
-                    Image = null,
+                    ImageTouristPoint = null,
                     Description = "one",
                     RegionId = 3,
                     Region = null,
@@ -45,7 +45,7 @@ namespace BusinessLogic.Tests.Test
                 {
                     Id = 2,
                     Name = "Other pointTurist",
-                    Image = null,
+                    ImageTouristPoint = null,
                     Description = "two",
                     RegionId = 1,
                     Region = null,
@@ -55,7 +55,7 @@ namespace BusinessLogic.Tests.Test
                 {
                     Id = 3,
                     Name = "And other pointTurist",
-                    Image = null,
+                    ImageTouristPoint = null,
                     Description = "three",
                     RegionId = 1,
                     Region = null,
@@ -65,7 +65,7 @@ namespace BusinessLogic.Tests.Test
                 {
                     Id = 4,
                     Name = "And one more pointTurist",
-                    Image = null,
+                    ImageTouristPoint = null,
                     Description = "four",
                     RegionId = 2,
                     Region = null,

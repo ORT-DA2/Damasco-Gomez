@@ -4,13 +4,13 @@ using Microsoft.VisualStudio.TestTools.UnitTesting;
 namespace Domain.Test.Test
 {
     [TestClass]
-    public class ImageTest
+    public class ImageTouristPointTest
     {
-        public Image image;
+        public ImageTouristPoint image;
         [TestInitialize]
         public void SetUp()
         {
-            image = new Image()
+            image = new ImageTouristPoint()
                 {
                     Id = 2,
                     Name = "image.png",
@@ -19,7 +19,7 @@ namespace Domain.Test.Test
         [TestMethod]
         public void TestUpdateName()
         {
-            Image newImage = new Image()
+            ImageTouristPoint newImage = new ImageTouristPoint()
             {
                 Name = "otherImage.png",
             };
@@ -32,7 +32,7 @@ namespace Domain.Test.Test
         public void TestUpdateNameEmpty()
         {
             string nameShouldBe = image.Name;
-            Image newImage = new Image()
+            ImageTouristPoint newImage = new ImageTouristPoint()
                 {
                     Name = null,
                 };

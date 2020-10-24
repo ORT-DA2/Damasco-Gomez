@@ -2,11 +2,11 @@ using Domain.Entities;
 
 namespace Model.Out
 {
-    public class ImageBasicModel
+    public class ImageHouseBasicModel
     {
         public int Id {get ; set ; }
         public string Name {get; set;}
-        public ImageBasicModel(Image image)
+        public ImageHouseBasicModel(ImageHouse image)
         {
             this.Id = image.Id;
             this.Name = image.Name;

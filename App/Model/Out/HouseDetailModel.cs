@@ -17,7 +17,7 @@ namespace Model
         public string Name {get ; set; }
         public int Starts {get ; set; }
         public string Address {get ; set; }
-        public List<ImageBasicModel> Images {get ; set; }
+        public List<ImageHouseBasicModel> Images {get ; set; }
         public string Description {get ; set;}
         public int Phone {get; set; }
         public string Contact {get; set;}

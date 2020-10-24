@@ -10,7 +10,7 @@ namespace Model.Out
     {
         public int Id {get; private set;}
         public string Name {get; private set;}
-        public ImageBasicModel Image {get; private set;}
+        public ImageTouristPointBasicModel Image {get; private set;}
         public string Description {get; private set;}
         public int RegionId {get; private set;}
         public  List<CategoryBasicInfoModel> Categories {get; private set;}
