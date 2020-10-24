@@ -12,7 +12,7 @@ namespace DataAccess.Repositories
 
         protected override void Update(ImageHouse elementToUpdate, ImageHouse element)
         {
-            throw new System.NotImplementedException();
+            elementToUpdate.Update(element);
         }
 
         protected override void Validate(ImageHouse element)
