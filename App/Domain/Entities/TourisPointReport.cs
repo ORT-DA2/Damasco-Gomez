@@ -3,7 +3,7 @@ using System.Diagnostics.CodeAnalysis;
 
 namespace Domain.Entities
 {
-    public class BookingReport
+    public class TourisPointReport
     {
         [ExcludeFromCodeCoverage]
         public int IdTp {get; set;}
