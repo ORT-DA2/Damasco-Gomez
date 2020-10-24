@@ -18,6 +18,8 @@ namespace DataAccess.Context
         public DbSet<State> States {get; set;}
         public DbSet<TouristPoint> TouristPoints {get; set;}
 
+        public DbSet<Report> Reports {get; set;}
+
         public VidlyContext(){}
         public VidlyContext(DbContextOptions options) : base(options){}
 
