@@ -5,15 +5,15 @@ using Domain.Entities;
 namespace Model.In
 {
     [ExcludeFromCodeCoverage]
-    public class BookingReportModel
+    public class TourisPointReportModel
     {
         public int IdTp {get; set;}
         public  string DateFrom {get; set;}
         public string DateTo {get; set;}
 
-        public BookingReport ToEntity()
+        public TourisPointReportModel ToEntity()
         {
-            return new BookingReport()
+            return new TourisPointReportModel()
             {
                 DateFrom = ParseDateTime(this.DateFrom),
                 DateTo = ParseDateTime(this.DateTo),
