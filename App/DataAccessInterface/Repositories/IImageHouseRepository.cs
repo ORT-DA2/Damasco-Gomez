@@ -2,7 +2,7 @@ using Domain.Entities;
 
 namespace DataAccessInterface.Repositories
 {
-    public interface IImageRepository: IAccessData<Image>
+    public interface IImageHouseRepository: IAccessData<ImageHouse>
     {
     }
 }

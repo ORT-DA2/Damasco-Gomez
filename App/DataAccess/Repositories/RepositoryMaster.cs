@@ -18,7 +18,8 @@ namespace DataAccess.Repositories
         private IRepository<TouristPoint> touristPoints;
         private IRepository<SessionUser> sessions;
         private IRepository<State> states;
-        private IRepository<Image> images;
+        private IRepository<ImageHouse> imagesHouses;
+        private IRepository<ImageTouristPoint> imagesTouristPoints;
         private bool isDispose = false;
         public RepositoryMaster(DbContext masterContext)
         {
@@ -117,15 +118,26 @@ namespace DataAccess.Repositories
                 return this.states;
             }
         }
-        public  IRepository<Image> Images
+        public  IRepository<ImageHouse> ImagesHouses
         {
             get
             {
-                if (states == null)
+                if (imagesHouses == null)
                 {
-                    this.images = new Repository<Image>(context);
+                    this.imagesHouses = new Repository<ImageHouse>(context);
                 }
-                return this.images;
+                return this.imagesHouses;
+            }
+        }
+        public  IRepository<ImageTouristPoint> ImagesTouristPoints
+        {
+            get
+            {
+                if (imagesTouristPoints == null)
+                {
+                    this.imagesTouristPoints = new Repository<ImageTouristPoint>(context);
+                }
+                return this.imagesTouristPoints;
             }
         }
     }
