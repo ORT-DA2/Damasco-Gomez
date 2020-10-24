@@ -19,7 +19,10 @@ namespace Model.In
             return new TouristPoint()
             {
                 Name= this.Name,
-                Image = this.Image,
+                ImageTouristPoint = new ImageTouristPoint()
+                {
+                    Name = this.Image
+                },
                 Description = this.Description,
                 RegionId = this.RegionId,
                 CategoriesTouristPoints = this.Categories.Select(m => new CategoryTouristPoint()

@@ -1,6 +1,8 @@
 using Domain;
 using Model.Out;
+using System.Collections.Generic;
 using System.Diagnostics.CodeAnalysis;
+using System.Linq;
 
 namespace Model
 {
@@ -15,7 +17,7 @@ namespace Model
         public string Name {get ; set; }
         public int Starts {get ; set; }
         public string Address {get ; set; }
-        public string Ilustrations {get ; set; }
+        public List<ImageHouseBasicModel> Images {get ; set; }
         public string Description {get ; set;}
         public int Phone {get; set; }
         public string Contact {get; set;}
@@ -40,7 +42,9 @@ namespace Model
             this.TouristPoint = new TouristPointBasicInfoModel(house.TouristPoint);
             this.Name = house.Name;
             this.Starts = house.Starts;
-            this.Ilustrations = house.Ilustrations;
+            this.Images = house.ImagesHouse.Select(
+                m => new ImageHouseBasicModel(m)
+            ).ToList();
             this.Description = house.Description;
             this.Contact = house.Contact;
         }
