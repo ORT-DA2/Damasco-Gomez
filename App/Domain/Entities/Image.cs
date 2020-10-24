@@ -13,5 +13,13 @@ namespace Domain.Entities
             this.Name = name;
             this.Entity = entity;
         }
+        [ExcludeFromCodeCoverage]
+        public Image()
+        {
+        }
+        public void Update(Image element)
+        {
+            if(element.Name != null) this.Name = element.Name;
+        }
     }
 }
