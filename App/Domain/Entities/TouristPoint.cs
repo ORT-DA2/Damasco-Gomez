@@ -8,7 +8,7 @@ namespace Domain
     {
         public int Id {get; set;}
         public string Name {get; set;}
-        public int ImageTouristPointId {get; set;}
+        public int? ImageTouristPointId {get; set;}
         public virtual ImageTouristPoint ImageTouristPoint {get; set;}
         public string Description {get; set;}
         public int RegionId {get; set;}
