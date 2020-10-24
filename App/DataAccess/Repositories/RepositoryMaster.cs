@@ -128,6 +128,8 @@ namespace DataAccess.Repositories
                     this.reports = new Repository<Report>(context);
                 }
                 return this.reports;
+            }
+        }
         public  IRepository<ImageHouse> ImagesHouses
         {
             get
@@ -142,12 +144,12 @@ namespace DataAccess.Repositories
         public  IRepository<ImageTouristPoint> ImagesTouristPoints
         {
             get
-                return this.imagesTouristPoints;
-                }
-                    this.imagesTouristPoints = new Repository<ImageTouristPoint>(context);
-                {
-                if (imagesTouristPoints == null)
             {
+                if (imagesTouristPoints == null)
+                {
+                     this.imagesTouristPoints = new Repository<ImageTouristPoint>(context);
+                }
+                 return this.imagesTouristPoints;
             }
         }
     }
