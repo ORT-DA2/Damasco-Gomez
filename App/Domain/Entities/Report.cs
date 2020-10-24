@@ -2,8 +2,9 @@ namespace Domain.Entities
 {
     public class Report
     {
-        string NameHouse;
-        int  HouseId;
-        int cantBookings;
+         public int Id {get; set; }
+        string NameHouse {get; set; }
+        int  HouseId {get; set; }
+        int cantBookings {get; set; }
     }
 }
