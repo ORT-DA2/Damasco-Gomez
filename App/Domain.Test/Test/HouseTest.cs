@@ -268,8 +268,60 @@ namespace Domain.Test.Test
                 CantAdults = 2,
                 CantChildrens = 0,
                 CantBabys = 0,
+                CantSeniors = 0,
             };
             double priceResult = 100*2*6;
+            double totalPriceResult = house.CalculateTotalPrice(houseSearch);
+            Assert.AreEqual(totalPriceResult , priceResult);
+        }
+        [TestMethod]
+        public void TestCalculateTotalPriceSenior()
+        {
+            house.PricePerNight = 100;
+            HouseSearch houseSearch = new HouseSearch()
+            {
+                CheckIn = DateTime.Today,
+                CheckOut = DateTime.Today.AddDays(6),
+                CantAdults = 0,
+                CantChildrens = 0,
+                CantBabys = 0,
+                CantSeniors = 1,
+            };
+            double priceResult = 100*0.3*6;
+            double totalPriceResult = house.CalculateTotalPrice(houseSearch);
+            Assert.AreEqual(totalPriceResult , priceResult);
+        }
+        [TestMethod]
+        public void TestCalculateTotalPriceSenior2()
+        {
+            house.PricePerNight = 100;
+            HouseSearch houseSearch = new HouseSearch()
+            {
+                CheckIn = DateTime.Today,
+                CheckOut = DateTime.Today.AddDays(6),
+                CantAdults = 0,
+                CantChildrens = 0,
+                CantBabys = 0,
+                CantSeniors = 2,
+            };
+            double priceResult = 100*0.3*6;
+            double totalPriceResult = house.CalculateTotalPrice(houseSearch);
+            Assert.AreEqual(totalPriceResult , priceResult);
+        }
+        [TestMethod]
+        public void TestCalculateTotalPriceSenior3()
+        {
+            house.PricePerNight = 100;
+            HouseSearch houseSearch = new HouseSearch()
+            {
+                CheckIn = DateTime.Today,
+                CheckOut = DateTime.Today.AddDays(6),
+                CantAdults = 0,
+                CantChildrens = 0,
+                CantBabys = 0,
+                CantSeniors = 3,
+            };
+            double priceResult = 100*0.3*2*6;
             double totalPriceResult = house.CalculateTotalPrice(houseSearch);
             Assert.AreEqual(totalPriceResult , priceResult);
         }
