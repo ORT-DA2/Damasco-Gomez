@@ -30,7 +30,7 @@ namespace WebApi.Tests
                 {
                     Id = 1,
                     Name = "Name TouristPoint 1",
-                    Image = "Image1",
+                    // Image = "Image1",
                     Description = "Description 1",
                     Region = null ,
                     CategoriesTouristPoints = new List<CategoryTouristPoint>()
@@ -52,7 +52,7 @@ namespace WebApi.Tests
                 {
                     Id = 2,
                     Name = "Name TouristPoint 2",
-                    Image = "Image2",
+                    // Image = "Image2",
                     Description = "Description 2",
                     Region = null ,
                     CategoriesTouristPoints = new List<CategoryTouristPoint>()
@@ -74,7 +74,7 @@ namespace WebApi.Tests
                 {
                     Id = 3,
                     Name = "Name TouristPoint 3",
-                    Image = "Image3",
+                    // Image = "Image3",
                     Description = "Description 3",
                     Region = null ,
                     CategoriesTouristPoints = new List<CategoryTouristPoint>()
@@ -96,7 +96,7 @@ namespace WebApi.Tests
                 {
                     Id = 4,
                     Name = "Name TouristPoint 4",
-                    Image = "Image4",
+                    // Image = "Image4",
                     Description = "Description 4",
                     Region = null ,
                     CategoriesTouristPoints = new List<CategoryTouristPoint>()

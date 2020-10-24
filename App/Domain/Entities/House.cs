@@ -1,3 +1,4 @@
+using System.Collections.Generic;
 using System.Diagnostics.CodeAnalysis;
 using Domain.Entities;
 
@@ -13,7 +14,7 @@ namespace Domain
         public string Name {get ; set; }
         public int Starts {get ; set; }
         public string Address {get ; set; }
-        public string Ilustrations {get ; set; }
+        public virtual List<Image> Images {get ; set; }
         public string Description {get ; set;}
         public int Phone {get; set; }
         public string Contact {get; set;}
@@ -54,7 +55,6 @@ namespace Domain
             if(element.Starts>0) this.Starts = element.Starts;
             if(element.Address != null) this.Address = element.Address;
             if(element.Description != null) this.Description = element.Description;
-            if(element.Ilustrations != null) this.Ilustrations = element.Ilustrations;
             if(element.Phone>0) this.Phone = element.Phone;
             if(element.Contact != null) this.Contact = element.Contact;
         }
@@ -70,12 +70,11 @@ namespace Domain
             bool touristPointIdZero = TouristPointId == 0;
             bool startsZero = Starts == 0;
             bool addressNull = Address == null;
-            bool ilustrationsNull = Ilustrations == null;
             bool descriptionNull = Description == null;
             bool phoneZero = Phone == 0;
             bool contactNull = Contact == null;
             return nameNull && pricePerNightZero && touristPointIdZero && startsZero
-                && addressNull && ilustrationsNull && descriptionNull && phoneZero
+                && addressNull && descriptionNull && phoneZero
                 && contactNull;
         }
 
