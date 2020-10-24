@@ -2,6 +2,7 @@ using System.Diagnostics.CodeAnalysis;
 using BusinessLogic;
 using BusinessLogic.Logics;
 using BusinessLogicInterface;
+using BusinessLogicInterface.Interfaces;
 using Contracts;
 using DataAccess.Context;
 using DataAccess.Repositories;
@@ -37,6 +38,8 @@ namespace Factory.Factories
             services.AddScoped<IPersonLogic, PersonLogic>();
             services.AddScoped<IRegionLogic, RegionLogic>();
             services.AddScoped<ISessionLogic, SessionLogic>();
+            services.AddScoped<IReportLogic, ReportLogic>();
+            //services.AddScoped<IReportRepository, ReportRepository>();
 
         }
         public void AddDbContextService()
