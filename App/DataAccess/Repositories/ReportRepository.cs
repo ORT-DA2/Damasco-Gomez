@@ -1,3 +1,5 @@
+using System;
+using System.Collections.Generic;
 using DataAccessInterface.Repositories;
 using Domain;
 using Domain.Entities;
@@ -15,6 +17,16 @@ namespace DataAccess.Repositories
             this.dbSet = context.Set<Booking>();
 
         }
-        
+        public List<Report> FilterCantBookigsByHouses (DateTime dateFrom, DateTime dateOn)
+        {
+           /* List <Report> housesAndCantBookings = Select count(*) as CantBooking , h.Name, h.Id 
+                                                from Booking b, House h , State s
+                                                where (h.Id= b.HouseId) and (b.CheckIn > = dateFrom) and (b.CheckOut <= dateOn) and (b.StateId <> ) and (b.StateId<> ) 
+                                                and (s.Id = b.StateId) and (s.Name <> "Expirada") and s.Name <> ("Rechazada") */
+            List <Report> housesAndCantBookings = new  List <Report>;
+            return housesAndCantBookings;
+    
+
+        }
     }
 }
