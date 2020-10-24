@@ -19,6 +19,7 @@ namespace Domain
         public string Description {get ; set;}
         public int Phone {get; set; }
         public string Contact {get; set;}
+        public virtual List <Booking> Booking {get; set;}
         [ExcludeFromCodeCoverage]
         public override bool Equals(object obj)
         {
