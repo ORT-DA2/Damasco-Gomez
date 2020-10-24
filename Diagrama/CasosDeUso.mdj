@@ -17249,7 +17249,7 @@
 											"top": -32,
 											"width": 129.314453125,
 											"height": 13,
-											"text": "(from UruguayNatural)"
+											"text": "(from DataAccess)"
 										},
 										{
 											"_type": "LabelView",
@@ -18348,6 +18348,38 @@
 							"width": 113,
 							"height": 117,
 							"text": "+BookingController\n+CategoryController\n+HouseController\n+PersonController\n+RegionController\n+SessionController\n+TouristPointController\n"
+						},
+						{
+							"_type": "UMLContainmentView",
+							"_id": "AAAAAAF1Ka0vGqm1KfI=",
+							"_parent": {
+								"$ref": "AAAAAAF0mN8+OgZDA/A="
+							},
+							"font": "Arial;13;0",
+							"head": {
+								"$ref": "AAAAAAF0mN+hFAZsvs4="
+							},
+							"tail": {
+								"$ref": "AAAAAAF0mN/AYgaGN3c="
+							},
+							"lineStyle": 1,
+							"points": "231:228;201:228"
+						},
+						{
+							"_type": "UMLContainmentView",
+							"_id": "AAAAAAF1Ka24Kam7xYI=",
+							"_parent": {
+								"$ref": "AAAAAAF0mN8+OgZDA/A="
+							},
+							"font": "Arial;13;0",
+							"head": {
+								"$ref": "AAAAAAF0mN/xcga6m+U="
+							},
+							"tail": {
+								"$ref": "AAAAAAF0mOAwBwccBsY="
+							},
+							"lineStyle": 1,
+							"points": "393:436;439:403"
 						}
 					]
 				},
@@ -96482,6 +96514,32 @@
 									"target": {
 										"$ref": "AAAAAAF0mN/AYQaEXEA="
 									}
+								}
+							]
+						},
+						{
+							"_type": "UMLPackage",
+							"_id": "AAAAAAF1JMOWjJruD2s=",
+							"_parent": {
+								"$ref": "AAAAAAF0mN/xcga4L9Q="
+							},
+							"name": "UruguayNatural",
+							"ownedElements": [
+								{
+									"_type": "UMLPackage",
+									"_id": "AAAAAAF0mN/gNQaes/w=",
+									"_parent": {
+										"$ref": "AAAAAAF1JMOWjJruD2s="
+									},
+									"name": "Domain"
+								},
+								{
+									"_type": "UMLPackage",
+									"_id": "AAAAAAF0mN/AYQaEXEA=",
+									"_parent": {
+										"$ref": "AAAAAAF1JMOWjJruD2s="
+									},
+									"name": "BusinessLogicInterface"
 								}
 							]
 						}
