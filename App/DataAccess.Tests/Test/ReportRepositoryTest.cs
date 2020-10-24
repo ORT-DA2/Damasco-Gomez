@@ -5,12 +5,8 @@ namespace DataAccess.Tests.Test
     [TestClass]
     public class ReportRepositoryTest
     {
-        public void TestUpdateOk()
-        {
-          Assert.IsTrue(true);
-        }
-
-        public void  TestValidateOk()
+      
+        public void TestFilterCantBookigsByHouse ()
         {
             Assert.IsTrue(true);
         }
