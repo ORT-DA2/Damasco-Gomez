@@ -1,21 +1,20 @@
 using DataAccessInterface.Repositories;
+using Domain;
 using Domain.Entities;
 using Microsoft.EntityFrameworkCore;
 
 namespace DataAccess.Repositories
 {
-    public class ReportRepository : AccessData<Report> /*, IReportRepository*/
+    public class ReportRepository : IReportRepository 
     {
-        public readonly DbSet<Report> dbSet;
+        public readonly DbSet<Booking> dbSet;
         public readonly DbContext context;
-        public ReportRepository()
+        public ReportRepository(DbContext context)
         {
+            this.context = context;
+            this.dbSet = context.Set<Booking>();
+
         }
-        protected override void Update(Report elementToUpdate, Report element)
-        {
-        }
-        protected override void Validate(Report element)
-        {
-        }
+        
     }
 }
