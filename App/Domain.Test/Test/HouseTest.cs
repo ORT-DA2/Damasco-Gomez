@@ -20,7 +20,6 @@ namespace Domain.Test.Test
                     Name = "Name house 1",
                     Starts = 1,
                     Address = "Address 1",
-                    Ilustrations = "Image here",
                     Description = "Description house 1",
                     Phone = 99898899 ,
                     Contact = "Person Name1",
@@ -37,7 +36,6 @@ namespace Domain.Test.Test
                     Name = null,
                     Starts = 0,
                     Address = null,
-                    Ilustrations = null,
                     Description = null,
                     Phone = 0 ,
                     Contact = null,
@@ -58,7 +56,6 @@ namespace Domain.Test.Test
                     Name = null,
                     Starts = 0,
                     Address = null,
-                    Ilustrations = null,
                     Description = null,
                     Phone = 0 ,
                     Contact = null,
@@ -79,7 +76,6 @@ namespace Domain.Test.Test
                     Name = "New name",
                     Starts = 0,
                     Address = null,
-                    Ilustrations = null,
                     Description = null,
                     Phone = 0 ,
                     Contact = null,
@@ -100,7 +96,6 @@ namespace Domain.Test.Test
                     Name = null,
                     Starts = 0,
                     Address = null,
-                    Ilustrations = null,
                     Description = null,
                     Phone = 0 ,
                     Contact = null,
@@ -121,7 +116,6 @@ namespace Domain.Test.Test
                     Name = null,
                     Starts = 0,
                     Address = null,
-                    Ilustrations = null,
                     Description = null,
                     Phone = 0 ,
                     Contact = null,
@@ -142,7 +136,6 @@ namespace Domain.Test.Test
                     Name = null,
                     Starts = 5,
                     Address = null,
-                    Ilustrations = null,
                     Description = null,
                     Phone = 0 ,
                     Contact = null,
@@ -163,7 +156,6 @@ namespace Domain.Test.Test
                     Name = null,
                     Starts = 0,
                     Address = "new address",
-                    Ilustrations = null,
                     Description = null,
                     Phone = 0 ,
                     Contact = null,
@@ -172,27 +164,6 @@ namespace Domain.Test.Test
             house.Update(newHouse);
 
             Assert.AreEqual(newHouse.Address, house.Address);
-        }
-        [TestMethod]
-        public void TestUpdateIlustrations()
-        {
-            House newHouse = new House()
-                {
-                    Avaible = true ,
-                    PricePerNight = 0,
-                    TouristPointId = 0,
-                    Name = null,
-                    Starts = 0,
-                    Address = null,
-                    Ilustrations = "new ilust",
-                    Description = null,
-                    Phone = 0 ,
-                    Contact = null,
-                };
-
-            house.Update(newHouse);
-
-            Assert.AreEqual(newHouse.Ilustrations, house.Ilustrations);
         }
         [TestMethod]
         public void TestUpdateDescription()
@@ -205,7 +176,6 @@ namespace Domain.Test.Test
                     Name = null,
                     Starts = 0,
                     Address = null,
-                    Ilustrations = null,
                     Description = "new description",
                     Phone = 0 ,
                     Contact = null,
@@ -226,7 +196,6 @@ namespace Domain.Test.Test
                     Name = null,
                     Starts = 0,
                     Address = null,
-                    Ilustrations = null,
                     Description = null,
                     Phone = 3423240 ,
                     Contact = null,
@@ -247,7 +216,6 @@ namespace Domain.Test.Test
                     Name = null,
                     Starts = 0,
                     Address = null,
-                    Ilustrations = null,
                     Description = null,
                     Phone = 0 ,
                     Contact = "new contact",
@@ -284,7 +252,6 @@ namespace Domain.Test.Test
                     Name = null,
                     Starts = 0,
                     Address = null,
-                    Ilustrations = null,
                     Description = null,
                     Phone = 0 ,
                     Contact = "new contact",
@@ -305,7 +272,6 @@ namespace Domain.Test.Test
                     Name = null,
                     Starts = 0,
                     Address = null,
-                    Ilustrations = null,
                     Description = null,
                     Phone = 0 ,
                     Contact = "new contact",
@@ -328,7 +294,6 @@ namespace Domain.Test.Test
                 Name = null,
                 Starts = 0,
                 Address = null,
-                Ilustrations = null,
                 Description = null,
                 Phone = 0,
                 Contact = "new contact",
@@ -349,7 +314,6 @@ namespace Domain.Test.Test
                 Name = null,
                 Starts = 0,
                 Address = null,
-                Ilustrations = null,
                 Description = null,
                 Phone = 0,
                 Contact = "new contact",
@@ -367,7 +331,6 @@ namespace Domain.Test.Test
                     Name = null,
                     Starts = 0,
                     Address = null,
-                    Ilustrations = null,
                     Description = null,
                     Phone = 0 ,
                     Contact = null,
@@ -387,7 +350,6 @@ namespace Domain.Test.Test
                     Name = "name",
                     Starts = 0,
                     Address = null,
-                    Ilustrations = null,
                     Description = null,
                     Phone = 0 ,
                     Contact = null,
@@ -408,7 +370,6 @@ namespace Domain.Test.Test
                     Name = null,
                     Starts = 0,
                     Address = null,
-                    Ilustrations = null,
                     Description = null,
                     Phone = 0 ,
                     Contact = null,
@@ -429,7 +390,6 @@ namespace Domain.Test.Test
                     Name = null,
                     Starts = 0,
                     Address = null,
-                    Ilustrations = null,
                     Description = null,
                     Phone = 0 ,
                     Contact = null,
@@ -451,7 +411,6 @@ namespace Domain.Test.Test
                     Name = null,
                     Starts = 10,
                     Address = null,
-                    Ilustrations = null,
                     Description = null,
                     Phone = 0 ,
                     Contact = null,
@@ -471,27 +430,6 @@ namespace Domain.Test.Test
                     Name = null,
                     Starts = 0,
                     Address = "address",
-                    Ilustrations = null,
-                    Description = null,
-                    Phone = 0 ,
-                    Contact = null,
-                };
-
-            bool empty = newHouse.IsEmpty();
-
-            Assert.IsFalse(empty);
-        }
-        [TestMethod]
-        public void TestIsEmptyNotIlustration()
-        {
-            House newHouse = new House()
-                {
-                    PricePerNight = 0,
-                    TouristPointId = 0,
-                    Name = null,
-                    Starts = 0,
-                    Address = null,
-                    Ilustrations = "ilustrations",
                     Description = null,
                     Phone = 0 ,
                     Contact = null,
@@ -511,7 +449,6 @@ namespace Domain.Test.Test
                     Name = null,
                     Starts = 0,
                     Address = null,
-                    Ilustrations = null,
                     Description = "description",
                     Phone = 0 ,
                     Contact = null,
@@ -531,7 +468,6 @@ namespace Domain.Test.Test
                     Name = null,
                     Starts = 0,
                     Address = null,
-                    Ilustrations = null,
                     Description = null,
                     Phone = 10 ,
                     Contact = null,
@@ -551,7 +487,6 @@ namespace Domain.Test.Test
                     Name = null,
                     Starts = 0,
                     Address = null,
-                    Ilustrations = null,
                     Description = null,
                     Phone = 0 ,
                     Contact = "contact",
