@@ -219,18 +219,6 @@ namespace DataAccess.Tests.Test
             var result = repositoryReport.FilterCantBookigsByHouse(dateFrom,dateOut, idTP);
 
             Assert.IsTrue(reportsToReturn.SequenceEqual(result));
-        
-        }
-        [TestMethod]
-        public void TestFilterDatesNotOk() 
-        {
-            int idTP = 1;
-            DateTime dateFrom = new DateTime(2020, 10, 15);
-            DateTime dateOut = new DateTime(2020, 11, 15);
-
-            var result = repositoryReport.FilterCantBookigsByHouse(dateFrom,dateOut, idTP);
-
-            Assert.IsTrue(emptyReports.SequenceEqual(result));
         }
         [TestMethod]
         public void TestFilterDateOnEqualToChekOut() 
@@ -244,11 +232,33 @@ namespace DataAccess.Tests.Test
             Assert.IsTrue(reportsToReturn.SequenceEqual(result));
         }
         [TestMethod]
+        public void TestFilterDateOkInRango() 
+        {
+            int idTP = 1;
+            DateTime dateFrom = new DateTime(2020, 10, 14);
+            DateTime dateOut = new DateTime(2021, 01, 3);
+
+            var result = repositoryReport.FilterCantBookigsByHouse(dateFrom,dateOut, idTP);
+
+            Assert.IsTrue(reportsToReturn.SequenceEqual(result));
+        }
+        [TestMethod]
         public void TestFilterDatesNotOk2() 
         {
             int idTP = 1;
             DateTime dateFrom = new DateTime(2021, 01, 01);
             DateTime dateOut = new DateTime(2021, 01, 15);
+
+            var result = repositoryReport.FilterCantBookigsByHouse(dateFrom,dateOut, idTP);
+
+            Assert.IsTrue(emptyReports.SequenceEqual(result));
+        }
+         [TestMethod]
+        public void TestFilterDatesNotOk() 
+        {
+            int idTP = 1;
+            DateTime dateFrom = new DateTime(2020, 10, 15);
+            DateTime dateOut = new DateTime(2020, 11, 15);
 
             var result = repositoryReport.FilterCantBookigsByHouse(dateFrom,dateOut, idTP);
 
