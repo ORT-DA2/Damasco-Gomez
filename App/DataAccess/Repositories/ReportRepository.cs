@@ -30,7 +30,7 @@ namespace DataAccess.Repositories
                         .Where(b => 
                             b.State.Name!="Rechazada" && 
                             b.State.Name!="Expirada" && 
-                            ((b.CheckIn <= dateFrom && b.CheckOut>=dateOut)|| (b.CheckIn >= dateFrom && b.CheckOut<=dateOut) || (b.CheckIn <=dateFrom && b.CheckOut>= dateOut) || (dateOut>=b.CheckIn) || (dateFrom<=b.CheckOut)))
+                            ((b.CheckIn <= dateFrom && b.CheckOut>=dateOut)|| (b.CheckIn >= dateFrom && b.CheckOut<=dateOut) || (dateOut<b.CheckIn) || (dateFrom>b.CheckOut)))
                             .Count()}).ToList();
             return housesAndCantBookings;
         }
