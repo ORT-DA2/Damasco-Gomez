@@ -39,7 +39,7 @@ namespace Factory.Factories
             services.AddScoped<IRegionLogic, RegionLogic>();
             services.AddScoped<ISessionLogic, SessionLogic>();
             services.AddScoped<IReportLogic, ReportLogic>();
-            //services.AddScoped<IReportRepository, ReportRepository>();
+            services.AddScoped<IReportRepository, ReportRepository>();
 
         }
         public void AddDbContextService()
