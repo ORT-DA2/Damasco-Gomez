@@ -102,7 +102,7 @@ namespace DataAccess.Tests.Test
                     TouristPointId= 1,
                      Bookings= {},
                     Name= "Hotel del Lago Golf & Art Resort",
-                }
+                },
                 new House()
                 {
                     TouristPointId= 1,
@@ -244,7 +244,7 @@ namespace DataAccess.Tests.Test
             string state ="Pendiente Pago";
             Assert.IsTrue(true);
         }
-        [TestMethod]
+         [TestMethod]
         public void TestFilterNotMatchTouristPoint() 
         {
            /* DateTime dateFrom = new DateTime(2020, 12, 15);
