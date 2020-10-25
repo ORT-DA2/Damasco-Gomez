@@ -22,7 +22,7 @@ namespace DataAccess.Repositories
         public List<Report> FilterCantBookigsByHouse (DateTime dateFrom, DateTime dateOut,int  idTp)
         {
             List <Report> housesAndCantBookings   = houses
-            .Where(h => h.TouristPointId == idTp)
+            .Where(h => h.TouristPointId == idTp).OrderByDescending(h=>h.CreatedOn)
                 .Select(
                     h => new Report(){ 
                         NameHouse = h.Name, 
