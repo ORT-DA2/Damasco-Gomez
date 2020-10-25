@@ -20,7 +20,7 @@ namespace Domain
         public int Phone {get; set; }
         public string Contact {get; set;}
          public DateTime CreatedOn {get; set;}
-        public virtual List <Booking> Booking {get; set;}
+        public virtual List <Booking> Bookings {get; set;}
         [ExcludeFromCodeCoverage]
         public override bool Equals(object obj)
         {
