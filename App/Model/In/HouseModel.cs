@@ -30,12 +30,18 @@ namespace Model
                 Name = this.Name,
                 Starts = this.Starts,
                 Address = this.Address,
-                // Images = this.Images.Select(m => new Image(m,"House")).ToList(),
                 Description = this.Description,
                 Phone = this.Phone,
                 Contact = this.Contact
             };
             if (post && newHouse.IsEmpty()) throw new ArgumentException("The values are all empty");
+            if (this.Images!=null)
+            {
+                newHouse.ImagesHouse = this.Images.Select
+                (
+                    m => new ImageHouse() {Name = m}
+                ).ToList();
+            }
             return newHouse;
         }
     }

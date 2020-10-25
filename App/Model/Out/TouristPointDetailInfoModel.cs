@@ -20,7 +20,10 @@ namespace Model.Out
             {
                 this.Id = touristPoint.Id;
                 this.Name = touristPoint.Name;
-                // this.Image = new ImageBasicModel(touristPoint.Image);
+                if(this.Image != null)
+                {
+                    this.Image = new ImageTouristPointBasicModel(touristPoint.ImageTouristPoint);
+                }
                 this.Description = touristPoint.Description;
                 this.RegionId = touristPoint.RegionId;
                 this.Categories = touristPoint.CategoriesTouristPoints.

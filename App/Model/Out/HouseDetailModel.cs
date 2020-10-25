@@ -42,7 +42,12 @@ namespace Model
             this.TouristPoint = new TouristPointBasicInfoModel(house.TouristPoint);
             this.Name = house.Name;
             this.Starts = house.Starts;
-            // this.Images = house.Images.Select(m => new ImageBasicModel(m)).ToList();
+            if(this.Images!=null)
+            {
+                this.Images = house.ImagesHouse.Select(
+                    m => new ImageHouseBasicModel(m)
+                ).ToList();
+            }
             this.Description = house.Description;
             this.Contact = house.Contact;
         }
