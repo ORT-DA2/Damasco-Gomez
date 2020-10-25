@@ -136,9 +136,9 @@ namespace DataAccess.Repositories
             {
                 if (imagesTouristPoints == null)
                 {
-                    this.imagesTouristPoints = new Repository<ImageTouristPoint>(context);
+                     this.imagesTouristPoints = new Repository<ImageTouristPoint>(context);
                 }
-                return this.imagesTouristPoints;
+                 return this.imagesTouristPoints;
             }
         }
         public  IRepository<Review> Reviews
