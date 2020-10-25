@@ -31,6 +31,9 @@ namespace Factory.Factories
             services.AddScoped<IRegionRepository, RegionRepository>();
             services.AddScoped<ISessionUserRepository, SessionUserRepository>();
             services.AddScoped<IStateRepository, StateRepository>();
+            services.AddScoped<IImageHouseRepository, ImageHouseRepository>();
+            services.AddScoped<IImageTouristPointRepository, ImageTouristPointRepository>();
+            services.AddScoped<IReviewRepository, ReviewRepository>();
             services.AddScoped<ITouristPointLogic, TouristPointLogic>();
             services.AddScoped<IBookingLogic, BookingLogic>();
             services.AddScoped<ICategoryLogic, CategoryLogic>();
