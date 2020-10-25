@@ -11,8 +11,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace DataAccess.Migrations
 {
     [DbContext(typeof(VidlyContext))]
-    [Migration("20201024212944_TweentyFourMigration")]
-    partial class TweentyFourMigration
+    [Migration("20201025132943_TweentyEightMigration")]
+    partial class TweentyEightMigration
     {
         [ExcludeFromCodeCoverage]
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -192,6 +192,9 @@ namespace DataAccess.Migrations
                     b.Property<string>("Contact")
                         .HasColumnType("nvarchar(max)");
 
+                    b.Property<DateTime>("CreatedOn")
+                        .HasColumnType("datetime2");
+
                     b.Property<string>("Description")
                         .HasColumnType("nvarchar(max)");
 
@@ -260,7 +263,7 @@ namespace DataAccess.Migrations
                     b.Property<string>("Description")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<int>("ImageTouristPointId")
+                    b.Property<int?>("ImageTouristPointId")
                         .HasColumnType("int");
 
                     b.Property<string>("Name")
@@ -281,7 +284,7 @@ namespace DataAccess.Migrations
             modelBuilder.Entity("Domain.Booking", b =>
                 {
                     b.HasOne("Domain.House", "House")
-                        .WithMany()
+                        .WithMany("Booking")
                         .HasForeignKey("HouseId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
@@ -337,9 +340,7 @@ namespace DataAccess.Migrations
                 {
                     b.HasOne("Domain.Entities.ImageTouristPoint", "ImageTouristPoint")
                         .WithMany()
-                        .HasForeignKey("ImageTouristPointId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
+                        .HasForeignKey("ImageTouristPointId");
 
                     b.HasOne("Domain.Region", "Region")
                         .WithMany()
