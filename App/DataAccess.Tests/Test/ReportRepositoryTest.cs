@@ -80,6 +80,15 @@ namespace DataAccess.Tests.Test
             DateTime checkOut = new DateTime(2020, 12, 31);
             Assert.IsTrue(true);
         }
+        public void TestFilterDateOffEqualToChekIn() 
+        {
+            int idTP = 1;
+            DateTime dateFrom = new DateTime(2020, 10, 14);
+            DateTime dateOut = new DateTime(2020, 12, 29);
+            DateTime checkIn = new DateTime(2020, 12, 29);
+            DateTime checkOut = new DateTime(2020, 12, 31);
+            Assert.IsTrue(true); /*tiene que retornar algo porque coincide un dìa*/
+        }
         public void TestFilterDatesRightEdgeCaseDatesOk() 
         {
             DateTime dateFrom = new DateTime(2020, 12, 15);
@@ -90,12 +99,29 @@ namespace DataAccess.Tests.Test
         }
         public void TestFilterDatesNotOk() 
         {
-           /* DateTime dateFrom = new DateTime(2020, 12, 15);
-            DateTime dateOut = new DateTime(2021, 01, 02);
+            DateTime dateFrom = new DateTime(2020, 10, 15);
+            DateTime dateOut = new DateTime(2020, 11, 15);
             DateTime checkIn = new DateTime(2020, 12, 01);
             DateTime checkOut = new DateTime(2020, 12, 31);
-             */
-            Assert.IsTrue(true);
+        
+            Assert.IsTrue(true); /*return empty report */
+        }
+        public void TestFilterDateOnEqualToChekOut() 
+        {
+            int idTP = 1;
+            DateTime dateFrom = new DateTime(2020, 12, 31);
+            DateTime dateOut = new DateTime(2021, 01, 29);
+            DateTime checkIn = new DateTime(2020, 12, 01);
+            DateTime checkOut = new DateTime(2020, 12, 31);
+            Assert.IsTrue(true); /*tiene que retornar algo porque coincide un dìa*/
+        }
+          public void TestFilterDatesNotOk2() 
+        {
+            DateTime dateFrom = new DateTime(2021, 01, 01);
+            DateTime dateOut = new DateTime(2021, 01, 15);
+            DateTime checkIn = new DateTime(2020, 12, 01);
+            DateTime checkOut = new DateTime(2020, 12, 31);
+            Assert.IsTrue(true); /*return empty report */
         }
         public void TestFilterSatateNotOk() 
         {
@@ -104,19 +130,48 @@ namespace DataAccess.Tests.Test
             DateTime checkIn = new DateTime(2020, 12, 01);
             DateTime checkOut = new DateTime(2020, 12, 31);
              */
+            string state="Rechazada";
             Assert.IsTrue(true);
         }
-         public void TestFilterSatateNotOk2() 
+        public void TestFilterSatateNotOk2() 
         {
            /* DateTime dateFrom = new DateTime(2020, 12, 15);
             DateTime dateOut = new DateTime(2021, 01, 02);
             DateTime checkIn = new DateTime(2020, 12, 01);
             DateTime checkOut = new DateTime(2020, 12, 31);
              */
+            string state ="Expirada";
             Assert.IsTrue(true);
         }
-   
-    
+        public void TestFilterSatateOk() 
+        {
+           /* DateTime dateFrom = new DateTime(2020, 12, 15);
+            DateTime dateOut = new DateTime(2021, 01, 02);
+            DateTime checkIn = new DateTime(2020, 12, 01);
+            DateTime checkOut = new DateTime(2020, 12, 31);
+             */
+            string state ="Creada";
+            Assert.IsTrue(true);
+        }
+        public void TestFilterSatateOk2() 
+        {
+           /* DateTime dateFrom = new DateTime(2020, 12, 15);
+            DateTime dateOut = new DateTime(2021, 01, 02);
+            DateTime checkIn = new DateTime(2020, 12, 01);
+            DateTime checkOut = new DateTime(2020, 12, 31);
+             */
+            string state ="Aceptada";
+            Assert.IsTrue(true);
+        }
+         public void TestFilterSatateOk2() 
+        {
+           /* DateTime dateFrom = new DateTime(2020, 12, 15);
+            DateTime dateOut = new DateTime(2021, 01, 02);
+            DateTime checkIn = new DateTime(2020, 12, 01);
+            DateTime checkOut = new DateTime(2020, 12, 31);
+             */
+            string state ="Pendiente Pago";
+            Assert.IsTrue(true);
+        }
     }
-    
 }
