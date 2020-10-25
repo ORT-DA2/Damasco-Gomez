@@ -113,6 +113,7 @@ namespace DataAccess.Tests.Test
             var result = repositoryReport.FilterCantBookigsByHouse(dateFrom,dateOut, idTP);
             Assert.IsTrue(reportsToReturn.SequenceEqual(result));
         }
+        [TestMethod]
         public void TestFilterDatesLeftEdgeCaseDatesOk() 
         {
             int idTP = 1;
@@ -122,6 +123,7 @@ namespace DataAccess.Tests.Test
             DateTime checkOut = new DateTime(2020, 12, 31);
             Assert.IsTrue(true);
         }
+        [TestMethod]
         public void TestFilterDateOffEqualToChekIn() 
         {
             int idTP = 1;
@@ -131,6 +133,7 @@ namespace DataAccess.Tests.Test
             DateTime checkOut = new DateTime(2020, 12, 31);
             Assert.IsTrue(true); /*tiene que retornar algo porque coincide un dìa*/
         }
+        [TestMethod]
         public void TestFilterDatesRightEdgeCaseDatesOk() 
         {
             DateTime dateFrom = new DateTime(2020, 12, 15);
@@ -139,6 +142,7 @@ namespace DataAccess.Tests.Test
             DateTime checkOut = new DateTime(2020, 12, 31);
              Assert.IsTrue(true);
         }
+        [TestMethod]
         public void TestFilterDatesNotOk() 
         {
             DateTime dateFrom = new DateTime(2020, 10, 15);
@@ -148,6 +152,7 @@ namespace DataAccess.Tests.Test
         
             Assert.IsTrue(true); /*return empty report */
         }
+        [TestMethod]
         public void TestFilterDateOnEqualToChekOut() 
         {
             int idTP = 1;
@@ -157,7 +162,8 @@ namespace DataAccess.Tests.Test
             DateTime checkOut = new DateTime(2020, 12, 31);
             Assert.IsTrue(true); /*tiene que retornar algo porque coincide un dìa*/
         }
-          public void TestFilterDatesNotOk2() 
+        [TestMethod]
+        public void TestFilterDatesNotOk2() 
         {
             DateTime dateFrom = new DateTime(2021, 01, 01);
             DateTime dateOut = new DateTime(2021, 01, 15);
@@ -165,6 +171,7 @@ namespace DataAccess.Tests.Test
             DateTime checkOut = new DateTime(2020, 12, 31);
             Assert.IsTrue(true); /*return empty report */
         }
+        [TestMethod]
         public void TestFilterSatateNotOk() 
         {
            /* DateTime dateFrom = new DateTime(2020, 12, 15);
@@ -175,6 +182,7 @@ namespace DataAccess.Tests.Test
             string state="Rechazada";
             Assert.IsTrue(true);
         }
+        [TestMethod]
         public void TestFilterSatateNotOk2() 
         {
            /* DateTime dateFrom = new DateTime(2020, 12, 15);
@@ -185,6 +193,7 @@ namespace DataAccess.Tests.Test
             string state ="Expirada";
             Assert.IsTrue(true);
         }
+        [TestMethod]
         public void TestFilterSatateOk() 
         {
            /* DateTime dateFrom = new DateTime(2020, 12, 15);
@@ -195,6 +204,7 @@ namespace DataAccess.Tests.Test
             string state ="Creada";
             Assert.IsTrue(true);
         }
+        [TestMethod]
         public void TestFilterSatateOk2() 
         {
            /* DateTime dateFrom = new DateTime(2020, 12, 15);
@@ -205,7 +215,8 @@ namespace DataAccess.Tests.Test
             string state ="Aceptada";
             Assert.IsTrue(true);
         }
-        public void TestFilterSatateOk2() 
+        [TestMethod]
+        public void TestFilterSatateOk3() 
         {
            /* DateTime dateFrom = new DateTime(2020, 12, 15);
             DateTime dateOut = new DateTime(2021, 01, 02);
@@ -215,6 +226,7 @@ namespace DataAccess.Tests.Test
             string state ="Pendiente Pago";
             Assert.IsTrue(true);
         }
+        [TestMethod]
         public void TestFilterNotMatchTouristPoint() 
         {
            /* DateTime dateFrom = new DateTime(2020, 12, 15);
@@ -222,7 +234,7 @@ namespace DataAccess.Tests.Test
             DateTime checkIn = new DateTime(2020, 12, 01);
             DateTime checkOut = new DateTime(2020, 12, 31);
              */
-            Assert.IsTrue(true); /* retorna reporte vacío porque no coinicide el punto turìstico /
+            Assert.IsTrue(true); /* retorna reporte vacío porque no coinicide el punto turìstico */
         }
     }
 }
