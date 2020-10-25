@@ -311,9 +311,9 @@ namespace DataAccess.Tests.Test
             int idTP = 1;
             DateTime dateFrom = new DateTime(2020, 12, 31);
             DateTime dateOut = new DateTime(2021, 01, 29);
-            DateTime checkIn = new DateTime(2020, 12, 01);
-            DateTime checkOut = new DateTime(2020, 12, 31);
-            Assert.IsTrue(true); /*tiene que retornar algo porque coincide un dìa*/
+            var result = repositoryReport.FilterCantBookigsByHouse(dateFrom,dateOut, idTP);
+            Assert.IsTrue(reportsToReturn.SequenceEqual(result));
+        
         }
         [TestMethod]
         public void TestFilterDatesNotOk2() 
