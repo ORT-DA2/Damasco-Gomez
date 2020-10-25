@@ -15,7 +15,7 @@ namespace DataAccess.Tests.Test
     {
         private List<Report> reportsToReturn;
         private List<House> HouseList;
-        private HouseRepository repositoryHouse;
+        private  List<Report>  emptyReports;
         private DbContext context;
         private DbContextOptions options;
         private ReportRepository repositoryReport;
@@ -24,6 +24,7 @@ namespace DataAccess.Tests.Test
         {
             this.options = new DbContextOptionsBuilder<VidlyContext>().UseInMemoryDatabase(databaseName: "VidlyDBtest").Options;
             this.context = new VidlyContext(this.options);
+            emptyReports = new List<Report>();
             reportsToReturn = new List<Report>()
             {
                 new Report()
@@ -56,12 +57,6 @@ namespace DataAccess.Tests.Test
             {
                 new House()
                 {
-                    TouristPointId= 2,
-                    Bookings= {},
-                    Name= "Radisson Colonia hotel",
-                },
-                new House()
-                {
                     Name= "Hotel L’Auberge",
                     TouristPointId =1,
                     Bookings= 
@@ -75,8 +70,8 @@ namespace DataAccess.Tests.Test
                             StateId = 1,
                             State = new State(){Id=1},
                             Price = 100,
-                            CheckIn = new System.DateTime(),
-                            CheckOut= new System.DateTime(),
+                            CheckIn = new DateTime(2020, 12, 01),
+                            CheckOut= new DateTime(2020, 12, 31),
                         },
                         new Booking()
                         {
@@ -247,12 +242,11 @@ namespace DataAccess.Tests.Test
          [TestMethod]
         public void TestFilterNotMatchTouristPoint() 
         {
-           /* DateTime dateFrom = new DateTime(2020, 12, 15);
-            DateTime dateOut = new DateTime(2021, 01, 02);
-            DateTime checkIn = new DateTime(2020, 12, 01);
-            DateTime checkOut = new DateTime(2020, 12, 31);
-             */
-            Assert.IsTrue(true); /* retorna reporte vacío porque no coinicide el punto turìstico */
+            int idTP = 3;
+            DateTime dateFrom = new DateTime(2020, 12, 03);
+            DateTime dateOut = new DateTime(2020, 12, 20);
+            var result = repositoryReport.FilterCantBookigsByHouse(dateFrom,dateOut, idTP);
+            Assert.IsTrue(emptyReports.SequenceEqual(result));
         }
     }
 }
