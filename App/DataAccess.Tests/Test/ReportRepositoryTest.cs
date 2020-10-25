@@ -29,6 +29,7 @@ namespace DataAccess.Tests.Test
         private Booking booking3;
         private Booking booking4;
         private Booking booking5;
+        private Booking booking6;
 
         [TestInitialize]
         public void Setup()
@@ -41,6 +42,18 @@ namespace DataAccess.Tests.Test
             stateId3 = new State(){Id=3, Name="Aceptada"};
             stateId4 = new State(){Id=4, Name="Rechazada"};
             stateId5 = new State(){Id=5, Name="Expirada"};
+            booking6 = new Booking()
+                        {
+                            Id = 6,
+                            Name = "Booking 6",
+                            Email = "lopezzmariano@mail.com",
+                            House = new House(){Avaible=true},
+                            StateId = 5,
+                            State = stateId5,
+                            Price = 100,
+                            CheckIn = new DateTime(2020, 12, 01),
+                            CheckOut= new DateTime(2020, 12, 31),
+                        };
             booking5 = new Booking()
                         {
                             Id = 5,
@@ -175,8 +188,11 @@ namespace DataAccess.Tests.Test
                 {
                      Id= 5,
                      TouristPointId= 1,
-                     Bookings= new List<Booking>(),
                      Name= "Hotel Arenas",
+                     Bookings= new List<Booking>()
+                    {
+                        booking6,
+                    },  
                 },
             };
 
@@ -292,48 +308,14 @@ namespace DataAccess.Tests.Test
         [TestMethod]
         public void TestFilterSatateNotOk2() 
         {
-           /* DateTime dateFrom = new DateTime(2020, 12, 15);
-            DateTime dateOut = new DateTime(2021, 01, 02);
-            DateTime checkIn = new DateTime(2020, 12, 01);
-            DateTime checkOut = new DateTime(2020, 12, 31);
-             */
-            string state ="Expirada";
-            Assert.IsTrue(true);
-        }
-        [TestMethod]
-        public void TestFilterSatateOk() 
-        {
-            string state ="Aceptada";
+           //not count booking with state= "expirada"
             int idTP = 1;
-            DateTime dateFrom = new DateTime(2020, 12, 15);
-            DateTime dateOut = new DateTime(2021, 01, 02);
-            DateTime checkIn = new DateTime(2020, 12, 01);
-            DateTime checkOut = new DateTime(2020, 12, 31);
+            DateTime dateFrom = new DateTime(2020, 12, 03);
+            DateTime dateOut = new DateTime(2020, 12, 20);
+
             var result = repositoryReport.FilterCantBookigsByHouse(dateFrom,dateOut, idTP);
 
             Assert.IsTrue(reportsToReturn.SequenceEqual(result));
-        }
-        [TestMethod]
-        public void TestFilterSatateOk2() 
-        {
-           /* DateTime dateFrom = new DateTime(2020, 12, 15);
-            DateTime dateOut = new DateTime(2021, 01, 02);
-            DateTime checkIn = new DateTime(2020, 12, 01);
-            DateTime checkOut = new DateTime(2020, 12, 31);
-             */
-            string state ="Aceptada";
-            Assert.IsTrue(true);
-        }
-        [TestMethod]
-        public void TestFilterSatateOk3() 
-        {
-           /* DateTime dateFrom = new DateTime(2020, 12, 15);
-            DateTime dateOut = new DateTime(2021, 01, 02);
-            DateTime checkIn = new DateTime(2020, 12, 01);
-            DateTime checkOut = new DateTime(2020, 12, 31);
-             */
-            string state ="Pendiente Pago";
-            Assert.IsTrue(true);
         }
          [TestMethod]
         public void TestFilterNotMatchTouristPoint() 
