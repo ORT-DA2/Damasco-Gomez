@@ -27,7 +27,6 @@ namespace DataAccess.Tests.Test
         private Booking booking1;
         private Booking booking2;
         private Booking booking3;
-        private Booking booking4;
         private Booking booking5;
         private Booking booking6;
 
@@ -45,6 +44,7 @@ namespace DataAccess.Tests.Test
             booking6 = new Booking()
                         {
                             Id = 6,
+                            HouseId = 2,
                             Name = "Booking 6",
                             Email = "lopezzmariano@mail.com",
                             House = new House(){Avaible=true},
@@ -56,6 +56,7 @@ namespace DataAccess.Tests.Test
                         };
             booking5 = new Booking()
                         {
+                            HouseId = 1,
                             Id = 5,
                             Name = "Booking 5",
                             Email = "lolitalatorre@mail.com",
@@ -69,6 +70,7 @@ namespace DataAccess.Tests.Test
             booking1 =  new Booking()
                         {
                             Id = 1,
+                            HouseId = 1,
                             Name = "Booking 1",
                             Email = "mail1@mail.com",
                             House = new House(){Avaible=true},
@@ -81,6 +83,7 @@ namespace DataAccess.Tests.Test
             booking2 =  new Booking()
                         {
                             Id = 2,
+                            HouseId = 1,
                             Name = "Booking 2",
                             Email = "mail2@mail.com",
                             House = new House(){Avaible=true},
@@ -93,20 +96,9 @@ namespace DataAccess.Tests.Test
             booking3 = new Booking()
                         {
                             Id = 3,
+                            HouseId = 2,
                             Name = "Booking 3",
                             Email = "daniel@mail.com",
-                            House = new House(){Avaible=true},
-                            StateId = 3,
-                            State = stateId3,
-                            Price = 100,
-                            CheckIn = new DateTime(2020, 12, 01),
-                            CheckOut= new DateTime(2020, 12, 31),
-                        };
-            booking4 =  new Booking()
-                        {
-                            Id = 4,
-                            Name = "Booking 4",
-                            Email = "yuliana@mail.com",
                             House = new House(){Avaible=true},
                             StateId = 3,
                             State = stateId3,
@@ -123,24 +115,9 @@ namespace DataAccess.Tests.Test
                 },
                 new Report()
                 {
-                    CantBookings = 4,
+                    CantBookings = 1,
                     NameHouse = "The Grand Hotel",
                 },
-                 new Report()
-                {
-                    CantBookings = 4,
-                    NameHouse = "Solanas Punta Del Este Spa & Resort",
-                },
-                 new Report()
-                {
-                    CantBookings = 3,
-                    NameHouse = "Hotel del Lago Golf & Art Resort",
-                },
-                 new Report()
-                {
-                    CantBookings = 0,
-                    NameHouse = "Hotel Arenas",
-                }
             };
             HouseList= new List<House>()
             {
@@ -151,7 +128,7 @@ namespace DataAccess.Tests.Test
                     TouristPointId =1,
                     Bookings= new List<Booking>()
                     { 
-                        booking1, booking2, booking5
+                        booking1 , booking2, booking5
                     },
                 },
                 new House()
@@ -161,39 +138,9 @@ namespace DataAccess.Tests.Test
                     TouristPointId=1,
                     Bookings= new List<Booking>()
                     {
-                      booking1, booking2, booking3, booking4 
+                      booking6, booking3
                     },
-                },
-                new House()
-                {
-                    Id= 3,
-                    Name = "Solanas Punta Del Este Spa & Resort",
-                    TouristPointId =1,
-                    Bookings= new List<Booking>()
-                    {
-                        booking1, booking2, booking3, booking4 
-                    },
-                },
-                new House()
-                {
-                    Id= 4,
-                    Name= "Hotel del Lago Golf & Art Resort",
-                    TouristPointId= 1,
-                    Bookings= new List<Booking>()
-                    {
-                        booking1, booking2, booking3
-                    }, 
-                },
-                new House()
-                {
-                     Id= 5,
-                     TouristPointId= 1,
-                     Name= "Hotel Arenas",
-                     Bookings= new List<Booking>()
-                    {
-                        booking6,
-                    },  
-                },
+                }, 
             };
 
             HouseList.ForEach(m => this.context.Add(m));
