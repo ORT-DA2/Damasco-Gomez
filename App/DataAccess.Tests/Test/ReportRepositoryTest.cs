@@ -332,7 +332,7 @@ namespace DataAccess.Tests.Test
             int idTP = 1;
             DateTime dateFrom = new DateTime(2021, 01, 01);
             DateTime dateOut = new DateTime(2021, 01, 15);
-            
+
             var result = repositoryReport.FilterCantBookigsByHouse(dateFrom,dateOut, idTP);
 
             Assert.IsTrue(emptyReports.SequenceEqual(result));
@@ -362,13 +362,15 @@ namespace DataAccess.Tests.Test
         [TestMethod]
         public void TestFilterSatateOk() 
         {
-           /* DateTime dateFrom = new DateTime(2020, 12, 15);
+            string state ="Aceptada";
+            int idTP = 1;
+            DateTime dateFrom = new DateTime(2020, 12, 15);
             DateTime dateOut = new DateTime(2021, 01, 02);
             DateTime checkIn = new DateTime(2020, 12, 01);
             DateTime checkOut = new DateTime(2020, 12, 31);
-             */
-            string state ="Creada";
-            Assert.IsTrue(true);
+            var result = repositoryReport.FilterCantBookigsByHouse(dateFrom,dateOut, idTP);
+
+            Assert.IsTrue(reportsToReturn.SequenceEqual(result));
         }
         [TestMethod]
         public void TestFilterSatateOk2() 
