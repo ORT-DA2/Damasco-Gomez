@@ -1,12 +1,13 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using BusinessLogicInterface;
 using DataAccessInterface.Repositories;
 using Domain.Entities;
 
 namespace BusinessLogic.Logics
 {
-    public class ReviewLogic
+    public class ReviewLogic : IReviewLogic
     {
         private readonly IReviewRepository reviewRepository;
         private readonly IHouseRepository houseRepository;
