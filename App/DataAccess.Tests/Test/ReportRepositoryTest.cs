@@ -51,8 +51,8 @@ namespace DataAccess.Tests.Test
                             StateId = 5,
                             State = stateId5,
                             Price = 100,
-                            CheckIn = new DateTime(2020, 12, 01),
-                            CheckOut= new DateTime(2020, 12, 31),
+                            CheckIn = new DateTime(2020, 12, 02),
+                            CheckOut= new DateTime(2020, 12, 30),
                         };
             booking5 = new Booking()
                         {
@@ -64,7 +64,7 @@ namespace DataAccess.Tests.Test
                             StateId = 4,
                             State = stateId4,
                             Price = 100,
-                            CheckIn = new DateTime(2020, 12, 01),
+                            CheckIn = new DateTime(2020, 11, 30),
                             CheckOut= new DateTime(2020, 12, 31),
                         };
             booking1 =  new Booking()
@@ -77,7 +77,7 @@ namespace DataAccess.Tests.Test
                             StateId = 3,
                             State = stateId3,
                             Price = 100,
-                            CheckIn = new DateTime(2020, 12, 01),
+                            CheckIn = new DateTime(2020, 12, 05),
                             CheckOut= new DateTime(2020, 12, 31),
                         };
             booking2 =  new Booking()
@@ -104,7 +104,7 @@ namespace DataAccess.Tests.Test
                             State = stateId3,
                             Price = 100,
                             CheckIn = new DateTime(2020, 12, 01),
-                            CheckOut= new DateTime(2020, 12, 31),
+                            CheckOut= new DateTime(2020, 12, 28),
                         };
             reportsToReturn = new List<Report>()
             {
