@@ -273,10 +273,9 @@ namespace DataAccess.Tests.Test
         {
             int idTP = 1;
             DateTime dateFrom = new DateTime(2020, 11, 29);
-            DateTime dateOut = new DateTime(2020, 12, 29);
-            DateTime checkIn = new DateTime(2020, 12, 01);
-            DateTime checkOut = new DateTime(2020, 12, 31);
-            Assert.IsTrue(true);
+            DateTime dateOut = new DateTime(2020, 12, 20);
+            var result = repositoryReport.FilterCantBookigsByHouse(dateFrom,dateOut, idTP);
+            Assert.IsTrue(reportsToReturn.SequenceEqual(result));
         }
         [TestMethod]
         public void TestFilterDateOffEqualToChekIn() 
