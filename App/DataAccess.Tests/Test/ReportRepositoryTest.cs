@@ -15,7 +15,6 @@ namespace DataAccess.Tests.Test
     {
         private List<Report> reportsToReturn;
         private List<House> HouseList;
-
         private HouseRepository repositoryHouse;
         private DbContext context;
         private DbContextOptions options;
@@ -29,7 +28,7 @@ namespace DataAccess.Tests.Test
             {
                 new Report()
                 {
-                    CantBookings = 10,
+                    CantBookings = 2,
                     NameHouse = "Hotel L’Auberge",
                 },
                 new Report()
@@ -60,23 +59,42 @@ namespace DataAccess.Tests.Test
                     TouristPointId= 2,
                     Bookings= {},
                     Name= "Radisson Colonia hotel",
-                }
+                },
                 new House()
                 {
-                    TouristPointId =1,
-                     Bookings= {},
                     Name= "Hotel L’Auberge",
+                    TouristPointId =1,
+                    Bookings= 
+                    {
+                        new Booking()
+                        {
+                            Id = 1,
+                            Name = "Booking 1",
+                            Email = "mail1@mail.com",
+                            House = new House(){Avaible=true},
+                            StateId = 1,
+                            State = new State(){Id=1},
+                            Price = 100,
+                            CheckIn = new System.DateTime(),
+                            CheckOut= new System.DateTime(),
+                        },
+                        new Booking()
+                        {
+                            Id = 2,
+                            Name = "Booking 2",
+                        }
+                    },
                 },
                 new House()
                 {
                     TouristPointId=1,
-                     Bookings= {},
+                    Bookings= {},
                     Name= "The Grand Hotel",
                 },
                  new House()
                 {
                     TouristPointId =1,
-                     Bookings= {},
+                    Bookings= {},
                     Name = "Solanas Punta Del Este Spa & Resort",
                 },
                 new House()
@@ -90,7 +108,7 @@ namespace DataAccess.Tests.Test
                     TouristPointId= 1,
                      Bookings= {},
                     Name= "Hotel Arenas",
-                }
+                },
             };
 
             HouseList.ForEach(m => this.context.Add(m));
