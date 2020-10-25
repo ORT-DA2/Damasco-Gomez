@@ -6,6 +6,6 @@ namespace DataAccessInterface.Repositories
 {
     public interface IReportRepository
     {
-       List<Report> FilterCantBookigsByHouse (DateTime dateFrom, DateTime dateOut,int  idTp)
+       List<Report> FilterCantBookigsByHouse (DateTime dateFrom, DateTime dateOut,int  idTp);
     }
 }
