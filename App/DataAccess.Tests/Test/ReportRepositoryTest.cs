@@ -28,6 +28,7 @@ namespace DataAccess.Tests.Test
         private Booking booking2;
         private Booking booking3;
         private Booking booking4;
+        private Booking booking5;
 
         [TestInitialize]
         public void Setup()
@@ -37,9 +38,21 @@ namespace DataAccess.Tests.Test
             emptyReports = new List<Report>();
             stateId1 = new State(){Id=1, Name="Creada"};
             stateId2 = new State(){Id=2, Name="Pendiente Pago"};
-            stateId3 = new State(){Id=1, Name="Aceptada"};
-            stateId4 = new State(){Id=1, Name="Rechazada"};
-            stateId5 = new State(){Id=1, Name="Expirada"};
+            stateId3 = new State(){Id=3, Name="Aceptada"};
+            stateId4 = new State(){Id=4, Name="Rechazada"};
+            stateId5 = new State(){Id=5, Name="Expirada"};
+            booking5 = new Booking()
+                        {
+                            Id = 5,
+                            Name = "Booking 5",
+                            Email = "lolitalatorre@mail.com",
+                            House = new House(){Avaible=true},
+                            StateId = 4,
+                            State = stateId4,
+                            Price = 100,
+                            CheckIn = new DateTime(2020, 12, 01),
+                            CheckOut= new DateTime(2020, 12, 31),
+                        };
             booking1 =  new Booking()
                         {
                             Id = 1,
@@ -125,7 +138,7 @@ namespace DataAccess.Tests.Test
                     TouristPointId =1,
                     Bookings= new List<Booking>()
                     { 
-                        booking1, booking2
+                        booking1, booking2, booking5
                     },
                 },
                 new House()
@@ -253,7 +266,7 @@ namespace DataAccess.Tests.Test
 
             Assert.IsTrue(emptyReports.SequenceEqual(result));
         }
-         [TestMethod]
+        [TestMethod]
         public void TestFilterDatesNotOk() 
         {
             int idTP = 1;
@@ -267,13 +280,14 @@ namespace DataAccess.Tests.Test
         [TestMethod]
         public void TestFilterSatateNotOk() 
         {
-           /* DateTime dateFrom = new DateTime(2020, 12, 15);
-            DateTime dateOut = new DateTime(2021, 01, 02);
-            DateTime checkIn = new DateTime(2020, 12, 01);
-            DateTime checkOut = new DateTime(2020, 12, 31);
-             */
-            string state="Rechazada";
-            Assert.IsTrue(true);
+            //not count booking with state= "rechazada"
+            int idTP = 1;
+            DateTime dateFrom = new DateTime(2020, 12, 03);
+            DateTime dateOut = new DateTime(2020, 12, 20);
+
+            var result = repositoryReport.FilterCantBookigsByHouse(dateFrom,dateOut, idTP);
+
+            Assert.IsTrue(reportsToReturn.SequenceEqual(result));
         }
         [TestMethod]
         public void TestFilterSatateNotOk2() 
