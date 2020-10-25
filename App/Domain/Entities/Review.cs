@@ -20,5 +20,20 @@ namespace Domain.Entities
             }
             return result;
         }
+        public void Update(Review element)
+        {
+            if(element.Name != null) this.Name = element.Name;
+            if(element.HouseId > 0 ) this.HouseId = element.HouseId;
+            if(element.Score > 0 ) this.Score = element.Score;
+            if(element.Comment != null) this.Comment = element.Comment;
+        }
+        public bool IsEmpty()
+        {
+            bool nameNull = Name == null;
+            bool houseIdZero = HouseId == 0;
+            bool scoreZero = Score == 0;
+            bool commentNull = Comment == null;
+            return nameNull && houseIdZero && scoreZero && commentNull ;
+        }
     }
 }
