@@ -57,10 +57,11 @@ namespace DataAccess.Tests.Test
             {
                 new House()
                 {
+                    Id= 1,
                     Name= "Hotel L’Auberge",
                     TouristPointId =1,
-                    Bookings= 
-                    {
+                    Bookings= new List<Booking>()
+                    { 
                         new Booking()
                         {
                             Id = 1,
@@ -89,9 +90,10 @@ namespace DataAccess.Tests.Test
                 },
                 new House()
                 {
+                     Id= 2,
                     Name= "The Grand Hotel",
                     TouristPointId=1,
-                    Bookings= 
+                    Bookings= new List<Booking>()
                     {
                         new Booking()
                         {
@@ -143,11 +145,12 @@ namespace DataAccess.Tests.Test
                         }
                     },
                 },
-                 new House()
+                new House()
                 {
+                    Id= 3,
                     Name = "Solanas Punta Del Este Spa & Resort",
                     TouristPointId =1,
-                    Bookings= 
+                    Bookings= new List<Booking>()
                     {
                          new Booking()
                         {
@@ -201,9 +204,10 @@ namespace DataAccess.Tests.Test
                 },
                 new House()
                 {
+                    Id= 4,
                     Name= "Hotel del Lago Golf & Art Resort",
                     TouristPointId= 1,
-                    Bookings= 
+                    Bookings= new List<Booking>()
                     {
                         new Booking()
                         {
@@ -245,8 +249,10 @@ namespace DataAccess.Tests.Test
                 },
                 new House()
                 {
-                    TouristPointId= 1,
-                    Name= "Hotel Arenas",
+                     Id= 5,
+                     TouristPointId= 1,
+                     Bookings= new List<Booking>(),
+                     Name= "Hotel Arenas",
                 },
             };
 
