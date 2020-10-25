@@ -1,3 +1,5 @@
+using System;
+using System.Collections.Generic;
 using System.Diagnostics.CodeAnalysis;
 using Domain.Entities;
 
@@ -13,10 +15,12 @@ namespace Domain
         public string Name {get ; set; }
         public int Starts {get ; set; }
         public string Address {get ; set; }
-        public string Ilustrations {get ; set; }
+        public virtual List<ImageHouse> ImagesHouse {get ; set; }
         public string Description {get ; set;}
         public int Phone {get; set; }
         public string Contact {get; set;}
+         public DateTime CreatedOn {get; set;}
+        public virtual List <Booking> Booking {get; set;}
         [ExcludeFromCodeCoverage]
         public override bool Equals(object obj)
         {
@@ -37,9 +41,12 @@ namespace Domain
                 double  PriceAdults = houseSearch.CantAdults * priceNight * nights;
                 const double percentChildrens = 0.5;
                 const double percentBabys = 0.5;
+                const double percentSeniors = 0.3;
                 double  PriceChildrens = houseSearch.CantChildrens* percentChildrens * priceNight * nights;
                 double  PriceBabys = houseSearch.CantBabys * percentBabys * priceNight * nights;
-                TotalPrice = PriceAdults + PriceChildrens + PriceBabys;
+                double  discountSeniors = (double)Math.Ceiling(Convert.ToDecimal(houseSearch.CantSeniors) / 2);
+                double PriceSeniors = discountSeniors * percentSeniors * priceNight * nights;             
+                TotalPrice = PriceAdults + PriceChildrens + PriceBabys + PriceSeniors;
             }
             return TotalPrice ;
         }
@@ -54,7 +61,6 @@ namespace Domain
             if(element.Starts>0) this.Starts = element.Starts;
             if(element.Address != null) this.Address = element.Address;
             if(element.Description != null) this.Description = element.Description;
-            if(element.Ilustrations != null) this.Ilustrations = element.Ilustrations;
             if(element.Phone>0) this.Phone = element.Phone;
             if(element.Contact != null) this.Contact = element.Contact;
         }
@@ -70,12 +76,11 @@ namespace Domain
             bool touristPointIdZero = TouristPointId == 0;
             bool startsZero = Starts == 0;
             bool addressNull = Address == null;
-            bool ilustrationsNull = Ilustrations == null;
             bool descriptionNull = Description == null;
             bool phoneZero = Phone == 0;
             bool contactNull = Contact == null;
             return nameNull && pricePerNightZero && touristPointIdZero && startsZero
-                && addressNull && ilustrationsNull && descriptionNull && phoneZero
+                && addressNull && descriptionNull && phoneZero
                 && contactNull;
         }
 

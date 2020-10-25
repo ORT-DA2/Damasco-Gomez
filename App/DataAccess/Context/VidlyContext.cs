@@ -17,6 +17,9 @@ namespace DataAccess.Context
         public DbSet<SessionUser> Sessions {get; set;}
         public DbSet<State> States {get; set;}
         public DbSet<TouristPoint> TouristPoints {get; set;}
+        public DbSet<ImageHouse> ImagesHouses {get; set;}
+        public DbSet<ImageTouristPoint> ImagesTouristPoints {get; set;}
+        public DbSet<Review> Reviews {get; set;}
 
         public VidlyContext(){}
         public VidlyContext(DbContextOptions options) : base(options){}

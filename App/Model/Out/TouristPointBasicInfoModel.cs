@@ -1,5 +1,6 @@
 using System.Diagnostics.CodeAnalysis;
 using Domain;
+using Domain.Entities;
 
 namespace Model.Out
 {
@@ -10,7 +11,7 @@ namespace Model.Out
 
         public string Name {get; private set;}
 
-        public string Image {get; private set;}
+        public ImageTouristPointBasicModel Image {get; private set;}
 
         public string Description {get; private set;}
 
@@ -20,7 +21,10 @@ namespace Model.Out
         {
             this.Id = touristPoint.Id;
             this.Name = touristPoint.Name;
-            this.Image = touristPoint.Image;
+            if(this.Image!=null)
+            {
+                this.Image = new ImageTouristPointBasicModel(touristPoint.ImageTouristPoint);
+            }
             this.Description = touristPoint.Description;
             this.RegionId = touristPoint.RegionId;
         }

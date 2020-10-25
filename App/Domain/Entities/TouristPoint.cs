@@ -8,7 +8,8 @@ namespace Domain
     {
         public int Id {get; set;}
         public string Name {get; set;}
-        public string Image {get; set;}
+        public int? ImageTouristPointId {get; set;}
+        public virtual ImageTouristPoint ImageTouristPoint {get; set;}
         public string Description {get; set;}
         public int RegionId {get; set;}
         public virtual Region Region {get; set;}
@@ -26,7 +27,7 @@ namespace Domain
         public void Update(TouristPoint element)
         {
             if(element.Name != null) this.Name = element.Name;
-            if(element.Image != null) this.Image = element.Image;
+            if(element.ImageTouristPoint != null) this.ImageTouristPoint = element.ImageTouristPoint;
             if(element.Description != null) this.Description = element.Description;
             if(element.RegionId>0) this.RegionId = element.RegionId;
         }

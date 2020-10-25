@@ -54,6 +54,7 @@ namespace BusinessLogic
                 );
                 categoryBd.CategoryTouristPoints = category.CategoryTouristPoints;
             }
+            categoryBd.Update(category);
             this.categoryRepository.Update(id, categoryBd);
             return categoryBd;
         }

@@ -12,5 +12,6 @@ namespace Domain.Entities
         public int CantAdults {get;  set;}
         public int CantChildrens {get; set;}
         public int CantBabys {get; set;}
+        public int CantSeniors {get; set;}
     }
 }
