@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using DataAccess.Context;
 using DataAccess.Repositories;
+using Domain;
 using Domain.Entities;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
@@ -13,10 +14,12 @@ namespace DataAccess.Tests.Test
     public class ReportRepositoryTest
     {
         private List<Report> reportsToReturn;
+        private List<House> HouseList;
+
+        private HouseRepository repositoryHouse;
         private DbContext context;
         private DbContextOptions options;
-        private ReportRepository repository;
-        
+        private ReportRepository repositoryReport;
         [TestInitialize]
         public void Setup()
         {
@@ -50,10 +53,49 @@ namespace DataAccess.Tests.Test
                     NameHouse = "Hotel Arenas",
                 }
             };
+            HouseList= new List<House>()
+            {
+                new House()
+                {
+                    TouristPointId= 2,
+                    Bookings= {},
+                    Name= "Radisson Colonia hotel",
+                }
+                new House()
+                {
+                    TouristPointId =1,
+                     Bookings= {},
+                    Name= "Hotel L’Auberge",
+                },
+                new House()
+                {
+                    TouristPointId=1,
+                     Bookings= {},
+                    Name= "The Grand Hotel",
+                },
+                 new House()
+                {
+                    TouristPointId =1,
+                     Bookings= {},
+                    Name = "Solanas Punta Del Este Spa & Resort",
+                },
+                new House()
+                {
+                    TouristPointId= 1,
+                     Bookings= {},
+                    Name= "Hotel del Lago Golf & Art Resort",
+                }
+                new House()
+                {
+                    TouristPointId= 1,
+                     Bookings= {},
+                    Name= "Hotel Arenas",
+                }
+            };
 
-            reportsToReturn.ForEach(m => this.context.Add(m));
+            HouseList.ForEach(m => this.context.Add(m));
             this.context.SaveChanges();
-            repository = new ReportRepository(context);
+            repositoryReport = new ReportRepository(context);
         }
         [TestCleanup]
         public void TestCleanup()
@@ -68,7 +110,7 @@ namespace DataAccess.Tests.Test
             DateTime dateOut = new DateTime(2020, 12, 20);
             DateTime checkIn = new DateTime(2020, 12, 01);
             DateTime checkOut = new DateTime(2020, 12, 31);
-            var result = repository.FilterCantBookigsByHouse(dateFrom,dateOut, idTP);
+            var result = repositoryReport.FilterCantBookigsByHouse(dateFrom,dateOut, idTP);
             Assert.IsTrue(reportsToReturn.SequenceEqual(result));
         }
         public void TestFilterDatesLeftEdgeCaseDatesOk() 
