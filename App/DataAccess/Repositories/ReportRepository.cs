@@ -26,7 +26,7 @@ namespace DataAccess.Repositories
                 .Select(
                     h => new Report(){ 
                         NameHouse = h.Name, 
-                        CantBookings = h.Booking
+                        CantBookings = h.Bookings
                         .Where(b => 
                             b.State.Name!="Rechazada" && 
                             b.State.Name!="Expirada" && 
