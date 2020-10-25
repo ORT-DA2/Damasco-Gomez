@@ -289,11 +289,12 @@ namespace DataAccess.Tests.Test
         [TestMethod]
         public void TestFilterDatesRightEdgeCaseDatesOk() 
         {
+            int idTP = 1;
             DateTime dateFrom = new DateTime(2020, 12, 15);
-            DateTime dateOut = new DateTime(2021, 01, 02);
-            DateTime checkIn = new DateTime(2020, 12, 01);
-            DateTime checkOut = new DateTime(2020, 12, 31);
-             Assert.IsTrue(true);
+            DateTime dateOut = new DateTime(2021, 01, 10);
+            var result = repositoryReport.FilterCantBookigsByHouse(dateFrom,dateOut, idTP);
+            Assert.IsTrue(reportsToReturn.SequenceEqual(result));
+        
         }
         [TestMethod]
         public void TestFilterDatesNotOk() 
