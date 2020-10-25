@@ -19,12 +19,22 @@ namespace DataAccess.Tests.Test
         private DbContext context;
         private DbContextOptions options;
         private ReportRepository repositoryReport;
+        private State stateId1 ;
+        private State stateId2;
+        private State stateId3 ;
+        private State stateId4 ;
+        private State stateId5 ;
         [TestInitialize]
         public void Setup()
         {
             this.options = new DbContextOptionsBuilder<VidlyContext>().UseInMemoryDatabase(databaseName: "VidlyDBtest").Options;
             this.context = new VidlyContext(this.options);
             emptyReports = new List<Report>();
+            stateId1 = new State(){Id=1, Name="Creada"};
+            stateId2 = new State(){Id=2, Name="Pendiente Pago"};
+            stateId3 = new State(){Id=1, Name="Aceptada"};
+            stateId4 = new State(){Id=1, Name="Rechazada"};
+            stateId5 = new State(){Id=1, Name="Expirada"};
             reportsToReturn = new List<Report>()
             {
                 new Report()
@@ -69,7 +79,7 @@ namespace DataAccess.Tests.Test
                             Email = "mail1@mail.com",
                             House = new House(){Avaible=true},
                             StateId = 3,
-                            State = new State(){Id=3, Name="Aceptada"},
+                            State = stateId3,
                             Price = 100,
                             CheckIn = new DateTime(2020, 12, 01),
                             CheckOut= new DateTime(2020, 12, 31),
@@ -81,7 +91,7 @@ namespace DataAccess.Tests.Test
                             Email = "mail2@mail.com",
                             House = new House(){Avaible=true},
                             StateId = 3,
-                            State = new State(){Id=3, Name="Aceptada"},
+                            State = stateId3,
                             Price = 100,
                             CheckIn = new DateTime(2020, 12, 01),
                             CheckOut= new DateTime(2020, 12, 31),
@@ -102,7 +112,7 @@ namespace DataAccess.Tests.Test
                             Email = "lola@mail.com",
                             House = new House(){Avaible=true},
                             StateId = 3,
-                            State = new State(){Id=3, Name="Aceptada"},
+                            State = stateId3,
                             Price = 100,
                             CheckIn = new DateTime(2020, 12, 01),
                             CheckOut= new DateTime(2020, 12, 31),
@@ -114,7 +124,7 @@ namespace DataAccess.Tests.Test
                             Email = "marco@mail.com",
                             House = new House(){Avaible=true},
                             StateId = 3,
-                            State = new State(){Id=3, Name="Aceptada"},
+                            State = stateId3,
                             Price = 100,
                             CheckIn = new DateTime(2020, 12, 01),
                             CheckOut= new DateTime(2020, 12, 31),
@@ -126,7 +136,7 @@ namespace DataAccess.Tests.Test
                             Email = "daniel@mail.com",
                             House = new House(){Avaible=true},
                             StateId = 3,
-                            State = new State(){Id=3, Name="Aceptada"},
+                            State = stateId3,
                             Price = 100,
                             CheckIn = new DateTime(2020, 12, 01),
                             CheckOut= new DateTime(2020, 12, 31),
@@ -138,7 +148,7 @@ namespace DataAccess.Tests.Test
                             Email = "yuliana@mail.com",
                             House = new House(){Avaible=true},
                             StateId = 3,
-                            State = new State(){Id=3, Name="Aceptada"},
+                            State = stateId3,
                             Price = 100,
                             CheckIn = new DateTime(2020, 12, 01),
                             CheckOut= new DateTime(2020, 12, 31),
@@ -159,7 +169,7 @@ namespace DataAccess.Tests.Test
                             Email = "mailpablo@mail.com",
                             House = new House(){Avaible=true},
                             StateId = 3,
-                            State = new State(){Id=3, Name="Aceptada"},
+                            State = stateId3,
                             Price = 100,
                             CheckIn = new DateTime(2020, 12, 01),
                             CheckOut= new DateTime(2020, 12, 31),
@@ -171,7 +181,7 @@ namespace DataAccess.Tests.Test
                             Email = "mailPRUEBA@mail.com",
                             House = new House(){Avaible=true},
                             StateId = 3,
-                            State = new State(){Id=13 Name="Aceptada"},
+                            State = stateId3,
                             Price = 100,
                             CheckIn = new DateTime(2020, 12, 01),
                             CheckOut= new DateTime(2020, 12, 31),
@@ -183,7 +193,7 @@ namespace DataAccess.Tests.Test
                             Email = "martaSiLVA@mail.com",
                             House = new House(){Avaible=true},
                             StateId = 1,
-                            State = new State(){Id=1, Name="Creada"},
+                            State = stateId1,
                             Price = 100,
                             CheckIn = new DateTime(2020, 12, 01),
                             CheckOut= new DateTime(2020, 12, 31),
@@ -195,7 +205,7 @@ namespace DataAccess.Tests.Test
                             Email = "andresperez@mail.com",
                             House = new House(){Avaible=true},
                             StateId = 1,
-                            State = new State(){Id=1, Name="Creada"},
+                            State = stateId1,
                             Price = 100,
                             CheckIn = new DateTime(2020, 12, 01),
                             CheckOut= new DateTime(2020, 12, 31),
@@ -216,7 +226,7 @@ namespace DataAccess.Tests.Test
                             Email = "gonzalo@mail.com",
                             House = new House(){Avaible=true},
                             StateId = 3,
-                            State = new State(){Id=3, Name="Aceptada"},
+                            State = stateId3,
                             Price = 100,
                             CheckIn = new DateTime(2020, 12, 01),
                             CheckOut= new DateTime(2020, 12, 31),
@@ -228,7 +238,7 @@ namespace DataAccess.Tests.Test
                             Email = "juan@mail.com",
                             House = new House(){Avaible=true},
                             StateId = 1,
-                            State = new State(){Id=1, Name="Creada"},
+                            State = stateId1,
                             Price = 100,
                             CheckIn = new DateTime(2020, 12, 01),
                             CheckOut= new DateTime(2020, 12, 31),
@@ -240,7 +250,7 @@ namespace DataAccess.Tests.Test
                             Email = "vale@mail.com",
                             House = new House(){Avaible=true},
                             StateId = 2,
-                            State = new State(){Id=2, Name="Pendiente Pago"},
+                            State = stateId2,
                             Price = 100,
                             CheckIn = new DateTime(2020, 12, 01),
                             CheckOut= new DateTime(2020, 12, 31),
