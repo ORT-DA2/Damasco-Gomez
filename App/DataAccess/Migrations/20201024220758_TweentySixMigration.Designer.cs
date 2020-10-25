@@ -11,8 +11,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace DataAccess.Migrations
 {
     [DbContext(typeof(VidlyContext))]
-    [Migration("20201024212944_TweentyFourMigration")]
-    partial class TweentyFourMigration
+    [Migration("20201024220758_TweentySixMigration")]
+    partial class TweentySixMigration
     {
         [ExcludeFromCodeCoverage]
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -139,6 +139,18 @@ namespace DataAccess.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("ImageTouristPoint");
+                });
+
+            modelBuilder.Entity("Domain.Entities.Report", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.HasKey("Id");
+
+                    b.ToTable("Reports");
                 });
 
             modelBuilder.Entity("Domain.Entities.SessionUser", b =>
@@ -281,7 +293,7 @@ namespace DataAccess.Migrations
             modelBuilder.Entity("Domain.Booking", b =>
                 {
                     b.HasOne("Domain.House", "House")
-                        .WithMany()
+                        .WithMany("Booking")
                         .HasForeignKey("HouseId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();

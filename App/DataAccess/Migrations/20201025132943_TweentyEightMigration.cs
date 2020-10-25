@@ -4,32 +4,20 @@ using Microsoft.EntityFrameworkCore.Migrations;
 namespace DataAccess.Migrations
 {
     [ExcludeFromCodeCoverage]
-    public partial class TweentyFourMigration : Migration
+    public partial class TweentyEightMigration : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.DropForeignKey(
-                name: "FK_TouristPoints_ImageTouristPoint_ImageId",
+                name: "FK_TouristPoints_ImageTouristPoint_ImageTouristPointId",
                 table: "TouristPoints");
 
-            migrationBuilder.DropIndex(
-                name: "IX_TouristPoints_ImageId",
-                table: "TouristPoints");
-
-            migrationBuilder.DropColumn(
-                name: "ImageId",
-                table: "TouristPoints");
-
-            migrationBuilder.AddColumn<int>(
+            migrationBuilder.AlterColumn<int>(
                 name: "ImageTouristPointId",
                 table: "TouristPoints",
-                nullable: false,
-                defaultValue: 0);
-
-            migrationBuilder.CreateIndex(
-                name: "IX_TouristPoints_ImageTouristPointId",
-                table: "TouristPoints",
-                column: "ImageTouristPointId");
+                nullable: true,
+                oldClrType: typeof(int),
+                oldType: "int");
 
             migrationBuilder.AddForeignKey(
                 name: "FK_TouristPoints_ImageTouristPoint_ImageTouristPointId",
@@ -37,7 +25,7 @@ namespace DataAccess.Migrations
                 column: "ImageTouristPointId",
                 principalTable: "ImageTouristPoint",
                 principalColumn: "Id",
-                onDelete: ReferentialAction.Cascade);
+                onDelete: ReferentialAction.Restrict);
         }
 
         protected override void Down(MigrationBuilder migrationBuilder)
@@ -46,30 +34,18 @@ namespace DataAccess.Migrations
                 name: "FK_TouristPoints_ImageTouristPoint_ImageTouristPointId",
                 table: "TouristPoints");
 
-            migrationBuilder.DropIndex(
-                name: "IX_TouristPoints_ImageTouristPointId",
-                table: "TouristPoints");
-
-            migrationBuilder.DropColumn(
+            migrationBuilder.AlterColumn<int>(
                 name: "ImageTouristPointId",
-                table: "TouristPoints");
-
-            migrationBuilder.AddColumn<int>(
-                name: "ImageId",
                 table: "TouristPoints",
                 type: "int",
                 nullable: false,
-                defaultValue: 0);
-
-            migrationBuilder.CreateIndex(
-                name: "IX_TouristPoints_ImageId",
-                table: "TouristPoints",
-                column: "ImageId");
+                oldClrType: typeof(int),
+                oldNullable: true);
 
             migrationBuilder.AddForeignKey(
-                name: "FK_TouristPoints_ImageTouristPoint_ImageId",
+                name: "FK_TouristPoints_ImageTouristPoint_ImageTouristPointId",
                 table: "TouristPoints",
-                column: "ImageId",
+                column: "ImageTouristPointId",
                 principalTable: "ImageTouristPoint",
                 principalColumn: "Id",
                 onDelete: ReferentialAction.Cascade);

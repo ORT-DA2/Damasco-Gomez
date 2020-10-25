@@ -116,7 +116,7 @@ namespace DataAccess.Migrations
 
                     b.HasIndex("HouseId");
 
-                    b.ToTable("ImageHouse");
+                    b.ToTable("ImagesHouses");
                 });
 
             modelBuilder.Entity("Domain.Entities.ImageTouristPoint", b =>
@@ -134,7 +134,33 @@ namespace DataAccess.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("ImageTouristPoint");
+                    b.ToTable("ImagesTouristPoints");
+                });
+
+            modelBuilder.Entity("Domain.Entities.Review", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<string>("Comment")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<int>("HouseId")
+                        .HasColumnType("int");
+
+                    b.Property<string>("Name")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<int>("Score")
+                        .HasColumnType("int");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("HouseId");
+
+                    b.ToTable("Reviews");
                 });
 
             modelBuilder.Entity("Domain.Entities.SessionUser", b =>
@@ -187,6 +213,9 @@ namespace DataAccess.Migrations
 
                     b.Property<string>("Contact")
                         .HasColumnType("nvarchar(max)");
+
+                    b.Property<DateTime>("CreatedOn")
+                        .HasColumnType("datetime2");
 
                     b.Property<string>("Description")
                         .HasColumnType("nvarchar(max)");
@@ -256,7 +285,7 @@ namespace DataAccess.Migrations
                     b.Property<string>("Description")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<int>("ImageTouristPointId")
+                    b.Property<int?>("ImageTouristPointId")
                         .HasColumnType("int");
 
                     b.Property<string>("Name")
@@ -277,7 +306,7 @@ namespace DataAccess.Migrations
             modelBuilder.Entity("Domain.Booking", b =>
                 {
                     b.HasOne("Domain.House", "House")
-                        .WithMany()
+                        .WithMany("Booking")
                         .HasForeignKey("HouseId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
@@ -311,6 +340,15 @@ namespace DataAccess.Migrations
                         .HasForeignKey("HouseId");
                 });
 
+            modelBuilder.Entity("Domain.Entities.Review", b =>
+                {
+                    b.HasOne("Domain.House", "House")
+                        .WithMany()
+                        .HasForeignKey("HouseId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+                });
+
             modelBuilder.Entity("Domain.Entities.SessionUser", b =>
                 {
                     b.HasOne("Domain.Person", "User")
@@ -333,9 +371,7 @@ namespace DataAccess.Migrations
                 {
                     b.HasOne("Domain.Entities.ImageTouristPoint", "ImageTouristPoint")
                         .WithMany()
-                        .HasForeignKey("ImageTouristPointId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
+                        .HasForeignKey("ImageTouristPointId");
 
                     b.HasOne("Domain.Region", "Region")
                         .WithMany()

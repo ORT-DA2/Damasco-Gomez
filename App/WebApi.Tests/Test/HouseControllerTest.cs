@@ -281,6 +281,7 @@ namespace WebApi.Tests
                 Description = "Description house 1",
                 Phone = 99898899 ,
                 Contact = "Person Name1",
+                Images = null,
             };
             houseId1 = houseModel.ToEntity();
             Exception exist = new Exception();
