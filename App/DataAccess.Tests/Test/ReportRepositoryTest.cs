@@ -299,12 +299,11 @@ namespace DataAccess.Tests.Test
         [TestMethod]
         public void TestFilterDatesNotOk() 
         {
+            int idTP = 1;
             DateTime dateFrom = new DateTime(2020, 10, 15);
             DateTime dateOut = new DateTime(2020, 11, 15);
-            DateTime checkIn = new DateTime(2020, 12, 01);
-            DateTime checkOut = new DateTime(2020, 12, 31);
-        
-            Assert.IsTrue(true); /*return empty report */
+            var result = repositoryReport.FilterCantBookigsByHouse(dateFrom,dateOut, idTP);
+            Assert.IsTrue(emptyReports.SequenceEqual(result));
         }
         [TestMethod]
         public void TestFilterDateOnEqualToChekOut() 
