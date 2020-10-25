@@ -1,4 +1,6 @@
+using System;
 using System.Collections.Generic;
+using System.Linq;
 using DataAccess.Context;
 using DataAccess.Repositories;
 using Domain.Entities;
@@ -59,10 +61,45 @@ namespace DataAccess.Tests.Test
             this.context.Database.EnsureDeleted();
         }
         [TestMethod]
-        public void TestFilterCantBookigsByHouse ()
+        public void TestFilterDatesInTheMiddleOk()
         {
-
+            int idTP = 1;
+            DateTime dateFrom = new DateTime(2020, 12, 03);
+            DateTime dateOut = new DateTime(2020, 12, 20);
+            DateTime checkIn = new DateTime(2020, 12, 01);
+            DateTime checkOut = new DateTime(2020, 12, 31);
+            var result = repository.FilterCantBookigsByHouse(dateFrom,dateOut, idTP);
+            Assert.IsTrue(reportsToReturn.SequenceEqual(result));
+        }
+        public void TestFilterDatesLeftEdgeCaseDatesOk() 
+        {
+            int idTP = 1;
+            DateTime dateFrom = new DateTime(2020, 11, 29);
+            DateTime dateOut = new DateTime(2020, 12, 29);
+            DateTime checkIn = new DateTime(2020, 12, 01);
+            DateTime checkOut = new DateTime(2020, 12, 31);
             Assert.IsTrue(true);
         }
+        public void TestFilterDatesRightEdgeCaseDatesOk() 
+        {
+            DateTime dateFrom = new DateTime(2020, 12, 15);
+            DateTime dateOut = new DateTime(2021, 01, 02);
+            DateTime checkIn = new DateTime(2020, 12, 01);
+            DateTime checkOut = new DateTime(2020, 12, 31);
+             Assert.IsTrue(true);
+        }
+        public void TestFilterDatesNotOk() 
+        {
+           /* DateTime dateFrom = new DateTime(2020, 12, 15);
+            DateTime dateOut = new DateTime(2021, 01, 02);
+            DateTime checkIn = new DateTime(2020, 12, 01);
+            DateTime checkOut = new DateTime(2020, 12, 31);
+             */
+            Assert.IsTrue(true);
+        }
+    
+   
+    
     }
+    
 }
