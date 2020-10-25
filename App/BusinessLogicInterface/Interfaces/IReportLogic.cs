@@ -1,7 +1,11 @@
+using System;
+using System.Collections.Generic;
+using Domain.Entities;
+
 namespace BusinessLogicInterface.Interfaces
 {
-    public class IReportLogic
+    public interface IReportLogic
     {
-        
+        List<Report> GetHousesReportBy(DateTime dateFrom, DateTime dateOut,int  idTp);
     }
 }
