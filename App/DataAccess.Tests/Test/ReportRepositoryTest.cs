@@ -34,12 +34,12 @@ namespace DataAccess.Tests.Test
                 },
                 new Report()
                 {
-                    CantBookings = 6,
+                    CantBookings = 4,
                     NameHouse = "The Grand Hotel",
                 },
                  new Report()
                 {
-                    CantBookings = 6,
+                    CantBookings = 4,
                     NameHouse = "Solanas Punta Del Este Spa & Resort",
                 },
                  new Report()
@@ -67,8 +67,8 @@ namespace DataAccess.Tests.Test
                             Name = "Booking 1",
                             Email = "mail1@mail.com",
                             House = new House(){Avaible=true},
-                            StateId = 1,
-                            State = new State(){Id=1},
+                            StateId = 3,
+                            State = new State(){Id=1, Name="Aceptada"},
                             Price = 100,
                             CheckIn = new DateTime(2020, 12, 01),
                             CheckOut= new DateTime(2020, 12, 31),
@@ -77,31 +77,175 @@ namespace DataAccess.Tests.Test
                         {
                             Id = 2,
                             Name = "Booking 2",
+                            Email = "mail2@mail.com",
+                            House = new House(){Avaible=true},
+                            StateId = 3,
+                            State = new State(){Id=1, Name="Aceptada"},
+                            Price = 100,
+                            CheckIn = new DateTime(2020, 12, 01),
+                            CheckOut= new DateTime(2020, 12, 31),
+                        }  
+                    },
+                },
+                new House()
+                {
+                    Name= "The Grand Hotel",
+                    TouristPointId=1,
+                    Bookings= 
+                    {
+                        new Booking()
+                        {
+                            Id = 1,
+                            Name = "Booking 1",
+                            Email = "lola@mail.com",
+                            House = new House(){Avaible=true},
+                            StateId = 3,
+                            State = new State(){Id=1, Name="Aceptada"},
+                            Price = 100,
+                            CheckIn = new DateTime(2020, 12, 01),
+                            CheckOut= new DateTime(2020, 12, 31),
+                        },
+                        new Booking()
+                        {
+                            Id = 2,
+                            Name = "Booking 2",
+                            Email = "marco@mail.com",
+                            House = new House(){Avaible=true},
+                            StateId = 3,
+                            State = new State(){Id=1, Name="Aceptada"},
+                            Price = 100,
+                            CheckIn = new DateTime(2020, 12, 01),
+                            CheckOut= new DateTime(2020, 12, 31),
+                        },
+                        new Booking()
+                        {
+                            Id = 3,
+                            Name = "Booking 3",
+                            Email = "daniel@mail.com",
+                            House = new House(){Avaible=true},
+                            StateId = 3,
+                            State = new State(){Id=1, Name="Aceptada"},
+                            Price = 100,
+                            CheckIn = new DateTime(2020, 12, 01),
+                            CheckOut= new DateTime(2020, 12, 31),
+                        },
+                        new Booking()
+                        {
+                            Id = 4,
+                            Name = "Booking 4",
+                            Email = "yuliana@mail.com",
+                            House = new House(){Avaible=true},
+                            StateId = 3,
+                            State = new State(){Id=1, Name="Aceptada"},
+                            Price = 100,
+                            CheckIn = new DateTime(2020, 12, 01),
+                            CheckOut= new DateTime(2020, 12, 31),
+                        }
+                    },
+                },
+                 new House()
+                {
+                    Name = "Solanas Punta Del Este Spa & Resort",
+                    TouristPointId =1,
+                    Bookings= 
+                    {
+                         new Booking()
+                        {
+                            Id = 1,
+                            Name = "Booking 1",
+                            Email = "mailpablo@mail.com",
+                            House = new House(){Avaible=true},
+                            StateId = 3,
+                            State = new State(){Id=1, Name="Aceptada"},
+                            Price = 100,
+                            CheckIn = new DateTime(2020, 12, 01),
+                            CheckOut= new DateTime(2020, 12, 31),
+                        },
+                        new Booking()
+                        {
+                            Id = 2,
+                            Name = "Booking 2",
+                            Email = "mailPRUEBA@mail.com",
+                            House = new House(){Avaible=true},
+                            StateId = 3,
+                            State = new State(){Id=1, Name="Aceptada"},
+                            Price = 100,
+                            CheckIn = new DateTime(2020, 12, 01),
+                            CheckOut= new DateTime(2020, 12, 31),
+                        },
+                        new Booking()
+                        {
+                            Id = 3,
+                            Name = "Booking 3",
+                            Email = "martaSiLVA@mail.com",
+                            House = new House(){Avaible=true},
+                            StateId = 1,
+                            State = new State(){Id=1, Name="Creada"},
+                            Price = 100,
+                            CheckIn = new DateTime(2020, 12, 01),
+                            CheckOut= new DateTime(2020, 12, 31),
+                        },
+                        new Booking()
+                        {
+                            Id = 4,
+                            Name = "Booking 4",
+                            Email = "andresperez@mail.com",
+                            House = new House(){Avaible=true},
+                            StateId = 1,
+                            State = new State(){Id=1, Name="Creada"},
+                            Price = 100,
+                            CheckIn = new DateTime(2020, 12, 01),
+                            CheckOut= new DateTime(2020, 12, 31),
                         }
                     },
                 },
                 new House()
                 {
-                    TouristPointId=1,
-                    Bookings= {},
-                    Name= "The Grand Hotel",
-                },
-                 new House()
-                {
-                    TouristPointId =1,
-                    Bookings= {},
-                    Name = "Solanas Punta Del Este Spa & Resort",
-                },
-                new House()
-                {
-                    TouristPointId= 1,
-                     Bookings= {},
                     Name= "Hotel del Lago Golf & Art Resort",
+                    TouristPointId= 1,
+                    Bookings= 
+                    {
+                        new Booking()
+                        {
+                            Id = 1,
+                            Name = "Booking 1",
+                            Email = "gonzalo@mail.com",
+                            House = new House(){Avaible=true},
+                            StateId = 3,
+                            State = new State(){Id=1, Name="Aceptada"},
+                            Price = 100,
+                            CheckIn = new DateTime(2020, 12, 01),
+                            CheckOut= new DateTime(2020, 12, 31),
+                        },
+                        new Booking()
+                        {
+                            Id = 2,
+                            Name = "Booking 2",
+                            Email = "juan@mail.com",
+                            House = new House(){Avaible=true},
+                            StateId = 1,
+                            State = new State(){Id=1, Name="Creada"},
+                            Price = 100,
+                            CheckIn = new DateTime(2020, 12, 01),
+                            CheckOut= new DateTime(2020, 12, 31),
+                        },
+                        new Booking()
+                        {
+                            Id = 3,
+                            Name = "Booking 3",
+                            Email = "vale@mail.com",
+                            House = new House(){Avaible=true},
+                            StateId = 2,
+                            State = new State(){Id=1, Name="Pendiente Pago"},
+                            Price = 100,
+                            CheckIn = new DateTime(2020, 12, 01),
+                            CheckOut= new DateTime(2020, 12, 31),
+                        }
+                    }, 
                 },
                 new House()
                 {
                     TouristPointId= 1,
-                     Bookings= {},
                     Name= "Hotel Arenas",
                 },
             };
@@ -121,8 +265,6 @@ namespace DataAccess.Tests.Test
             int idTP = 1;
             DateTime dateFrom = new DateTime(2020, 12, 03);
             DateTime dateOut = new DateTime(2020, 12, 20);
-            DateTime checkIn = new DateTime(2020, 12, 01);
-            DateTime checkOut = new DateTime(2020, 12, 31);
             var result = repositoryReport.FilterCantBookigsByHouse(dateFrom,dateOut, idTP);
             Assert.IsTrue(reportsToReturn.SequenceEqual(result));
         }
