@@ -172,3 +172,21 @@ VALUES (8, 'Name booking 8', 'emailBooking8@gmail.com', 'KFNRH8BOB9', 1, 4, 800,
 INSERT INTO Bookings (Id, Name, Email, Code, HouseId, StateId , Price , CheckIn , CheckOut)
 VALUES (9, 'Name booking 9', 'emailBooking9@gmail.com', 'KFNRH8BOB9', 2, 1, 900,'2020-09-09 00:00:00.0000000','2020-09-09 00:00:00.0000000');
 set IDENTITY_INSERT Bookings OFF
+
+
+set IDENTITY_INSERT Reviews ON
+INSERT INTO Reviews (Id, HouseId, Name, Score, Comment)
+VALUES (1, 1, 'Name 1', 1 , 'Comment 1');
+INSERT INTO Reviews (Id, HouseId, Name, Score, Comment)
+VALUES (2, 2, 'Name 2', 2 , 'Comment 2');
+INSERT INTO Reviews (Id, HouseId, Name, Score, Comment)
+VALUES (3, 3, 'Name 3', 3 , 'Comment 3');
+INSERT INTO Reviews (Id, HouseId, Name, Score, Comment)
+VALUES (4, 4, 'Name 4', 4 , 'Comment 4');
+INSERT INTO Reviews (Id, HouseId, Name, Score, Comment)
+VALUES (5, 5, 'Name 5', 5 , 'Comment 5');
+INSERT INTO Reviews (Id, HouseId, Name, Score, Comment)
+VALUES (6, 6, 'Name 6', 6 , 'Comment 6');
+INSERT INTO Reviews (Id, HouseId, Name, Score, Comment)
+VALUES (7, 7, 'Name 7', 7 , 'Comment 7');
+set IDENTITY_INSERT Reviews OFF
