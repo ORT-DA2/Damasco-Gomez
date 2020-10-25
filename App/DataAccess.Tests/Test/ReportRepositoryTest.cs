@@ -24,6 +24,11 @@ namespace DataAccess.Tests.Test
         private State stateId3 ;
         private State stateId4 ;
         private State stateId5 ;
+        private Booking booking1;
+        private Booking booking2;
+        private Booking booking3;
+        private Booking booking4;
+
         [TestInitialize]
         public void Setup()
         {
@@ -35,6 +40,54 @@ namespace DataAccess.Tests.Test
             stateId3 = new State(){Id=1, Name="Aceptada"};
             stateId4 = new State(){Id=1, Name="Rechazada"};
             stateId5 = new State(){Id=1, Name="Expirada"};
+            booking1 =  new Booking()
+                        {
+                            Id = 1,
+                            Name = "Booking 1",
+                            Email = "mail1@mail.com",
+                            House = new House(){Avaible=true},
+                            StateId = 3,
+                            State = stateId3,
+                            Price = 100,
+                            CheckIn = new DateTime(2020, 12, 01),
+                            CheckOut= new DateTime(2020, 12, 31),
+                        };
+            booking2 =  new Booking()
+                        {
+                            Id = 2,
+                            Name = "Booking 2",
+                            Email = "mail2@mail.com",
+                            House = new House(){Avaible=true},
+                            StateId = 3,
+                            State = stateId3,
+                            Price = 100,
+                            CheckIn = new DateTime(2020, 12, 01),
+                            CheckOut= new DateTime(2020, 12, 31),
+                        };
+            booking3 = new Booking()
+                        {
+                            Id = 3,
+                            Name = "Booking 3",
+                            Email = "daniel@mail.com",
+                            House = new House(){Avaible=true},
+                            StateId = 3,
+                            State = stateId3,
+                            Price = 100,
+                            CheckIn = new DateTime(2020, 12, 01),
+                            CheckOut= new DateTime(2020, 12, 31),
+                        };
+            booking4 =  new Booking()
+                        {
+                            Id = 4,
+                            Name = "Booking 4",
+                            Email = "yuliana@mail.com",
+                            House = new House(){Avaible=true},
+                            StateId = 3,
+                            State = stateId3,
+                            Price = 100,
+                            CheckIn = new DateTime(2020, 12, 01),
+                            CheckOut= new DateTime(2020, 12, 31),
+                        };
             reportsToReturn = new List<Report>()
             {
                 new Report()
@@ -72,30 +125,7 @@ namespace DataAccess.Tests.Test
                     TouristPointId =1,
                     Bookings= new List<Booking>()
                     { 
-                        new Booking()
-                        {
-                            Id = 1,
-                            Name = "Booking 1",
-                            Email = "mail1@mail.com",
-                            House = new House(){Avaible=true},
-                            StateId = 3,
-                            State = stateId3,
-                            Price = 100,
-                            CheckIn = new DateTime(2020, 12, 01),
-                            CheckOut= new DateTime(2020, 12, 31),
-                        },
-                        new Booking()
-                        {
-                            Id = 2,
-                            Name = "Booking 2",
-                            Email = "mail2@mail.com",
-                            House = new House(){Avaible=true},
-                            StateId = 3,
-                            State = stateId3,
-                            Price = 100,
-                            CheckIn = new DateTime(2020, 12, 01),
-                            CheckOut= new DateTime(2020, 12, 31),
-                        }  
+                        booking1, booking2
                     },
                 },
                 new House()
@@ -105,54 +135,7 @@ namespace DataAccess.Tests.Test
                     TouristPointId=1,
                     Bookings= new List<Booking>()
                     {
-                        new Booking()
-                        {
-                            Id = 1,
-                            Name = "Booking 1",
-                            Email = "lola@mail.com",
-                            House = new House(){Avaible=true},
-                            StateId = 3,
-                            State = stateId3,
-                            Price = 100,
-                            CheckIn = new DateTime(2020, 12, 01),
-                            CheckOut= new DateTime(2020, 12, 31),
-                        },
-                        new Booking()
-                        {
-                            Id = 2,
-                            Name = "Booking 2",
-                            Email = "marco@mail.com",
-                            House = new House(){Avaible=true},
-                            StateId = 3,
-                            State = stateId3,
-                            Price = 100,
-                            CheckIn = new DateTime(2020, 12, 01),
-                            CheckOut= new DateTime(2020, 12, 31),
-                        },
-                        new Booking()
-                        {
-                            Id = 3,
-                            Name = "Booking 3",
-                            Email = "daniel@mail.com",
-                            House = new House(){Avaible=true},
-                            StateId = 3,
-                            State = stateId3,
-                            Price = 100,
-                            CheckIn = new DateTime(2020, 12, 01),
-                            CheckOut= new DateTime(2020, 12, 31),
-                        },
-                        new Booking()
-                        {
-                            Id = 4,
-                            Name = "Booking 4",
-                            Email = "yuliana@mail.com",
-                            House = new House(){Avaible=true},
-                            StateId = 3,
-                            State = stateId3,
-                            Price = 100,
-                            CheckIn = new DateTime(2020, 12, 01),
-                            CheckOut= new DateTime(2020, 12, 31),
-                        }
+                      booking1, booking2, booking3, booking4 
                     },
                 },
                 new House()
@@ -162,54 +145,7 @@ namespace DataAccess.Tests.Test
                     TouristPointId =1,
                     Bookings= new List<Booking>()
                     {
-                         new Booking()
-                        {
-                            Id = 1,
-                            Name = "Booking 1",
-                            Email = "mailpablo@mail.com",
-                            House = new House(){Avaible=true},
-                            StateId = 3,
-                            State = stateId3,
-                            Price = 100,
-                            CheckIn = new DateTime(2020, 12, 01),
-                            CheckOut= new DateTime(2020, 12, 31),
-                        },
-                        new Booking()
-                        {
-                            Id = 2,
-                            Name = "Booking 2",
-                            Email = "mailPRUEBA@mail.com",
-                            House = new House(){Avaible=true},
-                            StateId = 3,
-                            State = stateId3,
-                            Price = 100,
-                            CheckIn = new DateTime(2020, 12, 01),
-                            CheckOut= new DateTime(2020, 12, 31),
-                        },
-                        new Booking()
-                        {
-                            Id = 3,
-                            Name = "Booking 3",
-                            Email = "martaSiLVA@mail.com",
-                            House = new House(){Avaible=true},
-                            StateId = 1,
-                            State = stateId1,
-                            Price = 100,
-                            CheckIn = new DateTime(2020, 12, 01),
-                            CheckOut= new DateTime(2020, 12, 31),
-                        },
-                        new Booking()
-                        {
-                            Id = 4,
-                            Name = "Booking 4",
-                            Email = "andresperez@mail.com",
-                            House = new House(){Avaible=true},
-                            StateId = 1,
-                            State = stateId1,
-                            Price = 100,
-                            CheckIn = new DateTime(2020, 12, 01),
-                            CheckOut= new DateTime(2020, 12, 31),
-                        }
+                        booking1, booking2, booking3, booking4 
                     },
                 },
                 new House()
@@ -219,42 +155,7 @@ namespace DataAccess.Tests.Test
                     TouristPointId= 1,
                     Bookings= new List<Booking>()
                     {
-                        new Booking()
-                        {
-                            Id = 1,
-                            Name = "Booking 1",
-                            Email = "gonzalo@mail.com",
-                            House = new House(){Avaible=true},
-                            StateId = 3,
-                            State = stateId3,
-                            Price = 100,
-                            CheckIn = new DateTime(2020, 12, 01),
-                            CheckOut= new DateTime(2020, 12, 31),
-                        },
-                        new Booking()
-                        {
-                            Id = 2,
-                            Name = "Booking 2",
-                            Email = "juan@mail.com",
-                            House = new House(){Avaible=true},
-                            StateId = 1,
-                            State = stateId1,
-                            Price = 100,
-                            CheckIn = new DateTime(2020, 12, 01),
-                            CheckOut= new DateTime(2020, 12, 31),
-                        },
-                        new Booking()
-                        {
-                            Id = 3,
-                            Name = "Booking 3",
-                            Email = "vale@mail.com",
-                            House = new House(){Avaible=true},
-                            StateId = 2,
-                            State = stateId2,
-                            Price = 100,
-                            CheckIn = new DateTime(2020, 12, 01),
-                            CheckOut= new DateTime(2020, 12, 31),
-                        }
+                        booking1, booking2, booking3
                     }, 
                 },
                 new House()
