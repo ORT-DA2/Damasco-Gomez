@@ -4,8 +4,8 @@ using Domain.Entities;
 
 namespace DataAccessInterface.Repositories
 {
-    public class IReportRepository
+    public interface IReportRepository
     {
-       
+       List<Report> FilterCantBookigsByHouse (DateTime dateFrom, DateTime dateOut,int  idTp)
     }
 }
