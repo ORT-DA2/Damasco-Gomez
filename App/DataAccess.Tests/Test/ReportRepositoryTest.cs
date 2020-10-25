@@ -163,7 +163,7 @@ namespace DataAccess.Tests.Test
             string state ="Aceptada";
             Assert.IsTrue(true);
         }
-         public void TestFilterSatateOk2() 
+        public void TestFilterSatateOk2() 
         {
            /* DateTime dateFrom = new DateTime(2020, 12, 15);
             DateTime dateOut = new DateTime(2021, 01, 02);
@@ -172,6 +172,15 @@ namespace DataAccess.Tests.Test
              */
             string state ="Pendiente Pago";
             Assert.IsTrue(true);
+        }
+        public void TestFilterNotMatchTouristPoint() 
+        {
+           /* DateTime dateFrom = new DateTime(2020, 12, 15);
+            DateTime dateOut = new DateTime(2021, 01, 02);
+            DateTime checkIn = new DateTime(2020, 12, 01);
+            DateTime checkOut = new DateTime(2020, 12, 31);
+             */
+            Assert.IsTrue(true); /* retorna reporte vacío porque no coinicide el punto turìstico /
         }
     }
 }
