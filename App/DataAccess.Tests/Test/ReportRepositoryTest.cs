@@ -97,7 +97,24 @@ namespace DataAccess.Tests.Test
              */
             Assert.IsTrue(true);
         }
-    
+        public void TestFilterSatateNotOk() 
+        {
+           /* DateTime dateFrom = new DateTime(2020, 12, 15);
+            DateTime dateOut = new DateTime(2021, 01, 02);
+            DateTime checkIn = new DateTime(2020, 12, 01);
+            DateTime checkOut = new DateTime(2020, 12, 31);
+             */
+            Assert.IsTrue(true);
+        }
+         public void TestFilterSatateNotOk2() 
+        {
+           /* DateTime dateFrom = new DateTime(2020, 12, 15);
+            DateTime dateOut = new DateTime(2021, 01, 02);
+            DateTime checkIn = new DateTime(2020, 12, 01);
+            DateTime checkOut = new DateTime(2020, 12, 31);
+             */
+            Assert.IsTrue(true);
+        }
    
     
     }
