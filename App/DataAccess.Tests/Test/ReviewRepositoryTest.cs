@@ -82,9 +82,17 @@ namespace DataAccess.Tests.Test
         }
         [TestMethod]
         [ExpectedException(typeof(ArgumentException))]
+        public void TestValidateFailScoreNegative()
+        {
+            Review region = new Review(){Score = -2};
+
+            repository.Add(region);
+        }
+        [TestMethod]
+        [ExpectedException(typeof(ArgumentException))]
         public void TestValidateFail()
         {
-            Review region = new Review(){Name = ""};
+            Review region = new Review(){Score = 11};
 
             repository.Add(region);
         }
