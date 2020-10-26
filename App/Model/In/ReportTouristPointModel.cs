@@ -15,8 +15,8 @@ namespace Model.In
             return new ReportTouristPoint()
             {
                 idTp= this.idTp,
-                dateFrom = this.dateFrom,
-                dateOut= this.dateOut,
+                dateFrom = this.ParseDateTime(dateFrom),
+                dateOut= this.ParseDateTime(dateOut),
 
             };
         }
@@ -40,7 +40,7 @@ namespace Model.In
         {
             bool allParams;
             allParams = this.dateFrom != null && this.dateOut!=null && this.idTp > 0;
-            if (!allParams) throw new ArgumentException("You need to put dates and tourist point );
+            if (!allParams) throw new ArgumentException("You need to put dates and tourist point ");
         }
 
     }
