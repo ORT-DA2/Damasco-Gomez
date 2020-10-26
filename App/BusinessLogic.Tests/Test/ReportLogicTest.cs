@@ -40,7 +40,7 @@ namespace BusinessLogic.Tests.Test
                     new Report()
                     {
                         CantBookings = 4,
-                        NameHouse = "Solanas Punta Del Este Spa & Resort (",
+                        NameHouse = "Solanas Punta Del Este Spa & Resort",
                     }
                 };
                 mock = new Mock<IReportRepository>(MockBehavior.Strict);
