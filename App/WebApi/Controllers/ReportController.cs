@@ -1,9 +1,11 @@
 using System.Collections.Generic;
+using System.Linq;
 using BusinessLogic.Logics;
 using BusinessLogicInterface.Interfaces;
 using Domain.Entities;
 using Microsoft.AspNetCore.Mvc;
 using Model.In;
+using Model.Out;
 using WebApi.Filters;
 
 namespace WebApi.Controllers
@@ -20,19 +22,21 @@ namespace WebApi.Controllers
         [AuthorizationFilter]
         public IActionResult GetHousesReportBy([FromQuery]ReportTouristPointModel touristPointReportModel)
         {
+            IEnumerable<Report> varRet ;
+            IEnumerable<ReportHousesBasicModel> basicModelsToReturn;
             if(touristPointReportModel.NotNull())
             {
-                List<Report> varRet;
-                touristPointReportModel.CheckAllParameters();
+               touristPointReportModel.CheckAllParameters();
                 ReportTouristPoint reportTouristPoint = touristPointReportModel.ToEntity();
                 varRet = this.reportLogic.GetHousesReportBy(reportTouristPoint);
-            
+                basicModelsToReturn = varRet.
+                    Select(m => new ReportHousesBasicModel(m)).ToList();
             }
             else
             {
-               // do 
+                // exception
             }
-            return Ok("varRet");
+            return Ok(basicModelsToReturn);
         }
     }
 }
