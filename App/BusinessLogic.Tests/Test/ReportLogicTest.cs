@@ -16,6 +16,7 @@ namespace BusinessLogic.Tests.Test
         private Mock<IReportRepository> mock;
         private List<Report> reportsToReturn;
         private List<Report> reportsEmpty;
+        private ReportTouristPoint touristPointReport ;
         [TestInitialize]
             public void Initialize ()
             {
@@ -53,9 +54,16 @@ namespace BusinessLogic.Tests.Test
             int idTP = 1;
             DateTime dateFrom = new DateTime(2020, 11, 29);
             DateTime dateOut = new DateTime(2020, 12, 20);
-            mock.Setup(m => m.FilterCantBookigsByHouse(dateFrom,dateOut,idTP)).Returns(reportsToReturn);
+            ReportTouristPoint touristPointReport = new ReportTouristPoint 
+            {
+                dateFrom= dateFrom,
+                dateOut = dateOut,
+                idTp = idTP,
+            };
 
-            List<Report> result = reportLogic.GetHousesReportBy(dateFrom,dateOut,idTP);
+            mock.Setup(m => m.FilterCantBookigsByHouse(dateFrom,dateOut,idTP)).Returns(reportsToReturn);
+            
+            List<Report> result = reportLogic.GetHousesReportBy(touristPointReport);
 
             Assert.IsTrue(result.SequenceEqual(reportsToReturn));
         }
@@ -65,9 +73,16 @@ namespace BusinessLogic.Tests.Test
             int idTP = 1;
             DateTime dateFrom = new DateTime(2020, 11, 29);
             DateTime dateOut = new DateTime(2020, 12, 20);
+            ReportTouristPoint touristPointReport = new ReportTouristPoint 
+            {
+                dateFrom= dateFrom,
+                dateOut = dateOut,
+                idTp = idTP,
+            };
+
             mock.Setup(m => m.FilterCantBookigsByHouse(dateFrom,dateOut,idTP)).Returns(reportsEmpty);
 
-            List<Report> result = reportLogic.GetHousesReportBy(dateFrom,dateOut,idTP);
+            List<Report> result = reportLogic.GetHousesReportBy(touristPointReport);
 
             Assert.IsTrue(result.SequenceEqual(reportsEmpty));
         }
