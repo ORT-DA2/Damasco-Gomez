@@ -19,6 +19,7 @@ namespace BusinessLogic.Tests.Test
         [TestInitialize]
             public void Initialize ()
             {
+                reportsEmpty = new List<Report>();
                 reportsToReturn = new List<Report>()
                 {
                     new Report()
@@ -57,6 +58,18 @@ namespace BusinessLogic.Tests.Test
             List<Report> result = reportLogic.GetHousesReportBy(dateFrom,dateOut,idTp);
 
             Assert.IsTrue(result.SequenceEqual(reportsToReturn));
+        }
+         [TestMethod]
+        public void TestGetHousesReportByEmpty ()
+        {
+            int idTP = 1;
+            DateTime dateFrom = new DateTime(2020, 11, 29);
+            DateTime dateOut = new DateTime(2020, 12, 20);
+            mock.Setup(m => m.FilterCantBookigsByHouse(dateFrom,dateOut,idTP)).Returns(reportsEmpty);
+
+            List<Report> result = reportLogic.GetHousesReportBy(dateFrom,dateOut,idTP);
+
+            Assert.IsTrue(result.SequenceEqual(reportsEmpty));
         }
     }
 }
