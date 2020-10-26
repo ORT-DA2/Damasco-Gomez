@@ -14,8 +14,13 @@ namespace BusinessLogic.Logics
         {
             this.reportRepository = reportRepository;
         }
-         public List<Report> GetHousesReportBy(DateTime dateFrom, DateTime dateOut,int  idTp)
+       
+         public List<Report> GetHousesReportBy(ReportTouristPoint touristPointReport)
          {
+             // DateTime dateFrom, DateTime dateOut,int  idTp
+             DateTime dateFrom = touristPointReport.dateFrom;
+             DateTime dateOut = touristPointReport.dateOut;
+             int idTp=touristPointReport.idTp;
              List<Report> housesWithBookingList = reportRepository.FilterCantBookigsByHouse(dateFrom,dateOut,idTp);
              return housesWithBookingList;
          }
