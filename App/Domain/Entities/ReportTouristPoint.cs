@@ -2,9 +2,9 @@ namespace Domain.Entities
 {
     public class ReportTouristPoint
     {
-         int idTp  {get; set;}
-        string dateFrom  {get; set;}
-        string dateOn  {get; set;} 
+        public int idTp  {get; set;}
+       public  string dateFrom  {get; set;}
+       public  string dateOn  {get; set;} 
 
     }
 }
