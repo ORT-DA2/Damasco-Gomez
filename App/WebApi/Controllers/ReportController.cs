@@ -18,11 +18,21 @@ namespace WebApi.Controllers
         }
         [HttpGet]
         [AuthorizationFilter]
-        public IActionResult GetHousesReportBy([FromQuery]int idTp, string dateFrom, string dateOn)
+        public IActionResult GetHousesReportBy([FromQuery]ReportTouristPointModel touristPointReportModel)
         {
-            IEnumerable <Report> reportsToReturn;
-
-            return Ok("reportsToReturn");
+            if(touristPointReportModel.NotNull())
+            {
+                List<Report> varRet;
+                touristPointReportModel.CheckAllParameters();
+                ReportTouristPoint reportTouristPoint = touristPointReportModel.ToEntity();
+                varRet = this.reportLogic.GetHousesReportBy(reportTouristPoint);
+            
+            }
+            else
+            {
+               // do 
+            }
+            return Ok("varRet");
         }
     }
 }
