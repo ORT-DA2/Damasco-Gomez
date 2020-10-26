@@ -17,7 +17,6 @@ namespace BusinessLogic.Logics
        
          public List<Report> GetHousesReportBy(ReportTouristPoint touristPointReport)
          {
-             // DateTime dateFrom, DateTime dateOut,int  idTp
              DateTime dateFrom = touristPointReport.dateFrom;
              DateTime dateOut = touristPointReport.dateOut;
              int idTp=touristPointReport.idTp;
