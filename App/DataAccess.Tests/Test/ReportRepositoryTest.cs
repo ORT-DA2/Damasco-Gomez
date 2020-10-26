@@ -17,6 +17,7 @@ namespace DataAccess.Tests.Test
         private List<House> HouseList;
         private  List<Report>  emptyReports;
         private  List<Report>  reportsToReturn2 ;
+        private  List<Report> reportsToReturn3;
         private DbContext context;
         private DbContextOptions options;
         private ReportRepository repositoryReport;
@@ -181,10 +182,22 @@ namespace DataAccess.Tests.Test
             int idTP = 1;
             DateTime dateFrom = new DateTime(2020, 10, 14);
             DateTime dateOut = new DateTime(2020, 12, 01);
-
+             reportsToReturn3 = new List<Report>()
+            {
+                new Report()
+                {
+                    CantBookings = 1,
+                    NameHouse = "Hotel L’Auberge",
+                },
+                new Report()
+                {
+                    CantBookings = 1,
+                    NameHouse = "The Grand Hotel",
+                },
+            };
             var result = repositoryReport.FilterCantBookigsByHouse(dateFrom,dateOut, idTP);
 
-            Assert.IsTrue(reportsToReturn.SequenceEqual(result));
+            Assert.IsTrue(reportsToReturn3.SequenceEqual(result));
         }
         [TestMethod]
         public void TestFilterDatesRightEdgeCaseDatesOk() 
