@@ -44,7 +44,7 @@ namespace BusinessLogic.Tests.Test
                     }
                 };
                 mock = new Mock<IReportRepository>(MockBehavior.Strict);
-                reportLogic = new RegionLogic(mock.Object);
+                reportLogic = new ReportLogic(mock.Object);
                 reportsEmpty = new List<Report>();
             }
         [TestMethod]
@@ -55,7 +55,7 @@ namespace BusinessLogic.Tests.Test
             DateTime dateOut = new DateTime(2020, 12, 20);
             mock.Setup(m => m.FilterCantBookigsByHouse(dateFrom,dateOut,idTP)).Returns(reportsToReturn);
 
-            List<Report> result = reportLogic.GetHousesReportBy(dateFrom,dateOut,idTp);
+            List<Report> result = reportLogic.GetHousesReportBy(dateFrom,dateOut,idTP);
 
             Assert.IsTrue(result.SequenceEqual(reportsToReturn));
         }
