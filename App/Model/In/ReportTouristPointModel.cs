@@ -33,7 +33,7 @@ namespace Model.In
         public bool NotNull()
         {
             bool notNull;
-            notNull = this.dateFrom != null || this.dateOut!=null;
+            notNull = this.dateFrom != null || this.dateOut!=null ||  this.idTp >0;
             return notNull;
         }
         public void CheckAllParameters()
