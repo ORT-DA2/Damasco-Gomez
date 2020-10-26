@@ -6,6 +6,6 @@ namespace BusinessLogicInterface.Interfaces
 {
     public interface IReportLogic
     {
-        List<Report> GetHousesReportBy(DateTime dateFrom, DateTime dateOut,int  idTp);
+        List<Report> GetHousesReportBy(ReportTouristPoint touristPointReport);
     }
 }
