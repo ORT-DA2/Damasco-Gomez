@@ -31,8 +31,8 @@ namespace DataAccess.Repositories
                         .Where(b => 
                             (b.State.Name!="Rechazada") && 
                             (b.State.Name!="Expirada") && 
-                            ((b.CheckIn <= dateFrom && b.CheckOut>=dateOut)|| 
-                            (b.CheckIn >dateFrom && b.CheckOut<=dateOut)|| (b.CheckIn >dateFrom && b.CheckOut>dateOut)|| 
+                            ((b.CheckIn <= dateFrom && b.CheckOut>=dateOut)||(b.CheckOut == dateFrom ) || 
+                            (b.CheckIn >dateFrom && b.CheckOut<=dateOut)/*|| (b.CheckIn< dateFrom && b.CheckOut < dateOut)||(b.CheckIn >dateFrom && b.CheckOut>dateOut)*/|| 
                             (dateFrom < b.CheckIn && dateOut> b.CheckOut)))
                             .Count()
                         }
