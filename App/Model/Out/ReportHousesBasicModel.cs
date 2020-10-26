@@ -1,7 +1,9 @@
+using System.Diagnostics.CodeAnalysis;
 using Domain.Entities;
 
 namespace Model.Out
 {
+    [ExcludeFromCodeCoverage]
     public class ReportHousesBasicModel
     {
         public string NameHouse {get; set;}
