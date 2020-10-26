@@ -4,7 +4,7 @@ namespace Domain.Entities
     {
         public int idTp  {get; set;}
        public  string dateFrom  {get; set;}
-       public  string dateOn  {get; set;} 
+       public  string dateOut  {get; set;} 
 
     }
 }
