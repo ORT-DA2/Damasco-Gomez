@@ -23,7 +23,7 @@ namespace WebApi.Controllers
         public IActionResult GetHousesReportBy([FromQuery]ReportTouristPointModel touristPointReportModel)
         {
             IEnumerable<Report> varRet ;
-            IEnumerable<ReportHousesBasicModel> basicModelsToReturn;
+            IEnumerable<ReportHousesBasicModel> basicModelsToReturn = new List<ReportHousesBasicModel> () ;
             if(touristPointReportModel.NotNull())
             {
                touristPointReportModel.CheckAllParameters();
@@ -31,10 +31,6 @@ namespace WebApi.Controllers
                 varRet = this.reportLogic.GetHousesReportBy(reportTouristPoint);
                 basicModelsToReturn = varRet.
                     Select(m => new ReportHousesBasicModel(m)).ToList();
-            }
-            else
-            {
-                // exception
             }
             return Ok(basicModelsToReturn);
         }
