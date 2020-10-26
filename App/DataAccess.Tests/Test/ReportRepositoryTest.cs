@@ -16,6 +16,7 @@ namespace DataAccess.Tests.Test
         private List<Report> reportsToReturn;
         private List<House> HouseList;
         private  List<Report>  emptyReports;
+        private  List<Report>  reportsToReturn2 ;
         private DbContext context;
         private DbContextOptions options;
         private ReportRepository repositoryReport;
@@ -202,10 +203,18 @@ namespace DataAccess.Tests.Test
             int idTP = 1;
             DateTime dateFrom = new DateTime(2020, 12, 31);
             DateTime dateOut = new DateTime(2021, 01, 29);
-
+            reportsToReturn2 = new List<Report>()
+            {
+                new Report()
+                {
+                    CantBookings = 2,
+                    NameHouse = "Hotel L’Auberge",
+                },
+            
+            };
             var result = repositoryReport.FilterCantBookigsByHouse(dateFrom,dateOut, idTP);
 
-            Assert.IsTrue(reportsToReturn.SequenceEqual(result));
+            Assert.IsTrue(reportsToReturn2.SequenceEqual(result));
         }
         [TestMethod]
         public void TestFilterDateOkInRango() 
