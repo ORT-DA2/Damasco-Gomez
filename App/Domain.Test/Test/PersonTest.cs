@@ -14,6 +14,7 @@ namespace Domain.Test.Test
                     Id = 2,
                     Email = "mail2@mail.com",
                     Password = "password",
+                    Name = "Name"
                 };
         }
         [TestMethod]
@@ -23,6 +24,7 @@ namespace Domain.Test.Test
                 {
                     Email = "new mail",
                     Password = null,
+                    Name = null,
                 };
 
             person.Update(newPerson);
@@ -36,11 +38,27 @@ namespace Domain.Test.Test
                 {
                     Email = null,
                     Password = "new p",
+                    Name = null,
                 };
 
             person.Update(newPerson);
 
             Assert.AreEqual(newPerson.Password, person.Password);
+        }
+        [TestMethod]
+        public void TestUpdateName()
+        {
+            string newName = "new Name";
+            person = new Person()
+                {
+                    Email = null,
+                    Password = null,
+                    Name = newName
+                };
+
+            person.Update(person);
+
+            Assert.AreEqual(person.Name, newName);
         }
         [TestMethod]
         public void TestId()
