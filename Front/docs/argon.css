@@ -10588,6 +10588,10 @@ button.bg-darker:focus
 }
 
 .pb-8,
+.py-8
+{
+    padding-bottom: 8rem !important;
+}
 
 .pl-8,
 .px-8
@@ -11534,6 +11538,10 @@ button.bg-darker:focus
         padding-right: 8rem !important;
     }
     .pb-sm-8,
+    .py-sm-8
+    {
+        padding-bottom: 8rem !important;
+    }
     .pl-sm-8,
     .px-sm-8
     {
@@ -12470,6 +12478,10 @@ button.bg-darker:focus
         padding-right: 8rem !important;
     }
     .pb-md-8,
+    .py-md-8
+    {
+        padding-bottom: 8rem !important;
+    }
     .pl-md-8,
     .px-md-8
     {
@@ -13406,6 +13418,10 @@ button.bg-darker:focus
         padding-right: 8rem !important;
     }
     .pb-lg-8,
+    .py-lg-8
+    {
+        padding-bottom: 8rem !important;
+    }
     .pl-lg-8,
     .px-lg-8
     {
@@ -14342,6 +14358,10 @@ button.bg-darker:focus
         padding-right: 8rem !important;
     }
     .pb-xl-8,
+    .py-xl-8
+    {
+        padding-bottom: 8rem !important;
+    }
     .pl-xl-8,
     .px-xl-8
     {
@@ -18505,6 +18525,16 @@ textarea[resize='horizontal']
     color: #adb5bd;
 }
 
+.map-canvas
+{
+    position: relative;
+
+    width: 100%;
+    height: 500px;
+
+    border-radius: .375rem;
+}
+
 .mask
 {
     position: absolute;
@@ -18973,7 +19003,7 @@ textarea[resize='horizontal']
 }
 .navbar-horizontal .navbar-brand img
 {
-    height: 180px;
+    height: 30px;
 }
 
 .navbar-horizontal .navbar-dark .navbar-brand
