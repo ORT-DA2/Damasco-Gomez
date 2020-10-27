@@ -75,8 +75,24 @@ namespace WebApi.Tests.Test
         [TestMethod]
         public void TestGetHousesReportByNullResult()
         {
-            Assert.IsTrue(true);
-        }
+            ReportTouristPointModel reportTouristPointModel = new ReportTouristPointModel ()
+            {
+                idTp = 1,
+                dateFrom= "01/12/2020",
+                dateOut= "31/12/2020",
+            };
+            List <Report> reportsToReturnEmpty = new List<Report>();
+            ReportTouristPoint  reportTouristPoint= reportTouristPointModel.ToEntity();
+            IEnumerable<ReportHousesBasicModel> reportsBasic = new List<ReportHousesBasicModel>(){}; 
 
+            mock.Setup(m => m.GetHousesReportBy(It.IsAny<ReportTouristPoint>())).Returns(reportsToReturnEmpty);
+        
+            var result = controller.GetHousesReportBy(reportTouristPointModel);
+
+            var okResult = result as OkObjectResult;
+            var reports = okResult.Value as IEnumerable<ReportHousesBasicModel>;
+            mock.VerifyAll();
+            Assert.IsTrue(reportsBasic.SequenceEqual(reports));
+        }
     }
 }
