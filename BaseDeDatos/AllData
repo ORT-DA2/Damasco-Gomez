@@ -47,18 +47,18 @@ VALUES (9,'Puerto');
 set IDENTITY_INSERT Categories OFF
 
 set IDENTITY_INSERT Persons ON
-INSERT INTO Persons (Id,Email,[Password])
-VALUES (1,'emailPerson1','password1');
-INSERT INTO Persons (Id,Email,[Password])
-VALUES (2,'emailPerson2','password2');
-INSERT INTO Persons (Id,Email,[Password])
-VALUES (3,'emailPerson3','password3');
-INSERT INTO Persons (Id,Email,[Password])
-VALUES (4,'emailPerson4','password4');
-INSERT INTO Persons (Id,Email,[Password])
-VALUES (5,'emailPerson5','password5');
-INSERT INTO Persons (Id,Email,[Password])
-VALUES (6,'emailPerson6','password6');
+INSERT INTO Persons (Id,Email,[Password],Name)
+VALUES (1,'emailPerson1','password1','NamePerson 1');
+INSERT INTO Persons (Id,Email,[Password],Name)
+VALUES (2,'emailPerson2','password2','NamePerson 2');
+INSERT INTO Persons (Id,Email,[Password],Name)
+VALUES (3,'emailPerson3','password3','NamePerson 3');
+INSERT INTO Persons (Id,Email,[Password],Name)
+VALUES (4,'emailPerson4','password4','NamePerson 4');
+INSERT INTO Persons (Id,Email,[Password],Name)
+VALUES (5,'emailPerson5','password5','NamePerson 5');
+INSERT INTO Persons (Id,Email,[Password],Name)
+VALUES (6,'emailPerson6','password6','NamePerson 6');
 set IDENTITY_INSERT Persons OFF
 
 set IDENTITY_INSERT ImageTouristPoint ON
