@@ -6,9 +6,8 @@ namespace Domain
     public class Person
     {
         public int Id {get; set;}
-
         public string Email {get; set;}
-
+        public string Name {get; set;}
         public string Password {get; set;}
         [ExcludeFromCodeCoverage]
         public override bool Equals(object obj)
@@ -24,6 +23,7 @@ namespace Domain
         {
             if(element.Password != null) this.Password = element.Password;
             if(element.Email != null) this.Email = element.Email;
+            if(element.Name != null) this.Name = element.Name;
         }
 
     }
