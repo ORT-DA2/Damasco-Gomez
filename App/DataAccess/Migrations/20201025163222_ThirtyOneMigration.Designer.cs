@@ -10,8 +10,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace DataAccess.Migrations
 {
     [DbContext(typeof(VidlyContext))]
-    [Migration("20201027010345_ThirtyOneMigration")]
-    partial class ThirtyTwoMigration
+    [Migration("20201025163222_ThirtyOneMigration")]
+    partial class ThirtyOneMigration
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -254,9 +254,6 @@ namespace DataAccess.Migrations
                     b.Property<string>("Email")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<string>("Name")
-                        .HasColumnType("nvarchar(max)");
-
                     b.Property<string>("Password")
                         .HasColumnType("nvarchar(max)");
 
@@ -311,7 +308,7 @@ namespace DataAccess.Migrations
             modelBuilder.Entity("Domain.Booking", b =>
                 {
                     b.HasOne("Domain.House", "House")
-                        .WithMany("Booking")
+                        .WithMany("Bookings")
                         .HasForeignKey("HouseId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();

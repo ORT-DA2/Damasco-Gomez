@@ -61,22 +61,22 @@ INSERT INTO Persons (Id,Email,[Password],Name)
 VALUES (6,'emailPerson6','password6','NamePerson 6');
 set IDENTITY_INSERT Persons OFF
 
-set IDENTITY_INSERT ImageTouristPoint ON
-INSERT INTO ImageTouristPoint(Id,Name,Extention)
+set IDENTITY_INSERT ImagesTouristPoints ON
+INSERT INTO ImagesTouristPoints(Id,Name,Extention)
 VALUES (1,'image1.png','png') ;
-INSERT INTO ImageTouristPoint(Id,Name,Extention)
+INSERT INTO ImagesTouristPoints(Id,Name,Extention)
 VALUES (2,'image2.png','png') ;
-INSERT INTO ImageTouristPoint(Id,Name,Extention)
+INSERT INTO ImagesTouristPoints(Id,Name,Extention)
 VALUES (3,'image3.png','png') ;
-INSERT INTO ImageTouristPoint(Id,Name,Extention)
+INSERT INTO ImagesTouristPoints(Id,Name,Extention)
 VALUES (4,'image4.png','png') ;
-INSERT INTO ImageTouristPoint(Id,Name,Extention)
+INSERT INTO ImagesTouristPoints(Id,Name,Extention)
 VALUES (5,'image5.png','png') ;
-INSERT INTO ImageTouristPoint(Id,Name,Extention)
+INSERT INTO ImagesTouristPoints(Id,Name,Extention)
 VALUES (6,'image6.png','png') ;
-INSERT INTO ImageTouristPoint(Id,Name,Extention)
+INSERT INTO ImagesTouristPoints(Id,Name,Extention)
 VALUES (7,'image7.png','png') ;
-set IDENTITY_INSERT ImageTouristPoint OFF
+set IDENTITY_INSERT ImagesTouristPoints OFF
 
 set IDENTITY_INSERT TouristPoints ON
 INSERT INTO TouristPoints (Id, Name, ImageTouristPointId,[Description],RegionId)
@@ -112,18 +112,18 @@ INSERT INTO Houses (Id, Avaible, PricePerNight, Starts, Address, Description, Ph
 VALUES (7, 1, 10, 1, 'Address House 7', 'Description', 099199399, 'Contact House 7', 'Name contact house 7', 7);
 set IDENTITY_INSERT Houses OFF
 
-set IDENTITY_INSERT ImageHouse ON
-INSERT INTO ImageHouse(Id,Name,Extention,HouseId)
+set IDENTITY_INSERT ImagesHouses ON
+INSERT INTO ImagesHouses(Id,Name,Extention,HouseId)
 VALUES (1,'image1.png','png',1) ;
-INSERT INTO ImageHouse(Id,Name,Extention,HouseId)
+INSERT INTO ImagesHouses(Id,Name,Extention,HouseId)
 VALUES (2,'image2.png','png',2) ;
-INSERT INTO ImageHouse(Id,Name,Extention,HouseId)
+INSERT INTO ImagesHouses(Id,Name,Extention,HouseId)
 VALUES (3,'image3.png','png',3) ;
-INSERT INTO ImageHouse(Id,Name,Extention,HouseId)
+INSERT INTO ImagesHouses(Id,Name,Extention,HouseId)
 VALUES (4,'image4.png','png',4) ;
-INSERT INTO ImageHouse(Id,Name,Extention,HouseId)
+INSERT INTO ImagesHouses(Id,Name,Extention,HouseId)
 VALUES (5,'image5.png','png',5) ;
-set IDENTITY_INSERT ImageHouse OFF
+set IDENTITY_INSERT ImagesHouses OFF
 
 
 set IDENTITY_INSERT CategoriesTouristicPoints ON
