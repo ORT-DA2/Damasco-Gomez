@@ -29,8 +29,8 @@ namespace DataAccess.Repositories
                         NameHouse = h.Name, 
                         CantBookings = h.Bookings
                         .Where(b => 
-                            (b.State.Name!="Rechazada") && 
-                            (b.State.Name!="Expirada") && 
+                            (b.StateId!=4) && 
+                            (b.StateId!=5) && 
                             ((b.CheckIn <= dateFrom && b.CheckOut>=dateOut)||(b.CheckOut == dateFrom ) || (b.CheckIn == dateOut) ||
                             (b.CheckIn >dateFrom && b.CheckOut<=dateOut)|| (b.CheckIn< dateFrom && b.CheckOut < dateOut && dateFrom< b.CheckOut )||(b.CheckIn >dateFrom && b.CheckOut>dateOut && b.CheckIn <dateOut)|| 
                             (dateFrom < b.CheckIn && dateOut> b.CheckOut)))
