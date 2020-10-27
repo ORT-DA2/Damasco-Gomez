@@ -2,7 +2,7 @@
 
 namespace DataAccess.Migrations
 {
-    public partial class ThirtyOneMigration : Migration
+    public partial class ThirtyTwoMigration : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {

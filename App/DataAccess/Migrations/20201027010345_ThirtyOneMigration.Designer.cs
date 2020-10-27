@@ -11,7 +11,7 @@ namespace DataAccess.Migrations
 {
     [DbContext(typeof(VidlyContext))]
     [Migration("20201027010345_ThirtyOneMigration")]
-    partial class ThirtyOneMigration
+    partial class ThirtyTwoMigration
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
