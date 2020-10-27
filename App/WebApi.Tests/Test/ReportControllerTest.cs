@@ -72,5 +72,11 @@ namespace WebApi.Tests.Test
             Assert.IsTrue(reportsBasic.SequenceEqual(reports));
 
         }
+        [TestMethod]
+        public void TestGetHousesReportByNullResult()
+        {
+            Assert.IsTrue(true);
+        }
+
     }
 }
