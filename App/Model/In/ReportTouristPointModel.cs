@@ -15,8 +15,8 @@ namespace Model.In
             return new ReportTouristPoint()
             {
                 idTp= this.idTp,
-                dateFrom = this.ParseDateTime(dateFrom),
-                dateOut= this.ParseDateTime(dateOut),
+                dateFrom = ParseDateTime(this.dateFrom),
+                dateOut= ParseDateTime(this.dateOut),
 
             };
         }
@@ -25,8 +25,8 @@ namespace Model.In
             if (dateString.Length != 10 && !dateString.Contains("/")) throw new ArgumentException("Date is not in the right format");
             string[] parse = dateString.Split('/');
             int year = int.Parse(parse[2]);
-            int month = int.Parse(parse[1]);
-            int day = int.Parse(parse[0]);
+            int month = int.Parse(parse[0]);
+            int day = int.Parse(parse[1]);
             DateTime date = new DateTime(year,month,day);
             return date;
         }
