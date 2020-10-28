@@ -17,9 +17,9 @@ namespace BusinessLogic.Logics
        
          public List<Report> GetHousesReportBy(ReportTouristPoint touristPointReport)
          {
-             DateTime dateFrom = touristPointReport.dateFrom;
-             DateTime dateOut = touristPointReport.dateOut;
-             int idTp=touristPointReport.idTp;
+             DateTime dateFrom = touristPointReport.DateFrom;
+             DateTime dateOut = touristPointReport.DateOut;
+             int idTp=touristPointReport.IdTp;
              List<Report> housesWithBookingList = reportRepository.FilterCantBookigsByHouse(dateFrom,dateOut,idTp);
              return housesWithBookingList;
          }

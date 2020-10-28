@@ -55,9 +55,9 @@ namespace WebApi.Tests.Test
         {
             ReportTouristPointModel reportTouristPointModel = new ReportTouristPointModel ()
             {
-                idTp = 1,
-                dateFrom= "01/12/2020",
-                dateOut= "31/12/2020",
+                IdTp = 1,
+                DateFrom= "01/12/2020",
+                DateOut= "31/12/2020",
             };
             ReportTouristPoint  reportTouristPoint= reportTouristPointModel.ToEntity();
             IEnumerable<ReportHousesBasicModel> reportsBasic = reportsToReturn.Select(m => new ReportHousesBasicModel(m));
@@ -77,9 +77,9 @@ namespace WebApi.Tests.Test
         {
             ReportTouristPointModel reportTouristPointModel = new ReportTouristPointModel ()
             {
-                idTp = 1,
-                dateFrom= "01/12/2020",
-                dateOut= "31/12/2020",
+                IdTp = 1,
+                DateFrom= "01/12/2020",
+                DateOut= "31/12/2020",
             };
             List <Report> reportsToReturnEmpty = new List<Report>();
             ReportTouristPoint  reportTouristPoint= reportTouristPointModel.ToEntity();
