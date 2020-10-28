@@ -10,7 +10,8 @@ import { environment } from 'src/environments/environment';
   providedIn: 'root'
 })
 export class BookingService {
-  private uri = environment.baseURL+"/bookings";
+  private uri = environment.baseURL+"bookings";
+  private id = 1;
   constructor(private http: HttpClient) { }
   getAll():Observable<BookingBasicInfo[]>{
     return this.http.get<BookingBasicInfo[]>(this.uri)
