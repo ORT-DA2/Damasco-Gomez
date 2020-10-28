@@ -136,11 +136,6 @@ argon-dashboard-angular
 │   │   │   │   ├── login.component.scss
 │   │   │   │   ├── login.component.spec.ts
 │   │   │   │   └── login.component.ts
-│   │   │   ├── maps
-│   │   │   │   ├── maps.component.html
-│   │   │   │   ├── maps.component.scss
-│   │   │   │   ├── maps.component.spec.ts
-│   │   │   │   └── maps.component.ts
 │   │   │   ├── register
 │   │   │   │   ├── register.component.html
 │   │   │   │   ├── register.component.scss
