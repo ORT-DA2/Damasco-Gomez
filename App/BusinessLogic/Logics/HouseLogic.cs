@@ -36,6 +36,7 @@ namespace BusinessLogic
         public House Add(House house)
         {
             ValidateTouristPoint(house.TouristPointId);
+            house.CreatedOn = DateTime.Now;
             House houseAdded = this.houseRepository.Add(house);
             return houseAdded;
         }
