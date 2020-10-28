@@ -56,9 +56,9 @@ namespace BusinessLogic.Tests.Test
             DateTime dateOut = new DateTime(2020, 12, 20);
             ReportTouristPoint touristPointReport = new ReportTouristPoint 
             {
-                dateFrom= dateFrom,
-                dateOut = dateOut,
-                idTp = idTP,
+                DateFrom= dateFrom,
+                DateOut = dateOut,
+                IdTp = idTP,
             };
 
             mock.Setup(m => m.FilterCantBookigsByHouse(dateFrom,dateOut,idTP)).Returns(reportsToReturn);
@@ -75,9 +75,9 @@ namespace BusinessLogic.Tests.Test
             DateTime dateOut = new DateTime(2020, 12, 20);
             ReportTouristPoint touristPointReport = new ReportTouristPoint 
             {
-                dateFrom= dateFrom,
-                dateOut = dateOut,
-                idTp = idTP,
+                DateFrom= dateFrom,
+                DateOut = dateOut,
+                IdTp = idTP,
             };
 
             mock.Setup(m => m.FilterCantBookigsByHouse(dateFrom,dateOut,idTP)).Returns(reportsEmpty);
