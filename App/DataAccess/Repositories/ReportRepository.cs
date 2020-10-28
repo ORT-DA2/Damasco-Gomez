@@ -36,7 +36,7 @@ namespace DataAccess.Repositories
                             .Count()
                         }
                     ).Where(r => r.CantBookings>0).ToList();
-            List <Report> reportToReturn = housesAndCantBookings.OrderBy(r=>r.CantBookings).ToList();
+            List <Report> reportToReturn = housesAndCantBookings.OrderByDescending(r=>r.CantBookings).ToList();
             return reportToReturn;
         }
     }
