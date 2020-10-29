@@ -12,7 +12,6 @@ import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 
 import { AppRoutingModule } from './app.routing';
 import { ComponentsModule } from './components/components.module';
-import { BookingsComponent } from './pages/movies/bookings/bookings.component';
 
 
 @NgModule({
@@ -28,8 +27,7 @@ import { BookingsComponent } from './pages/movies/bookings/bookings.component';
   declarations: [
     AppComponent,
     AdminLayoutComponent,
-    AuthLayoutComponent,
-    BookingsComponent
+    AuthLayoutComponent
   ],
   providers: [],
   bootstrap: [AppComponent]
