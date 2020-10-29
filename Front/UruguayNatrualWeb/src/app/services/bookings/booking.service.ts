@@ -1,4 +1,4 @@
-import { HttpClient, HttpErrorResponse } from '@angular/common/http';
+import { HttpClient, HttpErrorResponse, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable, throwError } from 'rxjs';
 import { catchError } from 'rxjs/operators';
@@ -18,7 +18,8 @@ export class BookingService {
       .pipe(catchError(this.handleError));
   }
   getBy(id):Observable<BookingDetailInfo>{
-    return this.http.get<BookingDetailInfo>(this.uri, {headers: id})
+    return this.http.get<BookingDetailInfo>(this.uri + "/" + id)
+        .pipe(catchError(this.handleError));
   }
   private handleError(error: HttpErrorResponse){
     let message: string;
