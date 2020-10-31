@@ -23,6 +23,7 @@ export class BookingService {
     return this.http.get<BookingDetailInfo>(this.uri + "/" + id)
         .pipe(catchError(this.handleError));
   }
+
   private handleError(error: HttpErrorResponse){
     let message: string;
     if (error.error instanceof ErrorEvent) {

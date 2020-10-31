@@ -23,6 +23,7 @@
           <td>{{booking.houseId}}</td>
           <td>
               <button
+                [routerLink]="['/bookings/booking-editor',booking.id]"
                 type="button"
                 placement="top-center"
                 triggers="hover focus click"
