@@ -2,6 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import { BookingDetailInfo } from 'src/app/models/booking/booking-detail-info';
 import { BookingService } from 'src/app/services/bookings/booking.service';
 import { ActivatedRoute } from '@angular/router';
+import { HouseBasicInfo } from 'src/app/models/house/house-base-info';
+import { HouseService } from 'src/app/services/houses/house.service';
 
 @Component({
   selector: 'app-booking-editor',
@@ -11,8 +13,14 @@ import { ActivatedRoute } from '@angular/router';
 export class BookingEditorComponent implements OnInit {
   public booking: BookingDetailInfo = null;
   public houses: HouseBasicInfo[] = [];
+  public houseName : string = "";
+  public Houses: string[] = [];
   public bookingId: number = 0;
-  constructor(private route: ActivatedRoute, private bookingService: BookingService) { }
+
+  constructor(
+    private route: ActivatedRoute,
+    private bookingService: BookingService,
+    private houseService: HouseService) { }
 
 
   ngOnInit(): void {
@@ -21,10 +29,19 @@ export class BookingEditorComponent implements OnInit {
     this.bookingService.getBy(this.bookingId).subscribe(
       bookingResponse =>
         this.getBy(bookingResponse), (error: string) => this.showError(error));
+    this.houseService.getAll().subscribe(
+      houseResponse =>
+        this.getAllHouses(houseResponse), (error: string) =>this.showError(error));
   }
 
   private getBy(bookingResponse: BookingDetailInfo){
     this.booking = bookingResponse;
+    var house = this.houses.find(x => x.id === this.booking.houseId);
+    this.houseName = house.name;
+  }
+  private getAllHouses(houseResponse: HouseBasicInfo[]){
+    this.houses = houseResponse;
+    this.Houses = this.houses.map(x => x.name);
   }
 
   private showError(message: string){

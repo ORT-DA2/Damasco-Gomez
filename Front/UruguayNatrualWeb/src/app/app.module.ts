@@ -1,6 +1,6 @@
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { NgModule } from '@angular/core';
-import { FormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
 import { RouterModule } from '@angular/router';
 
@@ -18,6 +18,7 @@ import {BookingService} from './services/bookings/booking.service';
 import {HouseService} from './services/houses/house.service';
 import {PersonService} from './services/persons/person.service';
 import {RegionService} from './services/regions/region.service';
+import { BookingEditorComponent } from './pages/booking/booking-editor/booking-editor.component';
 
 @NgModule({
   imports: [
@@ -27,12 +28,15 @@ import {RegionService} from './services/regions/region.service';
     ComponentsModule,
     NgbModule,
     RouterModule,
-    AppRoutingModule
+    AppRoutingModule,
+    ReactiveFormsModule,
+    RouterModule,
   ],
   declarations: [
     AppComponent,
     AdminLayoutComponent,
-    AuthLayoutComponent
+    AuthLayoutComponent,
+    BookingEditorComponent,
   ],
   providers: [TouristPointsService,
     CategoryService,

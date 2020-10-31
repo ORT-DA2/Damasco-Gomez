@@ -37,17 +37,20 @@
                       placeholder="jesse@example.com" value={{booking.email}}>
                   </div>
                 </div>
-                <div class="col-9">
+                <div class="col-8">
                   <div class="form-group">
                     <label class="form-control-label" for="input-houseId">House</label>
-                    <select type="list" id="input-house" class="form-control form-control-alternative">
+                    <select class="custom-select form-control form-control-alternative">
+                      <option value="{{houseName}}" disabled>Choose your city</option>
+                      <option *ngFor="let house of Houses" [ngValue]="house">{{house}}</option>
+                    </select>
                   </div>
                 </div>
-                <div class="col-3">
+                <div class="col-4">
                   <div class="form-group">
                     <label class="form-control-label" for="input-houseId">House Id</label>
-                    <input type="number" id="input-houseId" class="form-control form-control-alternative"
-                    value="{{booking.houseId}}">
+                    <p id="input-houseId" class="form-control form-control-alternative"
+                    >{{booking.houseId}}</p>
                   </div>
                 </div>
                 <div class="col-4">
