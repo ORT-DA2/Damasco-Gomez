@@ -12,6 +12,7 @@ import { UserProfileComponent } from '../../pages/user-profile/user-profile.comp
 import { TablesComponent } from '../../pages/tables/tables.component';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { BookingsTableComponent } from 'src/app/pages/booking/bookings-table/bookings-table.component';
+import { BookingDashboardComponent } from 'src/app/pages/booking/booking-dashboard/booking-dashboard.component';
 // import { ToastrModule } from 'ngx-toastr';
 
 @NgModule({
@@ -29,6 +30,7 @@ import { BookingsTableComponent } from 'src/app/pages/booking/bookings-table/boo
     TablesComponent,
     IconsComponent,
     BookingsTableComponent,
+    BookingDashboardComponent,
   ]
 })
 
