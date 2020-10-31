@@ -13,7 +13,10 @@ export class RegionService {
   private id = 1;
   constructor(private http: HttpClient) { }
 
-
+  getAll():Observable<RegionBasicInfo[]>{
+    return this.http.get<RegionBasicInfo[]>(this.uri)
+      .pipe(catchError(this.handleError));
+  }
 
 
   private handleError(error: HttpErrorResponse){
