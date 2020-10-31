@@ -3,6 +3,7 @@ import { Injectable } from '@angular/core';
 import { Observable, throwError } from 'rxjs';
 import { catchError } from 'rxjs/operators';
 import { environment } from 'src/environments/environment';
+import { RegionBasicInfo } from 'src/app/models/regions/region-base-info';
 
 @Injectable({
   providedIn: 'root'
