@@ -7,7 +7,7 @@ import { environment } from 'src/environments/environment';
 @Injectable({
   providedIn: 'root'
 })
-export class BookingService {
+export class TouristPointsService {
   private uri = environment.baseURL+'touristpoints';
   private id = 1;
   constructor(private http: HttpClient) { }
