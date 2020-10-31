@@ -41,3 +41,7 @@ App/SessionInterface/bin
 App/BusinessLogic.Tests/coverage.json
 App/DataAccess.Tests/coverage.json
 App/Domain.Test/coverage.json
+App/ImportInterface/bin
+App/ImportJson/bin/Debug/netstandard2.0/ImportInterface.pdb
+App/ImportJson/bin/Debug/netstandard2.0/ImportJson.deps.json
+App/ImportJson/bin/Debug/netstandard2.0/ImportJson.pdb
