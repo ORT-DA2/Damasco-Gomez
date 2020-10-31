@@ -14,6 +14,7 @@ import { AppRoutingModule } from './app.routing';
 import { ComponentsModule } from './components/components.module';
 import {TouristPointsService} from './services/touristpoints/touristpoint.service';
 import {CategoryService} from './services/categories/category.service';
+import {BookingService} from './services/bookings/booking.service';
 
 @NgModule({
   imports: [
@@ -30,7 +31,7 @@ import {CategoryService} from './services/categories/category.service';
     AdminLayoutComponent,
     AuthLayoutComponent
   ],
-  providers: [TouristPointsService, CategoryService],
+  providers: [TouristPointsService, CategoryService, BookingService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
