@@ -12,6 +12,10 @@ export class PersonService {
   private uri = environment.baseURL+'persons';
   private id = 1;
   constructor(private http: HttpClient) { }
+  getAll():Observable<PersonBasicInfo[]>{
+    return this.http.get<PersonBasicInfo[]>(this.uri)
+      .pipe(catchError(this.handleError));
+  }
 
   private handleError(error: HttpErrorResponse){
     let message: string;
