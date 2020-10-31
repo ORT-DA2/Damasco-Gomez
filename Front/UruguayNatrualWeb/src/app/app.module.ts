@@ -29,7 +29,7 @@ import {TouristPointsService} from './services/touristpoints/touristpoint.servic
     AdminLayoutComponent,
     AuthLayoutComponent
   ],
-  providers: [],
+  providers: [TouristPointsService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
