@@ -13,6 +13,7 @@ import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { AppRoutingModule } from './app.routing';
 import { ComponentsModule } from './components/components.module';
 import {TouristPointsService} from './services/touristpoints/touristpoint.service';
+import {CategoryService} from './services/categories/category.service';
 
 @NgModule({
   imports: [
@@ -29,7 +30,7 @@ import {TouristPointsService} from './services/touristpoints/touristpoint.servic
     AdminLayoutComponent,
     AuthLayoutComponent
   ],
-  providers: [TouristPointsService],
+  providers: [TouristPointsService, CategoryService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
