@@ -17,6 +17,7 @@ import {CategoryService} from './services/categories/category.service';
 import {BookingService} from './services/bookings/booking.service';
 import {HouseService} from './services/houses/house.service';
 import {PersonService} from './services/persons/person.service';
+import {RegionService} from './services/regions/region.service';
 
 @NgModule({
   imports: [
@@ -33,7 +34,12 @@ import {PersonService} from './services/persons/person.service';
     AdminLayoutComponent,
     AuthLayoutComponent
   ],
-  providers: [TouristPointsService, CategoryService, BookingService, HouseService, PersonService],
+  providers: [TouristPointsService,
+    CategoryService,
+     BookingService,
+      HouseService,
+      PersonService,
+      RegionService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
