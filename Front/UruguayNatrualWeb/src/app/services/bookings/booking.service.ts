@@ -13,10 +13,12 @@ export class BookingService {
   private uri = environment.baseURL+"bookings";
   private id = 1;
   constructor(private http: HttpClient) { }
+
   getAll():Observable<BookingBasicInfo[]>{
     return this.http.get<BookingBasicInfo[]>(this.uri)
       .pipe(catchError(this.handleError));
   }
+
   getBy(id):Observable<BookingDetailInfo>{
     return this.http.get<BookingDetailInfo>(this.uri + "/" + id)
         .pipe(catchError(this.handleError));
