@@ -12,7 +12,7 @@ import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 
 import { AppRoutingModule } from './app.routing';
 import { ComponentsModule } from './components/components.module';
-
+import {TouristPointsService} from './services/touristpoints/touristpoint.service';
 
 @NgModule({
   imports: [
