@@ -41,3 +41,4 @@ App/SessionInterface/bin
 App/BusinessLogic.Tests/coverage.json
 App/DataAccess.Tests/coverage.json
 App/Domain.Test/coverage.json
+Front/UruguayNatrualWeb/package-lock.json
