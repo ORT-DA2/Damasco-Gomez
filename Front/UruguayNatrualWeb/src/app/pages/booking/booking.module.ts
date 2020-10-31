@@ -1,6 +1,6 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { BookingsComponent } from './bookings/bookings.component';
+import { BookingsTableComponent } from './bookings-table/bookings-table.component';
 
 @NgModule({
   imports: [
@@ -8,7 +8,7 @@ import { BookingsComponent } from './bookings/bookings.component';
     BookingModule,
   ],
   declarations: [
-    BookingsComponent
+    BookingsTableComponent
   ],
   providers: [],
 })
