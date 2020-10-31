@@ -11,7 +11,7 @@ import { IconsComponent } from '../../pages/icons/icons.component';
 import { UserProfileComponent } from '../../pages/user-profile/user-profile.component';
 import { TablesComponent } from '../../pages/tables/tables.component';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
-import { BookingsComponent } from 'src/app/pages/booking/bookings/bookings.component';
+import { BookingsTableComponent } from 'src/app/pages/booking/bookings-table/bookings-table.component';
 // import { ToastrModule } from 'ngx-toastr';
 
 @NgModule({
@@ -28,7 +28,7 @@ import { BookingsComponent } from 'src/app/pages/booking/bookings/bookings.compo
     UserProfileComponent,
     TablesComponent,
     IconsComponent,
-    BookingsComponent,
+    BookingsTableComponent,
   ]
 })
 
