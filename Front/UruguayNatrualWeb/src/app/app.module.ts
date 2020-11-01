@@ -19,6 +19,7 @@ import {HouseService} from './services/houses/house.service';
 import {PersonService} from './services/persons/person.service';
 import {RegionService} from './services/regions/region.service';
 import { BookingEditorComponent } from './pages/booking/booking-editor/booking-editor.component';
+import {ReportService} from './services/reports/report.service';
 
 @NgModule({
   imports: [
@@ -43,7 +44,8 @@ import { BookingEditorComponent } from './pages/booking/booking-editor/booking-e
      BookingService,
       HouseService,
       PersonService,
-      RegionService],
+      RegionService,
+      ReportService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
