@@ -48,11 +48,11 @@ namespace BusinessLogic.Tests.Test
         [TestMethod]
         public void GetAllEmpty()
         {
-            mock.Setup(m => m.GetElements()).Returns(statesToReturn);
+            mock.Setup(m => m.GetElements()).Returns(emptyStates);
 
             var result = stateLogic.GetAll();
 
-            Assert.IsTrue(result.SequenceEqual(statesToReturn));
+            Assert.IsTrue(result.SequenceEqual(emptyStates));
         }
         [TestMethod]
         public void GetByTestOk()

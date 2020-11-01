@@ -14,12 +14,12 @@ namespace BusinessLogic.Logics
         } 
         public IEnumerable<State> GetAll()
         {
-            throw new System.NotImplementedException();
+            return this.stateRepository.GetElements();
         }
 
-        public IEnumerable<State> GetBy(int stateId)
+        public State GetBy(int stateId)
         {
-            throw new System.NotImplementedException();
+            return this.stateRepository.Find(stateId);
         }
     }
 }

@@ -6,6 +6,6 @@ namespace BusinessLogicInterface.Interfaces
     public interface IStateLogic
     {
         IEnumerable<State> GetAll();
-        IEnumerable<State> GetBy(int stateId);
+        State GetBy(int stateId);
     }
 }
