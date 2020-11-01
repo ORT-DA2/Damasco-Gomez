@@ -4,6 +4,8 @@ import { BookingService } from 'src/app/services/bookings/booking.service';
 import { ActivatedRoute } from '@angular/router';
 import { HouseBasicInfo } from 'src/app/models/house/house-base-info';
 import { HouseService } from 'src/app/services/houses/house.service';
+import { StatesService } from 'src/app/services/states/states.service';
+import { StateBasicInfo } from 'src/app/models/state/state-base-info';
 
 @Component({
   selector: 'app-booking-editor',
@@ -11,15 +13,17 @@ import { HouseService } from 'src/app/services/houses/house.service';
   styleUrls: ['./booking-editor.component.css']
 })
 export class BookingEditorComponent implements OnInit {
-  public booking: BookingDetailInfo = null;
+  public booking: BookingDetailInfo ;
   public houses: HouseBasicInfo[] = [];
+  public states: StateBasicInfo[] = [];
   public houseName : string = "";
   public bookingId: number = 0;
 
   constructor(
     private route: ActivatedRoute,
     private bookingService: BookingService,
-    private houseService: HouseService) { }
+    private houseService: HouseService,
+    private stateService: StatesService) { }
 
 
   ngOnInit(): void {
@@ -31,6 +35,9 @@ export class BookingEditorComponent implements OnInit {
     this.houseService.getAll().subscribe(
       houseResponse =>
         this.getAllHouses(houseResponse), (error: string) =>this.showError(error));
+    this.stateService.getAll().subscribe(
+      stateResponse =>
+        this.getAllStates(stateResponse), (error: string) =>this.showError(error));
   }
 
   private getBy(bookingResponse: BookingDetailInfo){
@@ -41,8 +48,9 @@ export class BookingEditorComponent implements OnInit {
   private getAllHouses(houseResponse: HouseBasicInfo[]){
     this.houses = houseResponse;
   }
-  private getAllStates(houseResponse: HouseBasicInfo[]){
-
+  private getAllStates(stateResponse: StateBasicInfo[]){
+    this.states = stateResponse;
+    console.log(this.states);
   }
 
   private showError(message: string){

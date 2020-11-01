@@ -66,10 +66,10 @@
                 </div>
                 <div class="col-8">
                   <div class="form-group">
-                    <label class="form-control-label" for="input-houseId">House</label>
+                    <label class="form-control-label">State</label>
                     <select class="custom-select form-control form-control-alternative">
-                      <option value="{{houseName}}" disabled>Choose your city</option>
-                      <option *ngFor="let house of Houses" [ngValue]="house">{{house}}</option>
+                      <option disabled>Choose state</option>
+                      <option *ngFor="let state of states" [ngValue]="state">{{state.name}}</option>
                     </select>
                   </div>
                 </div>
