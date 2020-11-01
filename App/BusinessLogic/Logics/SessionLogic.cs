@@ -13,30 +13,30 @@ namespace BusinessLogic.Logics
         private readonly ISessionUserRepository sessionUserRepository;
 
         private readonly IPersonRepository personRepository;
-       public SessionLogic(ISessionUserRepository sessionUserRepository, IPersonRepository personRepository)
-       {
-           this.sessionUserRepository = sessionUserRepository;
-           this.personRepository = personRepository;
-       }
+        public SessionLogic(ISessionUserRepository sessionUserRepository, IPersonRepository personRepository)
+        {
+            this.sessionUserRepository = sessionUserRepository;
+            this.personRepository = personRepository;
+        }
 
         public bool IsCorrectToken(Guid token)
         {
-             return this.sessionUserRepository.IsCorrectToken(token);
+            return this.sessionUserRepository.IsCorrectToken(token);
 
         }
-        public Guid Login(Person person)  
+        public Guid Login(Person person)
         {
-            IEnumerable<Person> personResult = this.personRepository.GetElements().Where(p=>p.Email == person.Email && p.Password == person.Password);
-            if (personResult.Count()==0)
+            IEnumerable<Person> personResult = this.personRepository.GetElements().Where(p => p.Email == person.Email && p.Password == person.Password);
+            if (personResult.Count() == 0)
             {
                 throw new ArgumentException("Email or password was not valid ");
             }
             person = personResult.First();
             Guid guid = Guid.NewGuid();
-            IEnumerable<SessionUser> sessions = this.sessionUserRepository.GetElements().Where(m=>m.PersonId==person.Id);
-            if(sessions.Count()==0)
+            IEnumerable<SessionUser> sessions = this.sessionUserRepository.GetElements().Where(m => m.PersonId == person.Id);
+            if (sessions.Count() == 0)
             {
-                SessionUser newSession = new SessionUser ()
+                SessionUser newSession = new SessionUser()
                 {
                     Token = guid,
                     PersonId = person.Id
