@@ -14,7 +14,6 @@ export class BookingEditorComponent implements OnInit {
   public booking: BookingDetailInfo = null;
   public houses: HouseBasicInfo[] = [];
   public houseName : string = "";
-  public Houses: string[] = [];
   public bookingId: number = 0;
 
   constructor(
@@ -41,7 +40,9 @@ export class BookingEditorComponent implements OnInit {
   }
   private getAllHouses(houseResponse: HouseBasicInfo[]){
     this.houses = houseResponse;
-    this.Houses = this.houses.map(x => x.name);
+  }
+  private getAllStates(houseResponse: HouseBasicInfo[]){
+
   }
 
   private showError(message: string){

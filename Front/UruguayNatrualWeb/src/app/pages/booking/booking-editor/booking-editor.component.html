@@ -39,18 +39,20 @@
                 </div>
                 <div class="col-8">
                   <div class="form-group">
-                    <label class="form-control-label" for="input-houseId">House</label>
-                    <select class="custom-select form-control form-control-alternative">
-                      <option value="{{houseName}}" disabled>Choose your city</option>
-                      <option *ngFor="let house of Houses" [ngValue]="house">{{house}}</option>
+                    <label class="form-control-label" for="select-house">House</label>
+                    <select class="custom-select form-control form-control-alternative"
+                      ng-model="houseName" >
+                      <option disabled>Choose your city</option>
+                      <option *ngFor="let house of houses" [ngValue]="house.name">{{house.name}}</option>
                     </select>
                   </div>
                 </div>
                 <div class="col-4">
                   <div class="form-group">
                     <label class="form-control-label" for="input-houseId">House Id</label>
-                    <p id="input-houseId" class="form-control form-control-alternative"
-                    >{{booking.houseId}}</p>
+                    <p id="input-houseId" class="form-control form-control-alternative">
+                      {{booking.houseId}}
+                    </p>
                   </div>
                 </div>
                 <div class="col-4">
@@ -60,6 +62,15 @@
                       class="form-control form-control-alternative">
                       {{booking.code}}
                     </p>
+                  </div>
+                </div>
+                <div class="col-8">
+                  <div class="form-group">
+                    <label class="form-control-label" for="input-houseId">House</label>
+                    <select class="custom-select form-control form-control-alternative">
+                      <option value="{{houseName}}" disabled>Choose your city</option>
+                      <option *ngFor="let house of Houses" [ngValue]="house">{{house}}</option>
+                    </select>
                   </div>
                 </div>
                 <div class="col-2">

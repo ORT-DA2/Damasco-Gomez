@@ -1,7 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { Console } from 'console';
 import { BookingBasicInfo } from 'src/app/models/booking/booking-base-info';
-import { BookingDetailInfo } from 'src/app/models/booking/booking-detail-info';
 import { BookingService } from 'src/app/services/bookings/booking.service';
 
 @Component({
