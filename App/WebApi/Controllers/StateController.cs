@@ -1,5 +1,9 @@
+using System.Collections.Generic;
+using System.Linq;
 using BusinessLogicInterface.Interfaces;
+using Domain.Entities;
 using Microsoft.AspNetCore.Mvc;
+using Model.Out;
 
 namespace WebApi.Controllers
 {
@@ -19,6 +23,9 @@ namespace WebApi.Controllers
         [HttpGet]
         public IActionResult Get()
         {
+            IEnumerable<State> states = this.stateLogic.GetAll();
+            IEnumerable<StateBasicModel> statesBasic = states.Select(m => new StateBasicModel(m));
+            return Ok(statesBasic);
         }
         /// <summary>
         /// Permite a un ususario ver un estado del sistema
@@ -29,6 +36,9 @@ namespace WebApi.Controllers
         [HttpGet( "{id}" , Name="GetState" )]
         public IActionResult GetBy([FromRoute]int id)
         {
+            var elementState = this.stateLogic.GetBy(id);
+            StateBasicModel statesBasic = new StateBasicModel(elementState);
+            return Ok(statesBasic);
         }
         
     }
