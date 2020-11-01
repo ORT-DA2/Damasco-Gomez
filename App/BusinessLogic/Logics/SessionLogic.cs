@@ -11,7 +11,6 @@ namespace BusinessLogic.Logics
     public class SessionLogic : ISessionLogic
     {
         private readonly ISessionUserRepository sessionUserRepository;
-
         private readonly IPersonRepository personRepository;
         public SessionLogic(ISessionUserRepository sessionUserRepository, IPersonRepository personRepository)
         {
