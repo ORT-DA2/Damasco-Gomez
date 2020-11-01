@@ -14,9 +14,9 @@ namespace Model.Out
         public override bool Equals(object obj)
         {
             var result = false;
-            if(obj is RegionDetailModel region)
+            if(obj is StateBasicModel state)
             {
-                result = this.Id == region.Id ;
+                result = this.Id == state.Id ;
             }
             return result;
         }
