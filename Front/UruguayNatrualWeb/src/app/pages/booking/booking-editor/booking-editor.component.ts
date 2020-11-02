@@ -13,10 +13,9 @@ import { StateBasicInfo } from 'src/app/models/state/state-base-info';
   styleUrls: ['./booking-editor.component.css']
 })
 export class BookingEditorComponent implements OnInit {
-  public booking: BookingDetailInfo ;
+  public booking: BookingDetailInfo = {} as BookingDetailInfo;
   public houses: HouseBasicInfo[] = [];
   public states: StateBasicInfo[] = [];
-  public houseName : string = "";
   public bookingId: number = 0;
 
   constructor(
@@ -42,15 +41,12 @@ export class BookingEditorComponent implements OnInit {
 
   private getBy(bookingResponse: BookingDetailInfo){
     this.booking = bookingResponse;
-    var house = this.houses.find(x => x.id === this.booking.houseId);
-    this.houseName = house.name;
   }
   private getAllHouses(houseResponse: HouseBasicInfo[]){
     this.houses = houseResponse;
   }
   private getAllStates(stateResponse: StateBasicInfo[]){
     this.states = stateResponse;
-    console.log(this.states);
   }
 
   private showError(message: string){

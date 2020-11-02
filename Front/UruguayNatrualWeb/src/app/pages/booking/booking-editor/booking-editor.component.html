@@ -37,17 +37,16 @@
                       placeholder="jesse@example.com" value={{booking.email}}>
                   </div>
                 </div>
-                <div class="col-8">
+                <div class="col-9">
                   <div class="form-group">
                     <label class="form-control-label" for="select-house">House</label>
-                    <select class="custom-select form-control form-control-alternative"
-                      ng-model="houseName" >
-                      <option disabled>Choose your city</option>
+                    <select class="custom-select form-control form-control-alternative" >
+                      <option disabled>Choose House</option>
                       <option *ngFor="let house of houses" [ngValue]="house.name">{{house.name}}</option>
                     </select>
                   </div>
                 </div>
-                <div class="col-4">
+                <div class="col-3">
                   <div class="form-group">
                     <label class="form-control-label" for="input-houseId">House Id</label>
                     <p id="input-houseId" class="form-control form-control-alternative">
@@ -55,29 +54,29 @@
                     </p>
                   </div>
                 </div>
-                <div class="col-4">
+                <div class="col-9">
+                  <div class="form-group">
+                    <label class="form-control-label">State</label>
+                    <select class="custom-select form-control form-control-alternative">
+                      <option disabled>Choose State</option>
+                      <option *ngFor="let state of states" [ngValue]="state">{{state.name}}</option>
+                    </select>
+                  </div>
+                </div>
+                <div class="col-3">
+                  <div class="form-group">
+                    <label class="form-control-label" for="input-state-id">State Id</label>
+                    <input type="number" id="input-state-id" class="form-control form-control-alternative"
+                      value="{{booking.stateId}}">
+                  </div>
+                </div>
+                <div class="col-8">
                   <div class="form-group">
                     <label class="form-control-label" for="input-code">Code</label>
                     <p type="email" id="input-code"
                       class="form-control form-control-alternative">
                       {{booking.code}}
                     </p>
-                  </div>
-                </div>
-                <div class="col-8">
-                  <div class="form-group">
-                    <label class="form-control-label">State</label>
-                    <select class="custom-select form-control form-control-alternative">
-                      <option disabled>Choose state</option>
-                      <option *ngFor="let state of states" [ngValue]="state">{{state.name}}</option>
-                    </select>
-                  </div>
-                </div>
-                <div class="col-2">
-                  <div class="form-group">
-                    <label class="form-control-label" for="input-state-id">State Id</label>
-                    <input type="number" id="input-state-id" class="form-control form-control-alternative"
-                      value="{{booking.stateId}}">
                   </div>
                 </div>
                 <div class="col-4">
