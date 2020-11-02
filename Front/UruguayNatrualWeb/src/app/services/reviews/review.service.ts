@@ -3,6 +3,7 @@ import { Injectable } from '@angular/core';
 import { Observable, throwError } from 'rxjs';
 import { catchError } from 'rxjs/operators';
 import { environment } from 'src/environments/environment';
+import { ReviewBasicInfo } from 'src/app/models/reviews/review-base-info';
 
 
 
@@ -14,6 +15,10 @@ export class ReviewService {
   private id = 1;
   constructor(private http: HttpClient) { }
 
+  getAll():Observable<ReviewBasicInfo[]>{
+    return this.http.get<ReviewBasicInfo[]>(this.uri)
+      .pipe(catchError(this.handleError));
+  }
 
 
   private handleError(error: HttpErrorResponse){
