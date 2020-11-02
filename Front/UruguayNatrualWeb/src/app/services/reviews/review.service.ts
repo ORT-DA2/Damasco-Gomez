@@ -11,7 +11,7 @@ import { ReviewBasicInfo } from 'src/app/models/reviews/review-base-info';
   providedIn: 'root'
 })
 export class ReviewService {
-  private uri = environment.baseURL+ 'reports';
+  private uri = environment.baseURL+ 'reviews';
   private id = 1;
   constructor(private http: HttpClient) { }
 
