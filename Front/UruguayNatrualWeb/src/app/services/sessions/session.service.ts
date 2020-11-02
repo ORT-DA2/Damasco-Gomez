@@ -3,7 +3,7 @@ import { Injectable } from '@angular/core';
 import { Observable, throwError } from 'rxjs';
 import { catchError } from 'rxjs/operators';
 import { environment } from 'src/environments/environment';
-
+import { SessionBasicInfo } from 'src/app/models/sessions/session-base-info';
 
 
 
@@ -15,6 +15,10 @@ export class SessionService {
   private id = 1;
   constructor(private http: HttpClient) { }
 
+  getAll():Observable<SessionBasicInfo[]>{
+    return this.http.get<SessionBasicInfo[]>(this.uri)
+      .pipe(catchError(this.handleError));
+  }
 
   private handleError(error: HttpErrorResponse){
     let message: string;
