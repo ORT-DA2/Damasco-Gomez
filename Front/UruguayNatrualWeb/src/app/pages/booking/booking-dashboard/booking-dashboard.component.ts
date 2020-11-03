@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { ActivatedRoute } from '@angular/router';
+import { BookingService } from 'src/app/services/bookings/booking.service';
 
 @Component({
   selector: 'app-booking-dashboard',
@@ -7,11 +9,12 @@ import { Component, OnInit } from '@angular/core';
 })
 export class BookingDashboardComponent implements OnInit {
 
-  constructor() { }
+  constructor(
+    private route: ActivatedRoute,
+    private bookingService: BookingService,) { }
 
   ngOnInit(): void {
   }
-  public add(){
-    console.log("add wanted");
-  }
+
+
 }
