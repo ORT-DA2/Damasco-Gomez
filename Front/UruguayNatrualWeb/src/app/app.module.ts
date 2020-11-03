@@ -18,13 +18,9 @@ import {BookingService} from './services/bookings/booking.service';
 import {HouseService} from './services/houses/house.service';
 import {PersonService} from './services/persons/person.service';
 import {RegionService} from './services/regions/region.service';
-import { BookingEditorComponent } from './pages/booking/booking-editor/booking-editor.component';
 import {ReportService} from './services/reports/report.service';
 import {ReviewService} from './services/reviews/review.service';
 import {SessionService} from './services/sessions/session.service';
-import { TouristPointDashboardComponent } from './pages/tourist-point/tourist-point-dashboard/tourist-point-dashboard.component';
-import { TouristPointEditorComponent } from './pages/tourist-point/tourist-point-editor/tourist-point-editor.component';
-import { TouristPointsTableComponent } from './pages/tourist-point/tourist-points-table/tourist-points-table.component';
 
 @NgModule({
   imports: [
@@ -42,20 +38,16 @@ import { TouristPointsTableComponent } from './pages/tourist-point/tourist-point
     AppComponent,
     AdminLayoutComponent,
     AuthLayoutComponent,
-    BookingEditorComponent,
-    TouristPointDashboardComponent,
-    TouristPointEditorComponent,
-    TouristPointsTableComponent,
   ],
   providers: [TouristPointsService,
     CategoryService,
-     BookingService,
-      HouseService,
-      PersonService,
-      RegionService,
-      ReportService,
-      ReviewService,
-      SessionService],
+    BookingService,
+    HouseService,
+    PersonService,
+    RegionService,
+    ReportService,
+    ReviewService,
+    SessionService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
