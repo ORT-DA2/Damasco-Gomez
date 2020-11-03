@@ -32,6 +32,13 @@ namespace WebApi
             factory.AddCustomServices();
             factory.AddDbContextService();
             services.AddSwaggerGen();
+            services.AddCors(options =>
+            {
+                options.AddPolicy("AllowMyOrigin", 
+                    builder => builder.WithOrigins("http://localhost:4200"));
+                // options.AddPolicy("AllowSpecificOrigin",
+                //     builder => builder.WithOrigins("http://localhost:4200"));
+            });
 
             var xmlFile = $"{Assembly.GetExecutingAssembly().GetName().Name}.XML";
             var xmlPath = Path.Combine(AppContext.BaseDirectory, xmlFile);
@@ -56,6 +63,7 @@ namespace WebApi
             app.UseRouting();
 
             app.UseCors("CorsPolicy");
+            app.UseCors("AllowMyOrigin");
 
             app.UseAuthorization();
 
