@@ -10,9 +10,13 @@ import { environment } from 'src/environments/environment';
   providedIn: 'root'
 })
 export class BookingService {
-  private uri = environment.baseURL+"bookings";
+
   private id = 1;
-  constructor(private http: HttpClient) { }
+  private uri;
+
+  constructor(private http: HttpClient) {
+    this.uri = environment.baseURL+"bookings";
+  }
 
   getAll():Observable<BookingBasicInfo[]>{
     return this.http.get<BookingBasicInfo[]>(this.uri)
@@ -20,8 +24,41 @@ export class BookingService {
   }
 
   getBy(id):Observable<BookingDetailInfo>{
-    return this.http.get<BookingDetailInfo>(this.uri + "/" + id)
+    var httpRequest =
+    this.http.get<BookingDetailInfo>(this.uri + "/" + id)
         .pipe(catchError(this.handleError));
+    return httpRequest;
+  }
+
+  // add():Observable<any>{
+  //   const headers = new HttpHeaders({
+  //     'Content-Type': 'application/json',
+  //     'Authorization': environment.token });
+  //   let options = { headers: headers };
+  //   const body=JSON.stringify("");
+  //   return this.http.post(this.uri,body,options).pipe(catchError(this.handleError));
+  // }
+
+  delete(id):Observable<any>{
+    const headers = new HttpHeaders({
+      'Authorization': environment.token,
+      'Content-Type':'application/json'
+    });
+    let options = { headers: headers };
+    var httpRequest = this.http.delete<any>(this.uri + "/" + id)
+      .pipe(catchError(this.handleError));
+    return httpRequest;
+  }
+
+  update(id, body):Observable<any>{
+    const headers = new HttpHeaders({
+      'Content-Type': 'application/json',
+      'Authorization': environment.token
+    });
+    let options = { headers: headers };
+    var httpRequest = this.http.put<any>(this.uri + "/" + id, body, options)
+      .pipe(catchError(this.handleError));
+    return httpRequest;
   }
 
   private handleError(error: HttpErrorResponse){
