@@ -1,6 +1,4 @@
 import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
-import { BookingService } from 'src/app/services/bookings/booking.service';
 
 @Component({
   selector: 'app-booking-dashboard',
