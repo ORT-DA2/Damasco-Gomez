@@ -29,12 +29,12 @@ export class TouristPointsTableComponent implements OnInit {
   }
 
   private delete(event) {
-    console.log(event);
     this.id = event.id;
     this.touristPointService.delete(this.id).subscribe(
       touristPointResponse =>
         this.delete(touristPointResponse), (error: string) => this.showError(error)
     );
+    this.touristpoints = this.touristpoints.filter(item => item.id != this.id);
   }
 
 }

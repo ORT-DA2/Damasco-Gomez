@@ -27,11 +27,11 @@ export class BookingsTableComponent implements OnInit {
   }
 
   private delete(event) {
-    console.log(event);
     this.id = event.id;
     this.bookingService.delete(this.id).subscribe(
       bookingResponse =>
         this.delete(bookingResponse), (error: string) => this.showError(error)
     );
+    this.bookings = this.bookings.filter(item => item.id != this.id);
   }
 }
