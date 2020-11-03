@@ -1,4 +1,4 @@
-export interface CateogryBasicInfo {
+export interface CategoryBasicInfo {
   id : number,
   name : string,
 
