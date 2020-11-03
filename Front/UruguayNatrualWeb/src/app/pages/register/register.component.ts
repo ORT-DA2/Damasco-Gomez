@@ -14,6 +14,12 @@ export class RegisterComponent implements OnInit {
 
   ngOnInit() {
     this.sessionUser = new SessionUserModel ();
+    this.sessionUser.email = 'yulianagomezsilva@gmail.com';
+  }
+  onSubmit()
+  {
+    console.log('formulario creado');
+    console.log(this.sessionUser);
   }
 
 }
