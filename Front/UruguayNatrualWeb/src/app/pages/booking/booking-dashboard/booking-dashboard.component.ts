@@ -9,9 +9,7 @@ import { BookingService } from 'src/app/services/bookings/booking.service';
 })
 export class BookingDashboardComponent implements OnInit {
 
-  constructor(
-    private route: ActivatedRoute,
-    private bookingService: BookingService,) { }
+  constructor() { }
 
   ngOnInit(): void {
   }
