@@ -22,6 +22,9 @@ import { BookingEditorComponent } from './pages/booking/booking-editor/booking-e
 import {ReportService} from './services/reports/report.service';
 import {ReviewService} from './services/reviews/review.service';
 import {SessionService} from './services/sessions/session.service';
+import { TouristPointDashboardComponent } from './pages/tourist-point/tourist-point-dashboard/tourist-point-dashboard.component';
+import { TouristPointEditorComponent } from './pages/tourist-point/tourist-point-editor/tourist-point-editor.component';
+import { TouristPointsTableComponent } from './pages/tourist-point/tourist-points-table/tourist-points-table.component';
 
 @NgModule({
   imports: [
@@ -40,6 +43,9 @@ import {SessionService} from './services/sessions/session.service';
     AdminLayoutComponent,
     AuthLayoutComponent,
     BookingEditorComponent,
+    TouristPointDashboardComponent,
+    TouristPointEditorComponent,
+    TouristPointsTableComponent,
   ],
   providers: [TouristPointsService,
     CategoryService,
