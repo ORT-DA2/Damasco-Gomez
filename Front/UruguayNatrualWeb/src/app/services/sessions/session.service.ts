@@ -4,7 +4,7 @@ import { Observable, throwError } from 'rxjs';
 import { catchError } from 'rxjs/operators';
 import { environment } from 'src/environments/environment';
 import { SessionBasicInfo } from 'src/app/models/sessions/session-base-info';
-
+import {SessionUserModel} from '../../models/sessions/session-user-model';
 
 
 @Injectable({
@@ -15,11 +15,12 @@ export class SessionService {
   private id = 1;
   constructor(private http: HttpClient) { }
 
-  getAll():Observable<SessionBasicInfo[]>{
+  getAll(): Observable<SessionBasicInfo[]>{
     return this.http.get<SessionBasicInfo[]>(this.uri)
       .pipe(catchError(this.handleError));
   }
-
+  logout(){}
+  login(user:SessionUserModel){}
   private handleError(error: HttpErrorResponse){
     let message: string;
     if (error.error instanceof ErrorEvent) {
