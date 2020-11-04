@@ -33,6 +33,7 @@ import {SessionService} from './services/sessions/session.service';
     AppRoutingModule,
     ReactiveFormsModule,
     RouterModule,
+    FormsModule,
   ],
   declarations: [
     AppComponent,
