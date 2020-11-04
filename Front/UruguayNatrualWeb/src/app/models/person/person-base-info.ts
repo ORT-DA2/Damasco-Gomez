@@ -1,4 +1,4 @@
-export interface PersonBasicInfo {
+export class PersonBasicInfo {
   id: number;
   name: string;
   email: string;
