@@ -13,20 +13,27 @@ import {SessionUserModel} from '../../models/sessions/session-user-model';
 export class SessionService {
   private uri = environment.baseURL+ 'sessions';
   private id = 1;
-  private token;
-  constructor(private http: HttpClient) { }
+  private token = 'a7573450-df29-4eac-a9d5-061c48c12385';
+  constructor(private http: HttpClient  ) { }
 
   getAll(): Observable<SessionBasicInfo[]>{
     return this.http.get<SessionBasicInfo[]>(this.uri)
       .pipe(catchError(this.handleError));
   }
-  logout(){}
+  logout() {}
 
   login(user: SessionUserModel){
 
+    const sessionData = {
+      ...user,
+    };
+    return this.http.post(
+      `${ this.uri}`,
+      sessionData
+    );
+
 
   }
-
 
 
   private handleError(error: HttpErrorResponse){
