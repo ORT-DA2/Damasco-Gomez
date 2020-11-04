@@ -38,21 +38,24 @@
                         <div class="text-center text-muted mb-4">
                             <small>Or sign in with credentials</small>
                         </div>
-                        <form role="form">
+                        <form (ngSubmit)="login(loginForm)" #loginForm="ngForm" role="form">
                             <div class="form-group mb-3">
                                 <div class="input-group input-group-alternative">
+                                    <span *ngIf="loginForm.submitted && loginForm.controls['email'].errors" class="text-danger animated fadeIn">The email is required</span>
                                     <div class="input-group-prepend">
+
                                         <span class="input-group-text"><i class="ni ni-email-83"></i></span>
                                     </div>
-                                    <input class="form-control" placeholder="Email" type="email">
+                                    <input class="form-control" name="email" [(ngModel)]="sessionUser.email" required email placeholder="Email" type="email">
                                 </div>
                             </div>
                             <div class="form-group">
                                 <div class="input-group input-group-alternative">
+                                    <span *ngIf="loginForm.submitted && loginForm.controls['pass'].errors" class="text-danger animated fadeIn">The password must be at least 6 characters </span>
                                     <div class="input-group-prepend">
-                                        <span class="input-group-text"><i class="ni ni-lock-circle-open"></i></span>
+                                        <span class="input-group-text" data-validate="Password is required"><i class="ni ni-lock-circle-open"></i></span>
                                     </div>
-                                    <input class="form-control" placeholder="Password" type="password">
+                                    <input class="form-control" name="pass" [(ngModel)]="sessionUser.password" required minlength="6" placeholder="Password" type="password">
                                 </div>
                             </div>
                             <div class="custom-control custom-control-alternative custom-checkbox">
@@ -62,7 +65,7 @@
               </label>
                             </div>
                             <div class="text-center">
-                                <button type="button" class="btn btn-primary my-4">Sign in</button>
+                                <button type="button" type="submit" class="btn btn-primary my-4">Sign in</button>
                             </div>
                         </form>
                     </div>
