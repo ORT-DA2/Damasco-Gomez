@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { CategoryBasicInfo } from 'src/app/models/category/category-basic-info';
 import { RegionBasicInfo } from 'src/app/models/regions/region-base-info';
@@ -16,7 +16,7 @@ import { TouristPointsService } from 'src/app/services/touristpoints/touristpoin
 export class TouristPointEditorComponent implements OnInit {
   public touristPoint: TouristPointDetailInfo = {} as TouristPointDetailInfo;
   public regions: RegionBasicInfo[] = [];
-  public states: CategoryBasicInfo[] = [];
+  public categories: CategoryBasicInfo[] = [];
   public touristPointId: number = 0;
 
   constructor(
@@ -47,9 +47,26 @@ export class TouristPointEditorComponent implements OnInit {
     this.regions = regionResponse;
   }
   private getAllCategories(categoryResponse: CategoryBasicInfo[]){
-    this.states = categoryResponse;
+    this.categories = categoryResponse;
   }
 
+  private updateData(touristPoint : TouristPointDetailInfo){
+    const basicInfo = this.createModel(touristPoint);
+    this.touristPointService.update(this.touristPointId, basicInfo).subscribe(
+      responseUpdate =>
+        console.log(responseUpdate)
+    );
+  }
+
+  private createModel(touristPoint : TouristPointDetailInfo) : TouristPointsBasicInfo{
+    let modelBase : TouristPointsBasicInfo = {} as TouristPointsBasicInfo ;
+    modelBase.categories = touristPoint.categories.map(x=> x.id);
+    modelBase.description = touristPoint.description;
+    // modelBase.images = touristPoint.images;
+    modelBase.name = touristPoint.name;
+    modelBase.regionId = touristPoint.regionId;
+    return modelBase;
+  }
   private showError(message: string){
     console.log(message);
   }

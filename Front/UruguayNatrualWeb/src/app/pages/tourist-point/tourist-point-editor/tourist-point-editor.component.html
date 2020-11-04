@@ -1,4 +1,5 @@
-<div class="header pb-8 pt-5 pt-lg-8 d-flex align-items-center" style="min-height: 600px; background-image: url(assets/img/theme/profile-cover.jpg); background-size: cover; background-position: center top;">
+<div class="header pb-8 pt-5 pt-lg-8 d-flex align-items-center"
+  style="min-height: 600px; background-image: url(assets/img/theme/profile-cover.jpg); background-size: cover; background-position: center top;">
   <!-- Mask -->
   <span class="mask bg-gradient-danger opacity-8"></span>
 </div>
@@ -13,7 +14,11 @@
               <span class="heading-small text-muted mb-4">Id {{touristPointId}}</span>
             </div>
             <div class="col-4 text-right">
-              <a href="#!" class="btn btn-sm btn-primary">Update</a>
+              <button type="button" placement="top-center" triggers="hover focus click"
+                class="btn btn-rounded btn-outline-warning" ngxClipboard [cbContent]="'air-baloon'"
+                (cbOnSuccess)="copy = 'air-baloon'" (click)="updateData(touristPoint)">
+                Update
+              </button>
             </div>
           </div>
         </div>
@@ -21,31 +26,34 @@
           <form>
             <div class="pl-lg-4">
               <div class="row">
+
                 <div class="col-6">
                   <div class="form-group">
                     <label class="form-control-label" for="input-username">Name</label>
-                    <input type="text" id="input-username"
-                      class="form-control form-control-alternative"
-                      value={{touristPoint.name}}>
+                    <input type="text" id="input-username" class="form-control form-control-alternative"
+                      [(ngModel)]="touristPoint.name" name="nameT">
                   </div>
                 </div>
+
                 <div class="col-6">
                   <div class="form-group">
                     <label class="form-control-label" for="input-description">Description</label>
-                    <input type="text" id="input-description"
-                      class="form-control form-control-alternative"
-                      value={{touristPoint.description}}>
+                    <input type="text" id="input-description" class="form-control form-control-alternative"
+                      [(ngModel)]=touristPoint.description name="description">
                   </div>
                 </div>
+
                 <div class="col-9">
                   <div class="form-group">
                     <label class="form-control-label">Region</label>
                     <select class="custom-select form-control form-control-alternative">
                       <option disabled>Choose Region</option>
-                      <option *ngFor="let region of regions" [ngValue]="region">{{region.name}}</option>
+                      <option *ngFor="let region of regions"
+                        [ngValue]="region">{{region.name}}</option>
                     </select>
                   </div>
                 </div>
+
                 <div class="col-3">
                   <div class="form-group">
                     <label class="form-control-label" for="input-region-id">Region Id</label>
@@ -53,6 +61,21 @@
                       value="{{touristPoint.regionId}}">
                   </div>
                 </div>
+
+                <div class="col-12">
+                  <div class="form-group" id="categoriesTouristPoints">
+                    <label class="form-control-label" for="input-categories">Categories</label>
+                    <select *ngFor="let categoryTouristPoint of touristPoint.categories; let i = index"
+                      class="custom-select form-control form-control-alternative">
+                      <option disabled>Choose Category</option>
+                      <option *ngFor="let category of categories"
+                        [ngValue]="category">
+                          {{category.name}}
+                      </option>
+                    </select>
+                  </div>
+                </div>
+
               </div>
             </div>
             <hr class="my-4" />

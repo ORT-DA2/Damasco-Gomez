@@ -4,7 +4,7 @@ import { TouristPointEditorComponent } from './tourist-point-editor/tourist-poin
 import { TouristPointsTableComponent } from './tourist-points-table/tourist-points-table.component';
 import { TouristPointDashboardComponent } from './tourist-point-dashboard/tourist-point-dashboard.component';
 import { BrowserModule } from '@angular/platform-browser';
-import { ReactiveFormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 
 
@@ -14,6 +14,7 @@ import { ReactiveFormsModule } from '@angular/forms';
     TouristPointModule,
     BrowserModule,
     ReactiveFormsModule,
+    FormsModule,
   ],
   declarations: [
     TouristPointEditorComponent,
