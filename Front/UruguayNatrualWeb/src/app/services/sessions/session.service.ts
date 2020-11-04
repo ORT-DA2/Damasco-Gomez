@@ -13,6 +13,7 @@ import {SessionUserModel} from '../../models/sessions/session-user-model';
 export class SessionService {
   private uri = environment.baseURL+ 'sessions';
   private id = 1;
+  private token;
   constructor(private http: HttpClient) { }
 
   getAll(): Observable<SessionBasicInfo[]>{
@@ -20,7 +21,14 @@ export class SessionService {
       .pipe(catchError(this.handleError));
   }
   logout(){}
-  login(user:SessionUserModel){}
+
+  login(user: SessionUserModel){
+
+
+  }
+
+
+
   private handleError(error: HttpErrorResponse){
     let message: string;
     if (error.error instanceof ErrorEvent) {
