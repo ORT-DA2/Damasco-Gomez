@@ -16,7 +16,7 @@ namespace Model.In
         public virtual  IEnumerable<int> Categories {get; set;}
         public TouristPoint ToEntity()
         {
-            return new TouristPoint()
+            TouristPoint touristPoint = new TouristPoint()
             {
                 Name= this.Name,
                 ImageTouristPoint = new ImageTouristPoint()
@@ -25,11 +25,15 @@ namespace Model.In
                 },
                 Description = this.Description,
                 RegionId = this.RegionId,
-                CategoriesTouristPoints = this.Categories.Select(m => new CategoryTouristPoint()
+            };
+            if (this.Categories!=null)
+            {
+                touristPoint.CategoriesTouristPoints = this.Categories.Select(m => new CategoryTouristPoint()
                 {
                     CategoryId = m
-                }).ToList()
+                }).ToList();
             };
+            return touristPoint;
         }
     }
 }
