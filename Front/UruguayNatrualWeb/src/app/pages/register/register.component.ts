@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { NgForm } from '@angular/forms';
 import {SessionUserModel} from '../../models/sessions/session-user-model';
 
 @Component({
@@ -14,12 +15,12 @@ export class RegisterComponent implements OnInit {
 
   ngOnInit() {
     this.sessionUser = new SessionUserModel ();
-    this.sessionUser.email = 'yulianagomezsilva@gmail.com';
   }
-  onSubmit()
-  {
+  onSubmit(form: NgForm) {
+    if (form.invalid) {return; }
     console.log('formulario creado');
     console.log(this.sessionUser);
+    console.log(form);
   }
 
 }
