@@ -21,7 +21,7 @@ export class RegisterComponent implements OnInit {
     if (form.invalid) {return; }
     this.personService.newUser(this.user).
       subscribe(resp => {
-          console.log(resp);
+          console.log(resp); }, (err) => {console.log(err.error.error.message);
         });
   }
 
