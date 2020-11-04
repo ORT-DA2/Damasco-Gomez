@@ -26,7 +26,7 @@ export class PersonService {
       returnSecureToken: true
     };
     return this.http.post(
-      `${ this.uri}/persons`,
+      `${ this.uri}`,
       personData
     );
   }
