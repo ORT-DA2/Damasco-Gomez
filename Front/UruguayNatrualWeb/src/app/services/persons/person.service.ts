@@ -9,10 +9,8 @@ import { PersonBasicInfo } from 'src/app/models/person/person-base-info';
 @Injectable({
   providedIn: 'root'
 })
-export class SessionService {
-  private uri = environment.baseURL+ 'sessions';
-  private id = 1;
-  private token;
+export class PersonService {
+  private uri = environment.baseURL+ 'persons';
   constructor(private http: HttpClient) { }
 
   getAll(): Observable<PersonBasicInfo[]>{
@@ -23,13 +21,13 @@ export class SessionService {
 
   newUser(user: PersonBasicInfo){
 
-    const authData = {
+    const personData = {
       ...user,
       returnSecureToken: true
     };
     return this.http.post(
       `${ this.uri}/persons`,
-      authData
+      personData
     );
   }
 
