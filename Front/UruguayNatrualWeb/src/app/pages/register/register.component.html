@@ -1,3 +1,4 @@
+<div class="limiter animated fadeInLeft"></div>
 <div class="header bg-gradient-danger py-7 py-lg-8">
     <div class="container">
         <div class="header-body text-center mb-7">
@@ -38,13 +39,14 @@
                     <div class="text-center text-muted mb-4">
                         <small>Or sign up with credentials</small>
                     </div>
-                    <form (ngSubmit)="onSubmit()" role="form">
+                    <form (ngSubmit)="onSubmit(registerForm)" #registerForm="ngForm" role="form">
                         <div class="form-group">
                             <div class="input-group input-group-alternative mb-3">
                                 <div class="input-group-prepend">
                                     <span class="input-group-text"><i class="ni ni-hat-3"></i></span>
                                 </div>
-                                <input class="form-control" name="name" [(ngModel)]="sessionUser.name" placeholder="Name" type="text">
+                                <span *ngIf="registerForm.submitted && registerForm.controls['name'].errors" class="text-danger animated fedIn"> The name  is required </span>
+                                <input class="form-control" name="name" [(ngModel)]="sessionUser.name" minlength="2" required placeholder="Name" type="text">
                             </div>
                         </div>
                         <div class="form-group">
@@ -52,6 +54,7 @@
                                 <div class="input-group-prepend">
                                     <span class="input-group-text"><i class="ni ni-email-83"></i></span>
                                 </div>
+                                <span *ngIf="registerForm.submitted && registerForm.controls['email'].errors" class="text-danger animated fedIn"> The email is required </span>
                                 <input class="form-control" type="email" name="email" [(ngModel)]="sessionUser.email" required placeholder="Email">
                             </div>
                         </div>
@@ -60,7 +63,8 @@
                                 <div class="input-group-prepend">
                                     <span class="input-group-text"><i class="ni ni-lock-circle-open"></i></span>
                                 </div>
-                                <input class="form-control" name="pass" [(ngModel)]="sessionUser.password" placeholder="Password" type="password">
+                                <span *ngIf="registerForm.submitted && registerForm.controls['pass'].errors" class="text-danger animated fedIn"> The password must be at least 6 characters </span>
+                                <input class="form-control" name="pass" [(ngModel)]="sessionUser.password" minlength="6" required placeholder="Password" type="password">
                             </div>
                         </div>
                         <div class="text-muted font-italic"><small>password strength: <span class="text-success font-weight-700">strong</span></small></div>
