@@ -21,6 +21,9 @@ import {RegionService} from './services/regions/region.service';
 import {ReportService} from './services/reports/report.service';
 import {ReviewService} from './services/reviews/review.service';
 import {SessionService} from './services/sessions/session.service';
+import { CategoryDashboardComponent } from './pages/category/category-dashboard/category-dashboard.component';
+import { CategoryTableComponent } from './pages/category/category-table/category-table/category-table.component';
+import { CategroyEditorComponent } from './pages/category/category-editor/categroy-editor/categroy-editor.component';
 
 @NgModule({
   imports: [
@@ -39,6 +42,9 @@ import {SessionService} from './services/sessions/session.service';
     AppComponent,
     AdminLayoutComponent,
     AuthLayoutComponent,
+    CategoryDashboardComponent,
+    CategoryTableComponent,
+    CategroyEditorComponent,
   ],
   providers: [TouristPointsService,
     CategoryService,
