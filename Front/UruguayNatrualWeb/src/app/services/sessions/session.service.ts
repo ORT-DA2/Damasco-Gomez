@@ -5,6 +5,7 @@ import { catchError } from 'rxjs/operators';
 import { environment } from 'src/environments/environment';
 import { SessionBasicInfo } from 'src/app/models/sessions/session-base-info';
 import {SessionUserModel} from '../../models/sessions/session-user-model';
+import { Guid } from 'guid-typescript';
 
 
 @Injectable({
@@ -13,7 +14,7 @@ import {SessionUserModel} from '../../models/sessions/session-user-model';
 export class SessionService {
   private uri = environment.baseURL+ 'sessions';
   private id = 1;
-  private token : string;
+  private token: Guid;
   constructor(private http: HttpClient  ) { }
 
   getAll(): Observable<SessionBasicInfo[]>{
@@ -32,7 +33,7 @@ export class SessionService {
       sessionData
     );
   }
-  saveToken (idToken: string) {
+  private saveToken (token: Guid) {
     this.token= idToken;
     localStorage.setItem('token', idToken);
   }
