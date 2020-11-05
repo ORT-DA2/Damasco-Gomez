@@ -6,6 +6,8 @@ import { UserProfileComponent } from '../../pages/user-profile/user-profile.comp
 import { TablesComponent } from '../../pages/tables/tables.component';
 import { BookingDashboardComponent } from 'src/app/pages/booking/booking-dashboard/booking-dashboard.component';
 import { BookingEditorComponent } from 'src/app/pages/booking/booking-editor/booking-editor.component';
+import { TouristPointDashboardComponent } from 'src/app/pages/tourist-point/tourist-point-dashboard/tourist-point-dashboard.component';
+import { TouristPointEditorComponent } from 'src/app/pages/tourist-point/tourist-point-editor/tourist-point-editor.component';
 
 export const AdminLayoutRoutes: Routes = [
     { path: 'dashboard',      component: DashboardComponent },
@@ -14,4 +16,6 @@ export const AdminLayoutRoutes: Routes = [
     { path: 'icons',          component: IconsComponent },
     { path: 'bookings',       component: BookingDashboardComponent },
     { path: 'bookings/booking-editor/:id',       component: BookingEditorComponent },
+    { path: 'tourist-points',       component: TouristPointDashboardComponent },
+    { path: 'tourist-points/tourist-point-editor/:id',       component: TouristPointEditorComponent },
 ];

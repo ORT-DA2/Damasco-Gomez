@@ -53,8 +53,8 @@ namespace BusinessLogic
                 );
                 touristPointBD.CategoriesTouristPoints = touristPointBD.CategoriesTouristPoints;
             }
-            this.touristPointRepository.Update(id, touristPointBD);
             touristPointBD.Update(touristPoint);
+            this.touristPointRepository.Update(id, touristPointBD);
             return touristPointBD;
         }
         public void Delete(int id)

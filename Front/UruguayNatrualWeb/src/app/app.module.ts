@@ -18,7 +18,6 @@ import {BookingService} from './services/bookings/booking.service';
 import {HouseService} from './services/houses/house.service';
 import {PersonService} from './services/persons/person.service';
 import {RegionService} from './services/regions/region.service';
-import { BookingEditorComponent } from './pages/booking/booking-editor/booking-editor.component';
 import {ReportService} from './services/reports/report.service';
 import {ReviewService} from './services/reviews/review.service';
 import {SessionService} from './services/sessions/session.service';
@@ -34,22 +33,22 @@ import {SessionService} from './services/sessions/session.service';
     AppRoutingModule,
     ReactiveFormsModule,
     RouterModule,
+    FormsModule,
   ],
   declarations: [
     AppComponent,
     AdminLayoutComponent,
     AuthLayoutComponent,
-    BookingEditorComponent,
   ],
   providers: [TouristPointsService,
     CategoryService,
-     BookingService,
-      HouseService,
-      PersonService,
-      RegionService,
-      ReportService,
-      ReviewService,
-      SessionService],
+    BookingService,
+    HouseService,
+    PersonService,
+    RegionService,
+    ReportService,
+    ReviewService,
+    SessionService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

@@ -4,6 +4,7 @@ import { Observable, throwError } from 'rxjs';
 import { catchError } from 'rxjs/operators';
 import { environment } from 'src/environments/environment';
 import { TouristPointsBasicInfo } from 'src/app/models/touristpoint/touristpoint-base-info';
+import { TouristPointDetailInfo } from 'src/app/models/touristpoint/tourist-point-detail-info';
 
 @Injectable({
   providedIn: 'root'
@@ -16,6 +17,44 @@ export class TouristPointsService {
   getAll():Observable<TouristPointsBasicInfo[]>{
     return this.http.get<TouristPointsBasicInfo[]>(this.uri)
       .pipe(catchError(this.handleError));
+  }
+
+  getBy(id):Observable<TouristPointDetailInfo>{
+    var httpRequest =
+    this.http.get<TouristPointDetailInfo>(this.uri + "/" + id)
+        .pipe(catchError(this.handleError));
+    return httpRequest;
+  }
+
+  add():Observable<any>{
+    const headers = new HttpHeaders({
+      'Content-Type': 'application/json',
+      'Authorization': environment.token });
+    let options = { headers: headers };
+    const body=JSON.stringify("");
+    return this.http.post(this.uri,body,options).pipe(catchError(this.handleError));
+  }
+
+  delete(id):Observable<any>{
+    const headers = new HttpHeaders({
+      'Authorization': environment.token,
+      'Content-Type':'application/json'
+    });
+    let options = { headers: headers };
+    var httpRequest = this.http.delete<any>(this.uri + "/" + id,options)
+      .pipe(catchError(this.handleError));
+    return httpRequest;
+  }
+
+  update(id, body):Observable<any>{
+    const headers = new HttpHeaders({
+      'Content-Type': 'application/json',
+      'Authorization': environment.token
+    });
+    let options = { headers: headers };
+    var httpRequest = this.http.put<any>(this.uri + "/" + id, body, options)
+      .pipe(catchError(this.handleError));
+    return httpRequest;
   }
 
 
