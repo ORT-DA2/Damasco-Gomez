@@ -1,4 +1,8 @@
 import { Component, OnInit } from '@angular/core';
+import { NgForm } from '@angular/forms';
+import { PersonBasicInfo } from 'src/app/models/person/person-base-info';
+import { SessionService } from 'src/app/services/sessions/session.service';
+import { PersonService } from '../../services/persons/person.service';
 
 @Component({
   selector: 'app-register',
@@ -7,9 +11,21 @@ import { Component, OnInit } from '@angular/core';
 })
 export class RegisterComponent implements OnInit {
 
-  constructor() { }
+  public user: PersonBasicInfo = {} as PersonBasicInfo;
+
+  constructor(private personService: PersonService, private sessionService: SessionService) { }
 
   ngOnInit() {
+  }
+
+  onSubmit(form: NgForm) {
+    if (form.invalid) {return; }
+    this.personService.newUser(this.user);
+    this.sessionService.login(this.user).
+    subscribe(resp => {
+        console.log(resp);
+      });
+
   }
 
 }
