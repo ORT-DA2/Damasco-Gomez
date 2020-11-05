@@ -35,17 +35,17 @@ export class SessionService {
   }
   private saveToken (token: Guid) {
     this.token = token;
-    localStorage.setItem('token', token);
+    localStorage.setItem('token', token.toString());
   }
   readToken () {
-    if (localStorage.getItem('token'))
-    {
-      this.token = localStorage.getItem('token');
-    } else
-    {
-      this.token = '' ;
-    }
-    return this.token;
+    // if (localStorage.getItem('token'))
+    // {
+    //   this.token = localStorage.getItem('token');
+    // } else
+    // {
+    //   this.token = '' ;
+    // }
+    // return this.token;
   }
   private handleError(error: HttpErrorResponse){
     let message: string;
