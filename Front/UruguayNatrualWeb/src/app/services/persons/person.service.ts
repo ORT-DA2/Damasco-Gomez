@@ -27,7 +27,7 @@ export class PersonService {
     return this.http.post(
       `${ this.uri}`,
       personData
-    ).pipe(map());
+    );
     }
 
 
