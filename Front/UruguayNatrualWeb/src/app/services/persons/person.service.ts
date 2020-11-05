@@ -19,19 +19,28 @@ export class PersonService {
   }
   logout(){}
 
-  newUser(user: PersonBasicInfo){
+  /*newUser(user: PersonBasicInfo){
 
     const personData = {
       ...user,
-      returnSecureToken: true
     };
     return this.http.post(
       `${ this.uri}`,
       personData
     );
-  }
-
-
+  */
+  newUser(user: PersonBasicInfo):Observable<any>{
+    const headers = new HttpHeaders({
+      'Content-Type': 'application/json',
+      'Authorization': environment.token });
+    const options = { headers: headers };
+    let bodyData = {...user};
+    const body=JSON.stringify(bodyData);
+    return this.http.post(this.uri,body,options).pipe(catchError(this.handleError));
+    }
+ /* newUser(user: PersonBasicInfo): Observable<any>{
+    return this.http.post(`${ this.uri}`, user);
+  }*/
 
   private handleError(error: HttpErrorResponse){
     let message: string;
