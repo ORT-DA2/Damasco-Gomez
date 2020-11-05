@@ -45,7 +45,7 @@ export class BookingService {
       'Content-Type':'application/json'
     });
     let options = { headers: headers };
-    var httpRequest = this.http.delete<any>(this.uri + "/" + id)
+    var httpRequest = this.http.delete<any>(this.uri + "/" + id, options)
       .pipe(catchError(this.handleError));
     return httpRequest;
   }

@@ -1,6 +1,4 @@
 import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
-import { BookingService } from 'src/app/services/bookings/booking.service';
 
 @Component({
   selector: 'app-booking-dashboard',
@@ -9,9 +7,7 @@ import { BookingService } from 'src/app/services/bookings/booking.service';
 })
 export class BookingDashboardComponent implements OnInit {
 
-  constructor(
-    private route: ActivatedRoute,
-    private bookingService: BookingService,) { }
+  constructor() { }
 
   ngOnInit(): void {
   }

@@ -1,29 +1,27 @@
 <!-- Table -->
 <div class="card shadow">
   <div class="card-header border-0">
-    <h3 class="mb-0">Bookings</h3>
+    <h3 class="mb-0">Tourist Points</h3>
   </div>
   <div class="table-responsive">
     <table class="table align-items-center table-flush">
       <thead class="thead-light">
         <tr>
           <th scope="col">Name</th>
-          <th scope="col">Email</th>
-          <th scope="col">Code</th>
-          <th scope="col">HouseId</th>
+          <th scope="col">Description</th>
+          <th scope="col">regionId</th>
           <th></th>
           <th></th>
         </tr>
       </thead>
       <tbody>
-        <tr *ngFor="let booking of bookings; let i = index">
-          <th scope="row"> {{booking.name}} </th>
-          <td>{{booking.email}}</td>
-          <td>{{booking.code}} </td>
-          <td>{{booking.houseId}}</td>
+        <tr *ngFor="let touristpoint of touristpoints; let i = index">
+          <th scope="row"> {{touristpoint.name}} </th>
+          <td>{{touristpoint.description}}</td>
+          <td>{{touristpoint.regionId}}</td>
           <td>
               <button
-                [routerLink]="['/bookings/booking-editor',booking.id]"
+                [routerLink]="['/tourist-points/tourist-point-editor',touristpoint.id]"
                 type="button"
                 placement="top-center"
                 triggers="hover focus click"
@@ -41,7 +39,7 @@
                 class="btn btn-rounded btn-outline-danger"
                 ngxClipboard [cbContent]="'air-baloon'"
                 (cbOnSuccess) = "copy = 'air-baloon'"
-                (click)="delete(booking)">
+                (click)="delete(touristpoint)">
                 Delete
               </button>
           </td>
