@@ -13,7 +13,7 @@ import {SessionUserModel} from '../../models/sessions/session-user-model';
 export class SessionService {
   private uri = environment.baseURL+ 'sessions';
   private id = 1;
-  private token = 'a7573450-df29-4eac-a9d5-061c48c12385';
+  private token : string;
   constructor(private http: HttpClient  ) { }
 
   getAll(): Observable<SessionBasicInfo[]>{
@@ -31,11 +31,21 @@ export class SessionService {
       `${ this.uri}`,
       sessionData
     );
-
-
   }
-
-
+  saveToken (idToken: string) {
+    this.token= idToken;
+    localStorage.setItem('token', idToken);
+  }
+  readToken () {
+    if (localStorage.getItem('token'))
+    {
+      this.token = localStorage.getItem('token');
+    } else
+    {
+      this.token = '' ;
+    }
+    return this.token;
+  }
   private handleError(error: HttpErrorResponse){
     let message: string;
     if (error.error instanceof ErrorEvent) {
