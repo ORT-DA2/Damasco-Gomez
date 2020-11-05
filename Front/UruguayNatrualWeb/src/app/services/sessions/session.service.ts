@@ -6,7 +6,7 @@ import { environment } from 'src/environments/environment';
 import { SessionBasicInfo } from 'src/app/models/sessions/session-base-info';
 import {SessionUserModel} from '../../models/sessions/session-user-model';
 import { Guid } from 'guid-typescript';
-
+import { map } from 'rxjs/operators';
 
 @Injectable({
   providedIn: 'root'
@@ -31,11 +31,11 @@ export class SessionService {
     return this.http.post(
       `${ this.uri}`,
       sessionData
-    );
+    ).pipe(map(resp => {this.saveToken(resp ['token']); return resp; }));
   }
   private saveToken (token: Guid) {
-    this.token= idToken;
-    localStorage.setItem('token', idToken);
+    this.token = token;
+    localStorage.setItem('token', token);
   }
   readToken () {
     if (localStorage.getItem('token'))
