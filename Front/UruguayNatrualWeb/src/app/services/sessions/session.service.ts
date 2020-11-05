@@ -12,9 +12,9 @@ import { map } from 'rxjs/operators';
   providedIn: 'root'
 })
 export class SessionService {
-  private uri = environment.baseURL+ 'sessions';
+  private uri = environment.baseURL + 'sessions';
   private id = 1;
-  private token: Guid;
+  private token: string;
   constructor(private http: HttpClient  ) { this.readToken(); }
 
   getAll(): Observable<SessionBasicInfo[]>{
@@ -33,16 +33,14 @@ export class SessionService {
       sessionData
     ).pipe(map(resp => {this.saveToken(resp ['token']); return resp; }));
   }
-  private saveToken (token: Guid) {
+  private saveToken (token: string) {
     this.token = token;
     localStorage.setItem('token', token);
   }
   readToken () {
-    if (localStorage.getItem('token'))
-    {
+    if (localStorage.getItem('token')) {
       this.token = localStorage.getItem('token');
-    } else
-    {
+    } else {
       this.token = '' ;
     }
     return this.token;
