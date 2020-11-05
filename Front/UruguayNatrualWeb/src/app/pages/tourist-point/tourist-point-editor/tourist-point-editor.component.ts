@@ -18,6 +18,8 @@ export class TouristPointEditorComponent implements OnInit {
   public regions: RegionBasicInfo[] = [];
   public categories: CategoryBasicInfo[] = [];
   public touristPointId: number = 0;
+  public regionName: string = "";
+  public categoriesName: string[] = [];
 
   constructor(
     private route: ActivatedRoute,
@@ -45,9 +47,11 @@ export class TouristPointEditorComponent implements OnInit {
   }
   private getAllRegions(regionResponse: RegionBasicInfo[]){
     this.regions = regionResponse;
+    this.regionName = this.regions.find(x => x.id === this.touristPoint.regionId).name;
   }
   private getAllCategories(categoryResponse: CategoryBasicInfo[]){
     this.categories = categoryResponse;
+    this.categoriesName = this.categories.map(x=> x.name);
   }
 
   private updateData(touristPoint : TouristPointDetailInfo){
