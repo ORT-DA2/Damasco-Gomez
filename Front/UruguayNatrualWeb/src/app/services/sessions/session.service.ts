@@ -15,7 +15,7 @@ export class SessionService {
   private uri = environment.baseURL+ 'sessions';
   private id = 1;
   private token: Guid;
-  constructor(private http: HttpClient  ) { }
+  constructor(private http: HttpClient  ) { this.readToken(); }
 
   getAll(): Observable<SessionBasicInfo[]>{
     return this.http.get<SessionBasicInfo[]>(this.uri)
@@ -53,7 +53,7 @@ export class SessionService {
       message = 'Error: do it again';
     } else{
       // tslint:disable-next-line: triple-equals
-      if(error.status == 0){
+      if (error.status == 0){
         message = 'The server is shutdown';
       } else{
         message = error.error.message;
