@@ -10,13 +10,13 @@ import { PersonService } from '../../services/persons/person.service';
 })
 export class RegisterComponent implements OnInit {
 
-  user: PersonBasicInfo;
+  public user: PersonBasicInfo = {} as PersonBasicInfo;
 
   constructor(private personService: PersonService) { }
 
   ngOnInit() {
-    this.user = new PersonBasicInfo();
   }
+
   onSubmit(form: NgForm) {
     if (form.invalid) {return; }
     this.personService.newUser(this.user).
