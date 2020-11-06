@@ -50,7 +50,7 @@ export class SessionService {
       return this.token.length > 2;
   }
 
-  private handleError(error: HttpErrorResponse){
+  private handleError(error: HttpErrorResponse) {
     let message: string;
     if (error.error instanceof ErrorEvent) {
       message = 'Error: do it again';
