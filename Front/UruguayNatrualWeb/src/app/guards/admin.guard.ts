@@ -14,7 +14,7 @@ export class AdminGuard implements CanActivate {
     if (this.session.isAuthenticated() ){
       return true;
     } else {
-      this.router.navigateByUrl('/login');
+      this.router.navigateByUrl('/login'); // esto despuès se tiene que redirigir a las vistas para los turistas
     }
   }
 
