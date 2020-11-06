@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { NgForm } from '@angular/forms';
+import { Router } from '@angular/router';
 import { PersonBasicInfo } from 'src/app/models/person/person-base-info';
 import { PersonModel } from 'src/app/models/person/person-model';
 import { SessionService } from 'src/app/services/sessions/session.service';
@@ -15,7 +16,9 @@ export class RegisterComponent implements OnInit {
   public user: PersonBasicInfo = {} as PersonBasicInfo;
 
 
-  constructor(private personService: PersonService, private sessionService: SessionService) { }
+  constructor(private personService: PersonService,
+              private sessionService: SessionService,
+              private router: Router ) { }
 
   ngOnInit() {
   }
@@ -26,6 +29,7 @@ export class RegisterComponent implements OnInit {
     this.sessionService.login(this.user).
     subscribe(resp => {
         console.log(resp);
+        this.router.navigateByUrl('/home');
       });
 
   }
