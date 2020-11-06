@@ -30,8 +30,7 @@ export class LoginComponent implements OnInit, OnDestroy {
 
     this.sessionService.login(this.sessionUser).
       subscribe(resp => {
-          console.log(resp);
-          //this.router.navigateByUrl('/home');
+           this.router.navigateByUrl('/dashboard');
         });
 
     if (this.rememberMe)
