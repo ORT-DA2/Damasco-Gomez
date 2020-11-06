@@ -15,7 +15,7 @@ export class LoginComponent implements OnInit, OnDestroy {
                private router: Router ) {}
 
   sessionUser: SessionUserModel = new SessionUserModel();
-
+  rememberMe = false;
   ngOnInit() {
   }
 
@@ -26,8 +26,16 @@ export class LoginComponent implements OnInit, OnDestroy {
     this.sessionService.login(this.sessionUser).
       subscribe(resp => {
           console.log(resp);
-          this.router.navigateByUrl('/home');
+          //this.router.navigateByUrl('/home');
         });
+
+    if (this.rememberMe)
+    {
+      localStorage.setItem('email', this.sessionUser.email);
+    }
+  }
+  rememberUser () {
+
   }
   ngOnDestroy() {
   }
