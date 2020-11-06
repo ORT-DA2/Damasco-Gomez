@@ -45,6 +45,11 @@ export class SessionService {
     }
     return this.token;
   }
+
+  isAuthenticated (): boolean{
+      return this.token.length > 2;
+  }
+
   private handleError(error: HttpErrorResponse){
     let message: string;
     if (error.error instanceof ErrorEvent) {
