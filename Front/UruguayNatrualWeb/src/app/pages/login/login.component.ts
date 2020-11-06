@@ -17,7 +17,7 @@ export class LoginComponent implements OnInit, OnDestroy {
   sessionUser: SessionUserModel = new SessionUserModel();
   rememberMe = false;
   ngOnInit() {
-    if (localStorage.getItem('email')){
+    if (localStorage.getItem('email')) {
       this.sessionUser.email = localStorage.getItem('email');
       this.rememberMe = true;
     }
