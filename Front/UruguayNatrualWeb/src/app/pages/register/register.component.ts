@@ -35,7 +35,6 @@ export class RegisterComponent implements OnInit {
   {
       this.sessionService.login(this.user).
       subscribe(resp => {
-      console.log(resp);
       this.router.navigateByUrl('/dashboard');
       });
   }
