@@ -21,7 +21,9 @@ export class SessionService {
     return this.http.get<SessionBasicInfo[]>(this.uri)
       .pipe(catchError(this.handleError));
   }
-  logout() {}
+  logout() {
+    localStorage.removeItem('token');
+  }
 
   login(user: SessionUserModel){
 
