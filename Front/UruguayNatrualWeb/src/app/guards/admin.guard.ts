@@ -15,6 +15,7 @@ export class AdminGuard implements CanActivate {
       return true;
     } else {
       this.router.navigateByUrl('/login'); // esto despuès se tiene que redirigir a las vistas para los turistas
+      return false;
     }
   }
 
