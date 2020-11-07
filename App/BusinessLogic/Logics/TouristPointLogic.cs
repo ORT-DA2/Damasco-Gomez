@@ -56,7 +56,6 @@ namespace BusinessLogic
                 );
                 touristPointBD.CategoriesTouristPoints.RemoveAll(x => x.TouristPointId == touristPointBD.Id);
                 touristPointBD.CategoriesTouristPoints = touristPoint.CategoriesTouristPoints;
-                System.Console.WriteLine(touristPointBD.CategoriesTouristPoints);
             }
             if(touristPoint.ImageTouristPointId > 0) 
             {
