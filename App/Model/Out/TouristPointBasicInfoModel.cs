@@ -1,4 +1,6 @@
+using System.Collections.Generic;
 using System.Diagnostics.CodeAnalysis;
+using System.Linq;
 using Domain;
 using Domain.Entities;
 
@@ -16,17 +18,17 @@ namespace Model.Out
         public string Description {get; private set;}
 
         public int RegionId {get; private set;}
+        public List<CategoryBasicInfoModel> Categories {get; private set;}
 
         public TouristPointBasicInfoModel (TouristPoint touristPoint)
         {
             this.Id = touristPoint.Id;
             this.Name = touristPoint.Name;
-            if(this.Image!=null)
-            {
-                this.Image = new ImageTouristPointBasicModel(touristPoint.ImageTouristPoint);
-            }
+            this.Image = new ImageTouristPointBasicModel(touristPoint.ImageTouristPoint);
             this.Description = touristPoint.Description;
             this.RegionId = touristPoint.RegionId;
+            this.Categories = touristPoint.CategoriesTouristPoints.
+                    Select(m => new CategoryBasicInfoModel(m.Category)).ToList();
         }
         public override bool Equals(object obj)
         {

@@ -3,8 +3,9 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace WebApi.Controllers
 {
-    [ApiController]
+
     [EnableCors("AllowEverything")]
+    [ApiController]
     public class VidlyControllerBase : ControllerBase
     {
     }

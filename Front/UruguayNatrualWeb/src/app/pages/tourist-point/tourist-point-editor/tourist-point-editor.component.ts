@@ -18,6 +18,9 @@ export class TouristPointEditorComponent implements OnInit {
   public regions: RegionBasicInfo[] = [];
   public categories: CategoryBasicInfo[] = [];
   public touristPointId: number = 0;
+  public regionName: string = "";
+  public categoriesName: string[] = [];
+  categoryNew: CategoryBasicInfo = {} as CategoryBasicInfo;
 
   constructor(
     private route: ActivatedRoute,
@@ -38,19 +41,23 @@ export class TouristPointEditorComponent implements OnInit {
     this.categoryService.getAll().subscribe(
       categoryResponse =>
         this.getAllCategories(categoryResponse), (error: string) =>this.showError(error));
+
   }
 
   private getBy(touristPointResponse: TouristPointDetailInfo){
     this.touristPoint = touristPointResponse;
+    this.categoriesName = this.touristPoint.categories? this.touristPoint.categories.map(category => category.name)
+      : [];
   }
   private getAllRegions(regionResponse: RegionBasicInfo[]){
     this.regions = regionResponse;
+    this.regionName = this.regions.find(x => x.id === this.touristPoint.regionId).name;
   }
   private getAllCategories(categoryResponse: CategoryBasicInfo[]){
     this.categories = categoryResponse;
   }
 
-  private updateData(touristPoint : TouristPointDetailInfo){
+  updateData(touristPoint : TouristPointDetailInfo){
     const basicInfo = this.createModel(touristPoint);
     this.touristPointService.update(this.touristPointId, basicInfo).subscribe(
       responseUpdate =>
@@ -58,11 +65,33 @@ export class TouristPointEditorComponent implements OnInit {
     );
   }
 
+  onChangeRegionName(event: any){
+    this.touristPoint.region = this.regions.find(x => this.regionName == x.name);
+    this.touristPoint.regionId = this.touristPoint.region.id;
+  }
+
+  onChangeCategoryName(categoryName: string, index: number){
+    var categoryId = this.categories.find(x => x.name == categoryName);
+    this.touristPoint.categories[index] = categoryId;
+  }
+
+  addCategory(){
+    if(this.touristPoint.categories[this.touristPoint.categories.length-1].id == null){
+      console.log("NO ADDED WITH ONE EMPTY");
+    }
+    else {
+      this.touristPoint.categories = this.touristPoint.categories.concat(this.categoryNew);
+    }
+  }
+  deleteCategory(){
+    this.touristPoint.categories.pop();
+  }
+
   private createModel(touristPoint : TouristPointDetailInfo) : TouristPointsBasicInfo{
     let modelBase : TouristPointsBasicInfo = {} as TouristPointsBasicInfo ;
     modelBase.categories = touristPoint.categories.map(x=> x.id);
     modelBase.description = touristPoint.description;
-    // modelBase.images = touristPoint.images;
+    // modelBase.image = touristPoint.image;
     modelBase.name = touristPoint.name;
     modelBase.regionId = touristPoint.regionId;
     return modelBase;
