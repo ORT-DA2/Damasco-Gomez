@@ -9,6 +9,7 @@ import { CategoryService } from 'src/app/services/categories/category.service';
 })
 export class CategoryTableComponent implements OnInit {
   public categories: CategoryBasicInfo[] = [];
+  public id: Number = 0;
   constructor(private categoryService: CategoryService) { }
 
 
@@ -27,5 +28,7 @@ export class CategoryTableComponent implements OnInit {
     console.log(message);
   }
 
+  private delete(event) {
+  }
 
 }
