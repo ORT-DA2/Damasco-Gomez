@@ -57,7 +57,6 @@ export class SessionService {
     if (error.error instanceof ErrorEvent) {
       message = 'Error: do it again';
     } else{
-      // tslint:disable-next-line: triple-equals
       if (error.status == 0){
         message = 'The server is shutdown';
       } else{
