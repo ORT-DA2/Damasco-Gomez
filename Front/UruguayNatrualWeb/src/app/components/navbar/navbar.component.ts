@@ -15,14 +15,17 @@ export class NavbarComponent implements OnInit {
   public listTitles: any[];
   public location: Location;
   public currentUser: string ;
+  public sessionService : SessionService;
   constructor(location: Location,  private element: ElementRef, private router: Router, sessionUser: SessionService) {
     this.location = location;
-    this.currentUser = sessionUser.currentUser();
+    this.sessionService = sessionUser;
+
   }
 
   ngOnInit() {
     this.listTitles = ROUTES.filter(listTitle => listTitle);
-
+    this.currentUser = this.sessionService.currentUser();
+    console.log(this.sessionService.currentUser());
   }
   getTitle(){
     var titlee = this.location.prepareExternalUrl(this.location.path());
@@ -40,7 +43,6 @@ export class NavbarComponent implements OnInit {
   logOut() {
     localStorage.removeItem('token');
     this.refreshPage();
-    //this.router.navigateByUrl('/sidebar');
   }
   refreshPage() { window.location.reload(); }
 
