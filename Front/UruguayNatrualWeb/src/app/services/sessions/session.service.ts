@@ -12,16 +12,18 @@ import { map } from 'rxjs/operators';
   providedIn: 'root'
 })
 export class SessionService {
-  private uri = environment.baseURL+ 'sessions';
+  private uri = environment.baseURL + 'sessions';
   private id = 1;
-  private token: Guid;
+  private token: string;
   constructor(private http: HttpClient  ) { this.readToken(); }
 
   getAll(): Observable<SessionBasicInfo[]>{
     return this.http.get<SessionBasicInfo[]>(this.uri)
       .pipe(catchError(this.handleError));
   }
-  logout() {}
+  logout() {
+    localStorage.removeItem('token');
+  }
 
   login(user: SessionUserModel){
 
@@ -33,21 +35,24 @@ export class SessionService {
       sessionData
     ).pipe(map(resp => {this.saveToken(resp ['token']); return resp; }));
   }
-  private saveToken (token: Guid) {
+  private saveToken (token: string) {
     this.token = token;
     localStorage.setItem('token', token.toString());
   }
   readToken () {
-    // if (localStorage.getItem('token'))
-    // {
-    //   this.token = localStorage.getItem('token');
-    // } else
-    // {
-    //   this.token = '' ;
-    // }
-    // return this.token;
+    if (localStorage.getItem('token')) {
+      this.token = localStorage.getItem('token');
+    } else {
+      this.token = '' ;
+    }
+    return this.token;
   }
-  private handleError(error: HttpErrorResponse){
+
+  isAuthenticated (): boolean{
+      return this.token.length > 2;
+  }
+
+  private handleError(error: HttpErrorResponse) {
     let message: string;
     if (error.error instanceof ErrorEvent) {
       message = 'Error: do it again';
