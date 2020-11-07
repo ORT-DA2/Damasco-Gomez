@@ -24,8 +24,7 @@ export class NavbarComponent implements OnInit {
 
   ngOnInit() {
     this.listTitles = ROUTES.filter(listTitle => listTitle);
-    this.currentUser = this.sessionService.currentUser();
-    console.log(this.sessionService.currentUser());
+    this.currentUser = localStorage.getItem('email');
   }
   getTitle(){
     var titlee = this.location.prepareExternalUrl(this.location.path());
