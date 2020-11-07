@@ -47,11 +47,6 @@ export class SessionService {
     }
     return this.token;
   }
-
-  currentUser ()
-  {
-    return this.currenUser;
-  }
   isAuthenticated (): boolean{
       return this.token.length > 2;
   }
