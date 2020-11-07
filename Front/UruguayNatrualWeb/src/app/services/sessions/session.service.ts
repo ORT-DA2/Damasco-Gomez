@@ -15,21 +15,21 @@ export class SessionService {
   private uri = environment.baseURL + 'sessions';
   private id = 1;
   private token: string;
+  private currenUser: string;
   constructor(private http: HttpClient  ) { this.readToken(); }
 
   getAll(): Observable<SessionBasicInfo[]>{
     return this.http.get<SessionBasicInfo[]>(this.uri)
       .pipe(catchError(this.handleError));
   }
-  logout() {
-    localStorage.removeItem('token');
-  }
+
 
   login(user: SessionUserModel){
 
     const sessionData = {
       ...user,
     };
+    this.currenUser = user.name;
     return this.http.post(
       `${ this.uri}`,
       sessionData
@@ -48,9 +48,14 @@ export class SessionService {
     return this.token;
   }
 
+  currentUser ()
+  {
+    return this.currenUser;
+  }
   isAuthenticated (): boolean{
       return this.token.length > 2;
   }
+
 
   private handleError(error: HttpErrorResponse) {
     let message: string;
