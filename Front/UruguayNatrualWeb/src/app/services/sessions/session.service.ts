@@ -29,7 +29,7 @@ export class SessionService {
     const sessionData = {
       ...user,
     };
-    this.currenUser = user.name;
+    this.currenUser = user.email;
     return this.http.post(
       `${ this.uri}`,
       sessionData
