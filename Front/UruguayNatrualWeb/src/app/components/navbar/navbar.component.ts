@@ -2,6 +2,8 @@ import { Component, OnInit, ElementRef } from '@angular/core';
 import { ROUTES } from '../sidebar/sidebar.component';
 import { Location, LocationStrategy, PathLocationStrategy } from '@angular/common';
 import { Router } from '@angular/router';
+import { SessionService } from 'src/app/services/sessions/session.service';
+import { SessionUserModel } from 'src/app/models/sessions/session-user-model';
 
 @Component({
   selector: 'app-navbar',
@@ -12,12 +14,15 @@ export class NavbarComponent implements OnInit {
   public focus;
   public listTitles: any[];
   public location: Location;
-  constructor(location: Location,  private element: ElementRef, private router: Router) {
+  public currentUser: string ;
+  constructor(location: Location,  private element: ElementRef, private router: Router, sessionUser: SessionService) {
     this.location = location;
+    this.currentUser = sessionUser.currentUser();
   }
 
   ngOnInit() {
     this.listTitles = ROUTES.filter(listTitle => listTitle);
+
   }
   getTitle(){
     var titlee = this.location.prepareExternalUrl(this.location.path());
@@ -32,5 +37,11 @@ export class NavbarComponent implements OnInit {
     }
     return 'Dashboard';
   }
+  logOut() {
+    localStorage.removeItem('token');
+    this.refreshPage();
+    //this.router.navigateByUrl('/sidebar');
+  }
+  refreshPage() { window.location.reload(); }
 
 }
