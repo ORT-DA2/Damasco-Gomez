@@ -14,7 +14,7 @@ import { TouristLayoutRoutes } from './tourist-layout.routing';
   ],
   declarations: [
     LoginComponent,
-    RegisterComponent
+    RegisterComponent,
   ]
 })
 export class TouristLayoutModule { }
