@@ -24,6 +24,7 @@ import {SessionService} from './services/sessions/session.service';
 import { TouristLayoutComponent } from './layouts/tourist-layout/tourist-layout.component';
 import { ReviewComponent } from './pages/review/review.component';
 import { SearchComponent } from './pages/search/search.component';
+import { RegisterForgotComponent } from './pages/register-forgot/register-forgot.component';
 
 
 @NgModule({
@@ -46,6 +47,7 @@ import { SearchComponent } from './pages/search/search.component';
     TouristLayoutComponent,
     ReviewComponent,
     SearchComponent,
+    RegisterForgotComponent,
   ],
   providers: [TouristPointsService,
     CategoryService,
