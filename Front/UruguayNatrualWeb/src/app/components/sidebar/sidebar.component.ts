@@ -1,9 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
-import { truncate } from 'fs';
-import { constants } from 'http2';
 import { SessionService } from 'src/app/services/sessions/session.service';
-import { isJSDocAuthorTag } from 'typescript';
 
 declare interface RouteInfo {
     admin: boolean;
