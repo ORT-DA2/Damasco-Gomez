@@ -31,12 +31,13 @@
               </tr>
             </thead>
             <tbody>
-              <tr >
+              <tr *ngFor="let touristPoint of touristPoints; let i = index">
                 <th scope="row">
-                  Id Tourist Point
+                  {{touristPoint.id}}
                 </th>
-                <td> Name </td>
-                <td><a href="#!" class="btn btn-sm btn-primary">Choose</a></td>
+                <td> {{touristPoint.name}} </td>
+                <td><a href="#!"
+                  class="btn btn-sm btn-primary">Choose</a></td>
               </tr>
             </tbody>
           </table>
