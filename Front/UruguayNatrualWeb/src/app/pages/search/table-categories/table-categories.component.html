@@ -22,7 +22,7 @@
             {{category.id}}
           </th>
           <td>{{category.name}}</td>
-          <td><a href="#/search/category/{{category.id}}"
+          <td><a routerLink="category/{{category.id}}"
             (click)="chooseCategory(category)"
             class="btn btn-sm btn-primary">Choose</a></td>
         </tr>
