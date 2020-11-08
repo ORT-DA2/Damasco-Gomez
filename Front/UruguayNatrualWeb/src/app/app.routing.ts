@@ -9,7 +9,7 @@ import { TouristLayoutComponent } from './layouts/tourist-layout/tourist-layout.
 const routes: Routes =[
   {
     path: '',
-    redirectTo: 'login',
+    redirectTo: 'search',
     pathMatch: 'full',
   }, {
     path: '',
@@ -31,7 +31,7 @@ const routes: Routes =[
     ]
   }, {
     path: '**',
-    redirectTo: 'login'
+    redirectTo: 'search'
   }
 ];
 
@@ -39,9 +39,7 @@ const routes: Routes =[
   imports: [
     CommonModule,
     BrowserModule,
-    RouterModule.forRoot(routes,{
-      useHash: true
-    })
+    RouterModule.forRoot(routes)
   ],
   exports: [
   ],
