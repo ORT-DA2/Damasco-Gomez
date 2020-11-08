@@ -1,0 +1,39 @@
+<div class="header bg-gradient-danger pb-8 pt-5 pt-md-8">
+  <div class="container-fluid">
+    <div class="header-body">
+      <!-- Card stats -->
+      <div class="row">
+        <div class="col-xl-3 col-6">
+          <div class="card card-stats mb-0">
+            <div class="card-body">
+              <button type="button" triggers="hover focus click" class="btn btn-rounded btn-outline-warning"
+                (click)="updateCategory()">Search by Category</button>
+            </div>
+          </div>
+        </div>
+        <div class="col-xl-3 col-6">
+          <div class="card card-stats mb-0">
+            <div class="card-body">
+              <button type="button" triggers="hover focus click" class="btn btn-rounded btn-outline-warning"
+                (click)="updateRegion()">Search by Region</button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+<div class="container-fluid">
+  <div class="row mt-5">
+    <div class="col-xl-8 mb-5 mb-xl-0" >
+      <app-table-regions></app-table-regions>
+    </div>
+  </div>
+  <div  class="row mt-5">
+    <div class="col-xl-8 mb-5 mb-xl-0" >
+      <app-table-categories></app-table-categories>
+    </div>
+  </div>
+</div>
