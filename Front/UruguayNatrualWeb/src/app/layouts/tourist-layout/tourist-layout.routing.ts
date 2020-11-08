@@ -8,9 +8,9 @@ import { TableTouristPointsComponent } from 'src/app/pages/search/table-tourist-
 export const TouristLayoutRoutes: Routes = [
   { path: 'login',          component: LoginComponent },
   { path: 'register',       component: RegisterComponent },
-  { path: 'search',       component: SearchDashboardComponent },
+  { path: 'search',       component: SearchDashboardComponent  },
   { path: 'search/region/:id',       component: TableTouristPointsComponent },
   { path: 'search/category/:id',       component: TableTouristPointsComponent },
-  { path: 'search/region/:id/tourist-point/:id',       component: HouseSearchComponent },
-  { path: 'search/category/:id/tourist-point/:id',       component: HouseSearchComponent },
+  { path: 'search/region/:id1/tourist-point/:id2',       component: HouseSearchComponent },
+  { path: 'search/category/:id1/tourist-point/:id2',       component: HouseSearchComponent },
 ];
