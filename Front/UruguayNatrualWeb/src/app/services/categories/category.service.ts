@@ -34,7 +34,7 @@ export class CategoryService {
   }
 
   getBy (id): Observable<CategoryDetailInfo>{
-    return this.http.get<CategoryDetailInfo>(this.uri + "/" + id)
+    return this.http.get<CategoryDetailInfo>(this.uri + '/' + id)
       .pipe(catchError(this.handleError));
   }
   delete( id ): Observable<any> {
@@ -42,7 +42,8 @@ export class CategoryService {
     return this.http.delete(`${ this.uri}${ id }.json`).pipe(catchError(this.handleError));
 
   }
+  update(id, body):Observable<any>{
 
-
-
+    return this.http.put(`${ this.uri }${ id }.json`, body).pipe(catchError(this.handleError));
+  }
 }
