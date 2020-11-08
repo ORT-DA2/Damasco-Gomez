@@ -51,7 +51,7 @@ export class CategoryService {
   update(id, body):Observable<any>{
     const headers = new HttpHeaders({
       'Content-Type': 'application/json',
-      'Authorization': localStorage.getItem('token') ,
+      'Authorization':  localStorage.getItem('token')
     });
     let options = { headers: headers };
     var httpRequest = this.http.put<any>(this.uri + '/' + id, body, options)

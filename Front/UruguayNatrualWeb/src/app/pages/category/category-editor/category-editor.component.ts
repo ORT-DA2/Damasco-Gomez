@@ -44,13 +44,21 @@ export class CategoryEditorComponent implements OnInit {
     this.touristPoints = touristPointResponse;
   }
 
+
   updateData(category : CategoryDetailInfo){
-    this.categoryService.update(this.categoryId, category).subscribe(
+    const basicInfo = this.createModel(category);
+    this.categoryService.update(this.categoryId, basicInfo).subscribe(
       responseUpdate =>
         console.log(responseUpdate)
     );
   }
 
+  private createModel(category : CategoryDetailInfo) : CategoryBasicInfo{
+    const modelBase : CategoryBasicInfo = {} as CategoryBasicInfo;
+    modelBase.name = category.name;
+    modelBase.touristPoints = category.touristPoints.map(x=> x.id);
+    return modelBase;
+  }
 
   onChangeTouristPointName(touristPointName: string, index: number){
 
