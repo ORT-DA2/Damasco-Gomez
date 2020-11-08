@@ -15,14 +15,61 @@ export class CategoryEditorComponent implements OnInit {
   public category: CategoryDetailInfo = {} as CategoryDetailInfo;
   public touristPoints: TouristPointsBasicInfo[] = [];
   public categoryId: number = 0;
-  tourisPointNew: TouristPointsBasicInfo = {} as TouristPointsBasicInfo;
-
+  public touristPointName: string[] = [];
+  public newTouristPoint :  TouristPointsBasicInfo = {} as TouristPointsBasicInfo;
   constructor(
     private route: ActivatedRoute,
     private categoryService: CategoryService,
     private touristPointService: TouristPointsService) { }
 
   ngOnInit(): void {
+    const id = this.route.snapshot.paramMap.get('id');
+    this.categoryId = Number(id);
+    this.categoryService.getBy(this.categoryId).subscribe(
+      categoryResponse =>
+        this.getBy(categoryResponse), (error: string) => this.showError(error));
+        this.touristPointService.getAll().subscribe(
+      touristPointResponse =>
+      this.getAllTouristPoints(touristPointResponse), (error: string) =>this.showError(error));
+
+   }
+
+  private getBy(categoryResponse: CategoryDetailInfo){
+    this.category = categoryResponse;
+    this.touristPointName = this.category.touristPoints? this.category.touristPoints.map(touristPonit => touristPonit.name)
+      : [];
   }
 
+  private getAllTouristPoints(touristPointResponse: TouristPointsBasicInfo[]){
+    this.touristPoints = touristPointResponse;
+  }
+
+  updateData(category : CategoryDetailInfo){
+    this.categoryService.update(this.categoryId, category).subscribe(
+      responseUpdate =>
+        console.log(responseUpdate)
+    );
+  }
+
+
+  onChangeTouristPointName(touristPointName: string, index: number){
+
+    const touristPointId = this.touristPoints.find(x => x.name == touristPointName);
+    this.category.touristPoints[index] = touristPointId;
+  }
+
+  addTouristPoint(){
+    if(this.category.touristPoints[this.category.touristPoints.length-1].id == null){
+      console.log('NO ADDED WITH ONE EMPTY');
+    } else {
+      this.category.touristPoints = this.category.touristPoints.concat(this.newTouristPoint);
+    }
+  }
+  deleteTouristPoint(){
+    this.category.touristPoints.pop();
+  }
+
+  private showError(message: string){
+    console.log(message);
+  }
 }
