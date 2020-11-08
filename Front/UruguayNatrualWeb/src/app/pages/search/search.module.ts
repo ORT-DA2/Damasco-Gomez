@@ -3,6 +3,7 @@ import { CommonModule } from '@angular/common';
 import { TableCategoriesComponent } from './table-categories/table-categories.component';
 import { TableRegionsComponent } from './table-regions/table-regions.component';
 import { SearchDashboardComponent } from './search-dashboard/search-dashboard.component';
+import { TableTouristPointsComponent } from './table-tourist-points/table-tourist-points.component';
 
 
 
@@ -15,6 +16,7 @@ import { SearchDashboardComponent } from './search-dashboard/search-dashboard.co
     TableCategoriesComponent,
     TableRegionsComponent,
     SearchDashboardComponent,
+    TableTouristPointsComponent,
   ],
   providers: [],
   exports: []
