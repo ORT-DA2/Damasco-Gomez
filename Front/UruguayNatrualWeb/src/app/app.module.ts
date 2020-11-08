@@ -23,10 +23,11 @@ import {ReviewService} from './services/reviews/review.service';
 import {SessionService} from './services/sessions/session.service';
 import { TouristLayoutComponent } from './layouts/tourist-layout/tourist-layout.component';
 import { ReviewComponent } from './pages/review/review.component';
-import { SearchComponent } from './pages/search/search.component';
+import { CommonModule } from '@angular/common';
 
 @NgModule({
   imports: [
+    CommonModule,
     BrowserAnimationsModule,
     FormsModule,
     HttpClientModule,
@@ -44,7 +45,6 @@ import { SearchComponent } from './pages/search/search.component';
     AuthLayoutComponent,
     TouristLayoutComponent,
     ReviewComponent,
-    SearchComponent,
   ],
   providers: [TouristPointsService,
     CategoryService,
