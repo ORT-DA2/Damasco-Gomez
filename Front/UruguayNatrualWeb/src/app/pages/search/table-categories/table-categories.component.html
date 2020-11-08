@@ -17,13 +17,17 @@
         </tr>
       </thead>
       <tbody>
-        <tr>
-          <th scope="row">/argon/
+        <tr *ngFor="let category of categories; let i = index">
+          <th scope="row">
+            {{category.id}}
           </th>
-          <td>4,569</td>
-          <td><a href="#!" class="btn btn-sm btn-primary">See all</a></td>
+          <td>{{category.name}}</td>
+          <td><a (click)="chooseCategory(category)" class="btn btn-sm btn-primary">Choose</a></td>
         </tr>
       </tbody>
     </table>
   </div>
 </div>
+
+
+

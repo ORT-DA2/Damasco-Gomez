@@ -17,13 +17,17 @@
         </tr>
       </thead>
       <tbody>
-        <tr>
-          <th scope="row">/argon/
+        <tr *ngFor="let region of regions; let i = index">
+          <th scope="row">
+            {{region.id}}
           </th>
-          <td>4,569</td>
-          <td><a href="#!" class="btn btn-sm btn-primary">See all</a></td>
+          <td>{{region.name}}</td>
+          <td><a (click)="chooseRegion(region)" class="btn btn-sm btn-primary">Choose</a></td>
         </tr>
       </tbody>
     </table>
   </div>
 </div>
+
+
+

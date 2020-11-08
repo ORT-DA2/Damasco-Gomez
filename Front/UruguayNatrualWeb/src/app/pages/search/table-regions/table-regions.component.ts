@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { RegionBasicInfo } from 'src/app/models/regions/region-base-info';
+import { RegionService } from 'src/app/services/regions/region.service';
 
 @Component({
   selector: 'app-table-regions',
@@ -6,10 +8,26 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./table-regions.component.css']
 })
 export class TableRegionsComponent implements OnInit {
+  public regions: RegionBasicInfo[] = [];
 
-  constructor() { }
+  constructor(private regionService: RegionService) {
 
-  ngOnInit(): void {
   }
 
+  ngOnInit(): void {
+    this.regionService.getAll().subscribe(
+      regionResponse =>
+        this.getAll(regionResponse), (error: string) => this.showError(error)
+    );
+  }
+  private getAll(regionResponse: RegionBasicInfo[]){
+    this.regions = regionResponse;
+  }
+
+  private showError(message: string){
+    console.log(message);
+  }
+  chooseRegion(event){
+    console.log(event);
+  }
 }

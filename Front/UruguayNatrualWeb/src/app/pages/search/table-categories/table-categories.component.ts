@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { CategoryBasicInfo } from 'src/app/models/category/category-basic-info';
+import { CategoryService } from 'src/app/services/categories/category.service';
 
 @Component({
   selector: 'app-table-categories',
@@ -6,10 +8,26 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./table-categories.component.css']
 })
 export class TableCategoriesComponent implements OnInit {
+  public categories: CategoryBasicInfo[] = [];
 
-  constructor() { }
+  constructor(private categoryService: CategoryService) { }
 
   ngOnInit(): void {
+    this.categoryService.getAll().subscribe(
+      categoryResponse =>
+        this.getAll(categoryResponse), (error: string) => this.showError(error)
+    );
+  }
+  private getAll(categoryResponse: CategoryBasicInfo[]){
+    this.categories = categoryResponse;
+  }
+
+  private showError(message: string){
+    console.log(message);
+  }
+
+  chooseCategory(event){
+    console.log(event);
   }
 
 }
