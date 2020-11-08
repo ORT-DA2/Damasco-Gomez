@@ -31,4 +31,15 @@ export class CategoryService {
     }
     return throwError(message);
   }
+
+
+
+  delete( id ): Observable<any> {
+
+    return this.http.delete(`${ this.uri}${ id }.json`);
+
+  }
+
+
+
 }
