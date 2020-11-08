@@ -36,7 +36,7 @@ export class CategoryService {
 
   delete( id ): Observable<any> {
 
-    return this.http.delete(`${ this.uri}${ id }.json`);
+    return this.http.delete(`${ this.uri}${ id }.json`).pipe(catchError(this.handleError));
 
   }
 
