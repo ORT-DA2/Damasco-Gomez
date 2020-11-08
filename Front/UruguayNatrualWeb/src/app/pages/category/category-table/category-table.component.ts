@@ -29,6 +29,12 @@ export class CategoryTableComponent implements OnInit {
   }
 
   private delete(event) {
+    this.id = event.id;
+    this.categoryService.delete(this.id).subscribe(
+      response =>
+        this.delete(response), (error: string) => this.showError(error)
+    );
+    this.categories = this.categories.filter(item => item.id != this.id);
   }
 
 }
