@@ -4,6 +4,7 @@ import { TableCategoriesComponent } from './table-categories/table-categories.co
 import { TableRegionsComponent } from './table-regions/table-regions.component';
 import { SearchDashboardComponent } from './search-dashboard/search-dashboard.component';
 import { TableTouristPointsComponent } from './table-tourist-points/table-tourist-points.component';
+import { HouseSearchComponent } from './house-search/house-search.component';
 
 
 
@@ -17,6 +18,7 @@ import { TableTouristPointsComponent } from './table-tourist-points/table-touris
     TableRegionsComponent,
     SearchDashboardComponent,
     TableTouristPointsComponent,
+    HouseSearchComponent,
   ],
   providers: [],
   exports: []
