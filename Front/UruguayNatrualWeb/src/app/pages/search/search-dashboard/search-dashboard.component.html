@@ -26,12 +26,12 @@
 
 
 <div class="container-fluid">
-  <div class="row mt-5">
+  <div *ngIf="isRegion" class="row mt-5">
     <div class="col-xl-8 mb-5 mb-xl-0" >
       <app-table-regions></app-table-regions>
     </div>
   </div>
-  <div  class="row mt-5">
+  <div *ngIf="isCategory" class="row mt-5">
     <div class="col-xl-8 mb-5 mb-xl-0" >
       <app-table-categories></app-table-categories>
     </div>

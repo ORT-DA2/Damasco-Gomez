@@ -7,7 +7,7 @@ import { Component, OnInit } from '@angular/core';
 })
 export class SearchDashboardComponent implements OnInit {
   public isRegion: boolean = false;
-  public isCategory: boolean = true;
+  public isCategory: boolean = false;
 
   constructor() { }
 
