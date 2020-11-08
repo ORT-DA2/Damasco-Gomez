@@ -7,6 +7,7 @@ import { RegisterComponent } from 'src/app/pages/register/register.component';
 import { SearchDashboardComponent } from 'src/app/pages/search/search-dashboard/search-dashboard.component';
 import { TableCategoriesComponent } from 'src/app/pages/search/table-categories/table-categories.component';
 import { TableRegionsComponent } from 'src/app/pages/search/table-regions/table-regions.component';
+import { TableTouristPointsComponent } from 'src/app/pages/search/table-tourist-points/table-tourist-points.component';
 import { TouristLayoutRoutes } from './tourist-layout.routing';
 
 @NgModule({
@@ -21,6 +22,7 @@ import { TouristLayoutRoutes } from './tourist-layout.routing';
     SearchDashboardComponent,
     TableCategoriesComponent,
     TableRegionsComponent,
+    TableTouristPointsComponent,
   ]
 })
 export class TouristLayoutModule { }

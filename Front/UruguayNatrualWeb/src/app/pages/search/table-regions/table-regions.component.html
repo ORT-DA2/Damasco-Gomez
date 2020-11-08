@@ -22,7 +22,9 @@
             {{region.id}}
           </th>
           <td>{{region.name}}</td>
-          <td><a (click)="chooseRegion(region)" class="btn btn-sm btn-primary">Choose</a></td>
+          <td><a  href="#/search/region/{{region.id}}"
+            (click)="chooseRegion(region)"
+            class="btn btn-sm btn-primary">Choose</a></td>
         </tr>
       </tbody>
     </table>
