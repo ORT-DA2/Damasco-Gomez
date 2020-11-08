@@ -4,6 +4,7 @@ import { Observable, throwError } from 'rxjs';
 import { catchError } from 'rxjs/operators';
 import { environment } from 'src/environments/environment';
 import { CategoryBasicInfo } from 'src/app/models/category/category-basic-info';
+import { CategoryDetailInfo } from 'src/app/models/category/category-detail-info';
 @Injectable({
   providedIn: 'root'
 })
@@ -32,8 +33,10 @@ export class CategoryService {
     return throwError(message);
   }
 
-
-
+  getBy (id): Observable<CategoryDetailInfo>{
+    return this.http.get<CategoryDetailInfo>(this.uri + "/" + id)
+      .pipe(catchError(this.handleError));
+  }
   delete( id ): Observable<any> {
 
     return this.http.delete(`${ this.uri}${ id }.json`).pipe(catchError(this.handleError));
