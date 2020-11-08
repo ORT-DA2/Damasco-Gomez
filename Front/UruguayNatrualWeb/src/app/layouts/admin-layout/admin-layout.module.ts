@@ -20,7 +20,7 @@ import { TouristPointEditorComponent } from 'src/app/pages/tourist-point/tourist
 import { CategoryEditorComponent } from 'src/app/pages/category/category-editor/category-editor.component';
 import { CategoryDashboardComponent } from 'src/app/pages/category/category-dashboard/category-dashboard.component';
 import { CategoryTableComponent } from 'src/app/pages/category/category-table/category-table.component';
-// import { ToastrModule } from 'ngx-toastr';
+import { CategoryEditorNewComponent } from 'src/app/pages/category/category-editor-new/category-editor-new.component';
 
 @NgModule({
   imports: [
@@ -44,7 +44,8 @@ import { CategoryTableComponent } from 'src/app/pages/category/category-table/ca
     TouristPointEditorComponent,
     CategoryEditorComponent,
     CategoryDashboardComponent,
-    CategoryTableComponent
+    CategoryTableComponent,
+    CategoryEditorNewComponent
   ]
 })
 

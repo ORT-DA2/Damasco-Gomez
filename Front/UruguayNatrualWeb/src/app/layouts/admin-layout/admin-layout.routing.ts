@@ -10,6 +10,7 @@ import { TouristPointDashboardComponent } from 'src/app/pages/tourist-point/tour
 import { TouristPointEditorComponent } from 'src/app/pages/tourist-point/tourist-point-editor/tourist-point-editor.component';
 import { CategoryDashboardComponent } from 'src/app/pages/category/category-dashboard/category-dashboard.component';
 import { CategoryEditorComponent } from 'src/app/pages/category/category-editor/category-editor.component';
+import { CategoryEditorNewComponent } from 'src/app/pages/category/category-editor-new/category-editor-new.component';
 
 export const AdminLayoutRoutes: Routes = [
     { path: 'dashboard',      component: DashboardComponent },
@@ -21,5 +22,6 @@ export const AdminLayoutRoutes: Routes = [
     { path: 'tourist-points',       component: TouristPointDashboardComponent },
     { path: 'tourist-points/tourist-point-editor/:id',       component: TouristPointEditorComponent },
     { path: 'categories',       component: CategoryDashboardComponent },
-    {path : 'category/category-editor/:id', component :  CategoryEditorComponent}
+    {path : 'category/category-editor/:id', component :  CategoryEditorComponent},
+    { path: 'category/category-editor-new',  component: CategoryEditorNewComponent },
 ];
