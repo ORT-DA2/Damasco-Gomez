@@ -20,8 +20,6 @@ import { TouristPointEditorComponent } from 'src/app/pages/tourist-point/tourist
 import { CategoryEditorComponent } from 'src/app/pages/category/category-editor/category-editor.component';
 import { CategoryDashboardComponent } from 'src/app/pages/category/category-dashboard/category-dashboard.component';
 import { CategoryTableComponent } from 'src/app/pages/category/category-table/category-table.component';
-import { CategoryEditorNewComponent } from 'src/app/pages/category/category-editor-new/category-editor-new.component';
-
 @NgModule({
   imports: [
     CommonModule,
@@ -45,7 +43,6 @@ import { CategoryEditorNewComponent } from 'src/app/pages/category/category-edit
     CategoryEditorComponent,
     CategoryDashboardComponent,
     CategoryTableComponent,
-    CategoryEditorNewComponent
   ]
 })
 

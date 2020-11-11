@@ -52,7 +52,7 @@ export class TouristPointsService {
       'Authorization':  localStorage.getItem('token')
     });
     let options = { headers: headers };
-    var httpRequest = this.http.put<any>(this.uri + "/" + id, body, options)
+    var httpRequest = this.http.put<any>(this.uri + '/' + id, body, options)
       .pipe(catchError(this.handleError));
     return httpRequest;
   }

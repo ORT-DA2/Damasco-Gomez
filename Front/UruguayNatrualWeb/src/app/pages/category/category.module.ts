@@ -5,7 +5,7 @@ import { CategoryDashboardComponent } from './category-dashboard/category-dashbo
 import { CategoryEditorComponent } from './category-editor/category-editor.component';
 import { ReactiveFormsModule } from '@angular/forms';
 import { BrowserModule } from '@angular/platform-browser';
-import { CategoryEditorNewComponent } from './category-editor-new/category-editor-new.component';
+
 
 @NgModule({
   imports: [
@@ -18,7 +18,6 @@ import { CategoryEditorNewComponent } from './category-editor-new/category-edito
     CategoryTableComponent,
     CategoryDashboardComponent,
     CategoryEditorComponent,
-    CategoryEditorNewComponent
   ],
   providers: [],
 })
