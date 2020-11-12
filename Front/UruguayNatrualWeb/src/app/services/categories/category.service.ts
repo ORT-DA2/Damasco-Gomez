@@ -59,13 +59,13 @@ export class CategoryService {
     return httpRequest;
   }
 
-  add(id, body):Observable<any>{
+  add(body):Observable<any>{
     const headers = new HttpHeaders({
       'Content-Type': 'application/json',
       'Authorization':  localStorage.getItem('token')
     });
     let options = { headers: headers };
-    var httpRequest = this.http.post<any>(this.uri + '/' + id, body, options)
+    var httpRequest = this.http.post<any>(this.uri , body, options)
       .pipe(catchError(this.handleError));
     return httpRequest;
   }
