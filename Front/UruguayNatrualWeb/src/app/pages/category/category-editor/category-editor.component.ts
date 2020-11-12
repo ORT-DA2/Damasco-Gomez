@@ -6,6 +6,7 @@ import { TouristPointsBasicInfo } from 'src/app/models/touristpoint/touristpoint
 import { CategoryService } from 'src/app/services/categories/category.service';
 import { TouristPointsService } from 'src/app/services/touristpoints/touristpoint.service';
 
+const newLocal = false;
 @Component({
   selector: 'app-category-editor',
   templateUrl: './category-editor.component.html',
@@ -16,7 +17,8 @@ export class CategoryEditorComponent implements OnInit {
   public touristPoints: TouristPointsBasicInfo[] = [];
   public categoryId: number = 0;
   public touristPointName: string[] = [];
-  public newTouristPoint :  TouristPointsBasicInfo = {} as TouristPointsBasicInfo;
+  public newTouristPoint:  TouristPointsBasicInfo = {} as TouristPointsBasicInfo;
+  public existentCategory: boolean = false;
   constructor(
     private route: ActivatedRoute,
     private categoryService: CategoryService,
@@ -25,6 +27,7 @@ export class CategoryEditorComponent implements OnInit {
   ngOnInit(): void {
     const id = this.route.snapshot.paramMap.get('id');
     this.categoryId = Number(id);
+    this.existentCategory = this.isExistentCategory();
     this.categoryService.getBy(this.categoryId).subscribe(
       categoryResponse =>
         this.getBy(categoryResponse), (error: string) => this.showError(error));
@@ -34,6 +37,15 @@ export class CategoryEditorComponent implements OnInit {
 
    }
 
+  private isExistentCategory(): boolean
+  {
+    var existCategory = false;
+    if (this.categoryId != 0)
+    {
+      existCategory = true;
+    }
+     return existCategory;
+  }
   private getBy(categoryResponse: CategoryDetailInfo){
     this.category = categoryResponse;
     this.touristPointName = this.category.touristPoints? this.category.touristPoints.map(touristPonit => touristPonit.name)

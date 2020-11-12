@@ -46,12 +46,11 @@
                                     </div>
                                     <button type="button" placement="top-center" triggers="hover focus click" class="btn btn-rounded btn-outline-warning" ngxClipboard [cbContent]="'air-baloon'" (click)="addTouristPoint()" (cbOnSuccess)="copy = 'air-baloon'">
                     Add Tourist Point
-                  </button>
-                                    <button type="button" placement="top-center" triggers="hover focus click" class="btn btn-rounded btn-outline-danger" ngxClipboard [cbContent]="'air-baloon'" (click)="deleteTouristPoint()" (cbOnSuccess)="copy = 'air-baloon'">
+                </button>
+                                    <button *ngIf="existentCategory" type="button" placement="top-center" triggers="hover focus click" class="btn btn-rounded btn-outline-danger" ngxClipboard [cbContent]="'air-baloon'" (click)="deleteTouristPoint()" (cbOnSuccess)="copy = 'air-baloon'">
                     Delete Tourist Point
                   </button>
                                 </div>
-
                             </div>
                         </div>
                         <hr class="my-4" />
