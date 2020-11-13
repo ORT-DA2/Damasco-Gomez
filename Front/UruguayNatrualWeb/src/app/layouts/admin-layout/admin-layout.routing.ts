@@ -23,4 +23,5 @@ export const AdminLayoutRoutes: Routes = [
     { path: 'categories',       component: CategoryDashboardComponent },
     {path : 'category/category-editor/:id', component :  CategoryEditorComponent},
     {path : 'category/category-editor', component :  CategoryEditorComponent},
+    { path: 'tourist-points/tourist-point-editor', component: TouristPointEditorComponent },
 ];
