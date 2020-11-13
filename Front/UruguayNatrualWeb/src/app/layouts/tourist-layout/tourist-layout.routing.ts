@@ -10,20 +10,10 @@ export const TouristLayoutRoutes: Routes = [
   { path: 'register', component: RegisterComponent },
   { path: 'search', component: SearchDashboardComponent, },
   {
-    path: 'search',
+    path: 'search/:name/:id',
     children: [
-      { path: ':name/:id', component: TableTouristPointsComponent , children: [
-        { path: 'tourist-point/:id', component: HouseSearchComponent },
-      ] },
+      { path: '', component: TableTouristPointsComponent },
+      { path: 'tourist-point/:id', component: HouseSearchComponent },
     ]
   },
-  // {
-  //   path: 'search',
-  //   children: [
-  //     { path: ':name/:id', component: TableTouristPointsComponent, children:[
-  //       { path: 'tourist-point/:id', component: HouseSearchComponent },
-  //     ] },
-  //   ]
-  // },
-
 ];
