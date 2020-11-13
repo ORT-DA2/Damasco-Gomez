@@ -16,7 +16,7 @@
                             <button *ngIf="existentCategory" type="button" placement="top-center" triggers="hover focus click" class="btn btn-rounded btn-outline-warning" ngxClipboard [cbContent]="'air-baloon'" (cbOnSuccess)="copy = 'air-baloon'" (click)="updateData(category)">
                             Update
                             </button>
-                            <button *ngIf="!existentCategory" type="button" placement="top-center" triggers="hover focus click" class="btn btn-rounded btn-outline-warning" ngxClipboard [cbContent]="'air-baloon'" (cbOnSuccess)="copy = 'air-baloon'" (click)="updateData(category)">
+                            <button *ngIf="!existentCategory" type="button" placement="top-center" triggers="hover focus click" class="btn btn-rounded btn-outline-warning" ngxClipboard [cbContent]="'air-baloon'" (cbOnSuccess)="copy = 'air-baloon'" (click)="addCategory(category)">
                               Add Category
                             </button>
                         </div>
@@ -40,7 +40,7 @@
                                         <label class="form-control-label" for="input-categories">Tourist Points</label>
                                         <select *ngFor="let touristPointCategory of category.touristPoints; let i = index" [(ngModel)]="touristPointName[i]" name="{{i}}" (change)="onChangeTouristPointName(touristPointName[i],i)" class="custom-select form-control form-control-alternative">
                       <option> {{touristPoints.name}} </option>
-                      <option disabled>Choose Tourist point</option>
+                      <option enable>Choose Tourist point</option>
                       <option *ngFor="let touristPoint of touristPoints"
                         [ngValue]="touristPoint.name">
                           {{touristPoint.name}}
@@ -50,7 +50,7 @@
                                     <button type="button" placement="top-center" triggers="hover focus click" class="btn btn-rounded btn-outline-warning" ngxClipboard [cbContent]="'air-baloon'" (click)="addTouristPoint()" (cbOnSuccess)="copy = 'air-baloon'">
                     Add Tourist Point
                 </button>
-                                    <button *ngIf="existentCategory" type="button" placement="top-center" triggers="hover focus click" class="btn btn-rounded btn-outline-danger" ngxClipboard [cbContent]="'air-baloon'" (click)="deleteTouristPoint()" (cbOnSuccess)="copy = 'air-baloon'">
+                                    <button type="button" placement="top-center" triggers="hover focus click" class="btn btn-rounded btn-outline-danger" ngxClipboard [cbContent]="'air-baloon'" (click)="deleteTouristPoint()" (cbOnSuccess)="copy = 'air-baloon'">
                     Delete Tourist Point
                   </button>
                                 </div>
