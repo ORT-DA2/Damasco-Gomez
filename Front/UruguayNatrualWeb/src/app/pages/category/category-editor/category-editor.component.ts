@@ -74,7 +74,7 @@ export class CategoryEditorComponent implements OnInit {
   private createModel(category : CategoryDetailInfo) : CategoryBasicInfo{
     const modelBase : CategoryBasicInfo = {} as CategoryBasicInfo;
     modelBase.name = category.name;
-    modelBase.touristPoints = category.touristPoints.map(x=> x.id);
+    //modelBase.touristPoints = category.touristPoints.map(x=> x.id);
     return modelBase;
   }
 
