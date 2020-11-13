@@ -22,7 +22,8 @@ import {ReportService} from './services/reports/report.service';
 import {ReviewService} from './services/reviews/review.service';
 import {SessionService} from './services/sessions/session.service';
 import { TouristLayoutComponent } from './layouts/tourist-layout/tourist-layout.component';
-
+import { ReviewComponent } from './pages/review/review.component';
+import { SearchComponent } from './pages/search/search.component';
 
 @NgModule({
   imports: [
@@ -42,6 +43,8 @@ import { TouristLayoutComponent } from './layouts/tourist-layout/tourist-layout.
     AdminLayoutComponent,
     AuthLayoutComponent,
     TouristLayoutComponent,
+    ReviewComponent,
+    SearchComponent,
   ],
   providers: [TouristPointsService,
     CategoryService,

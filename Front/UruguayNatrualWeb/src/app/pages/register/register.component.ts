@@ -2,7 +2,6 @@ import { Component, OnInit } from '@angular/core';
 import { NgForm } from '@angular/forms';
 import { Router } from '@angular/router';
 import { PersonBasicInfo } from 'src/app/models/person/person-base-info';
-import { PersonModel } from 'src/app/models/person/person-model';
 import { SessionService } from 'src/app/services/sessions/session.service';
 import { PersonService } from '../../services/persons/person.service';
 

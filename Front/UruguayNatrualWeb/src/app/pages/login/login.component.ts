@@ -9,19 +9,13 @@ import {SessionUserModel} from '../../models/sessions/session-user-model';
   templateUrl: './login.component.html',
   styleUrls: ['./login.component.scss']
 })
-export class LoginComponent implements OnInit, OnDestroy {
+export class LoginComponent implements OnInit {
 
   constructor(private sessionService: SessionService,
                private router: Router ) {}
 
   sessionUser: SessionUserModel = new SessionUserModel();
-  rememberMe = false;
   ngOnInit() {
-    if (localStorage.getItem('email')) {
-      this.sessionUser.email = localStorage.getItem('email');
-      this.rememberMe = true;
-    }
-
   }
 
   login(form: NgForm) {
@@ -32,16 +26,7 @@ export class LoginComponent implements OnInit, OnDestroy {
       subscribe(resp => {
            this.router.navigateByUrl('/dashboard');
         });
-
-    if (this.rememberMe)
-    {
       localStorage.setItem('email', this.sessionUser.email);
-    }
-  }
-  rememberUser () {
-
-  }
-  ngOnDestroy() {
   }
 /*
    if (  form.invalid ) { return; }

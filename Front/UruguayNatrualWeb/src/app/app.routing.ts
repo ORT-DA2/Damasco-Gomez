@@ -2,15 +2,14 @@ import { NgModule } from '@angular/core';
 import { CommonModule, } from '@angular/common';
 import { BrowserModule  } from '@angular/platform-browser';
 import { Routes, RouterModule } from '@angular/router';
-
 import { AdminLayoutComponent } from './layouts/admin-layout/admin-layout.component';
-import { AuthLayoutComponent } from './layouts/auth-layout/auth-layout.component';
 import { AdminGuard } from './guards/admin.guard';
+import { TouristLayoutComponent } from './layouts/tourist-layout/tourist-layout.component';
 
 const routes: Routes =[
   {
     path: '',
-    redirectTo: 'dashboard',
+    redirectTo: 'login',
     pathMatch: 'full',
   }, {
     path: '',
@@ -23,16 +22,16 @@ const routes: Routes =[
     ]
   }, {
     path: '',
-    component: AuthLayoutComponent,
+    component: TouristLayoutComponent,
     children: [
       {
         path: '',
-        loadChildren: './layouts/auth-layout/auth-layout.module#AuthLayoutModule'
+        loadChildren: './layouts/tourist-layout/tourist-layout.module#TouristLayoutModule'
       }
     ]
   }, {
     path: '**',
-    redirectTo: 'dashboard'
+    redirectTo: 'login'
   }
 ];
 

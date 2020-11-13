@@ -1,6 +1,5 @@
 import { Injectable } from '@angular/core';
 import { CanActivate, ActivatedRouteSnapshot, RouterStateSnapshot, UrlTree, Router } from '@angular/router';
-import { Observable } from 'rxjs';
 import { SessionService } from '../services/sessions/session.service';
 
 @Injectable({
@@ -14,7 +13,8 @@ export class AdminGuard implements CanActivate {
     if (this.session.isAuthenticated() ){
       return true;
     } else {
-      this.router.navigateByUrl('/login'); // esto despuès se tiene que redirigir a las vistas para los turistas
+      this.router.navigateByUrl('/login');
+      //this.router.navigateByUrl('/tourist-layout');
       return false;
     }
   }
