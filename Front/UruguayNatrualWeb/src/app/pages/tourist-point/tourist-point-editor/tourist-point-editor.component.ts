@@ -32,6 +32,7 @@ export class TouristPointEditorComponent implements OnInit {
   ngOnInit(): void {
     const id = this.route.snapshot.paramMap.get('id');
     this.touristPointId = Number(id);
+    this.touristPoint.categories = [];
     this.touristPointService.getBy(this.touristPointId).subscribe(
       touristPointResponse =>
         this.getBy(touristPointResponse), (error: string) => this.showError(error));
