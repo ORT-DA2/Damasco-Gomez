@@ -34,7 +34,7 @@ export class CategoryEditorComponent implements OnInit {
         this.touristPointService.getAll().subscribe(
       touristPointResponse =>
       this.getAllTouristPoints(touristPointResponse), (error: string) =>this.showError(error));
-
+      this.category.touristPoints = [];
    }
 
   private isExistentCategory(): boolean
@@ -74,7 +74,7 @@ export class CategoryEditorComponent implements OnInit {
   private createModel(category : CategoryDetailInfo) : CategoryBasicInfo{
     const modelBase : CategoryBasicInfo = {} as CategoryBasicInfo;
     modelBase.name = category.name;
-    //modelBase.touristPoints = category.touristPoints.map(x=> x.id);
+    modelBase.touristPoints = category.touristPoints.map(x=> x.id);
     return modelBase;
   }
 
