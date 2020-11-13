@@ -84,7 +84,15 @@ export class TouristPointEditorComponent implements OnInit {
     this.touristPoint.categories.splice(-1,1);
     this.categoriesName.splice(-1,1);
   }
-
+  isExistentTp ()
+  {
+    var existTp= false;
+    if (this.touristPointId != 0)
+    {
+      existTp = true;
+    }
+     return existTp;
+  }
   private createModel(touristPoint : TouristPointDetailInfo) : TouristPointsBasicInfo{
     let modelBase : TouristPointsBasicInfo = {} as TouristPointsBasicInfo ;
     modelBase.categories = touristPoint.categories.map(x=> x.id);
