@@ -64,7 +64,13 @@ export class CategoryEditorComponent implements OnInit {
         console.log(responseUpdate)
     );
   }
-
+  addCategory(category : CategoryDetailInfo){
+      const basicInfo = this.createModel(category);
+      this.categoryService.add(basicInfo).subscribe(
+        responseAdd =>
+        console.log(responseAdd)
+    );
+  }
   private createModel(category : CategoryDetailInfo) : CategoryBasicInfo{
     const modelBase : CategoryBasicInfo = {} as CategoryBasicInfo;
     modelBase.name = category.name;
@@ -79,14 +85,11 @@ export class CategoryEditorComponent implements OnInit {
   }
 
   addTouristPoint(){
-    if(this.category.touristPoints[this.category.touristPoints.length-1].id == null){
-      console.log('NO ADDED WITH ONE EMPTY');
-    } else {
       this.category.touristPoints = this.category.touristPoints.concat(this.newTouristPoint);
-    }
   }
   deleteTouristPoint(){
-    this.category.touristPoints.pop();
+    this.category.touristPoints.splice(-1, 1);
+    this.touristPointName.splice(-1, 1);
   }
 
   private showError(message: string){
