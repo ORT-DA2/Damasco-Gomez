@@ -39,41 +39,57 @@
                   <div class="form-group">
                     <label class="form-control-label" for="input-description">Description</label>
                     <input type="text" id="input-description" class="form-control form-control-alternative"
-                      [(ngModel)]=touristPoint.description name="description">
+                      [(ngModel)]="touristPoint.description" name="description">
                   </div>
                 </div>
 
                 <div class="col-9">
                   <div class="form-group">
                     <label class="form-control-label">Region</label>
-                    <select class="custom-select form-control form-control-alternative">
+                    <select class="custom-select form-control form-control-alternative"
+                      [(ngModel)]="regionName" name="regionName" (change)="onChangeRegionName(regionName)">
                       <option disabled>Choose Region</option>
-                      <option *ngFor="let region of regions"
-                        [ngValue]="region">{{region.name}}</option>
+                      <option *ngFor="let region of regions"> {{region.name}} </option>
                     </select>
                   </div>
                 </div>
 
                 <div class="col-3">
                   <div class="form-group">
-                    <label class="form-control-label" for="input-region-id">Region Id</label>
+                    <label class="form-control-label" for="label-region-id">Region Id</label>
                     <input type="number" id="input-region-id" class="form-control form-control-alternative"
-                      value="{{touristPoint.regionId}}">
+                      value="{{touristPoint.regionId}}" [(ngModel)]="touristPoint.regionId" name="regionId"
+                      disabled>
                   </div>
                 </div>
 
-                <div class="col-12">
+                {{categoriesName | json}}
+                <div class="col-12" >
                   <div class="form-group" id="categoriesTouristPoints">
                     <label class="form-control-label" for="input-categories">Categories</label>
                     <select *ngFor="let categoryTouristPoint of touristPoint.categories; let i = index"
+                      [(ngModel)]="categoriesName[i]" name="{{i}}" (change)="onChangeCategoryName(categoriesName[i],i)"
                       class="custom-select form-control form-control-alternative">
+                      <option> {{categoryTouristPoint.name}} </option>
                       <option disabled>Choose Category</option>
                       <option *ngFor="let category of categories"
-                        [ngValue]="category">
+                        [ngValue]="category.name">
                           {{category.name}}
                       </option>
                     </select>
                   </div>
+                  <button type="button" placement="top-center" triggers="hover focus click"
+                    class="btn btn-rounded btn-outline-warning" ngxClipboard [cbContent]="'air-baloon'"
+                    (click)="addCategory()"
+                    (cbOnSuccess)="copy = 'air-baloon'">
+                    Add Category
+                  </button>
+                  <button type="button" placement="top-center" triggers="hover focus click"
+                    class="btn btn-rounded btn-outline-danger" ngxClipboard [cbContent]="'air-baloon'"
+                    (click)="deleteCategory()"
+                    (cbOnSuccess)="copy = 'air-baloon'">
+                    Delete Category
+                  </button>
                 </div>
 
               </div>

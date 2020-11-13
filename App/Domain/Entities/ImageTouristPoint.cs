@@ -11,9 +11,9 @@ namespace Domain.Entities
         public ImageTouristPoint()
         {
         }
-        public void Update(ImageTouristPoint element)
+        public void Update(ImageTouristPoint image)
         {
-            if(element.Name != null) this.Name = element.Name;
+            if (image.Name !=null) this.Name = image.Name;
         }
     }
 }

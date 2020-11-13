@@ -34,6 +34,7 @@ export class TouristPointsTableComponent implements OnInit {
       touristPointResponse =>
         this.delete(touristPointResponse), (error: string) => this.showError(error)
     );
+    // tslint:disable-next-line: triple-equals
     this.touristpoints = this.touristpoints.filter(item => item.id != this.id);
   }
 
