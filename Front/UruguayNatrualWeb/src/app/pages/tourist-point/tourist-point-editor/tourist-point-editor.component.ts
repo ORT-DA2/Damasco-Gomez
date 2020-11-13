@@ -76,15 +76,12 @@ export class TouristPointEditorComponent implements OnInit {
   }
 
   addCategory(){
-    if(this.touristPoint.categories[this.touristPoint.categories.length-1].id == null){
-      console.log("NO ADDED WITH ONE EMPTY");
-    }
-    else {
-      this.touristPoint.categories = this.touristPoint.categories.concat(this.categoryNew);
-    }
+    this.touristPoint.categories = this.touristPoint.categories.concat(this.categoryNew);
   }
+
   deleteCategory(){
-    this.touristPoint.categories.pop();
+    this.touristPoint.categories.splice(-1,1);
+    this.categoriesName.splice(-1,1);
   }
 
   private createModel(touristPoint : TouristPointDetailInfo) : TouristPointsBasicInfo{
