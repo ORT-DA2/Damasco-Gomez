@@ -12,16 +12,18 @@ export const TouristLayoutRoutes: Routes = [
   {
     path: 'search',
     children: [
-      { path: ':name/:id', component: TableTouristPointsComponent },
-      { path: 'tourist-point/:id', component: HouseSearchComponent },
+      { path: ':name/:id', component: TableTouristPointsComponent , children: [
+        { path: 'tourist-point/:id', component: HouseSearchComponent },
+      ] },
     ]
   },
-  {
-    path: 'search',
-    children: [
-      { path: '/:name/:id', component: TableTouristPointsComponent },
-      { path: 'tourist-point/:id', component: HouseSearchComponent },
-    ]
-  },
+  // {
+  //   path: 'search',
+  //   children: [
+  //     { path: ':name/:id', component: TableTouristPointsComponent, children:[
+  //       { path: 'tourist-point/:id', component: HouseSearchComponent },
+  //     ] },
+  //   ]
+  // },
 
 ];

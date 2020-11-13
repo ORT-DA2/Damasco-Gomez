@@ -11,7 +11,7 @@ export class HouseSearchComponent implements OnInit {
   constructor(private route: ActivatedRoute) { }
 
   ngOnInit(): void {
-
+    debugger;
     const id = this.route.snapshot.paramMap.get('id');
     console.log(id);
   }
