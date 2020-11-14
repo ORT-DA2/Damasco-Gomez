@@ -32,6 +32,7 @@ export class TouristPointEditorComponent implements OnInit {
   ngOnInit(): void {
     const id = this.route.snapshot.paramMap.get('id');
     this.touristPointId = Number(id);
+    this.touristPoint.categories = [];
     this.touristPointService.getBy(this.touristPointId).subscribe(
       touristPointResponse =>
         this.getBy(touristPointResponse), (error: string) => this.showError(error));
@@ -51,7 +52,8 @@ export class TouristPointEditorComponent implements OnInit {
   }
   private getAllRegions(regionResponse: RegionBasicInfo[]){
     this.regions = regionResponse;
-    this.regionName = this.regions.find(x => x.id === this.touristPoint.regionId).name;
+    const regionWithId = this.regions.find(x => x.id === this.touristPoint.regionId);
+    this.regionName = regionWithId ? regionWithId.name : "";
   }
   private getAllCategories(categoryResponse: CategoryBasicInfo[]){
     this.categories = categoryResponse;

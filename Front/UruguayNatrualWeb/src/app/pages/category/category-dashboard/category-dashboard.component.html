@@ -1,1 +1,28 @@
-<p>category-dashboard works!</p>
+<div class="header bg-gradient-danger pb-8 pt-5 pt-md-8">
+  <div class="container-fluid">
+    <div class="header-body">
+      <!-- Card stats -->
+      <div class="row">
+        <div class="col-xl-3 col-lg-6">
+          <div class="card card-stats mb-4 mb-xl-0">
+            <div class="card-body">
+              <div class="row">
+                <div class="col">
+                  <button type="button" placement="top-center" triggers="hover focus click"
+                    class="bg-warning btn btn-rounded bg-warning text-white shadow"
+                    ngxClipboard cbContent="'air-baloon'" (cbOnSuccess)="copy = 'air-baloon'"
+                    routerLink="/category/category-editor/new" >
+                    Add Category</button>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<!-- Page content -->
+<div class="container-fluid mt--7">
+  <app-category-table></app-category-table>
+</div>

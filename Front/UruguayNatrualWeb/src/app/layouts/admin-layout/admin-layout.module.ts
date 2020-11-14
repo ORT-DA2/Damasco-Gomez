@@ -17,8 +17,9 @@ import { TouristPointDashboardComponent } from 'src/app/pages/tourist-point/tour
 import { TouristPointsTableComponent } from 'src/app/pages/tourist-point/tourist-points-table/tourist-points-table.component';
 import { BookingEditorComponent } from 'src/app/pages/booking/booking-editor/booking-editor.component';
 import { TouristPointEditorComponent } from 'src/app/pages/tourist-point/tourist-point-editor/tourist-point-editor.component';
-// import { ToastrModule } from 'ngx-toastr';
-
+import { CategoryEditorComponent } from 'src/app/pages/category/category-editor/category-editor.component';
+import { CategoryDashboardComponent } from 'src/app/pages/category/category-dashboard/category-dashboard.component';
+import { CategoryTableComponent } from 'src/app/pages/category/category-table/category-table.component';
 @NgModule({
   imports: [
     CommonModule,
@@ -39,6 +40,9 @@ import { TouristPointEditorComponent } from 'src/app/pages/tourist-point/tourist
     TouristPointDashboardComponent,
     TouristPointsTableComponent,
     TouristPointEditorComponent,
+    CategoryEditorComponent,
+    CategoryDashboardComponent,
+    CategoryTableComponent,
   ]
 })
 
