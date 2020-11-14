@@ -10,6 +10,8 @@ import { TouristPointDashboardComponent } from 'src/app/pages/tourist-point/tour
 import { TouristPointEditorComponent } from 'src/app/pages/tourist-point/tourist-point-editor/tourist-point-editor.component';
 import { CategoryDashboardComponent } from 'src/app/pages/category/category-dashboard/category-dashboard.component';
 import { CategoryEditorComponent } from 'src/app/pages/category/category-editor/category-editor.component';
+import { HouseEditorComponent } from 'src/app/pages/house/house-editor/house-editor.component';
+import { HouseDashboardComponent } from 'src/app/pages/house/house-dashboard/house-dashboard.component';
 
 export const AdminLayoutRoutes: Routes = [
     { path: 'dashboard',      component: DashboardComponent },
@@ -21,5 +23,7 @@ export const AdminLayoutRoutes: Routes = [
     { path: 'tourist-points',       component: TouristPointDashboardComponent },
     { path: 'tourist-points/tourist-point-editor/:id',       component: TouristPointEditorComponent },
     { path: 'categories',       component: CategoryDashboardComponent },
-    {path : 'category/category-editor/:id', component :  CategoryEditorComponent},
+    { path : 'category/category-editor/:id', component :  CategoryEditorComponent},
+    { path : 'house/house-editor/:id', component :  HouseEditorComponent},
+    { path: 'houses',       component: HouseDashboardComponent },
 ];
