@@ -12,7 +12,7 @@ export class HouseEditorComponent implements OnInit {
   public touristPoints: TouristPointsBasicInfo[] = [];
   public houseId: number = 0;
   public pricePerNigth : number;
-  public starts: number;
+  public avaible: boolean;
   public touristPointsNames: string[] = [];
   touristPointNew: TouristPointsBasicInfo = {} as TouristPointsBasicInfo;
   constructor() { }
