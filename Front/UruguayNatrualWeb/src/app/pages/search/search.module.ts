@@ -11,7 +11,7 @@ import { HouseSearchComponent } from './house-search/house-search.component';
 @NgModule({
   imports: [
     CommonModule,
-    SearchModule
+    SearchModule,
   ],
   declarations: [
     TableCategoriesComponent,
