@@ -52,7 +52,8 @@ export class TouristPointEditorComponent implements OnInit {
   }
   private getAllRegions(regionResponse: RegionBasicInfo[]){
     this.regions = regionResponse;
-    this.regionName = this.regions.find(x => x.id === this.touristPoint.regionId).name;
+    const regionWithId = this.regions.find(x => x.id === this.touristPoint.regionId);
+    this.regionName = regionWithId ? regionWithId.name : "";
   }
   private getAllCategories(categoryResponse: CategoryBasicInfo[]){
     this.categories = categoryResponse;
