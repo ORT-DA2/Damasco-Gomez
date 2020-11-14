@@ -14,7 +14,6 @@ export class AdminGuard implements CanActivate {
       return true;
     } else {
       this.router.navigateByUrl('/login');
-      //this.router.navigateByUrl('/tourist-layout');
       return false;
     }
   }
