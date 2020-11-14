@@ -66,6 +66,13 @@ export class TouristPointEditorComponent implements OnInit {
         console.log(responseUpdate)
     );
   }
+  addTouristPoint(touristPoint: TouristPointDetailInfo){
+    const basicInfo = this.createModel(touristPoint);
+    this.touristPointService.add(basicInfo).subscribe(
+      responseAdd =>
+        console.log(responseAdd)
+    );
+  }
 
   onChangeRegionName(event: any){
     this.touristPoint.region = this.regions.find(x => this.regionName == x.name);
