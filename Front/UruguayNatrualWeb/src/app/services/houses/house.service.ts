@@ -26,6 +26,7 @@ export class HouseService {
     var httpRequest = this.http.delete<any>(this.uri + '/' + id,options)
       .pipe(catchError(this.handleError));
     return httpRequest;
+
   }
 
   private handleError(error: HttpErrorResponse){
