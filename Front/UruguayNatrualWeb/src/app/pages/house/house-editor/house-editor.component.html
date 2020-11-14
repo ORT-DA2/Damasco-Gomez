@@ -19,7 +19,7 @@
               >
             </div>
             <div class="col-4 text-right">
-              <button
+              <button *ngIf="existentHouse"
                 type="button"
                 placement="top-center"
                 triggers="hover focus click"
@@ -31,7 +31,18 @@
               >
                 Update
               </button>
-            </div>
+              <button *ngIf="!existentHouse"
+              type="button"
+              placement="top-center"
+              triggers="hover focus click"
+              class="btn btn-rounded btn-outline-warning"
+              ngxClipboard
+              [cbContent]="'air-baloon'"
+              (cbOnSuccess)="copy = 'air-baloon'"
+              (click)="addHouse(house)"
+            >
+              Add House
+            </button>
           </div>
         </div>
         <div class="card-body">
