@@ -19,6 +19,7 @@ export class HouseEditorComponent implements OnInit {
   public avaible: boolean;
   public existentHouse : boolean;
   public touristPointName: string;
+  public readonly : boolean;
   touristPointNew: TouristPointsBasicInfo = {} as TouristPointsBasicInfo;
   constructor(
     private route: ActivatedRoute,
@@ -30,6 +31,8 @@ export class HouseEditorComponent implements OnInit {
     const id = this.route.snapshot.paramMap.get('id');
     this.houseId = Number(id);
     this.existentHouse = this.isExistentHouse();
+    this.readonly = this.isReadOnly();
+    console.log( this.readonly);
     if (this.existentHouse) {
       this.houseService.getBy(this.houseId).subscribe(
         houseResponse =>
@@ -41,9 +44,9 @@ export class HouseEditorComponent implements OnInit {
       return !isNaN(this.houseId);
     }
 
-  updateAvaible(house: HouseDetailInfo) {
+    updateAvailable(house: HouseDetailInfo) {
     const basicInfo = this.createModel(house);
-    this.houseService.update(this.houseId, basicInfo).subscribe(
+    this.houseService.updateAvailable(this.houseId, basicInfo).subscribe(
       responseUpdate =>
         console.log(responseUpdate)
     );
@@ -57,6 +60,9 @@ export class HouseEditorComponent implements OnInit {
         this.existentHouse = true;
       }
     );
+  }
+  isReadOnly () : boolean{
+    return !isNaN(this.houseId);
   }
   private createModel(house: HouseDetailInfo): HouseBasicInfo {
     const modelBase: HouseBasicInfo = {} as HouseBasicInfo;
