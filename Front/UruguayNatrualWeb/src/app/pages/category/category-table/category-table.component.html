@@ -1,30 +1,34 @@
 <!-- Table -->
 <div class="card shadow">
-    <div class="card-header border-0">
-        <h3 class="mb-0">Categories</h3>
-    </div>
-    <div class="table-responsive">
-        <table class="table align-items-center table-flush">
-            <thead class="thead-light">
-                <tr>
-                    <th scope="col">Name</th>
-                </tr>
-            </thead>
-            <tbody>
-                <tr *ngFor="let category of categories; let i = index">
-                    <th scope="row"> {{category.name}} </th>
-                    <td>
-                        <button [routerLink]="['/category/category-editor',category.id]" type="button" placement="top-center" triggers="hover focus click" class="btn btn-rounded" ngxClipboard cbContent="'air-baloon'" (cbOnSuccess)="copy = 'air-baloon'">
-                Edit
-              </button>
-                    </td>
-                    <td>
-                        <button type="button" placement="top-center" triggers="hover focus click" class="btn btn-rounded btn-outline-danger" ngxClipboard cbContent="'air-baloon'" (cbOnSuccess)="copy = 'air-baloon'" (click)="delete(category)">
-                Delete
-              </button>
-                    </td>
-                </tr>
-            </tbody>
-        </table>
-    </div>
+  <div class="card-header border-0">
+    <h3 class="mb-0">Categories</h3>
+  </div>
+  <div class="table-responsive">
+    <table class="table align-items-center table-flush">
+      <thead class="thead-light">
+        <tr>
+          <th scope="col">Name</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let category of categories; let i = index">
+          <th scope="row"> {{category.name}} </th>
+          <td>
+            <button [routerLink]="['/category/category-editor',category.id]" type="button" placement="top-center"
+              triggers="hover focus click" class="btn btn-rounded" ngxClipboard cbContent="'air-baloon'"
+              (cbOnSuccess)="copy = 'air-baloon'">
+              Edit
+            </button>
+          </td>
+          <td>
+            <button type="button" placement="top-center" triggers="hover focus click"
+              class="btn btn-rounded btn-outline-danger" ngxClipboard cbContent="'air-baloon'"
+              (cbOnSuccess)="copy = 'air-baloon'" (click)="delete(category)">
+              Delete
+            </button>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
 </div>
