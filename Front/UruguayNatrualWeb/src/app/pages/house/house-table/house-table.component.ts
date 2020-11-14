@@ -12,8 +12,28 @@ export class HouseTableComponent implements OnInit {
   public id: Number = 0;
   constructor(private houseService: HouseService) { }
 
-
   ngOnInit(): void {
+    this.houseService.getAll().subscribe(
+      response =>
+        this.getAll(response), (error: string) => this.showError(error)
+    );
+  }
+
+  private getAll(response: HouseBasicInfo[]){
+    this.houses = response;
+  }
+
+  private showError(message: string){
+    console.log(message);
+  }
+
+  private delete(event) {
+    this.id = event.id;
+    this.houseService.delete(this.id).subscribe(
+      response =>
+        this.delete(response), (error: string) => this.showError(error)
+    );
+    this.houses = this.houses.filter(item => item.id != this.id);
   }
 
 }
