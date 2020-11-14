@@ -36,18 +36,36 @@
                   <div class="card bg-secondary shadow">
                     <div class="card-header bg-white border-0">
                       <div class="row align-items-center">
-                        <div class="col-6">
+                        <div class="col-6 col-md-3">
                           <div class="input-group align-items-center">
-                            <label class="form-control-label m-0 mr-3" for="input-date">Check In:</label>
-                            <input type="date" id="input-date-in" class="form-control form-control-alternative">
+                            <label class="form-control-label mr-3" for="input-adults">Adults</label>
+                            <input type="number" id="input-adults" placement="top-center"
+                              class="form-control"
+                              [(ngModel)]="cantAdults" name="adults">
                           </div>
                         </div>
-                        <div class="col-6">
+                        <div class="col-6 col-md-3">
                           <div class="input-group align-items-center">
-                            <label class="form-control-label m-0 mr-3" for="input-date">Check Out:</label>
-                            <input type="date" id="input-date-in" class="form-control form-control-alternative">
+                            <label class="form-control-label mr-3" for="input-children">Children</label>
+                            <input type="number" id="input-children" class="form-control m-2 ml-3"
+                              [(ngModel)]="cantChildren" name="children">
                           </div>
                         </div>
+                        <div class="col-6 col-md-3">
+                          <div class="input-group align-items-center">
+                            <label class="form-control-label mr-3" for="input-babies">Babies</label>
+                            <input type="number" id="input-babies" class="form-control m-2 ml-3"
+                              [(ngModel)]="cantBabies" name="babies">
+                          </div>
+                        </div>
+                        <div class="col-6 col-md-3">
+                          <div class="input-group align-items-center">
+                            <label class="form-control-label mr-3" for="input-retires">Retires</label>
+                            <input type="number" id="input-retires" class="form-control m-2 ml-3"
+                              [(ngModel)]="cantRetires" name="retires">
+                          </div>
+                        </div>
+
                       </div>
                     </div>
                   </div>
@@ -89,7 +107,7 @@
                 <div class="col-lg-6">
                   <div class="form-group">
                     <label class="form-control-label" for="input-email">Email address</label>
-                    <input type="email" id="input-email" class="form-control form-control-alternative"
+                    <input type="email" id="input-email" class="form-control"
                       placeholder="jesse@example.com">
                   </div>
                 </div>
@@ -98,14 +116,14 @@
                 <div class="col-lg-6">
                   <div class="form-group">
                     <label class="form-control-label" for="input-first-name">First name</label>
-                    <input type="text" id="input-first-name" class="form-control form-control-alternative"
+                    <input type="text" id="input-first-name" class="form-control"
                       placeholder="First name" value="Lucky">
                   </div>
                 </div>
                 <div class="col-lg-6">
                   <div class="form-group">
                     <label class="form-control-label" for="input-last-name">Last name</label>
-                    <input type="text" id="input-last-name" class="form-control form-control-alternative"
+                    <input type="text" id="input-last-name" class="form-control"
                       placeholder="Last name" value="Jesse">
                   </div>
                 </div>
