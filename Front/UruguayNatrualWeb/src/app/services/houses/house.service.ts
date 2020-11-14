@@ -4,6 +4,7 @@ import { Observable, throwError } from 'rxjs';
 import { catchError } from 'rxjs/operators';
 import { environment } from 'src/environments/environment';
 import { HouseBasicInfo } from 'src/app/models/house/house-base-info';
+import { HouseDetailInfo } from 'src/app/models/house/house-detail-info';
 
 @Injectable({
   providedIn: 'root'
@@ -28,8 +29,8 @@ export class HouseService {
     return httpRequest;
 
   }
-  getBy (id): Observable<HouseBasicInfo>{
-    return this.http.get<HouseBasicInfo>(this.uri + '/' + id)
+  getBy (id): Observable<HouseDetailInfo>{
+    return this.http.get<HouseDetailInfo>(this.uri + '/' + id)
       .pipe(catchError(this.handleError));
   }
   private handleError(error: HttpErrorResponse){
