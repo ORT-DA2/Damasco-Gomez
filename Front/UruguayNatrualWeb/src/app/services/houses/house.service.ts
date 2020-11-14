@@ -28,7 +28,10 @@ export class HouseService {
     return httpRequest;
 
   }
-
+  getBy (id): Observable<HouseBasicInfo>{
+    return this.http.get<HouseBasicInfo>(this.uri + '/' + id)
+      .pipe(catchError(this.handleError));
+  }
   private handleError(error: HttpErrorResponse){
     let message: string;
     if (error.error instanceof ErrorEvent) {
