@@ -17,6 +17,17 @@ export class HouseService {
     return this.http.get<HouseBasicInfo[]>(this.uri)
       .pipe(catchError(this.handleError));
   }
+  delete(id):Observable<any>{
+    const headers = new HttpHeaders({
+      'Authorization':  localStorage.getItem('token'),
+      'Content-Type':'application/json'
+    });
+    let options = { headers: headers };
+    var httpRequest = this.http.delete<any>(this.uri + '/' + id,options)
+      .pipe(catchError(this.handleError));
+    return httpRequest;
+  }
+
   private handleError(error: HttpErrorResponse){
     let message: string;
     if (error.error instanceof ErrorEvent) {
