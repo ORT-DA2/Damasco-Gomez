@@ -17,7 +17,7 @@ export class CategoryEditorComponent implements OnInit {
   public touristPoints: TouristPointsBasicInfo[] = [];
   public categoryId: number = 0;
   public touristPointName: string[] = [];
-  public newTouristPoint:  TouristPointsBasicInfo = {} as TouristPointsBasicInfo;
+  public newTouristPoint: TouristPointsBasicInfo = {} as TouristPointsBasicInfo;
   public existentCategory: boolean = false;
   constructor(
     private route: ActivatedRoute,
@@ -31,68 +31,66 @@ export class CategoryEditorComponent implements OnInit {
     this.categoryService.getBy(this.categoryId).subscribe(
       categoryResponse =>
         this.getBy(categoryResponse), (error: string) => this.showError(error));
-        this.touristPointService.getAll().subscribe(
+    this.touristPointService.getAll().subscribe(
       touristPointResponse =>
-      this.getAllTouristPoints(touristPointResponse), (error: string) =>this.showError(error));
-      this.category.touristPoints = [];
-   }
+        this.getAllTouristPoints(touristPointResponse), (error: string) => this.showError(error));
+    this.category.touristPoints = [];
+  }
 
-  private isExistentCategory(): boolean
-  {
+  private isExistentCategory(): boolean {
     var existCategory = false;
-    if (this.categoryId != 0)
-    {
+    if (this.categoryId != 0) {
       existCategory = true;
     }
-     return existCategory;
+    return existCategory;
   }
-  private getBy(categoryResponse: CategoryDetailInfo){
+  private getBy(categoryResponse: CategoryDetailInfo) {
     this.category = categoryResponse;
-    this.touristPointName = this.category.touristPoints? this.category.touristPoints.map(touristPonit => touristPonit.name)
+    this.touristPointName = this.category.touristPoints ? this.category.touristPoints.map(touristPonit => touristPonit.name)
       : [];
   }
 
-  private getAllTouristPoints(touristPointResponse: TouristPointsBasicInfo[]){
+  private getAllTouristPoints(touristPointResponse: TouristPointsBasicInfo[]) {
     this.touristPoints = touristPointResponse;
+    console.log(this.touristPoints);
   }
 
-
-  updateData(category : CategoryDetailInfo){
+  updateData(category: CategoryDetailInfo) {
     const basicInfo = this.createModel(category);
     this.categoryService.update(this.categoryId, basicInfo).subscribe(
       responseUpdate =>
         console.log(responseUpdate)
     );
   }
-  addCategory(category : CategoryDetailInfo){
-      const basicInfo = this.createModel(category);
-      this.categoryService.add(basicInfo).subscribe(
-        responseAdd =>
+  addCategory(category: CategoryDetailInfo) {
+    const basicInfo = this.createModel(category);
+    this.categoryService.add(basicInfo).subscribe(
+      responseAdd =>
         console.log(responseAdd)
     );
   }
-  private createModel(category : CategoryDetailInfo) : CategoryBasicInfo{
-    const modelBase : CategoryBasicInfo = {} as CategoryBasicInfo;
+  private createModel(category: CategoryDetailInfo): CategoryBasicInfo {
+    const modelBase: CategoryBasicInfo = {} as CategoryBasicInfo;
     modelBase.name = category.name;
-    modelBase.touristPoints = category.touristPoints.map(x=> x.id);
+    modelBase.touristPoints = category.touristPoints.map(x => x.id);
     return modelBase;
   }
 
-  onChangeTouristPointName(touristPointName: string, index: number){
+  onChangeTouristPointName(touristPointName: string, index: number) {
 
     const touristPointId = this.touristPoints.find(x => x.name == touristPointName);
     this.category.touristPoints[index] = touristPointId;
   }
 
-  addTouristPoint(){
-      this.category.touristPoints = this.category.touristPoints.concat(this.newTouristPoint);
+  addTouristPoint() {
+    this.category.touristPoints = this.category.touristPoints.concat(this.newTouristPoint);
   }
-  deleteTouristPoint(){
+  deleteTouristPoint() {
     this.category.touristPoints.splice(-1, 1);
     this.touristPointName.splice(-1, 1);
   }
 
-  private showError(message: string){
+  private showError(message: string) {
     console.log(message);
   }
 }
