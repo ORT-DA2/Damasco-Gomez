@@ -25,6 +25,9 @@ import { TouristLayoutComponent } from './layouts/tourist-layout/tourist-layout.
 import { ReviewComponent } from './pages/review/review.component';
 import { SearchComponent } from './pages/search/search.component';
 import { HouseComponent } from './pages/house/house.component';
+import { HouseDashboardComponent } from './pages/house/house-dashboard/house-dashboard.component';
+import { HouseTableComponent } from './pages/house/house-table/house-table.component';
+import { HouseEditorComponent } from './pages/house/house-editor/house-editor.component';
 
 @NgModule({
   imports: [
@@ -47,6 +50,9 @@ import { HouseComponent } from './pages/house/house.component';
     ReviewComponent,
     SearchComponent,
     HouseComponent,
+    HouseDashboardComponent,
+    HouseTableComponent,
+    HouseEditorComponent,
   ],
   providers: [TouristPointsService,
     CategoryService,
