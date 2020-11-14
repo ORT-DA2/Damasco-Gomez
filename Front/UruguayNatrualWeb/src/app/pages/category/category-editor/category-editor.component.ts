@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { CategoryBasicInfo } from 'src/app/models/category/category-basic-info';
 import { CategoryDetailInfo } from 'src/app/models/category/category-detail-info';
 import { TouristPointsBasicInfo } from 'src/app/models/touristpoint/touristpoint-base-info';
@@ -21,6 +21,7 @@ export class CategoryEditorComponent implements OnInit {
   public existentCategory: boolean = false;
   constructor(
     private route: ActivatedRoute,
+    private router: Router,
     private categoryService: CategoryService,
     private touristPointService: TouristPointsService) { }
 
@@ -28,9 +29,11 @@ export class CategoryEditorComponent implements OnInit {
     const id = this.route.snapshot.paramMap.get('id');
     this.categoryId = Number(id);
     this.existentCategory = this.isExistentCategory();
-    this.categoryService.getBy(this.categoryId).subscribe(
-      categoryResponse =>
-        this.getBy(categoryResponse), (error: string) => this.showError(error));
+    if (this.existentCategory) {
+      this.categoryService.getBy(this.categoryId).subscribe(
+        categoryResponse =>
+          this.getBy(categoryResponse), (error: string) => this.showError(error));
+    }
     this.touristPointService.getAll().subscribe(
       touristPointResponse =>
         this.getAllTouristPoints(touristPointResponse), (error: string) => this.showError(error));
@@ -38,11 +41,7 @@ export class CategoryEditorComponent implements OnInit {
   }
 
   private isExistentCategory(): boolean {
-    var existCategory = false;
-    if (this.categoryId != 0) {
-      existCategory = true;
-    }
-    return existCategory;
+    return !isNaN(this.categoryId);
   }
   private getBy(categoryResponse: CategoryDetailInfo) {
     this.category = categoryResponse;
@@ -65,8 +64,11 @@ export class CategoryEditorComponent implements OnInit {
   addCategory(category: CategoryDetailInfo) {
     const basicInfo = this.createModel(category);
     this.categoryService.add(basicInfo).subscribe(
-      responseAdd =>
-        console.log(responseAdd)
+      responseAdd => {
+        this.categoryId = responseAdd.id;
+        this.router.navigateByUrl(`/category/category-editor/${this.categoryId}`);
+        this.existentCategory = true;
+      }
     );
   }
   private createModel(category: CategoryDetailInfo): CategoryBasicInfo {
