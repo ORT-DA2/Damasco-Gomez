@@ -31,8 +31,9 @@ export class HouseTableComponent implements OnInit {
     this.id = event.id;
     this.houseService.delete(this.id).subscribe(
       response =>
-        this.delete(response), (error: string) => this.showError(error)
+        this.delete(response), (error: string) => this.showError(error) ,
     );
+
     this.houses = this.houses.filter(item => item.id != this.id);
   }
 
