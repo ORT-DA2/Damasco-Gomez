@@ -9,6 +9,7 @@ import { BookingEditorComponent } from 'src/app/pages/booking/booking-editor/boo
 import { TouristPointDashboardComponent } from 'src/app/pages/tourist-point/tourist-point-dashboard/tourist-point-dashboard.component';
 import { TouristPointEditorComponent } from 'src/app/pages/tourist-point/tourist-point-editor/tourist-point-editor.component';
 import { CategoryDashboardComponent } from 'src/app/pages/category/category-dashboard/category-dashboard.component';
+import { CategoryEditorComponent } from 'src/app/pages/category/category-editor/category-editor.component';
 
 export const AdminLayoutRoutes: Routes = [
     { path: 'dashboard',      component: DashboardComponent },
@@ -20,4 +21,5 @@ export const AdminLayoutRoutes: Routes = [
     { path: 'tourist-points',       component: TouristPointDashboardComponent },
     { path: 'tourist-points/tourist-point-editor/:id',       component: TouristPointEditorComponent },
     { path: 'categories',       component: CategoryDashboardComponent },
+    {path : 'category/category-editor/:id', component :  CategoryEditorComponent},
 ];

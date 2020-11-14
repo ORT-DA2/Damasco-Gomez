@@ -6,6 +6,7 @@ import { CategoryEditorComponent } from './category-editor/category-editor.compo
 import { ReactiveFormsModule } from '@angular/forms';
 import { BrowserModule } from '@angular/platform-browser';
 
+
 @NgModule({
   imports: [
     CommonModule,
@@ -16,7 +17,7 @@ import { BrowserModule } from '@angular/platform-browser';
   declarations: [
     CategoryTableComponent,
     CategoryDashboardComponent,
-    CategoryEditorComponent
+    CategoryEditorComponent,
   ],
   providers: [],
 })
