@@ -36,15 +36,33 @@ export class HouseEditorComponent implements OnInit {
           this.getBy(houseResponse), (error: string) => this.showError(error));
     }
   }
-  updateAvaible(house) {
 
-  }
   isExistentHouse (): boolean {
       return !isNaN(this.houseId);
     }
-  addHouse ()
-  {
 
+  updateAvaible(house: HouseDetailInfo) {
+    const basicInfo = this.createModel(house);
+    this.houseService.update(this.houseId, basicInfo).subscribe(
+      responseUpdate =>
+        console.log(responseUpdate)
+    );
+  }
+  addHouse(house: HouseDetailInfo) {
+    const basicInfo = this.createModel(house);
+    this.houseService.add(basicInfo).subscribe(
+      responseAdd => {
+        this.houseId= responseAdd.id;
+        this.router.navigateByUrl(`/category/category-editor/${this.houseId}`);
+        this.existentHouse = true;
+      }
+    );
+  }
+  private createModel(house: HouseDetailInfo): HouseBasicInfo {
+    const modelBase: HouseBasicInfo = {} as HouseBasicInfo;
+    modelBase.name = house.name;
+    modelBase.touristPointId = house.touristPoint.id;
+    return modelBase;
   }
   private getBy(houseResponse: HouseDetailInfo) {
     this.house = houseResponse;
