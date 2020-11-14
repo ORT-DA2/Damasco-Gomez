@@ -25,16 +25,6 @@ export class TouristPointsService {
         .pipe(catchError(this.handleError));
     return httpRequest;
   }
-
-  add():Observable<any>{
-    const headers = new HttpHeaders({
-      'Content-Type': 'application/json',
-      'Authorization': localStorage.getItem('token'), });
-    let options = { headers: headers };
-    const body=JSON.stringify("");
-    return this.http.post(this.uri,body,options).pipe(catchError(this.handleError));
-  }
-
   delete(id):Observable<any>{
     const headers = new HttpHeaders({
       'Authorization':  localStorage.getItem('token'),
@@ -45,7 +35,6 @@ export class TouristPointsService {
       .pipe(catchError(this.handleError));
     return httpRequest;
   }
-
   update(id, body):Observable<any>{
     const headers = new HttpHeaders({
       'Content-Type': 'application/json',
@@ -53,6 +42,16 @@ export class TouristPointsService {
     });
     let options = { headers: headers };
     var httpRequest = this.http.put<any>(this.uri + '/' + id, body, options)
+      .pipe(catchError(this.handleError));
+    return httpRequest;
+  }
+  add(body):Observable<any>{
+    const headers = new HttpHeaders({
+      'Content-Type': 'application/json',
+      'Authorization':  localStorage.getItem('token')
+    });
+    let options = { headers: headers };
+    var httpRequest = this.http.post<any>(this.uri  , body, options)
       .pipe(catchError(this.handleError));
     return httpRequest;
   }
