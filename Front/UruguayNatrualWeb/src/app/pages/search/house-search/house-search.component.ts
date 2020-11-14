@@ -1,4 +1,5 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit} from '@angular/core';
+import { FormGroup } from '@angular/forms';
 import { ActivatedRoute } from '@angular/router';
 
 @Component({
@@ -8,12 +9,14 @@ import { ActivatedRoute } from '@angular/router';
 })
 export class HouseSearchComponent implements OnInit {
 
-  constructor(private route: ActivatedRoute) { }
+  public myForm: FormGroup;
+
+  constructor(
+    private route: ActivatedRoute) { }
 
   ngOnInit(): void {
-    debugger;
     const id = this.route.snapshot.paramMap.get('id');
-    console.log(id);
   }
+
 
 }

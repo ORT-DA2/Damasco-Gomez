@@ -24,6 +24,7 @@ import {SessionService} from './services/sessions/session.service';
 import { TouristLayoutComponent } from './layouts/tourist-layout/tourist-layout.component';
 import { ReviewComponent } from './pages/review/review.component';
 import { CommonModule } from '@angular/common';
+import { AngularMyDatePickerModule } from 'angular-mydatepicker';
 
 @NgModule({
   imports: [
@@ -38,6 +39,7 @@ import { CommonModule } from '@angular/common';
     ReactiveFormsModule,
     RouterModule,
     FormsModule,
+    AngularMyDatePickerModule
   ],
   declarations: [
     AppComponent,
