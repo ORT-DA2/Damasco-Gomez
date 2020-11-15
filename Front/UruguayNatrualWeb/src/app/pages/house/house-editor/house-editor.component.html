@@ -186,22 +186,21 @@
                     >
                   </div>
 
-                  {{touristPoints | json}}
-                    <div class="form-group" id="touristPoints">
-                      <label class="form-control-label" for="input-touristpoints">Tourist Points</label>
-                      <select *ngFor="let touristPoint of touristPoints; let i = index"
-                        [(ngModel)]="touristPointName[i]" name="{{i}}"
-                        (change)="onChangeTouristPointName(touristPointName[i],i)"
+                  {{touristPointName | json}}
+                  <div class="col-12">
+                    <div class="form-group" id="TouristPoints">
+                      <label class="form-control-label" for="input-touristPoints">Tourist Points</label>
+                      <select
+                        [(ngModel)]="touristPointName" name="tourisPointName"
+                        (change)="onChangeTouristPointName(touristPointName)"
                         class="custom-select form-control form-control-alternative">
-                        <option> {{touristPoints.name}} </option>
                         <option enable>Choose Tourist point</option>
                         <option *ngFor="let touristPoint of touristPoints" [ngValue]="touristPoint.name">
                           {{touristPoint.name}}
                         </option>
                       </select>
                     </div>
-
-
+                  </div>
 
                 </div>
               </div>
