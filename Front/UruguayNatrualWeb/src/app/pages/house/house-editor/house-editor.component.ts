@@ -20,7 +20,6 @@ export class HouseEditorComponent implements OnInit {
   public houseId: number = 0;
   public pricePerNigth : number;
   public starts : number;
-  public avaible: boolean;
   public existentHouse : boolean;
   public readonly : boolean;
   public regionName: string;
@@ -66,8 +65,8 @@ export class HouseEditorComponent implements OnInit {
     );
   }
   addHouse(house: HouseDetailInfo) {
+
     const basicInfo = this.createModel(house);
-    console.log(basicInfo);
     this.houseService.add(basicInfo).subscribe(
       responseAdd => {
         this.houseId= responseAdd.id;
@@ -85,7 +84,7 @@ export class HouseEditorComponent implements OnInit {
     modelBase.name = house.name;
     modelBase.starts = house.starts;
     modelBase.pricePerNight = house.pricePerNight;
-    //modelBase.avaiable = true;
+    modelBase.avaible = house.avaible;
     modelBase.address = house.address;
     modelBase.description = house.description;
     modelBase.phone = house.phone;
@@ -95,7 +94,6 @@ export class HouseEditorComponent implements OnInit {
   }
   private getBy(houseResponse: HouseDetailInfo) {
     this.house = houseResponse;
-    this.avaible = this.house.avaiable;
     this.touristPointName = this.house.touristPoint ? this.house.touristPoint.name: '' ;
   }
   private getAllTouristPoints(touristPointResponse: TouristPointsBasicInfo[]){

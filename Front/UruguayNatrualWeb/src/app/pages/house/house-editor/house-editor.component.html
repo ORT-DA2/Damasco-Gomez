@@ -78,7 +78,7 @@
                       <input
                         [readonly]="existentHouse"
                         type="number"
-                        id="input-description"
+                        id="input-starts"
                         class="form-control form-control-alternative"
                         [(ngModel)]="house.starts"
                         name="starts"
@@ -96,7 +96,7 @@
                       <input
                         [readonly]="existentHouse"
                         type="number"
-                        id="input-description"
+                        id="input-pricepernight"
                         class="form-control form-control-alternative"
                         [(ngModel)]="house.pricePerNight"
                         name="pricePerNigth"
@@ -109,12 +109,12 @@
                       <label class="form-control-label">Avaiable</label>
                       <select
                         class="custom-select form-control form-control-alternative"
-                        [(ngModel)]='avaible'
-                        name="avaible"
+                        [(ngModel)]="house.avaible"
+                        name="house.avaible"
                       >
                         <option disabled>Choose Avaible</option>
-                        <option>True</option>
-                        <option>False</option>
+                        <option [ngValue]="true">True</option>
+                        <option [ngValue]="false">False</option>
                       </select>
                     </div>
                   </div>
@@ -127,7 +127,7 @@
                       <input
                         [readonly]="existentHouse"
                         type="text"
-                        id="input-description"
+                        id="input-adress"
                         class="form-control form-control-alternative"
                         [(ngModel)]="house.address"
                         name="adress"
@@ -158,7 +158,7 @@
                       <input
                         type="number"
                         [readonly]="existentHouse"
-                        id="input-description"
+                        id="input-phone"
                         class="form-control form-control-alternative"
                         [(ngModel)]="house.phone"
                         name="phone"
