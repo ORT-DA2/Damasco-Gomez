@@ -18,7 +18,6 @@ export class HouseEditorComponent implements OnInit {
   public pricePerNigth : number;
   public avaible: boolean;
   public existentHouse : boolean;
-  public touristPointName: string;
   public readonly : boolean;
   touristPointNew: TouristPointsBasicInfo = {} as TouristPointsBasicInfo;
   constructor(
@@ -72,7 +71,6 @@ export class HouseEditorComponent implements OnInit {
   }
   private getBy(houseResponse: HouseDetailInfo) {
     this.house = houseResponse;
-    this.touristPointName = this.house.touristPoint.name;
   }
   private showError(message: string) {
     console.log(message);
