@@ -57,7 +57,7 @@
                         >Name</label
                       >
                       <input
-                        [readonly]="readonly"
+                        [readonly]="existentHouse"
                         type="text"
                         id="input-username"
                         class="form-control form-control-alternative"
@@ -67,18 +67,21 @@
                     </div>
                   </div>
 
+
                   <div class="col-6">
                     <div class="form-group">
-                      <label class="form-control-label" for="input-description"
+                      <label
+                        class="form-control-label"
+                        for="input-pricePerNight"
                         >Starts</label
                       >
                       <input
-                        [readonly]="readonly"
-                        type="text"
+                        [readonly]="existentHouse"
+                        type="number"
                         id="input-description"
                         class="form-control form-control-alternative"
                         [(ngModel)]="house.starts"
-                        name="aviable"
+                        name="starts"
                       />
                     </div>
                   </div>
@@ -91,8 +94,8 @@
                         >PricePerNight</label
                       >
                       <input
-                        [readonly]="readonly"
-                        type="text"
+                        [readonly]="existentHouse"
+                        type="number"
                         id="input-description"
                         class="form-control form-control-alternative"
                         [(ngModel)]="house.pricePerNight"
@@ -110,8 +113,8 @@
                         name="avaible"
                       >
                         <option disabled>Choose Avaible</option>
-                        <option>true</option>
-                        <option>false</option>
+                        <option>True</option>
+                        <option>False</option>
                       </select>
                     </div>
                   </div>
@@ -122,7 +125,7 @@
                         >Adress</label
                       >
                       <input
-                        [readonly]="readonly"
+                        [readonly]="existentHouse"
                         type="text"
                         id="input-description"
                         class="form-control form-control-alternative"
@@ -138,7 +141,7 @@
                         >Description</label
                       >
                       <input
-                        [readonly]="readonly"
+                        [readonly]="existentHouse"
                         type="text"
                         id="input-description"
                         class="form-control form-control-alternative"
@@ -153,8 +156,8 @@
                         >Phone</label
                       >
                       <input
-                        type="text"
-                        [readonly]="readonly"
+                        type="number"
+                        [readonly]="existentHouse"
                         id="input-description"
                         class="form-control form-control-alternative"
                         [(ngModel)]="house.phone"
@@ -169,7 +172,7 @@
                         >Contact</label
                       >
                       <input
-                        [readonly]="readonly"
+                        [readonly]="existentHouse"
                         type="text"
                         id="input-contact"
                         class="form-control form-control-alternative"

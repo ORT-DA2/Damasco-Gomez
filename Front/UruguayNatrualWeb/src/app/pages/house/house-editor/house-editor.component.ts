@@ -19,6 +19,7 @@ export class HouseEditorComponent implements OnInit {
   public touristPoints: TouristPointsBasicInfo[] = [];
   public houseId: number = 0;
   public pricePerNigth : number;
+  public starts : number;
   public avaible: boolean;
   public existentHouse : boolean;
   public readonly : boolean;
@@ -26,6 +27,7 @@ export class HouseEditorComponent implements OnInit {
   public touristPointName: string;
   public touristPointId: number;
   public categoriesName: string[] = [];
+  public startsList : number [] = [];
   public categories : CategoryBasicInfo[] = [];
   constructor(
     private route: ActivatedRoute,
@@ -38,6 +40,7 @@ export class HouseEditorComponent implements OnInit {
   ngOnInit(): void {
     const id = this.route.snapshot.paramMap.get('id');
     this.houseId = Number(id);
+    this.startsList =   [1, 2, 3, 4, 5];
     this.existentHouse = this.isExistentHouse();
     this.readonly = this.isReadOnly();
     if (this.existentHouse) {
@@ -68,7 +71,7 @@ export class HouseEditorComponent implements OnInit {
     this.houseService.add(basicInfo).subscribe(
       responseAdd => {
         this.houseId= responseAdd.id;
-        this.router.navigateByUrl(`/category/category-editor/${this.houseId}`);
+        this.router.navigateByUrl(`/house/house-editor/${this.houseId}`);
         this.existentHouse = true;
       }
     );
@@ -80,13 +83,13 @@ export class HouseEditorComponent implements OnInit {
   private createModel(house: HouseDetailInfo): HouseBasicInfo {
     const modelBase: HouseBasicInfo = {} as HouseBasicInfo;
     modelBase.name = house.name;
-    modelBase.starts= house.starts;
-    modelBase.pricePerNight= house.pricePerNight;
-    modelBase.avaiable= house.avaiable;
-    modelBase.address= house.address;
-    modelBase.description= house.description;
-    modelBase.phone= house.phone;
-    modelBase.contact= house.contact;
+    modelBase.starts = house.starts;
+    modelBase.pricePerNight = house.pricePerNight;
+    //modelBase.avaiable = true;
+    modelBase.address = house.address;
+    modelBase.description = house.description;
+    modelBase.phone = house.phone;
+    modelBase.contact = house.contact;
     modelBase.touristPointId = house.touristPointId;
     return modelBase;
   }
@@ -94,7 +97,6 @@ export class HouseEditorComponent implements OnInit {
     this.house = houseResponse;
     this.avaible = this.house.avaiable;
     this.touristPointName = this.house.touristPoint ? this.house.touristPoint.name: '' ;
-   // this.touristPointId = this.house.touristPoint ? this.house.touristPoint.id: '' ;
   }
   private getAllTouristPoints(touristPointResponse: TouristPointsBasicInfo[]){
     this.touristPoints = touristPointResponse;
@@ -107,5 +109,6 @@ export class HouseEditorComponent implements OnInit {
     var touristPoint = this.touristPoints.find(x => x.name == touristPointName);
     this.house.touristPointId = touristPoint.id;
   }
+
 
 }
