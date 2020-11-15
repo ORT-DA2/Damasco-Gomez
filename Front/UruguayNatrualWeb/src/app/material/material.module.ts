@@ -15,6 +15,7 @@ import { MatTableModule } from '@angular/material/table';
 import { MatToolbarModule } from '@angular/material/toolbar';
 
 import { MatMomentDateModule } from '@angular/material-moment-adapter';
+import { MatDialogModule } from '@angular/material/dialog';
 
 
 
@@ -34,6 +35,7 @@ import { MatMomentDateModule } from '@angular/material-moment-adapter';
     MatSidenavModule,
     MatTableModule,
     MatToolbarModule,
+    MatDialogModule,
   ],
 })
 export class MaterialModule { }

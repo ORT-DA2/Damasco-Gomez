@@ -93,7 +93,9 @@
       </div>
     </div>
   </div>
+
 </div>
+
 <div *ngIf="searchDone" class="container-fluid mt--7">
   <!-- Table -->
   <div class="card shadow">
@@ -113,6 +115,10 @@
           <mat-panel-description>
             Total Price: {{house.totalPrice}}
           </mat-panel-description>
+          <mat-panel-description
+            (click)="open(mymodal)"
+            class="btn btn-sm btn-primary"> Choose
+          </mat-panel-description>
         </mat-expansion-panel-header>
         <p>Price per Nigh: {{house.pricePerNight}} </p>
         <p>Starts: {{house.starts}}</p>
@@ -125,3 +131,30 @@
   </div>
 
 </div>
+
+
+
+<ng-template #mymodal let-modal>
+  <div class="modal-header">
+    <h4 class="modal-title" id="modal-basic-title">Complete Booking</h4>
+    <button type="button" class="close" aria-label="Close" (click)="modal.dismiss('Cross click')">
+      <span aria-hidden="true">×</span>
+    </button>
+  </div>
+  <div class="modal-body">
+    <form>
+      <div class="col-12">
+        <div class="form-group">
+          <label class="form-control-label" for="input-email">Email</label>
+          <input type="email" id="input-email"
+            class="form-control form-control-alternative"
+            placeholder="jesse@example.com">
+        </div>
+      </div>
+    </form>
+  </div>
+  <div class="modal-footer">
+    <button type="button" class="btn btn-outline-dark" (click)="modal.close('Save click')">Ok</button>
+    <button type="button" class="btn btn-outline-danger" (click)="modal.close('Cancel click')">Cancel</button>
+  </div>
+</ng-template>
