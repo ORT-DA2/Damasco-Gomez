@@ -29,7 +29,7 @@ export class HouseService {
     return httpRequest;
 
   }
-  updateAvailable(){
+  updateAvailable(id, body){
     const headers = new HttpHeaders({
       'Content-Type': 'application/json',
       'Authorization':  localStorage.getItem('token')
