@@ -2,8 +2,10 @@ import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { HouseBasicInfo } from 'src/app/models/house/house-base-info';
 import { HouseDetailInfo } from 'src/app/models/house/house-detail-info';
+import { RegionBasicInfo } from 'src/app/models/regions/region-base-info';
 import { TouristPointsBasicInfo } from 'src/app/models/touristpoint/touristpoint-base-info';
 import { HouseService } from 'src/app/services/houses/house.service';
+import { RegionService } from 'src/app/services/regions/region.service';
 import { TouristPointsService } from 'src/app/services/touristpoints/touristpoint.service';
 
 @Component({
@@ -19,11 +21,13 @@ export class HouseEditorComponent implements OnInit {
   public avaible: boolean;
   public existentHouse : boolean;
   public readonly : boolean;
+  public regionName: string;
   touristPointNew: TouristPointsBasicInfo = {} as TouristPointsBasicInfo;
   constructor(
     private route: ActivatedRoute,
     private router: Router,
     private houseService: HouseService,
+    private regionService: RegionService,
     private touristPointService: TouristPointsService) { }
 
   ngOnInit(): void {
@@ -37,6 +41,9 @@ export class HouseEditorComponent implements OnInit {
         houseResponse =>
           this.getBy(houseResponse), (error: string) => this.showError(error));
     }
+    this.regionService.getBy(this.house.touristPoint.regionId).subscribe(
+      response =>
+        this.getRegionNameBy(response), (error: string) => this.showError(error));
   }
 
   isExistentHouse (): boolean {
@@ -75,4 +82,9 @@ export class HouseEditorComponent implements OnInit {
   private showError(message: string) {
     console.log(message);
   }
+
+  getRegionNameBy(event: any){
+    this.regionName = event.name;
+  }
+
 }
