@@ -15,7 +15,8 @@ export class NavbarComponent implements OnInit {
   public listTitles: any[];
   public location: Location;
   public currentUser: string ;
-  public sessionService : SessionService;
+  public isAutorizated: boolean = false;
+  public sessionService: SessionService;
   constructor(location: Location,  private element: ElementRef, private router: Router, sessionUser: SessionService) {
     this.location = location;
     this.sessionService = sessionUser;
@@ -25,6 +26,7 @@ export class NavbarComponent implements OnInit {
   ngOnInit() {
     this.listTitles = ROUTES.filter(listTitle => listTitle);
     this.currentUser = localStorage.getItem('email');
+    this.isUserLogged();
   }
   getTitle(){
     var titlee = this.location.prepareExternalUrl(this.location.path());
@@ -44,5 +46,10 @@ export class NavbarComponent implements OnInit {
     this.refreshPage();
   }
   refreshPage() { window.location.reload(); }
+
+  isUserLogged ()
+  {
+    this.isAutorizated = this.sessionService.isAuthenticated();
+  }
 
 }

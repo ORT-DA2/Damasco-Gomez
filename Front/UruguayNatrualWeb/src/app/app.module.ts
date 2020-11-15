@@ -25,6 +25,7 @@ import { SessionService } from './services/sessions/session.service';
 import { TouristLayoutComponent } from './layouts/tourist-layout/tourist-layout.component';
 import { ReviewComponent } from './pages/review/review.component';
 
+
 @NgModule({
   imports: [
     CommonModule,
@@ -54,6 +55,7 @@ import { ReviewComponent } from './pages/review/review.component';
     RegionService,
     ReportService,
     ReviewService,
+    HouseService,
     SessionService],
   bootstrap: [AppComponent]
 })
