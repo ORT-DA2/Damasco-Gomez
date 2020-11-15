@@ -24,6 +24,7 @@ export class HouseEditorComponent implements OnInit {
   public readonly : boolean;
   public regionName: string;
   public touristPointName: string;
+  public touristPointId: number;
   public categoriesName: string[] = [];
   public categories : CategoryBasicInfo[] = [];
   constructor(
@@ -63,6 +64,7 @@ export class HouseEditorComponent implements OnInit {
   }
   addHouse(house: HouseDetailInfo) {
     const basicInfo = this.createModel(house);
+    console.log(basicInfo);
     this.houseService.add(basicInfo).subscribe(
       responseAdd => {
         this.houseId= responseAdd.id;
@@ -71,19 +73,28 @@ export class HouseEditorComponent implements OnInit {
       }
     );
   }
+
   isReadOnly () : boolean{
     return !isNaN(this.houseId);
   }
   private createModel(house: HouseDetailInfo): HouseBasicInfo {
     const modelBase: HouseBasicInfo = {} as HouseBasicInfo;
     modelBase.name = house.name;
-    modelBase.touristPointId = house.touristPoint.id;
+    modelBase.starts= house.starts;
+    modelBase.pricePerNight= house.pricePerNight;
+    modelBase.avaiable= house.avaiable;
+    modelBase.address= house.address;
+    modelBase.description= house.description;
+    modelBase.phone= house.phone;
+    modelBase.contact= house.contact;
+    modelBase.touristPointId = house.touristPointId;
     return modelBase;
   }
   private getBy(houseResponse: HouseDetailInfo) {
     this.house = houseResponse;
     this.avaible = this.house.avaiable;
     this.touristPointName = this.house.touristPoint ? this.house.touristPoint.name: '' ;
+   // this.touristPointId = this.house.touristPoint ? this.house.touristPoint.id: '' ;
   }
   private getAllTouristPoints(touristPointResponse: TouristPointsBasicInfo[]){
     this.touristPoints = touristPointResponse;
@@ -91,10 +102,10 @@ export class HouseEditorComponent implements OnInit {
   private showError(message: string) {
     console.log(message);
   }
-  onChangeTouristPointName(touristPointName: string, index: number) {
+  onChangeTouristPointName(touristPointName: string) {
 
-    const touristPointId = this.touristPoints.find(x => x.name == touristPointName);
-    this.touristPoints[index] = touristPointId;
+    var touristPoint = this.touristPoints.find(x => x.name == touristPointName);
+    this.house.touristPointId = touristPoint.id;
   }
 
 }
