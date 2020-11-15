@@ -23,7 +23,7 @@ export class HouseEditorComponent implements OnInit {
   public existentHouse : boolean;
   public readonly : boolean;
   public regionName: string;
-  public touristPointNames: string[] = [];
+  public touristPointName: string[] = [];
   public categoriesName: string[] = [];
   public categories : CategoryBasicInfo[] = [];
   constructor(
@@ -83,11 +83,11 @@ export class HouseEditorComponent implements OnInit {
   private getBy(houseResponse: HouseDetailInfo) {
     this.house = houseResponse;
     this.avaible = this.house.avaiable;
-    this.touristPointNames = this.touristPoints ? this.touristPoints.map(touristPonit => touristPonit.name)
-    : [];
   }
   private getAllTouristPoints(touristPointResponse: TouristPointsBasicInfo[]){
     this.touristPoints = touristPointResponse;
+    this.touristPointName = this.touristPoints ? this.touristPoints.map(touristPonit => touristPonit.name)
+    : [];
   }
   private showError(message: string) {
     console.log(message);
