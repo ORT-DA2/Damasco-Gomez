@@ -19,19 +19,19 @@
               >
             </div>
             <div class="col-4 text-right">
-              <button
-                *ngIf="existentHouse"
-                type="button"
-                placement="top-center"
-                triggers="hover focus click"
-                class="btn btn-rounded btn-outline-warning"
-                ngxClipboard
-                [cbContent]="'air-baloon'"
-                (cbOnSuccess)="copy = 'air-baloon'"
-                (click)="updateAvailable(house)"
-              >
-                Update
-              </button>
+                <button
+                  *ngIf="existentHouse"
+                  type="button"
+                  placement="top-center"
+                  triggers="hover focus click"
+                  class="btn btn-rounded btn-outline-warning"
+                  ngxClipboard
+                  [cbContent]="'air-baloon'"
+                  (cbOnSuccess)="copy = 'air-baloon'"
+                  (click)="updateAvailable(house)"
+                >
+                  Update
+                </button>
               <button
                 *ngIf="!existentHouse"
                 type="button"
@@ -205,10 +205,25 @@
                     </div>
                   </div>
 
+                  <button routerLink="/houses"
+                  *ngIf="existentHouse"
+                  type="button"
+                  placement="top-center"
+                  triggers="hover focus click"
+                  class="btn btn-rounded btn-outline-warning"
+                  ngxClipboard
+                  [cbContent]="'air-baloon'"
+                  (cbOnSuccess)="copy = 'air-baloon'"
+                >
+                   Go back
+                </button>
+
+
                 </div>
               </div>
               <hr class="my-4" />
             </form>
+
           </div>
         </div>
       </div>
