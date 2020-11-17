@@ -19,19 +19,15 @@
                         <div class="col-6">
                           <div class="input-group align-items-center">
                             <label class="form-control-label m-0 mr-3" for="input-date">Check In:</label>
-                            <input type="date" id="input-date-in"
-                              [(ngModel)] = "checkIn" name="checkIn"
-                              class="form-control form-control-alternative"
-                              (change)="onChangeCheckIn(checkIn)">
+                            <input type="date" id="input-date-in" [(ngModel)]="checkIn" name="checkIn"
+                              class="form-control form-control-alternative" (change)="onChangeCheckIn(checkIn)">
                           </div>
                         </div>
                         <div class="col-6">
                           <div class="input-group align-items-center">
                             <label class="form-control-label m-0 mr-3" for="input-date">Check Out:</label>
-                            <input type="date" id="input-date-in"
-                              [(ngModel)] = "checkOut" name="checkOut"
-                              class="form-control form-control-alternative"
-                              (change)="onChangeCheckOut(checkOut)">
+                            <input type="date" id="input-date-in" [(ngModel)]="checkOut" name="checkOut"
+                              class="form-control form-control-alternative" (change)="onChangeCheckOut(checkOut)">
                           </div>
                         </div>
                       </div>
@@ -80,8 +76,7 @@
                     <div class="card-header bg-white border-0">
                       <button type="button" placement="top-center" triggers="hover focus click"
                         class="bg-warning btn btn-rounded bg-warning text-white shadow" ngxClipboard
-                        cbContent="'air-baloon'" (cbOnSuccess)="copy = 'air-baloon'"
-                        (click)="searchBy()">
+                        cbContent="'air-baloon'" (cbOnSuccess)="copy = 'air-baloon'" (click)="searchBy()">
                         Search</button>
                     </div>
                   </div>
@@ -115,9 +110,7 @@
           <mat-panel-description>
             Total Price: {{house.totalPrice}}
           </mat-panel-description>
-          <mat-panel-description
-            (click)="open(mymodal)"
-            class="btn btn-sm btn-primary"> Choose
+          <mat-panel-description (click)="open(mymodal, house)" class="btn btn-sm btn-primary"> Choose
           </mat-panel-description>
         </mat-expansion-panel-header>
         <p>Price per Nigh: {{house.pricePerNight}} </p>
@@ -146,15 +139,28 @@
       <div class="col-12">
         <div class="form-group">
           <label class="form-control-label" for="input-email">Email</label>
-          <input type="email" id="input-email"
-            class="form-control form-control-alternative"
-            placeholder="jesse@example.com">
+          <input type="email" id="input-email" [(ngModel)]="email" name="email"
+            class="form-control form-control-alternative" placeholder="jesse@example.com">
+        </div>
+      </div>
+      <div class="col-12">
+        <div class="form-group">
+          <label class="form-control-label" for="input-first">FirstName</label>
+          <input type="text" id="input-first" [(ngModel)]="firstName" name="firstName"
+            class="form-control form-control-alternative">
+        </div>
+      </div>
+      <div class="col-12">
+        <div class="form-group">
+          <label class="form-control-label" for="input-last">LastName</label>
+          <input type="text" id="input-last" [(ngModel)]="lastName" name="lastName"
+            class="form-control form-control-alternative">
         </div>
       </div>
     </form>
   </div>
   <div class="modal-footer">
-    <button type="button" class="btn btn-outline-dark" (click)="modal.close('Save click')">Ok</button>
+    <button type="button" class="btn btn-outline-dark" (click)="okModal(modal)">Ok</button>
     <button type="button" class="btn btn-outline-danger" (click)="modal.close('Cancel click')">Cancel</button>
   </div>
 </ng-template>

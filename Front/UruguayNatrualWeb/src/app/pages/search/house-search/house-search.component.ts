@@ -3,7 +3,9 @@ import { FormGroup } from '@angular/forms';
 import { MatDialog, MatDialogConfig } from '@angular/material/dialog';
 import { ActivatedRoute } from '@angular/router';
 import { ModalDismissReasons, NgbModal } from '@ng-bootstrap/ng-bootstrap';
+import { BookingInInfo } from 'src/app/models/booking/booking-in-info';
 import { HouseBasicInfo } from 'src/app/models/house/house-base-info';
+import { BookingService } from 'src/app/services/bookings/booking.service';
 import { HouseService } from 'src/app/services/houses/house.service';
 
 @Component({
@@ -24,6 +26,11 @@ export class HouseSearchComponent implements OnInit {
   public cantBabies: string = '0';
   public cantSeniors: string = '0';
   public searchDone: boolean = false;
+  public houseSelected: HouseBasicInfo ;
+  public bookingModelIn: BookingInInfo = {} as BookingInInfo;
+  public email : string;
+  public firstName: string;
+  public lastName: string;
 
   public myForm: FormGroup;
   closeResult: string;
@@ -31,13 +38,15 @@ export class HouseSearchComponent implements OnInit {
   constructor(
     private route: ActivatedRoute,
     private houseService: HouseService,
+    private bookingService: BookingService,
     private modalService: NgbModal) { }
 
   ngOnInit(): void {
     this.touristPointId = (this.route.snapshot.paramMap.get('id'));
   }
 
-  open(content) {
+  open(content, house) {
+    this.houseSelected = house;
     this.modalService.open(content, {ariaLabelledBy: 'modal-basic-title'}).result.then((result) => {
       this.closeResult = `Closed with: ${result}`;
     }, (reason) => {
@@ -87,7 +96,21 @@ export class HouseSearchComponent implements OnInit {
     return day + '/' + month + '/' + year;
   }
 
-  chooseHouse(house) {
-    console.log(house)
+  okModal(modal) {
+    this.createModel();
+    console.log(this.bookingModelIn);
+    this.bookingService.post(this.bookingModelIn).subscribe(
+      response => console.log(response)
+    );
+    modal.close();
+  }
+
+  createModel(){
+    this.bookingModelIn.checkIn = new Date(this.checkInValue);
+    this.bookingModelIn.checkOut = new Date(this.checkOutValue);
+    this.bookingModelIn.houseId = this.houseSelected.id;
+    this.bookingModelIn.email = this.email;
+    this.bookingModelIn.name = this.firstName + ' ' + this.lastName;
+    this.bookingModelIn.price = this.houseSelected.totalPrice;
   }
 }

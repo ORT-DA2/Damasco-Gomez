@@ -30,14 +30,16 @@ export class BookingService {
     return httpRequest;
   }
 
-  // add():Observable<any>{
-  //   const headers = new HttpHeaders({
-  //     'Content-Type': 'application/json',
-  //     'Authorization': environment.token });
-  //   let options = { headers: headers };
-  //   const body=JSON.stringify("");
-  //   return this.http.post(this.uri,body,options).pipe(catchError(this.handleError));
-  // }
+  post(body):Observable<any>{
+    const headers = new HttpHeaders({
+      'Content-Type': 'application/json'
+    });
+    let options = { headers: headers };
+    var httpRequest = this.http.post<any>(this.uri, body, options)
+      .pipe(catchError(this.handleError));
+    return httpRequest;
+  }
+
 
   delete(id):Observable<any>{
     const headers = new HttpHeaders({
