@@ -26,15 +26,16 @@ export class HouseSearchComponent implements OnInit {
   public cantBabies: string = '0';
   public cantSeniors: string = '0';
   public searchDone: boolean = false;
-  public houseSelected: HouseBasicInfo ;
+  public houseSelected: HouseBasicInfo;
   public bookingModelIn: BookingInInfo = {} as BookingInInfo;
-  public email : string;
+  public email: string;
   public firstName: string;
   public lastName: string;
   public errorMessage: string;
   public codeGenerated: boolean = false;
   public code: string;
   public errorMessageDates: string = '';
+  public errorMessagePeople: string = '';
 
   public myForm: FormGroup;
   closeResult: string;
@@ -51,7 +52,7 @@ export class HouseSearchComponent implements OnInit {
 
   open(content, house) {
     this.houseSelected = house;
-    this.modalService.open(content, {ariaLabelledBy: 'modal-basic-title'}).result.then((result) => {
+    this.modalService.open(content, { ariaLabelledBy: 'modal-basic-title' }).result.then((result) => {
       this.closeResult = `Closed with: ${result}`;
     }, (reason) => {
       this.closeResult = `Dismissed ${this.getDismissReason(reason)}`;
@@ -64,7 +65,7 @@ export class HouseSearchComponent implements OnInit {
     } else if (reason === ModalDismissReasons.BACKDROP_CLICK) {
       return 'by clicking on a backdrop';
     } else {
-      return  `with: ${reason}`;
+      return `with: ${reason}`;
     }
   }
 
@@ -73,23 +74,30 @@ export class HouseSearchComponent implements OnInit {
     this.searchDone = true;
   }
 
-  private showError(message: string) {
-    console.log(message);
+  private showError(event) {
+    console.log(event)
   }
 
   searchBy() {
     const checkInDate = new Date(this.checkIn);
     const checkOutDate = new Date(this.checkOut);
-    const currentDate = new Date();
-    if (checkInDate < checkOutDate && checkInDate >= currentDate) {
-      console.log(this.checkInValue + 'checkin value');
-      console.log(this.checkOutValue + 'checkout value');
-      this.houseService.getByTouristoPoint(this.checkInValue, this.checkOutValue, this.touristPointId,
-        this.cantAdults, this.cantChildren, this.cantBabies, this.cantSeniors).subscribe(
-          houseResponse =>
-            this.getAll(houseResponse), (error: string) => this.showError(error)
-        );
-      this.errorMessageDates = '';
+    // const currentDate = new Date();
+    if (checkInDate < checkOutDate) {
+      const adults = Number(this.cantAdults);
+      const children = Number(this.cantChildren);
+      const babies = Number(this.cantBabies);
+      const seniors = Number(this.cantSeniors);
+      if (!(adults == 0 && children == 0 && babies == 0 && seniors == 0)) {
+        this.houseService.getByTouristoPoint(this.checkInValue, this.checkOutValue, this.touristPointId,
+          this.cantAdults, this.cantChildren, this.cantBabies, this.cantSeniors).subscribe(
+            houseResponse =>
+              this.getAll(houseResponse), (error: string) => this.showError(error)
+          );
+        this.errorMessageDates = '';
+        this.errorMessagePeople = '';
+      } else {
+        this.errorMessagePeople = 'Try to search with at least one person';
+      }
     }
     else {
       this.errorMessageDates = 'Error in the dates, check them please';
@@ -113,10 +121,10 @@ export class HouseSearchComponent implements OnInit {
   }
 
   okModal() {
-    if(this.email && this.firstName && this.lastName){
+    if (this.email && this.firstName && this.lastName) {
       this.createModel();
       this.bookingService.post(this.bookingModelIn).subscribe(
-        response => this.code = response.code
+        response => this.code = response.code, (error: string) => this.showError(error)
       );
       this.errorMessage = '';
       this.codeGenerated = true;
@@ -126,7 +134,7 @@ export class HouseSearchComponent implements OnInit {
     }
   }
 
-  done(modal){
+  done(modal) {
     this.lastName = '';
     this.firstName = '';
     this.email = '';
@@ -135,7 +143,7 @@ export class HouseSearchComponent implements OnInit {
     modal.close();
   }
 
-  createModel(){
+  createModel() {
     this.bookingModelIn.checkIn = new Date(this.checkIn);
     this.bookingModelIn.checkOut = new Date(this.checkOut);
     this.bookingModelIn.houseId = this.houseSelected.id;
