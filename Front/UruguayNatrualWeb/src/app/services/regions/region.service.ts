@@ -18,6 +18,10 @@ export class RegionService {
       .pipe(catchError(this.handleError));
   }
 
+  getBy (id): Observable<RegionBasicInfo>{
+    return this.http.get<RegionBasicInfo>(this.uri + '/' + id)
+      .pipe(catchError(this.handleError));
+  }
 
   private handleError(error: HttpErrorResponse){
     let message: string;
