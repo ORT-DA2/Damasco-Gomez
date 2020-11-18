@@ -7,6 +7,7 @@ namespace Model.In
     public class PersonModel
     {
         public string Email {get; set;}
+        public string Name {get; set;}
         public string Password {get; set;}
         public Person ToEntity()
         {
@@ -14,6 +15,7 @@ namespace Model.In
             {
                 Email = this.Email,
                 Password = this.Password,
+                Name= this.Name,
             };
         }
     }

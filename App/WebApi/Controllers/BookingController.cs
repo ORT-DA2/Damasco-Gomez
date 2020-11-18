@@ -47,7 +47,6 @@ namespace WebApi.Controllers
         /// <response code="200">Se devuelve la información requerida.</response>
         /// <response code="400">Reserva no existente con ese identificador</response>
         [HttpPost]
-        [AuthorizationFilter]
         public IActionResult Post([FromBody]BookingModel bookingModel)
         {
             Booking newBooking = bookingModel.ToEntity();

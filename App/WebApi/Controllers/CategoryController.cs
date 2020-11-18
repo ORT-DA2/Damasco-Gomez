@@ -49,7 +49,7 @@ namespace WebApi.Controllers
         public IActionResult Post([FromBody]CategoryModel categoryModel)
         {
             Category categoryAdded = this.categoryLogic.Add(categoryModel.ToEntity());
-            CategoryBasicInfoModel categoryInfoModel = new CategoryBasicInfoModel(categoryAdded);
+            CategoryDetailInfoModel categoryInfoModel = new CategoryDetailInfoModel(categoryAdded);
             return CreatedAtRoute("GetCategory", new {Id = categoryInfoModel.Id} ,categoryInfoModel);
         }
         /// <summary>
@@ -65,7 +65,7 @@ namespace WebApi.Controllers
         {
             Category newCategory = categoryModel.ToEntity();
             newCategory = this.categoryLogic.Update(id,newCategory);
-            CategoryBasicInfoModel categoryInfoModel = new CategoryBasicInfoModel(newCategory);
+            CategoryDetailInfoModel categoryInfoModel = new CategoryDetailInfoModel(newCategory);
             return CreatedAtRoute("GetCategory", new {Id = categoryInfoModel.Id} ,categoryInfoModel);
         }
         /// <summary>

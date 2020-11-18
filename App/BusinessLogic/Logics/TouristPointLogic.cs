@@ -9,10 +9,13 @@ namespace BusinessLogic
     {
         private readonly ITouristPointRepository touristPointRepository;
         private readonly ICategoryRepository categoryRepository;
-        public TouristPointLogic(ITouristPointRepository touristPointRepository,ICategoryRepository categoryRepository )
+        private readonly IImageTouristPointRepository imageRepository;
+        public TouristPointLogic(ITouristPointRepository touristPointRepository,ICategoryRepository categoryRepository,
+            IImageTouristPointRepository imageRepository )
         {
             this.touristPointRepository = touristPointRepository;
             this.categoryRepository = categoryRepository;
+            this.imageRepository = imageRepository;
         }
         public void Delete()
         {
@@ -51,10 +54,16 @@ namespace BusinessLogic
                 (
                     m => m.Category = this.categoryRepository.Find(m.CategoryId)
                 );
-                touristPointBD.CategoriesTouristPoints = touristPointBD.CategoriesTouristPoints;
+                touristPointBD.CategoriesTouristPoints.RemoveAll(x => x.TouristPointId == touristPointBD.Id);
+                touristPointBD.CategoriesTouristPoints = touristPoint.CategoriesTouristPoints;
             }
-            this.touristPointRepository.Update(id, touristPointBD);
+            if(touristPoint.ImageTouristPointId > 0) 
+            {
+                var oldImage = this.imageRepository.Find(touristPointBD.ImageTouristPointId);
+                oldImage.Update(touristPoint.ImageTouristPoint);
+            }
             touristPointBD.Update(touristPoint);
+            this.touristPointRepository.Update(id, touristPointBD);
             return touristPointBD;
         }
         public void Delete(int id)

@@ -1,0 +1,231 @@
+<div class="header pb-8 pt-5 pt-lg-8 d-flex align-items-center" style="
+    min-height: 600px;
+    background-image: url(assets/img/theme/profile-cover.jpg);
+    background-size: cover;
+    background-position: center top;
+  ">
+    <!-- Mask -->
+    <span class="mask bg-gradient-danger opacity-8"></span>
+</div>
+<div class="container-fluid mt--7">
+    <div class="row">
+        <div class="col-xl-8 order-xl-1">
+            <div class="card bg-secondary shadow">
+                <div class="card-header bg-white border-0">
+                    <div class="row align-items-center">
+                        <div class="col-8">
+                            <h3 class="mb-0">House</h3>
+                            <span class="heading-small text-muted mb-4">Id {{ houseId }}</span
+              >
+            </div>
+            <div class="col-4 text-right">
+              <button
+                *ngIf="existentHouse"
+                type="button"
+                placement="top-center"
+                triggers="hover focus click"
+                class="btn btn-rounded btn-outline-warning"
+                ngxClipboard
+                [cbContent]="'air-baloon'"
+                (cbOnSuccess)="copy = 'air-baloon'"
+                (click)="updateAvailable(house)"
+              >
+                Update
+              </button>
+              <button
+                *ngIf="!existentHouse"
+                type="button"
+                placement="top-center"
+                triggers="hover focus click"
+                class="btn btn-rounded btn-outline-warning"
+                ngxClipboard
+                [cbContent]="'air-baloon'"
+                (cbOnSuccess)="copy = 'air-baloon'"
+                (click)="addHouse(house)"
+              >
+                Add House
+              </button>
+            </div>
+          </div>
+          <div class="card-body">
+            <form>
+              <div class="pl-lg-4">
+                <div class="row">
+                  <div class="col-6">
+                    <div class="form-group">
+                      <label class="form-control-label" for="input-username"
+                        >Name</label
+                      >
+                      <input
+                        [readonly]="readonly"
+                        type="text"
+                        id="input-username"
+                        class="form-control form-control-alternative"
+                        [(ngModel)]="house.name"
+                        name="nameHouse"
+                      />
+                    </div>
+                  </div>
+
+                  <div class="col-6">
+                    <div class="form-group">
+                      <label class="form-control-label" for="input-description"
+                        >Starts</label
+                      >
+                      <input
+                        [readonly]="readonly"
+                        type="text"
+                        id="input-description"
+                        class="form-control form-control-alternative"
+                        [(ngModel)]="house.starts"
+                        name="aviable"
+                      />
+                    </div>
+                  </div>
+
+                  <div class="col-6">
+                    <div class="form-group">
+                      <label
+                        class="form-control-label"
+                        for="input-pricePerNight"
+                        >PricePerNight</label
+                      >
+                      <input
+                        [readonly]="readonly"
+                        type="text"
+                        id="input-description"
+                        class="form-control form-control-alternative"
+                        [(ngModel)]="house.pricePerNight"
+                        name="pricePerNigth"
+                      />
+                    </div>
+                  </div>
+
+                  <div class="col-6">
+                    <div class="form-group">
+                      <label class="form-control-label">Avaiable</label>
+                      <select
+                        class="custom-select form-control form-control-alternative"
+                        [(ngModel)]="house.avaiable"
+                        name="avaible"
+                      >
+                        <option disabled>Choose Avaible</option>
+                        <option>true</option>
+                        <option>false</option>
+                      </select>
+                    </div>
+                  </div>
+
+                  <div class="col-6">
+                    <div class="form-group">
+                      <label class="form-control-label" for="input-adress"
+                        >Adress</label
+                      >
+                      <input
+                        [readonly]="readonly"
+                        type="text"
+                        id="input-description"
+                        class="form-control form-control-alternative"
+                        [(ngModel)]="house.address"
+                        name="adress"
+                      />
+                    </div>
+                  </div>
+
+                  <div class="col-6">
+                    <div class="form-group">
+                      <label class="form-control-label" for="input-description"
+                        >Description</label
+                      >
+                      <input
+                        [readonly]="readonly"
+                        type="text"
+                        id="input-description"
+                        class="form-control form-control-alternative"
+                        [(ngModel)]="house.description"
+                        name="description"
+                      />
+                    </div>
+                  </div>
+                  <div class="col-6">
+                    <div class="form-group">
+                      <label class="form-control-label" for="input-phone"
+                        >Phone</label
+                      >
+                      <input
+                        type="text"
+                        [readonly]="readonly"
+                        id="input-description"
+                        class="form-control form-control-alternative"
+                        [(ngModel)]="house.phone"
+                        name="phone"
+                      />
+                    </div>
+                  </div>
+
+                  <div class="col-6">
+                    <div class="form-group">
+                      <label class="form-control-label" for="input-contact"
+                        >Contact</label
+                      >
+                      <input
+                        [readonly]="readonly"
+                        type="text"
+                        id="input-contact"
+                        class="form-control form-control-alternative"
+                        [(ngModel)]="house.contact"
+                        name="contact"
+                      />
+                    </div>
+                  </div>
+
+                  <div class="col-8">
+                    <h3 class="mb-0">Tourist Point</h3>
+                    <span class="heading-small text-muted mb-4"
+                      >Id {{ house.touristPoint.id }}</span
+                    >
+                  </div>
+
+                  <div class="col-6">
+                    <div class="form-group">
+                      <label class="form-control-label" for="input-username"
+                        >Name</label
+                      >
+                      <input
+                        type="text"
+                        id="input-username"
+                        class="form-control form-control-alternative"
+                        [(ngModel)]="house.touristPoint.name"
+                        name="nameTP"
+                      />
+                    </div>
+                  </div>
+
+                  <div class="col-6">
+                    <div class="form-group">
+                      <label class="form-control-label" for="input-description">Description</label>
+                      <input type="text" id="input-description" class="form-control form-control-alternative"
+                        [(ngModel)]="house.touristPoint.description" name="descriptionTP">
+                    </div>
+                  </div>
+
+                  <div class="col-9">
+                    <div class="form-group">
+                      <label class="form-control-label">Region</label>
+                      <input type="text" id="input-regionName" class="form-control form-control-alternative"
+                        [(ngModel)]="regionName" name="regionName">
+                    </div>
+                  </div>
+
+
+
+                </div>
+              </div>
+              <hr class="my-4" />
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

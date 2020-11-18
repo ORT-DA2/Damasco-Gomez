@@ -14,14 +14,14 @@ namespace BusinessLogic.Logics
         {
             this.reportRepository = reportRepository;
         }
-       
-         public List<Report> GetHousesReportBy(ReportTouristPoint touristPointReport)
-         {
-             DateTime dateFrom = touristPointReport.DateFrom;
-             DateTime dateOut = touristPointReport.DateOut;
-             int idTp=touristPointReport.IdTp;
-             List<Report> housesWithBookingList = reportRepository.FilterCantBookigsByHouse(dateFrom,dateOut,idTp);
-             return housesWithBookingList;
-         }
+
+        public List<Report> GetHousesReportBy(ReportTouristPoint touristPointReport)
+        {
+            DateTime dateFrom = touristPointReport.DateFrom;
+            DateTime dateOut = touristPointReport.DateOut;
+            int idTp = touristPointReport.IdTp;
+            List<Report> housesWithBookingList = reportRepository.FilterCantBookigsByHouse(dateFrom, dateOut, idTp);
+            return housesWithBookingList;
+        }
     }
 }
