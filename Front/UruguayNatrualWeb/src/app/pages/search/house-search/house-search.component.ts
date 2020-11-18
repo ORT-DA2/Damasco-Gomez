@@ -19,9 +19,9 @@ export class HouseSearchComponent implements OnInit {
   touristPointId: string;
   public checkIn: string;
   public checkOut: string;
-  checkInValue: string = '11/11/2020';
-  checkOutValue: string = '12/12/2020';
-  public cantAdults: string = '1';
+  checkInValue: string;
+  checkOutValue: string;
+  public cantAdults: string = '0';
   public cantChildren: string = '0';
   public cantBabies: string = '0';
   public cantSeniors: string = '0';
@@ -31,6 +31,10 @@ export class HouseSearchComponent implements OnInit {
   public email : string;
   public firstName: string;
   public lastName: string;
+  public errorMessage: string;
+  public codeGenerated: boolean = false;
+  public code: string;
+  public errorMessageDates: string = '';
 
   public myForm: FormGroup;
   closeResult: string;
@@ -74,16 +78,28 @@ export class HouseSearchComponent implements OnInit {
   }
 
   searchBy() {
-    this.houseService.getByTouristoPoint(this.checkInValue, this.checkOutValue, this.touristPointId,
-      this.cantAdults, this.cantChildren, this.cantBabies, this.cantSeniors).subscribe(
-        houseResponse =>
-          this.getAll(houseResponse), (error: string) => this.showError(error)
-      );
+    const checkInDate = new Date(this.checkIn);
+    const checkOutDate = new Date(this.checkOut);
+    const currentDate = new Date();
+    if (checkInDate < checkOutDate && checkInDate >= currentDate) {
+      console.log(this.checkInValue + 'checkin value');
+      console.log(this.checkOutValue + 'checkout value');
+      this.houseService.getByTouristoPoint(this.checkInValue, this.checkOutValue, this.touristPointId,
+        this.cantAdults, this.cantChildren, this.cantBabies, this.cantSeniors).subscribe(
+          houseResponse =>
+            this.getAll(houseResponse), (error: string) => this.showError(error)
+        );
+      this.errorMessageDates = '';
+    }
+    else {
+      this.errorMessageDates = 'Error in the dates, check them please';
+    }
   }
 
   onChangeCheckIn(event) {
     this.checkInValue = this.parseDate(event);
   }
+
   onChangeCheckOut(event) {
     this.checkOutValue = this.parseDate(event);
   }
@@ -96,18 +112,32 @@ export class HouseSearchComponent implements OnInit {
     return day + '/' + month + '/' + year;
   }
 
-  okModal(modal) {
-    this.createModel();
-    console.log(this.bookingModelIn);
-    this.bookingService.post(this.bookingModelIn).subscribe(
-      response => console.log(response)
-    );
+  okModal() {
+    if(this.email && this.firstName && this.lastName){
+      this.createModel();
+      this.bookingService.post(this.bookingModelIn).subscribe(
+        response => this.code = response.code
+      );
+      this.errorMessage = '';
+      this.codeGenerated = true;
+    }
+    else {
+      this.errorMessage = 'Complete all data';
+    }
+  }
+
+  done(modal){
+    this.lastName = '';
+    this.firstName = '';
+    this.email = '';
+    this.code = '';
+    this.codeGenerated = false;
     modal.close();
   }
 
   createModel(){
-    this.bookingModelIn.checkIn = new Date(this.checkInValue);
-    this.bookingModelIn.checkOut = new Date(this.checkOutValue);
+    this.bookingModelIn.checkIn = new Date(this.checkIn);
+    this.bookingModelIn.checkOut = new Date(this.checkOut);
     this.bookingModelIn.houseId = this.houseSelected.id;
     this.bookingModelIn.email = this.email;
     this.bookingModelIn.name = this.firstName + ' ' + this.lastName;
