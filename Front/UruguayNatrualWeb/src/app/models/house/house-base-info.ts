@@ -1,6 +1,6 @@
 export interface HouseBasicInfo {
   id : number,
-  avaiable : boolean,
+  avaible : boolean,
   pricePerNight : number,
   touristPointId : number,
   name : string,

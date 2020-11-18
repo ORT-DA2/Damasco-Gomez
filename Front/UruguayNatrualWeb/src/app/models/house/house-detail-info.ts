@@ -2,7 +2,7 @@ import { TouristPointsBasicInfo } from "../touristpoint/touristpoint-base-info";
 
 export interface HouseDetailInfo {
   id : number,
-  avaiable : boolean,
+  avaible : boolean,
   pricePerNight : number,
   touristPointId : number,
   name : string,

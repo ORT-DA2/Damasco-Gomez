@@ -19,19 +19,19 @@
               >
             </div>
             <div class="col-4 text-right">
-              <button
-                *ngIf="existentHouse"
-                type="button"
-                placement="top-center"
-                triggers="hover focus click"
-                class="btn btn-rounded btn-outline-warning"
-                ngxClipboard
-                [cbContent]="'air-baloon'"
-                (cbOnSuccess)="copy = 'air-baloon'"
-                (click)="updateAvailable(house)"
-              >
-                Update
-              </button>
+                <button
+                  *ngIf="existentHouse"
+                  type="button"
+                  placement="top-center"
+                  triggers="hover focus click"
+                  class="btn btn-rounded btn-outline-warning"
+                  ngxClipboard
+                  [cbContent]="'air-baloon'"
+                  (cbOnSuccess)="copy = 'air-baloon'"
+                  (click)="updateAvailable(house)"
+                >
+                  Update
+                </button>
               <button
                 *ngIf="!existentHouse"
                 type="button"
@@ -57,7 +57,7 @@
                         >Name</label
                       >
                       <input
-                        [readonly]="readonly"
+                        [readonly]="existentHouse"
                         type="text"
                         id="input-username"
                         class="form-control form-control-alternative"
@@ -67,18 +67,21 @@
                     </div>
                   </div>
 
+
                   <div class="col-6">
                     <div class="form-group">
-                      <label class="form-control-label" for="input-description"
+                      <label
+                        class="form-control-label"
+                        for="input-pricePerNight"
                         >Starts</label
                       >
                       <input
-                        [readonly]="readonly"
-                        type="text"
-                        id="input-description"
+                        [readonly]="existentHouse"
+                        type="number"
+                        id="input-starts"
                         class="form-control form-control-alternative"
                         [(ngModel)]="house.starts"
-                        name="aviable"
+                        name="starts"
                       />
                     </div>
                   </div>
@@ -91,9 +94,9 @@
                         >PricePerNight</label
                       >
                       <input
-                        [readonly]="readonly"
-                        type="text"
-                        id="input-description"
+                        [readonly]="existentHouse"
+                        type="number"
+                        id="input-pricepernight"
                         class="form-control form-control-alternative"
                         [(ngModel)]="house.pricePerNight"
                         name="pricePerNigth"
@@ -106,12 +109,12 @@
                       <label class="form-control-label">Avaiable</label>
                       <select
                         class="custom-select form-control form-control-alternative"
-                        [(ngModel)]="house.avaiable"
-                        name="avaible"
+                        [(ngModel)]="house.avaible"
+                        name="house.avaible"
                       >
                         <option disabled>Choose Avaible</option>
-                        <option>true</option>
-                        <option>false</option>
+                        <option [ngValue]="true">True</option>
+                        <option [ngValue]="false">False</option>
                       </select>
                     </div>
                   </div>
@@ -122,9 +125,9 @@
                         >Adress</label
                       >
                       <input
-                        [readonly]="readonly"
+                        [readonly]="existentHouse"
                         type="text"
-                        id="input-description"
+                        id="input-adress"
                         class="form-control form-control-alternative"
                         [(ngModel)]="house.address"
                         name="adress"
@@ -138,7 +141,7 @@
                         >Description</label
                       >
                       <input
-                        [readonly]="readonly"
+                        [readonly]="existentHouse"
                         type="text"
                         id="input-description"
                         class="form-control form-control-alternative"
@@ -153,9 +156,9 @@
                         >Phone</label
                       >
                       <input
-                        type="text"
-                        [readonly]="readonly"
-                        id="input-description"
+                        type="number"
+                        [readonly]="existentHouse"
+                        id="input-phone"
                         class="form-control form-control-alternative"
                         [(ngModel)]="house.phone"
                         name="phone"
@@ -169,7 +172,7 @@
                         >Contact</label
                       >
                       <input
-                        [readonly]="readonly"
+                        [readonly]="existentHouse"
                         type="text"
                         id="input-contact"
                         class="form-control form-control-alternative"
@@ -182,47 +185,45 @@
                   <div class="col-8">
                     <h3 class="mb-0">Tourist Point</h3>
                     <span class="heading-small text-muted mb-4"
-                      >Id {{ house.touristPoint.id }}</span
+                      >Id {{ house.touristPointId}}</span
                     >
                   </div>
 
-                  <div class="col-6">
-                    <div class="form-group">
-                      <label class="form-control-label" for="input-username"
-                        >Name</label
-                      >
-                      <input
-                        type="text"
-                        id="input-username"
-                        class="form-control form-control-alternative"
-                        [(ngModel)]="house.touristPoint.name"
-                        name="nameTP"
-                      />
-                    </div>
-                  </div>
+                  {{touristPointName | json}}
+                  <div class="col-12">
+                    <div class="form-group" id="TouristPoints">
 
-                  <div class="col-6">
-                    <div class="form-group">
-                      <label class="form-control-label" for="input-description">Description</label>
-                      <input type="text" id="input-description" class="form-control form-control-alternative"
-                        [(ngModel)]="house.touristPoint.description" name="descriptionTP">
-                    </div>
-                  </div>
-
-                  <div class="col-9">
-                    <div class="form-group">
-                      <label class="form-control-label">Region</label>
-                      <input type="text" id="input-regionName" class="form-control form-control-alternative"
-                        [(ngModel)]="regionName" name="regionName">
+                      <select
+                        [(ngModel)]="touristPointName" name="touristPointName"
+                        (change)="onChangeTouristPointName(touristPointName)"
+                        class="custom-select form-control form-control-alternative">
+                        <option enable>Choose Tourist point</option>
+                        <option *ngFor="let touristPoint of touristPoints" [ngValue]="touristPoint.name">
+                          {{touristPoint.name}}
+                        </option>
+                      </select>
                     </div>
                   </div>
 
 
+                    <button routerLink="/houses"
+                    type="button"
+                    placement="top-center"
+                    triggers="hover focus click"
+                    class="btn btn-rounded btn-outline-warning"
+                    ngxClipboard
+                    [cbContent]="'air-baloon'"
+                    (cbOnSuccess)="copy = 'air-baloon'"
+
+                  >
+                     Go back
+                  </button>
 
                 </div>
               </div>
               <hr class="my-4" />
             </form>
+
           </div>
         </div>
       </div>

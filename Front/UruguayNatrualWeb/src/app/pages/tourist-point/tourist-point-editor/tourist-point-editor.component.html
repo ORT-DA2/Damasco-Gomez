@@ -1,5 +1,12 @@
-<div class="header pb-8 pt-5 pt-lg-8 d-flex align-items-center"
-  style="min-height: 600px; background-image: url(assets/img/theme/profile-cover.jpg); background-size: cover; background-position: center top;">
+<div
+  class="header pb-8 pt-5 pt-lg-8 d-flex align-items-center"
+  style="
+    min-height: 600px;
+    background-image: url(assets/img/theme/profile-cover.jpg);
+    background-size: cover;
+    background-position: center top;
+  "
+>
   <!-- Mask -->
   <span class="mask bg-gradient-danger opacity-8"></span>
 </div>
@@ -11,12 +18,21 @@
           <div class="row align-items-center">
             <div class="col-8">
               <h3 class="mb-0">Tourist Point</h3>
-              <span class="heading-small text-muted mb-4">Id {{touristPointId}}</span>
+              <span class="heading-small text-muted mb-4"
+                >Id {{ touristPointId }}</span
+              >
             </div>
             <div class="col-4 text-right">
-              <button type="button" placement="top-center" triggers="hover focus click"
-                class="btn btn-rounded btn-outline-warning" ngxClipboard [cbContent]="'air-baloon'"
-                (cbOnSuccess)="copy = 'air-baloon'" (click)="updateData(touristPoint)">
+              <button
+                type="button"
+                placement="top-center"
+                triggers="hover focus click"
+                class="btn btn-rounded btn-outline-warning"
+                ngxClipboard
+                [cbContent]="'air-baloon'"
+                (cbOnSuccess)="copy = 'air-baloon'"
+                (click)="updateData(touristPoint)"
+              >
                 Update
               </button>
             </div>
@@ -26,76 +42,138 @@
           <form>
             <div class="pl-lg-4">
               <div class="row">
-
                 <div class="col-6">
                   <div class="form-group">
-                    <label class="form-control-label" for="input-username">Name</label>
-                    <input type="text" id="input-username" class="form-control form-control-alternative"
-                      [(ngModel)]="touristPoint.name" name="nameT">
+                    <label class="form-control-label" for="input-username"
+                      >Name</label
+                    >
+                    <input
+                      type="text"
+                      id="input-username"
+                      class="form-control form-control-alternative"
+                      [(ngModel)]="touristPoint.name"
+                      name="nameT"
+                    />
                   </div>
                 </div>
 
                 <div class="col-6">
                   <div class="form-group">
-                    <label class="form-control-label" for="input-description">Description</label>
-                    <input type="text" id="input-description" class="form-control form-control-alternative"
-                      [(ngModel)]="touristPoint.description" name="description">
+                    <label class="form-control-label" for="input-description"
+                      >Description</label
+                    >
+                    <input
+                      type="text"
+                      id="input-description"
+                      class="form-control form-control-alternative"
+                      [(ngModel)]="touristPoint.description"
+                      name="description"
+                    />
                   </div>
                 </div>
 
                 <div class="col-9">
                   <div class="form-group">
                     <label class="form-control-label">Region</label>
-                    <select class="custom-select form-control form-control-alternative"
-                      [(ngModel)]="regionName" name="regionName" (change)="onChangeRegionName(regionName)">
+                    <select
+                      class="custom-select form-control form-control-alternative"
+                      [(ngModel)]="regionName"
+                      name="regionName"
+                      (change)="onChangeRegionName(regionName)"
+                    >
                       <option disabled>Choose Region</option>
-                      <option *ngFor="let region of regions"> {{region.name}} </option>
+                      <option *ngFor="let region of regions">
+                        {{ region.name }}
+                      </option>
                     </select>
                   </div>
                 </div>
 
                 <div class="col-3">
                   <div class="form-group">
-                    <label class="form-control-label" for="label-region-id">Region Id</label>
-                    <input type="number" id="input-region-id" class="form-control form-control-alternative"
-                      value="{{touristPoint.regionId}}" [(ngModel)]="touristPoint.regionId" name="regionId"
-                      disabled>
+                    <label class="form-control-label" for="label-region-id"
+                      >Region Id</label
+                    >
+                    <input
+                      type="number"
+                      id="input-region-id"
+                      class="form-control form-control-alternative"
+                      value="{{ touristPoint.regionId }}"
+                      [(ngModel)]="touristPoint.regionId"
+                      name="regionId"
+                      disabled
+                    />
                   </div>
                 </div>
 
-                {{categoriesName | json}}
-                <div class="col-12" >
+                {{ categoriesName | json }}
+                <div class="col-12">
                   <div class="form-group" id="categoriesTouristPoints">
-                    <label class="form-control-label" for="input-categories">Categories</label>
-                    <select *ngFor="let categoryTouristPoint of touristPoint.categories; let i = index"
-                      [(ngModel)]="categoriesName[i]" name="{{i}}" (change)="onChangeCategoryName(categoriesName[i],i)"
-                      class="custom-select form-control form-control-alternative">
-                      <option> {{categoryTouristPoint.name}} </option>
+                    <label class="form-control-label" for="input-categories"
+                      >Categories</label
+                    >
+                    <select
+                      *ngFor="
+                        let categoryTouristPoint of touristPoint.categories;
+                        let i = index
+                      "
+                      [(ngModel)]="categoriesName[i]"
+                      name="{{ i }}"
+                      (change)="onChangeCategoryName(categoriesName[i], i)"
+                      class="custom-select form-control form-control-alternative"
+                    >
+                      <option>{{ categoryTouristPoint.name }}</option>
                       <option disabled>Choose Category</option>
-                      <option *ngFor="let category of categories"
-                        [ngValue]="category.name">
-                          {{category.name}}
+                      <option
+                        *ngFor="let category of categories"
+                        [ngValue]="category.name"
+                      >
+                        {{ category.name }}
                       </option>
                     </select>
                   </div>
-                  <button type="button" placement="top-center" triggers="hover focus click"
-                    class="btn btn-rounded btn-outline-warning" ngxClipboard [cbContent]="'air-baloon'"
+                  <button
+                    type="button"
+                    placement="top-center"
+                    triggers="hover focus click"
+                    class="btn btn-rounded btn-outline-warning"
+                    ngxClipboard
+                    [cbContent]="'air-baloon'"
                     (click)="addCategory()"
-                    (cbOnSuccess)="copy = 'air-baloon'">
+                    (cbOnSuccess)="copy = 'air-baloon'"
+                  >
                     Add Category
                   </button>
-                  <button type="button" placement="top-center" triggers="hover focus click"
-                    class="btn btn-rounded btn-outline-danger" ngxClipboard [cbContent]="'air-baloon'"
+                  <button
+                    type="button"
+                    placement="top-center"
+                    triggers="hover focus click"
+                    class="btn btn-rounded btn-outline-danger"
+                    ngxClipboard
+                    [cbContent]="'air-baloon'"
                     (click)="deleteCategory()"
-                    (cbOnSuccess)="copy = 'air-baloon'">
+                    (cbOnSuccess)="copy = 'air-baloon'"
+                  >
                     Delete Category
                   </button>
                 </div>
-
               </div>
             </div>
             <hr class="my-4" />
           </form>
+
+          <button
+            routerLink="/tourist-points"
+            type="button"
+            placement="top-center"
+            triggers="hover focus click"
+            class="btn btn-rounded btn-outline-warning"
+            ngxClipboard
+            [cbContent]="'air-baloon'"
+            (cbOnSuccess)="copy = 'air-baloon'"
+          >
+            Go back
+          </button>
         </div>
       </div>
     </div>

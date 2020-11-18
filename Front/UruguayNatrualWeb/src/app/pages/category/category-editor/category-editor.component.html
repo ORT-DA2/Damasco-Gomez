@@ -1,27 +1,48 @@
-<div class="header pb-8 pt-5 pt-lg-8 d-flex align-items-center"
-  style="min-height: 600px; background-image: url(assets/img/theme/profile-cover.jpg); background-size: cover; background-position: center top;">
-  <!-- Mask -->
-  <span class="mask bg-gradient-danger opacity-8"></span>
+<div class="header pb-8 pt-5 pt-lg-8 d-flex align-items-center" style="
+    min-height: 600px;
+    background-image: url(assets/img/theme/profile-cover.jpg);
+    background-size: cover;
+    background-position: center top;
+  ">
+    <!-- Mask -->
+    <span class="mask bg-gradient-danger opacity-8"></span>
 </div>
 <div class="container-fluid mt--7">
-  <div class="row">
-    <div class="col-xl-8 order-xl-1">
-      <div class="card bg-secondary shadow">
-        <div class="card-header bg-white border-0">
-          <div class="row align-items-center">
-            <div class="col-8">
-              <h3 class="mb-0">Category</h3>
-              <span class="heading-small text-muted mb-4">Id {{categoryId}}</span>
+    <div class="row">
+        <div class="col-xl-8 order-xl-1">
+            <div class="card bg-secondary shadow">
+                <div class="card-header bg-white border-0">
+                    <div class="row align-items-center">
+                        <div class="col-8">
+                            <h3 class="mb-0">Category</h3>
+                            <span class="heading-small text-muted mb-4">Id {{ categoryId }}</span
+              >
             </div>
             <div class="col-4 text-right">
-              <button *ngIf="existentCategory" type="button" placement="top-center" triggers="hover focus click"
-                class="btn btn-rounded btn-outline-warning" ngxClipboard [cbContent]="'air-baloon'"
-                (cbOnSuccess)="copy = 'air-baloon'" (click)="updateData(category)">
+              <button
+                *ngIf="existentCategory"
+                type="button"
+                placement="top-center"
+                triggers="hover focus click"
+                class="btn btn-rounded btn-outline-warning"
+                ngxClipboard
+                [cbContent]="'air-baloon'"
+                (cbOnSuccess)="copy = 'air-baloon'"
+                (click)="updateData(category)"
+              >
                 Update
               </button>
-              <button *ngIf="!existentCategory" type="button" placement="top-center" triggers="hover focus click"
-                class="btn btn-rounded btn-outline-warning" ngxClipboard [cbContent]="'air-baloon'"
-                (cbOnSuccess)="copy = 'air-baloon'" (click)="addCategory(category)">
+              <button
+                *ngIf="!existentCategory"
+                type="button"
+                placement="top-center"
+                triggers="hover focus click"
+                class="btn btn-rounded btn-outline-warning"
+                ngxClipboard
+                [cbContent]="'air-baloon'"
+                (cbOnSuccess)="copy = 'air-baloon'"
+                (click)="addCategory(category)"
+              >
                 Add Category
               </button>
             </div>
@@ -31,38 +52,72 @@
           <form>
             <div class="pl-lg-4">
               <div class="row">
-
                 <div class="col-6">
                   <div class="form-group">
-                    <label class="form-control-label" for="input-username">Name</label>
-                    <input type="text" id="input-username" class="form-control form-control-alternative"
-                      [(ngModel)]="category.name" name="nameCategory">
+                    <label class="form-control-label" for="input-username"
+                      >Name</label
+                    >
+                    <input
+                      type="text"
+                      id="input-username"
+                      class="form-control form-control-alternative"
+                      [(ngModel)]="category.name"
+                      name="nameCategory"
+                    />
                   </div>
                 </div>
 
-                {{touristPointName | json}}
+                {{ touristPointName | json }}
                 <div class="col-12">
                   <div class="form-group" id="categoriesTouristPoints">
-                    <label class="form-control-label" for="input-categories">Tourist Points</label>
-                    <select *ngFor="let touristPointCategory of category.touristPoints; let i = index"
-                      [(ngModel)]="touristPointName[i]" name="{{i}}"
-                      (change)="onChangeTouristPointName(touristPointName[i],i)"
-                      class="custom-select form-control form-control-alternative">
-                      <option> {{touristPoints.name}} </option>
+                    <label class="form-control-label" for="input-categories"
+                      >Tourist Points</label
+                    >
+                    <select
+                      *ngFor="
+                        let touristPointCategory of category.touristPoints;
+                        let i = index
+                      "
+                      [(ngModel)]="touristPointName[i]"
+                      name="{{ i }}"
+                      (change)="
+                        onChangeTouristPointName(touristPointName[i], i)
+                      "
+                      class="custom-select form-control form-control-alternative"
+                    >
+                      <option>{{ touristPoints.name }}</option>
                       <option enable>Choose Tourist point</option>
-                      <option *ngFor="let touristPoint of touristPoints" [ngValue]="touristPoint.name">
-                        {{touristPoint.name}}
+                      <option
+                        *ngFor="let touristPoint of touristPoints"
+                        [ngValue]="touristPoint.name"
+                      >
+                        {{ touristPoint.name }}
                       </option>
                     </select>
                   </div>
-                  <button type="button" placement="top-center" triggers="hover focus click"
-                    class="btn btn-rounded btn-outline-warning" ngxClipboard [cbContent]="'air-baloon'"
-                    (click)="addTouristPoint()" (cbOnSuccess)="copy = 'air-baloon'">
+
+                  <button
+                    type="button"
+                    placement="top-center"
+                    triggers="hover focus click"
+                    class="btn btn-rounded btn-outline-warning"
+                    ngxClipboard
+                    [cbContent]="'air-baloon'"
+                    (click)="addTouristPoint()"
+                    (cbOnSuccess)="copy = 'air-baloon'"
+                  >
                     Add Tourist Point
                   </button>
-                  <button type="button" placement="top-center" triggers="hover focus click"
-                    class="btn btn-rounded btn-outline-danger" ngxClipboard [cbContent]="'air-baloon'"
-                    (click)="deleteTouristPoint()" (cbOnSuccess)="copy = 'air-baloon'">
+                  <button
+                    type="button"
+                    placement="top-center"
+                    triggers="hover focus click"
+                    class="btn btn-rounded btn-outline-danger"
+                    ngxClipboard
+                    [cbContent]="'air-baloon'"
+                    (click)="deleteTouristPoint()"
+                    (cbOnSuccess)="copy = 'air-baloon'"
+                  >
                     Delete Tourist Point
                   </button>
                 </div>
@@ -70,6 +125,20 @@
             </div>
             <hr class="my-4" />
           </form>
+
+          <button routerLink="/categories"
+          type="button"
+          placement="top-center"
+          triggers="hover focus click"
+          class="btn btn-rounded btn-outline-warning"
+          ngxClipboard
+          [cbContent]="'air-baloon'"
+          (cbOnSuccess)="copy = 'air-baloon'"
+
+        >
+           Go back
+        </button>
+
         </div>
       </div>
     </div>
