@@ -1,3 +1,6 @@
 .modal-error, .errorMessage{
   color: red;
 }
+.btn.btn-sm.btn-primary{
+  display: block;
+}
