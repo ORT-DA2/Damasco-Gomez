@@ -43,3 +43,4 @@ App/DataAccess.Tests/coverage.json
 App/Domain.Test/coverage.json
 Front/UruguayNatrualWeb/package-lock.json
 Front/UruguayNatrualWeb/package.json
+App/ImportInterface/bin/Debug
