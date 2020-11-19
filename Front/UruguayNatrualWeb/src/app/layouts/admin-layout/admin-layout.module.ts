@@ -23,7 +23,8 @@ import { CategoryTableComponent } from 'src/app/pages/category/category-table/ca
 import { HouseDashboardComponent } from 'src/app/pages/house/house-dashboard/house-dashboard.component';
 import { HouseTableComponent } from 'src/app/pages/house/house-table/house-table.component';
 import { HouseEditorComponent } from 'src/app/pages/house/house-editor/house-editor.component';
-import { ReportComponent } from 'src/app/pages/report/report.component';
+
+
 @NgModule({
   imports: [
     CommonModule,
@@ -50,7 +51,8 @@ import { ReportComponent } from 'src/app/pages/report/report.component';
     HouseDashboardComponent,
     HouseTableComponent,
     HouseEditorComponent,
-    ReportComponent
+
+
   ]
 })
 

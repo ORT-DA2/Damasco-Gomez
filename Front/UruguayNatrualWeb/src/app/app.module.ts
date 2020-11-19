@@ -24,6 +24,9 @@ import { ReviewService } from './services/reviews/review.service';
 import { SessionService } from './services/sessions/session.service';
 import { TouristLayoutComponent } from './layouts/tourist-layout/tourist-layout.component';
 import { ReviewComponent } from './pages/review/review.component';
+import { ReportDashboardComponent } from './pages/report-dashboard/report-dashboard.component';
+import { ReportTableComponent } from './pages/report-table/report-table.component';
+
 
 
 
@@ -46,7 +49,10 @@ import { ReviewComponent } from './pages/review/review.component';
     AdminLayoutComponent,
     AuthLayoutComponent,
     TouristLayoutComponent,
-    ReviewComponent
+    ReviewComponent,
+    ReportDashboardComponent,
+    ReportTableComponent
+
   ],
   providers: [TouristPointsService,
     CategoryService,

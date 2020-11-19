@@ -11,7 +11,8 @@ import { CategoryDashboardComponent } from 'src/app/pages/category/category-dash
 import { CategoryEditorComponent } from 'src/app/pages/category/category-editor/category-editor.component';
 import { HouseEditorComponent } from 'src/app/pages/house/house-editor/house-editor.component';
 import { HouseDashboardComponent } from 'src/app/pages/house/house-dashboard/house-dashboard.component';
-import { ReportComponent } from 'src/app/pages/report/report.component';
+
+
 
 export const AdminLayoutRoutes: Routes = [
     { path: 'dashboard',      component: DashboardComponent },
@@ -25,5 +26,6 @@ export const AdminLayoutRoutes: Routes = [
     { path : 'category/category-editor/:id', component :  CategoryEditorComponent},
     { path : 'house/house-editor/:id', component :  HouseEditorComponent},
     { path: 'houses',       component: HouseDashboardComponent },
-    { path: 'reports',       component: ReportComponent },
+
+
 ];
