@@ -19,6 +19,17 @@ export class ReportService {
       .pipe(catchError(this.handleError));
   }
 
+
+  GetHousesReportBy(TouristPointId: number, CheckIn: string, CheckOut: string)
+    : Observable<ReportBasicInfo[]> {
+    let params = new HttpParams()
+      .set('touristpointId', TouristPointId)
+      .set('checkin', CheckIn)
+      .set('checkout', CheckOut)
+    return this.http.get<ReportBasicInfo[]>(this.uri, { params });
+  }
+
+
   private handleError(error: HttpErrorResponse){
     let message: string;
     if (error.error instanceof ErrorEvent) {
