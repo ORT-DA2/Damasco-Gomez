@@ -21,6 +21,7 @@ export const ROUTES: RouteInfo[] = [
     { path: '/categories', title: 'Categories',  icon:'ni-bullet-list-67 text-pink', class: '' ,admin:true},
     { path: '/houses', title: 'Houses',  icon:'ni-building text-blue', class: '' , admin:true},
     { path: '/search', title: 'Search',  icon:'ni-building text-blue', class: '' , admin:false},
+    { path: '/reports', title: 'Reports',  icon:'ni-building text-blue', class: '' , admin:true},
 ];
 
 @Component({
