@@ -24,6 +24,7 @@ import { ReviewService } from './services/reviews/review.service';
 import { SessionService } from './services/sessions/session.service';
 import { TouristLayoutComponent } from './layouts/tourist-layout/tourist-layout.component';
 import { ReviewComponent } from './pages/review/review.component';
+import { ReportComponent } from './page/report/report.component';
 
 
 @NgModule({
@@ -46,6 +47,7 @@ import { ReviewComponent } from './pages/review/review.component';
     AuthLayoutComponent,
     TouristLayoutComponent,
     ReviewComponent,
+    ReportComponent,
   ],
   providers: [TouristPointsService,
     CategoryService,
