@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { HouseBasicInfo } from 'src/app/models/house/house-base-info';
 
 @Component({
   selector: 'app-report-table',
@@ -6,7 +7,7 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./report-table.component.css']
 })
 export class ReportTableComponent implements OnInit {
-
+  public houses: HouseBasicInfo[] = {} as HouseBasicInfo[];
   constructor() { }
 
   ngOnInit(): void {
