@@ -57,12 +57,11 @@
                     </div>
                   </div>
                 </div>
-
+                <div class="col-8">
+                  <h3 class="mb-0">Tourist Point</h3>
+                </div>
                 {{ touristPointName | json }}
                 <div class="col-12">
-                  <div class="col-8">
-                    <h3 class="mb-0">Tourist Point</h3>
-                  </div>
                   <div class="form-group" id="TouristPoints">
                     <select
                       [(ngModel)]="touristPointName"
@@ -92,7 +91,7 @@
                         ngxClipboard
                         cbContent="'air-baloon'"
                         (cbOnSuccess)="copy = 'air-baloon'"
-                        (click)="searchBy()"
+                        (click)="getReportByTp()"
                       >
                         Search Bookings
                       </button>
@@ -109,6 +108,6 @@
 </div>
 
 <!-- Page content -->
-<div class="container-fluid mt--7">
+<div *ngIf="showReports" class="container-fluid mt--7">
   <app-report-table></app-report-table>
 </div>

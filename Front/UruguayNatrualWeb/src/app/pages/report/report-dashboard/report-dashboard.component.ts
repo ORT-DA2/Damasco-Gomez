@@ -66,7 +66,6 @@ export class ReportDashboardComponent implements OnInit {
 
     const checkInDate = new Date(this.checkIn);
     const checkOutDate = new Date(this.checkOut);
-    // const currentDate = new Date();
     if (checkInDate < checkOutDate) {
         this.reportService.GetHousesReportBy(this.touristPointId, this.checkIParse, this.checkOutParse).subscribe(
             reportResponse =>
@@ -78,7 +77,9 @@ export class ReportDashboardComponent implements OnInit {
       this.errorMessageDates = 'Error in the dates, check them please';
     }
   }
+  createModel() {
 
+  }
   private showError(message: string) {
     console.log(message);
   }
