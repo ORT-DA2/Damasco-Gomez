@@ -16,7 +16,7 @@ namespace DataAccess.Repositories
 
         protected override void Validate(Review element)
         {
-            if (element.Score < 11 || element.Score > 0) throw new ArgumentException("You need a score between 0 and 10");
+            if (element.Score > 10 || element.Score < 0) throw new ArgumentException("You need a score between 0 and 10");
         }
     }
 }
