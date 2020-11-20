@@ -80,19 +80,30 @@ set IDENTITY_INSERT ImagesTouristPoints OFF
 
 set IDENTITY_INSERT TouristPoints ON
 INSERT INTO TouristPoints (Id, Name, ImageTouristPointId,[Description],RegionId)
-VALUES (1, 'Name tourist point1', 1, 'descripcion tourist point 1',1);
+VALUES (1, ' Colonia del Sacramento', 1, 'Mágica ciudad levantada a orillas del Río de la Plata, conocida como uno de los mejores lugares turísticos de Uruguay para amantes de la historia, siendo hogar de un invaluable centro histórico declarado Patrimonio de la Humanidad por la UNESCO, donde perderse caminando entre angostas callecitas de piedra y coloridas arquitecturas coloniales.',2);
 INSERT INTO TouristPoints (Id, Name, ImageTouristPointId,[Description],RegionId)
-VALUES (2, 'Name tourist point1', 2, 'descripcion tourist point 1',1);
+VALUES (2, 'Montevideo', 2, 'descripcion tourist point 1',2);
 INSERT INTO TouristPoints (Id, Name, ImageTouristPointId,[Description],RegionId)
-VALUES (3, 'Name tourist point1', 3, 'descripcion tourist point 1',1);
+VALUES (3, 'Maldonado', 3, 'descripcion tourist point 1',3);
 INSERT INTO TouristPoints (Id, Name, ImageTouristPointId,[Description],RegionId)
-VALUES (4, 'Name tourist point1', 4, 'descripcion tourist point 1',1);
+VALUES (4, 'La Paloma', 4, 'Balneario y puerto situado en el departamento de Rocha, una localidad que destaca por sus 22 kilómetros de hermosas playas, vasta oferta turística y privilegiados entornos naturales, rodeándose de algunos de los más espectaculares lugares turísticos de Uruguay para amantes de la naturaleza y las playas.',3);
 INSERT INTO TouristPoints (Id, Name, ImageTouristPointId,[Description],RegionId)
-VALUES (5, 'Name tourist point1', 5, 'descripcion tourist point 1',1);
+VALUES (5, 'Atlántida', 5, 'Hermosa ciudad balneario situada a orillas del Río de la Plata, conocida como la Capital de la Costa
+de Oro, destacando tanto por la belleza de sus playas y espacios verdes, como por su
+cercanía y fácil accesibilidad desde Montevideo.',1);
 INSERT INTO TouristPoints (Id, Name, ImageTouristPointId,[Description],RegionId)
-VALUES (6, 'Name tourist point1', 6, 'descripcion tourist point 1',1);
+VALUES (6, 'Punta del diablo', 6, 'Pequeño pueblo de pescadores y artesanos, conocido por sus pintorescos ranchitos con techos de paja que se extienden a lo largo del borde costero; bastante tranquilo durante el año hasta la llegada del verano, cuando se transforma en un animado balneario, especialmente apetecido por surfistas que aprovechan las buenas olas de sus playas y la movida nocturna que toma vida entre sus relajados bares.',3);
 INSERT INTO TouristPoints (Id, Name, ImageTouristPointId,[Description],RegionId)
-VALUES (7, 'Name tourist point1', 7, 'descripcion tourist point 1',1);
+VALUES (7, 'Cabo Polonio', 7, 'Otro de los espectaculares lugares turísticos de Uruguay escondido en el departamento de Rocha, un parque nacional que sorprende con su conjunto de playas, dunas de arena y tres pequeñas islas, donde habitan cientos de lobos marinos.',3);
+
+INSERT INTO TouristPoints (Id, Name, ImageTouristPointId,[Description],RegionId)
+VALUES (7, 'Piriápolis', 7, 'Ciudad balnearia bañada por las aguas del Río de la Plata, conocida por haber sido el primer balneario de Uruguay, conservando hasta el día hoy varias de las elegantes construcciones que se levantaron a principios del siglo XX. Hoy con su economía centrada en el turismo, alberga una amplia oferta de servicios, entre los que se cuentan, hoteles, casinos, restaurantes y una animada vida nocturna.',3);
+
+
+INSERT INTO TouristPoints (Id, Name, ImageTouristPointId,[Description],RegionId)
+VALUES (7, 'Paysandú', 7, 'Una de las ciudades más importantes del Uruguay, albergando una amplia oferta de servicios y atractivos turísticos, entre los cuales figuran monumentos históricos, playas en la costa del Río Uruguay, una linda marina y algunos famosos festivales como La Semana de la Cerveza.',4);
+
+
 set IDENTITY_INSERT TouristPoints OFF
 
 set IDENTITY_INSERT Houses ON
