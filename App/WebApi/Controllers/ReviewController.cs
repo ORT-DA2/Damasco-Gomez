@@ -62,7 +62,6 @@ namespace WebApi.Controllers
         /// <response code="200">Se devuelve la información requerida.</response>
         /// <response code="400">Categoria no existente con ese identificador</response>
         [HttpPost]
-        [AuthorizationFilter]
         public IActionResult Post([FromBody]ReviewModel reviewModel)
         {
             Review review = reviewModel.ToEntity();
