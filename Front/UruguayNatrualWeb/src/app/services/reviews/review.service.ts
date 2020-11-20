@@ -21,6 +21,17 @@ export class ReviewService {
   }
 
 
+  add(body): Observable<any> {
+    const headers = new HttpHeaders({
+      'Content-Type': 'application/json'
+    });
+    let options = { headers: headers };
+    var httpRequest = this.http.post<any>(this.uri, body, options)
+      .pipe(catchError(this.handleError));
+    return httpRequest;
+  }
+
+
   private handleError(error: HttpErrorResponse){
     let message: string;
     if (error.error instanceof ErrorEvent) {

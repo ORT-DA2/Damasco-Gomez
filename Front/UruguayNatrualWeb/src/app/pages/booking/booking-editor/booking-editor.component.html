@@ -1,4 +1,12 @@
-<div class="header pb-8 pt-5 pt-lg-8 d-flex align-items-center" style="min-height: 600px; background-image: url(assets/img/theme/profile-cover.jpg); background-size: cover; background-position: center top;">
+<div
+  class="header pb-8 pt-5 pt-lg-8 d-flex align-items-center"
+  style="
+    min-height: 600px;
+    background-image: url(assets/img/theme/profile-cover.jpg);
+    background-size: cover;
+    background-position: center top;
+  "
+>
   <!-- Mask -->
   <span class="mask bg-gradient-danger opacity-8"></span>
 </div>
@@ -10,7 +18,9 @@
           <div class="row align-items-center">
             <div class="col-8">
               <h3 class="mb-0">Booking</h3>
-              <span class="heading-small text-muted mb-4">Id {{bookingId}}</span>
+              <span class="heading-small text-muted mb-4"
+                >Id {{ bookingId }}</span
+              >
             </div>
             <div class="col-4 text-right">
               <a href="#!" class="btn btn-sm btn-primary">Update</a>
@@ -23,88 +33,159 @@
               <div class="row">
                 <div class="col-6">
                   <div class="form-group">
-                    <label class="form-control-label" for="input-username">Name</label>
-                    <input type="text" id="input-username"
+                    <label class="form-control-label" for="input-username"
+                      >Name</label
+                    >
+                    <input
+                      type="text"
+                      id="input-username"
                       class="form-control form-control-alternative"
-                      value={{booking.name}}>
+                      value="{{ booking.name }}"
+                    />
                   </div>
                 </div>
                 <div class="col-6">
                   <div class="form-group">
-                    <label class="form-control-label" for="input-email">Email</label>
-                    <input type="email" id="input-email"
+                    <label class="form-control-label" for="input-email"
+                      >Email</label
+                    >
+                    <input
+                      type="email"
+                      id="input-email"
                       class="form-control form-control-alternative"
-                      placeholder="jesse@example.com" value={{booking.email}}>
+                      placeholder="jesse@example.com"
+                      value="{{ booking.email }}"
+                    />
                   </div>
                 </div>
                 <div class="col-9">
                   <div class="form-group">
-                    <label class="form-control-label" for="select-house">House</label>
-                    <select class="custom-select form-control form-control-alternative" >
+                    <label class="form-control-label" for="select-house"
+                      >House</label
+                    >
+                    <select
+                      class="custom-select form-control form-control-alternative"
+                    >
                       <option disabled>Choose House</option>
-                      <option *ngFor="let house of houses" [ngValue]="house.name">{{house.name}}</option>
+                      <option
+                        *ngFor="let house of houses"
+                        [ngValue]="house.name"
+                      >
+                        {{ house.name }}
+                      </option>
                     </select>
                   </div>
                 </div>
                 <div class="col-3">
                   <div class="form-group">
-                    <label class="form-control-label" for="input-houseId">House Id</label>
-                    <p id="input-houseId" class="form-control form-control-alternative">
-                      {{booking.houseId}}
+                    <label class="form-control-label" for="input-houseId"
+                      >House Id</label
+                    >
+                    <p
+                      id="input-houseId"
+                      class="form-control form-control-alternative"
+                    >
+                      {{ booking.houseId }}
                     </p>
                   </div>
                 </div>
                 <div class="col-9">
                   <div class="form-group">
                     <label class="form-control-label">State</label>
-                    <select class="custom-select form-control form-control-alternative">
+                    <select
+                      class="custom-select form-control form-control-alternative"
+                    >
                       <option disabled>Choose State</option>
-                      <option *ngFor="let state of states" [ngValue]="state">{{state.name}}</option>
+                      <option *ngFor="let state of states" [ngValue]="state">
+                        {{ state.name }}
+                      </option>
                     </select>
                   </div>
                 </div>
                 <div class="col-3">
                   <div class="form-group">
-                    <label class="form-control-label" for="input-state-id">State Id</label>
-                    <input type="number" id="input-state-id" class="form-control form-control-alternative"
-                      value="{{booking.stateId}}">
+                    <label class="form-control-label" for="input-state-id"
+                      >State Id</label
+                    >
+                    <input
+                      type="number"
+                      id="input-state-id"
+                      class="form-control form-control-alternative"
+                      value="{{ booking.stateId }}"
+                    />
                   </div>
                 </div>
                 <div class="col-8">
                   <div class="form-group">
-                    <label class="form-control-label" for="input-code">Code</label>
-                    <p type="email" id="input-code"
-                      class="form-control form-control-alternative">
-                      {{booking.code}}
+                    <label class="form-control-label" for="input-code"
+                      >Code</label
+                    >
+                    <p
+                      type="email"
+                      id="input-code"
+                      class="form-control form-control-alternative"
+                    >
+                      {{ booking.code }}
                     </p>
                   </div>
                 </div>
                 <div class="col-4">
                   <div class="form-group">
-                    <label class="form-control-label" for="input-price">Price</label>
-                    <input type="number" id="input-price" class="form-control form-control-alternative"
-                      value="{{booking.price}}">
+                    <label class="form-control-label" for="input-price"
+                      >Price</label
+                    >
+                    <input
+                      type="number"
+                      id="input-price"
+                      class="form-control form-control-alternative"
+                      value="{{ booking.price }}"
+                    />
                   </div>
                 </div>
 
                 <div class="col-6">
                   <div class="form-group">
-                    <label class="form-control-label" for="input-date">Check In</label>
-                    <input type="date" id="input-date-in" class="form-control form-control-alternative"
-                      value={{booking.checkIn}}>
+                    <label class="form-control-label" for="input-date"
+                      >Check In</label
+                    >
+                    <input
+                      type="date"
+                      id="input-date-in"
+                      class="form-control form-control-alternative"
+                      value="{{ booking.checkIn }}"
+                    />
                   </div>
                 </div>
 
                 <div class="col-6">
                   <div class="form-group">
-                    <label class="form-control-label" for="input-date">Check Out</label>
-                    <input type="date" id="input-date-out" class="form-control form-control-alternative">
+                    <label class="form-control-label" for="input-date"
+                      >Check Out</label
+                    >
+                    <input
+                      type="date"
+                      id="input-date-out"
+                      class="form-control form-control-alternative"
+                    />
                   </div>
                 </div>
               </div>
             </div>
             <hr class="my-4" />
           </form>
+
+          <button
+            routerLink="/bookings"
+            type="button"
+            placement="top-center"
+            triggers="hover focus click"
+            class="btn btn-rounded btn-outline-warning"
+            ngxClipboard
+            [cbContent]="'air-baloon'"
+            (cbOnSuccess)="copy = 'air-baloon'"
+          >
+            Go back
+          </button>
         </div>
       </div>
     </div>

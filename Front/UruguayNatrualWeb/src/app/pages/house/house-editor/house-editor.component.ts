@@ -3,7 +3,6 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { CategoryBasicInfo } from 'src/app/models/category/category-basic-info';
 import { HouseBasicInfo } from 'src/app/models/house/house-base-info';
 import { HouseDetailInfo } from 'src/app/models/house/house-detail-info';
-import { RegionBasicInfo } from 'src/app/models/regions/region-base-info';
 import { TouristPointsBasicInfo } from 'src/app/models/touristpoint/touristpoint-base-info';
 import { CategoryService } from 'src/app/services/categories/category.service';
 import { HouseService } from 'src/app/services/houses/house.service';
@@ -17,16 +16,18 @@ import { TouristPointsService } from 'src/app/services/touristpoints/touristpoin
 })
 export class HouseEditorComponent implements OnInit {
   public house: HouseDetailInfo = {} as HouseDetailInfo;
-  public touristPoint: TouristPointsBasicInfo[] = [];
+  public touristPoints: TouristPointsBasicInfo[] = [];
   public houseId: number = 0;
   public pricePerNigth : number;
-  public avaible: boolean;
+  public starts : number;
   public existentHouse : boolean;
   public readonly : boolean;
   public regionName: string;
+  public touristPointName: string;
+  public touristPointId: number;
   public categoriesName: string[] = [];
+  public startsList : number [] = [];
   public categories : CategoryBasicInfo[] = [];
-  touristPointNew: TouristPointsBasicInfo = {} as TouristPointsBasicInfo;
   constructor(
     private route: ActivatedRoute,
     private router: Router,
@@ -38,20 +39,18 @@ export class HouseEditorComponent implements OnInit {
   ngOnInit(): void {
     const id = this.route.snapshot.paramMap.get('id');
     this.houseId = Number(id);
+    this.startsList =   [1, 2, 3, 4, 5];
     this.existentHouse = this.isExistentHouse();
     this.readonly = this.isReadOnly();
-    console.log( this.readonly);
     if (this.existentHouse) {
       this.houseService.getBy(this.houseId).subscribe(
         houseResponse =>
           this.getBy(houseResponse), (error: string) => this.showError(error));
     }
-    this.regionService.getBy(this.house.touristPoint.regionId).subscribe(
-      response =>
-        this.getRegionNameBy(response), (error: string) => this.showError(error));
-        this.categoryService.getAll().subscribe(
-          categoryResponse =>
-            this.getAllCategories(categoryResponse), (error: string) =>this.showError(error));
+    this.touristPointService.getAll().subscribe(
+      touristPointResponse =>
+        this.getAllTouristPoints(touristPointResponse), (error: string) => this.showError(error)
+    );
   }
 
   isExistentHouse (): boolean {
@@ -66,37 +65,48 @@ export class HouseEditorComponent implements OnInit {
     );
   }
   addHouse(house: HouseDetailInfo) {
+
     const basicInfo = this.createModel(house);
     this.houseService.add(basicInfo).subscribe(
       responseAdd => {
         this.houseId= responseAdd.id;
-        this.router.navigateByUrl(`/category/category-editor/${this.houseId}`);
+        this.router.navigateByUrl(`/house/house-editor/${this.houseId}`);
         this.existentHouse = true;
       }
     );
   }
+
   isReadOnly () : boolean{
     return !isNaN(this.houseId);
   }
   private createModel(house: HouseDetailInfo): HouseBasicInfo {
     const modelBase: HouseBasicInfo = {} as HouseBasicInfo;
     modelBase.name = house.name;
-    modelBase.touristPointId = house.touristPoint.id;
+    modelBase.starts = house.starts;
+    modelBase.pricePerNight = house.pricePerNight;
+    modelBase.avaible = house.avaible;
+    modelBase.address = house.address;
+    modelBase.description = house.description;
+    modelBase.phone = house.phone;
+    modelBase.contact = house.contact;
+    modelBase.touristPointId = house.touristPointId;
     return modelBase;
   }
   private getBy(houseResponse: HouseDetailInfo) {
     this.house = houseResponse;
+    this.touristPointName = this.house.touristPoint ? this.house.touristPoint.name: '' ;
+  }
+  private getAllTouristPoints(touristPointResponse: TouristPointsBasicInfo[]){
+    this.touristPoints = touristPointResponse;
   }
   private showError(message: string) {
     console.log(message);
   }
+  onChangeTouristPointName(touristPointName: string) {
 
-  getRegionNameBy(event: any){
-    this.regionName = event.name;
+    var touristPoint = this.touristPoints.find(x => x.name == touristPointName);
+    this.house.touristPointId = touristPoint.id;
   }
-  getAllCategories (categoryResponse: any){
-      this.categories = categoryResponse;
 
-  }
 
 }

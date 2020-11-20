@@ -51,7 +51,6 @@ export class CategoryEditorComponent implements OnInit {
 
   private getAllTouristPoints(touristPointResponse: TouristPointsBasicInfo[]) {
     this.touristPoints = touristPointResponse;
-    console.log(this.touristPoints);
   }
 
   updateData(category: CategoryDetailInfo) {

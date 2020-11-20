@@ -41,9 +41,15 @@ App/SessionInterface/bin
 App/BusinessLogic.Tests/coverage.json
 App/DataAccess.Tests/coverage.json
 App/Domain.Test/coverage.json
+<<<<<<< HEAD
 App/ImportInterface/bin
 App/ImportJson/bin/Debug/netstandard2.0/ImportInterface.pdb
 App/ImportJson/bin/Debug/netstandard2.0/ImportJson.deps.json
 App/ImportJson/bin/Debug/netstandard2.0/ImportJson.pdb
 App/ImporterInterface/bin
 
+=======
+Front/UruguayNatrualWeb/package-lock.json
+Front/UruguayNatrualWeb/package.json
+App/ImportInterface/bin/Debug
+>>>>>>> develop-front
