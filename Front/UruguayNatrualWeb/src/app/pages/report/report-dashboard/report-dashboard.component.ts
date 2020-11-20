@@ -15,8 +15,8 @@ export class ReportDashboardComponent implements OnInit {
   public touristPoints: TouristPointsBasicInfo[] = [];
   public touristPointName: string;
   public touristPointId :number;
-  public checkIn: string;
-  public checkOut :string;
+  public dateFrom: string;
+  public dateOut :string;
   public errorMessageDates: string = '';
   public showReports :boolean;
   public checkIParse :string;
@@ -63,11 +63,10 @@ export class ReportDashboardComponent implements OnInit {
     this.showReports = true;
   }
   private getReportByTp(){
-
-    const checkInDate = new Date(this.checkIn);
-    const checkOutDate = new Date(this.checkOut);
+    const checkInDate = new Date(this.dateFrom);
+    const checkOutDate = new Date(this.dateOut);
     if (checkInDate < checkOutDate) {
-        this.reportService.GetHousesReportBy(this.touristPointId, this.checkIParse, this.checkOutParse).subscribe(
+        this.reportService.GetHousesReportBy(this.touristPointId.toString(), this.checkIParse, this.checkOutParse).subscribe(
             reportResponse =>
               this.getAllReports(reportResponse), (error: string) => this.showError(error)
           );
@@ -77,9 +76,7 @@ export class ReportDashboardComponent implements OnInit {
       this.errorMessageDates = 'Error in the dates, check them please';
     }
   }
-  createModel() {
 
-  }
   private showError(message: string) {
     console.log(message);
   }

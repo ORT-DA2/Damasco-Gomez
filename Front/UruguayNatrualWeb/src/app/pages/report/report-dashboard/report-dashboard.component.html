@@ -26,10 +26,10 @@
                             <input
                               type="date"
                               id="input-date-in"
-                              [(ngModel)]="checkIn"
+                              [(ngModel)]="dateFrom"
                               name="checkIn"
                               class="form-control form-control-alternative"
-                              (change)="onChangeCheckIn(checkIn)"
+                              (change)="onChangeCheckIn(dateFrom)"
                             />
                           </div>
                         </div>
@@ -43,10 +43,10 @@
                             <input
                               type="date"
                               id="input-date-in"
-                              [(ngModel)]="checkOut"
+                              [(ngModel)]="dateOut"
                               name="checkOut"
                               class="form-control form-control-alternative"
-                              (change)="onChangeCheckOut(checkOut)"
+                              (change)="onChangeCheckOut(dateOut)"
                             />
                           </div>
                         </div>
@@ -109,5 +109,27 @@
 
 <!-- Page content -->
 <div *ngIf="showReports" class="container-fluid mt--7">
-  <app-report-table></app-report-table>
+
+<!-- Table -->
+<div class="card shadow">
+  <div class="card-header border-0">
+      <h3 class="mb-0">Bookings</h3>
+  </div>
+  <div class="table-responsive">
+      <table class="table align-items-center table-flush">
+          <thead class="thead-light">
+              <tr>
+                  <th scope="col">House</th>
+                  <th scope="col">Cant Bookings</th>
+              </tr>
+          </thead>
+          <tbody>
+              <tr *ngFor="let report of reports; let i = index">
+                  <th scope="row">{{ report.nameHouse }}</th>
+                  <td>{{ report.cantBookings }}</td>
+              </tr>
+          </tbody>
+      </table>
+  </div>
+</div>
 </div>
