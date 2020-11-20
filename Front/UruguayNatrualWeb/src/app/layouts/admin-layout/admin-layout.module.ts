@@ -24,7 +24,6 @@ import { HouseDashboardComponent } from 'src/app/pages/house/house-dashboard/hou
 import { HouseTableComponent } from 'src/app/pages/house/house-table/house-table.component';
 import { HouseEditorComponent } from 'src/app/pages/house/house-editor/house-editor.component';
 import { ReportDashboardComponent } from 'src/app/pages/report/report-dashboard/report-dashboard.component';
-import { ReportTableComponent } from 'src/app/pages/report/report-table/report-table.component';
 
 
 @NgModule({
@@ -53,11 +52,7 @@ import { ReportTableComponent } from 'src/app/pages/report/report-table/report-t
     HouseDashboardComponent,
     HouseTableComponent,
     HouseEditorComponent,
-    ReportDashboardComponent,
-    ReportTableComponent
-
-
-
+    ReportDashboardComponent
   ]
 })
 
