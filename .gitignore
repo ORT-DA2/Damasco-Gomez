@@ -45,3 +45,5 @@ App/ImportInterface/bin
 App/ImportJson/bin/Debug/netstandard2.0/ImportInterface.pdb
 App/ImportJson/bin/Debug/netstandard2.0/ImportJson.deps.json
 App/ImportJson/bin/Debug/netstandard2.0/ImportJson.pdb
+App/ImporterInterface/bin
+
