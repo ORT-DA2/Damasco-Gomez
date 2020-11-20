@@ -25,6 +25,9 @@ import { SessionService } from './services/sessions/session.service';
 import { TouristLayoutComponent } from './layouts/tourist-layout/tourist-layout.component';
 
 
+
+
+
 @NgModule({
   imports: [
     CommonModule,
