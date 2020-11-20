@@ -11,7 +11,7 @@ import { ReviewService } from 'src/app/services/reviews/review.service';
 })
 export class ReviewComponent implements OnInit {
   private bookings: BookingBasicInfo[] = [];
-  private code: string = 'QINAUN77LV';
+  private code: string = '';
   showInputsReview = false;
   errorMessageCode = '';
   review: ReviewBasicInfo = {} as ReviewBasicInfo;
@@ -52,8 +52,8 @@ export class ReviewComponent implements OnInit {
   send(){
     this.reviewService.add(this.review).subscribe(
       response => {
-        console.log(response), (error) => this.showError(error)
-        // this.disableSend = true
+        console.log(response), (error) => this.showError(error),
+        this.disableSend = true
       }
     );
   }
