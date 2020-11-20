@@ -20,18 +20,13 @@ export class ReportService {
   }
 
 
-  GetHousesReportBy(touristPointId: string, CheckInParse: string, CheckOutParse: string)
+  GetHousesReportBy(touristPointId: string, dateFromParse: string, dateOutParse: string)
     : Observable<ReportBasicInfo[]> {
-      const headers = new HttpHeaders({
-        'Authorization': localStorage.getItem('token'),
-        'Content-Type': 'application/json'
-      });
       let params = new HttpParams()
-      .set('touristpointId', touristPointId)
-      .set('checkin', CheckInParse)
-      .set('checkout', CheckOutParse);
-    return this.http.get<ReportBasicInfo[]>(this.uri,  {headers: headers, params: params}); }
-
+      .set('idTp', touristPointId)
+      .set('dateFrom', dateFromParse)
+      .set('dateOut', dateOutParse);
+    return this.http.get<ReportBasicInfo[]>(this.uri, {params}); }
 
   private handleError(error: HttpErrorResponse){
     let message: string;
