@@ -63,19 +63,45 @@ set IDENTITY_INSERT Persons OFF
 
 set IDENTITY_INSERT ImagesTouristPoints ON
 INSERT INTO ImagesTouristPoints(Id,Name,Extention)
-VALUES (1,'image1.png','png') ;
+VALUES (1,'arroyo.jpeg','jpeg') ;
 INSERT INTO ImagesTouristPoints(Id,Name,Extention)
-VALUES (2,'image2.png','png') ;
+VALUES (2,'AtlantidaTP.jpg','jpg') ;
 INSERT INTO ImagesTouristPoints(Id,Name,Extention)
-VALUES (3,'image3.png','png') ;
+VALUES (3,'CaboPolonioTP.jpg','jpg') ;
 INSERT INTO ImagesTouristPoints(Id,Name,Extention)
-VALUES (4,'image4.png','png') ;
+VALUES (4,'cabopolonio.jpeg','jpeg') ;
 INSERT INTO ImagesTouristPoints(Id,Name,Extention)
-VALUES (5,'image5.png','png') ;
+VALUES (5,'campo.jpeg','jpeg') ;
 INSERT INTO ImagesTouristPoints(Id,Name,Extention)
-VALUES (6,'image6.png','png') ;
+VALUES (6,'campo2.jpeg','jpeg') ;
 INSERT INTO ImagesTouristPoints(Id,Name,Extention)
-VALUES (7,'image7.png','png') ;
+VALUES (7,'campovacas.jpeg','jpeg') ;
+INSERT INTO ImagesTouristPoints(Id,Name,Extention)
+VALUES (8,'casapueblo.jpg','jpg') ;
+INSERT INTO ImagesTouristPoints(Id,Name,Extention)
+VALUES (9,'ColoniaDelSacramentoTP.jpg','jpg') ;
+INSERT INTO ImagesTouristPoints(Id,Name,Extention)
+VALUES (10,'LaPalomaTP.jpg','jpg') ;
+INSERT INTO ImagesTouristPoints(Id,Name,Extention)
+VALUES (10,'MontevideoTP.jpg','jpg') ;
+INSERT INTO ImagesTouristPoints(Id,Name,Extention)
+VALUES (11,'museo.jpg','jpg') ;
+INSERT INTO ImagesTouristPoints(Id,Name,Extention)
+VALUES (12,'PaysanduTP.jpg','jpg') ;
+INSERT INTO ImagesTouristPoints(Id,Name,Extention)
+VALUES (13,'piedras.jpeg','jpeg') ;
+INSERT INTO ImagesTouristPoints(Id,Name,Extention)
+VALUES (14,'PiriapolisTP.jpg','jpg') ;
+INSERT INTO ImagesTouristPoints(Id,Name,Extention)
+VALUES (15,'playa.jpeg','jpeg') ;
+INSERT INTO ImagesTouristPoints(Id,Name,Extention)
+VALUES (16,'punta.jpeg','jpeg') ;
+INSERT INTO ImagesTouristPoints(Id,Name,Extention)
+VALUES (17,'PuntaDelDiabloTP.jpg','jpg') ;
+INSERT INTO ImagesTouristPoints(Id,Name,Extention)
+VALUES (18,'PuntaDelEsteTP.jpg','jpg') ;
+INSERT INTO ImagesTouristPoints(Id,Name,Extention)
+VALUES (19,'SaltoTP.jpg','jpg') ;
 set IDENTITY_INSERT ImagesTouristPoints OFF
 
 set IDENTITY_INSERT TouristPoints ON
@@ -84,7 +110,7 @@ VALUES (1, ' Colonia del Sacramento', 1, 'Mágica ciudad levantada a orillas del
 INSERT INTO TouristPoints (Id, Name, ImageTouristPointId,[Description],RegionId)
 VALUES (2, 'Montevideo', 2, 'Capital y ciudad más poblada de Uruguay, una hermosa urbe catalogada una y otra vez, en diversos rankings, como la ciudad con la mejor calidad de vida de Latinoamérica, destacando por su seguridad, limpieza, arquitectura, oferta cultural y kilómetros de playa a lo largo del Río de la Plata.',2);
 INSERT INTO TouristPoints (Id, Name, ImageTouristPointId,[Description],RegionId)
-VALUES (3, 'Maldonado', 3, 'descripcion tourist point 1',3);
+VALUES (3, 'Maldonado', 3, 'Maldonado, es la capital del departamento homónimo. Actualmente se encuentra conurbada con la ciudad de Punta del Este y de forma parcial está vinculada a la ciudad de San Carlos. Entre las tres ciudades conforman el segundo conurbano más amplio y poblado del país. El departamento en su conjunto es rico en contrastes.',3);
 INSERT INTO TouristPoints (Id, Name, ImageTouristPointId,[Description],RegionId)
 VALUES (4, 'La Paloma', 4, 'Balneario y puerto situado en el departamento de Rocha, una localidad que destaca por sus 22 kilómetros de hermosas playas, vasta oferta turística y privilegiados entornos naturales, rodeándose de algunos de los más espectaculares lugares turísticos de Uruguay para amantes de la naturaleza y las playas.',3);
 INSERT INTO TouristPoints (Id, Name, ImageTouristPointId,[Description],RegionId)
@@ -97,22 +123,22 @@ INSERT INTO TouristPoints (Id, Name, ImageTouristPointId,[Description],RegionId)
 VALUES (7, 'Cabo Polonio', 7, 'Otro de los espectaculares lugares turísticos de Uruguay escondido en el departamento de Rocha, un parque nacional que sorprende con su conjunto de playas, dunas de arena y tres pequeñas islas, donde habitan cientos de lobos marinos.',3);
 
 INSERT INTO TouristPoints (Id, Name, ImageTouristPointId,[Description],RegionId)
-VALUES (7, 'Piriápolis', 7, 'Ciudad balnearia bañada por las aguas del Río de la Plata, conocida por haber sido el primer balneario de Uruguay, conservando hasta el día hoy varias de las elegantes construcciones que se levantaron a principios del siglo XX. Hoy con su economía centrada en el turismo, alberga una amplia oferta de servicios, entre los que se cuentan, hoteles, casinos, restaurantes y una animada vida nocturna.',3);
+VALUES (8, 'Piriápolis', 7, 'Ciudad balnearia bañada por las aguas del Río de la Plata, conocida por haber sido el primer balneario de Uruguay, conservando hasta el día hoy varias de las elegantes construcciones que se levantaron a principios del siglo XX. Hoy con su economía centrada en el turismo, alberga una amplia oferta de servicios, entre los que se cuentan, hoteles, casinos, restaurantes y una animada vida nocturna.',3);
 
 
 INSERT INTO TouristPoints (Id, Name, ImageTouristPointId,[Description],RegionId)
-VALUES (7, 'Paysandú', 7, 'Una de las ciudades más importantes del Uruguay, albergando una amplia oferta de servicios y atractivos turísticos, entre los cuales figuran monumentos históricos, playas en la costa del Río Uruguay, una linda marina y algunos famosos festivales como La Semana de la Cerveza.',2);
+VALUES (9, 'Paysandú', 7, 'Una de las ciudades más importantes del Uruguay, albergando una amplia oferta de servicios y atractivos turísticos, entre los cuales figuran monumentos históricos, playas en la costa del Río Uruguay, una linda marina y algunos famosos festivales como La Semana de la Cerveza.',2);
 
 INSERT INTO TouristPoints (Id, Name, ImageTouristPointId,[Description],RegionId)
-VALUES (7, 'Punta del este ', 7, 'Uno de los balnearios más celebres de Sudamérica, famoso por su glamorosa oferta turística, con hoteles de lujo, restaurantes exclusivos, palpitante vida nocturna y hermosas playas, siendo cada año, uno de los destinos de veraneo preferidos del del jet-set internacional.',4);
+VALUES (10, 'Punta del este ', 7, 'Uno de los balnearios más celebres de Sudamérica, famoso por su glamorosa oferta turística, con hoteles de lujo, restaurantes exclusivos, palpitante vida nocturna y hermosas playas, siendo cada año, uno de los destinos de veraneo preferidos del del jet-set internacional.',4);
 INSERT INTO TouristPoints (Id, Name, ImageTouristPointId,[Description],RegionId)
-VALUES (7, 'Rivera', 7, 'Una de las ciudades más importantes del Uruguay, albergando una amplia oferta de servicios y atractivos turísticos, entre los cuales figuran monumentos históricos, playas en la costa del Río Uruguay, una linda marina y algunos famosos festivales como La Semana de la Cerveza.',3);
+VALUES (11, 'Rivera', 7, 'Una de las ciudades más importantes del Uruguay, albergando una amplia oferta de servicios y atractivos turísticos, entre los cuales figuran monumentos históricos, playas en la costa del Río Uruguay, una linda marina y algunos famosos festivales como La Semana de la Cerveza.',3);
 
 set IDENTITY_INSERT TouristPoints OFF
 
 set IDENTITY_INSERT Houses ON
 INSERT INTO Houses (Id, Avaible, PricePerNight, Starts, Address, Description, Phone, Contact, Name, TouristPointId)
-VALUES (1, 1, 10, 1, 'Address House 1', 'Description', 099199399, 'Contact House 1', 'Name contact house 1', 1);
+VALUES (1, 1, 10, 1, 'Address House 1', 'Posada de la Flor', 099199399, 'Contact House 1', 'Name contact house 1', 1);
 INSERT INTO Houses (Id, Avaible, PricePerNight, Starts, Address, Description, Phone, Contact, Name, TouristPointId)
 VALUES (2, 1, 10, 1, 'Address House 2', 'Description', 099199399, 'Contact House 2', 'Name contact house 2', 2);
 INSERT INTO Houses (Id, Avaible, PricePerNight, Starts, Address, Description, Phone, Contact, Name, TouristPointId)
@@ -125,19 +151,39 @@ INSERT INTO Houses (Id, Avaible, PricePerNight, Starts, Address, Description, Ph
 VALUES (6, 1, 10, 1, 'Address House 6', 'Description', 099199399, 'Contact House 6', 'Name contact house 6', 6);
 INSERT INTO Houses (Id, Avaible, PricePerNight, Starts, Address, Description, Phone, Contact, Name, TouristPointId)
 VALUES (7, 1, 10, 1, 'Address House 7', 'Description', 099199399, 'Contact House 7', 'Name contact house 7', 7);
+INSERT INTO Houses (Id, Avaible, PricePerNight, Starts, Address, Description, Phone, Contact, Name, TouristPointId)
+VALUES (7, 1, 10, 1, 'Address House 7', 'Description', 099199399, 'Contact House 7', 'Name contact house 7', 8);
+INSERT INTO Houses (Id, Avaible, PricePerNight, Starts, Address, Description, Phone, Contact, Name, TouristPointId)
+VALUES (7, 1, 10, 1, 'Address House 7', 'Description', 099199399, 'Contact House 7', 'Name contact house 7', 9);
+INSERT INTO Houses (Id, Avaible, PricePerNight, Starts, Address, Description, Phone, Contact, Name, TouristPointId)
+VALUES (7, 1, 10, 1, 'Address House 7', 'Description', 099199399, 'Contact House 7', 'Name contact house 7', 10);
+INSERT INTO Houses (Id, Avaible, PricePerNight, Starts, Address, Description, Phone, Contact, Name, TouristPointId)
+VALUES (7, 1, 10, 1, 'Address House 7', 'Description', 099199399, 'Contact House 7', 'Name contact house 7', 11);
 set IDENTITY_INSERT Houses OFF
 
 set IDENTITY_INSERT ImagesHouses ON
 INSERT INTO ImagesHouses(Id,Name,Extention,HouseId)
-VALUES (1,'image1.png','png',1) ;
+VALUES (1,'HousePosadaDeLaFlorTP1.jpeg','jpeg',1) ;
 INSERT INTO ImagesHouses(Id,Name,Extention,HouseId)
-VALUES (2,'image2.png','png',2) ;
+VALUES (2,'HouseRadissonTP2.jpeg','jpeg',2) ;
 INSERT INTO ImagesHouses(Id,Name,Extention,HouseId)
-VALUES (3,'image3.png','png',3) ;
+VALUES (3,'HouseHotelConcordeTP3.jpeg','jpeg',3) ;
 INSERT INTO ImagesHouses(Id,Name,Extention,HouseId)
-VALUES (4,'image4.png','png',4) ;
+VALUES (4,'CabañaSolTP4.jpeg','jpeg',4) ;
 INSERT INTO ImagesHouses(Id,Name,Extention,HouseId)
-VALUES (5,'image5.png','png',5) ;
+VALUES (5,'ChaletPinarSurTP5.jpeg','jpeg',5) ;
+INSERT INTO ImagesHouses(Id,Name,Extention,HouseId)
+VALUES (6,'CabañasElOcioTP6.jpeg','jpeg',6) ;
+INSERT INTO ImagesHouses(Id,Name,Extention,HouseId)
+VALUES (7,'HouseHostalDelCaboTP7.jpeg','jpeg',7) ;
+INSERT INTO ImagesHouses(Id,Name,Extention,HouseId)
+VALUES (8,'HotelArgentinoTP8.jpeg','jpeg',8) ;
+INSERT INTO ImagesHouses(Id,Name,Extention,HouseId)
+VALUES (9,'HotelPaysanduTP.jpeg','jpeg',9) ;
+INSERT INTO ImagesHouses(Id,Name,Extention,HouseId)
+VALUES (10,'HotelConcordePDETP.jpeg','jpeg',10) ;
+INSERT INTO ImagesHouses(Id,Name,Extention,HouseId)
+VALUES (11,'FortinerRivera.jpeg','jpeg',11) ;
 set IDENTITY_INSERT ImagesHouses OFF
 
 
