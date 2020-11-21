@@ -30,6 +30,7 @@ namespace Domain
             if(element.ImageTouristPoint != null) this.ImageTouristPoint = element.ImageTouristPoint;
             if(element.Description != null) this.Description = element.Description;
             if(element.RegionId>0) this.RegionId = element.RegionId;
+            if(element.ImageTouristPointId >0) this.ImageTouristPointId = element.ImageTouristPointId;
         }
     }
 }

@@ -34,7 +34,7 @@ namespace Filters
                 context.Result = new ContentResult()
                 {
                     StatusCode = 500,
-                    Content = "Server error" + context.Exception.Message,
+                    Content = "Server error :" + context.Exception.Message,
                 };
             }
         }
