@@ -1,12 +1,14 @@
 import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { CategoryBasicInfo } from 'src/app/models/category/category-basic-info';
+import { ImageTouristPointBasic } from 'src/app/models/imagetouristpoint/Imagetourispoint-base-info';
 import { RegionBasicInfo } from 'src/app/models/regions/region-base-info';
 import { TouristPointDetailInfo } from 'src/app/models/touristpoint/tourist-point-detail-info';
 import { TouristPointsBasicInfo } from 'src/app/models/touristpoint/touristpoint-base-info';
 import { CategoryService } from 'src/app/services/categories/category.service';
 import { RegionService } from 'src/app/services/regions/region.service';
 import { TouristPointsService } from 'src/app/services/touristpoints/touristpoint.service';
+import { environment } from 'src/environments/environment';
 
 @Component({
   selector: 'app-tourist-point-editor',
@@ -19,7 +21,10 @@ export class TouristPointEditorComponent implements OnInit {
   public categories: CategoryBasicInfo[] = [];
   public touristPointId: number = 0;
   public regionName: string = "";
+  public imageName : string;
   public categoriesName: string[] = [];
+  public sourceImage : string = environment.imageURL;
+  public imageTP: ImageTouristPointBasic = {} as ImageTouristPointBasic ;
   categoryNew: CategoryBasicInfo = {} as CategoryBasicInfo;
 
   constructor(
@@ -43,10 +48,19 @@ export class TouristPointEditorComponent implements OnInit {
       categoryResponse =>
         this.getAllCategories(categoryResponse), (error: string) =>this.showError(error));
 
+
+
+
   }
 
   private getBy(touristPointResponse: TouristPointDetailInfo){
     this.touristPoint = touristPointResponse;
+    this.imageName = this.touristPoint.image.name;
+    this.imageTP = this.touristPoint.image;
+    this.imageName = this.sourceImage + '/' + this.imageTP.name;
+
+
+
     this.categoriesName = this.touristPoint.categories? this.touristPoint.categories.map(category => category.name)
       : [];
   }
@@ -90,7 +104,7 @@ export class TouristPointEditorComponent implements OnInit {
     let modelBase : TouristPointsBasicInfo = {} as TouristPointsBasicInfo ;
     modelBase.categories = touristPoint.categories.map(x=> x.id);
     modelBase.description = touristPoint.description;
-    // modelBase.image = touristPoint.image;
+    modelBase.image = touristPoint.image;
     modelBase.name = touristPoint.name;
     modelBase.regionId = touristPoint.regionId;
     return modelBase;

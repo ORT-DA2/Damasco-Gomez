@@ -1,25 +1,21 @@
-<div
-  class="header pb-8 pt-5 pt-lg-8 d-flex align-items-center"
-  style="
+<div class="header pb-8 pt-5 pt-lg-8 d-flex align-items-center" style="
     min-height: 600px;
     background-image: url(assets/img/theme/profile-cover.jpg);
     background-size: cover;
     background-position: center top;
-  "
->
-  <!-- Mask -->
-<span class="mask bg-gradient-danger opacity-8"></span>
+  ">
+    <!-- Mask -->
+    <span class="mask bg-gradient-danger opacity-8"></span>
 </div>
 <div class="container-fluid mt--7">
-  <div class="row">
-    <div class="col-xl-8 order-xl-1">
-      <div class="card bg-secondary shadow">
-        <div class="card-header bg-white border-0">
-          <div class="row align-items-center">
-            <div class="col-8">
-              <h3 class="mb-0">Tourist Point</h3>
-              <span class="heading-small text-muted mb-4"
-                >Id {{ touristPointId }}</span
+    <div class="row">
+        <div class="col-xl-8 order-xl-1">
+            <div class="card bg-secondary shadow">
+                <div class="card-header bg-white border-0">
+                    <div class="row align-items-center">
+                        <div class="col-8">
+                            <h3 class="mb-0">Tourist Point</h3>
+                            <span class="heading-small text-muted mb-4">Id {{ touristPointId }}</span
               >
             </div>
             <div class="col-4 text-right">
@@ -29,7 +25,6 @@
                 triggers="hover focus click"
                 class="btn btn-rounded btn-outline-warning"
                 ngxClipboard
-                [cbContent]="'air-baloon'"
                 (cbOnSuccess)="copy = 'air-baloon'"
                 (click)="updateData(touristPoint)"
               >
@@ -57,7 +52,7 @@
                   </div>
                 </div>
 
-                <div class="col-6">
+                <div class="col-12">
                   <div class="form-group">
                     <label class="form-control-label" for="input-description"
                       >Description</label
@@ -65,10 +60,14 @@
                     <input
                       type="text"
                       id="input-description"
+                      size="50"
                       class="form-control form-control-alternative"
                       [(ngModel)]="touristPoint.description"
                       name="description"
                     />
+
+
+                    <img [src]="imageName" class="img-thumbnail img-circle">
                   </div>
                 </div>
 
@@ -138,7 +137,6 @@
                     triggers="hover focus click"
                     class="btn btn-rounded btn-outline-warning"
                     ngxClipboard
-                    [cbContent]="'air-baloon'"
                     (click)="addCategory()"
                     (cbOnSuccess)="copy = 'air-baloon'"
                   >
@@ -150,7 +148,6 @@
                     triggers="hover focus click"
                     class="btn btn-rounded btn-outline-danger"
                     ngxClipboard
-                    [cbContent]="'air-baloon'"
                     (click)="deleteCategory()"
                     (cbOnSuccess)="copy = 'air-baloon'"
                   >
@@ -169,7 +166,6 @@
             triggers="hover focus click"
             class="btn btn-rounded btn-outline-warning"
             ngxClipboard
-            [cbContent]="'air-baloon'"
             (cbOnSuccess)="copy = 'air-baloon'"
           >
             Go back
