@@ -8,7 +8,6 @@ import { ClipboardModule } from 'ngx-clipboard';
 import { AdminLayoutRoutes } from './admin-layout.routing';
 import { DashboardComponent } from '../../pages/dashboard/dashboard.component';
 import { IconsComponent } from '../../pages/icons/icons.component';
-import { UserProfileComponent } from '../../pages/user-profile/user-profile.component';
 import { TablesComponent } from '../../pages/tables/tables.component';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { BookingsTableComponent } from 'src/app/pages/booking/bookings-table/bookings-table.component';
@@ -37,7 +36,6 @@ import { ReportDashboardComponent } from 'src/app/pages/report/report-dashboard/
   ],
   declarations: [
     DashboardComponent,
-    UserProfileComponent,
     TablesComponent,
     IconsComponent,
     BookingsTableComponent,
