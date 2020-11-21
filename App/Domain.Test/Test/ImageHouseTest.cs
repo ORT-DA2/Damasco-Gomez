@@ -7,35 +7,28 @@ namespace Domain.Test.Test
     public class ImageHouseTest
     {
         public ImageHouse image;
+        public House house;
         [TestInitialize]
         public void SetUp()
         {
-            image = new ImageHouse()
-                {
-                    Id = 2,
-                    Name = "image.png",
-                };
+            house = new House() {Id = 1, Name = "Name  house"};
         }
         [TestMethod]
         public void TestUpdateName()
         {
-            ImageHouse newImage = new ImageHouse()
-            {
-                Name = "otherImage.png",
-            };
+            string nameImage = "otherImage.png";
+            ImageHouse newImage = new ImageHouse(nameImage, house.Id);
 
             image.Update(newImage);
 
-            Assert.AreEqual(newImage.Name, image.Name);
+            Assert.AreEqual(newImage.Name, nameImage);
         }
         [TestMethod]
         public void TestUpdateNameEmpty()
         {
+            image = new ImageHouse("NameImage",house.Id);
             string nameShouldBe = image.Name;
-            ImageHouse newImage = new ImageHouse()
-                {
-                    Name = null,
-                };
+            ImageHouse newImage = new ImageHouse("", house.Id);
 
             image.Update(newImage);
 
