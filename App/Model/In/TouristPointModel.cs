@@ -19,10 +19,6 @@ namespace Model.In
             TouristPoint touristPoint = new TouristPoint()
             {
                 Name= this.Name,
-                ImageTouristPoint = new ImageTouristPoint()
-                {
-                    Name = this.Image
-                },
                 Description = this.Description,
                 RegionId = this.RegionId,
             };
@@ -33,6 +29,10 @@ namespace Model.In
                     CategoryId = m
                 }).ToList();
             };
+            if (this.Image != null) 
+            {
+                touristPoint.ImageTouristPoint = new ImageTouristPoint(this.Image);
+            }
             return touristPoint;
         }
     }

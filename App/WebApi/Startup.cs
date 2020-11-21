@@ -75,6 +75,7 @@ namespace WebApi
                 c.RoutePrefix = "";
                 c.SwaggerEndpoint("/swagger/v1/swagger.json", "UruguayNatural Request");
             });
+            app.UseStaticFiles();
         }
     }
 }

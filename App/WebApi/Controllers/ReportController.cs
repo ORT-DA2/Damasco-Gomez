@@ -19,7 +19,6 @@ namespace WebApi.Controllers
             this.reportLogic = reportLogic;
         }
         [HttpGet]
-        [AuthorizationFilter]
         public IActionResult GetHousesReportBy([FromQuery]ReportTouristPointModel touristPointReportModel)
         {
             IEnumerable<Report> varRet ;

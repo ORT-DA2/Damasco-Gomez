@@ -1,4 +1,4 @@
-import { HttpClient, HttpErrorResponse, HttpHeaders } from '@angular/common/http';
+import { HttpClient, HttpErrorResponse, HttpHeaders, HttpParams } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable, throwError } from 'rxjs';
 import { catchError } from 'rxjs/operators';
@@ -18,6 +18,15 @@ export class ReportService {
     return this.http.get<ReportBasicInfo[]>(this.uri)
       .pipe(catchError(this.handleError));
   }
+
+
+  GetHousesReportBy(touristPointId: string, dateFromParse: string, dateOutParse: string)
+    : Observable<ReportBasicInfo[]> {
+      let params = new HttpParams()
+      .set('idTp', touristPointId)
+      .set('dateFrom', dateFromParse)
+      .set('dateOut', dateOutParse);
+    return this.http.get<ReportBasicInfo[]>(this.uri, {params}); }
 
   private handleError(error: HttpErrorResponse){
     let message: string;
