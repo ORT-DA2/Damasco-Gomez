@@ -1,7 +1,6 @@
 using System.Collections.Generic;
 using BusinessLogicInterface.Interfaces;
 using Domain;
-using Microsoft.AspNetCore.Mvc;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Moq;
 using WebApi.Controllers;
@@ -42,7 +41,7 @@ namespace WebApi.Tests.Test
                 }
             };
             mock = new Mock<IImporterLogic>(MockBehavior.Strict);
-            controller = new ImportController();
+            controller = new ImportController(mock.Object);
             namesToReturn = new List<string>{"", ""};
         }
         [TestMethod]
