@@ -2,10 +2,9 @@ using System.Collections.Generic;
 
 namespace ImporterInterface
 {
-    public interface Importer<T> where T : class
+    public interface IImporter
     {
         string GetName();
-        List<T> ImportData(string path);
-
+        List<HouseImportModel> ImportData(string path);
     }
 }
