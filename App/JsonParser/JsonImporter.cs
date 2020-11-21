@@ -1,16 +1,23 @@
+using System.Collections.Generic;
+using System.IO;
+using System.Reflection;
+using Domain;
 using ImporterInterface;
 
 namespace JsonParser
 {
-    public class JsonImporter : Importer
+    public class JsonImporter : IImporter
     {
         public string GetName()
         {
-            throw new System.NotImplementedException();
+            return "JSON";
         }
 
-        public TouristPoint ImportTouristPoints(string path)
+        public List<HouseImportModel> ImportData(string path)
         {
+            string currentDirectory = Path.GetDirectoryName(Assembly.GetEntryAssembly().Location);
+            string archiveFolder = Path.Combine(currentDirectory, "archive");
+            string[] files = Directory.GetFiles(archiveFolder, "*.zip");
             throw new System.NotImplementedException();
         }
     }

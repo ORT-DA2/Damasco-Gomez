@@ -1,0 +1,74 @@
+{
+    "houses": [
+        {
+            "Name": "Name house 1",
+            "PricePerNight": 100,
+            "Starts": 1,
+            "TouristPointId": 1,
+            "Phone": 2334234,
+            "Address": "asdfasdfasdf",
+            "Contact": "sadfasdf",
+            "Description": "asdfasdf",
+            "Images": [
+                "img1.png",
+                "other1.png"
+            ]
+        },
+        {
+            "Name": "Name house 2",
+            "PricePerNight": 200,
+            "Starts": 2,
+            "TouristPoint": {
+                "Name" : "Name TouristPoint 200",
+                "Image" : "Image200.png",
+                "Description" : "Description 200",
+                "RegionId" : 1 ,
+                "Categories" : [1,2,3]
+            },
+            "TouristPointId": 200,
+            "Phone": 22222222,
+            "Address": "Address 2",
+            "Contact": "Contact 2",
+            "Description": "Description 2",
+            "Images": [
+                "img2.png",
+                "other2.png"
+            ]
+        },
+        {
+            "Name": "Name house 3",
+            "PricePerNight": 300,
+            "Starts": 3,
+            "TouristPointId": 3,
+            "Phone": 33333333,
+            "Address": "Address 3",
+            "Contact": "Contact 3",
+            "Description": "Description 3",
+            "Images": [
+                "img.png3",
+                "other.png3"
+            ]
+        },
+        {
+            "Name": "Name house 4",
+            "PricePerNight": 400,
+            "Starts": 4,
+            "TouristPoint": {
+                "Name" : "Name TouristPoint 400",
+                "Image" : "Image400.png",
+                "Description" : "Description 400",
+                "RegionId" : 4 ,
+                "Categories" : [5,6,1]
+            },
+            "TouristPointId": 400,
+            "Phone": 44444444,
+            "Address": "Address 4",
+            "Contact": "Contact 4",
+            "Description": "Description 4",
+            "Images": [
+                "img.png4",
+                "other.png4"
+            ]
+        }
+    ]
+}
