@@ -9,6 +9,7 @@ import { CategoryService } from 'src/app/services/categories/category.service';
 import { RegionService } from 'src/app/services/regions/region.service';
 import { TouristPointsService } from 'src/app/services/touristpoints/touristpoint.service';
 import { environment } from 'src/environments/environment';
+import {HttpClient, HttpClientModule} from '@angular/common/http';
 
 @Component({
   selector: 'app-tourist-point-editor',
@@ -26,6 +27,7 @@ export class TouristPointEditorComponent implements OnInit {
   public sourceImage : string = environment.imageURL;
   public existTP : boolean =false;
   public existImageName : boolean =false;
+  public selectedFile : File= null;
   public imageTP: ImageTouristPointBasic = {} as ImageTouristPointBasic ;
   categoryNew: CategoryBasicInfo = {} as CategoryBasicInfo;
 
@@ -34,7 +36,7 @@ export class TouristPointEditorComponent implements OnInit {
     private router: Router,
     private touristPointService: TouristPointsService,
     private regionService: RegionService,
-    private categoryService: CategoryService
+    private categoryService: CategoryService,
   ) { }
 
   ngOnInit(): void {
@@ -68,9 +70,11 @@ export class TouristPointEditorComponent implements OnInit {
     this.categoriesName = this.touristPoint.categories? this.touristPoint.categories.map(category => category.name)
       : [];
   }
-  updateSource (event){
-      console.log(event);
+  onFileSelected (event){
+      this.selectedFile = <File>event.target.files[0];
+      this.imageName = this.selectedFile.name;
   }
+
   private getAllRegions(regionResponse: RegionBasicInfo[]){
     this.regions = regionResponse;
     const regionWithId = this.regions.find(x => x.id === this.touristPoint.regionId);
@@ -80,6 +84,8 @@ export class TouristPointEditorComponent implements OnInit {
     this.categories = categoryResponse;
   }
   addTouristPoint(touristPoint: TouristPointDetailInfo) {
+    this.imageTP.name = this.imageName;
+    //this.touristPoint.image = imageTP;
     const basicInfo = this.createModel(touristPoint);
     this.touristPointService.add(basicInfo).subscribe(
       responseAdd => {
@@ -91,6 +97,7 @@ export class TouristPointEditorComponent implements OnInit {
     );
   }
   updateData(touristPoint : TouristPointDetailInfo){
+    //this.touristPoint.image.name= this.imageName;
     const basicInfo = this.createModel(touristPoint);
     this.touristPointService.update(this.touristPointId, basicInfo).subscribe(
       responseUpdate =>
