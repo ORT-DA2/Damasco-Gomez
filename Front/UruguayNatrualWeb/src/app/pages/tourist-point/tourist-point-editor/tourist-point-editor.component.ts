@@ -1,5 +1,5 @@
 import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { CategoryBasicInfo } from 'src/app/models/category/category-basic-info';
 import { ImageTouristPointBasic } from 'src/app/models/imagetouristpoint/Imagetourispoint-base-info';
 import { RegionBasicInfo } from 'src/app/models/regions/region-base-info';
@@ -24,11 +24,13 @@ export class TouristPointEditorComponent implements OnInit {
   public imageName : string;
   public categoriesName: string[] = [];
   public sourceImage : string = environment.imageURL;
+  public existTP : boolean =false;
   public imageTP: ImageTouristPointBasic = {} as ImageTouristPointBasic ;
   categoryNew: CategoryBasicInfo = {} as CategoryBasicInfo;
 
   constructor(
     private route: ActivatedRoute,
+    private router: Router,
     private touristPointService: TouristPointsService,
     private regionService: RegionService,
     private categoryService: CategoryService
@@ -38,6 +40,7 @@ export class TouristPointEditorComponent implements OnInit {
     const id = this.route.snapshot.paramMap.get('id');
     this.touristPointId = Number(id);
     this.touristPoint.categories = [];
+    this.existTP = this.isExistentTouristPoint();
     this.touristPointService.getBy(this.touristPointId).subscribe(
       touristPointResponse =>
         this.getBy(touristPointResponse), (error: string) => this.showError(error));
@@ -48,11 +51,11 @@ export class TouristPointEditorComponent implements OnInit {
       categoryResponse =>
         this.getAllCategories(categoryResponse), (error: string) =>this.showError(error));
 
-
-
-
   }
 
+  private isExistentTouristPoint(): boolean {
+    return !isNaN(this.touristPointId);
+  }
   private getBy(touristPointResponse: TouristPointDetailInfo){
     this.touristPoint = touristPointResponse;
     this.imageName = this.touristPoint.image.name;
@@ -72,7 +75,16 @@ export class TouristPointEditorComponent implements OnInit {
   private getAllCategories(categoryResponse: CategoryBasicInfo[]){
     this.categories = categoryResponse;
   }
-
+  addTouristPoint(touristPoint: TouristPointDetailInfo) {
+    const basicInfo = this.createModel(touristPoint);
+    this.touristPointService.add(basicInfo).subscribe(
+      responseAdd => {
+        this.touristPointId = responseAdd.id;
+        this.router.navigateByUrl(`/tourist-point/tourist-point-editor/${this.touristPointId}`);
+        this.existTP = true;
+      }
+    );
+  }
   updateData(touristPoint : TouristPointDetailInfo){
     const basicInfo = this.createModel(touristPoint);
     this.touristPointService.update(this.touristPointId, basicInfo).subscribe(

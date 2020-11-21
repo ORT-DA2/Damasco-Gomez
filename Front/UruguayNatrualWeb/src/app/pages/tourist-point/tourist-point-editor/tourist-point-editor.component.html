@@ -20,7 +20,21 @@
             </div>
             <div class="col-4 text-right">
               <button
+                *ngIf="!existTP"
                 type="button"
+                placement="top-center"
+                triggers="hover focus click"
+                class="btn btn-rounded btn-outline-warning"
+                ngxClipboard
+                (cbOnSuccess)="copy = 'air-baloon'"
+                (click)="addTouristPoint(touristPoint)"
+              >
+                Add Tourist Point
+              </button>
+
+              <button
+                type="button"
+                *ngIf="existTP"
                 placement="top-center"
                 triggers="hover focus click"
                 class="btn btn-rounded btn-outline-warning"
