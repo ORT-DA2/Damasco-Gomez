@@ -43,7 +43,7 @@ export class BookingService {
 
   delete(id):Observable<any>{
     const headers = new HttpHeaders({
-      'Authorization': environment.token,
+      'Authorization': localStorage.getItem('token'),
       'Content-Type':'application/json'
     });
     let options = { headers: headers };
@@ -55,7 +55,7 @@ export class BookingService {
   update(id, body):Observable<any>{
     const headers = new HttpHeaders({
       'Content-Type': 'application/json',
-      'Authorization': environment.token
+      'Authorization': localStorage.getItem('token')
     });
     let options = { headers: headers };
     var httpRequest = this.http.put<any>(this.uri + "/" + id, body, options)

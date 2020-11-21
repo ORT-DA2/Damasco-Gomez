@@ -4,8 +4,7 @@
 
 export const environment = {
   production: false,
-  baseURL:"https://localhost:5001/api/",
-  token:"1f4edc98-e83d-4c90-8fd6-1fe63f42608c",
+  baseURL:'https://localhost:5001/api/',
   imageUrl: '/Assets/Images',
 };
 
