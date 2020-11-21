@@ -5,7 +5,6 @@ import { catchError } from 'rxjs/operators';
 import { environment } from 'src/environments/environment';
 import { SessionBasicInfo } from 'src/app/models/sessions/session-base-info';
 import {SessionUserModel} from '../../models/sessions/session-user-model';
-import { Guid } from 'guid-typescript';
 import { map } from 'rxjs/operators';
 
 @Injectable({
