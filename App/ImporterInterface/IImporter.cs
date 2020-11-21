@@ -5,6 +5,6 @@ namespace ImporterInterface
     public interface IImporter
     {
         string GetName();
-        List<HouseImportModel> ImportData(string path);
+        HouseImportModel ImportData(string path);
     }
 }

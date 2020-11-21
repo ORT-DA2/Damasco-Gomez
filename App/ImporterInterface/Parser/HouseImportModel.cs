@@ -6,6 +6,7 @@ namespace ImporterInterface
     {
         public bool Avaible {get ; set; }
         public int PricePerNight {get; set;}
+        // public TouristImportModel TouristPoint {get ; set; }
         public int TouristPointId {get ; set; }
         public string Name {get ; set; }
         public int Starts {get ; set; }

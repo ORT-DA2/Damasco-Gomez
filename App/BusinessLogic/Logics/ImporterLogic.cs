@@ -15,10 +15,11 @@ namespace BusinessLogic.Logics
     {
         private readonly IHouseLogic houseLogic;
         private readonly string configurationPath;
-        public ImporterLogic(IHouseLogic houseLogic, string path)
+
+        public ImporterLogic(IHouseLogic houseLogic) //, string path)
         {
             this.houseLogic = houseLogic;
-            this.configurationPath = path;
+            this.configurationPath = @"../../WebApi/Parser/";
         }
         public List<string> GetNames()
         {
@@ -33,7 +34,7 @@ namespace BusinessLogic.Logics
             */
             List<string> names = new List<string>();
 
-            var directory = new DirectoryInfo(configurationPath);
+            var directory = new DirectoryInfo(this.configurationPath);
             FileInfo[] files = directory.GetFiles("*.dll");
 
             foreach (var file in files)
@@ -66,8 +67,8 @@ namespace BusinessLogic.Logics
             */
 
             List<string> names = new List<string>();
-
-            var directory = new DirectoryInfo(this.configurationPath);
+            
+            var directory = new DirectoryInfo(configurationPath);
             FileInfo[] files = directory.GetFiles("*.dll");
 
             foreach (var file in files)
@@ -84,21 +85,28 @@ namespace BusinessLogic.Logics
                     var implementation = Activator.CreateInstance(loadedImplementation) as IImporter;
                     if (implementation.GetName() == import.Name)
                     {
-                        var parseo = implementation.ImportData(import.Path);
-                        parseo.ForEach(m =>
-                            this.houseLogic.Add(new House()
-                            {
-                                Avaible = m.Avaible,
-                                PricePerNight = m.PricePerNight,
-                                TouristPointId = m.TouristPointId,
-                                Name = m.Name,
-                                Starts = m.Starts,
-                                Address = m.Address,
-                                Description = m.Description,
-                                Phone = m.Phone,
-                                Contact = m.Contact
-                            })
-                        );
+                        try 
+                        {
+                            var parseo = implementation.ImportData(import.Path);
+                        }
+                        catch (Exception e)
+                        {
+                            Console.WriteLine(e);
+                        }
+                        // parseo.ForEach(m =>
+                        //     this.houseLogic.Add(new House()
+                        //     {
+                        //         Avaible = m.Avaible,
+                        //         PricePerNight = m.PricePerNight,
+                        //         TouristPointId = m.TouristPointId,
+                        //         Name = m.Name,
+                        //         Starts = m.Starts,
+                        //         Address = m.Address,
+                        //         Description = m.Description,
+                        //         Phone = m.Phone,
+                        //         Contact = m.Contact
+                        //     })
+                        // );
 
 
                     }
