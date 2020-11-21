@@ -25,6 +25,7 @@ export class TouristPointEditorComponent implements OnInit {
   public categoriesName: string[] = [];
   public sourceImage : string = environment.imageURL;
   public existTP : boolean =false;
+  public existImageName : boolean =false;
   public imageTP: ImageTouristPointBasic = {} as ImageTouristPointBasic ;
   categoryNew: CategoryBasicInfo = {} as CategoryBasicInfo;
 
@@ -41,9 +42,11 @@ export class TouristPointEditorComponent implements OnInit {
     this.touristPointId = Number(id);
     this.touristPoint.categories = [];
     this.existTP = this.isExistentTouristPoint();
-    this.touristPointService.getBy(this.touristPointId).subscribe(
-      touristPointResponse =>
-        this.getBy(touristPointResponse), (error: string) => this.showError(error));
+    if (this.existTP) {
+      this.touristPointService.getBy(this.touristPointId).subscribe(
+        touristPointResponse =>
+          this.getBy(touristPointResponse), (error: string) => this.showError(error));
+    }
     this.regionService.getAll().subscribe(
       regionResponse =>
         this.getAllRegions(regionResponse), (error: string) =>this.showError(error));
@@ -61,11 +64,12 @@ export class TouristPointEditorComponent implements OnInit {
     this.imageName = this.touristPoint.image.name;
     this.imageTP = this.touristPoint.image;
     this.imageName = this.sourceImage + '/' + this.imageTP.name;
-
-
-
+    this.existImageName =  true;
     this.categoriesName = this.touristPoint.categories? this.touristPoint.categories.map(category => category.name)
       : [];
+  }
+  updateSource (event){
+      console.log(event);
   }
   private getAllRegions(regionResponse: RegionBasicInfo[]){
     this.regions = regionResponse;
@@ -82,6 +86,7 @@ export class TouristPointEditorComponent implements OnInit {
         this.touristPointId = responseAdd.id;
         this.router.navigateByUrl(`/tourist-point/tourist-point-editor/${this.touristPointId}`);
         this.existTP = true;
+        this.existImageName = true;
       }
     );
   }
