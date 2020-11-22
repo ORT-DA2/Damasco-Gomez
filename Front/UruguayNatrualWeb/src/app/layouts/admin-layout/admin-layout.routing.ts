@@ -19,7 +19,6 @@ import { ReportDashboardComponent } from 'src/app/pages/report/report-dashboard/
 export const AdminLayoutRoutes: Routes = [
     { path: 'dashboard',      component: DashboardComponent },
     { path: 'user-profile',   component: UserProfileComponent },
-    { path: 'tables',         component: TablesComponent },
     { path: 'bookings',       component: BookingDashboardComponent },
     { path: 'bookings/booking-editor/:id',       component: BookingEditorComponent },
     { path: 'tourist-points',       component: TouristPointDashboardComponent },
