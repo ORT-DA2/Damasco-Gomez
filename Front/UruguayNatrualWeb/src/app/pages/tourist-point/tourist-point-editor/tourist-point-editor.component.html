@@ -80,16 +80,11 @@
                       name="description"
                     />
 
-                    <!-- Icon as placeholder when no file picked -->
-                    <i *ngIf="!existTP" class="material-icons">Select Image</i>
 
-                    <!-- file input, accepts images only. Detect when file has been picked/changed with Angular's native (change) event listener -->
-                    <input  *ngIf="!existTP" type="file"  (change)="onFileSelected($event)">
-
-                    <!-- img placeholder when a file has been picked. shows only when 'source' is not empty -->
-                    <img *ngIf="existImageName" [src]="source" src="">
+                    <input *ngIf="!existTP"  type='file' (change)="onSelectFile($event)">
 
                     <img *ngIf="existTP" [src]="imageName" class="img-thumbnail img-circle">
+
                   </div>
                 </div>
 

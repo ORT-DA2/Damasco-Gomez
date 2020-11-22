@@ -63,17 +63,17 @@ export class TouristPointEditorComponent implements OnInit {
   }
   private getBy(touristPointResponse: TouristPointDetailInfo){
     this.touristPoint = touristPointResponse;
-    this.imageName = this.touristPoint.image.name;
-    this.imageTP = this.touristPoint.image;
-    this.imageName = this.sourceImage + '/' + this.imageTP.name;
+    this.imageName = this.sourceImage + '/' + this.touristPoint.image.name;
     this.existImageName =  true;
     this.categoriesName = this.touristPoint.categories? this.touristPoint.categories.map(category => category.name)
       : [];
   }
-  onFileSelected (event){
-      this.selectedFile = <File>event.target.files[0];
-      this.imageName = this.selectedFile.name;
+  onSelectFile (event){
+
+        this.selectedFile = event.target.files[0];
+        this.imageName =  this.selectedFile.name;
   }
+
 
   private getAllRegions(regionResponse: RegionBasicInfo[]){
     this.regions = regionResponse;
@@ -84,9 +84,14 @@ export class TouristPointEditorComponent implements OnInit {
     this.categories = categoryResponse;
   }
   addTouristPoint(touristPoint: TouristPointDetailInfo) {
-    this.imageTP.name = this.imageName;
-    //this.touristPoint.image = imageTP;
-    const basicInfo = this.createModel(touristPoint);
+    console.log('point:', touristPoint);
+    console.log(this.imageName);
+    const newTouristPoint = {
+      ...touristPoint,
+      image: this.imageName
+    };
+
+    const basicInfo = this.createModel(newTouristPoint);
     this.touristPointService.add(basicInfo).subscribe(
       responseAdd => {
         this.touristPointId = responseAdd.id;
@@ -97,7 +102,7 @@ export class TouristPointEditorComponent implements OnInit {
     );
   }
   updateData(touristPoint : TouristPointDetailInfo){
-    //this.touristPoint.image.name= this.imageName;
+    this.touristPoint.image.name = this.imageName;
     const basicInfo = this.createModel(touristPoint);
     this.touristPointService.update(this.touristPointId, basicInfo).subscribe(
       responseUpdate =>
@@ -124,7 +129,7 @@ export class TouristPointEditorComponent implements OnInit {
     this.categoriesName.splice(-1,1);
   }
 
-  private createModel(touristPoint : TouristPointDetailInfo) : TouristPointsBasicInfo{
+  private createModel(touristPoint : any) : TouristPointsBasicInfo{
     let modelBase : TouristPointsBasicInfo = {} as TouristPointsBasicInfo ;
     modelBase.categories = touristPoint.categories.map(x=> x.id);
     modelBase.description = touristPoint.description;
