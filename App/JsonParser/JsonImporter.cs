@@ -2,6 +2,7 @@
 using System.IO;
 using System.Text.Json;
 using ImporterInterface;
+using ImporterInterface.Parser;
 
 namespace JsonParser
 {
@@ -12,11 +13,11 @@ namespace JsonParser
             return "JSON";
         }
 
-        public HouseImportModel ImportData(string path)
+        public ListHouseModel ImportData(string path)
         {
             FileInfo jsonFile = new FileInfo(path);
             var jsontString = File.ReadAllText(jsonFile.FullName);
-            var houseImportModel = JsonSerializer.Deserialize<HouseImportModel>(jsontString);
+            var houseImportModel = JsonSerializer.Deserialize<ListHouseModel>(jsontString);
             return houseImportModel;
         }
     }

@@ -19,7 +19,7 @@ namespace BusinessLogic.Logics
         public ImporterLogic(IHouseLogic houseLogic) //, string path)
         {
             this.houseLogic = houseLogic;
-            this.configurationPath = @"../../WebApi/Parser/";
+            this.configurationPath = @"../WebApi/Parser/";
         }
         public List<string> GetNames()
         {
@@ -85,14 +85,7 @@ namespace BusinessLogic.Logics
                     var implementation = Activator.CreateInstance(loadedImplementation) as IImporter;
                     if (implementation.GetName() == import.Name)
                     {
-                        try 
-                        {
-                            var parseo = implementation.ImportData(import.Path);
-                        }
-                        catch (Exception e)
-                        {
-                            Console.WriteLine(e);
-                        }
+                        var parseo = implementation.ImportData(import.Path);
                         // parseo.ForEach(m =>
                         //     this.houseLogic.Add(new House()
                         //     {
@@ -107,8 +100,6 @@ namespace BusinessLogic.Logics
                         //         Contact = m.Contact
                         //     })
                         // );
-
-
                     }
                 }
             }

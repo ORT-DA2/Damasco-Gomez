@@ -28,13 +28,13 @@ namespace WebApi.Controllers
         /// <summary>
         /// Permite a un administrador agregar un import
         /// </summary>
-        /// <param name="importerModel">Este modelo contiene la información del import</param>
+        /// <param name="ImporterModel">Este modelo contiene la información del import</param>
         /// <response code="200">Se devuelve la información requerida.</response>
         /// <response code="400">Categoria no existente con ese identificador</response>
         [HttpPost]
-        public IActionResult Post([FromBody]ImportModel import)
+        public IActionResult Post([FromBody]ImportModel ImporterModel)
         {
-            this.importLogic.Import(import);
+            this.importLogic.Import(ImporterModel);
             return Ok();
         }
     }
