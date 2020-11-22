@@ -1,3 +1,5 @@
+import { ImageBasicModel } from "../image-house/image-house.-basic";
+
 export interface HouseBasicInfo {
   id : number,
   avaible : boolean,
@@ -6,7 +8,7 @@ export interface HouseBasicInfo {
   name : string,
   starts : number,
   address : string,
-  //image : ImageBasicModel,
+  images : ImageBasicModel [],
   description : string,
   phone : number,
   contact: string,

@@ -1,3 +1,4 @@
+import { ImageBasicModel } from "../image-house/image-house.-basic";
 import { TouristPointsBasicInfo } from "../touristpoint/touristpoint-base-info";
 
 export interface HouseDetailInfo {
@@ -8,11 +9,17 @@ export interface HouseDetailInfo {
   name : string,
   starts : number,
   address : string,
-  //image : ImageBasicModel,
+  images : ImageBasicModel [],
   description : string,
   phone : number,
   contact: string,
   totalPrice: number,
-  touristPoint :  TouristPointsBasicInfo ;
+  touristPoint :  TouristPointsBasicInfo ,
 
 }
+
+
+
+
+
+
