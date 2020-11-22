@@ -7,22 +7,17 @@ namespace Domain.Test.Test
     public class ImageTouristPointTest
     {
         public ImageTouristPoint image;
+        public TouristPoint touristPoint;
         [TestInitialize]
         public void SetUp()
         {
-            image = new ImageTouristPoint()
-                {
-                    Id = 2,
-                    Name = "image.png",
-                };
+            touristPoint = new TouristPoint(){Id = 1};
+            image = new ImageTouristPoint("image.png");
         }
         [TestMethod]
         public void TestUpdateName()
         {
-            ImageTouristPoint newImage = new ImageTouristPoint()
-            {
-                Name = "otherImage.png",
-            };
+            ImageTouristPoint newImage = new ImageTouristPoint("otherImage.png");
 
             image.Update(newImage);
 
@@ -31,11 +26,9 @@ namespace Domain.Test.Test
         [TestMethod]
         public void TestUpdateNameEmpty()
         {
+            image = new ImageTouristPoint("Name");
             string nameShouldBe = image.Name;
-            ImageTouristPoint newImage = new ImageTouristPoint()
-                {
-                    Name = null,
-                };
+            ImageTouristPoint newImage = new ImageTouristPoint("");
 
             image.Update(newImage);
 

@@ -17,6 +17,7 @@ namespace BusinessLogic.Tests.Test
         private HouseLogic houseLogic;
         private Mock<IHouseRepository> mock;
         private Mock<ITouristPointRepository> mock2;
+        private Mock<IImageHouseRepository> mock3;
         [TestInitialize]
         public void initVariables()
         {
@@ -36,7 +37,8 @@ namespace BusinessLogic.Tests.Test
             emptyHouses = new List<House>();
             mock = new Mock<IHouseRepository>(MockBehavior.Strict);
             mock2 = new Mock<ITouristPointRepository>(MockBehavior.Strict);
-            houseLogic = new HouseLogic(mock.Object,mock2.Object);
+            mock3 = new Mock<IImageHouseRepository>(MockBehavior.Strict);
+            houseLogic = new HouseLogic(mock.Object,mock2.Object,mock3.Object);
         }
 
         [TestMethod]

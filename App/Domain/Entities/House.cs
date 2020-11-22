@@ -63,6 +63,7 @@ namespace Domain
             if(element.Description != null) this.Description = element.Description;
             if(element.Phone>0) this.Phone = element.Phone;
             if(element.Contact != null) this.Contact = element.Contact;
+            if(element.ImagesHouse.Count >0) this.ImagesHouse = element.ImagesHouse;
         }
 
         public bool IsAvailable()

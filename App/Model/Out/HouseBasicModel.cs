@@ -46,7 +46,7 @@ namespace Model
             this.Description = house.Description;
             this.Contact = house.Contact;
             if(houseSearch!=null) this.TotalPrice = house.CalculateTotalPrice(houseSearch);
-            if(this.Images!=null)
+            if(house.ImagesHouse.Count > 0)
             {
                 this.Images = house.ImagesHouse.Select(
                     m => new ImageHouseBasicModel(m)
