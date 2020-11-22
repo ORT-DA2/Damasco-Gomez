@@ -15,6 +15,8 @@ namespace ImporterInterface
         public int Phone {get; set; }
         public string Contact {get; set;}
         public List<string> Images {get; set;}
-        public HouseImportModel(){}
+        public HouseImportModel(){
+            Images = new List<string>();
+        }
     }
 }

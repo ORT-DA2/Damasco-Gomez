@@ -8,6 +8,10 @@ namespace ImporterInterface.Parser
         public string Description {get; set;}
         public int RegionId {get; set;}
         public string Image{get; set;}
-        public virtual  IEnumerable<int> Categories {get; set;}
+        public List<int> Categories {get; set;}
+
+        public TouristImportModel(){
+            Categories = new List<int>();
+        }
     }
 }
