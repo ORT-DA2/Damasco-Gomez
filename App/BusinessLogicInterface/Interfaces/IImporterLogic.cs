@@ -1,11 +1,12 @@
 using System.Collections.Generic;
 using BusinessLogicInterface.Utils;
+using ImporterInterface.Parser;
 
 namespace BusinessLogicInterface.Interfaces
 {
     public interface IImporterLogic
     {
         List<string> GetNames();
-        void Import(ImportModel import);
+        ListHouseModel Import(ImportModel import);
     }
 }

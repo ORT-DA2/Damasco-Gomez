@@ -14,8 +14,7 @@ namespace ImporterInterface
         public string Description {get ; set;}
         public int Phone {get; set; }
         public string Contact {get; set;}
-        // public List<string> Images {get ; set; }
-        // public TouristImportModel TouristPoint {get ; set; }
+        public List<string> Images {get; set;}
         
     }
 }
