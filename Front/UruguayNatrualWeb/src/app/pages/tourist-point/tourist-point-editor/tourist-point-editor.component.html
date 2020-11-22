@@ -32,18 +32,7 @@
                 Add Tourist Point
               </button>
 
-              <button
-                type="button"
-                *ngIf="existTP"
-                placement="top-center"
-                triggers="hover focus click"
-                class="btn btn-rounded btn-outline-warning"
-                ngxClipboard
-                (cbOnSuccess)="copy = 'air-baloon'"
-                (click)="updateData(touristPoint)"
-              >
-                Update
-              </button>
+
             </div>
           </div>
         </div>
@@ -168,13 +157,40 @@
                     (click)="deleteCategory()"
                     (cbOnSuccess)="copy = 'air-baloon'"
                   >
-                    Delete Category
+                  Delete Category
                   </button>
+                  <button
+                  type="button"
+                  placement="top-center"
+                  triggers="hover focus click"
+                  class="btn btn-rounded btn-outline-warning"
+                  ngxClipboard
+                  (click)="OnChangeImage()"
+                  (cbOnSuccess)="copy = 'air-baloon'"
+                >
+                  Change Image
+                </button>
+
+                <input *ngIf="showImageSelector"  type='file' (change)="onSelectFile($event)">
+
                 </div>
               </div>
             </div>
             <hr class="my-4" />
           </form>
+
+          <button
+          type="button"
+          *ngIf="existTP"
+          placement="top-center"
+          triggers="hover focus click"
+          class="btn btn-rounded btn-outline-warning"
+          ngxClipboard
+          (cbOnSuccess)="copy = 'air-baloon'"
+          (click)="updateData(touristPoint)"
+        >
+          Update
+        </button>
 
           <button
             routerLink="/tourist-points"

@@ -28,7 +28,7 @@ export class TouristPointEditorComponent implements OnInit {
   public existTP : boolean =false;
   public existImageName : boolean =false;
   public selectedFile : File= null;
-  public imageTP: ImageTouristPointBasic = {} as ImageTouristPointBasic ;
+  public showImageSelector : boolean;
   categoryNew: CategoryBasicInfo = {} as CategoryBasicInfo;
 
   constructor(
@@ -84,13 +84,10 @@ export class TouristPointEditorComponent implements OnInit {
     this.categories = categoryResponse;
   }
   addTouristPoint(touristPoint: TouristPointDetailInfo) {
-    console.log('point:', touristPoint);
-    console.log(this.imageName);
     const newTouristPoint = {
       ...touristPoint,
       image: this.imageName
     };
-
     const basicInfo = this.createModel(newTouristPoint);
     this.touristPointService.add(basicInfo).subscribe(
       responseAdd => {
@@ -102,8 +99,11 @@ export class TouristPointEditorComponent implements OnInit {
     );
   }
   updateData(touristPoint : TouristPointDetailInfo){
-    this.touristPoint.image.name = this.imageName;
-    const basicInfo = this.createModel(touristPoint);
+    const newTouristPoint = {
+      ...touristPoint,
+      image: this.imageName
+    };
+    const basicInfo = this.createModel(newTouristPoint);
     this.touristPointService.update(this.touristPointId, basicInfo).subscribe(
       responseUpdate =>
         console.log(responseUpdate)
@@ -113,6 +113,11 @@ export class TouristPointEditorComponent implements OnInit {
   onChangeRegionName(event: any){
     this.touristPoint.region = this.regions.find(x => this.regionName == x.name);
     this.touristPoint.regionId = this.touristPoint.region.id;
+  }
+  OnChangeImage()
+  {
+
+    this.showImageSelector = true;
   }
 
   onChangeCategoryName(categoryName: string, index: number){
