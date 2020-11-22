@@ -86,49 +86,42 @@ namespace BusinessLogic.Logics
 
         private void ParseDateTouristPoint(ListHouseModel parseo)
         {
-            try
-            {
-                parseo.TouristImportModels.ForEach(m =>
-                    {
-                        TouristPoint tourist = new TouristPoint()
-                        {
-                            Name = m.Name,
-                            Description = m.Description,
-                            RegionId = m.RegionId,
-                            ImageTouristPoint = new ImageTouristPoint(m.Image) { },
-                        };
-                        this.touristPointLogic.Add(tourist);
-                    }
-                                        );
-                parseo.HouseImportModels.ForEach(m =>
+            parseo.TouristImportModels.ForEach(m =>
                 {
-                    House house = new House()
+                    TouristPoint tourist = new TouristPoint()
                     {
-                        Avaible = m.Avaible,
-                        PricePerNight = m.PricePerNight,
-                        TouristPointId = m.TouristPointId,
                         Name = m.Name,
-                        Starts = m.Starts,
-                        Address = m.Address,
                         Description = m.Description,
-                        Phone = m.Phone,
-                        Contact = m.Contact
+                        RegionId = m.RegionId,
+                        ImageTouristPoint = new ImageTouristPoint(m.Image) { },
                     };
-                    if (m.Images != null && m.Images.Count > 0)
-                    {
-                        List<ImageHouse> listImage = new List<ImageHouse>();
-                        m.Images.ForEach(image =>
-                            listImage.Add(new ImageHouse(image, house.Id)));
-
-                        house.ImagesHouse = listImage;
-                    }
-                    this.houseLogic.Add(house);
-                });
-            }
-            catch (Exception e)
+                    this.touristPointLogic.Add(tourist);
+                }
+                                    );
+            parseo.HouseImportModels.ForEach(m =>
             {
-                throw e;
-            }
+                House house = new House()
+                {
+                    Avaible = m.Avaible,
+                    PricePerNight = m.PricePerNight,
+                    TouristPointId = m.TouristPointId,
+                    Name = m.Name,
+                    Starts = m.Starts,
+                    Address = m.Address,
+                    Description = m.Description,
+                    Phone = m.Phone,
+                    Contact = m.Contact
+                };
+                if (m.Images != null && m.Images.Count > 0)
+                {
+                    List<ImageHouse> listImage = new List<ImageHouse>();
+                    m.Images.ForEach(image =>
+                        listImage.Add(new ImageHouse(image, house.Id)));
+
+                    house.ImagesHouse = listImage;
+                }
+                this.houseLogic.Add(house);
+            });
         }
     }
 }

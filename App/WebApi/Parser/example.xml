@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<root>
+  <TouristImportModels>
+    <Name>Name tourist point</Name>
+    <Image>arroyo.jpeg</Image>
+    <Description>Description tourist point</Description>
+    <RegionId>1</RegionId>
+    <Categories>1</Categories>
+    <Categories>2</Categories>
+    <Categories>3</Categories>
+  </TouristImportModels>
+  <TouristImportModels>
+    <Name>Name tourist point 2</Name>
+    <Image>campo.jpeg</Image>
+    <Description>Description tourist point 2</Description>
+    <RegionId>2</RegionId>
+    <Categories>1</Categories>
+    <Categories>2</Categories>
+    <Categories>3</Categories>
+  </TouristImportModels>
+  <HouseImportModels>
+    <Avaible>true</Avaible>
+    <PricePerNight>100</PricePerNight>
+    <TouristPointId>1</TouristPointId>
+    <Name>Name house 1</Name>
+    <Starts>1</Starts>
+    <Address>asdfasdfasdf</Address>
+    <Description>asdfasdf</Description>
+    <Phone>1234</Phone>
+    <Contact>Contact example</Contact>
+    <Images>museo.jpeg</Images>
+    <Images>playa.jpeg</Images>
+  </HouseImportModels>
+  <HouseImportModels>
+    <Avaible>true</Avaible>
+    <PricePerNight>200</PricePerNight>
+    <TouristPointId>1</TouristPointId>
+    <Name>Name house 2</Name>
+    <Starts>1</Starts>
+    <Address>asdfasdfasdf</Address>
+    <Description>asdfasdf</Description>
+    <Phone>1234</Phone>
+    <Contact>Contact example</Contact>
+    <Images>punta.jpeg</Images>
+    <Images>piedras.jpeg</Images>
+  </HouseImportModels>
+  <HouseImportModels>
+    <Avaible>true</Avaible>
+    <PricePerNight>100</PricePerNight>
+    <TouristPointId>1</TouristPointId>
+    <Name>Name house 3</Name>
+    <Starts>1</Starts>
+    <Address>asdfasdfasdf</Address>
+    <Description>asdfasdf</Description>
+    <Phone>1234</Phone>
+    <Contact>Contact example</Contact>
+    <Images/>
+  </HouseImportModels>
+  <HouseImportModels>
+    <Avaible>true</Avaible>
+    <PricePerNight>100</PricePerNight>
+    <TouristPointId>1</TouristPointId>
+    <Name>Name house 4</Name>
+    <Starts>4</Starts>
+    <Address>asdfasdfasdf</Address>
+    <Description>asdfasdf</Description>
+    <Phone>1234</Phone>
+    <Contact>Contact example</Contact>
+  </HouseImportModels>
+</root>

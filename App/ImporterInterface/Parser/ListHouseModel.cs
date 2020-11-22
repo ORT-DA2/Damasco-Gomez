@@ -6,5 +6,6 @@ namespace ImporterInterface.Parser
     {
         public List<TouristImportModel> TouristImportModels {get; set;}
         public List<HouseImportModel> HouseImportModels {get ; set; }
+        public ListHouseModel(){}
     }
 }
