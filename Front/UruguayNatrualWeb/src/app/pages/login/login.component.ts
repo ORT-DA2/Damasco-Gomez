@@ -19,12 +19,11 @@ export class LoginComponent implements OnInit {
   }
 
   login(form: NgForm) {
-
     if (form.invalid) {return; }
 
     this.sessionService.login(this.sessionUser).
       subscribe(resp => {
-           this.router.navigateByUrl('/dashboard');
+           this.router.navigateByUrl('/user-profile');
         });
       localStorage.setItem('email', this.sessionUser.email);
   }
