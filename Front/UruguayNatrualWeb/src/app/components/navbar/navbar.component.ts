@@ -40,7 +40,7 @@ export class NavbarComponent implements OnInit {
             return this.listTitles[item].title;
         }
     }
-    return 'Dashboard';
+    return 'Title';
   }
   logOut() {
     localStorage.removeItem('token');

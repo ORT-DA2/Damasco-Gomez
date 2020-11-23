@@ -31,7 +31,7 @@ const routes: Routes =[
     ]
   }, {
     path: '**',
-    redirectTo: 'search'
+    redirectTo: 'login'
   }
 ];
 

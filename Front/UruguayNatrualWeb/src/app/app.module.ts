@@ -7,7 +7,6 @@ import { CommonModule } from '@angular/common';
 
 import { AppComponent } from './app.component';
 import { AdminLayoutComponent } from './layouts/admin-layout/admin-layout.component';
-import { AuthLayoutComponent } from './layouts/auth-layout/auth-layout.component';
 
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 
@@ -45,7 +44,6 @@ import { TouristLayoutComponent } from './layouts/tourist-layout/tourist-layout.
   declarations: [
     AppComponent,
     AdminLayoutComponent,
-    AuthLayoutComponent,
     TouristLayoutComponent,
   ],
   providers: [TouristPointsService,
