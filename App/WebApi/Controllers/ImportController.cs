@@ -5,7 +5,7 @@ using Microsoft.AspNetCore.Mvc;
 namespace WebApi.Controllers
 {
     [Route("api/importers")]
-    public class ImportController : ControllerBase
+    public class ImportController : ControllerBaseApi
     {
         private readonly IImporterLogic importLogic;
 

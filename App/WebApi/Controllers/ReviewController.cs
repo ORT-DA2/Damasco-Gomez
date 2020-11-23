@@ -10,7 +10,7 @@ using WebApi.Filters;
 namespace WebApi.Controllers
 {
     [Route("api/reviews")]
-    public class ReviewController : ControllerBase
+    public class ReviewController : ControllerBaseApi
     {
         private readonly IReviewLogic reviewLogic;
 

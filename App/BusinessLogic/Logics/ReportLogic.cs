@@ -19,7 +19,7 @@ namespace BusinessLogic.Logics
         {
             DateTime dateFrom = touristPointReport.DateFrom;
             DateTime dateOut = touristPointReport.DateOut;
-            int idTp = touristPointReport.IdTp;
+            int idTp = touristPointReport.IdTouristPoint;
             List<Report> housesWithBookingList = reportRepository.FilterCantBookigsByHouse(dateFrom, dateOut, idTp);
             return housesWithBookingList;
         }

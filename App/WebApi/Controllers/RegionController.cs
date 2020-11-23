@@ -11,7 +11,7 @@ namespace WebApi.Controllers
 {
 
     [Route("api/regions")]
-    public class RegionController : ControllerBase
+    public class RegionController : ControllerBaseApi
     {
         private readonly IRegionLogic regionLogic;
 

@@ -10,7 +10,7 @@ using Model.Out;
 namespace WebApi.Controllers
 {
     [Route("api/persons")]
-    public class PersonController : ControllerBase
+    public class PersonController : ControllerBaseApi
     {
         private readonly IPersonLogic personLogic;
 

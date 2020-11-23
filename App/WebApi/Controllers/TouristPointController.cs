@@ -10,7 +10,7 @@ using WebApi.Filters;
 namespace WebApi.Controllers
 {   
     [Route("api/touristpoints")]
-    public class TouristPointController : ControllerBase
+    public class TouristPointController : ControllerBaseApi
     {
         private readonly ITouristPointLogic touristPointLogic;
         public TouristPointController(ITouristPointLogic touristPointLogic)

@@ -9,7 +9,7 @@ using WebApi.Filters;
 namespace WebApi.Controllers
 {
     [Route("api/categories")]
-    public class CategoryController : ControllerBase
+    public class CategoryController : ControllerBaseApi
     {
         private readonly ICategoryLogic categoryLogic;
         public CategoryController(ICategoryLogic categoryLogic)

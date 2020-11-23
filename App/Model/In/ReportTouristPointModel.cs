@@ -14,7 +14,7 @@ namespace Model.In
         {
             return new ReportTouristPoint()
             {
-                IdTp= this.IdTp,
+                IdTouristPoint= this.IdTp,
                 DateFrom = ParseDateTime(this.DateFrom),
                 DateOut= ParseDateTime(this.DateOut),
 

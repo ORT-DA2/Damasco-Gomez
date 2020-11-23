@@ -8,7 +8,7 @@ using Model.Out;
 namespace WebApi.Controllers
 {
     [Route("api/sessions")]
-    public class SessionController : ControllerBase
+    public class SessionController : ControllerBaseApi
     {
         private readonly ISessionLogic sessionLogic;
 

@@ -11,7 +11,7 @@ using WebApi.Filters;
 namespace WebApi.Controllers
 {
     [Route("api/houses")]
-    public class HouseController : ControllerBase
+    public class HouseController : ControllerBaseApi
     {
         private readonly IHouseLogic houseLogic;
         public HouseController(IHouseLogic houseLogic)

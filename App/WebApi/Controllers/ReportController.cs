@@ -11,7 +11,7 @@ using WebApi.Filters;
 namespace WebApi.Controllers
 {
     [Route("api/reports")]
-    public class ReportController : ControllerBase
+    public class ReportController : ControllerBaseApi
     {
         private IReportLogic reportLogic;
          public ReportController(IReportLogic reportLogic)
