@@ -1,17 +1,19 @@
-import { ImageHouseBasicModel } from "../image-house/image-house.-basic";
 
-export interface HouseBasicInfo {
-  id : number,
+
+export interface HouseModelIn {
   avaible : boolean,
   pricePerNight : number,
   touristPointId : number,
   name : string,
   starts : number,
   address : string,
-  images : ImageHouseBasicModel [],
+  images : string [],
   description : string,
   phone : number,
   contact: string,
-  totalPrice: number,
-
 }
+
+
+
+
+

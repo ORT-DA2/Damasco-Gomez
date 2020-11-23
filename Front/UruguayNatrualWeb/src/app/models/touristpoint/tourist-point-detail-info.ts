@@ -4,10 +4,10 @@ import { RegionBasicInfo } from "../regions/region-base-info";
 
 export interface TouristPointDetailInfo {
   id : number,
-  name : string,
-  image : ImageTouristPointBasic,
+  name : string;
   description : string,
   regionId : number,
   region : RegionBasicInfo,
   categories : CategoryBasicInfo[],
+  image : ImageTouristPointBasic,
 }

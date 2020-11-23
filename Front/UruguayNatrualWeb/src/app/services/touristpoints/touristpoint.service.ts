@@ -26,14 +26,17 @@ export class TouristPointsService {
     return httpRequest;
   }
 
-  add():Observable<any>{
+  add(body):Observable<any>{
     const headers = new HttpHeaders({
       'Content-Type': 'application/json',
-      'Authorization': localStorage.getItem('token'), });
+      'Authorization':  localStorage.getItem('token')
+    });
     let options = { headers: headers };
-    const body=JSON.stringify("");
-    return this.http.post(this.uri,body,options).pipe(catchError(this.handleError));
+    var httpRequest = this.http.post<any>(this.uri , body, options)
+      .pipe(catchError(this.handleError));
+    return httpRequest;
   }
+
 
   delete(id):Observable<any>{
     const headers = new HttpHeaders({
