@@ -10,37 +10,46 @@ import { PersonBasicInfo } from 'src/app/models/person/person-base-info';
   providedIn: 'root'
 })
 export class PersonService {
-  private uri = environment.baseURL+ 'persons';
+  private uri = environment.baseURL + 'persons';
   constructor(private http: HttpClient) { }
 
-  getAll(): Observable<PersonBasicInfo[]>{
+  getAll(): Observable<PersonBasicInfo[]> {
     return this.http.get<PersonBasicInfo[]>(this.uri)
       .pipe(catchError(this.handleError));
   }
-  logout(){}
+  logout() { }
 
-  newUser(user: PersonBasicInfo){
-
+  newUser(user: PersonBasicInfo) {
     const personData = {
       ...user,
     };
     return this.http.post(
-      `${ this.uri}`,
+      `${this.uri}`,
       personData
     );
-    }
+  }
+
+  update(id, body):Observable<any>{
+    const headers = new HttpHeaders({
+      'Content-Type': 'application/json',
+      'Authorization':  localStorage.getItem('token')
+    });
+    let options = { headers: headers };
+    var httpRequest = this.http.put<any>(this.uri + '/' + id, body, options)
+      .pipe(catchError(this.handleError));
+    return httpRequest;
+  }
 
 
-
-  private handleError(error: HttpErrorResponse){
+  private handleError(error: HttpErrorResponse) {
     let message: string;
     if (error.error instanceof ErrorEvent) {
       message = 'Error: do it again';
-    } else{
+    } else {
       // tslint:disable-next-line: triple-equals
-      if(error.status == 0){
+      if (error.status == 0) {
         message = 'The server is shutdown';
-      } else{
+      } else {
         message = error.error.message;
       }
     }
