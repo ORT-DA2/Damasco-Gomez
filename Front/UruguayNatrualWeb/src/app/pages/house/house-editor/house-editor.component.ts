@@ -4,7 +4,7 @@ import { CategoryBasicInfo } from 'src/app/models/category/category-basic-info';
 import { HouseBasicInfo } from 'src/app/models/house/house-base-info';
 import { HouseDetailInfo } from 'src/app/models/house/house-detail-info';
 import { HouseModelIn } from 'src/app/models/house/house-model-in';
-import { ImageBasicModel } from 'src/app/models/image-house/image-house.-basic';
+import { ImageHouseBasicModel } from 'src/app/models/image-house/image-house.-basic';
 import { TouristPointsBasicInfo } from 'src/app/models/touristpoint/touristpoint-base-info';
 import { CategoryService } from 'src/app/services/categories/category.service';
 import { HouseService } from 'src/app/services/houses/house.service';
@@ -18,8 +18,7 @@ import { environment } from 'src/environments/environment';
   styleUrls: ['./house-editor.component.css']
 })
 export class HouseEditorComponent implements OnInit {
-  public house: HouseDetailInfo = {} as HouseDetailInfo;
-  public houseModel :  HouseModelIn = {} as HouseModelIn;
+  public house: HouseBasicInfo = {} as HouseBasicInfo;
   public touristPoints: TouristPointsBasicInfo[] = [];
   public houseId: number = 0;
   public pricePerNigth : number;
@@ -35,7 +34,7 @@ export class HouseEditorComponent implements OnInit {
   public categories : CategoryBasicInfo[] = [];
   public imageHouse : string;
   public selectedFile : File;
-  public images : ImageBasicModel [];
+  public images : ImageHouseBasicModel [];
   public imagesNames :  string[] = [];
   public imageName : string;
   public selectedFiles: FileList;
@@ -69,18 +68,15 @@ export class HouseEditorComponent implements OnInit {
       return !isNaN(this.houseId);
     }
 
-    updateAvailable(house: HouseDetailInfo) {
+    updateAvailable(house: HouseBasicInfo) {
     const basicInfo = this.createModel(house);
     this.houseService.updateAvailable(this.houseId, basicInfo).subscribe(
       responseUpdate =>
         console.log(responseUpdate)
     );
   }
-  addHouse(house: HouseModelIn) {
-    const newHouse = {
-      ...house,
-      images: this.imagesNames
-    };
+  addHouse(house: HouseBasicInfo) {
+
    const basicInfo = this.createModel(house);
    console.log(basicInfo);
     this.houseService.add(basicInfo).subscribe(
@@ -88,14 +84,13 @@ export class HouseEditorComponent implements OnInit {
         this.houseId= responseAdd.id;
         this.router.navigateByUrl(`/house/house-editor/${this.houseId}`);
         this.existentHouse = true;
-        console.log(responseAdd);
       }
     );
   }
   isReadOnly () : boolean{
     return !isNaN(this.houseId);
   }
-  private createModel(house: any): HouseModelIn {
+  private createModel(house: HouseBasicInfo): HouseModelIn {
     const modelBase: HouseModelIn = {} as HouseModelIn;
     modelBase.name = house.name;
     modelBase.starts = house.starts;
@@ -109,17 +104,12 @@ export class HouseEditorComponent implements OnInit {
     modelBase.images = this.imagesNames;
     return modelBase;
   }
-  private getBy(houseResponse: HouseDetailInfo) {
+  private getBy(houseResponse: HouseBasicInfo) {
     this.house = houseResponse;
-   // this.imagesNames = this.house.images? this.house.images.map(image => this.sourceImage + '/' + image.name)
-   // : [];
-    this.touristPointName = this.house.touristPoint ? this.house.touristPoint.name: '' ;
-   // const length = this.house.images.length;
-  //  for (let i = 0; i <  this.house.images.length; i++) {
-  //    this.imagesNames.push( this.house.images[i].name);
-  // }
-   console.log(this.house.images);
-
+    this.imagesNames = this.house.images? this.house.images.map(image => this.sourceImage + '/' + image.name)
+   : [];
+    var touristPoint = this.touristPoints.find(x => x.id == this.house.touristPointId);
+    this.touristPointName =  touristPoint.name;
   }
   private getAllTouristPoints(touristPointResponse: TouristPointsBasicInfo[]){
     this.touristPoints = touristPointResponse;
