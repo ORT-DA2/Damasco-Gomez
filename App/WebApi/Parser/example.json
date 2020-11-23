@@ -1,0 +1,73 @@
+{
+    "TouristImportModels": [
+        {
+            "Name": "Name tourist point",
+            "Image": "arroyo.jpeg",
+            "Description": "Description tourist point",
+            "RegionId": 1,
+            "Categories": [1,2,3]
+        },
+        {
+            "Name": "Name tourist point 2",
+            "Image": "campo.jpeg",
+            "Description": "Description tourist point 2",
+            "RegionId": 2,
+            "Categories": [1,2,3]
+        }
+    ],
+    "HouseImportModels": [
+        {
+            "Avaible": true,
+            "PricePerNight": 100,
+            "TouristPointId": 1,
+            "Name": "Name house 1",
+            "Starts": 1,
+            "Address": "asdfasdfasdf",
+            "Description": "asdfasdf",
+            "Phone": 1234,
+            "Contact": "Contact example",
+            "Images": [
+                "museo.jpeg",
+                "playa.jpeg"
+            ]
+        },
+        {
+            "Avaible": true,
+            "PricePerNight": 200,
+            "TouristPointId": 1,
+            "Name": "Name house 2",
+            "Starts": 1,
+            "Address": "asdfasdfasdf",
+            "Description": "asdfasdf",
+            "Phone": 1234,
+            "Contact": "Contact example",
+            "Images": [
+                "punta.jpeg",
+                "piedras.jpeg"
+            ]
+        },
+        {
+            "Avaible": true,
+            "PricePerNight": 100,
+            "TouristPointId": 1,
+            "Name": "Name house 3",
+            "Starts": 1,
+            "Address": "asdfasdfasdf",
+            "Description": "asdfasdf",
+            "Phone": 1234,
+            "Contact": "Contact example",
+            "Images": []
+        },
+        {
+            "Avaible": true,
+            "PricePerNight": 100,
+            "TouristPointId": 1,
+            "Name": "Name house 4",
+            "Starts": 4,
+            "Address": "asdfasdfasdf",
+            "Description": "asdfasdf",
+            "Phone": 1234,
+            "Contact": "Contact example"
+        }
+    ]
+}

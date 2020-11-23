@@ -46,6 +46,7 @@ namespace Factory.Factories
             services.AddScoped<IReviewLogic, ReviewLogic>();
             services.AddScoped<IReportLogic, ReportLogic>();
             services.AddScoped<IStateLogic, StateLogic>();
+            services.AddScoped<IImporterLogic, ImporterLogic>();
 
         }
         public void AddDbContextService()
