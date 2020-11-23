@@ -29,7 +29,4 @@ export const AdminLayoutRoutes: Routes = [
     { path : 'house/house-editor/:id', component :  HouseEditorComponent},
     { path: 'houses',       component: HouseDashboardComponent },
     { path: 'reports',       component: ReportDashboardComponent },
-
-
-
 ];
