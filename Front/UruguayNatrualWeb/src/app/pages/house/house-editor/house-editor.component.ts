@@ -86,7 +86,7 @@ export class HouseEditorComponent implements OnInit {
     this.houseService.add(basicInfo).subscribe(
       responseAdd => {
         this.houseId = responseAdd.id;
-        this.router.navigateByUrl(`/house/house-editor/${this.houseId}`);
+        this.router.navigateByUrl(`/houses/house-editor/${this.houseId}`);
         this.existentHouse = true;
       }
     );

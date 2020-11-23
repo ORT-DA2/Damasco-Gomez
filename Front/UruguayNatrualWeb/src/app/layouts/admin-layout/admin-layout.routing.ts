@@ -19,24 +19,24 @@ export const AdminLayoutRoutes: Routes = [
     { path: 'bookings',
       children: [
         { path: '', component: BookingDashboardComponent},
-        { path: 'bookings/booking-editor/:id', component: BookingEditorComponent }
+        { path: 'booking-editor/:id', component: BookingEditorComponent }
       ]
     },
     { path: 'tourist-points',
       children: [
         { path: '', component: TouristPointDashboardComponent  },
-        { path: 'tourist-points/tourist-point-editor/:id', component: TouristPointEditorComponent },
+        { path: 'tourist-point-editor/:id', component: TouristPointEditorComponent },
       ]
     },
     { path: 'categories',
       children:[
         { path: '', component: CategoryDashboardComponent},
-        { path: 'category/category-editor/:id', component :  CategoryEditorComponent},
+        { path: 'category-editor/:id', component :  CategoryEditorComponent},
       ]
     },
     { path: 'houses', children:[
       { path: '', component: HouseDashboardComponent },
-      { path: 'house/house-editor/:id', component :  HouseEditorComponent},
+      { path: 'house-editor/:id', component :  HouseEditorComponent},
     ] },
     { path: 'reports', component: ReportDashboardComponent },
 ];

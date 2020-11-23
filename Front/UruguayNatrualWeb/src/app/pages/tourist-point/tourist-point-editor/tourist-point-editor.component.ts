@@ -94,7 +94,7 @@ export class TouristPointEditorComponent implements OnInit {
     this.touristPointService.add(basicInfo).subscribe(
       responseAdd => {
         this.touristPointId = responseAdd.id;
-        this.router.navigateByUrl(`/tourist-point/tourist-point-editor/${this.touristPointId}`);
+        this.router.navigateByUrl(`/tourist-points/tourist-point-editor/${this.touristPointId}`);
         this.existTP = true;
         this.existImageName = true;
       }
