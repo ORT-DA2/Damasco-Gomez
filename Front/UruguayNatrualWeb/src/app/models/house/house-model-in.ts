@@ -1,7 +1,6 @@
 
 
 export interface HouseModelIn {
-  id : number,
   avaible : boolean,
   pricePerNight : number,
   touristPointId : number,
