@@ -7,6 +7,6 @@ namespace BusinessLogicInterface.Interfaces
     public interface IImporterLogic
     {
         List<string> GetNames();
-        ListHouseModel Import(ImportModel import);
+        ListImporterModel Import(ImportModel import);
     }
 }

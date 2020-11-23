@@ -5,7 +5,6 @@ namespace ImporterInterface
 {
     public class HouseImportModel
     {
-        public bool Avaible {get ; set; }
         public int PricePerNight {get; set;}
         public int TouristPointId {get ; set; }
         public string Name {get ; set; }

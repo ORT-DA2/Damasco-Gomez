@@ -23,7 +23,6 @@
     </Categories>
   </TouristImportModels>
   <HouseImportModels>
-    <Avaible>true</Avaible>
     <PricePerNight>100</PricePerNight>
     <TouristPointId>1</TouristPointId>
     <Name>Name house 1</Name>
@@ -38,7 +37,6 @@
     </Images>
   </HouseImportModels>
   <HouseImportModels>
-    <Avaible>true</Avaible>
     <PricePerNight>200</PricePerNight>
     <TouristPointId>1</TouristPointId>
     <Name>Name house 2</Name>
@@ -53,7 +51,6 @@
     </Images>
   </HouseImportModels>
   <HouseImportModels>
-    <Avaible>true</Avaible>
     <PricePerNight>100</PricePerNight>
     <TouristPointId>1</TouristPointId>
     <Name>Name house 3</Name>
@@ -68,7 +65,6 @@
     </Images>
   </HouseImportModels>
   <HouseImportModels>
-    <Avaible>true</Avaible>
     <PricePerNight>100</PricePerNight>
     <TouristPointId>1</TouristPointId>
     <Name>Name house 4</Name>

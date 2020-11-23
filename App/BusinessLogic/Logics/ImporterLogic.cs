@@ -54,7 +54,7 @@ namespace BusinessLogic.Logics
             return names;
         }
 
-        public ListHouseModel Import(ImportModel import)
+        public ListImporterModel Import(ImportModel import)
         {
             List<string> names = new List<string>();
 
@@ -84,7 +84,7 @@ namespace BusinessLogic.Logics
             throw new ArgumentException("Cant find dll");
         }
 
-        private void ParseDateTouristPoint(ListHouseModel parseo)
+        private void ParseDateTouristPoint(ListImporterModel parseo)
         {
             parseo.TouristImportModels.ForEach(m =>
                 {
@@ -102,7 +102,6 @@ namespace BusinessLogic.Logics
             {
                 House house = new House()
                 {
-                    Avaible = m.Avaible,
                     PricePerNight = m.PricePerNight,
                     TouristPointId = m.TouristPointId,
                     Name = m.Name,

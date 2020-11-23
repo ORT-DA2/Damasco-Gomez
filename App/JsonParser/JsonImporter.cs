@@ -13,11 +13,11 @@ namespace JsonParser
             return "JSON";
         }
 
-        public ListHouseModel ImportData(string path)
+        public ListImporterModel ImportData(string path)
         {
             FileInfo jsonFile = new FileInfo(path);
             var jsontString = File.ReadAllText(jsonFile.FullName);
-            var houseImportModel = JsonSerializer.Deserialize<ListHouseModel>(jsontString);
+            var houseImportModel = JsonSerializer.Deserialize<ListImporterModel>(jsontString);
             return houseImportModel;
         }
     }
