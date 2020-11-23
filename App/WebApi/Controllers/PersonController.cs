@@ -10,7 +10,7 @@ using Model.Out;
 namespace WebApi.Controllers
 {
     [Route("api/persons")]
-    public class PersonController : VidlyControllerBase
+    public class PersonController : ControllerBase
     {
         private readonly IPersonLogic personLogic;
 

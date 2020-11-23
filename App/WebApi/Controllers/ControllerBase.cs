@@ -6,7 +6,7 @@ namespace WebApi.Controllers
 
     [EnableCors("AllowEverything")]
     [ApiController]
-    public class VidlyControllerBase : ControllerBase
+    public class ControllerBase : ControllerBase
     {
     }
 }

@@ -9,7 +9,7 @@ using WebApi.Filters;
 namespace WebApi.Controllers
 {
     [Route("api/bookings")]
-    public class BookingController : VidlyControllerBase
+    public class BookingController : ControllerBase
     {
         private readonly IBookingLogic bookingLogic;
         public BookingController(IBookingLogic bookingLogic)

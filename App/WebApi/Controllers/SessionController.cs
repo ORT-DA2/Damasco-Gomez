@@ -8,7 +8,7 @@ using Model.Out;
 namespace WebApi.Controllers
 {
     [Route("api/sessions")]
-    public class SessionController : VidlyControllerBase
+    public class SessionController : ControllerBase
     {
         private readonly ISessionLogic sessionLogic;
 

@@ -10,7 +10,7 @@ using WebApi.Filters;
 namespace WebApi.Controllers
 {
     [Route("api/reviews")]
-    public class ReviewController : VidlyControllerBase
+    public class ReviewController : ControllerBase
     {
         private readonly IReviewLogic reviewLogic;
 
