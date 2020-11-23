@@ -1,4 +1,4 @@
-import { ImageHouseBasicModel } from "../image-house/image-house.-basic";
+import { ImageHouseBasicModel } from "../image-house/image-house-basic";
 
 export interface HouseBasicInfo {
   id : number,

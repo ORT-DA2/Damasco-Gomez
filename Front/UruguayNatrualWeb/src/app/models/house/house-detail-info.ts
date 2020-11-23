@@ -1,5 +1,5 @@
 
-import { ImageHouseBasicModel } from "../image-house/image-house.-basic";
+import { ImageHouseBasicModel } from "../image-house/image-house-basic";
 import { TouristPointsBasicInfo } from "../touristpoint/touristpoint-base-info";
 
 export interface HouseDetailInfo {
