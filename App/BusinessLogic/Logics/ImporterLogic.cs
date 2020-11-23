@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using System.Diagnostics.CodeAnalysis;
 using System.IO;
 using System.Linq;
 using System.Reflection;
@@ -13,6 +14,7 @@ using ImporterInterface.Parser;
 
 namespace BusinessLogic.Logics
 {
+    [ExcludeFromCodeCoverage]
     public class ImporterLogic : IImporterLogic
     {
         private readonly IHouseLogic houseLogic;
