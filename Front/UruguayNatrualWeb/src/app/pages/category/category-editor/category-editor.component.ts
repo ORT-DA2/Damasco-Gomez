@@ -19,6 +19,9 @@ export class CategoryEditorComponent implements OnInit {
   public touristPointName: string[] = [];
   public newTouristPoint: TouristPointsBasicInfo = {} as TouristPointsBasicInfo;
   public existentCategory: boolean = false;
+  public updateMessage: string = '';
+  public errorBackend: string = '';
+
   constructor(
     private route: ActivatedRoute,
     private router: Router,
@@ -56,8 +59,7 @@ export class CategoryEditorComponent implements OnInit {
   updateData(category: CategoryDetailInfo) {
     const basicInfo = this.createModel(category);
     this.categoryService.update(this.categoryId, basicInfo).subscribe(
-      responseUpdate =>
-        console.log(responseUpdate)
+      responseUpdate => this.updateMessage = 'Update sucessfully!'
     );
   }
   addCategory(category: CategoryDetailInfo) {
@@ -67,6 +69,7 @@ export class CategoryEditorComponent implements OnInit {
         this.categoryId = responseAdd.id;
         this.router.navigateByUrl(`/category/category-editor/${this.categoryId}`);
         this.existentCategory = true;
+        this.updateMessage = 'Added sucessfully!'
       }
     );
   }
@@ -92,6 +95,6 @@ export class CategoryEditorComponent implements OnInit {
   }
 
   private showError(message: string) {
-    console.log(message);
+    this.errorBackend = message;
   }
 }

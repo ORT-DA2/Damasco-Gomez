@@ -28,33 +28,5 @@ export class LoginComponent implements OnInit {
         });
       localStorage.setItem('email', this.sessionUser.email);
   }
-/*
-   if (  form.invalid ) { return; }
-
-    Swal.fire({
-      allowOutsideClick: false,
-      type: 'info',
-      text: 'Please Wait...'
-    });
-    Swal.showLoading();
-
-
-    this.sessionService.login( this.sessionUser )
-      .subscribe( resp => {
-
-        console.log(resp);
-        Swal.close();
-
-
-      }, (err) => {
-
-        console.log(err.error.error.message);
-        Swal.fire({
-          type: 'error',
-          title: 'Authentication error',
-          text: err.error.error.message
-        });
-      });
-*/
 
 }

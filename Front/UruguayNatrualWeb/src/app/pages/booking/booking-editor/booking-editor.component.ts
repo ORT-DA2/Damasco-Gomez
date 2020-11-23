@@ -17,6 +17,7 @@ export class BookingEditorComponent implements OnInit {
   public houses: HouseBasicInfo[] = [];
   public states: StateBasicInfo[] = [];
   public bookingId: number = 0;
+  public errorBackend: string = '';
 
   constructor(
     private route: ActivatedRoute,
@@ -50,7 +51,7 @@ export class BookingEditorComponent implements OnInit {
   }
 
   private showError(message: string){
-    console.log(message);
+    this.errorBackend = message;
   }
 
 }

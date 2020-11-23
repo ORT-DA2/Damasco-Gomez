@@ -3,7 +3,6 @@ import { ROUTES } from '../sidebar/sidebar.component';
 import { Location, LocationStrategy, PathLocationStrategy } from '@angular/common';
 import { Router } from '@angular/router';
 import { SessionService } from 'src/app/services/sessions/session.service';
-import { SessionUserModel } from 'src/app/models/sessions/session-user-model';
 
 @Component({
   selector: 'app-navbar',
@@ -30,12 +29,14 @@ export class NavbarComponent implements OnInit {
   }
   getTitle(){
     var titlee = this.location.prepareExternalUrl(this.location.path());
-    if(titlee.charAt(0) === '#'){
-        titlee = titlee.slice( 1 );
+    var paths = titlee.split('/');
+
+    if(paths.length > 0){
+      titlee = paths[1];
     }
 
     for(var item = 0; item < this.listTitles.length; item++){
-        if(this.listTitles[item].path === titlee){
+        if(this.listTitles[item].path.includes(titlee)){
             return this.listTitles[item].title;
         }
     }

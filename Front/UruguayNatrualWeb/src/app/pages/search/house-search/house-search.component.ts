@@ -36,6 +36,7 @@ export class HouseSearchComponent implements OnInit {
   public code: string;
   public errorMessageDates: string = '';
   public errorMessagePeople: string = '';
+  public errorMessageBackend: string = '';
 
   public myForm: FormGroup;
   closeResult: string;
@@ -75,7 +76,7 @@ export class HouseSearchComponent implements OnInit {
   }
 
   private showError(event) {
-    console.log(event)
+    this.errorMessageBackend = event;
   }
 
   searchBy() {

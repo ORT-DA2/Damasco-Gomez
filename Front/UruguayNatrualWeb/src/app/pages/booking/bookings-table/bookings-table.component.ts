@@ -10,6 +10,8 @@ import { BookingService } from 'src/app/services/bookings/booking.service';
 export class BookingsTableComponent implements OnInit {
   public bookings: BookingBasicInfo[] = [];
   public id: Number = 0;
+  public errorBackend: string = '';
+
   constructor(private bookingService: BookingService) { }
 
   ngOnInit(): void {
@@ -23,7 +25,7 @@ export class BookingsTableComponent implements OnInit {
   }
 
   private showError(message: string){
-    console.log(message);
+    this.errorBackend = message;
   }
 
   private delete(event) {

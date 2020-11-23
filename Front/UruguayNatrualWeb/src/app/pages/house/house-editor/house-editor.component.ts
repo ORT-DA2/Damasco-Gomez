@@ -28,6 +28,9 @@ export class HouseEditorComponent implements OnInit {
   public categoriesName: string[] = [];
   public startsList : number [] = [];
   public categories : CategoryBasicInfo[] = [];
+  public errorBackend: string = '';
+  public updateMessage: string = '';
+
   constructor(
     private route: ActivatedRoute,
     private router: Router,
@@ -61,7 +64,7 @@ export class HouseEditorComponent implements OnInit {
     const basicInfo = this.createModel(house);
     this.houseService.updateAvailable(this.houseId, basicInfo).subscribe(
       responseUpdate =>
-        console.log(responseUpdate)
+        this.updateMessage = 'Update done!'
     );
   }
   addHouse(house: HouseDetailInfo) {
@@ -100,7 +103,7 @@ export class HouseEditorComponent implements OnInit {
     this.touristPoints = touristPointResponse;
   }
   private showError(message: string) {
-    console.log(message);
+    this.errorBackend = message;
   }
   onChangeTouristPointName(touristPointName: string) {
 

@@ -14,6 +14,7 @@ export class TableTouristPointsComponent implements OnInit {
   public isRegion : boolean ;
   public by : string;
   public id : number;
+  public errorMessageBackend: string = '';
 
   constructor(private route: ActivatedRoute,private touristPointService: TouristPointsService) {
     this.by = this.route.snapshot.paramMap.get('name');
@@ -32,13 +33,9 @@ export class TableTouristPointsComponent implements OnInit {
     this.touristPoints = this.isRegion ?
       touristPointResponse.filter(x =>(x.regionId == this.id) ) :
       touristPointResponse.filter(y => y.categories.filter( j => j == this.id));
-    console.log(this.touristPoints);
   }
 
   private showError(message: string){
-    console.log(message);
-  }
-  chooseRegion(event){
-    console.log(event);
+    this.errorMessageBackend = message;
   }
 }

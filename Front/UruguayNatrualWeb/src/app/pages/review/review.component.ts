@@ -32,7 +32,6 @@ export class ReviewComponent implements OnInit {
   }
 
   private showError(message){
-    debugger;
     this.errorMessageEndpoint  = message;
   }
 
@@ -51,8 +50,8 @@ export class ReviewComponent implements OnInit {
 
   send(){
     this.reviewService.add(this.review).subscribe(
+      error => this.showError(error),
       response => {
-        console.log(response), (error) => this.showError(error),
         this.disableSend = true
       }
     );

@@ -21,6 +21,8 @@ export class TouristPointEditorComponent implements OnInit {
   public regionName: string = "";
   public categoriesName: string[] = [];
   categoryNew: CategoryBasicInfo = {} as CategoryBasicInfo;
+  public errorMessageBackend: string = '';
+  public updateMessage: string = '';
 
   constructor(
     private route: ActivatedRoute,
@@ -63,7 +65,7 @@ export class TouristPointEditorComponent implements OnInit {
     const basicInfo = this.createModel(touristPoint);
     this.touristPointService.update(this.touristPointId, basicInfo).subscribe(
       responseUpdate =>
-        console.log(responseUpdate)
+        this.updateMessage = 'Update is done!'
     );
   }
 
@@ -96,7 +98,7 @@ export class TouristPointEditorComponent implements OnInit {
     return modelBase;
   }
   private showError(message: string){
-    console.log(message);
+    this.errorMessageBackend = message;
   }
 
 }

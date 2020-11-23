@@ -10,6 +10,7 @@ import { TouristPointsService } from 'src/app/services/touristpoints/touristpoin
 export class TouristPointsTableComponent implements OnInit {
   public touristpoints: TouristPointsBasicInfo[] = [];
   public id: Number = 0;
+  public errorMessageBackend: string = '';
 
   constructor(private touristPointService: TouristPointsService) { }
 
@@ -25,7 +26,7 @@ export class TouristPointsTableComponent implements OnInit {
   }
 
   private showError(message: string){
-    console.log(message);
+    this.errorMessageBackend = message;
   }
 
   private delete(event) {

@@ -9,6 +9,7 @@ import { RegionService } from 'src/app/services/regions/region.service';
 })
 export class TableRegionsComponent implements OnInit {
   public regions: RegionBasicInfo[] = [];
+  public errorMessageBackend: string = '';
 
   constructor(private regionService: RegionService) {
 
@@ -25,9 +26,6 @@ export class TableRegionsComponent implements OnInit {
   }
 
   private showError(message: string){
-    console.log(message);
-  }
-  chooseRegion(event){
-    console.log(event);
+    this.errorMessageBackend = message;
   }
 }

@@ -10,6 +10,8 @@ import { CategoryService } from 'src/app/services/categories/category.service';
 export class CategoryTableComponent implements OnInit {
   public categories: CategoryBasicInfo[] = [];
   public id: Number = 0;
+  public errorBackend: string = '';
+
   constructor(private categoryService: CategoryService) { }
 
 
@@ -25,7 +27,7 @@ export class CategoryTableComponent implements OnInit {
   }
 
   private showError(message: string){
-    console.log(message);
+    this.errorBackend = message;
   }
 
   private delete(event) {

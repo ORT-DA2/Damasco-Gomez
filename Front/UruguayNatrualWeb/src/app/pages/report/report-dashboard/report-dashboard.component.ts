@@ -22,6 +22,8 @@ export class ReportDashboardComponent implements OnInit {
   public checkIParse :string;
   public checkOutParse : string;
   public reports : ReportBasicInfo [] = [];
+  public errorBackend: string = '';
+
   constructor( private touristPointService: TouristPointsService , private reportService: ReportService) { }
 
   ngOnInit(): void {
@@ -78,7 +80,7 @@ export class ReportDashboardComponent implements OnInit {
   }
 
   private showError(message: string) {
-    console.log(message);
+    this.errorBackend =  message;
   }
 
 }

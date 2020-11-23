@@ -10,6 +10,8 @@ import { HouseService } from 'src/app/services/houses/house.service';
 export class HouseTableComponent implements OnInit {
   public houses: HouseBasicInfo[] = [];
   public id: Number = 0;
+  public errorBackend: string = '';
+
   constructor(private houseService: HouseService) { }
 
   ngOnInit(): void {
@@ -24,7 +26,7 @@ export class HouseTableComponent implements OnInit {
   }
 
   private showError(message: string){
-    console.log(message);
+    this.errorBackend = message;
   }
 
   private delete(event) {

@@ -9,6 +9,7 @@ import { CategoryService } from 'src/app/services/categories/category.service';
 })
 export class TableCategoriesComponent implements OnInit {
   public categories: CategoryBasicInfo[] = [];
+  public errorMessageBackend: string = '';
 
   constructor(private categoryService: CategoryService) { }
 
@@ -23,11 +24,7 @@ export class TableCategoriesComponent implements OnInit {
   }
 
   private showError(message: string){
-    console.log(message);
-  }
-
-  chooseCategory(event){
-    console.log(event);
+    this.errorMessageBackend = message;
   }
 
 }
