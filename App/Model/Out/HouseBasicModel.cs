@@ -21,15 +21,6 @@ namespace Model
         public string Contact {get; set;}
         public double TotalPrice {get; set; }
 
-        public override bool Equals(object obj)
-        {
-            var result = false;
-            if(obj is HouseBasicModel house)
-            {
-                result = this.Id == house.Id ;
-            }
-            return result;
-        }
         public HouseBasicModel(House house, HouseSearch houseSearch = null)
         {
             this.Id = house.Id;
@@ -49,6 +40,15 @@ namespace Model
                     m => new ImageHouseBasicModel(m)
                 ).ToList();
             }
+        }
+        public override bool Equals(object obj)
+        {
+            var result = false;
+            if(obj is HouseBasicModel house)
+            {
+                result = this.Id == house.Id ;
+            }
+            return result;
         }
     }
 }

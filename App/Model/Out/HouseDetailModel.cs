@@ -18,16 +18,6 @@ namespace Model
         public string Description {get ; set;}
         public int Phone {get; set; }
         public string Contact {get; set;}
-
-        public override bool Equals(object obj)
-        {
-            var result = false;
-            if(obj is HouseDetailModel house)
-            {
-                result = this.Id == house.Id ;
-            }
-            return result;
-        }
         public HouseDetailModel(House house)
         {
             this.Id = house.Id;
@@ -47,6 +37,16 @@ namespace Model
             }
             this.Description = house.Description;
             this.Contact = house.Contact;
+        }
+
+        public override bool Equals(object obj)
+        {
+            var result = false;
+            if(obj is HouseDetailModel house)
+            {
+                result = this.Id == house.Id ;
+            }
+            return result;
         }
     }
 }
