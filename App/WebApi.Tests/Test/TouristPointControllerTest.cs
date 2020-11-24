@@ -263,7 +263,7 @@ namespace WebApi.Tests
             TouristPointModel touristPointModel = new TouristPointModel()
             {
                 Name = "new name",
-                Image = "image",
+                Image = "image.png",
                 Description = "description",
                 RegionId = 1,
                 Categories = new List<int>(){1}
