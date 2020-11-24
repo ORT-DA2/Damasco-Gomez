@@ -135,7 +135,6 @@ namespace BusinessLogic.Tests.Test
         {
             TouristPoint touristPoint = touristPoints.First();
             mock.Setup(m => m.Add(touristPoint)).Returns(touristPoint);
-            //this.categoryRepository.Find(m.CategoryId)
             mock2.Setup(m => m.Find(touristPoint.CategoriesTouristPoints.First().CategoryId))
                 .Returns(touristPoint.CategoriesTouristPoints.First().Category);
 

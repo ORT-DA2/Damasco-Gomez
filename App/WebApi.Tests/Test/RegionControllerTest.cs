@@ -108,7 +108,6 @@ namespace WebApi.Test
             var result = controller.GetBy(id);
 
             mock.VerifyAll();
-            //Assert.IsInstanceOfType(result, typeof(BadRequestObjectResult));
         }
         [TestMethod]
         public void TestPostOk ()
@@ -144,7 +143,6 @@ namespace WebApi.Test
             var result = controller.Post(regionModel);
 
             mock.VerifyAll();
-            //Assert.IsInstanceOfType(result, typeof(BadRequestObjectResult));
         }
         [TestMethod]
         [ExpectedException(typeof(ArgumentException))]
@@ -161,7 +159,6 @@ namespace WebApi.Test
             var result = controller.Post(regionModel);
 
             mock.VerifyAll();
-            //Assert.IsInstanceOfType(result, typeof(BadRequestObjectResult));
         }
         [TestMethod]
         [ExpectedException(typeof(Exception))]
@@ -178,7 +175,6 @@ namespace WebApi.Test
             var result = controller.Post(regionModel);
 
             mock.VerifyAll();
-            //Assert.IsInstanceOfType(result, typeof(BadRequestObjectResult));
         }
         [TestMethod]
         public void TestPutOk()
@@ -214,7 +210,6 @@ namespace WebApi.Test
             var result = controller.Put(regionId1.Id, regionModel);
 
             mock.VerifyAll();
-            //Assert.IsInstanceOfType(result, typeof(BadRequestObjectResult));
         }
         [TestMethod]
         [ExpectedException(typeof(Exception))]
@@ -231,7 +226,6 @@ namespace WebApi.Test
             var result = controller.Put(regionId1.Id, regionModel);
 
             mock.VerifyAll();
-            //Assert.IsInstanceOfType(result, typeof(BadRequestObjectResult));
         }
         [TestMethod]
         public void TestDeleteWithId()
@@ -253,8 +247,6 @@ namespace WebApi.Test
             mock.Setup(mock=> mock.Delete(region.Id));
 
             var result = controller.Delete(region.Id);
-
-            //Assert.IsInstanceOfType(result,typeof(NotFoundResult));
         }
         [TestMethod]
         public void TestDelete()

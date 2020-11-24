@@ -30,7 +30,6 @@ namespace WebApi.Tests
                 {
                     Id = 1,
                     Name = "Name TouristPoint 1",
-                    // Image = "Image1",
                     Description = "Description 1",
                     Region = null ,
                     CategoriesTouristPoints = new List<CategoryTouristPoint>()
@@ -46,13 +45,12 @@ namespace WebApi.Tests
                             TouristPointId = 1,
                             TouristPoint = new TouristPoint(){ Id = 1}
                         }
-                    },//HAY QUE TENER CUIDADO CON ESTO NULL, ROMPE TODO , HACER CHECK DE ESTA VAR
+                    },
                 },
                 new TouristPoint()
                 {
                     Id = 2,
                     Name = "Name TouristPoint 2",
-                    // Image = "Image2",
                     Description = "Description 2",
                     Region = null ,
                     CategoriesTouristPoints = new List<CategoryTouristPoint>()
@@ -74,7 +72,6 @@ namespace WebApi.Tests
                 {
                     Id = 3,
                     Name = "Name TouristPoint 3",
-                    // Image = "Image3",
                     Description = "Description 3",
                     Region = null ,
                     CategoriesTouristPoints = new List<CategoryTouristPoint>()
@@ -96,7 +93,6 @@ namespace WebApi.Tests
                 {
                     Id = 4,
                     Name = "Name TouristPoint 4",
-                    // Image = "Image4",
                     Description = "Description 4",
                     Region = null ,
                     CategoriesTouristPoints = new List<CategoryTouristPoint>()
@@ -176,7 +172,6 @@ namespace WebApi.Tests
             var result = controller.GetBy(id);
 
             mock.VerifyAll();
-            //Assert.IsInstanceOfType(result, typeof(BadRequestObjectResult));
         }
         [TestMethod]
         public void TestPostOk()
@@ -220,7 +215,6 @@ namespace WebApi.Tests
             var result = controller.Post(touristPointModel);
 
             mock.VerifyAll();
-            //Assert.IsInstanceOfType(result, typeof(BadRequestObjectResult));
         }
         [TestMethod]
         [ExpectedException(typeof(ArgumentException))]
@@ -241,7 +235,6 @@ namespace WebApi.Tests
             var result = controller.Post(touristPointModel);
 
             mock.VerifyAll();
-            //Assert.IsInstanceOfType(result, typeof(BadRequestObjectResult));
         }
         [TestMethod]
         [ExpectedException(typeof(Exception))]
@@ -262,7 +255,6 @@ namespace WebApi.Tests
             var result = controller.Post(touristPointModel);
 
             mock.VerifyAll();
-            //Assert.IsInstanceOfType(result, typeof(BadRequestObjectResult));
         }
         [TestMethod]
         public void TestPutOk()
@@ -307,7 +299,6 @@ namespace WebApi.Tests
             var result = controller.Put(touristPointId1.Id, touristPointModel);
 
             mock.VerifyAll();
-            //Assert.IsInstanceOfType(result, typeof(BadRequestObjectResult));
         }
         [TestMethod]
         [ExpectedException(typeof(ArgumentException))]
@@ -328,7 +319,6 @@ namespace WebApi.Tests
             var result = controller.Put(touristPointId1.Id, touristPointModel);
 
             mock.VerifyAll();
-            //Assert.IsInstanceOfType(result, typeof(BadRequestObjectResult));
         }
         [TestMethod]
         public void TestDeleteWithId()

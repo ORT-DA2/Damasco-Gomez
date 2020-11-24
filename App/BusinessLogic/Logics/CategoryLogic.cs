@@ -32,7 +32,6 @@ namespace BusinessLogic
 
         public Category Add(Category category)
         {
-            //Validate(category);
             if (category.CategoryTouristPoints != null)
             {
                 category.CategoryTouristPoints.ForEach

@@ -53,7 +53,6 @@ namespace Domain
 
         public void Update(House element)
         {
-            //if(element.Avaible)
                this.Avaible = element.Avaible;
             if(element.PricePerNight>0) this.PricePerNight = element.PricePerNight;
             if(element.TouristPointId>0) this.TouristPointId = element.TouristPointId;

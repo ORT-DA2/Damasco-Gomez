@@ -133,7 +133,6 @@ namespace WebApi.Tests
             var result = controller.GetBy(id);
 
             mock.VerifyAll();
-            //Assert.IsInstanceOfType(result, typeof(BadRequestObjectResult));
         }
         [TestMethod]
         public void TestPostOk()
@@ -177,8 +176,6 @@ namespace WebApi.Tests
             mock.Setup(p => p.Add(bookingModel.ToEntity(true))).Throws(exist);
 
             var result = controller.Post(bookingModel);
-
-            //Assert.IsInstanceOfType(result, typeof(BadRequestObjectResult));
         }
         [TestMethod]
         [ExpectedException(typeof(ArgumentException))]
@@ -198,8 +195,6 @@ namespace WebApi.Tests
             mock.Setup(p => p.Add(bookingModel.ToEntity(true))).Throws(exist);
 
             var result = controller.Post(bookingModel);
-
-            //Assert.IsInstanceOfType(result, typeof(BadRequestObjectResult));
         }
         [TestMethod]
         [ExpectedException(typeof(Exception))]
@@ -219,8 +214,6 @@ namespace WebApi.Tests
             mock.Setup(p => p.Add(bookingModel.ToEntity(true))).Throws(exist);
 
             var result = controller.Post(bookingModel);
-
-            //Assert.IsInstanceOfType(result, typeof(BadRequestObjectResult));
         }
         [TestMethod]
         public void TestPutOk()
@@ -258,7 +251,6 @@ namespace WebApi.Tests
             var result = controller.Put(booking.Id, bookingModel);
 
             mock.VerifyAll();
-            //Assert.IsInstanceOfType(result, typeof(BadRequestObjectResult));
         }
         [TestMethod]
         [ExpectedException(typeof(Exception))]
@@ -279,8 +271,6 @@ namespace WebApi.Tests
             mock.Setup(p => p.Update(booking.Id,booking)).Throws(exist);
 
             var result = controller.Put(booking.Id,bookingModel);
-
-            //Assert.IsInstanceOfType(result, typeof(BadRequestObjectResult));
         }
         [TestMethod]
         public void TestDeleteWithId()
@@ -302,8 +292,6 @@ namespace WebApi.Tests
             mock.Setup(mock=> mock.Delete(booking.Id));
 
             var result = controller.Delete(booking.Id);
-
-            //Assert.IsInstanceOfType(result,typeof(NotFoundResult));
         }
 
         [TestMethod]

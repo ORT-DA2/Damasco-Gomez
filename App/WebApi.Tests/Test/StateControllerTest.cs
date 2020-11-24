@@ -105,7 +105,6 @@ namespace WebApi.Tests.Test
             var result = controller.GetBy(id);
 
             mock.VerifyAll();
-            //Assert.IsInstanceOfType(result, typeof(BadRequestObjectResult));
         }
         
     }

@@ -40,7 +40,6 @@ namespace Domain.Test.Test
             TouristPoint newTouristPoint = new TouristPoint()
                 {
                     Name = null,
-                    // ImageTouristPoint = "new image",
                     Description = null,
                     RegionId = 0,
                 };

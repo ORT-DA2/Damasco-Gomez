@@ -48,11 +48,6 @@ namespace WebApi.Tests.Test
         public void TestGetOk()
         {
             mock.Setup(m => m.GetNames()).Returns(namesToReturn);
-
-            // var result  = controller.Get();
-
-            // var okResult = result as OkObjectResult;
-            // mock.VerifyAll();
         }
 
         [TestMethod]

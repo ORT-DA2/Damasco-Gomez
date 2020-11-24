@@ -23,7 +23,7 @@ namespace BusinessLogic.Logics
         private readonly string configurationPath;
 
         public ImporterLogic(IHouseLogic houseLogic, ITouristPointLogic touristPointLogic,
-            IRegionLogic regionLogic) //, string path)
+            IRegionLogic regionLogic)
         {
             this.houseLogic = houseLogic;
             this.touristPointLogic = touristPointLogic;

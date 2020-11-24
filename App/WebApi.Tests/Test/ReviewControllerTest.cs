@@ -120,7 +120,6 @@ namespace WebApi.Tests.Test
             var result = controller.GetBy(id);
 
             mock.VerifyAll();
-            //Assert.IsInstanceOfType(result, typeof(BadRequestObjectResult));
         }
         [TestMethod]
         public void TestPostOk()
@@ -158,8 +157,6 @@ namespace WebApi.Tests.Test
             mock.Setup(p => p.Add(reviewModel.ToEntity())).Throws(exist);
 
             var result = controller.Post(reviewModel);
-
-            //Assert.IsInstanceOfType(result, typeof(BadRequestObjectResult));
         }
         [TestMethod]
         [ExpectedException(typeof(ArgumentException))]
@@ -176,8 +173,6 @@ namespace WebApi.Tests.Test
             mock.Setup(p => p.Add(reviewModel.ToEntity())).Throws(exist);
 
             var result = controller.Post(reviewModel);
-
-            //Assert.IsInstanceOfType(result, typeof(BadRequestObjectResult));
         }
         [TestMethod]
         [ExpectedException(typeof(Exception))]
@@ -194,8 +189,6 @@ namespace WebApi.Tests.Test
             mock.Setup(p => p.Add(reviewModel.ToEntity())).Throws(exist);
 
             var result = controller.Post(reviewModel);
-
-            //Assert.IsInstanceOfType(result, typeof(BadRequestObjectResult));
         }
         [TestMethod]
         public void TestPutOk()
@@ -231,7 +224,6 @@ namespace WebApi.Tests.Test
             var result = controller.Put(review.Id, reviewModel);
 
             mock.VerifyAll();
-            //Assert.IsInstanceOfType(result, typeof(BadRequestObjectResult));
         }
         [TestMethod]
         [ExpectedException(typeof(Exception))]
@@ -249,8 +241,6 @@ namespace WebApi.Tests.Test
             mock.Setup(p => p.Update(review.Id,review)).Throws(exist);
 
             var result = controller.Put(review.Id,reviewModel);
-
-            //Assert.IsInstanceOfType(result, typeof(BadRequestObjectResult));
         }
         [TestMethod]
         public void TestDeleteWithId()
@@ -272,8 +262,6 @@ namespace WebApi.Tests.Test
             mock.Setup(mock=> mock.Delete(review.Id));
 
             var result = controller.Delete(review.Id);
-
-            //Assert.IsInstanceOfType(result,typeof(NotFoundResult));
         }
 
         [TestMethod]
