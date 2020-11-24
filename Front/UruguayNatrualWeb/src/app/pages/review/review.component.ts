@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { catchError } from 'rxjs/operators';
 import { BookingBasicInfo } from 'src/app/models/booking/booking-base-info';
 import { ReviewBasicInfo } from 'src/app/models/reviews/review-base-info';
 import { BookingService } from 'src/app/services/bookings/booking.service';
@@ -17,6 +18,7 @@ export class ReviewComponent implements OnInit {
   review: ReviewBasicInfo = {} as ReviewBasicInfo;
   disableSend: boolean = false;
   errorMessageEndpoint: string = '';
+  successMessage: string = '';
 
   constructor(private bookingService: BookingService, private reviewService: ReviewService) { }
 
@@ -36,7 +38,6 @@ export class ReviewComponent implements OnInit {
   }
 
   checkBookingCode(){
-    //"QINAUN77LV"
     var bookingWithCode = this.bookings.filter(x => x.code == this.code);
     if (bookingWithCode.length != 0){
       this.showInputsReview = true;
@@ -50,9 +51,13 @@ export class ReviewComponent implements OnInit {
 
   send(){
     this.reviewService.add(this.review).subscribe(
-      error => this.showError(error),
       response => {
-        this.disableSend = true
+        this.disableSend = true;
+        this.errorMessageEndpoint = '';
+        this.successMessage = 'Done!'
+      },
+      catchError => {
+        this.errorMessageEndpoint = catchError + ', fix it and try again';
       }
     );
   }
