@@ -18,21 +18,6 @@ export class CategoryService {
       .pipe(catchError(this.handleError));
   }
 
-
-  private handleError(error: HttpErrorResponse){
-    let message: string;
-    if (error.error instanceof ErrorEvent) {
-      message = 'Error: do it again';
-    } else{
-      if(error.status == 0){
-        message = 'The server is shutdown';
-      } else{
-        message = error.error.message;
-      }
-    }
-    return throwError(message);
-  }
-
   getBy (id): Observable<CategoryDetailInfo>{
     return this.http.get<CategoryDetailInfo>(this.uri + '/' + id)
       .pipe(catchError(this.handleError));
@@ -70,5 +55,8 @@ export class CategoryService {
     return httpRequest;
   }
 
+  private handleError(error: HttpErrorResponse) {
+    return throwError(error.error);
+  }
 
 }

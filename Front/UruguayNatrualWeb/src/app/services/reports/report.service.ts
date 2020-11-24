@@ -29,17 +29,6 @@ export class ReportService {
     return this.http.get<ReportBasicInfo[]>(this.uri, {params}); }
 
   private handleError(error: HttpErrorResponse){
-    let message: string;
-    if (error.error instanceof ErrorEvent) {
-      message = 'Error: do it again';
-    } else{
-      // tslint:disable-next-line: triple-equals
-      if(error.status == 0){
-        message = 'The server is shutdown';
-      } else{
-        message = error.error.message;
-      }
-    }
-    return throwError(message);
+    return throwError(error.error);
   }
 }

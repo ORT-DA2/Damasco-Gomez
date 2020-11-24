@@ -19,16 +19,6 @@ export class StatesService {
 
 
   private handleError(error: HttpErrorResponse){
-    let message: string;
-    if (error.error instanceof ErrorEvent) {
-      message = 'Error: do it again';
-    } else{
-      if(error.status == 0){
-        message = 'The server is shutdown';
-      } else{
-        message = error.error.message;
-      }
-    }
-    return throwError(message);
+    return throwError(error.error);
   }
 }
