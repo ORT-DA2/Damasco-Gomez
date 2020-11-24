@@ -9,18 +9,14 @@ namespace Model.Out
     [ExcludeFromCodeCoverage]
     public class TouristPointBasicInfoModel
     {
-        public int Id {get; private set;}
+        public int Id { get; private set; }
+        public string Name { get; private set; }
+        public ImageTouristPointBasicModel Image { get; private set; }
+        public string Description { get; private set; }
+        public int RegionId { get; private set; }
+        public List<CategoryBasicInfoModel> Categories { get; private set; }
 
-        public string Name {get; private set;}
-
-        public ImageTouristPointBasicModel Image {get; private set;}
-
-        public string Description {get; private set;}
-
-        public int RegionId {get; private set;}
-        public List<CategoryBasicInfoModel> Categories {get; private set;}
-
-        public TouristPointBasicInfoModel (TouristPoint touristPoint)
+        public TouristPointBasicInfoModel(TouristPoint touristPoint)
         {
             this.Id = touristPoint.Id;
             this.Name = touristPoint.Name;
@@ -33,9 +29,9 @@ namespace Model.Out
         public override bool Equals(object obj)
         {
             var result = false;
-            if(obj is TouristPointBasicInfoModel touristPoint)
+            if (obj is TouristPointBasicInfoModel touristPoint)
             {
-                result = this.Id == touristPoint.Id ;
+                result = this.Id == touristPoint.Id;
             }
             return result;
         }

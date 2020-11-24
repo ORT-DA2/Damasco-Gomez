@@ -190,7 +190,7 @@ namespace WebApi.Tests
                 Categories = new List<int>() { 1 }
             };
             touristPointId1 = touristPointModel.ToEntity();
-            TouristPointBasicInfoModel detailInfoModel = new TouristPointBasicInfoModel(touristPointId1);
+            TouristPointDetailInfoModel detailInfoModel = new TouristPointDetailInfoModel(touristPointId1);
             mock.Setup(m => m.Add(touristPointId1)).Returns(touristPointId1);
 
             var result = controller.Post(touristPointModel);
@@ -277,7 +277,7 @@ namespace WebApi.Tests
                 Categories = new List<int>(){1}
             };
             touristPointId1 = touristPointModel.ToEntity();
-            TouristPointBasicInfoModel touristPointBasicModel = new TouristPointBasicInfoModel(touristPointId1);
+            TouristPointDetailInfoModel touristPointBasicModel = new TouristPointDetailInfoModel(touristPointId1);
             mock.Setup(m => m.Update(id,touristPointId1)).Returns(touristPointId1);
 
             var result = controller.Put(id, touristPointModel);

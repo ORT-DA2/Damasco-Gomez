@@ -13,6 +13,7 @@ namespace Model.Out
         public ImageTouristPointBasicModel Image {get; private set;}
         public string Description {get; private set;}
         public int RegionId {get; private set;}
+        public RegionDetailModel Region {get; private set;}
         public  List<CategoryBasicInfoModel> Categories {get; private set;}
         public TouristPointDetailInfoModel(TouristPoint touristPoint)
         {
@@ -23,6 +24,7 @@ namespace Model.Out
                 this.Image = new ImageTouristPointBasicModel(touristPoint.ImageTouristPoint);
                 this.Description = touristPoint.Description;
                 this.RegionId = touristPoint.RegionId;
+                this.Region = new RegionDetailModel(touristPoint.Region);
                 this.Categories = touristPoint.CategoriesTouristPoints.
                     Select(m => new CategoryBasicInfoModel(m.Category)).ToList();
             }

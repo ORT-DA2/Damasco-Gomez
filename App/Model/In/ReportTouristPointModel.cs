@@ -7,14 +7,14 @@ namespace Model.In
     [ExcludeFromCodeCoverage]
     public class ReportTouristPointModel
     {
-        public int IdTp  {get; set;}
+        public int IdTouristPoint  {get; set;}
         public string DateFrom  {get; set;}
         public string DateOut  {get; set;} 
         public ReportTouristPoint ToEntity()
         {
             return new ReportTouristPoint()
             {
-                IdTouristPoint= this.IdTp,
+                IdTouristPoint= this.IdTouristPoint,
                 DateFrom = ParseDateTime(this.DateFrom),
                 DateOut= ParseDateTime(this.DateOut),
 
@@ -33,13 +33,13 @@ namespace Model.In
         public bool NotNull()
         {
             bool notNull;
-            notNull = this.DateFrom != null || this.DateOut!=null ||  this.IdTp >0;
+            notNull = this.DateFrom != null || this.DateOut!=null ||  this.IdTouristPoint >0;
             return notNull;
         }
         public void CheckAllParameters()
         {
             bool allParams;
-            allParams = this.DateFrom != null && this.DateOut!=null && this.IdTp > 0;
+            allParams = this.DateFrom != null && this.DateOut!=null && this.IdTouristPoint > 0;
             if (!allParams) throw new ArgumentException("You need to put dates and tourist point ");
         }
 

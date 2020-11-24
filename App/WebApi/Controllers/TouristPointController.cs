@@ -53,7 +53,7 @@ namespace WebApi.Controllers
         {
             var newTouristPoint = touristPointModel.ToEntity();
             var touristPointAdded = this.touristPointLogic.Add(newTouristPoint);
-            var touristPointModelOut = new TouristPointBasicInfoModel(touristPointAdded);
+            var touristPointModelOut = new TouristPointDetailInfoModel(touristPointAdded);
             var routePost = CreatedAtRoute("GetTouristPoint", new {Id = touristPointAdded.Id} , touristPointModelOut);
             return routePost;
         }
@@ -70,7 +70,7 @@ namespace WebApi.Controllers
         {
             TouristPoint touristPoint = touristPointModel.ToEntity();
             touristPoint = this.touristPointLogic.Update(id,touristPoint);
-            TouristPointBasicInfoModel basicModel = new TouristPointBasicInfoModel(touristPoint);
+            TouristPointDetailInfoModel basicModel = new TouristPointDetailInfoModel(touristPoint);
             return CreatedAtRoute("GetTouristPoint", new {id =basicModel.Id} ,basicModel);
         }
         /// <summary>

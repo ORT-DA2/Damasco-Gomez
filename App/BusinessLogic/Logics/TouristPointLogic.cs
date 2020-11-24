@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using BusinessLogicInterface;
 using DataAccessInterface.Repositories;
@@ -10,12 +11,14 @@ namespace BusinessLogic
         private readonly ITouristPointRepository touristPointRepository;
         private readonly ICategoryRepository categoryRepository;
         private readonly IImageTouristPointRepository imageRepository;
+        private readonly IRegionRepository regionRepository;
         public TouristPointLogic(ITouristPointRepository touristPointRepository,ICategoryRepository categoryRepository,
-            IImageTouristPointRepository imageRepository )
+            IImageTouristPointRepository imageRepository, IRegionRepository regionRepository )
         {
             this.touristPointRepository = touristPointRepository;
             this.categoryRepository = categoryRepository;
             this.imageRepository = imageRepository;
+            this.regionRepository = regionRepository;
         }
         public void Delete()
         {
@@ -35,6 +38,7 @@ namespace BusinessLogic
 
         public TouristPoint Add(TouristPoint touristPoint)
         {
+            touristPoint.Region = ValidateRegion(touristPoint.RegionId);
             if (touristPoint.CategoriesTouristPoints != null)
             {
                 touristPoint.CategoriesTouristPoints.ForEach
@@ -48,6 +52,7 @@ namespace BusinessLogic
         public TouristPoint Update(int id, TouristPoint touristPoint)
         {
             TouristPoint touristPointBD = this.touristPointRepository.Find(id);
+            touristPoint.Region = ValidateRegion(touristPoint.RegionId);
             if (touristPoint.CategoriesTouristPoints != null)
             {
                 touristPoint.CategoriesTouristPoints.ForEach
@@ -73,6 +78,15 @@ namespace BusinessLogic
         public bool Exist(TouristPoint TouristPoint)
         {
             return this.touristPointRepository.ExistElement(TouristPoint);
+        }
+
+        public Region ValidateRegion(int regionId)
+        {
+            if (regionId > 0)
+            {
+                return this.regionRepository.Find(regionId);
+            }
+            throw new ArgumentException("No Region with id: " + regionId);
         }
     }
 }

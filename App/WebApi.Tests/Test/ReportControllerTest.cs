@@ -55,7 +55,7 @@ namespace WebApi.Tests.Test
         {
             ReportTouristPointModel reportTouristPointModel = new ReportTouristPointModel ()
             {
-                IdTp = 1,
+                IdTouristPoint = 1,
                 DateFrom= "01/12/2020",
                 DateOut= "31/12/2020",
             };
@@ -77,7 +77,7 @@ namespace WebApi.Tests.Test
         {
             ReportTouristPointModel reportTouristPointModel = new ReportTouristPointModel ()
             {
-                IdTp = 1,
+                IdTouristPoint = 1,
                 DateFrom= "01/12/2020",
                 DateOut= "31/12/2020",
             };

@@ -17,6 +17,7 @@ namespace BusinessLogic.Tests.Test
         private Mock<ITouristPointRepository> mock;
         private Mock<ICategoryRepository> mock2;
         private Mock<IImageTouristPointRepository> mock3;
+        private Mock<IRegionRepository> mock4;
         private List<TouristPoint> touristPoints;
         private List<TouristPoint> touristPointsEmpty;
         [TestInitialize]
@@ -76,7 +77,8 @@ namespace BusinessLogic.Tests.Test
             mock = new Mock<ITouristPointRepository>(MockBehavior.Strict);
             mock2 = new Mock<ICategoryRepository>(MockBehavior.Strict);
             mock3 = new Mock<IImageTouristPointRepository>(MockBehavior.Strict);
-            touristPointLogic = new TouristPointLogic(mock.Object,mock2.Object,mock3.Object);
+            mock4 = new Mock<IRegionRepository>(MockBehavior.Strict);
+            touristPointLogic = new TouristPointLogic(mock.Object,mock2.Object,mock3.Object,mock4.Object);
             touristPointsEmpty = new List<TouristPoint>();
         }
         [TestMethod]
