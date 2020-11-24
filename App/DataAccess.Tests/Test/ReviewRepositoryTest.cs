@@ -17,7 +17,7 @@ namespace DataAccess.Tests.Test
         private RepositoryMaster repositoryMaster;
         private DbContext context;
         private DbContextOptions options;
-        private ReviewRepository repository;
+        private ReviewRepository repositoryReview;
         [TestInitialize]
         public void Setup()
         {
@@ -45,7 +45,7 @@ namespace DataAccess.Tests.Test
             reviewToReturn.ForEach(m => this.context.Add(m));
             this.context.SaveChanges();
             repositoryMaster = new RepositoryMaster(context);
-            repository = new ReviewRepository(repositoryMaster);
+            repositoryReview = new ReviewRepository(repositoryMaster);
         }
 
         [TestCleanup]
@@ -58,7 +58,7 @@ namespace DataAccess.Tests.Test
         {
             Review region = new Review(){Id = 123, Name="name new"};
             ReviewRepository repo = new ReviewRepository(this.repositoryMaster);
-            int cantRepo = this.repository.GetElements().Count();
+            int cantRepo = this.repositoryReview.GetElements().Count();
 
             repo.Add(region);
 
@@ -70,7 +70,7 @@ namespace DataAccess.Tests.Test
         {
             Review region = new Review(){Id = 1, Name="name new"};
 
-            repository.Add(region);
+            repositoryReview.Add(region);
         }
         [TestMethod]
         [ExpectedException(typeof(ArgumentException))]
@@ -78,7 +78,7 @@ namespace DataAccess.Tests.Test
         {
             Review region = reviewToReturn.First();
 
-            repository.Add(region);
+            repositoryReview.Add(region);
         }
         [TestMethod]
         [ExpectedException(typeof(ArgumentException))]
@@ -86,7 +86,7 @@ namespace DataAccess.Tests.Test
         {
             Review region = new Review(){Score = -2};
 
-            repository.Add(region);
+            repositoryReview.Add(region);
         }
         [TestMethod]
         [ExpectedException(typeof(ArgumentException))]
@@ -94,12 +94,12 @@ namespace DataAccess.Tests.Test
         {
             Review region = new Review(){Score = 11};
 
-            repository.Add(region);
+            repositoryReview.Add(region);
         }
         [TestMethod]
         public void TestGetAllReviewsOk()
         {
-            var result = repository.GetElements();
+            var result = repositoryReview.GetElements();
 
             Assert.IsTrue(reviewToReturn.SequenceEqual(result));
         }
@@ -108,7 +108,7 @@ namespace DataAccess.Tests.Test
         {
             Review region = reviewToReturn.First();
 
-            bool result = repository.ExistElement(region);
+            bool result = repositoryReview.ExistElement(region);
 
             Assert.IsTrue(result);
         }
@@ -117,7 +117,7 @@ namespace DataAccess.Tests.Test
         {
             Review region = new Review(){Id = 223 , Name="name"};
 
-            bool result = repository.ExistElement(region);
+            bool result = repositoryReview.ExistElement(region);
 
             Assert.IsFalse(result);
         }
@@ -127,7 +127,7 @@ namespace DataAccess.Tests.Test
         {
             int regionId = 234234234;
 
-            bool result = repository.ExistElement(regionId);
+            bool result = repositoryReview.ExistElement(regionId);
 
             Assert.IsFalse(result);
         }
@@ -136,7 +136,7 @@ namespace DataAccess.Tests.Test
         {
             Review region = reviewToReturn.First();
 
-            bool result = repository.ExistElement(region.Id);
+            bool result = repositoryReview.ExistElement(region.Id);
 
             Assert.IsTrue(result);
         }
@@ -145,7 +145,7 @@ namespace DataAccess.Tests.Test
         {
             Review region = new Review(){Id=123423};
 
-            bool result = repository.ExistElement(region.Id);
+            bool result = repositoryReview.ExistElement(region.Id);
 
             Assert.IsFalse(result);
         }
@@ -154,7 +154,7 @@ namespace DataAccess.Tests.Test
         {
             Review region = reviewToReturn.First();
 
-            Review result = repository.Find(region.Id);
+            Review result = repositoryReview.Find(region.Id);
 
             Assert.AreEqual(result,region);
         }
@@ -165,7 +165,7 @@ namespace DataAccess.Tests.Test
         {
             Review region = new Review(){Id=232323};
 
-            Review result = repository.Find(region.Id);
+            Review result = repositoryReview.Find(region.Id);
         }
         [TestMethod]
         public void TestUpdate()
@@ -174,7 +174,7 @@ namespace DataAccess.Tests.Test
             region.Name = "New name of region";
             string newName = region.Name;
 
-            repository.Update(region.Id, region);
+            repositoryReview.Update(region.Id, region);
 
             Assert.AreEqual(region.Name, newName);
         }
@@ -182,11 +182,11 @@ namespace DataAccess.Tests.Test
         public void TestDelete()
         {
             Review region = reviewToReturn.First();
-            int repoCount = this.repository.GetElements().Count();
+            int repoCount = this.repositoryReview.GetElements().Count();
 
-            repository.Delete(region);
+            repositoryReview.Delete(region);
 
-            Assert.AreEqual(repoCount - 1 , repository.GetElements().Count());
+            Assert.AreEqual(repoCount - 1 , repositoryReview.GetElements().Count());
         }
         [TestMethod]
         [ExpectedException(typeof(ArgumentException))]
@@ -194,17 +194,17 @@ namespace DataAccess.Tests.Test
         {
             Review region = new Review(){Id = 2342342};
 
-            repository.Delete(region);
+            repositoryReview.Delete(region);
         }
         [TestMethod]
         public void TestDeleteById()
         {
             Review region = reviewToReturn.First();
-            int repoCount = this.repository.GetElements().Count();
+            int repoCount = this.repositoryReview.GetElements().Count();
 
-            repository.Delete(region.Id);
+            repositoryReview.Delete(region.Id);
 
-            Assert.AreEqual(repoCount - 1 , repository.GetElements().Count());
+            Assert.AreEqual(repoCount - 1 , repositoryReview.GetElements().Count());
         }
         [TestMethod]
         [ExpectedException(typeof(ArgumentException))]
@@ -212,7 +212,7 @@ namespace DataAccess.Tests.Test
         {
             int id = 23123123;
 
-            repository.Delete(id);
+            repositoryReview.Delete(id);
         }
     }
 }

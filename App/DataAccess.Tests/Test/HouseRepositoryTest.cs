@@ -17,7 +17,7 @@ namespace DataAccess.Tests.Test
         private RepositoryMaster repositoryMaster;
         private DbContext context;
         private DbContextOptions options;
-        private HouseRepository repository;
+        private HouseRepository repositoryHouse;
         [TestInitialize]
         public void Setup()
         {
@@ -42,7 +42,7 @@ namespace DataAccess.Tests.Test
             housesToReturn.ForEach(m => this.context.Add(m));
             this.context.SaveChanges();
             repositoryMaster = new RepositoryMaster(context);
-            repository = new HouseRepository(repositoryMaster);
+            repositoryHouse = new HouseRepository(repositoryMaster);
         }
 
         [TestCleanup]
@@ -61,7 +61,7 @@ namespace DataAccess.Tests.Test
                 Starts=2
             };
             HouseRepository repo = new HouseRepository(this.repositoryMaster);
-            int cantRepo = this.repository.GetElements().Count();
+            int cantRepo = this.repositoryHouse.GetElements().Count();
 
             repo.Add(house);
 
@@ -73,7 +73,7 @@ namespace DataAccess.Tests.Test
         {
             House house = null;
 
-            repository.Add(house);
+            repositoryHouse.Add(house);
         }
         [TestMethod]
         [ExpectedException(typeof(ArgumentException))]
@@ -87,7 +87,7 @@ namespace DataAccess.Tests.Test
                 Starts=0
             };
 
-            repository.Add(house);
+            repositoryHouse.Add(house);
         }
         [TestMethod]
         [ExpectedException(typeof(ArgumentException))]
@@ -101,7 +101,7 @@ namespace DataAccess.Tests.Test
                 Starts=8
             };
 
-            repository.Add(house);
+            repositoryHouse.Add(house);
         }
         [TestMethod]
         [ExpectedException(typeof(ArgumentException))]
@@ -109,7 +109,7 @@ namespace DataAccess.Tests.Test
         {
             House house = new House(){Id = 123, Name="name new",PricePerNight=0,Starts=2};
 
-            repository.Add(house);
+            repositoryHouse.Add(house);
         }
         [TestMethod]
         [ExpectedException(typeof(ArgumentException))]
@@ -118,12 +118,12 @@ namespace DataAccess.Tests.Test
             House house = housesToReturn.First();
             ArgumentException exception = new ArgumentException();
 
-            repository.Add(house);
+            repositoryHouse.Add(house);
         }
         [TestMethod]
         public void TestGetAllHousesOk()
         {
-            var result = repository.GetElements();
+            var result = repositoryHouse.GetElements();
 
             Assert.IsTrue(housesToReturn.SequenceEqual(result));
         }
@@ -132,7 +132,7 @@ namespace DataAccess.Tests.Test
         {
             House house = housesToReturn.First();
 
-            bool result = repository.ExistElement(house);
+            bool result = repositoryHouse.ExistElement(house);
 
             Assert.IsTrue(result);
         }
@@ -141,7 +141,7 @@ namespace DataAccess.Tests.Test
         {
             House house = new House(){Id = 223 , Name="name"};
 
-            bool result = repository.ExistElement(house);
+            bool result = repositoryHouse.ExistElement(house);
 
             Assert.IsFalse(result);
         }
@@ -151,7 +151,7 @@ namespace DataAccess.Tests.Test
         {
             int houseId = 234234234;
 
-            bool result = repository.ExistElement(houseId);
+            bool result = repositoryHouse.ExistElement(houseId);
 
             Assert.IsFalse(result);
         }
@@ -160,7 +160,7 @@ namespace DataAccess.Tests.Test
         {
             House house = housesToReturn.First();
 
-            bool result = repository.ExistElement(house.Id);
+            bool result = repositoryHouse.ExistElement(house.Id);
 
             Assert.IsTrue(result);
         }
@@ -169,7 +169,7 @@ namespace DataAccess.Tests.Test
         {
             House house = new House(){Id=123423};
 
-            bool result = repository.ExistElement(house.Id);
+            bool result = repositoryHouse.ExistElement(house.Id);
 
             Assert.IsFalse(result);
         }
@@ -178,7 +178,7 @@ namespace DataAccess.Tests.Test
         {
             House house = housesToReturn.First();
 
-            House result = repository.Find(house.Id);
+            House result = repositoryHouse.Find(house.Id);
 
             Assert.AreEqual(result,house);
         }
@@ -189,7 +189,7 @@ namespace DataAccess.Tests.Test
         {
             House house = new House(){Id=232323};
 
-            House result = repository.Find(house.Id);
+            House result = repositoryHouse.Find(house.Id);
         }
         [TestMethod]
         public void TestUpdate()
@@ -198,7 +198,7 @@ namespace DataAccess.Tests.Test
             house.Name = "New name of house";
             string newName = house.Name;
 
-            repository.Update(house.Id,house);
+            repositoryHouse.Update(house.Id,house);
 
             Assert.AreEqual(house.Name,newName);
         }
@@ -206,11 +206,11 @@ namespace DataAccess.Tests.Test
         public void TestDelete()
         {
             House house = housesToReturn.First();
-            int repoCount = this.repository.GetElements().Count();
+            int repoCount = this.repositoryHouse.GetElements().Count();
 
-            repository.Delete(house);
+            repositoryHouse.Delete(house);
 
-            Assert.AreEqual(repoCount - 1 , repository.GetElements().Count());
+            Assert.AreEqual(repoCount - 1 , repositoryHouse.GetElements().Count());
         }
         [TestMethod]
         [ExpectedException(typeof(ArgumentException))]
@@ -218,17 +218,17 @@ namespace DataAccess.Tests.Test
         {
             House house = new House(){Id = 2342342};
 
-            repository.Delete(house);
+            repositoryHouse.Delete(house);
         }
         [TestMethod]
         public void TestDeleteById()
         {
             House house = housesToReturn.First();
-            int repoCount = this.repository.GetElements().Count();
+            int repoCount = this.repositoryHouse.GetElements().Count();
 
-            repository.Delete(house.Id);
+            repositoryHouse.Delete(house.Id);
 
-            Assert.AreEqual(repoCount - 1 , repository.GetElements().Count());
+            Assert.AreEqual(repoCount - 1 , repositoryHouse.GetElements().Count());
         }
         [TestMethod]
         [ExpectedException(typeof(ArgumentException))]
@@ -236,7 +236,7 @@ namespace DataAccess.Tests.Test
         {
             int id = 23123123;
 
-            repository.Delete(id);
+            repositoryHouse.Delete(id);
         }
         [TestMethod]
         public void TestGetByIdTouristPointOk ()
@@ -247,7 +247,7 @@ namespace DataAccess.Tests.Test
                 housesToReturn.First()
             };
 
-            var result = repository.GetByIdTouristPoint(idTP);
+            var result = repositoryHouse.GetByIdTouristPoint(idTP);
 
             Assert.IsTrue(houses.SequenceEqual(result));
         }
@@ -257,7 +257,7 @@ namespace DataAccess.Tests.Test
             int idTP = 3;
             List <House> emptyHouses = new List<House>();
 
-            var result = repository.GetByIdTouristPoint(idTP);
+            var result = repositoryHouse.GetByIdTouristPoint(idTP);
            
             Assert.IsTrue(emptyHouses.SequenceEqual(result));
         }

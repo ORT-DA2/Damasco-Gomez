@@ -17,7 +17,7 @@ namespace DataAccess.Tests.Test
         private RepositoryMaster repositoryMaster;
         private DbContext context;
         private DbContextOptions options;
-        private BookingRepository repository;
+        private BookingRepository repositoryBooking;
         [TestInitialize]
         public void Setup()
         {
@@ -47,7 +47,7 @@ namespace DataAccess.Tests.Test
             bookingsToReturn.ForEach(m => this.context.Add(m));
             this.context.SaveChanges();
             repositoryMaster = new RepositoryMaster(context);
-            repository = new BookingRepository(repositoryMaster);
+            repositoryBooking = new BookingRepository(repositoryMaster);
         }
 
         [TestCleanup]
@@ -70,7 +70,7 @@ namespace DataAccess.Tests.Test
                 CheckOut= DateTime.Today
                 };
             BookingRepository repo = new BookingRepository(this.repositoryMaster);
-            int cantRepo = this.repository.GetElements().Count();
+            int cantRepo = this.repositoryBooking.GetElements().Count();
 
             repo.Add(booking);
 
@@ -90,7 +90,7 @@ namespace DataAccess.Tests.Test
                     Avaible=false},
                 CheckIn = DateTime.Today};
 
-            repository.Add(booking);
+            repositoryBooking.Add(booking);
         }
         [TestMethod]
         [ExpectedException(typeof(ArgumentException))]
@@ -109,7 +109,7 @@ namespace DataAccess.Tests.Test
                 CheckOut= DateTime.Today
                 };
 
-            repository.Add(booking);
+            repositoryBooking.Add(booking);
         }
         [TestMethod]
         [ExpectedException(typeof(ArgumentException))]
@@ -122,7 +122,7 @@ namespace DataAccess.Tests.Test
                 CheckIn = DateTime.Today,
                 CheckOut= DateTime.MinValue};
 
-            repository.Add(booking);
+            repositoryBooking.Add(booking);
         }
         [TestMethod]
         [ExpectedException(typeof(ArgumentException))]
@@ -137,7 +137,7 @@ namespace DataAccess.Tests.Test
                 CheckOut= DateTime.Today
                 };
 
-            repository.Add(booking);
+            repositoryBooking.Add(booking);
         }
         [TestMethod]
         [ExpectedException(typeof(ArgumentException))]
@@ -151,7 +151,7 @@ namespace DataAccess.Tests.Test
                 CheckOut= DateTime.Today
                 };
 
-            repository.Add(booking);
+            repositoryBooking.Add(booking);
         }
         [TestMethod]
         [ExpectedException(typeof(ArgumentException))]
@@ -160,12 +160,12 @@ namespace DataAccess.Tests.Test
             Booking booking = bookingsToReturn.First();
             ArgumentException exception = new ArgumentException();
 
-            repository.Add(booking);
+            repositoryBooking.Add(booking);
         }
         [TestMethod]
         public void TestGetAllBookingsOk()
         {
-            var result = repository.GetElements();
+            var result = repositoryBooking.GetElements();
 
             Assert.IsTrue(bookingsToReturn.SequenceEqual(result));
         }
@@ -174,7 +174,7 @@ namespace DataAccess.Tests.Test
         {
             Booking booking = bookingsToReturn.First();
 
-            bool result = repository.ExistElement(booking);
+            bool result = repositoryBooking.ExistElement(booking);
 
             Assert.IsTrue(result);
         }
@@ -183,7 +183,7 @@ namespace DataAccess.Tests.Test
         {
             Booking booking = new Booking(){Id = 223 , Name="name"};
 
-            bool result = repository.ExistElement(booking);
+            bool result = repositoryBooking.ExistElement(booking);
 
             Assert.IsFalse(result);
         }
@@ -193,7 +193,7 @@ namespace DataAccess.Tests.Test
         {
             int bookingId = 234234234;
 
-            bool result = repository.ExistElement(bookingId);
+            bool result = repositoryBooking.ExistElement(bookingId);
 
             Assert.IsFalse(result);
         }
@@ -202,7 +202,7 @@ namespace DataAccess.Tests.Test
         {
             Booking booking = bookingsToReturn.First();
 
-            bool result = repository.ExistElement(booking.Id);
+            bool result = repositoryBooking.ExistElement(booking.Id);
 
             Assert.IsTrue(result);
         }
@@ -211,7 +211,7 @@ namespace DataAccess.Tests.Test
         {
             Booking booking = new Booking(){Id=123423};
 
-            bool result = repository.ExistElement(booking.Id);
+            bool result = repositoryBooking.ExistElement(booking.Id);
 
             Assert.IsFalse(result);
         }
@@ -220,7 +220,7 @@ namespace DataAccess.Tests.Test
         {
             Booking booking = bookingsToReturn.First();
 
-            Booking result = repository.Find(booking.Id);
+            Booking result = repositoryBooking.Find(booking.Id);
 
             Assert.AreEqual(result,booking);
         }
@@ -231,7 +231,7 @@ namespace DataAccess.Tests.Test
         {
             Booking booking = new Booking(){Id=232323};
 
-            Booking result = repository.Find(booking.Id);
+            Booking result = repositoryBooking.Find(booking.Id);
         }
         [TestMethod]
         public void TestUpdate()
@@ -240,7 +240,7 @@ namespace DataAccess.Tests.Test
             booking.Name = "New name of booking";
             string newName = booking.Name;
 
-            repository.Update(booking.Id,booking);
+            repositoryBooking.Update(booking.Id,booking);
 
             Assert.AreEqual(booking.Name,newName);
         }
@@ -248,11 +248,11 @@ namespace DataAccess.Tests.Test
         public void TestDelete()
         {
             Booking booking = bookingsToReturn.First();
-            int repoCount = this.repository.GetElements().Count();
+            int repoCount = this.repositoryBooking.GetElements().Count();
 
-            repository.Delete(booking);
+            repositoryBooking.Delete(booking);
 
-            Assert.AreEqual(repoCount - 1 , repository.GetElements().Count());
+            Assert.AreEqual(repoCount - 1 , repositoryBooking.GetElements().Count());
         }
         [TestMethod]
         [ExpectedException(typeof(ArgumentException))]
@@ -260,17 +260,17 @@ namespace DataAccess.Tests.Test
         {
             Booking booking = new Booking(){Id = 2342342};
 
-            repository.Delete(booking);
+            repositoryBooking.Delete(booking);
         }
         [TestMethod]
         public void TestDeleteById()
         {
             Booking booking = bookingsToReturn.First();
-            int repoCount = this.repository.GetElements().Count();
+            int repoCount = this.repositoryBooking.GetElements().Count();
 
-            repository.Delete(booking.Id);
+            repositoryBooking.Delete(booking.Id);
 
-            Assert.AreEqual(repoCount - 1 , repository.GetElements().Count());
+            Assert.AreEqual(repoCount - 1 , repositoryBooking.GetElements().Count());
         }
         [TestMethod]
         [ExpectedException(typeof(ArgumentException))]
@@ -278,7 +278,7 @@ namespace DataAccess.Tests.Test
         {
             int id = 23123123;
 
-            repository.Delete(id);
+            repositoryBooking.Delete(id);
         }
     }
 }
