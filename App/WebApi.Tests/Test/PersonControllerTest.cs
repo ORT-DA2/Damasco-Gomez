@@ -17,9 +17,9 @@ namespace WebApi.Tests
     {
         private List<Person> personsToReturn;
         private List<Person> personsToReturnEmpty;
-        private Person personId1;
-        private Mock<IPersonLogic> mock;
-        private PersonController controller ;
+        private Person personWithId1;
+        private Mock<IPersonLogic> mockPersonLogic;
+        private PersonController controllerPerson ;
         [TestInitialize]
         public void InitVariables()
         {
@@ -47,31 +47,31 @@ namespace WebApi.Tests
                 }
             };
             personsToReturnEmpty = new List<Person>();
-            personId1 = personsToReturn.First();
-            mock = new Mock<IPersonLogic>(MockBehavior.Strict);
-            controller = new PersonController(mock.Object);
+            personWithId1 = personsToReturn.First();
+            mockPersonLogic = new Mock<IPersonLogic>(MockBehavior.Strict);
+            controllerPerson = new PersonController(mockPersonLogic.Object);
         }
         [TestMethod]
         public void TestGetAllPersonsOk()
         {
-            mock.Setup(m => m.GetAll()).Returns(personsToReturn);
+            mockPersonLogic.Setup(m => m.GetAll()).Returns(personsToReturn);
             IEnumerable<PersonBasicModel> personBasicModels = personsToReturn.Select(m => new PersonBasicModel(m));
 
-            var result = controller.Get();
+            var result = controllerPerson.Get();
 
             var okResult = result as OkObjectResult;
             var persons = okResult.Value as IEnumerable<PersonBasicModel>;
-            mock.VerifyAll();
+            mockPersonLogic.VerifyAll();
             Assert.IsTrue(personBasicModels.SequenceEqual(persons));
         }
 
         [TestMethod]
         public void TestGetAllPersonsVacia()
         {
-            mock.Setup(m => m.GetAll()).Returns(personsToReturnEmpty);
+            mockPersonLogic.Setup(m => m.GetAll()).Returns(personsToReturnEmpty);
             IEnumerable<PersonBasicModel> personBasicModels = personsToReturnEmpty.Select(m => new PersonBasicModel(m));
 
-            var result = controller.Get();
+            var result = controllerPerson.Get();
 
             var okResult = result as OkObjectResult;
             var persons = okResult.Value as IEnumerable<PersonBasicModel>;
@@ -80,10 +80,10 @@ namespace WebApi.Tests
         [TestMethod]
         public void TestGetByOk()
         {
-            mock.Setup(m => m.GetBy(personId1.Id)).Returns(personId1);
-            PersonBasicModel personBasicModel = new PersonBasicModel(personId1);
+            mockPersonLogic.Setup(m => m.GetBy(personWithId1.Id)).Returns(personWithId1);
+            PersonBasicModel personBasicModel = new PersonBasicModel(personWithId1);
 
-            var result = controller.GetBy(personId1.Id);
+            var result = controllerPerson.GetBy(personWithId1.Id);
 
             var okResult = result as OkObjectResult;
             var persons = okResult.Value as PersonBasicModel;
@@ -95,11 +95,11 @@ namespace WebApi.Tests
         {
             int id = 4;
             ArgumentException exist = new ArgumentException();
-            mock.Setup(m => m.GetBy(id)).Throws(exist);
+            mockPersonLogic.Setup(m => m.GetBy(id)).Throws(exist);
 
-            var result = controller.GetBy(id);
+            var result = controllerPerson.GetBy(id);
 
-            mock.VerifyAll();
+            mockPersonLogic.VerifyAll();
         }
         [TestMethod]
         public void TestPostOk()
@@ -109,14 +109,14 @@ namespace WebApi.Tests
                 Email = "email",
                 Password = "psswd"
             };
-            personId1 = personModel.ToEntity();
-            mock.Setup(m => m.Add(personId1)).Returns(personId1);
-            PersonBasicModel personBasicModel = new PersonBasicModel(personId1);
+            personWithId1 = personModel.ToEntity();
+            mockPersonLogic.Setup(m => m.Add(personWithId1)).Returns(personWithId1);
+            PersonBasicModel personBasicModel = new PersonBasicModel(personWithId1);
 
-            var result = controller.Post(personModel);
+            var result = controllerPerson.Post(personModel);
 
             var okResult = result as CreatedAtRouteResult;
-            mock.VerifyAll();
+            mockPersonLogic.VerifyAll();
             Assert.IsNotNull(okResult);
             Assert.AreEqual("GetPerson", okResult.RouteName);
             Assert.AreEqual(okResult.Value, personBasicModel);
@@ -130,13 +130,13 @@ namespace WebApi.Tests
                 Email = "email",
                 Password = "psswd"
             };
-            personId1 = personModel.ToEntity();
+            personWithId1 = personModel.ToEntity();
             Exception exist = new AggregateException();
-            mock.Setup(p => p.Add(personId1)).Throws(exist);
+            mockPersonLogic.Setup(p => p.Add(personWithId1)).Throws(exist);
 
-            var result = controller.Post(personModel);
+            var result = controllerPerson.Post(personModel);
 
-            mock.VerifyAll();
+            mockPersonLogic.VerifyAll();
         }
         [TestMethod]
         [ExpectedException(typeof(ArgumentException))]
@@ -147,13 +147,13 @@ namespace WebApi.Tests
                 Email = "email",
                 Password = "psswd"
             };
-            personId1 = personModel.ToEntity();
+            personWithId1 = personModel.ToEntity();
             ArgumentException exist = new ArgumentException();
-            mock.Setup(p => p.Add(personId1)).Throws(exist);
+            mockPersonLogic.Setup(p => p.Add(personWithId1)).Throws(exist);
 
-            var result = controller.Post(personModel);
+            var result = controllerPerson.Post(personModel);
 
-            mock.VerifyAll();
+            mockPersonLogic.VerifyAll();
         }
         [TestMethod]
         [ExpectedException(typeof(Exception))]
@@ -164,13 +164,13 @@ namespace WebApi.Tests
                 Email = "email",
                 Password = "psswd"
             };
-            personId1 = personModel.ToEntity();
+            personWithId1 = personModel.ToEntity();
             Exception exist = new Exception();
-            mock.Setup(p => p.Add(personId1)).Throws(exist);
+            mockPersonLogic.Setup(p => p.Add(personWithId1)).Throws(exist);
 
-            var result = controller.Post(personModel);
+            var result = controllerPerson.Post(personModel);
 
-            mock.VerifyAll();
+            mockPersonLogic.VerifyAll();
         }
         [TestMethod]
         public void TestPutOk()
@@ -180,12 +180,12 @@ namespace WebApi.Tests
                 Email = "email",
                 Password = "psw"
             };
-            personId1 = personModel.ToEntity();
-            personId1.Email = "new email";
-            mock.Setup(m => m.Update(personId1.Id,personId1)).Returns(personId1);
-            PersonBasicModel personBasicModel = new PersonBasicModel(personId1);
+            personWithId1 = personModel.ToEntity();
+            personWithId1.Email = "new email";
+            mockPersonLogic.Setup(m => m.Update(personWithId1.Id,personWithId1)).Returns(personWithId1);
+            PersonBasicModel personBasicModel = new PersonBasicModel(personWithId1);
 
-            var result = controller.Put(personId1.Id, personModel);
+            var result = controllerPerson.Put(personWithId1.Id, personModel);
 
             var okResult = result as CreatedAtRouteResult;
             Assert.IsNotNull(okResult);
@@ -201,13 +201,13 @@ namespace WebApi.Tests
                 Email = "email",
                 Password = "psw"
             };
-            personId1 = personModel.ToEntity();
+            personWithId1 = personModel.ToEntity();
             Exception exist = new ArgumentException();
-            mock.Setup(p => p.Update(personId1.Id,personId1)).Throws(exist);
+            mockPersonLogic.Setup(p => p.Update(personWithId1.Id,personWithId1)).Throws(exist);
 
-            var result = controller.Put(personId1.Id, personModel);
+            var result = controllerPerson.Put(personWithId1.Id, personModel);
 
-            mock.VerifyAll();
+            mockPersonLogic.VerifyAll();
         }
         [TestMethod]
         [ExpectedException(typeof(Exception))]
@@ -218,22 +218,22 @@ namespace WebApi.Tests
                 Email = "email",
                 Password = "psw"
             };
-            personId1 = personModel.ToEntity();
+            personWithId1 = personModel.ToEntity();
             Exception exist = new Exception();
-            mock.Setup(p => p.Update(personId1.Id,personId1)).Throws(exist);
+            mockPersonLogic.Setup(p => p.Update(personWithId1.Id,personWithId1)).Throws(exist);
 
-            var result = controller.Put(personId1.Id, personModel);
+            var result = controllerPerson.Put(personWithId1.Id, personModel);
 
-            mock.VerifyAll();
+            mockPersonLogic.VerifyAll();
         }
         [TestMethod]
         public void TestDeleteWithId()
         {
             Person person = personsToReturn.First();
-            mock.Setup(m => m.GetBy(person.Id)).Returns(person);
-            mock.Setup(mock=> mock.Delete(person.Id));
+            mockPersonLogic.Setup(m => m.GetBy(person.Id)).Returns(person);
+            mockPersonLogic.Setup(mockPersonLogic=> mockPersonLogic.Delete(person.Id));
 
-            var result = controller.Delete(person.Id);
+            var result = controllerPerson.Delete(person.Id);
 
             Assert.IsNotNull(result);
         }
@@ -242,18 +242,18 @@ namespace WebApi.Tests
         {
             Person person = personsToReturn.First();
             Person personNull = null;
-            mock.Setup(m => m.GetBy(person.Id)).Returns(personNull);
-            mock.Setup(mock=> mock.Delete(person.Id));
+            mockPersonLogic.Setup(m => m.GetBy(person.Id)).Returns(personNull);
+            mockPersonLogic.Setup(mockPersonLogic=> mockPersonLogic.Delete(person.Id));
 
-            var result = controller.Delete(person.Id);
+            var result = controllerPerson.Delete(person.Id);
         }
 
         [TestMethod]
         public void TestDelete()
         {
-            mock.Setup(mock=> mock.Delete());
+            mockPersonLogic.Setup(mockPersonLogic=> mockPersonLogic.Delete());
 
-            var result = controller.Delete();
+            var result = controllerPerson.Delete();
             
             Assert.IsNotNull(result);
         }

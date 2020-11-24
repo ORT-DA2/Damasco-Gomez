@@ -33,7 +33,7 @@ namespace Model
                 Contact = this.Contact
             };
             if (post && newHouse.IsEmpty()) throw new ArgumentException("The values are all empty");
-            if (this.Images.Count > 0)
+            if (this.Images != null && this.Images.Count > 0)
             {
                 newHouse.ImagesHouse = this.Images.Select
                 (

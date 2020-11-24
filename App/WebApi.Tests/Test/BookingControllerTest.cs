@@ -17,9 +17,9 @@ namespace WebApi.Tests
     {
         private List<Booking> bookingsToReturn;
         private List<Booking> bookingsToReturnEmpty;
-        private Booking bookingId1;
-        private Mock<IBookingLogic> mock;
-        private BookingController controller ;
+        private Booking bookingWithId1;
+        private Mock<IBookingLogic> mockBookingLogic;
+        private BookingController controllerBooking ;
         [TestInitialize]
         public void InitVariables()
         {
@@ -77,21 +77,21 @@ namespace WebApi.Tests
                 }
             };
             bookingsToReturnEmpty = new List<Booking>();
-            bookingId1 = bookingsToReturn.First();
-            mock = new Mock<IBookingLogic>(MockBehavior.Strict);
-            controller = new BookingController(mock.Object);
+            bookingWithId1 = bookingsToReturn.First();
+            mockBookingLogic = new Mock<IBookingLogic>(MockBehavior.Strict);
+            controllerBooking = new BookingController(mockBookingLogic.Object);
         }
         [TestMethod]
         public void TestGetAllBookingsOk()
         {
-            mock.Setup(m => m.GetAll()).Returns(bookingsToReturn);
+            mockBookingLogic.Setup(m => m.GetAll()).Returns(bookingsToReturn);
             IEnumerable<BookingBasicModel> bookingModels = bookingsToReturn.Select(m => new BookingBasicModel(m));
 
-            var result = controller.Get();
+            var result = controllerBooking.Get();
 
             var okResult = result as OkObjectResult;
             var bookings = okResult.Value as IEnumerable<BookingBasicModel>;
-            mock.VerifyAll();
+            mockBookingLogic.VerifyAll();
             Assert.IsTrue(bookingModels.SequenceEqual(bookings));
         }
 
@@ -99,27 +99,27 @@ namespace WebApi.Tests
         public void TestGetAllBookingsVacia()
         {
             IEnumerable<BookingBasicModel> basicModelList = new List<BookingBasicModel>(){};
-            mock.Setup(m => m.GetAll()).Returns(bookingsToReturnEmpty);
+            mockBookingLogic.Setup(m => m.GetAll()).Returns(bookingsToReturnEmpty);
 
-            var result = controller.Get();
+            var result = controllerBooking.Get();
 
             var okResult = result as OkObjectResult;
             var bookings = okResult.Value as IEnumerable<BookingBasicModel>;
-            mock.VerifyAll();
+            mockBookingLogic.VerifyAll();
             Assert.IsTrue(basicModelList.SequenceEqual(bookings));
         }
         [TestMethod]
         public void TestGetByOk()
         {
             int id = 1;
-            mock.Setup(m => m.GetBy(id)).Returns(bookingId1);
-            BookingDetailModel bookingDetailModel = new BookingDetailModel(bookingId1);
+            mockBookingLogic.Setup(m => m.GetBy(id)).Returns(bookingWithId1);
+            BookingDetailModel bookingDetailModel = new BookingDetailModel(bookingWithId1);
 
-            var result = controller.GetBy(id);
+            var result = controllerBooking.GetBy(id);
 
             var okResult = result as OkObjectResult;
             var bookings = okResult.Value as BookingDetailModel;
-            mock.VerifyAll();
+            mockBookingLogic.VerifyAll();
             Assert.IsTrue(bookings.Equals(bookingDetailModel));
         }
         [TestMethod]
@@ -128,11 +128,11 @@ namespace WebApi.Tests
         {
             int id = 4;
             ArgumentException exist = new ArgumentException();
-            mock.Setup(m => m.GetBy(id)).Throws(exist);
+            mockBookingLogic.Setup(m => m.GetBy(id)).Throws(exist);
 
-            var result = controller.GetBy(id);
+            var result = controllerBooking.GetBy(id);
 
-            mock.VerifyAll();
+            mockBookingLogic.VerifyAll();
         }
         [TestMethod]
         public void TestPostOk()
@@ -148,10 +148,10 @@ namespace WebApi.Tests
                 CheckOut = DateTime.Today
             };
             Booking booking = bookingModel.ToEntity();
-            mock.Setup(m => m.Add(bookingModel.ToEntity(true))).Returns(bookingModel.ToEntity());
+            mockBookingLogic.Setup(m => m.Add(bookingModel.ToEntity(true))).Returns(bookingModel.ToEntity());
             BookingBasicModel bookingBasic = new BookingBasicModel(booking);
 
-            var result = controller.Post(bookingModel);
+            var result = controllerBooking.Post(bookingModel);
 
             var okResult = result as CreatedAtRouteResult;
             Assert.IsNotNull(okResult);
@@ -173,9 +173,9 @@ namespace WebApi.Tests
                 CheckIn = DateTime.Today,
                 CheckOut = DateTime.Today
             };
-            mock.Setup(p => p.Add(bookingModel.ToEntity(true))).Throws(exist);
+            mockBookingLogic.Setup(p => p.Add(bookingModel.ToEntity(true))).Throws(exist);
 
-            var result = controller.Post(bookingModel);
+            var result = controllerBooking.Post(bookingModel);
         }
         [TestMethod]
         [ExpectedException(typeof(ArgumentException))]
@@ -192,9 +192,9 @@ namespace WebApi.Tests
                 CheckIn = DateTime.Today,
                 CheckOut = DateTime.Today
             };
-            mock.Setup(p => p.Add(bookingModel.ToEntity(true))).Throws(exist);
+            mockBookingLogic.Setup(p => p.Add(bookingModel.ToEntity(true))).Throws(exist);
 
-            var result = controller.Post(bookingModel);
+            var result = controllerBooking.Post(bookingModel);
         }
         [TestMethod]
         [ExpectedException(typeof(Exception))]
@@ -211,9 +211,9 @@ namespace WebApi.Tests
                 CheckIn = DateTime.Today,
                 CheckOut = DateTime.Today
             };
-            mock.Setup(p => p.Add(bookingModel.ToEntity(true))).Throws(exist);
+            mockBookingLogic.Setup(p => p.Add(bookingModel.ToEntity(true))).Throws(exist);
 
-            var result = controller.Post(bookingModel);
+            var result = controllerBooking.Post(bookingModel);
         }
         [TestMethod]
         public void TestPutOk()
@@ -229,10 +229,10 @@ namespace WebApi.Tests
                 CheckOut = DateTime.Today
             };
             Booking booking = bookingModel.ToEntity(false);
-            mock.Setup(m => m.Update(booking.Id,booking)).Returns(booking);
+            mockBookingLogic.Setup(m => m.Update(booking.Id,booking)).Returns(booking);
             BookingBasicModel bookingBasic = new BookingBasicModel(booking);
 
-            var result = controller.Put(booking.Id, bookingModel);
+            var result = controllerBooking.Put(booking.Id, bookingModel);
 
             var okResult = result as CreatedAtRouteResult;
             Assert.IsNotNull(okResult.Value);
@@ -246,11 +246,11 @@ namespace WebApi.Tests
             BookingModel bookingModel = new BookingModel();
             Booking booking = bookingModel.ToEntity(false);
             Exception exist = new ArgumentException();
-            mock.Setup(p => p.Update(booking.Id,booking)).Throws(exist);
+            mockBookingLogic.Setup(p => p.Update(booking.Id,booking)).Throws(exist);
 
-            var result = controller.Put(booking.Id, bookingModel);
+            var result = controllerBooking.Put(booking.Id, bookingModel);
 
-            mock.VerifyAll();
+            mockBookingLogic.VerifyAll();
         }
         [TestMethod]
         [ExpectedException(typeof(Exception))]
@@ -268,18 +268,18 @@ namespace WebApi.Tests
                 CheckOut = DateTime.Today
             };
             Booking booking = bookingModel.ToEntity(false);
-            mock.Setup(p => p.Update(booking.Id,booking)).Throws(exist);
+            mockBookingLogic.Setup(p => p.Update(booking.Id,booking)).Throws(exist);
 
-            var result = controller.Put(booking.Id,bookingModel);
+            var result = controllerBooking.Put(booking.Id,bookingModel);
         }
         [TestMethod]
         public void TestDeleteWithId()
         {
             Booking booking = bookingsToReturn.First();
-            mock.Setup(m => m.GetBy(booking.Id)).Returns(booking);
-            mock.Setup(mock=> mock.Delete(booking.Id));
+            mockBookingLogic.Setup(m => m.GetBy(booking.Id)).Returns(booking);
+            mockBookingLogic.Setup(mockBookingLogic=> mockBookingLogic.Delete(booking.Id));
 
-            var result = controller.Delete(booking.Id);
+            var result = controllerBooking.Delete(booking.Id);
 
             Assert.IsNotNull(result);
         }
@@ -288,18 +288,18 @@ namespace WebApi.Tests
         {
             Booking booking = bookingsToReturn.First();
             Booking bookingNull = null;
-            mock.Setup(m => m.GetBy(booking.Id)).Returns(bookingNull);
-            mock.Setup(mock=> mock.Delete(booking.Id));
+            mockBookingLogic.Setup(m => m.GetBy(booking.Id)).Returns(bookingNull);
+            mockBookingLogic.Setup(mockBookingLogic=> mockBookingLogic.Delete(booking.Id));
 
-            var result = controller.Delete(booking.Id);
+            var result = controllerBooking.Delete(booking.Id);
         }
 
         [TestMethod]
         public void TestDelete()
         {
-            mock.Setup(mock=> mock.Delete());
+            mockBookingLogic.Setup(mockBookingLogic=> mockBookingLogic.Delete());
 
-            var result = controller.Delete();
+            var result = controllerBooking.Delete();
 
             Assert.IsNotNull(result);
         }

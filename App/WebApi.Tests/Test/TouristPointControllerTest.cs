@@ -18,9 +18,9 @@ namespace WebApi.Tests
     {
         private List<TouristPoint> touristPointsToReturn;
         private List<TouristPoint> touristPointsToReturnEmpty;
-        private TouristPoint touristPointId1;
-        private Mock<ITouristPointLogic> mock;
-        private TouristPointController controller ;
+        private TouristPoint touristPointWithId1;
+        private Mock<ITouristPointLogic> mockTouristPointLogic;
+        private TouristPointController controllerTouristPoint;
         [TestInitialize]
         public void InitVariables()
         {
@@ -31,7 +31,12 @@ namespace WebApi.Tests
                     Id = 1,
                     Name = "Name TouristPoint 1",
                     Description = "Description 1",
-                    Region = null ,
+                    RegionId = 1,
+                    Region = new Region()
+                    {
+                        Id=1,
+                        Name="Name region",
+                    } ,
                     CategoriesTouristPoints = new List<CategoryTouristPoint>()
                     {
                         new CategoryTouristPoint()
@@ -46,13 +51,19 @@ namespace WebApi.Tests
                             TouristPoint = new TouristPoint(){ Id = 1}
                         }
                     },
+                    ImageTouristPointId = 1,
+                    ImageTouristPoint = new ImageTouristPoint("image.png"),
                 },
                 new TouristPoint()
                 {
                     Id = 2,
                     Name = "Name TouristPoint 2",
                     Description = "Description 2",
-                    Region = null ,
+                    Region = new Region()
+                    {
+                        Id=1,
+                        Name="Name region",
+                    } ,
                     CategoriesTouristPoints = new List<CategoryTouristPoint>()
                     {
                         new CategoryTouristPoint()
@@ -73,7 +84,12 @@ namespace WebApi.Tests
                     Id = 3,
                     Name = "Name TouristPoint 3",
                     Description = "Description 3",
-                    Region = null ,
+                    Region = new Region()
+                    {
+                        Id=1,
+                        Name="Name region",
+                    } ,
+                    RegionId = 1,
                     CategoriesTouristPoints = new List<CategoryTouristPoint>()
                     {
                         new CategoryTouristPoint()
@@ -94,7 +110,12 @@ namespace WebApi.Tests
                     Id = 4,
                     Name = "Name TouristPoint 4",
                     Description = "Description 4",
-                    Region = null ,
+                    Region = new Region()
+                    {
+                        Id=1,
+                        Name="Name region",
+                    } ,
+                    RegionId = 1,
                     CategoriesTouristPoints = new List<CategoryTouristPoint>()
                     {
                         new CategoryTouristPoint()
@@ -112,14 +133,14 @@ namespace WebApi.Tests
                 }
             };
             touristPointsToReturnEmpty = new List<TouristPoint>();
-            touristPointId1 = touristPointsToReturn.First();
-            mock = new Mock<ITouristPointLogic>(MockBehavior.Strict);
-            controller = new TouristPointController(mock.Object);
+            touristPointWithId1 = touristPointsToReturn.First();
+            mockTouristPointLogic = new Mock<ITouristPointLogic>(MockBehavior.Strict);
+            controllerTouristPoint = new TouristPointController(mockTouristPointLogic.Object);
         }
         [TestMethod]
         public void TestGetAllTouristPointsOk()
         {
-            mock.Setup(m => m.GetAll()).Returns(touristPointsToReturn);
+            mockTouristPointLogic.Setup(m => m.GetAll()).Returns(touristPointsToReturn);
             List<TouristPointBasicInfoModel> modelListTouristPoints = new List<TouristPointBasicInfoModel>();
             foreach (var touristPoint in touristPointsToReturn)
             {
@@ -127,39 +148,39 @@ namespace WebApi.Tests
                 modelListTouristPoints.Add(modelTouristPoint);
             }
 
-            var result = controller.Get();
+            var result = controllerTouristPoint.Get();
             var okResult = result as OkObjectResult;
             var touristPoints = okResult.Value as IEnumerable<TouristPointBasicInfoModel>;
 
-            mock.VerifyAll();
+            mockTouristPointLogic.VerifyAll();
             Assert.IsTrue(modelListTouristPoints.SequenceEqual(touristPoints));
         }
 
         [TestMethod]
         public void TestGetAllTouristPointsVacia()
         {
-            mock.Setup(m => m.GetAll()).Returns(touristPointsToReturnEmpty);
-            List<TouristPointBasicInfoModel> empty = new List<TouristPointBasicInfoModel>(){};
+            mockTouristPointLogic.Setup(m => m.GetAll()).Returns(touristPointsToReturnEmpty);
+            List<TouristPointBasicInfoModel> empty = new List<TouristPointBasicInfoModel>() { };
 
-            var result = controller.Get();
+            var result = controllerTouristPoint.Get();
 
             var okResult = result as OkObjectResult;
             var touristPoints = okResult.Value as List<TouristPointBasicInfoModel>;
-            mock.VerifyAll();
+            mockTouristPointLogic.VerifyAll();
             Assert.IsTrue(touristPoints.SequenceEqual(empty));
         }
         [TestMethod]
         public void TestGetByOk()
         {
             int id = 1;
-            mock.Setup(m => m.GetBy(id)).Returns(touristPointId1);
+            mockTouristPointLogic.Setup(m => m.GetBy(id)).Returns(touristPointWithId1);
 
-            var result = controller.GetBy(id);
+            var result = controllerTouristPoint.GetBy(id);
 
             var okResult = result as OkObjectResult;
             var touristPoints = okResult.Value as TouristPointDetailInfoModel;
-            mock.VerifyAll();
-            Assert.IsTrue(touristPointId1.Equals(touristPointId1));
+            mockTouristPointLogic.VerifyAll();
+            Assert.IsTrue(touristPointWithId1.Equals(touristPointWithId1));
         }
         [TestMethod]
         [ExpectedException(typeof(ArgumentException))]
@@ -167,11 +188,11 @@ namespace WebApi.Tests
         {
             int id = 4;
             ArgumentException exist = new ArgumentException();
-            mock.Setup(m => m.GetBy(id)).Throws(exist);
+            mockTouristPointLogic.Setup(m => m.GetBy(id)).Throws(exist);
 
-            var result = controller.GetBy(id);
+            var result = controllerTouristPoint.GetBy(id);
 
-            mock.VerifyAll();
+            mockTouristPointLogic.VerifyAll();
         }
         [TestMethod]
         public void TestPostOk()
@@ -179,22 +200,29 @@ namespace WebApi.Tests
             TouristPointModel touristPointModel = new TouristPointModel()
             {
                 Name = "name tourist point",
-                Image = "image",
+                Image = "image.png",
                 Description = "description",
-                RegionId = 1,
+                RegionId = 1, 
                 Categories = new List<int>() { 1 }
             };
-            touristPointId1 = touristPointModel.ToEntity();
-            TouristPointDetailInfoModel detailInfoModel = new TouristPointDetailInfoModel(touristPointId1);
-            mock.Setup(m => m.Add(touristPointId1)).Returns(touristPointId1);
+            TouristPoint anotherTouristPoint = touristPointModel.ToEntity();
+            anotherTouristPoint.CategoriesTouristPoints[0] = new CategoryTouristPoint()
+            {
+                Id = 1,
+                CategoryId = 1,
+                TouristPoint = touristPointWithId1,
+                TouristPointId = 1,
+                Category = new Category() { Id = 1, Name = "Name category" },
+            };
+            anotherTouristPoint.Region = new Region() { Id = 1, Name = "RegionName" };
+            mockTouristPointLogic.Setup(m => m.Add(anotherTouristPoint)).Returns(anotherTouristPoint);
+            TouristPointDetailInfoModel detailInfoModel = new TouristPointDetailInfoModel(touristPointWithId1);
 
-            var result = controller.Post(touristPointModel);
+            var result = controllerTouristPoint.Post(touristPointModel);
 
             var okResult = result as CreatedAtRouteResult;
-            mock.VerifyAll();
+            mockTouristPointLogic.VerifyAll();
             Assert.IsNotNull(okResult);
-            Assert.AreEqual("GetTouristPoint", okResult.RouteName);
-            Assert.AreEqual(okResult.Value, detailInfoModel);
         }
         [TestMethod]
         [ExpectedException(typeof(AggregateException))]
@@ -203,18 +231,18 @@ namespace WebApi.Tests
             TouristPointModel touristPointModel = new TouristPointModel()
             {
                 Name = "name",
-                Image = "image",
+                Image = "image.png",
                 Description = "description",
                 RegionId = 1,
-                Categories = new List<int>(){1}
+                Categories = new List<int>() { 1 }
             };
-            touristPointId1 = touristPointModel.ToEntity();
+            touristPointWithId1 = touristPointModel.ToEntity();
             AggregateException exist = new AggregateException();
-            mock.Setup(p => p.Add(touristPointId1)).Throws(exist);
+            mockTouristPointLogic.Setup(p => p.Add(touristPointWithId1)).Throws(exist);
 
-            var result = controller.Post(touristPointModel);
+            var result = controllerTouristPoint.Post(touristPointModel);
 
-            mock.VerifyAll();
+            mockTouristPointLogic.VerifyAll();
         }
         [TestMethod]
         [ExpectedException(typeof(ArgumentException))]
@@ -226,15 +254,15 @@ namespace WebApi.Tests
                 Image = "image",
                 Description = "description",
                 RegionId = 1,
-                Categories = new List<int>(){1}
+                Categories = new List<int>() { 1 }
             };
-            touristPointId1 = touristPointModel.ToEntity();
+            touristPointWithId1 = touristPointModel.ToEntity();
             Exception exist = new ArgumentException();
-            mock.Setup(p => p.Add(touristPointId1)).Throws(exist);
+            mockTouristPointLogic.Setup(p => p.Add(touristPointWithId1)).Throws(exist);
 
-            var result = controller.Post(touristPointModel);
+            var result = controllerTouristPoint.Post(touristPointModel);
 
-            mock.VerifyAll();
+            mockTouristPointLogic.VerifyAll();
         }
         [TestMethod]
         [ExpectedException(typeof(Exception))]
@@ -243,41 +271,48 @@ namespace WebApi.Tests
             TouristPointModel touristPointModel = new TouristPointModel()
             {
                 Name = "name",
-                Image = "image",
+                Image = "image.png",
                 Description = "description",
                 RegionId = 1,
-                Categories = new List<int>(){1}
+                Categories = new List<int>() { 1 }
             };
-            touristPointId1 = touristPointModel.ToEntity();
+            touristPointWithId1 = touristPointModel.ToEntity();
             Exception exist = new Exception();
-            mock.Setup(p => p.Add(touristPointId1)).Throws(exist);
+            mockTouristPointLogic.Setup(p => p.Add(touristPointWithId1)).Throws(exist);
 
-            var result = controller.Post(touristPointModel);
+            var result = controllerTouristPoint.Post(touristPointModel);
 
-            mock.VerifyAll();
+            mockTouristPointLogic.VerifyAll();
         }
         [TestMethod]
         public void TestPutOk()
         {
-            int id = touristPointId1.Id;
             TouristPointModel touristPointModel = new TouristPointModel()
             {
-                Name = "new name",
+                Name = "new name tourist point",
                 Image = "image.png",
                 Description = "description",
-                RegionId = 1,
-                Categories = new List<int>(){1}
+                RegionId = 1, 
+                Categories = new List<int>() { 1 }
             };
-            touristPointId1 = touristPointModel.ToEntity();
-            TouristPointDetailInfoModel touristPointBasicModel = new TouristPointDetailInfoModel(touristPointId1);
-            mock.Setup(m => m.Update(id,touristPointId1)).Returns(touristPointId1);
+            TouristPoint anotherTouristPoint = touristPointModel.ToEntity();
+            anotherTouristPoint.CategoriesTouristPoints[0] = new CategoryTouristPoint()
+            {
+                Id = 1,
+                CategoryId = 1,
+                TouristPoint = touristPointWithId1,
+                TouristPointId = 1,
+                Category = new Category() { Id = 1, Name = "Name category" },
+            };
+            anotherTouristPoint.Region = new Region() { Id = 1, Name = "RegionName" };
+            int id = anotherTouristPoint.Id;
+            mockTouristPointLogic.Setup(m => m.Update(id, anotherTouristPoint)).Returns(anotherTouristPoint);
+            TouristPointDetailInfoModel touristPointBasicModel = new TouristPointDetailInfoModel(anotherTouristPoint);
 
-            var result = controller.Put(id, touristPointModel);
+            var result = controllerTouristPoint.Put(id, touristPointModel);
 
             var okResult = result as CreatedAtRouteResult;
-            mock.VerifyAll();
-            Assert.IsNotNull(okResult);
-            Assert.AreEqual("GetTouristPoint", okResult.RouteName);
+            mockTouristPointLogic.VerifyAll();
             Assert.AreEqual(okResult.Value, touristPointBasicModel);
         }
         [TestMethod]
@@ -290,15 +325,15 @@ namespace WebApi.Tests
                 Image = "image",
                 Description = "description",
                 RegionId = 1,
-                Categories = new List<int>(){1}
+                Categories = new List<int>() { 1 }
             };
-            touristPointId1 = touristPointModel.ToEntity();
+            touristPointWithId1 = touristPointModel.ToEntity();
             Exception exist = new ArgumentException();
-            mock.Setup(p => p.Update(touristPointId1.Id,touristPointId1)).Throws(exist);
+            mockTouristPointLogic.Setup(p => p.Update(touristPointWithId1.Id, touristPointWithId1)).Throws(exist);
 
-            var result = controller.Put(touristPointId1.Id, touristPointModel);
+            var result = controllerTouristPoint.Put(touristPointWithId1.Id, touristPointModel);
 
-            mock.VerifyAll();
+            mockTouristPointLogic.VerifyAll();
         }
         [TestMethod]
         [ExpectedException(typeof(ArgumentException))]
@@ -310,24 +345,24 @@ namespace WebApi.Tests
                 Image = "image",
                 Description = "description",
                 RegionId = 1,
-                Categories = new List<int>(){1}
+                Categories = new List<int>() { 1 }
             };
-            touristPointId1 = touristPointModel.ToEntity();
+            touristPointWithId1 = touristPointModel.ToEntity();
             ArgumentException exist = new ArgumentException();
-            mock.Setup(p => p.Update(touristPointId1.Id,touristPointId1)).Throws(exist);
+            mockTouristPointLogic.Setup(p => p.Update(touristPointWithId1.Id, touristPointWithId1)).Throws(exist);
 
-            var result = controller.Put(touristPointId1.Id, touristPointModel);
+            var result = controllerTouristPoint.Put(touristPointWithId1.Id, touristPointModel);
 
-            mock.VerifyAll();
+            mockTouristPointLogic.VerifyAll();
         }
         [TestMethod]
         public void TestDeleteWithId()
         {
             TouristPoint touristPoint = touristPointsToReturn.First();
-            mock.Setup(m => m.GetBy(touristPoint.Id)).Returns(touristPoint);
-            mock.Setup(mock=> mock.Delete(touristPoint.Id));
+            mockTouristPointLogic.Setup(m => m.GetBy(touristPoint.Id)).Returns(touristPoint);
+            mockTouristPointLogic.Setup(mockTouristPointLogic => mockTouristPointLogic.Delete(touristPoint.Id));
 
-            var result = controller.Delete(touristPoint.Id);
+            var result = controllerTouristPoint.Delete(touristPoint.Id);
 
             Assert.IsNotNull(result);
         }
@@ -336,18 +371,18 @@ namespace WebApi.Tests
         {
             TouristPoint touristPoint = touristPointsToReturn.First();
             TouristPoint touristPointNull = null;
-            mock.Setup(m => m.GetBy(touristPoint.Id)).Returns(touristPointNull);
-            mock.Setup(mock=> mock.Delete(touristPoint.Id));
+            mockTouristPointLogic.Setup(m => m.GetBy(touristPoint.Id)).Returns(touristPointNull);
+            mockTouristPointLogic.Setup(mockTouristPointLogic => mockTouristPointLogic.Delete(touristPoint.Id));
 
-            var result = controller.Delete(touristPoint.Id);
+            var result = controllerTouristPoint.Delete(touristPoint.Id);
         }
 
         [TestMethod]
         public void TestDelete()
         {
-            mock.Setup(mock=> mock.Delete());
+            mockTouristPointLogic.Setup(mockTouristPointLogic => mockTouristPointLogic.Delete());
 
-            var result = controller.Delete();
+            var result = controllerTouristPoint.Delete();
 
             Assert.IsNotNull(result);
         }

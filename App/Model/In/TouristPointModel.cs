@@ -31,6 +31,10 @@ namespace Model.In
             {
                 touristPoint.ImageTouristPoint = new ImageTouristPoint(this.Image);
             }
+            if (this.RegionId > 0)
+            {
+                touristPoint.Region = new Region(){Id = this.RegionId};
+            }
             return touristPoint;
         }
     }
