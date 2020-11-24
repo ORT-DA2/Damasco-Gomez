@@ -1,13 +1,11 @@
 using System;
 using System.Collections.Generic;
-using System.Diagnostics.CodeAnalysis;
 using System.Linq;
 using Domain;
 using Domain.Entities;
 
 namespace Model
 {
-    [ExcludeFromCodeCoverage]
     public class HouseModel
     {
         public bool Avaible {get ; set; }

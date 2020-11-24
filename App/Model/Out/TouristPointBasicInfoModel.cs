@@ -1,12 +1,9 @@
 using System.Collections.Generic;
-using System.Diagnostics.CodeAnalysis;
 using System.Linq;
 using Domain;
-using Domain.Entities;
 
 namespace Model.Out
 {
-    [ExcludeFromCodeCoverage]
     public class TouristPointBasicInfoModel
     {
         public int Id { get; private set; }
