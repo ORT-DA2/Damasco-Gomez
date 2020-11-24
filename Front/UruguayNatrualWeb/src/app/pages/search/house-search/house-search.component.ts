@@ -37,7 +37,7 @@ export class HouseSearchComponent implements OnInit {
   public errorMessageDates: string = '';
   public errorMessagePeople: string = '';
   public errorMessageBackend: string = '';
-
+  public successMessage: string = '';
   public myForm: FormGroup;
   closeResult: string;
 
@@ -82,19 +82,18 @@ export class HouseSearchComponent implements OnInit {
   searchBy() {
     const checkInDate = new Date(this.checkIn);
     const checkOutDate = new Date(this.checkOut);
-    // const currentDate = new Date();
     if (checkInDate < checkOutDate) {
       const adults = Number(this.cantAdults);
       const children = Number(this.cantChildren);
       const babies = Number(this.cantBabies);
       const seniors = Number(this.cantSeniors);
+      this.errorMessageDates = '';
       if (!(adults == 0 && children == 0 && babies == 0 && seniors == 0)) {
         this.houseService.getByTouristoPoint(this.checkInValue, this.checkOutValue, this.touristPointId,
           this.cantAdults, this.cantChildren, this.cantBabies, this.cantSeniors).subscribe(
             houseResponse =>
               this.getAll(houseResponse), (error: string) => this.showError(error)
           );
-        this.errorMessageDates = '';
         this.errorMessagePeople = '';
       } else {
         this.errorMessagePeople = 'Try to search with at least one person';
@@ -125,7 +124,13 @@ export class HouseSearchComponent implements OnInit {
     if (this.email && this.firstName && this.lastName) {
       this.createModel();
       this.bookingService.post(this.bookingModelIn).subscribe(
-        response => this.code = response.code, (error: string) => this.showError(error)
+        response => {
+          this.code = response.code;
+          this.successMessage = 'Done! Keep the booking code just in case';
+        },
+        catchError => {
+          this.errorMessageBackend = catchError + ', fix it and try again';
+        }
       );
       this.errorMessage = '';
       this.codeGenerated = true;

@@ -177,7 +177,8 @@
   </div>
   <div class="modal-footer">
     <div>
-      <p class="modal-error" id="modal-error">{{errorMessage}}</p>
+      <p class="errorMessage" id="modal-error">{{errorMessage}}</p>
+      <p class="successMessage" id="modal-success">{{successMessage}}</p>
     </div>
     <button *ngIf="codeGenerated" type="button" class="btn btn-outline-dark" (click)="done(modal)">Done</button>
     <button *ngIf="!codeGenerated" type="button" class="btn btn-outline-dark" (click)="okModal()">Book</button>
