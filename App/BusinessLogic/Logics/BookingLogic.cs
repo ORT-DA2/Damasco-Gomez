@@ -19,7 +19,7 @@ namespace BusinessLogic.Logics
         }
         public void Delete()
         {
-            foreach(Booking booking in this.bookingRepository.GetElements())
+            foreach (Booking booking in this.bookingRepository.GetElements())
             {
                 this.Delete(booking.Id);
             }
@@ -28,7 +28,7 @@ namespace BusinessLogic.Logics
         {
             return this.bookingRepository.GetElements();
         }
-        public  Booking GetBy(int id)
+        public Booking GetBy(int id)
         {
             return this.bookingRepository.Find(id);
         }
@@ -36,13 +36,15 @@ namespace BusinessLogic.Logics
         public Booking Add(Booking booking)
         {
             ValidateHouse(booking.HouseId);
+            booking.State = this.stateRepository.Find(booking.StateId);
             Booking bookingBD = this.bookingRepository.Add(booking);
             return bookingBD;
         }
         public Booking Update(int id, Booking booking)
         {
-            if(booking.HouseId > 0) ValidateHouse(booking.HouseId);
-            if(booking.StateId >0) ValidateState(booking.StateId);
+            ValidateHouse(booking.HouseId);
+            ValidateState(booking.StateId);
+            booking.State = this.stateRepository.Find(booking.StateId);
             Booking bookingBD = this.bookingRepository.Find(id);
             bookingBD.Update(booking);
             this.bookingRepository.Update(id, bookingBD);
@@ -58,18 +60,21 @@ namespace BusinessLogic.Logics
         }
         public void ValidateHouse(int houseId)
         {
-            if (!this.houseRepository.ExistElement(houseId))
+            if (houseId > 0)
             {
-                throw new ArgumentException("There is no House with id : " + houseId);
-            }
-            if(!this.houseRepository.Find(houseId).IsAvailable())
-            {
-                throw new ArgumentException("The house is not available");
+                if (!this.houseRepository.ExistElement(houseId))
+                {
+                    throw new ArgumentException("There is no House with id : " + houseId);
+                }
+                if (!this.houseRepository.Find(houseId).IsAvailable())
+                {
+                    throw new ArgumentException("The house is not available");
+                }
             }
         }
         public void ValidateState(int stateId)
         {
-            if (!this.stateRepository.ExistElement(stateId))
+            if (stateId > 0 && !this.stateRepository.ExistElement(stateId))
             {
                 throw new ArgumentException("State is not correct");
             }

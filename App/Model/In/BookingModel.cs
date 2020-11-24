@@ -1,5 +1,6 @@
 using System;
 using Domain;
+using Domain.Entities;
 
 namespace Model
 {
@@ -24,9 +25,18 @@ namespace Model
                 CheckOut = this.CheckOut
             };
             booking.Code = Booking.RandomString();
-            if(post) booking.StateId = 1;
-            else booking.StateId = this.StateId;
-            if(post && booking.IsEmpty()) throw new ArgumentException("No values");
+            if(post) 
+            {
+                booking.StateId = 1;
+            }
+            else 
+            {
+                booking.StateId = this.StateId;
+            }
+            if(post && booking.IsEmpty())
+            {
+                throw new ArgumentException("No values");
+            }
             return booking;
         }
     }

@@ -83,7 +83,7 @@
 						],
 						"body": {
 							"mode": "raw",
-							"raw": "\n{\n    \n    \"Name\" : \"name\",\n    \"Email\" : \"email\",\n    \"HouseId\" : 1,\n    \"Price\" : 100,\n    \"checkIn\": \"2020-01-01T00:00:00\",\n    \"checkOut\": \"2020-01-09T00:00:00\"\n\n    \n}",
+							"raw": "{\n    \"Name\" : \"name\",\n    \"Email\" : \"email\",\n    \"HouseId\" : 1,\n    \"Price\" : 100,\n    \"checkIn\": \"2020-01-01T00:00:00\",\n    \"checkOut\": \"2020-01-09T00:00:00\"\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -368,7 +368,7 @@
 						],
 						"body": {
 							"mode": "raw",
-							"raw": "{\n    \n    \"name\": \"new name booking\",\n    \"email\": \"emailBooking1@gmail.com\",\n    \"houseId\": 1,\n    \"state\": \"Checking data\",\n    \"price\": 100,\n    \"checkIn\": \"2020-01-01T00:00:00\",\n    \"checkOut\": \"2020-01-09T00:00:00\"\n    \n}",
+							"raw": "{\n    \n    \"name\": \"new name booking\",\n    \"email\": \"emailBooking1@gmail.com\",\n    \"houseId\": 1,\n    \"stateId\": 3,\n    \"price\": 100,\n    \"checkIn\": \"2020-01-01T00:00:00\",\n    \"checkOut\": \"2020-01-09T00:00:00\"\n    \n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -376,7 +376,7 @@
 							}
 						},
 						"url": {
-							"raw": "http://localhost:5000/api/bookings/1",
+							"raw": "http://localhost:5000/api/bookings/4",
 							"protocol": "http",
 							"host": [
 								"localhost"
@@ -385,7 +385,7 @@
 							"path": [
 								"api",
 								"bookings",
-								"1"
+								"4"
 							]
 						}
 					},
@@ -412,7 +412,7 @@
 							}
 						},
 						"url": {
-							"raw": "http://localhost:5000/api/bookings/1",
+							"raw": "http://localhost:5000/api/bookings/4",
 							"protocol": "http",
 							"host": [
 								"localhost"
@@ -421,7 +421,7 @@
 							"path": [
 								"api",
 								"bookings",
-								"1"
+								"4"
 							]
 						}
 					},
@@ -494,42 +494,6 @@
 								"api",
 								"bookings",
 								"1"
-							]
-						}
-					},
-					"response": []
-				},
-				{
-					"name": "PutErorArgument",
-					"request": {
-						"method": "PUT",
-						"header": [
-							{
-								"key": "Authorization",
-								"value": "{{token}}",
-								"type": "text"
-							}
-						],
-						"body": {
-							"mode": "raw",
-							"raw": "{\n   \n}",
-							"options": {
-								"raw": {
-									"language": "json"
-								}
-							}
-						},
-						"url": {
-							"raw": "http://localhost:5000/api/bookings/100",
-							"protocol": "http",
-							"host": [
-								"localhost"
-							],
-							"port": "5000",
-							"path": [
-								"api",
-								"bookings",
-								"100"
 							]
 						}
 					},
@@ -727,41 +691,6 @@
 						"body": {
 							"mode": "raw",
 							"raw": "{\n    \"Name\" : \"name\",\n    \"TouristPoints\" : [4,5,6]\n}",
-							"options": {
-								"raw": {
-									"language": "json"
-								}
-							}
-						},
-						"url": {
-							"raw": "http://localhost:5000/api/categories",
-							"protocol": "http",
-							"host": [
-								"localhost"
-							],
-							"port": "5000",
-							"path": [
-								"api",
-								"categories"
-							]
-						}
-					},
-					"response": []
-				},
-				{
-					"name": "PostElement Copy",
-					"request": {
-						"method": "POST",
-						"header": [
-							{
-								"key": "Authorization",
-								"value": "{{token}}",
-								"type": "text"
-							}
-						],
-						"body": {
-							"mode": "raw",
-							"raw": "{\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -990,7 +919,7 @@
 					"response": []
 				},
 				{
-					"name": "PutErorArgument",
+					"name": "PutEror Wrong Tourist point Id",
 					"request": {
 						"method": "PUT",
 						"header": [
@@ -1651,7 +1580,7 @@
 						],
 						"body": {
 							"mode": "raw",
-							"raw": "\n{                \n    \"Name\" : \"Name house 1\",\n    \"PricePerNight\" : 100,\n    \"Starts\" : 2,\n    \"TouristPointId\" : 4,\n    \"Phone\" : 2334234,\n    \"Address\" : \"asdfasdfasdf\",\n    \"Contact\" : \"sadfasdf\",\n    \"Description\" : \"asdfasdf\",\n    \"Images\" : [\"img.png\",\"other.png\"]\n}\n                    ",
+							"raw": "\n{                \n    \"Name\" : \"Name house 1\",\n    \"PricePerNight\" : 100,\n    \"Starts\" : 2,\n    \"TouristPointId\" : 1,\n    \"Phone\" : 2334234,\n    \"Address\" : \"asdfasdfasdf\",\n    \"Contact\" : \"sadfasdf\",\n    \"Description\" : \"asdfasdf\",\n    \"Images\" : [\"img.png\", \"img2.png\"]\n}\n                    ",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -1803,6 +1732,42 @@
 								"api",
 								"houses",
 								"1"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Put Images",
+					"request": {
+						"method": "PUT",
+						"header": [
+							{
+								"key": "Authorization",
+								"type": "text",
+								"value": "{{token}}"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{           \n    \"Images\" : [\"image1.png\",\"image2.png\",\"image3.png\"]\n}\n  ",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:5000/api/houses/2",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "5000",
+							"path": [
+								"api",
+								"houses",
+								"2"
 							]
 						}
 					},
@@ -2105,7 +2070,7 @@
 							}
 						},
 						"url": {
-							"raw": "http://localhost:5000/api/houses?checkin=20/2/2020&checkout=27/2/2020&touristpointId=1&cantadults=1&cantchildrens=1&cantbabys=1&cantSeniors=1",
+							"raw": "http://localhost:5000/api/houses?checkin=20/2/2020&checkout=27/2/2021&touristpointId=1&cantadults=1&cantchildrens=1&cantbabys=1&cantSeniors=1",
 							"protocol": "http",
 							"host": [
 								"localhost"
@@ -2122,7 +2087,7 @@
 								},
 								{
 									"key": "checkout",
-									"value": "27/2/2020"
+									"value": "27/2/2021"
 								},
 								{
 									"key": "touristpointId",
@@ -2453,7 +2418,7 @@
 						],
 						"body": {
 							"mode": "raw",
-							"raw": "{\n    \"email\" : \"email5\",\n    \"password\" : \"psw\"\n}",
+							"raw": "{\n    \"email\" : \"email6\",\n    \"password\" : \"psw\",\n    \"name\" : \"name person\"\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -2488,7 +2453,7 @@
 						],
 						"body": {
 							"mode": "raw",
-							"raw": "{\n    \"email\" : \"email1\",\n    \"password\" : \"password1\"\n}",
+							"raw": "{\n    \"email\" : \"email1\",\n    \"password\" : \"password1\",\n    \"name\" : \"name person\"\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -2587,7 +2552,7 @@
 						],
 						"body": {
 							"mode": "raw",
-							"raw": "{\n    \"email\" : \"new email5\",\n    \"password\" : \"psw\"\n}",
+							"raw": "{\n    \"email\" : \"new email0000\",\n    \"password\" : \"psw\",\n    \"name\" : \"other name person0000\"\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -3290,7 +3255,115 @@
 						],
 						"body": {
 							"mode": "raw",
-							"raw": "{\n    \"Name\" : \"Name TouristPoint 1\",\n    \"Image\" : \"Image1\",\n    \"Description\" : \"Description 1\",\n    \"RegionId\" : 1 ,\n    \"Categories\" : [1]\n}",
+							"raw": "{\n    \"Name\" : \"Name TouristPoint 1\",\n    \"Image\" : \"Image1.png\",\n    \"Description\" : \"Description 1\",\n    \"RegionId\" : 2 ,\n    \"Categories\" : [1]\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:5000/api/touristpoints/1",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "5000",
+							"path": [
+								"api",
+								"touristpoints",
+								"1"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Put Image",
+					"request": {
+						"method": "PUT",
+						"header": [
+							{
+								"key": "Authorization",
+								"type": "text",
+								"value": "{{token}}"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"Image\" : \"Image2.png\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:5000/api/touristpoints/1",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "5000",
+							"path": [
+								"api",
+								"touristpoints",
+								"1"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "PutElement Only Category",
+					"request": {
+						"method": "PUT",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "{{token}}",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"Categories\" : [1]\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:5000/api/touristpoints/1",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "5000",
+							"path": [
+								"api",
+								"touristpoints",
+								"1"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "PutElement Copy 2",
+					"request": {
+						"method": "PUT",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "{{token}}",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"Image\" : \"Image78.png\"\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -3568,6 +3641,203 @@
 								"api",
 								"sessions",
 								""
+							]
+						}
+					},
+					"response": []
+				}
+			],
+			"protocolProfileBehavior": {}
+		},
+		{
+			"name": "Report",
+			"item": [
+				{
+					"name": "Get One",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "{{token}}",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "http://localhost:5000/api/reports?IdTouristPoint=1&dateFrom=1/1/2020&dateOut=11/12/2020",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "5000",
+							"path": [
+								"api",
+								"reports"
+							],
+							"query": [
+								{
+									"key": "IdTouristPoint",
+									"value": "1"
+								},
+								{
+									"key": "dateFrom",
+									"value": "1/1/2020"
+								},
+								{
+									"key": "dateOut",
+									"value": "11/12/2020"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get More than one",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "{{token}}",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "http://localhost:5000/api/reports?IdTouristPoint=2&dateFrom=1/1/2019&dateOut=9/12/2021",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "5000",
+							"path": [
+								"api",
+								"reports"
+							],
+							"query": [
+								{
+									"key": "IdTouristPoint",
+									"value": "2"
+								},
+								{
+									"key": "dateFrom",
+									"value": "1/1/2019"
+								},
+								{
+									"key": "dateOut",
+									"value": "9/12/2021"
+								}
+							]
+						}
+					},
+					"response": []
+				}
+			],
+			"protocolProfileBehavior": {}
+		},
+		{
+			"name": "States",
+			"item": [
+				{
+					"name": "GetAll",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true,
+						"followRedirects": true,
+						"disableUrlEncoding": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "{{token}}",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:5000/api/states/",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "5000",
+							"path": [
+								"api",
+								"states",
+								""
+							]
+						}
+					},
+					"response": []
+				}
+			],
+			"protocolProfileBehavior": {}
+		},
+		{
+			"name": "Import",
+			"item": [
+				{
+					"name": "Post JSON",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"name\":\"JSON\",\n    \"path\": \"./Parser/example.json\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "https://localhost:5001/api/importers",
+							"protocol": "https",
+							"host": [
+								"localhost"
+							],
+							"port": "5001",
+							"path": [
+								"api",
+								"importers"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Post XML",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"name\":\"XML\",\n    \"path\": \"./Parser/example.xml\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "https://localhost:5001/api/importers",
+							"protocol": "https",
+							"host": [
+								"localhost"
+							],
+							"port": "5001",
+							"path": [
+								"api",
+								"importers"
 							]
 						}
 					},

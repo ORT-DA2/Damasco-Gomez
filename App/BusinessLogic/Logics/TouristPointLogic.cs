@@ -52,7 +52,10 @@ namespace BusinessLogic
         public TouristPoint Update(int id, TouristPoint touristPoint)
         {
             TouristPoint touristPointBD = this.touristPointRepository.Find(id);
-            touristPoint.Region = ValidateRegion(touristPoint.RegionId);
+            if (touristPoint.RegionId > 0)
+            {
+                touristPoint.Region = ValidateRegion(touristPoint.RegionId);
+            }
             if (touristPoint.CategoriesTouristPoints != null)
             {
                 touristPoint.CategoriesTouristPoints.ForEach
@@ -82,11 +85,7 @@ namespace BusinessLogic
 
         public Region ValidateRegion(int regionId)
         {
-            if (regionId > 0)
-            {
-                return this.regionRepository.Find(regionId);
-            }
-            throw new ArgumentException("No Region with id: " + regionId);
+            return this.regionRepository.Find(regionId);
         }
     }
 }
