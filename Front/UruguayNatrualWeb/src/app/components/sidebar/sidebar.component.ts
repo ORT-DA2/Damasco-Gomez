@@ -17,10 +17,9 @@ export const ROUTES: RouteInfo[] = [
     { path: '/tourist-points', title: 'Tourist Points',  icon:'ni-compass-04 text-yellow', class: '' ,admin:true},
     { path: '/categories', title: 'Categories',  icon:'ni-bullet-list-67 text-pink', class: '' ,admin:true},
     { path: '/houses', title: 'Houses',  icon:'ni-building text-blue', class: '' , admin:true},
-    { path: '/search', title: 'Search',  icon:'ni-building text-blue', class: '' , admin:false},
+    { path: '/search', title: 'Search',  icon:'ni-building text-yellow', class: '' , admin:false},
     { path: '/reports', title: 'Reports',  icon:'ni-building text-blue', class: '' , admin:true},
-
-
+    { path: '/review', title: 'Review',  icon:'ni-chart-pie-35 text-blue', class: '' , admin:false},
 ];
 
 @Component({
