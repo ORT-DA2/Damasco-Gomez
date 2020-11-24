@@ -24,9 +24,9 @@ namespace WebApi.Controllers
         [HttpGet]
         public IActionResult Get()
         {
-            var elementTouristPoint = this.touristPointLogic.GetAll();
-            var model = elementTouristPoint.Select(m => new TouristPointBasicInfoModel(m)).ToList();
-            return Ok(model);
+            var touristPoints = this.touristPointLogic.GetAll();
+            var modelTouristPoint = touristPoints.Select(m => new TouristPointBasicInfoModel(m)).ToList();
+            return Ok(modelTouristPoint);
         }
         /// <summary>
         /// Permite a un ususario ver un punto turistico del sistema
@@ -38,8 +38,8 @@ namespace WebApi.Controllers
         public IActionResult GetBy([FromRoute]int id)
         {
             var elementTouristPoint = this.touristPointLogic.GetBy(id);
-            var model = new TouristPointDetailInfoModel(elementTouristPoint);
-            return Ok(model);
+            var modelTouristPoint = new TouristPointDetailInfoModel(elementTouristPoint);
+            return Ok(modelTouristPoint);
         }
         /// <summary>
         /// Permite a un administrador realizar un punto turisticos

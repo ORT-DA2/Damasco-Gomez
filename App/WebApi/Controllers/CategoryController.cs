@@ -23,8 +23,8 @@ namespace WebApi.Controllers
         [HttpGet]
         public IActionResult Get()
         {
-            var elementCategory = this.categoryLogic.GetAll().Select(m => new CategoryBasicInfoModel(m)).ToList();
-            return Ok(elementCategory);
+            var Categories = this.categoryLogic.GetAll().Select(m => new CategoryBasicInfoModel(m)).ToList();
+            return Ok(Categories);
         }
         /// <summary>
         /// Permite a un ususario ver una categoria del sistema
@@ -35,8 +35,8 @@ namespace WebApi.Controllers
         [HttpGet("{id}",Name="GetCategory")]
         public IActionResult GetBy([FromRoute]int id)
         {
-            Category elementCategory = this.categoryLogic.GetBy(id);
-            return Ok(new CategoryDetailInfoModel(elementCategory));
+            Category Category = this.categoryLogic.GetBy(id);
+            return Ok(new CategoryDetailInfoModel(Category));
         }
         /// <summary>
         /// Permite a un administrador agregar una categoria

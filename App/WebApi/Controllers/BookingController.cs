@@ -23,8 +23,8 @@ namespace WebApi.Controllers
         [HttpGet]
         public IActionResult Get()
         {
-            IEnumerable<Booking> elementBookings = this.bookingLogic.GetAll();
-            IEnumerable<BookingBasicModel> bookingModels =  elementBookings.Select(m => new BookingBasicModel(m));
+            IEnumerable<Booking> bookings = this.bookingLogic.GetAll();
+            IEnumerable<BookingBasicModel> bookingModels =  bookings.Select(m => new BookingBasicModel(m));
             return Ok(bookingModels);
         }
         /// <summary>
@@ -36,8 +36,8 @@ namespace WebApi.Controllers
         [HttpGet("{id}",Name="GetBooking")]
         public IActionResult GetBy([FromRoute]int id)
         {
-            Booking elementBooking = this.bookingLogic.GetBy(id);
-            BookingDetailModel bookingModel = new BookingDetailModel(elementBooking);
+            Booking Booking = this.bookingLogic.GetBy(id);
+            BookingDetailModel bookingModel = new BookingDetailModel(Booking);
             return Ok(bookingModel);
         }
         /// <summary>
