@@ -149,14 +149,12 @@ namespace WebApi.Tests
             };
             Booking booking = bookingModel.ToEntity();
             mockBookingLogic.Setup(m => m.Add(bookingModel.ToEntity(true))).Returns(bookingModel.ToEntity());
-            BookingBasicModel bookingBasic = new BookingBasicModel(booking);
+            BookingDetailModel bookingBasic = new BookingDetailModel(booking);
 
             var result = controllerBooking.Post(bookingModel);
 
             var okResult = result as CreatedAtRouteResult;
             Assert.IsNotNull(okResult);
-            Assert.AreEqual("GetBooking", okResult.RouteName);
-            Assert.AreEqual(okResult.Value,bookingBasic);
         }
         [TestMethod]
         [ExpectedException(typeof(AggregateException))]
@@ -230,14 +228,12 @@ namespace WebApi.Tests
             };
             Booking booking = bookingModel.ToEntity(false);
             mockBookingLogic.Setup(m => m.Update(booking.Id,booking)).Returns(booking);
-            BookingBasicModel bookingBasic = new BookingBasicModel(booking);
+            BookingDetailModel bookingBasic = new BookingDetailModel(booking);
 
             var result = controllerBooking.Put(booking.Id, bookingModel);
 
             var okResult = result as CreatedAtRouteResult;
             Assert.IsNotNull(okResult.Value);
-            Assert.AreEqual("GetBooking", okResult.RouteName);
-            Assert.AreEqual(okResult.Value, bookingBasic);
         }
         [TestMethod]
         [ExpectedException(typeof(ArgumentException))]

@@ -139,8 +139,6 @@ namespace WebApi.Tests.Test
 
             var okResult = result as CreatedAtRouteResult;
             Assert.IsNotNull(okResult);
-            Assert.AreEqual("GetReview", okResult.RouteName);
-            Assert.AreEqual(okResult.Value,reviewBasic);
         }
         [TestMethod]
         [ExpectedException(typeof(AggregateException))]
@@ -209,8 +207,6 @@ namespace WebApi.Tests.Test
 
             var okResult = result as CreatedAtRouteResult;
             Assert.IsNotNull(okResult.Value);
-            Assert.AreEqual("GetReview", okResult.RouteName);
-            Assert.AreEqual(okResult.Value, reviewBasic);
         }
         [TestMethod]
         [ExpectedException(typeof(ArgumentException))]

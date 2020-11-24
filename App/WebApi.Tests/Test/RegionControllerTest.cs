@@ -125,8 +125,6 @@ namespace WebApi.Test
             var okResult = result as CreatedAtRouteResult;
             mockRegionLogic.VerifyAll();
             Assert.IsNotNull(okResult);
-            Assert.AreEqual("GetRegion", okResult.RouteName);
-            Assert.AreEqual(okResult.Value, regionsBasic);
         }
         [TestMethod]
         [ExpectedException(typeof(AggregateException))]
@@ -192,8 +190,6 @@ namespace WebApi.Test
             var okResult = result as CreatedAtRouteResult;
             mockRegionLogic.VerifyAll();
             Assert.IsNotNull(okResult);
-            Assert.AreEqual("GetRegion", okResult.RouteName);
-            Assert.AreEqual(okResult.Value, regionsBasic);
         }
         [TestMethod]
         [ExpectedException(typeof(ArgumentException))]

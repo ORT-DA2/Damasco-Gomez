@@ -180,8 +180,6 @@ namespace WebApi.Tests
             var okResult = result as CreatedAtRouteResult;
             mockHouseLogic.VerifyAll();
             Assert.IsNotNull(okResult);
-            Assert.AreEqual("GetHouse", okResult.RouteName);
-            Assert.AreEqual(okResult.Value, houseBasicModel);
         }
         [TestMethod]
         [ExpectedException(typeof(ArgumentException))]
@@ -248,8 +246,6 @@ namespace WebApi.Tests
             var okResult = result as CreatedAtRouteResult;
             mockHouseLogic.VerifyAll();
             Assert.IsNotNull(okResult);
-            Assert.AreEqual("GetHouse", okResult.RouteName);
-            Assert.AreEqual(okResult.Value, basicModel);
         }
         [TestMethod]
         [ExpectedException(typeof(ArgumentException))]

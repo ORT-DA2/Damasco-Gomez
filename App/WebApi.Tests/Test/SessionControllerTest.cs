@@ -46,7 +46,6 @@ namespace WebApi.Tests.Test
             mockSessionLogic.VerifyAll();
             var okResult = result as OkObjectResult;
             var session = okResult.Value as SessionBasicModel;
-            Assert.IsNotNull(result);
             Assert.AreEqual(session, sessionModel);
         }
 

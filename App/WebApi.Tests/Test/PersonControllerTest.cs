@@ -118,8 +118,6 @@ namespace WebApi.Tests
             var okResult = result as CreatedAtRouteResult;
             mockPersonLogic.VerifyAll();
             Assert.IsNotNull(okResult);
-            Assert.AreEqual("GetPerson", okResult.RouteName);
-            Assert.AreEqual(okResult.Value, personBasicModel);
         }
         [TestMethod]
         [ExpectedException(typeof(AggregateException))]
@@ -189,8 +187,6 @@ namespace WebApi.Tests
 
             var okResult = result as CreatedAtRouteResult;
             Assert.IsNotNull(okResult);
-            Assert.AreEqual("GetPerson", okResult.RouteName);
-            Assert.AreEqual(okResult.Value, personBasicModel);
         }
         [TestMethod]
         [ExpectedException(typeof(ArgumentException))]
