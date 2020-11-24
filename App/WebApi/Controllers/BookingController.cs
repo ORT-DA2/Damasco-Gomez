@@ -51,7 +51,7 @@ namespace WebApi.Controllers
         {
             Booking newBooking = bookingModel.ToEntity();
             newBooking = this.bookingLogic.Add(newBooking);
-            BookingBasicModel basicModel = new BookingBasicModel(newBooking);
+            BookingDetailModel basicModel = new BookingDetailModel(newBooking);
             return CreatedAtRoute("GetBooking", new {Id = basicModel.Id} , basicModel);
         }
         /// <summary>
@@ -67,7 +67,7 @@ namespace WebApi.Controllers
         {
             Booking newBooking = bookingModel.ToEntity(false);
             newBooking = this.bookingLogic.Update(id, newBooking);
-            BookingBasicModel basicModel = new BookingBasicModel(newBooking);
+            BookingDetailModel basicModel = new BookingDetailModel(newBooking);
             return CreatedAtRoute("GetBooking", new {Id = basicModel.Id} , basicModel);
         }
         /// <summary>
