@@ -15,9 +15,9 @@ namespace BusinessLogic.Tests.Test
         private  List<House> housesToReturn;
         private  List<House>  emptyHouses;
         private HouseLogic houseLogic;
-        private Mock<IHouseRepository> mock;
-        private Mock<ITouristPointRepository> mock2;
-        private Mock<IImageHouseRepository> mock3;
+        private Mock<IHouseRepository> mockHouseRepository;
+        private Mock<ITouristPointRepository> mockTouristPointRepository;
+        private Mock<IImageHouseRepository> mockImageHouseRepository;
         [TestInitialize]
         public void InitVariables()
         {
@@ -27,6 +27,7 @@ namespace BusinessLogic.Tests.Test
                 {
                     Id = 1,
                     Name = "House 1",
+                    
                 },
                 new House()
                 {
@@ -35,50 +36,50 @@ namespace BusinessLogic.Tests.Test
                 }
             };
             emptyHouses = new List<House>();
-            mock = new Mock<IHouseRepository>(MockBehavior.Strict);
-            mock2 = new Mock<ITouristPointRepository>(MockBehavior.Strict);
-            mock3 = new Mock<IImageHouseRepository>(MockBehavior.Strict);
-            houseLogic = new HouseLogic(mock.Object,mock2.Object,mock3.Object);
+            mockHouseRepository = new Mock<IHouseRepository>(MockBehavior.Strict);
+            mockTouristPointRepository = new Mock<ITouristPointRepository>(MockBehavior.Strict);
+            mockImageHouseRepository = new Mock<IImageHouseRepository>(MockBehavior.Strict);
+            houseLogic = new HouseLogic(mockHouseRepository.Object,mockTouristPointRepository.Object,mockImageHouseRepository.Object);
         }
 
         [TestMethod]
         public void TestDeleteById()
         {
             int lengthTouristPoint = housesToReturn.Count;
-            mock.Setup(m => m.Delete(housesToReturn.First().Id));
+            mockHouseRepository.Setup(m => m.Delete(housesToReturn.First().Id));
 
             houseLogic.Delete(housesToReturn.First().Id);
 
-            mock.VerifyAll();
+            mockHouseRepository.VerifyAll();
         }
 
         [TestMethod]
         public void TestDelete()
         {
             int lengthRegions = housesToReturn.Count;
-            mock.Setup(m => m.GetElements()).Returns(housesToReturn);
+            mockHouseRepository.Setup(m => m.GetElements()).Returns(housesToReturn);
             foreach (House t in housesToReturn)
             {
-                mock.Setup(m => m.Delete(t.Id));
+                mockHouseRepository.Setup(m => m.Delete(t.Id));
             }
 
             houseLogic.Delete();
 
-            mock.VerifyAll();
+            mockHouseRepository.VerifyAll();
         }
         [TestMethod]
         public void TestDeleteEmpty()
         {
-            mock.Setup(m => m.GetElements()).Returns(emptyHouses);
+            mockHouseRepository.Setup(m => m.GetElements()).Returns(emptyHouses);
 
             houseLogic.Delete();
 
-            mock.VerifyAll();
+            mockHouseRepository.VerifyAll();
         }
         [TestMethod]
         public void GetAll()
         {
-            mock.Setup(m => m.GetElements()).Returns(housesToReturn);
+            mockHouseRepository.Setup(m => m.GetElements()).Returns(housesToReturn);
 
             var result = houseLogic.GetAll();
 
@@ -88,7 +89,7 @@ namespace BusinessLogic.Tests.Test
         public void GetByTestOk()
         {
             House house = housesToReturn.First();
-            mock.Setup(m => m.Find(house.Id)).Returns(house);
+            mockHouseRepository.Setup(m => m.Find(house.Id)).Returns(house);
 
             House result = houseLogic.GetBy(house.Id);
 
@@ -99,7 +100,7 @@ namespace BusinessLogic.Tests.Test
         {
             House house = housesToReturn.First();
             House empty = null;
-            mock.Setup(m => m.Find(house.Id)).Returns(empty);
+            mockHouseRepository.Setup(m => m.Find(house.Id)).Returns(empty);
 
             var result = houseLogic.GetBy(house.Id);
 
@@ -109,9 +110,9 @@ namespace BusinessLogic.Tests.Test
         public void TestAddOk()
         {
             House house = housesToReturn.First();
-            mock2.Setup(m => m.ExistElement(house.TouristPointId)).Returns(true);
-            mock.Setup(m => m.Find(house.Id)).Returns(house);
-            mock.Setup(m => m.Add(house)).Returns(house);
+            mockTouristPointRepository.Setup(m => m.ExistElement(house.TouristPointId)).Returns(true);
+            mockHouseRepository.Setup(m => m.Find(house.Id)).Returns(house);
+            mockHouseRepository.Setup(m => m.Add(house)).Returns(house);
 
             House result = houseLogic.Add(house);
 
@@ -121,9 +122,9 @@ namespace BusinessLogic.Tests.Test
         public void TestAddValidateError()
         {
             House house = housesToReturn.First();
-            mock2.Setup(m => m.ExistElement(house.TouristPointId)).Returns(true);
-            mock.Setup(m => m.Find(house.Id)).Returns(house);
-            mock.Setup(m => m.Add(house)).Returns(house);
+            mockTouristPointRepository.Setup(m => m.ExistElement(house.TouristPointId)).Returns(true);
+            mockHouseRepository.Setup(m => m.Find(house.Id)).Returns(house);
+            mockHouseRepository.Setup(m => m.Add(house)).Returns(house);
 
             var result = houseLogic.Add(house);
 
@@ -134,22 +135,22 @@ namespace BusinessLogic.Tests.Test
         public void TestAddExistError()
         {
             House house = housesToReturn.First();
-            mock2.Setup(m => m.ExistElement(house.TouristPointId)).Returns(true);
+            mockTouristPointRepository.Setup(m => m.ExistElement(house.TouristPointId)).Returns(true);
             ArgumentException exception = new ArgumentException();
-            mock.Setup(m => m.Find(house.Id)).Returns(house);
-            mock.Setup(m => m.Add(house)).Throws(exception);
+            mockHouseRepository.Setup(m => m.Find(house.Id)).Returns(house);
+            mockHouseRepository.Setup(m => m.Add(house)).Throws(exception);
 
             var reuslt = houseLogic.Add(house);
 
-            mock.VerifyAll();
+            mockHouseRepository.VerifyAll();
         }
         [TestMethod]
         public void TestUpdateOk ()
         {
             House house = housesToReturn.First();
-            mock2.Setup(m => m.ExistElement(house.TouristPointId)).Returns(true);
-            mock.Setup(m => m.Find(house.Id)).Returns(house);
-            mock.Setup(m => m.Update(house.Id,house));
+            mockTouristPointRepository.Setup(m => m.ExistElement(house.TouristPointId)).Returns(true);
+            mockHouseRepository.Setup(m => m.Find(house.Id)).Returns(house);
+            mockHouseRepository.Setup(m => m.Update(house.Id,house));
 
             House result = houseLogic.Update(house.Id,house);
 
@@ -159,13 +160,13 @@ namespace BusinessLogic.Tests.Test
         public void TestUpdateValidateError()
         {
             House house = housesToReturn.First();
-            mock2.Setup(m => m.ExistElement(house.TouristPointId)).Returns(true);
-            mock.Setup(m => m.Find(house.Id)).Returns(house);
-            mock.Setup(m => m.Update(house.Id,house));
+            mockTouristPointRepository.Setup(m => m.ExistElement(house.TouristPointId)).Returns(true);
+            mockHouseRepository.Setup(m => m.Find(house.Id)).Returns(house);
+            mockHouseRepository.Setup(m => m.Update(house.Id,house));
 
             houseLogic.Update(house.Id,house);
 
-            mock.VerifyAll();
+            mockHouseRepository.VerifyAll();
         }
         [TestMethod]
         [ExpectedException(typeof(ArgumentException))]
@@ -173,31 +174,31 @@ namespace BusinessLogic.Tests.Test
         {
             House house = housesToReturn.First();
             house.TouristPointId = 1;
-            mock2.Setup(m => m.ExistElement(house.TouristPointId)).Returns(false);
+            mockTouristPointRepository.Setup(m => m.ExistElement(house.TouristPointId)).Returns(false);
 
             houseLogic.Update(house.Id, house);
 
-            mock.VerifyAll();
+            mockHouseRepository.VerifyAll();
         }
         [TestMethod]
         [ExpectedException(typeof(ArgumentException))]
         public void TestUpdateExistError()
         {
             House house = housesToReturn.First();
-            mock2.Setup(m => m.ExistElement(house.TouristPointId)).Returns(true);
+            mockTouristPointRepository.Setup(m => m.ExistElement(house.TouristPointId)).Returns(true);
             ArgumentException exception = new ArgumentException();
-            mock.Setup(m => m.Find(house.Id)).Returns(house);
-            mock.Setup(m => m.Update(house.Id,house)).Throws(exception);
+            mockHouseRepository.Setup(m => m.Find(house.Id)).Returns(house);
+            mockHouseRepository.Setup(m => m.Update(house.Id,house)).Throws(exception);
 
             houseLogic.Update(house.Id,house);
 
-            mock.VerifyAll();
+            mockHouseRepository.VerifyAll();
         }
         [TestMethod]
         public void TestExistOk()
         {
             House house = housesToReturn.First();
-            mock.Setup(m => m.ExistElement(house)).Returns(true);
+            mockHouseRepository.Setup(m => m.ExistElement(house)).Returns(true);
 
             var result = houseLogic.Exist(house);
 
@@ -207,7 +208,7 @@ namespace BusinessLogic.Tests.Test
         public void TestNotExistOk()
         {
             House house = housesToReturn.First();
-            mock.Setup(m => m.ExistElement(house)).Returns(false);
+            mockHouseRepository.Setup(m => m.ExistElement(house)).Returns(false);
 
             var result = houseLogic.Exist(house);
 
@@ -228,7 +229,7 @@ namespace BusinessLogic.Tests.Test
                 CantChildrens = 1,
                 CantBabys = 0,
             };
-            mock.Setup(m => m.GetByIdTouristPoint(houseSearch.TouristPointId)).Returns(houses);
+            mockHouseRepository.Setup(m => m.GetByIdTouristPoint(houseSearch.TouristPointId)).Returns(houses);
 
             IEnumerable<House> result = houseLogic.GetHousesBy(houseSearch);
 
@@ -246,7 +247,7 @@ namespace BusinessLogic.Tests.Test
                 CantChildrens = 1,
                 CantBabys = 0,
             };
-            mock.Setup(m => m.GetByIdTouristPoint(houseSearch.TouristPointId)).Returns(emptyHouses);
+            mockHouseRepository.Setup(m => m.GetByIdTouristPoint(houseSearch.TouristPointId)).Returns(emptyHouses);
 
             IEnumerable<House> result = houseLogic.GetHousesBy(houseSearch);
 
@@ -257,7 +258,7 @@ namespace BusinessLogic.Tests.Test
         public void TestValidateNotExistHouse()
         {
             House house = housesToReturn.First();
-            mock2.Setup(m => m.ExistElement(house.TouristPointId)).Returns(false);
+            mockTouristPointRepository.Setup(m => m.ExistElement(house.TouristPointId)).Returns(false);
 
             House result = houseLogic.Add(house);
 

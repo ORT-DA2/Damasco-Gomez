@@ -51,7 +51,7 @@ namespace BusinessLogic
                 ValidateTouristPoint(house.TouristPointId);
             }
             House houseBD = this.houseRepository.Find(id);
-            if(house.ImagesHouse.Count > 0) 
+            if(house.ImagesHouse != null && house.ImagesHouse.Count > 0) 
             {
                 houseBD.ImagesHouse.ForEach
                 (

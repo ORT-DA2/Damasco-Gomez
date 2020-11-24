@@ -14,10 +14,10 @@ namespace BusinessLogic.Tests.Test
     {
         private TouristPointLogic touristPointLogic;
         private List<CategoryTouristPoint> categoriesTouristPoints;
-        private Mock<ITouristPointRepository> mock;
-        private Mock<ICategoryRepository> mock2;
-        private Mock<IImageTouristPointRepository> mock3;
-        private Mock<IRegionRepository> mock4;
+        private Mock<ITouristPointRepository> mockTouristPointRepository;
+        private Mock<ICategoryRepository> mockCategoryRepository;
+        private Mock<IImageTouristPointRepository> mockImageTouristPointRepository;
+        private Mock<IRegionRepository> mockRegionRepository;
         private List<TouristPoint> touristPoints;
         private List<TouristPoint> touristPointsEmpty;
         [TestInitialize]
@@ -32,7 +32,7 @@ namespace BusinessLogic.Tests.Test
                     ImageTouristPoint = null,
                     Description = "one",
                     RegionId = 3,
-                    Region = null,
+                    Region = new Region(){Id = 3},
                     CategoriesTouristPoints = new List<CategoryTouristPoint>
                     { new CategoryTouristPoint()
                         {
@@ -70,21 +70,21 @@ namespace BusinessLogic.Tests.Test
                     ImageTouristPoint = null,
                     Description = "four",
                     RegionId = 2,
-                    Region = null,
+                    Region = new Region(){Id=2},
                     CategoriesTouristPoints = null,
                 }
             };
-            mock = new Mock<ITouristPointRepository>(MockBehavior.Strict);
-            mock2 = new Mock<ICategoryRepository>(MockBehavior.Strict);
-            mock3 = new Mock<IImageTouristPointRepository>(MockBehavior.Strict);
-            mock4 = new Mock<IRegionRepository>(MockBehavior.Strict);
-            touristPointLogic = new TouristPointLogic(mock.Object,mock2.Object,mock3.Object,mock4.Object);
+            mockTouristPointRepository = new Mock<ITouristPointRepository>(MockBehavior.Strict);
+            mockCategoryRepository = new Mock<ICategoryRepository>(MockBehavior.Strict);
+            mockImageTouristPointRepository = new Mock<IImageTouristPointRepository>(MockBehavior.Strict);
+            mockRegionRepository = new Mock<IRegionRepository>(MockBehavior.Strict);
+            touristPointLogic = new TouristPointLogic(mockTouristPointRepository.Object,mockCategoryRepository.Object,mockImageTouristPointRepository.Object,mockRegionRepository.Object);
             touristPointsEmpty = new List<TouristPoint>();
         }
         [TestMethod]
         public void TestGetAll()
         {
-            mock.Setup(m => m.GetElements()).Returns(touristPoints);
+            mockTouristPointRepository.Setup(m => m.GetElements()).Returns(touristPoints);
             
             var result = touristPointLogic.GetAll();
 
@@ -94,7 +94,7 @@ namespace BusinessLogic.Tests.Test
         public void TestGetEmptyGetAll()
         {
             List<TouristPoint> touristPointEmpty = new List<TouristPoint>();
-            mock.Setup(m => m.GetElements()).Returns(touristPointEmpty);
+            mockTouristPointRepository.Setup(m => m.GetElements()).Returns(touristPointEmpty);
 
             var result = touristPointLogic.GetAll();
 
@@ -103,7 +103,7 @@ namespace BusinessLogic.Tests.Test
         [TestMethod]
         public void GetAll()
         {
-            mock.Setup(m => m.GetElements()).Returns(touristPoints);
+            mockTouristPointRepository.Setup(m => m.GetElements()).Returns(touristPoints);
 
             var result = touristPointLogic.GetAll();
 
@@ -113,7 +113,7 @@ namespace BusinessLogic.Tests.Test
         public void TestGetBy()
         {
             TouristPoint touristPoint = touristPoints.First();
-            mock.Setup(m => m.Find(touristPoint.Id)).Returns(touristPoint);
+            mockTouristPointRepository.Setup(m => m.Find(touristPoint.Id)).Returns(touristPoint);
 
             var result = touristPointLogic.GetBy(touristPoint.Id);
 
@@ -124,7 +124,7 @@ namespace BusinessLogic.Tests.Test
         {
             TouristPoint touristPoint = touristPoints.First();
             TouristPoint empty = null;
-            mock.Setup(m => m.Find(touristPoint.Id)).Returns(empty);
+            mockTouristPointRepository.Setup(m => m.Find(touristPoint.Id)).Returns(empty);
 
             var result = touristPointLogic.GetBy(touristPoint.Id);
 
@@ -134,9 +134,10 @@ namespace BusinessLogic.Tests.Test
         public void TestAdd()
         {
             TouristPoint touristPoint = touristPoints.First();
-            mock.Setup(m => m.Add(touristPoint)).Returns(touristPoint);
-            mock2.Setup(m => m.Find(touristPoint.CategoriesTouristPoints.First().CategoryId))
+            mockTouristPointRepository.Setup(m => m.Add(touristPoint)).Returns(touristPoint);
+            mockCategoryRepository.Setup(m => m.Find(touristPoint.CategoriesTouristPoints.First().CategoryId))
                 .Returns(touristPoint.CategoriesTouristPoints.First().Category);
+            mockRegionRepository.Setup(m => m.Find(touristPoint.RegionId)).Returns(touristPoint.Region);
 
             TouristPoint touristPointToReturn = touristPointLogic.Add(touristPoint);
 
@@ -146,7 +147,8 @@ namespace BusinessLogic.Tests.Test
         public void TestAddValidateError()
         {
             TouristPoint touristPoint = touristPoints.Last();
-            mock.Setup(m => m.Add(touristPoint)).Returns(touristPoint);
+            mockTouristPointRepository.Setup(m => m.Add(touristPoint)).Returns(touristPoint);
+            mockRegionRepository.Setup(m => m.Find(touristPoint.RegionId)).Returns(touristPoint.Region);
 
             TouristPoint touristPointToReturn = touristPointLogic.Add(touristPoint);
 
@@ -158,54 +160,59 @@ namespace BusinessLogic.Tests.Test
         {
             TouristPoint touristPoint = touristPoints.Last();
             ArgumentException exception = new ArgumentException();
-            mock.Setup(m => m.Add(touristPoint)).Throws(exception);
+            mockTouristPointRepository.Setup(m => m.Add(touristPoint)).Throws(exception);
+            mockRegionRepository.Setup(m => m.Find(touristPoint.RegionId)).Returns(touristPoint.Region);
 
             touristPointLogic.Add(touristPoint);
 
-            mock.VerifyAll();
+            mockTouristPointRepository.VerifyAll();
         }
         [TestMethod]
         public void TestUpdateOk ()
         {
             TouristPoint touristPoint = touristPoints.First();
             Category category = new Category(){Id = 1};
-            mock.Setup(m => m.Update(touristPoint.Id,touristPoint));
-            mock2.Setup(m => m.Find(category.Id)).Returns(category);
-            mock.Setup(m => m.Find(touristPoint.Id)).Returns(touristPoint);
+            mockTouristPointRepository.Setup(m => m.Update(touristPoint.Id,touristPoint));
+            mockCategoryRepository.Setup(m => m.Find(category.Id)).Returns(category);
+            mockTouristPointRepository.Setup(m => m.Find(touristPoint.Id)).Returns(touristPoint);
+            mockRegionRepository.Setup(m => m.Find(touristPoint.RegionId)).Returns(touristPoint.Region);
 
             TouristPoint result =  touristPointLogic.Update(touristPoint.Id,touristPoint);
 
             Assert.AreEqual(result, touristPoint);
         }
         [TestMethod]
+        [ExpectedException(typeof(ArgumentException))]
         public void TestUpdateValidateError()
         {
             TouristPoint touristPoint = touristPoints.Last();
-            mock.Setup(m => m.Update(touristPoint.Id,touristPoint));
-            mock.Setup(m => m.Find(touristPoint.Id)).Returns(touristPoint);
+            mockTouristPointRepository.Setup(m => m.Update(touristPoint.Id,touristPoint));
+            mockTouristPointRepository.Setup(m => m.Find(touristPoint.Id)).Returns(touristPoint);
+            mockRegionRepository.Setup(m => m.Find(touristPoint.RegionId)).Throws(new ArgumentException());
 
             touristPointLogic.Update(touristPoint.Id,touristPoint);
 
-            mock.VerifyAll();
+            mockTouristPointRepository.VerifyAll();
         }
         [TestMethod]
         [ExpectedException(typeof(ArgumentException))]
         public void TestUpdateExistError()
         {
             TouristPoint touristPoint = touristPoints.Last();
+            touristPoint.RegionId = 0;
             ArgumentException exception = new ArgumentException();
-            mock.Setup(m => m.Update(touristPoint.Id,touristPoint)).Throws(exception);
-            mock.Setup(m => m.Find(touristPoint.Id)).Returns(touristPoint);
+            mockTouristPointRepository.Setup(m => m.Update(touristPoint.Id,touristPoint)).Throws(exception);
+            mockTouristPointRepository.Setup(m => m.Find(touristPoint.Id)).Returns(touristPoint);
 
             touristPointLogic.Update(touristPoint.Id,touristPoint);
 
-            mock.VerifyAll();
+            mockTouristPointRepository.VerifyAll();
         }
         [TestMethod]
         public void TestExistOk()
         {
             TouristPoint touristPoint = touristPoints.First();
-            mock.Setup(m => m.ExistElement(touristPoint)).Returns(true);
+            mockTouristPointRepository.Setup(m => m.ExistElement(touristPoint)).Returns(true);
 
             bool touristPointToReturn = touristPointLogic.Exist(touristPoint);
 
@@ -215,7 +222,7 @@ namespace BusinessLogic.Tests.Test
         public void TestNotExistOk()
         {
             TouristPoint touristPoint = touristPoints.First();
-            mock.Setup(m => m.ExistElement(touristPoint)).Returns(false);
+            mockTouristPointRepository.Setup(m => m.ExistElement(touristPoint)).Returns(false);
 
             bool touristPointToReturn = touristPointLogic.Exist(touristPoint);
 
@@ -225,35 +232,35 @@ namespace BusinessLogic.Tests.Test
         public void TestDeleteById()
         {
             int lengthTouristPoint = touristPoints.Count;
-            mock.Setup(m => m.Delete(touristPoints.First().Id));
+            mockTouristPointRepository.Setup(m => m.Delete(touristPoints.First().Id));
 
             touristPointLogic.Delete(touristPoints.First().Id);
 
-            mock.VerifyAll();
+            mockTouristPointRepository.VerifyAll();
         }
 
         [TestMethod]
         public void TestDelete()
         {
             int lengthTouristPoint = touristPoints.Count;
-            mock.Setup(m => m.GetElements()).Returns(touristPoints);
+            mockTouristPointRepository.Setup(m => m.GetElements()).Returns(touristPoints);
             foreach (TouristPoint t in touristPoints)
             {
-                mock.Setup(m => m.Delete(t.Id));
+                mockTouristPointRepository.Setup(m => m.Delete(t.Id));
             }
 
             touristPointLogic.Delete();
 
-            mock.VerifyAll();
+            mockTouristPointRepository.VerifyAll();
         }
         [TestMethod]
         public void TestDeleteEmpty()
         {
-            mock.Setup(m => m.GetElements()).Returns(touristPointsEmpty);
+            mockTouristPointRepository.Setup(m => m.GetElements()).Returns(touristPointsEmpty);
 
             touristPointLogic.Delete();
 
-            mock.VerifyAll();
+            mockTouristPointRepository.VerifyAll();
         }
     }
 }
