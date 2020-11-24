@@ -30,22 +30,20 @@ namespace WebApi.Controllers
         [HttpGet]
         public IActionResult GetHousesBy([FromQuery]HouseSearchModel houseSearchModel)
         {
-            IEnumerable<House> varRet ;
+            IEnumerable<House> houses ;
             IEnumerable<HouseBasicModel> basicModels;
             if(houseSearchModel.NotNull())
             {
                 houseSearchModel.CheckAllParameters();
                 HouseSearch houseSearch = houseSearchModel.ToEntity();
-                // Get houses by tourist point
-                varRet = this.houseLogic.GetHousesBy(houseSearch);
-                basicModels = varRet.
+                houses = this.houseLogic.GetHousesBy(houseSearch);
+                basicModels = houses.
                     Select(m => new HouseBasicModel(m,houseSearch)).ToList();
             }
             else
             {
-                //Get ALL houses
-                varRet = this.houseLogic.GetAll();
-                basicModels = varRet.Select( m => new HouseBasicModel(m));
+                houses = this.houseLogic.GetAll();
+                basicModels = houses.Select( m => new HouseBasicModel(m));
             }
             return Ok(basicModels);
         }

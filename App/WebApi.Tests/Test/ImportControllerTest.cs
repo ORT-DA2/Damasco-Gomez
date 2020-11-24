@@ -15,7 +15,7 @@ namespace WebApi.Tests.Test
         private ImportController controller ;
         private List<string> namesToReturn;
         [TestInitialize]
-        public void initVariables()
+        public void InitVariables()
         {
             houseToReturn = new List<House>()
             {
@@ -48,11 +48,6 @@ namespace WebApi.Tests.Test
         public void TestGetOk()
         {
             mock.Setup(m => m.GetNames()).Returns(namesToReturn);
-
-            // var result  = controller.Get();
-
-            // var okResult = result as OkObjectResult;
-            // mock.VerifyAll();
         }
 
         [TestMethod]

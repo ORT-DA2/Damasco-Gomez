@@ -20,7 +20,7 @@ namespace WebApi.Tests.Test
         private Mock<IReportLogic> mock;
         private ReportController controller ;
         [TestInitialize]
-        public void initVariables()
+        public void InitVariables()
         {
             reportsToReturn = new List<Report>()
             {

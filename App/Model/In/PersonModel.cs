@@ -1,9 +1,7 @@
-using System.Diagnostics.CodeAnalysis;
 using Domain;
 
 namespace Model.In
 {
-    [ExcludeFromCodeCoverage]
     public class PersonModel
     {
         public string Email {get; set;}

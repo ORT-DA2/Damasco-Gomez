@@ -16,11 +16,11 @@ namespace WebApi.Tests.Test
     {
         private List<State> statesToReturn;
         private List<State> statesToReturnEmpty;
-        private State stateId1;
-        private Mock<IStateLogic> mock;
-        private StateController controller ;
+        private State stateWithId1;
+        private Mock<IStateLogic> mockStateLogic;
+        private StateController controllerState ;
         [TestInitialize]
-        public void initVariables()
+        public void InitVariables()
         {
             statesToReturn = new List<State>()
             {
@@ -46,52 +46,52 @@ namespace WebApi.Tests.Test
                 }
             };
             statesToReturnEmpty = new List<State>();
-            stateId1 = statesToReturn.First();
-            mock = new Mock<IStateLogic>(MockBehavior.Strict);
-            controller = new StateController(mock.Object);
+            stateWithId1 = statesToReturn.First();
+            mockStateLogic = new Mock<IStateLogic>(MockBehavior.Strict);
+            controllerState = new StateController(mockStateLogic.Object);
         }
         [TestMethod]
         public void TestGetAllStatesOk()
         {
-            mock.Setup(m => m.GetAll()).Returns(statesToReturn);
+            mockStateLogic.Setup(m => m.GetAll()).Returns(statesToReturn);
             IEnumerable<StateBasicModel> statesBasic = statesToReturn.Select(m => new StateBasicModel(m));
 
-            var result = controller.Get();
+            var result = controllerState.Get();
 
             var okResult = result as OkObjectResult;
             var states = okResult.Value as IEnumerable<StateBasicModel>;
-            mock.VerifyAll();
+            mockStateLogic.VerifyAll();
             Assert.IsTrue(statesBasic.SequenceEqual(states));
         }
 
         [TestMethod]
         public void TestGetAllEmptyStates ()
         {
-            var mock = new Mock<IStateLogic>(MockBehavior.Strict);
-            mock.Setup(m => m.GetAll()).Returns(statesToReturnEmpty);
+            var mockStateLogic = new Mock<IStateLogic>(MockBehavior.Strict);
+            mockStateLogic.Setup(m => m.GetAll()).Returns(statesToReturnEmpty);
             IEnumerable<StateBasicModel> statesBasic = statesToReturnEmpty.Select(m => new StateBasicModel(m));
-            var controller = new StateController(mock.Object);
+            var controllerState = new StateController(mockStateLogic.Object);
 
-            var result = controller.Get();
+            var result = controllerState.Get();
 
             var okResult = result as OkObjectResult;
             var states = okResult.Value as IEnumerable<StateBasicModel>;
-            mock.VerifyAll();
+            mockStateLogic.VerifyAll();
             Assert.IsTrue(statesBasic.SequenceEqual(states));
 
         }
         [TestMethod]
         public void TestGetByOk()
         {
-            stateId1 = statesToReturn.First();
-            mock.Setup(m => m.GetBy(stateId1.Id)).Returns(stateId1);
-            StateBasicModel statesBasic = new StateBasicModel(stateId1);
+            stateWithId1 = statesToReturn.First();
+            mockStateLogic.Setup(m => m.GetBy(stateWithId1.Id)).Returns(stateWithId1);
+            StateBasicModel statesBasic = new StateBasicModel(stateWithId1);
 
-            var result = controller.GetBy(stateId1.Id);
+            var result = controllerState.GetBy(stateWithId1.Id);
 
             var okResult = result as OkObjectResult;
             var state = okResult.Value as StateBasicModel;
-            mock.VerifyAll();
+            mockStateLogic.VerifyAll();
             Assert.IsTrue(state.Equals(statesBasic));
         }
         [TestMethod]
@@ -100,12 +100,11 @@ namespace WebApi.Tests.Test
         {
             int id = 4;
             ArgumentException exist = new ArgumentException();
-            mock.Setup(m => m.GetBy(id)).Throws(exist);
+            mockStateLogic.Setup(m => m.GetBy(id)).Throws(exist);
 
-            var result = controller.GetBy(id);
+            var result = controllerState.GetBy(id);
 
-            mock.VerifyAll();
-            //Assert.IsInstanceOfType(result, typeof(BadRequestObjectResult));
+            mockStateLogic.VerifyAll();
         }
         
     }

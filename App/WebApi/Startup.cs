@@ -23,7 +23,6 @@ namespace WebApi
 
         public IConfiguration Configuration { get; }
 
-        // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddCors(options =>
@@ -45,11 +44,9 @@ namespace WebApi
             {
                 options.SwaggerDoc("v1", new OpenApiInfo { Title = "UrugayNaturalRequest", Version = "v1" });
                 options.IncludeXmlComments(xmlPath);
-                //options.OperationFilter<ExceptionFilter>();
             });
         }
 
-        // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
         {
             if (env.IsDevelopment())

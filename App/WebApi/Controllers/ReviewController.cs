@@ -25,20 +25,19 @@ namespace WebApi.Controllers
         [HttpGet]
         public IActionResult GetReviewsBy([FromQuery]int houseId)
         {
-            IEnumerable<Review> varRet ;
+            IEnumerable<Review> reviews ;
             IEnumerable<ReviewBasicModel> basicModels;
             if(houseId > 0)
             {
-                // Get reviews by houseId
-                varRet = this.reviewLogic.GetByHouseId(houseId);
-                basicModels = varRet.
+                reviews = this.reviewLogic.GetByHouseId(houseId);
+                basicModels = reviews.
                     Select(m => new ReviewBasicModel(m)).ToList();
             }
             else
             {
                 //Get ALL reviews
-                varRet = this.reviewLogic.GetAll();
-                basicModels = varRet.Select( m => new ReviewBasicModel(m));
+                reviews = this.reviewLogic.GetAll();
+                basicModels = reviews.Select( m => new ReviewBasicModel(m));
             }
             return Ok(basicModels);
         }

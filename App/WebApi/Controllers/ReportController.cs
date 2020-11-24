@@ -21,14 +21,14 @@ namespace WebApi.Controllers
         [HttpGet]
         public IActionResult GetHousesReportBy([FromQuery] ReportTouristPointModel touristPointReportModel)
         {
-            IEnumerable<Report> varRet;
+            IEnumerable<Report> reports;
             IEnumerable<ReportHousesBasicModel> basicModelsToReturn = new List<ReportHousesBasicModel>();
             if (touristPointReportModel.NotNull())
             {
                 touristPointReportModel.CheckAllParameters();
                 ReportTouristPoint reportTouristPoint = touristPointReportModel.ToEntity();
-                varRet = this.reportLogic.GetHousesReportBy(reportTouristPoint);
-                basicModelsToReturn = varRet.
+                reports = this.reportLogic.GetHousesReportBy(reportTouristPoint);
+                basicModelsToReturn = reports.
                     Select(m => new ReportHousesBasicModel(m)).ToList();
             }
             return Ok(basicModelsToReturn);

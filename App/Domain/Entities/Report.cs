@@ -8,7 +8,6 @@ namespace Domain.Entities
         public string NameHouse {get; set; }
         public  int CantBookings {get; set; }
 
-        [ExcludeFromCodeCoverage]
         public override bool Equals(object obj)
         {
             var result = false;

@@ -5,7 +5,6 @@ namespace Domain
     {
         public int Id {get; set; }
         public string Name {get; set;}
-        //public virtual List<TouristPoint> TouristPoints {get; set;}
         [ExcludeFromCodeCoverage]
         public override bool Equals(object obj)
         {

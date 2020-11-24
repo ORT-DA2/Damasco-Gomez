@@ -15,22 +15,22 @@ namespace WebApi.Tests.Test
     public class SessionControllerTest
     {
         private SessionUser sessionUser;
-        private Mock<ISessionLogic> mock;
+        private Mock<ISessionLogic> mockSessionLogic;
         private SessionController sessionController ;
         private PersonModel personModel;
         private Person person;
         private Guid newToken;
 
         [TestInitialize]
-        public void initVariables()
+        public void InitVariables()
         {
             PersonModel personModel = new PersonModel()
             {
                 Email = "yuli@gmail.com",
                 Password ="uruguaynomas",
             };
-            mock = new Mock<ISessionLogic>(MockBehavior.Strict);
-            sessionController = new SessionController(mock.Object);
+            mockSessionLogic = new Mock<ISessionLogic>(MockBehavior.Strict);
+            sessionController = new SessionController(mockSessionLogic.Object);
         }
         [TestMethod]
         public void TestLoginOk()
@@ -38,12 +38,12 @@ namespace WebApi.Tests.Test
             PersonModel personModel = new PersonModel {Email = "email", Password="psw"};
             Person person = personModel.ToEntity();
             Guid newToken = Guid.NewGuid();
-            mock.Setup(m => m.Login(person)).Returns(newToken);
+            mockSessionLogic.Setup(m => m.Login(person)).Returns(newToken);
             SessionBasicModel sessionModel = new SessionBasicModel(newToken);
 
             var result = sessionController.Post(personModel);
 
-            mock.VerifyAll();
+            mockSessionLogic.VerifyAll();
             var okResult = result as OkObjectResult;
             var session = okResult.Value as SessionBasicModel;
             Assert.IsNotNull(result);

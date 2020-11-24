@@ -1,12 +1,10 @@
 using System;
 using System.Diagnostics.CodeAnalysis;
 using Domain;
-using Domain.Entities;
 using Model.Out;
 
 namespace Model
 {
-    [ExcludeFromCodeCoverage]
     public class BookingDetailModel
     {
 

@@ -25,8 +25,8 @@ namespace WebApi.Controllers
         [HttpGet]
         public IActionResult Get()
         {
-            IEnumerable<Person> elementPerson = this.personLogic.GetAll();
-            IEnumerable<PersonBasicModel> personBasicModels = elementPerson.Select(m => new PersonBasicModel(m));
+            IEnumerable<Person> Persons = this.personLogic.GetAll();
+            IEnumerable<PersonBasicModel> personBasicModels = Persons.Select(m => new PersonBasicModel(m));
             return Ok(personBasicModels);
         }
 

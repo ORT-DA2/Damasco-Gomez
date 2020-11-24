@@ -18,11 +18,11 @@ namespace WebApi.Tests.Test
     {
         private List<Review> reviewsToReturn;
         private List<Review> reviewsToReturnEmpty;
-        private Review reviewId1;
-        private Mock<IReviewLogic> mock;
-        private ReviewController controller ;
+        private Review reviewWithId1;
+        private Mock<IReviewLogic> mockReviewLogic;
+        private ReviewController controllerReview ;
         [TestInitialize]
-        public void initVariables()
+        public void InitVariables()
         {
             reviewsToReturn = new List<Review>()
             {
@@ -64,21 +64,21 @@ namespace WebApi.Tests.Test
                 }
             };
             reviewsToReturnEmpty = new List<Review>();
-            reviewId1 = reviewsToReturn.First();
-            mock = new Mock<IReviewLogic>(MockBehavior.Strict);
-            controller = new ReviewController(mock.Object);
+            reviewWithId1 = reviewsToReturn.First();
+            mockReviewLogic = new Mock<IReviewLogic>(MockBehavior.Strict);
+            controllerReview = new ReviewController(mockReviewLogic.Object);
         }
         [TestMethod]
         public void TestGetAllReviewsOk()
         {
-            mock.Setup(m => m.GetAll()).Returns(reviewsToReturn);
+            mockReviewLogic.Setup(m => m.GetAll()).Returns(reviewsToReturn);
             IEnumerable<ReviewBasicModel> reviewModels = reviewsToReturn.Select(m => new ReviewBasicModel(m));
 
-            var result = controller.GetReviewsBy(0);
+            var result = controllerReview.GetReviewsBy(0);
 
             var okResult = result as OkObjectResult;
             var reviews = okResult.Value as IEnumerable<ReviewBasicModel>;
-            mock.VerifyAll();
+            mockReviewLogic.VerifyAll();
             Assert.IsTrue(reviewModels.SequenceEqual(reviews));
         }
 
@@ -86,27 +86,27 @@ namespace WebApi.Tests.Test
         public void TestGetAllReviewsVacia()
         {
             IEnumerable<ReviewBasicModel> basicModelList = new List<ReviewBasicModel>(){};
-            mock.Setup(m => m.GetAll()).Returns(reviewsToReturnEmpty);
+            mockReviewLogic.Setup(m => m.GetAll()).Returns(reviewsToReturnEmpty);
 
-            var result = controller.GetReviewsBy(0);
+            var result = controllerReview.GetReviewsBy(0);
 
             var okResult = result as OkObjectResult;
             var reviews = okResult.Value as IEnumerable<ReviewBasicModel>;
-            mock.VerifyAll();
+            mockReviewLogic.VerifyAll();
             Assert.IsTrue(basicModelList.SequenceEqual(reviews));
         }
         [TestMethod]
         public void TestGetByOk()
         {
             int id = 1;
-            mock.Setup(m => m.GetBy(id)).Returns(reviewId1);
-            ReviewDetailModel reviewDetailModel = new ReviewDetailModel(reviewId1);
+            mockReviewLogic.Setup(m => m.GetBy(id)).Returns(reviewWithId1);
+            ReviewDetailModel reviewDetailModel = new ReviewDetailModel(reviewWithId1);
 
-            var result = controller.GetBy(id);
+            var result = controllerReview.GetBy(id);
 
             var okResult = result as OkObjectResult;
             var reviews = okResult.Value as ReviewDetailModel;
-            mock.VerifyAll();
+            mockReviewLogic.VerifyAll();
             Assert.IsTrue(reviews.Equals(reviewDetailModel));
         }
         [TestMethod]
@@ -115,12 +115,11 @@ namespace WebApi.Tests.Test
         {
             int id = 4;
             ArgumentException exist = new ArgumentException();
-            mock.Setup(m => m.GetBy(id)).Throws(exist);
+            mockReviewLogic.Setup(m => m.GetBy(id)).Throws(exist);
 
-            var result = controller.GetBy(id);
+            var result = controllerReview.GetBy(id);
 
-            mock.VerifyAll();
-            //Assert.IsInstanceOfType(result, typeof(BadRequestObjectResult));
+            mockReviewLogic.VerifyAll();
         }
         [TestMethod]
         public void TestPostOk()
@@ -133,10 +132,10 @@ namespace WebApi.Tests.Test
                 Score = 1,
             };
             Review review = reviewModel.ToEntity();
-            mock.Setup(m => m.Add(reviewModel.ToEntity())).Returns(reviewModel.ToEntity());
+            mockReviewLogic.Setup(m => m.Add(reviewModel.ToEntity())).Returns(reviewModel.ToEntity());
             ReviewBasicModel reviewBasic = new ReviewBasicModel(review);
 
-            var result = controller.Post(reviewModel);
+            var result = controllerReview.Post(reviewModel);
 
             var okResult = result as CreatedAtRouteResult;
             Assert.IsNotNull(okResult);
@@ -155,11 +154,9 @@ namespace WebApi.Tests.Test
                 HouseId = 1,
                 Score = 1,
             };
-            mock.Setup(p => p.Add(reviewModel.ToEntity())).Throws(exist);
+            mockReviewLogic.Setup(p => p.Add(reviewModel.ToEntity())).Throws(exist);
 
-            var result = controller.Post(reviewModel);
-
-            //Assert.IsInstanceOfType(result, typeof(BadRequestObjectResult));
+            var result = controllerReview.Post(reviewModel);
         }
         [TestMethod]
         [ExpectedException(typeof(ArgumentException))]
@@ -173,11 +170,9 @@ namespace WebApi.Tests.Test
                 HouseId = 1,
                 Score = 1,
             };
-            mock.Setup(p => p.Add(reviewModel.ToEntity())).Throws(exist);
+            mockReviewLogic.Setup(p => p.Add(reviewModel.ToEntity())).Throws(exist);
 
-            var result = controller.Post(reviewModel);
-
-            //Assert.IsInstanceOfType(result, typeof(BadRequestObjectResult));
+            var result = controllerReview.Post(reviewModel);
         }
         [TestMethod]
         [ExpectedException(typeof(Exception))]
@@ -191,11 +186,9 @@ namespace WebApi.Tests.Test
                 HouseId = 1,
                 Score = 1,
             };
-            mock.Setup(p => p.Add(reviewModel.ToEntity())).Throws(exist);
+            mockReviewLogic.Setup(p => p.Add(reviewModel.ToEntity())).Throws(exist);
 
-            var result = controller.Post(reviewModel);
-
-            //Assert.IsInstanceOfType(result, typeof(BadRequestObjectResult));
+            var result = controllerReview.Post(reviewModel);
         }
         [TestMethod]
         public void TestPutOk()
@@ -209,10 +202,10 @@ namespace WebApi.Tests.Test
             };
             Review review = reviewModel.ToEntity();
             review.House = new House(){Id = 1};
-            mock.Setup(m => m.Update(review.Id,review)).Returns(review);
+            mockReviewLogic.Setup(m => m.Update(review.Id,review)).Returns(review);
             ReviewBasicModel reviewBasic = new ReviewBasicModel(review);
 
-            var result = controller.Put(review.Id, reviewModel);
+            var result = controllerReview.Put(review.Id, reviewModel);
 
             var okResult = result as CreatedAtRouteResult;
             Assert.IsNotNull(okResult.Value);
@@ -226,12 +219,11 @@ namespace WebApi.Tests.Test
             ReviewModel reviewModel = new ReviewModel();
             Review review = reviewModel.ToEntity();
             Exception exist = new ArgumentException();
-            mock.Setup(p => p.Update(review.Id,review)).Throws(exist);
+            mockReviewLogic.Setup(p => p.Update(review.Id,review)).Throws(exist);
 
-            var result = controller.Put(review.Id, reviewModel);
+            var result = controllerReview.Put(review.Id, reviewModel);
 
-            mock.VerifyAll();
-            //Assert.IsInstanceOfType(result, typeof(BadRequestObjectResult));
+            mockReviewLogic.VerifyAll();
         }
         [TestMethod]
         [ExpectedException(typeof(Exception))]
@@ -246,20 +238,18 @@ namespace WebApi.Tests.Test
                 Score = 1,
             };
             Review review = reviewModel.ToEntity();
-            mock.Setup(p => p.Update(review.Id,review)).Throws(exist);
+            mockReviewLogic.Setup(p => p.Update(review.Id,review)).Throws(exist);
 
-            var result = controller.Put(review.Id,reviewModel);
-
-            //Assert.IsInstanceOfType(result, typeof(BadRequestObjectResult));
+            var result = controllerReview.Put(review.Id,reviewModel);
         }
         [TestMethod]
         public void TestDeleteWithId()
         {
             Review review = reviewsToReturn.First();
-            mock.Setup(m => m.GetBy(review.Id)).Returns(review);
-            mock.Setup(mock=> mock.Delete(review.Id));
+            mockReviewLogic.Setup(m => m.GetBy(review.Id)).Returns(review);
+            mockReviewLogic.Setup(mockReviewLogic=> mockReviewLogic.Delete(review.Id));
 
-            var result = controller.Delete(review.Id);
+            var result = controllerReview.Delete(review.Id);
 
             Assert.IsNotNull(result);
         }
@@ -268,20 +258,18 @@ namespace WebApi.Tests.Test
         {
             Review review = reviewsToReturn.First();
             Review reviewNull = null;
-            mock.Setup(m => m.GetBy(review.Id)).Returns(reviewNull);
-            mock.Setup(mock=> mock.Delete(review.Id));
+            mockReviewLogic.Setup(m => m.GetBy(review.Id)).Returns(reviewNull);
+            mockReviewLogic.Setup(mockReviewLogic=> mockReviewLogic.Delete(review.Id));
 
-            var result = controller.Delete(review.Id);
-
-            //Assert.IsInstanceOfType(result,typeof(NotFoundResult));
+            var result = controllerReview.Delete(review.Id);
         }
 
         [TestMethod]
         public void TestDelete()
         {
-            mock.Setup(mock=> mock.Delete());
+            mockReviewLogic.Setup(mockReviewLogic=> mockReviewLogic.Delete());
 
-            var result = controller.Delete();
+            var result = controllerReview.Delete();
 
             Assert.IsNotNull(result);
         }
