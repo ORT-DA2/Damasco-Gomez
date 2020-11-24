@@ -16,7 +16,7 @@ namespace Domain.Entities
         }
         public void Update(ImageTouristPoint image)
         {
-            if (image.Name !=null) 
+            if (image.Name != null) 
             {
                 this.Name = image.Name;
                 this.Extention = GetExtention(image.Name);

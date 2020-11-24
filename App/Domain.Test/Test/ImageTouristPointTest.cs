@@ -1,3 +1,4 @@
+using System;
 using Domain.Entities;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 
@@ -24,15 +25,33 @@ namespace Domain.Test.Test
             Assert.AreEqual(newImage.Name, image.Name);
         }
         [TestMethod]
-        public void TestUpdateNameEmpty()
+        public void TestUpdateNameNull()
         {
-            image = new ImageTouristPoint("Name");
+            image = new ImageTouristPoint("Name.png");
             string nameShouldBe = image.Name;
-            ImageTouristPoint newImage = new ImageTouristPoint("");
+            ImageTouristPoint newImage = new ImageTouristPoint("NameTwo.png"){Name = null};
 
             image.Update(newImage);
 
             Assert.AreEqual(nameShouldBe, image.Name);
+        }
+        [TestMethod]
+        public void TestGetExtention()
+        {
+            string nameImage = "otherImage.png";
+            string extention = "png";
+
+            ImageTouristPoint newImage = new ImageTouristPoint(nameImage);
+
+            Assert.AreEqual(newImage.Extention,extention);
+        }
+        [TestMethod]
+        [ExpectedException(typeof(ArgumentException))]
+        public void TestGetExtentionFail()
+        {
+            string nameImage = "otherImage";
+
+            ImageTouristPoint newImage = new ImageTouristPoint(nameImage);
         }
     }
 }

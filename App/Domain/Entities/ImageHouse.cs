@@ -18,7 +18,7 @@ namespace Domain.Entities
         }
         public void Update(ImageHouse element)
         {
-            if(element.Name != "") 
+            if(element.Name != null) 
             { 
                 this.Name = element.Name;
                 this.Extention = GetExtention(element.Name);
