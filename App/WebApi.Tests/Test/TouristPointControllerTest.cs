@@ -120,11 +120,11 @@ namespace WebApi.Tests
         public void TestGetAllTouristPointsOk()
         {
             mock.Setup(m => m.GetAll()).Returns(touristPointsToReturn);
-            List<TouristPointBasicInfoModel> modelList = new List<TouristPointBasicInfoModel>();
+            List<TouristPointBasicInfoModel> modelListTouristPoints = new List<TouristPointBasicInfoModel>();
             foreach (var touristPoint in touristPointsToReturn)
             {
-                var model = new TouristPointBasicInfoModel(touristPoint);
-                modelList.Add(model);
+                var modelTouristPoint = new TouristPointBasicInfoModel(touristPoint);
+                modelListTouristPoints.Add(modelTouristPoint);
             }
 
             var result = controller.Get();
@@ -132,7 +132,7 @@ namespace WebApi.Tests
             var touristPoints = okResult.Value as IEnumerable<TouristPointBasicInfoModel>;
 
             mock.VerifyAll();
-            Assert.IsTrue(modelList.SequenceEqual(touristPoints));
+            Assert.IsTrue(modelListTouristPoints.SequenceEqual(touristPoints));
         }
 
         [TestMethod]
