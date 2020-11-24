@@ -142,14 +142,14 @@ namespace WebApi.Tests
                 Name = "Name Booking",
                 Email = "Email ",
                 HouseId = 1,
-                StateId = 1,
                 Price = 100,
                 CheckIn = DateTime.Today,
                 CheckOut = DateTime.Today
             };
             Booking booking = bookingModel.ToEntity();
-            mockBookingLogic.Setup(m => m.Add(bookingModel.ToEntity(true))).Returns(bookingModel.ToEntity());
-            BookingDetailModel bookingBasic = new BookingDetailModel(booking);
+            booking.State = new State() {Id = 1};
+            booking.House = new House() {Id = 1};
+            mockBookingLogic.Setup(m => m.Add(bookingModel.ToEntity(true))).Returns(booking);
 
             var result = controllerBooking.Post(bookingModel);
 
@@ -227,8 +227,9 @@ namespace WebApi.Tests
                 CheckOut = DateTime.Today
             };
             Booking booking = bookingModel.ToEntity(false);
+            booking.House = new House() {Id = 1};
+            booking.State = new State(){Id = 1};
             mockBookingLogic.Setup(m => m.Update(booking.Id,booking)).Returns(booking);
-            BookingDetailModel bookingBasic = new BookingDetailModel(booking);
 
             var result = controllerBooking.Put(booking.Id, bookingModel);
 
