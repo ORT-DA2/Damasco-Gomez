@@ -22,7 +22,7 @@ namespace WebApi.Test
         private RegionController controller ;
 
         [TestInitialize]
-        public void initVariables()
+        public void InitVariables()
         {
             regionsToReturn = new List<Region>()
             {

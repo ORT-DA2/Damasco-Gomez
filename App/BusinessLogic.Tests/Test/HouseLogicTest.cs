@@ -19,7 +19,7 @@ namespace BusinessLogic.Tests.Test
         private Mock<ITouristPointRepository> mock2;
         private Mock<IImageHouseRepository> mock3;
         [TestInitialize]
-        public void initVariables()
+        public void InitVariables()
         {
             housesToReturn = new List<House>()
             {

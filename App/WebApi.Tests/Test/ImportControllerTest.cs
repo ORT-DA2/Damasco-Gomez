@@ -15,7 +15,7 @@ namespace WebApi.Tests.Test
         private ImportController controller ;
         private List<string> namesToReturn;
         [TestInitialize]
-        public void initVariables()
+        public void InitVariables()
         {
             houseToReturn = new List<House>()
             {

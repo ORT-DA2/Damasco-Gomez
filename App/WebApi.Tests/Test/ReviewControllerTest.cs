@@ -22,7 +22,7 @@ namespace WebApi.Tests.Test
         private Mock<IReviewLogic> mock;
         private ReviewController controller ;
         [TestInitialize]
-        public void initVariables()
+        public void InitVariables()
         {
             reviewsToReturn = new List<Review>()
             {

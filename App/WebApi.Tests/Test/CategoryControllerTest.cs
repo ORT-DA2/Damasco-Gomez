@@ -22,7 +22,7 @@ namespace WebApi.Test
         private Mock<ICategoryLogic> mock;
         private CategoryController controller ;
         [TestInitialize]
-        public void initVariables()
+        public void InitVariables()
         {
             categoriesToReturn = new List<Category>()
             {

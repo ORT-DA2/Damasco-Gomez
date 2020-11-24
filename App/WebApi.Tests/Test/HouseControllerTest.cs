@@ -23,7 +23,7 @@ namespace WebApi.Tests
         private HouseController controller ;
         private HouseSearchModel houseSearchModelNull;
         [TestInitialize]
-        public void initVariables()
+        public void InitVariables()
         {
             housesToReturn = new List<House>()
             {

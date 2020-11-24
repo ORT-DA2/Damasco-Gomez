@@ -21,7 +21,7 @@ namespace WebApi.Tests
         private Mock<IPersonLogic> mock;
         private PersonController controller ;
         [TestInitialize]
-        public void initVariables()
+        public void InitVariables()
         {
             personsToReturn = new List<Person>()
             {

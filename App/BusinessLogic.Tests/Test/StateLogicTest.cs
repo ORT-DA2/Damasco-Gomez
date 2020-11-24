@@ -17,7 +17,7 @@ namespace BusinessLogic.Tests.Test
         private Mock<IStateRepository> mock;
 
         [TestInitialize]
-        public void initVariables()
+        public void InitVariables()
         {
             statesToReturn = new List<State>()
             {

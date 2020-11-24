@@ -22,7 +22,7 @@ namespace WebApi.Tests
         private Mock<ITouristPointLogic> mock;
         private TouristPointController controller ;
         [TestInitialize]
-        public void initVariables()
+        public void InitVariables()
         {
             touristPointsToReturn = new List<TouristPoint>()
             {

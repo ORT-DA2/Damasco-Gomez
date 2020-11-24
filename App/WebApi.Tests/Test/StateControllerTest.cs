@@ -20,7 +20,7 @@ namespace WebApi.Tests.Test
         private Mock<IStateLogic> mock;
         private StateController controller ;
         [TestInitialize]
-        public void initVariables()
+        public void InitVariables()
         {
             statesToReturn = new List<State>()
             {

@@ -21,7 +21,7 @@ namespace WebApi.Tests
         private Mock<IBookingLogic> mock;
         private BookingController controller ;
         [TestInitialize]
-        public void initVariables()
+        public void InitVariables()
         {
             bookingsToReturn = new List<Booking>()
             {

@@ -22,7 +22,7 @@ namespace WebApi.Tests.Test
         private Guid newToken;
 
         [TestInitialize]
-        public void initVariables()
+        public void InitVariables()
         {
             PersonModel personModel = new PersonModel()
             {

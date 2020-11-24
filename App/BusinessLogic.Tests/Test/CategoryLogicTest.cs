@@ -20,7 +20,7 @@ namespace BusinessLogic.Tests.Test
         private List<Category> categoriesToReturn;
 
         [TestInitialize]
-        public void initVariables()
+        public void InitVariables()
         {
             categoriesToReturn = new List<Category>()
             {

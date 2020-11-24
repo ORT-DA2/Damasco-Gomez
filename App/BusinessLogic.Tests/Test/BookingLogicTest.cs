@@ -22,7 +22,7 @@ namespace BusinessLogic.Tests.Test
         private House houseId1;
 
         [TestInitialize]
-        public void initVariables()
+        public void InitVariables()
         {
             bookingsToReturn = new List<Booking>()
             {
