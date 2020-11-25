@@ -10,25 +10,42 @@ import { environment } from 'src/environments/environment';
 })
 export class UserProfileComponent implements OnInit {
   public user: PersonBasicInfo = {} as PersonBasicInfo;
+  public persons: PersonBasicInfo[] = [];
   public id: Number = 0;
   public errorMessageBackend: string = '';
   public email : string = '';
   public updateMessage: string = '';
+  public errorMessageEndpoint:string = '';
 
   constructor(private userService: PersonService) { }
 
   ngOnInit() {
     this.email = localStorage.getItem('email');
-    this.userService.getAll().subscribe(
-      personResponse =>
-        this.getAll(personResponse), (error: string) => this.showError(error)
+    this.userService.getAll()
+    .subscribe(
+      personResponse => {
+        this.persons = personResponse;
+        this.getPersonWithMail();
+        localStorage.setItem('name',this.user.name);
+      },
+      catchError => {
+        this.errorMessageEndpoint = catchError.error + ', fix it and try again';
+      }
     );
   }
 
   updateData() {
     const basicInfo = this.createModel(this.user);
-    this.userService.update(this.user.id, basicInfo).subscribe(
-      responseUpdate => console.log(responseUpdate)// this.updateMessage = 'Update sucessfully!'
+    this.userService.update(this.user.id, basicInfo)
+    .subscribe(
+      personResponse => {
+        this.user = personResponse;
+        localStorage.setItem('name',this.user.name);
+        this.updateMessage = 'Update sucessfully!'
+      },
+      catchError => {
+        this.errorMessageEndpoint = catchError.error + ', fix it and try again';
+      }
     );
   }
 
@@ -40,11 +57,7 @@ export class UserProfileComponent implements OnInit {
     return modelBase;
   }
 
-  private getAll(personResponse: PersonBasicInfo[]){
-    this.user = personResponse.find( x => x.email == this.email);
-  }
-
-  private showError(message: string){
-    this.errorMessageBackend = message;
+  private getPersonWithMail(){
+    this.user = this.persons.find( x => x.email == this.email);
   }
 }

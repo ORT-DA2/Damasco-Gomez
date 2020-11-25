@@ -33,14 +33,16 @@
                 <div class="col-lg-6">
                   <div class="form-group">
                     <label class="form-control-label" for="input-username">Username</label>
-                    <input type="text" id="input-username" class="form-control form-control-alternative" placeholder="Username" value={{user.name}}>
+                    <input type="text" id="input-username" class="form-control form-control-alternative"
+                      [(ngModel)]="user.name" name="name"
+                      placeholder="Username" value={{user.name}}>
                   </div>
                 </div>
                 <div class="col-lg-6">
                   <div class="form-group">
                     <label class="form-control-label" for="input-email">Email address</label>
                     <input type="email" id="input-email" class="form-control form-control-alternative"
-                      value={{user.email}}
+                      value={{user.email}} [(ngModel)]="user.email" name="email"
                       placeholder="jesse@example.com">
                   </div>
                 </div>
@@ -49,8 +51,13 @@
                     <label class="form-control-label" for="input-password">Password</label>
                     <input type="password" id="input-password"
                       value={{user.password}}
+                      [(ngModel)]="user.password" name="password"
                       class="form-control form-control-alternative">
                   </div>
+                </div>
+                <div class="col-12">
+                  <p class="errorMessage" id="error-message">{{errorMessage}}</p>
+                  <p class="successMessage" id="succes-messages">{{updateMessage}}</p>
                 </div>
               </div>
             </div>
