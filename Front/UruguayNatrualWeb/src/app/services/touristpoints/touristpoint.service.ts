@@ -5,6 +5,7 @@ import { catchError } from 'rxjs/operators';
 import { environment } from 'src/environments/environment';
 import { TouristPointsBasicInfo } from 'src/app/models/touristpoint/touristpoint-base-info';
 import { TouristPointDetailInfo } from 'src/app/models/touristpoint/tourist-point-detail-info';
+import { TouristPointInInfo } from 'src/app/models/touristpoint/tourist-point-in-info';
 
 @Injectable({
   providedIn: 'root'
@@ -26,13 +27,13 @@ export class TouristPointsService {
     return httpRequest;
   }
 
-  add(body):Observable<any>{
+  add(body):Observable<TouristPointDetailInfo>{
     const headers = new HttpHeaders({
       'Content-Type': 'application/json',
       'Authorization':  localStorage.getItem('token')
     });
     let options = { headers: headers };
-    var httpRequest = this.http.post<any>(this.uri , body, options)
+    var httpRequest = this.http.post<TouristPointDetailInfo>(this.uri , body, options)
       .pipe(catchError(this.handleError));
     return httpRequest;
   }
@@ -49,13 +50,13 @@ export class TouristPointsService {
     return httpRequest;
   }
 
-  update(id, body):Observable<any>{
+  update(id, body):Observable<TouristPointDetailInfo>{
     const headers = new HttpHeaders({
       'Content-Type': 'application/json',
       'Authorization':  localStorage.getItem('token')
     });
     let options = { headers: headers };
-    var httpRequest = this.http.put<any>(this.uri + '/' + id, body, options)
+    var httpRequest = this.http.put<TouristPointDetailInfo>(this.uri + '/' + id, body, options)
       .pipe(catchError(this.handleError));
     return httpRequest;
   }

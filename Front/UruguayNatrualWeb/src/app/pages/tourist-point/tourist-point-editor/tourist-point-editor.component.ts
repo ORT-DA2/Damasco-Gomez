@@ -1,15 +1,14 @@
-import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { CategoryBasicInfo } from 'src/app/models/category/category-basic-info';
 import { ImageTouristPointBasic } from 'src/app/models/imagetouristpoint/Imagetourispoint-base-info';
 import { RegionBasicInfo } from 'src/app/models/regions/region-base-info';
 import { TouristPointDetailInfo } from 'src/app/models/touristpoint/tourist-point-detail-info';
-import { TouristPointsBasicInfo } from 'src/app/models/touristpoint/touristpoint-base-info';
 import { CategoryService } from 'src/app/services/categories/category.service';
 import { RegionService } from 'src/app/services/regions/region.service';
 import { TouristPointsService } from 'src/app/services/touristpoints/touristpoint.service';
 import { environment } from 'src/environments/environment';
-import {HttpClient, HttpClientModule} from '@angular/common/http';
+import { TouristPointInInfo } from 'src/app/models/touristpoint/tourist-point-in-info';
 
 @Component({
   selector: 'app-tourist-point-editor',
@@ -18,17 +17,18 @@ import {HttpClient, HttpClientModule} from '@angular/common/http';
 })
 export class TouristPointEditorComponent implements OnInit {
   public touristPoint: TouristPointDetailInfo = {} as TouristPointDetailInfo;
+  public touristPointIn: TouristPointInInfo = {} as TouristPointInInfo;
   public regions: RegionBasicInfo[] = [];
   public categories: CategoryBasicInfo[] = [];
   public touristPointId: number = 0;
   public regionName: string = "";
-  public imageName : string;
+  public image: ImageTouristPointBasic = {} as ImageTouristPointBasic;
+  public imageName: string;
   public categoriesName: string[] = [];
-  public sourceImage : string = environment.imageURL;
-  public existTP : boolean =false;
-  public existImageName : boolean =false;
-  public selectedFile : File= null;
-  public showImageSelector : boolean;
+  public sourceImage: string = '';
+  public existTP: boolean = false;
+  public selectedFile: File = null;
+  public showImageSelector: boolean;
   categoryNew: CategoryBasicInfo = {} as CategoryBasicInfo;
   public errorMessageBackend: string = '';
   public updateMessage: string = '';
@@ -47,106 +47,120 @@ export class TouristPointEditorComponent implements OnInit {
     this.touristPoint.categories = [];
     this.existTP = this.isExistentTouristPoint();
     if (this.existTP) {
-      this.touristPointService.getBy(this.touristPointId).subscribe(
-        touristPointResponse =>
-          this.getBy(touristPointResponse), (error: string) => this.showError(error));
+      this.touristPointService.getBy(this.touristPointId)
+        .subscribe(
+          touristPointResponse => {
+            this.getBy(touristPointResponse);
+          },
+          catchError => {
+            this.errorMessageBackend = catchError.error + ', fix it and try again';
+          }
+        );
     }
-    this.regionService.getAll().subscribe(
-      regionResponse =>
-        this.getAllRegions(regionResponse), (error: string) =>this.showError(error));
-    this.categoryService.getAll().subscribe(
-      categoryResponse =>
-        this.getAllCategories(categoryResponse), (error: string) =>this.showError(error));
+    this.regionService.getAll()
+      .subscribe(
+        regionResponse => {
+          this.getAllRegions(regionResponse);
+        },
+        catchError => {
+          this.errorMessageBackend = catchError.error + ', fix it and try again';
+        }
+      );
+    this.categoryService.getAll()
+      .subscribe(
+        categoryResponse => {
+          this.getAllCategories(categoryResponse);
+        },
+        catchError => {
+          this.errorMessageBackend = catchError.error + ', fix it and try again';
+        }
+      );
 
   }
 
   private isExistentTouristPoint(): boolean {
     return !isNaN(this.touristPointId);
   }
-  private getBy(touristPointResponse: TouristPointDetailInfo){
+  private getBy(touristPointResponse: TouristPointDetailInfo) {
     this.touristPoint = touristPointResponse;
-    this.imageName = this.sourceImage + '/' + this.touristPoint.image.name;
-    this.existImageName =  true;
-    this.categoriesName = this.touristPoint.categories? this.touristPoint.categories.map(category => category.name)
+    this.image = this.touristPoint.image;
+    this.sourceImage = environment.imageURL + this.touristPoint.image.name;
+    this.categoriesName = this.touristPoint.categories ? this.touristPoint.categories.map(category => category.name)
       : [];
   }
-  onSelectFile (event){
-
-        this.selectedFile = event.target.files[0];
-        this.imageName =  this.selectedFile.name;
+  onSelectFile(event) {
+    this.selectedFile = event.target.files[0];
+    this.imageName = this.selectedFile.name;
+    this.sourceImage = environment.imageURL + this.imageName;
   }
 
 
-  private getAllRegions(regionResponse: RegionBasicInfo[]){
+  private getAllRegions(regionResponse: RegionBasicInfo[]) {
     this.regions = regionResponse;
     const regionWithId = this.regions.find(x => x.id === this.touristPoint.regionId);
     this.regionName = regionWithId ? regionWithId.name : "";
   }
-  private getAllCategories(categoryResponse: CategoryBasicInfo[]){
+  private getAllCategories(categoryResponse: CategoryBasicInfo[]) {
     this.categories = categoryResponse;
   }
-  addTouristPoint(touristPoint: TouristPointDetailInfo) {
-    const newTouristPoint = {
-      ...touristPoint,
-      image: this.imageName
-    };
-    const basicInfo = this.createModel(newTouristPoint);
-    this.touristPointService.add(basicInfo).subscribe(
-      responseAdd => {
-        this.touristPointId = responseAdd.id;
-        this.router.navigateByUrl(`/tourist-points/tourist-point-editor/${this.touristPointId}`);
-        this.existTP = true;
-        this.existImageName = true;
-      }
-    );
+  addTouristPoint() {
+    var touristPoint = this.touristPoint;
+    const basicInfo = this.createModel(touristPoint);
+    this.touristPointService.add(basicInfo)
+      .subscribe(
+        responseResponse => {
+          this.touristPointId = responseResponse.id;
+          this.sourceImage = environment.imageURL + responseResponse.image.name;
+          this.router.navigateByUrl(`/tourist-points/tourist-point-editor/${this.touristPointId}`);
+          this.existTP = true;
+        },
+        catchError => {
+          this.errorMessageBackend = catchError.error + ', fix it and try again';
+        }
+      );
   }
-  updateData(touristPoint : TouristPointDetailInfo){
-    const newTouristPoint = {
-      ...touristPoint,
-      image: this.imageName
-    };
-    const basicInfo = this.createModel(newTouristPoint);
-    this.touristPointService.update(this.touristPointId, basicInfo).subscribe(
-      responseUpdate =>
-        this.updateMessage = 'Update is done!'
-    );
+  updateData() {
+    var touristPoint = this.touristPoint;
+    const basicInfo = this.createModel(touristPoint);
+    this.touristPointService.update(this.touristPointId, basicInfo)
+      .subscribe(
+        responseResponse => {
+          this.sourceImage = environment.imageURL + responseResponse.image.name;
+          this.updateMessage = 'Update is done!';
+        },
+        catchError => {
+          this.errorMessageBackend = catchError.error + ', fix it and try again';
+        }
+      );
   }
 
-  onChangeRegionName(event: any){
+  onChangeRegionName(event: any) {
     this.touristPoint.region = this.regions.find(x => this.regionName == x.name);
     this.touristPoint.regionId = this.touristPoint.region.id;
   }
-  OnChangeImage()
-  {
 
-    this.showImageSelector = true;
-  }
-
-  onChangeCategoryName(categoryName: string, index: number){
+  onChangeCategoryName(categoryName: string, index: number) {
     var categoryId = this.categories.find(x => x.name == categoryName);
     this.touristPoint.categories[index] = categoryId;
   }
 
-  addCategory(){
+  addCategory() {
     this.touristPoint.categories = this.touristPoint.categories.concat(this.categoryNew);
   }
 
-  deleteCategory(){
-    this.touristPoint.categories.splice(-1,1);
-    this.categoriesName.splice(-1,1);
+  deleteCategory() {
+    this.touristPoint.categories.splice(-1, 1);
+    this.categoriesName.splice(-1, 1);
   }
 
-  private createModel(touristPoint : any) : TouristPointsBasicInfo{
-    let modelBase : TouristPointsBasicInfo = {} as TouristPointsBasicInfo ;
-    modelBase.categories = touristPoint.categories.map(x=> x.id);
+  private createModel(touristPoint: any): TouristPointInInfo {
+    let modelBase: TouristPointInInfo = {} as TouristPointInInfo;
+    modelBase.categories = touristPoint.categories.map(x => x.id);
     modelBase.description = touristPoint.description;
-    modelBase.image = touristPoint.image;
+    modelBase.image = this.imageName;
     modelBase.name = touristPoint.name;
     modelBase.regionId = touristPoint.regionId;
     return modelBase;
-  }
-  private showError(message: string){
-    this.errorMessageBackend = message;
   }
 
 }
