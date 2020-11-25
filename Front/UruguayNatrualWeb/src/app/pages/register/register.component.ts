@@ -23,7 +23,7 @@ export class RegisterComponent implements OnInit {
   ngOnInit() {
   }
 
-  onSubmit(form: NgForm) {
+  createAccount() {
     debugger;
     this.personService.newUser(this.user).
       subscribe(
@@ -37,10 +37,10 @@ export class RegisterComponent implements OnInit {
   }
 
   loginNewUser(user: any) {
+    debugger;
     this.sessionService.login(this.user).
     subscribe(
       response => {
-        debugger;
         this.router.navigateByUrl('/user-profile');
       },
       catchError => {
