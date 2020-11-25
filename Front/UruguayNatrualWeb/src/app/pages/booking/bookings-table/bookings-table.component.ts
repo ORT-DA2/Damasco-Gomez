@@ -15,25 +15,32 @@ export class BookingsTableComponent implements OnInit {
   constructor(private bookingService: BookingService) { }
 
   ngOnInit(): void {
-    this.bookingService.getAll().subscribe(
-      bookingResponse =>
-        this.getAll(bookingResponse), (error: string) => this.showError(error));
+    this.bookingService.getAll()
+    .subscribe(
+      bookingResponse => {
+        this.getAll(bookingResponse);
+      },
+      catchError => {
+        this.errorBackend = catchError.error + ', fix it and try again';
+      }
+    );
   }
 
   private getAll(bookingResponse: BookingBasicInfo[]){
     this.bookings = bookingResponse;
   }
 
-  private showError(message: string){
-    this.errorBackend = message;
-  }
-
   private delete(event) {
     this.id = event.id;
-    this.bookingService.delete(this.id).subscribe(
-      bookingResponse =>
-        this.delete(bookingResponse), (error: string) => this.showError(error)
+    this.bookingService.delete(this.id)
+    .subscribe(
+      bookingResponse => {
+        this.delete(bookingResponse);
+        this.bookings = this.bookings.filter(item => item.id != this.id);
+      },
+      catchError => {
+        this.errorBackend = catchError.error + ', fix it and try again';
+      }
     );
-    this.bookings = this.bookings.filter(item => item.id != this.id);
   }
 }

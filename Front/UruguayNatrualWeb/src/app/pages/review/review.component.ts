@@ -23,18 +23,19 @@ export class ReviewComponent implements OnInit {
   constructor(private bookingService: BookingService, private reviewService: ReviewService) { }
 
   ngOnInit(): void {
-    this.bookingService.getAll().subscribe(
-      bookingResponse =>
-        this.getAll(bookingResponse), (error: string) => this.showError(error)
+    this.bookingService.getAll()
+    .subscribe(
+      bookingResponse => {
+        this.getAll(bookingResponse);
+      },
+      catchError => {
+        this.errorMessageEndpoint = catchError.error + ', fix it and try again';
+      }
     );
   }
 
   private getAll(bookingResponse: BookingBasicInfo[]){
     this.bookings = bookingResponse;
-  }
-
-  private showError(message){
-    this.errorMessageEndpoint  = message;
   }
 
   checkBookingCode(){

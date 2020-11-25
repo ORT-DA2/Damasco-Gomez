@@ -26,9 +26,14 @@ export class ReportDashboardComponent implements OnInit {
   constructor( private touristPointService: TouristPointsService , private reportService: ReportService) { }
 
   ngOnInit(): void {
-    this.touristPointService.getAll().subscribe(
-      touristPointResponse =>
-        this.getAllTouristPoints(touristPointResponse), (error: string) => this.showError(error)
+    this.touristPointService.getAll()
+    .subscribe(
+      touristPointResponse => {
+        this.getAllTouristPoints(touristPointResponse)
+      },
+      catchError => {
+        this.errorBackend = catchError.error + ', fix it and try again';
+      }
     );
   }
   onChangeTouristPointName(touristPointName: string) {
@@ -70,19 +75,20 @@ export class ReportDashboardComponent implements OnInit {
     const checkInDate = new Date(this.dateFrom);
     const checkOutDate = new Date(this.dateOut);
     if (checkInDate < checkOutDate) {
-        this.reportService.GetHousesReportBy(this.touristPointId.toString(), this.checkIParse, this.checkOutParse).subscribe(
-            reportResponse =>
-              this.getAllReports(reportResponse), (error: string) => this.showError(error)
-          );
-        this.errorMessageDates = '';
+        this.reportService.GetHousesReportBy(this.touristPointId.toString(), this.checkIParse, this.checkOutParse)
+        .subscribe(
+          responseUpdate => {
+            this.getAllReports(responseUpdate);
+          },
+          catchError => {
+            this.errorBackend = catchError.error + ', fix it and try again';
+          }
+        );
     }
     else {
       this.errorMessageDates = 'Error in the dates, check them please';
     }
   }
 
-  private showError(message: string) {
-    this.errorBackend =  message;
-  }
 
 }

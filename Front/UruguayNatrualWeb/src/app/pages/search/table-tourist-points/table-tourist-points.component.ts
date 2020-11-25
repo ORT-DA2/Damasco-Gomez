@@ -23,9 +23,14 @@ export class TableTouristPointsComponent implements OnInit {
    }
 
   ngOnInit(): void {
-    this.touristPointService.getAll().subscribe(
-      touristPointResponse =>
-        this.getAll(touristPointResponse), (error: string) => this.showError(error)
+    this.touristPointService.getAll()
+    .subscribe(
+      touristPointResponse => {
+        this.getAll(touristPointResponse);
+      },
+      catchError => {
+        this.errorMessageBackend = catchError.error + ', fix it and try again';
+      }
     );
   }
 
@@ -33,9 +38,5 @@ export class TableTouristPointsComponent implements OnInit {
     this.touristPoints = this.isRegion ?
       touristPointResponse.filter(x =>(x.regionId == this.id) ) :
       touristPointResponse.filter(y => y.categories.filter( j => j == this.id));
-  }
-
-  private showError(message: string){
-    this.errorMessageBackend = message;
   }
 }

@@ -16,16 +16,17 @@ export class TableRegionsComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.regionService.getAll().subscribe(
-      regionResponse =>
-        this.getAll(regionResponse), (error: string) => this.showError(error)
+    this.regionService.getAll()
+    .subscribe(
+      regionResponse => {
+        this.getAll(regionResponse);
+      },
+      catchError => {
+        this.errorMessageBackend = catchError.error + ', fix it and try again';
+      }
     );
   }
   private getAll(regionResponse: RegionBasicInfo[]){
     this.regions = regionResponse;
-  }
-
-  private showError(message: string){
-    this.errorMessageBackend = message;
   }
 }

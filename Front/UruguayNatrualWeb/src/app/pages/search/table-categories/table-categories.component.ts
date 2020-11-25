@@ -14,17 +14,19 @@ export class TableCategoriesComponent implements OnInit {
   constructor(private categoryService: CategoryService) { }
 
   ngOnInit(): void {
-    this.categoryService.getAll().subscribe(
-      categoryResponse =>
-        this.getAll(categoryResponse), (error: string) => this.showError(error)
+    this.categoryService.getAll()
+    .subscribe(
+      categoryResponse => {
+        this.getAll(categoryResponse);
+      },
+      catchError => {
+        this.errorMessageBackend = catchError.error + ', fix it and try again';
+      }
     );
   }
+
   private getAll(categoryResponse: CategoryBasicInfo[]){
     this.categories = categoryResponse;
-  }
-
-  private showError(message: string){
-    this.errorMessageBackend = message;
   }
 
 }

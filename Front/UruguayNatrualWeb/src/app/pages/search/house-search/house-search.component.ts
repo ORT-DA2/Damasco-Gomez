@@ -75,10 +75,6 @@ export class HouseSearchComponent implements OnInit {
     this.searchDone = true;
   }
 
-  private showError(event) {
-    this.errorMessageBackend = event;
-  }
-
   searchBy() {
     const checkInDate = new Date(this.checkIn);
     const checkOutDate = new Date(this.checkOut);
@@ -90,9 +86,14 @@ export class HouseSearchComponent implements OnInit {
       this.errorMessageDates = '';
       if (!(adults == 0 && children == 0 && babies == 0 && seniors == 0)) {
         this.houseService.getByTouristoPoint(this.checkInValue, this.checkOutValue, this.touristPointId,
-          this.cantAdults, this.cantChildren, this.cantBabies, this.cantSeniors).subscribe(
-            houseResponse =>
-              this.getAll(houseResponse), (error: string) => this.showError(error)
+          this.cantAdults, this.cantChildren, this.cantBabies, this.cantSeniors)
+          .subscribe(
+            houseResponse => {
+              this.getAll(houseResponse);
+            },
+            catchError => {
+              this.errorMessageBackend = catchError.error + ', fix it and try again';
+            }
           );
         this.errorMessagePeople = '';
       } else {

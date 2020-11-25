@@ -15,9 +15,14 @@ export class TouristPointsTableComponent implements OnInit {
   constructor(private touristPointService: TouristPointsService) { }
 
   ngOnInit(): void {
-    this.touristPointService.getAll().subscribe(
-      touristPointResponse =>
-        this.getAll(touristPointResponse), (error: string) => this.showError(error)
+    this.touristPointService.getAll()
+    .subscribe(
+      touristPointResponse => {
+        this.getAll(touristPointResponse);
+      },
+      catchError => {
+        this.errorMessageBackend = catchError.error + ', fix it and try again';
+      }
     );
   }
 
@@ -25,18 +30,18 @@ export class TouristPointsTableComponent implements OnInit {
     this.touristpoints = touristPointResponse;
   }
 
-  private showError(message: string){
-    this.errorMessageBackend = message;
-  }
-
   private delete(event) {
     this.id = event.id;
-    this.touristPointService.delete(this.id).subscribe(
-      touristPointResponse =>
-        this.delete(touristPointResponse), (error: string) => this.showError(error)
+    this.touristPointService.delete(this.id)
+    .subscribe(
+      touristPointResponse => {
+        this.delete(touristPointResponse);
+        this.touristpoints = this.touristpoints.filter(item => item.id != this.id);
+      },
+      catchError => {
+        this.errorMessageBackend = catchError.error + ', fix it and try again';
+      }
     );
-    // tslint:disable-next-line: triple-equals
-    this.touristpoints = this.touristpoints.filter(item => item.id != this.id);
   }
 
 }

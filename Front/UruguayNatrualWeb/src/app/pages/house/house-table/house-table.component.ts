@@ -15,9 +15,14 @@ export class HouseTableComponent implements OnInit {
   constructor(private houseService: HouseService) { }
 
   ngOnInit(): void {
-    this.houseService.getAll().subscribe(
-      response =>
-        this.getAll(response), (error: string) => this.showError(error)
+    this.houseService.getAll()
+    .subscribe(
+      response => {
+        this.getAll(response)
+      },
+      catchError => {
+        this.errorBackend = catchError.error + ', fix it and try again';
+      }
     );
   }
 
@@ -25,18 +30,18 @@ export class HouseTableComponent implements OnInit {
     this.houses = response;
   }
 
-  private showError(message: string){
-    this.errorBackend = message;
-  }
-
   private delete(event) {
     this.id = event.id;
-    this.houseService.delete(this.id).subscribe(
-      response =>
-        this.delete(response), (error: string) => this.showError(error) ,
+    this.houseService.delete(this.id)
+    .subscribe(
+      response => {
+        this.delete(response);
+        this.houses = this.houses.filter(item => item.id != this.id);
+      },
+      catchError => {
+        this.errorBackend = catchError.error + ', fix it and try again';
+      }
     );
-
-    this.houses = this.houses.filter(item => item.id != this.id);
   }
 
 }
