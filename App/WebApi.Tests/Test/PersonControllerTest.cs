@@ -107,7 +107,8 @@ namespace WebApi.Tests
             PersonModel personModel = new PersonModel()
             {
                 Email = "email",
-                Password = "psswd"
+                Password = "psswd", 
+                Name = "Name"
             };
             personWithId1 = personModel.ToEntity();
             mockPersonLogic.Setup(m => m.Add(personWithId1)).Returns(personWithId1);
@@ -126,7 +127,8 @@ namespace WebApi.Tests
             PersonModel personModel = new PersonModel()
             {
                 Email = "email",
-                Password = "psswd"
+                Password = "psswd", 
+                Name = "Name"
             };
             personWithId1 = personModel.ToEntity();
             Exception exist = new AggregateException();
@@ -160,7 +162,8 @@ namespace WebApi.Tests
             PersonModel personModel = new PersonModel()
             {
                 Email = "email",
-                Password = "psswd"
+                Password = "psswd", 
+                Name = "Name"
             };
             personWithId1 = personModel.ToEntity();
             Exception exist = new Exception();
@@ -176,7 +179,8 @@ namespace WebApi.Tests
             PersonModel personModel = new PersonModel()
             {
                 Email = "email",
-                Password = "psw"
+                Password = "psw", 
+                Name = "Name"
             };
             personWithId1 = personModel.ToEntity();
             personWithId1.Email = "new email";
@@ -212,7 +216,8 @@ namespace WebApi.Tests
             PersonModel personModel = new PersonModel()
             {
                 Email = "email",
-                Password = "psw"
+                Password = "psw", 
+                Name = "Name"
             };
             personWithId1 = personModel.ToEntity();
             Exception exist = new Exception();

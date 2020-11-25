@@ -162,10 +162,10 @@ namespace Domain.Test.Test
         {
             Review newBooking = new Review()
             {
-                Name = null,
-                Comment = null,
+                Name = "Name",
+                Comment = "Comment",
                 HouseId = 1,
-                Score = 0,
+                Score = 3,
             };
 
             bool empty = newBooking.IsEmpty();

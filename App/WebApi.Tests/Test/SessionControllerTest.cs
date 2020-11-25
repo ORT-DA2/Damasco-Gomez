@@ -35,7 +35,7 @@ namespace WebApi.Tests.Test
         [TestMethod]
         public void TestLoginOk()
         {
-            PersonModel personModel = new PersonModel {Email = "email", Password="psw"};
+            PersonModel personModel = new PersonModel {Email = "email", Password="psw", Name = "Name"};
             Person person = personModel.ToEntity();
             Guid newToken = Guid.NewGuid();
             mockSessionLogic.Setup(m => m.Login(person)).Returns(newToken);
