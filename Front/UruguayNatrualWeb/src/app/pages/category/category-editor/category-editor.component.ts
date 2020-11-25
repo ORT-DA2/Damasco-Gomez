@@ -33,13 +33,24 @@ export class CategoryEditorComponent implements OnInit {
     this.categoryId = Number(id);
     this.existentCategory = this.isExistentCategory();
     if (this.existentCategory) {
-      this.categoryService.getBy(this.categoryId).subscribe(
-        categoryResponse =>
-          this.getBy(categoryResponse), (error: string) => this.showError(error));
+      this.categoryService.getBy(this.categoryId)
+      .subscribe(
+        categoryResponse => {
+          this.getBy(categoryResponse)
+        },
+        catchError => {
+          this.errorBackend = catchError.error + ', fix it and try again';
+        }
+      );
     }
-    this.touristPointService.getAll().subscribe(
-      touristPointResponse =>
-        this.getAllTouristPoints(touristPointResponse), (error: string) => this.showError(error));
+    this.touristPointService.getAll()
+    .subscribe(
+      touristPointResponse => {
+        this.getAllTouristPoints(touristPointResponse)
+      },
+      catchError => {
+        this.errorBackend = catchError.error + ', fix it and try again';
+      });
     this.category.touristPoints = [];
   }
 
@@ -58,18 +69,29 @@ export class CategoryEditorComponent implements OnInit {
 
   updateData(category: CategoryDetailInfo) {
     const basicInfo = this.createModel(category);
-    this.categoryService.update(this.categoryId, basicInfo).subscribe(
-      responseUpdate => this.updateMessage = 'Update sucessfully!'
+    this.categoryService.update(this.categoryId, basicInfo)
+    .subscribe(
+      responseAdd => {
+        this.updateMessage = 'Update sucessfully!';
+        this.category = responseAdd;
+      },
+      catchError => {
+        this.errorBackend = catchError.error + ', fix it and try again';
+      }
     );
   }
   addCategory(category: CategoryDetailInfo) {
     const basicInfo = this.createModel(category);
-    this.categoryService.add(basicInfo).subscribe(
+    this.categoryService.add(basicInfo)
+    .subscribe(
       responseAdd => {
         this.categoryId = responseAdd.id;
         this.router.navigateByUrl(`/category/category-editor/${this.categoryId}`);
         this.existentCategory = true;
         this.updateMessage = 'Added sucessfully!'
+      },
+      catchError => {
+        this.errorBackend = catchError.error + ', fix it and try again';
       }
     );
   }
@@ -81,7 +103,6 @@ export class CategoryEditorComponent implements OnInit {
   }
 
   onChangeTouristPointName(touristPointName: string, index: number) {
-
     const touristPointId = this.touristPoints.find(x => x.name == touristPointName);
     this.category.touristPoints[index] = touristPointId;
   }
@@ -89,12 +110,9 @@ export class CategoryEditorComponent implements OnInit {
   addTouristPoint() {
     this.category.touristPoints = this.category.touristPoints.concat(this.newTouristPoint);
   }
+
   deleteTouristPoint() {
     this.category.touristPoints.splice(-1, 1);
     this.touristPointName.splice(-1, 1);
-  }
-
-  private showError(message: string) {
-    this.errorBackend = message;
   }
 }

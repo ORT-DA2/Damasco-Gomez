@@ -130,6 +130,7 @@ export class TouristPointEditorComponent implements OnInit {
           this.sourceImage = environment.imageURL + responseResponse.image.name;
           this.updateMessage = 'Update is done!';
           this.errorMessageBackend = '';
+          this.touristPoint = responseResponse;
         },
         catchError => {
           this.errorMessageBackend = catchError + ', fix it and try again';

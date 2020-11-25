@@ -96,6 +96,7 @@ export class BookingEditorComponent implements OnInit {
     this.bookingService.update(this.bookingId,this.booking)
     .subscribe(
       bookingResponse => {
+        this.booking = bookingResponse;
         this.updateMessage = 'Update done!';
       },
       catchError => {
