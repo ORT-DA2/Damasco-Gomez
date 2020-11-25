@@ -4,3 +4,11 @@
 .container-fluid.mt--7{
   margin-top: -26rem!important;
 }
+.errorMessage{
+  font-weight: bold;
+  color: red;
+}
+.successMessage{
+  font-weight: bold;
+  color: green;
+}

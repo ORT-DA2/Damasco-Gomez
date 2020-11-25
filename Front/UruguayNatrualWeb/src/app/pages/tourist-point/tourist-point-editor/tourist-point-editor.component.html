@@ -13,9 +13,13 @@
       <div class="card bg-secondary shadow">
         <div class="card-header bg-white border-0">
           <div class="row align-items-center">
-            <div class="col-8">
+            <div class="col-4">
               <h3 class="mb-0">Tourist Point</h3>
               <span class="heading-small text-muted mb-4">Id {{ touristPointId }}</span>
+            </div>
+            <div class="col-4 text-right">
+              <p class="errorMessage" id="error-message">{{errorMessageBackend}}</p>
+              <p class="successMessage" id="succes-messages">{{updateMessage}}</p>
             </div>
             <div class="col-4 text-right">
               <a *ngIf="existTP" (click)="updateData()" class="btn btn-primary">Update</a>
@@ -49,14 +53,15 @@
                     <label class="form-control-label" for="input-image">Image</label>
                     <input type="file" id="input-image" size="50" class="form-control form-control-alternative"
                       (change)="onSelectFile($event)" value="image.name" />
-                    <img *ngIf="!!image.name" [src]="sourceImage" class="img-thumbnail img-circle">
+                    <img *ngIf="sourceImage" src="{{sourceImage}}" class="img-thumbnail img-circle">
                   </div>
                 </div>
 
                 <div class="col-9">
                   <div class="form-group">
                     <label class="form-control-label">Region</label>
-                    <select class="custom-select form-control form-control-alternative" [(ngModel)]="regionName"
+                    <select class="custom-select form-control form-control-alternative"
+                      [(ngModel)]="regionName"
                       name="regionName" (change)="onChangeRegionName(regionName)">
                       <option disabled>Choose Region</option>
                       <option *ngFor="let region of regions">

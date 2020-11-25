@@ -21,7 +21,7 @@ export class TouristPointEditorComponent implements OnInit {
   public regions: RegionBasicInfo[] = [];
   public categories: CategoryBasicInfo[] = [];
   public touristPointId: number = 0;
-  public regionName: string = "";
+  public regionName: string = '';
   public image: ImageTouristPointBasic = {} as ImageTouristPointBasic;
   public imageName: string;
   public categoriesName: string[] = [];
@@ -53,7 +53,7 @@ export class TouristPointEditorComponent implements OnInit {
             this.getBy(touristPointResponse);
           },
           catchError => {
-            this.errorMessageBackend = catchError.error + ', fix it and try again';
+            this.errorMessageBackend = catchError + ', fix it and try again';
           }
         );
     }
@@ -63,7 +63,7 @@ export class TouristPointEditorComponent implements OnInit {
           this.getAllRegions(regionResponse);
         },
         catchError => {
-          this.errorMessageBackend = catchError.error + ', fix it and try again';
+          this.errorMessageBackend = catchError + ', fix it and try again';
         }
       );
     this.categoryService.getAll()
@@ -72,7 +72,7 @@ export class TouristPointEditorComponent implements OnInit {
           this.getAllCategories(categoryResponse);
         },
         catchError => {
-          this.errorMessageBackend = catchError.error + ', fix it and try again';
+          this.errorMessageBackend = catchError + ', fix it and try again';
         }
       );
 
@@ -98,7 +98,7 @@ export class TouristPointEditorComponent implements OnInit {
   private getAllRegions(regionResponse: RegionBasicInfo[]) {
     this.regions = regionResponse;
     const regionWithId = this.regions.find(x => x.id === this.touristPoint.regionId);
-    this.regionName = regionWithId ? regionWithId.name : "";
+    this.regionName = regionWithId ? regionWithId.name : '';
   }
   private getAllCategories(categoryResponse: CategoryBasicInfo[]) {
     this.categories = categoryResponse;
@@ -113,9 +113,11 @@ export class TouristPointEditorComponent implements OnInit {
           this.sourceImage = environment.imageURL + responseResponse.image.name;
           this.router.navigateByUrl(`/tourist-points/tourist-point-editor/${this.touristPointId}`);
           this.existTP = true;
+          this.errorMessageBackend = '';
+          this.updateMessage = 'Added!'
         },
         catchError => {
-          this.errorMessageBackend = catchError.error + ', fix it and try again';
+          this.errorMessageBackend = catchError + ', fix it and try again';
         }
       );
   }
@@ -127,9 +129,10 @@ export class TouristPointEditorComponent implements OnInit {
         responseResponse => {
           this.sourceImage = environment.imageURL + responseResponse.image.name;
           this.updateMessage = 'Update is done!';
+          this.errorMessageBackend = '';
         },
         catchError => {
-          this.errorMessageBackend = catchError.error + ', fix it and try again';
+          this.errorMessageBackend = catchError + ', fix it and try again';
         }
       );
   }
