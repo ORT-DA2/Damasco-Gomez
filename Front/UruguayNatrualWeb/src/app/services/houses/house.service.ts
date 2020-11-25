@@ -45,24 +45,24 @@ export class HouseService {
     return httpRequest;
 
   }
-  updateAvailable(id, body) {
+  updateAvailable(id, body): Observable<HouseDetailInfo> {
     const headers = new HttpHeaders({
       'Content-Type': 'application/json',
       'Authorization': localStorage.getItem('token')
     });
     let options = { headers: headers };
-    var httpRequest = this.http.put<any>(this.uri + '/' + id, body, options)
+    var httpRequest = this.http.put<HouseDetailInfo>(this.uri + '/' + id, body, options)
       .pipe(catchError(this.handleError));
     return httpRequest;
   }
 
-  add(body): Observable<any> {
+  add(body): Observable<HouseDetailInfo> {
     const headers = new HttpHeaders({
       'Content-Type': 'application/json',
       'Authorization': localStorage.getItem('token')
     });
     let options = { headers: headers };
-    var httpRequest = this.http.post<any>(this.uri, body, options)
+    var httpRequest = this.http.post<HouseDetailInfo>(this.uri, body, options)
       .pipe(catchError(this.handleError));
     return httpRequest;
   }

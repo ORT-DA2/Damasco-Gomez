@@ -29,7 +29,7 @@ namespace Model
             this.TouristPoint = new TouristPointBasicInfoModel(house.TouristPoint);
             this.Name = house.Name;
             this.Starts = house.Starts;
-            if(this.Images!=null)
+            if(house.ImagesHouse!=null && house.ImagesHouse.Count > 0)
             {
                 this.Images = house.ImagesHouse.Select(
                     m => new ImageHouseBasicModel(m)

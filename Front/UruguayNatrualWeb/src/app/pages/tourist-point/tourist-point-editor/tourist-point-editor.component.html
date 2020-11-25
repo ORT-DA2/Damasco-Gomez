@@ -83,8 +83,7 @@
                 <div class="col-12">
                   <div class="form-group" id="categoriesTouristPoints">
                     <label class="form-control-label" for="input-categories">Categories</label>
-                    <select *ngFor="
-                        let categoryTouristPoint of touristPoint.categories;
+                    <select *ngFor="let categoryTouristPoint of touristPoint.categories;
                         let i = index" [(ngModel)]="categoriesName[i]" name="{{ i }}"
                       (change)="onChangeCategoryName(categoriesName[i], i)"
                       class="custom-select form-control form-control-alternative">

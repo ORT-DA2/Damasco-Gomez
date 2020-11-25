@@ -6,9 +6,7 @@ import { HouseDetailInfo } from 'src/app/models/house/house-detail-info';
 import { HouseModelIn } from 'src/app/models/house/house-model-in';
 import { ImageHouseBasicModel } from 'src/app/models/image-house/image-house-basic';
 import { TouristPointsBasicInfo } from 'src/app/models/touristpoint/touristpoint-base-info';
-import { CategoryService } from 'src/app/services/categories/category.service';
 import { HouseService } from 'src/app/services/houses/house.service';
-import { RegionService } from 'src/app/services/regions/region.service';
 import { TouristPointsService } from 'src/app/services/touristpoints/touristpoint.service';
 import { environment } from 'src/environments/environment';
 
@@ -19,6 +17,7 @@ import { environment } from 'src/environments/environment';
 })
 export class HouseEditorComponent implements OnInit {
   public house: HouseDetailInfo = {} as HouseDetailInfo;
+  public houseIn: HouseModelIn = {} as HouseModelIn;
   public touristPoints: TouristPointsBasicInfo[] = [];
   public houseId: number = 0;
   public pricePerNigth: number;
@@ -32,22 +31,22 @@ export class HouseEditorComponent implements OnInit {
   public categoriesName: string[] = [];
   public startsList: number[] = [];
   public categories: CategoryBasicInfo[] = [];
-  public imageHouse: string;
+  public imagesHouse: string[] = [];
   public selectedFile: File;
   public images: ImageHouseBasicModel[];
   public imagesNames: string[] = [];
   public imageName: string;
   public selectedFiles: FileList;
-  public sourceImage: string = environment.imageURL;
+  public sourcesImages: string[] = [];
   public updateMessage: string = '';
   public errorBackend: string = '';
+  public addNewImage: boolean = false;
+  public areImages: boolean = false;
 
   constructor(
     private route: ActivatedRoute,
     private router: Router,
     private houseService: HouseService,
-    private regionService: RegionService,
-    private categoryService: CategoryService,
     private touristPointService: TouristPointsService) { }
 
   ngOnInit(): void {
@@ -55,15 +54,25 @@ export class HouseEditorComponent implements OnInit {
     this.houseId = Number(id);
     this.startsList = [1, 2, 3, 4, 5];
     this.existentHouse = this.isExistentHouse();
-    this.readonly = this.isReadOnly();
     if (this.existentHouse) {
-      this.houseService.getBy(this.houseId).subscribe(
-        houseResponse =>
-          this.getBy(houseResponse), (error: string) => this.showError(error));
+      this.houseService.getBy(this.houseId)
+      .subscribe(
+        houseResponse => {
+          this.getBy(houseResponse);
+        },
+        catchError => {
+          this.errorBackend = catchError.error + ', fix it and try again';
+        }
+      );
     }
-    this.touristPointService.getAll().subscribe(
-      touristPointResponse =>
-        this.getAllTouristPoints(touristPointResponse), (error: string) => this.showError(error)
+    this.touristPointService.getAll()
+    .subscribe(
+      touristPointResponse => {
+        this.getAllTouristPoints(touristPointResponse)
+      },
+      catchError => {
+        this.errorBackend = catchError.error + ', fix it and try again';
+      }
     );
   }
 
@@ -71,30 +80,39 @@ export class HouseEditorComponent implements OnInit {
     return !isNaN(this.houseId);
   }
 
-  updateAvailable(house: HouseBasicInfo) {
-    const basicInfo = this.createModel(house);
-    this.houseService.updateAvailable(this.houseId, basicInfo).subscribe(
-      responseUpdate =>
-        this.updateMessage = 'Update done!'
+  updateAvailable() {
+    const basicInfo = this.createModel();
+    this.houseService.updateAvailable(this.houseId, basicInfo)
+    .subscribe(
+      responseUpdate => {
+        this.updateMessage = 'Update done!';
+        this.house = responseUpdate;
+        this.addNewImage = false;
+      },
+      catchError => {
+        this.errorBackend = catchError.error + ', fix it and try again';
+      }
     );
   }
 
-  addHouse(house: HouseBasicInfo) {
-
-    const basicInfo = this.createModel(house);
+  addHouse() {
+    const basicInfo = this.createModel();
     console.log(basicInfo);
-    this.houseService.add(basicInfo).subscribe(
+    this.houseService.add(basicInfo)
+    .subscribe(
       responseAdd => {
         this.houseId = responseAdd.id;
         this.router.navigateByUrl(`/houses/house-editor/${this.houseId}`);
         this.existentHouse = true;
+      },
+      catchError => {
+        this.errorBackend = catchError.error + ', fix it and try again';
       }
     );
   }
-  isReadOnly(): boolean {
-    return !isNaN(this.houseId);
-  }
-  private createModel(house: HouseBasicInfo): HouseModelIn {
+
+  private createModel(): HouseModelIn {
+    const house = this.house;
     const modelBase: HouseModelIn = {} as HouseModelIn;
     modelBase.name = house.name;
     modelBase.starts = house.starts;
@@ -110,29 +128,36 @@ export class HouseEditorComponent implements OnInit {
   }
   private getBy(houseResponse: HouseDetailInfo) {
     this.house = houseResponse;
-    this.imagesNames = this.house.images ? this.house.images.map(image => this.sourceImage + '/' + image.name)
-      : [];
-    var touristPoint = this.touristPoints.find(x => x.id == this.house.touristPointId);
-    this.touristPointName = touristPoint.name;
+    this.imagesNames = houseResponse.images ? houseResponse.images.map(x=> x.name): [];
+    this.areImages = this.imagesNames.length > 0;
+    this.sourcesImages = this.imagesNames ? this.imagesNames.map( x=> environment.imageURL + x ) : [];
+    this.touristPointName = houseResponse.touristPoint ? houseResponse.touristPoint.name :  '';
   }
+
   private getAllTouristPoints(touristPointResponse: TouristPointsBasicInfo[]) {
     this.touristPoints = touristPointResponse;
   }
-  private showError(message: string) {
-    this.errorBackend = message;
-  }
-  onChangeTouristPointName(touristPointName: string) {
 
+  onChangeTouristPointName(touristPointName: string) {
     var touristPoint = this.touristPoints.find(x => x.name == touristPointName);
     this.house.touristPointId = touristPoint.id;
   }
 
 
-  selectFiles(event) {
+  onSelectFile(event) {
     this.selectedFiles = event.target.files;
     for (let i = 0; i < this.selectedFiles.length; i++) {
       this.imagesNames.push(this.selectedFiles[i].name);
+      this.sourcesImages.push(environment.imageURL + this.selectedFiles[i].name);
     }
   }
 
+  addImage(){
+    this.addNewImage = true;
+  }
+
+  deleteImage(){
+    this.house.images.splice(-1, 1);
+    this.imagesNames.splice(-1, 1);
+  }
 }
