@@ -11,31 +11,42 @@ import { PersonService } from '../../services/persons/person.service';
   styleUrls: ['./register.component.scss']
 })
 export class RegisterComponent implements OnInit {
+  public errorMessageEndpoint: string = '';
 
   public user: PersonBasicInfo = {} as PersonBasicInfo;
 
 
   constructor(private personService: PersonService,
-              private sessionService: SessionService,
-              private router: Router ) { }
+    private sessionService: SessionService,
+    private router: Router) { }
 
   ngOnInit() {
   }
 
   onSubmit(form: NgForm) {
-    if (form.invalid) {return; }
-   this.personService.newUser(this.user).
-   subscribe(resp => {
-    this.loginNewUser(resp);
-   });
+    debugger;
+    this.personService.newUser(this.user).
+      subscribe(
+        response => {
+          this.loginNewUser(response);
+        },
+        catchError => {
+          this.errorMessageEndpoint = catchError.error + ', fix it and try again';
+        }
+      )
   }
 
-  loginNewUser (user: any)
-  {
-      this.sessionService.login(this.user).
-      subscribe(resp => {
-      this.router.navigateByUrl('/dashboard');
-      });
+  loginNewUser(user: any) {
+    this.sessionService.login(this.user).
+    subscribe(
+      response => {
+        debugger;
+        this.router.navigateByUrl('/user-profile');
+      },
+      catchError => {
+        this.errorMessageEndpoint = catchError.error + ', fix it and try again';
+      }
+    )
   }
 
 }
