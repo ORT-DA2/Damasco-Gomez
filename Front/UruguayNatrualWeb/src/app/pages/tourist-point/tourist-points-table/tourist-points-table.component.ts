@@ -21,7 +21,7 @@ export class TouristPointsTableComponent implements OnInit {
         this.getAll(touristPointResponse);
       },
       catchError => {
-        this.errorMessageBackend = catchError.error + ', fix it and try again';
+        this.errorMessageBackend = catchError + ', fix it and try again';
       }
     );
   }
@@ -39,7 +39,7 @@ export class TouristPointsTableComponent implements OnInit {
         this.touristpoints = this.touristpoints.filter(item => item.id != this.id);
       },
       catchError => {
-        this.errorMessageBackend = catchError.error + ', fix it and try again';
+        this.errorMessageBackend = catchError + ', fix it and try again';
       }
     );
   }

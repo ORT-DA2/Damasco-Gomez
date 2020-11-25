@@ -21,7 +21,7 @@ export class BookingsTableComponent implements OnInit {
         this.getAll(bookingResponse);
       },
       catchError => {
-        this.errorBackend = catchError.error + ', fix it and try again';
+        this.errorBackend = catchError + ', fix it and try again';
       }
     );
   }
@@ -39,7 +39,7 @@ export class BookingsTableComponent implements OnInit {
         this.bookings = this.bookings.filter(item => item.id != this.id);
       },
       catchError => {
-        this.errorBackend = catchError.error + ', fix it and try again';
+        this.errorBackend = catchError + ', fix it and try again';
       }
     );
   }

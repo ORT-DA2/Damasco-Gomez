@@ -20,7 +20,7 @@ export class TableCategoriesComponent implements OnInit {
         this.getAll(categoryResponse);
       },
       catchError => {
-        this.errorMessageBackend = catchError.error + ', fix it and try again';
+        this.errorMessageBackend = catchError + ', fix it and try again';
       }
     );
   }

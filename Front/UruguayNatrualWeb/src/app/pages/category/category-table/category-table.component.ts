@@ -22,7 +22,7 @@ export class CategoryTableComponent implements OnInit {
         this.getAll(response)
       },
       catchError => {
-        this.errorBackend = catchError.error + ', fix it and try again';
+        this.errorBackend = catchError + ', fix it and try again';
       }
     );
   }
@@ -40,7 +40,7 @@ export class CategoryTableComponent implements OnInit {
         this.categories = this.categories.filter(item => item.id != this.id);
       },
       catchError => {
-        this.errorBackend = catchError.error + ', fix it and try again';
+        this.errorBackend = catchError + ', fix it and try again';
       }
     );
   }

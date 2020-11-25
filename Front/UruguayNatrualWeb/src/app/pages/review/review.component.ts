@@ -29,7 +29,7 @@ export class ReviewComponent implements OnInit {
         this.getAll(bookingResponse);
       },
       catchError => {
-        this.errorMessageEndpoint = catchError.error + ', fix it and try again';
+        this.errorMessageEndpoint = catchError + ', fix it and try again';
       }
     );
   }

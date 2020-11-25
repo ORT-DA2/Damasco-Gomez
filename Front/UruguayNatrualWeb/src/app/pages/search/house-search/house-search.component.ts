@@ -92,7 +92,7 @@ export class HouseSearchComponent implements OnInit {
               this.getAll(houseResponse);
             },
             catchError => {
-              this.errorMessageBackend = catchError.error + ', fix it and try again';
+              this.errorMessageBackend = catchError + ', fix it and try again';
             }
           );
         this.errorMessagePeople = '';

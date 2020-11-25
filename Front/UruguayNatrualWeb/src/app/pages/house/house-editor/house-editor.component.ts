@@ -61,7 +61,7 @@ export class HouseEditorComponent implements OnInit {
           this.getBy(houseResponse);
         },
         catchError => {
-          this.errorBackend = catchError.error + ', fix it and try again';
+          this.errorBackend = catchError + ', fix it and try again';
         }
       );
     }
@@ -71,7 +71,7 @@ export class HouseEditorComponent implements OnInit {
         this.getAllTouristPoints(touristPointResponse)
       },
       catchError => {
-        this.errorBackend = catchError.error + ', fix it and try again';
+        this.errorBackend = catchError + ', fix it and try again';
       }
     );
   }
@@ -90,7 +90,7 @@ export class HouseEditorComponent implements OnInit {
         this.addNewImage = false;
       },
       catchError => {
-        this.errorBackend = catchError.error + ', fix it and try again';
+        this.errorBackend = catchError + ', fix it and try again';
       }
     );
   }
@@ -106,7 +106,7 @@ export class HouseEditorComponent implements OnInit {
         this.existentHouse = true;
       },
       catchError => {
-        this.errorBackend = catchError.error + ', fix it and try again';
+        this.errorBackend = catchError + ', fix it and try again';
       }
     );
   }

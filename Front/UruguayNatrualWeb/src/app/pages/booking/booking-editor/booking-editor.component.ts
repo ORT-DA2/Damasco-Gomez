@@ -42,7 +42,7 @@ export class BookingEditorComponent implements OnInit {
         this.stateName = bookingResponse.state.name;
       },
       catchError => {
-        this.errorMessageEndpoint = catchError.error + ', fix it and try again';
+        this.errorMessageEndpoint = catchError + ', fix it and try again';
       }
     );
     this.houseService.getAll()
@@ -51,7 +51,7 @@ export class BookingEditorComponent implements OnInit {
         this.getAllHouses(houseResponse)
       },
       catchError => {
-        this.errorMessageEndpoint = catchError.error + ', fix it and try again';
+        this.errorMessageEndpoint = catchError + ', fix it and try again';
       }
     );
     this.stateService.getAll()
@@ -60,7 +60,7 @@ export class BookingEditorComponent implements OnInit {
         this.getAllStates(stateResponse)
       },
       catchError => {
-        this.errorMessageEndpoint = catchError.error + ', fix it and try again';
+        this.errorMessageEndpoint = catchError + ', fix it and try again';
       }
     );
   }
@@ -100,7 +100,7 @@ export class BookingEditorComponent implements OnInit {
         this.updateMessage = 'Update done!';
       },
       catchError => {
-        this.errorMessageEndpoint = catchError.error + ', fix it and try again';
+        this.errorMessageEndpoint = catchError + ', fix it and try again';
       }
     );
   }

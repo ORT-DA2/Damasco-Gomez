@@ -29,7 +29,7 @@ export class TableTouristPointsComponent implements OnInit {
         this.getAll(touristPointResponse);
       },
       catchError => {
-        this.errorMessageBackend = catchError.error + ', fix it and try again';
+        this.errorMessageBackend = catchError + ', fix it and try again';
       }
     );
   }

@@ -32,7 +32,7 @@ export class ReportDashboardComponent implements OnInit {
         this.getAllTouristPoints(touristPointResponse)
       },
       catchError => {
-        this.errorBackend = catchError.error + ', fix it and try again';
+        this.errorBackend = catchError + ', fix it and try again';
       }
     );
   }
@@ -81,7 +81,7 @@ export class ReportDashboardComponent implements OnInit {
             this.getAllReports(responseUpdate);
           },
           catchError => {
-            this.errorBackend = catchError.error + ', fix it and try again';
+            this.errorBackend = catchError + ', fix it and try again';
           }
         );
     }

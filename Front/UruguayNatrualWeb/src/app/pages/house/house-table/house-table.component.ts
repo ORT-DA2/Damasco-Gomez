@@ -21,7 +21,7 @@ export class HouseTableComponent implements OnInit {
         this.getAll(response)
       },
       catchError => {
-        this.errorBackend = catchError.error + ', fix it and try again';
+        this.errorBackend = catchError + ', fix it and try again';
       }
     );
   }
@@ -39,7 +39,7 @@ export class HouseTableComponent implements OnInit {
         this.houses = this.houses.filter(item => item.id != this.id);
       },
       catchError => {
-        this.errorBackend = catchError.error + ', fix it and try again';
+        this.errorBackend = catchError + ', fix it and try again';
       }
     );
   }

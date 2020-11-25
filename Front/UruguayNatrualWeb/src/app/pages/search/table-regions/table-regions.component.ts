@@ -22,7 +22,7 @@ export class TableRegionsComponent implements OnInit {
         this.getAll(regionResponse);
       },
       catchError => {
-        this.errorMessageBackend = catchError.error + ', fix it and try again';
+        this.errorMessageBackend = catchError + ', fix it and try again';
       }
     );
   }

@@ -39,7 +39,7 @@ export class CategoryEditorComponent implements OnInit {
           this.getBy(categoryResponse)
         },
         catchError => {
-          this.errorBackend = catchError.error + ', fix it and try again';
+          this.errorBackend = catchError + ', fix it and try again';
         }
       );
     }
@@ -49,7 +49,7 @@ export class CategoryEditorComponent implements OnInit {
         this.getAllTouristPoints(touristPointResponse)
       },
       catchError => {
-        this.errorBackend = catchError.error + ', fix it and try again';
+        this.errorBackend = catchError + ', fix it and try again';
       });
     this.category.touristPoints = [];
   }
@@ -76,7 +76,7 @@ export class CategoryEditorComponent implements OnInit {
         this.category = responseAdd;
       },
       catchError => {
-        this.errorBackend = catchError.error + ', fix it and try again';
+        this.errorBackend = catchError + ', fix it and try again';
       }
     );
   }
@@ -91,7 +91,7 @@ export class CategoryEditorComponent implements OnInit {
         this.updateMessage = 'Added sucessfully!'
       },
       catchError => {
-        this.errorBackend = catchError.error + ', fix it and try again';
+        this.errorBackend = catchError + ', fix it and try again';
       }
     );
   }
