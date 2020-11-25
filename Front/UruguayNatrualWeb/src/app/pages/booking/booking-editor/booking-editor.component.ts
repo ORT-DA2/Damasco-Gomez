@@ -17,7 +17,11 @@ export class BookingEditorComponent implements OnInit {
   public houses: HouseBasicInfo[] = [];
   public states: StateBasicInfo[] = [];
   public bookingId: number = 0;
-  public errorBackend: string = '';
+  public dateIn: string = '';
+  public dateOut: string = '';
+  public errorMessageEndpoint: string = '';
+  public stateName: string = '';
+  public updateMessage: string = '';
 
   constructor(
     private route: ActivatedRoute,
@@ -29,15 +33,36 @@ export class BookingEditorComponent implements OnInit {
   ngOnInit(): void {
     const id = this.route.snapshot.paramMap.get('id');
     this.bookingId = Number(id);
-    this.bookingService.getBy(this.bookingId).subscribe(
-      bookingResponse =>
-        this.getBy(bookingResponse), (error: string) => this.showError(error));
-    this.houseService.getAll().subscribe(
-      houseResponse =>
-        this.getAllHouses(houseResponse), (error: string) =>this.showError(error));
-    this.stateService.getAll().subscribe(
-      stateResponse =>
-        this.getAllStates(stateResponse), (error: string) =>this.showError(error));
+    this.bookingService.getBy(this.bookingId)
+    .subscribe(
+      bookingResponse => {
+        this.getBy(bookingResponse);
+        this.dateIn = this.formatDate(this.booking.checkIn);
+        this.dateOut = this.formatDate(this.booking.checkOut);
+        this.stateName = bookingResponse.state.name;
+      },
+      catchError => {
+        this.errorMessageEndpoint = catchError.error + ', fix it and try again';
+      }
+    );
+    this.houseService.getAll()
+    .subscribe(
+      houseResponse => {
+        this.getAllHouses(houseResponse)
+      },
+      catchError => {
+        this.errorMessageEndpoint = catchError.error + ', fix it and try again';
+      }
+    );
+    this.stateService.getAll()
+    .subscribe(
+      stateResponse => {
+        this.getAllStates(stateResponse)
+      },
+      catchError => {
+        this.errorMessageEndpoint = catchError.error + ', fix it and try again';
+      }
+    );
   }
 
   private getBy(bookingResponse: BookingDetailInfo){
@@ -50,8 +75,32 @@ export class BookingEditorComponent implements OnInit {
     this.states = stateResponse;
   }
 
-  private showError(message: string){
-    this.errorBackend = message;
+  formatDate(date: Date){
+    var dateString = date.toString();
+    var dateArray = dateString.split('-');
+    if(dateArray.length == 3){
+      const year = dateArray[0];
+      const month = dateArray[1];
+      const day = dateArray[2].substr(0,2);
+      return year + '-' + month + '-' + day;
+    }
+    return '';
   }
 
+  onChangeStateName(stateName: string){
+    const newStateId = this.states.filter(s => s.name === stateName);
+    this.booking.stateId = newStateId[0].id;
+  }
+
+  updateState(){
+    this.bookingService.update(this.bookingId,this.booking)
+    .subscribe(
+      bookingResponse => {
+        this.updateMessage = 'Update done!';
+      },
+      catchError => {
+        this.errorMessageEndpoint = catchError.error + ', fix it and try again';
+      }
+    );
+  }
 }
