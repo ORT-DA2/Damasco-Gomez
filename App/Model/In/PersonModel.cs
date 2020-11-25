@@ -8,9 +8,9 @@ namespace Model.In
         public string Email {get; set;}
         public string Name {get; set;}
         public string Password {get; set;}
-        public Person ToEntity()
+        public Person ToEntity(bool post = true)
         {
-            if (this.AnyValueEmpty())
+            if (post && this.AnyValueEmpty())
             {
                 throw new ArgumentException("You need to put all values: email, password and name");
             }

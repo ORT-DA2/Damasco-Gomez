@@ -68,7 +68,7 @@ namespace WebApi.Controllers
         [HttpPut("{id}")]
         public IActionResult Put([FromRoute]int id,[FromBody]PersonModel personModel)
         {
-            Person person = personModel.ToEntity();
+            Person person = personModel.ToEntity(false);
             person = this.personLogic.Update(id,person);
             PersonBasicModel personBasicModel = new PersonBasicModel(person);
             return CreatedAtRoute("GetPerson", new {Id = personBasicModel.Id} , personBasicModel);
