@@ -12,8 +12,8 @@ namespace BusinessLogic
         private readonly ICategoryRepository categoryRepository;
         private readonly IImageTouristPointRepository imageRepository;
         private readonly IRegionRepository regionRepository;
-        public TouristPointLogic(ITouristPointRepository touristPointRepository,ICategoryRepository categoryRepository,
-            IImageTouristPointRepository imageRepository, IRegionRepository regionRepository )
+        public TouristPointLogic(ITouristPointRepository touristPointRepository, ICategoryRepository categoryRepository,
+            IImageTouristPointRepository imageRepository, IRegionRepository regionRepository)
         {
             this.touristPointRepository = touristPointRepository;
             this.categoryRepository = categoryRepository;
@@ -22,7 +22,7 @@ namespace BusinessLogic
         }
         public void Delete()
         {
-            foreach(TouristPoint TouristPoint in this.touristPointRepository.GetElements())
+            foreach (TouristPoint TouristPoint in this.touristPointRepository.GetElements())
             {
                 this.Delete(TouristPoint.Id);
             }
@@ -65,7 +65,7 @@ namespace BusinessLogic
                 touristPointBD.CategoriesTouristPoints.RemoveAll(x => x.TouristPointId == touristPointBD.Id);
                 touristPointBD.CategoriesTouristPoints = touristPoint.CategoriesTouristPoints;
             }
-            if(touristPoint.ImageTouristPointId > 0) 
+            if (touristPoint.ImageTouristPointId > 0)
             {
                 var oldImage = this.imageRepository.Find(touristPointBD.ImageTouristPointId);
                 oldImage.Update(touristPoint.ImageTouristPoint);
@@ -85,7 +85,11 @@ namespace BusinessLogic
 
         public Region ValidateRegion(int regionId)
         {
-            return this.regionRepository.Find(regionId);
+            if (this.regionRepository.ExistElement(regionId))
+            {
+                return this.regionRepository.Find(regionId);
+            }
+            throw new ArgumentException("There is no Region with id: " + regionId);
         }
     }
 }
