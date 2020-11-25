@@ -23,7 +23,7 @@ export class ReportService {
   GetHousesReportBy(touristPointId: string, dateFromParse: string, dateOutParse: string)
     : Observable<ReportBasicInfo[]> {
       let params = new HttpParams()
-      .set('idTp', touristPointId)
+      .set('IdTouristPoint', touristPointId)
       .set('dateFrom', dateFromParse)
       .set('dateOut', dateOutParse);
     return this.http.get<ReportBasicInfo[]>(this.uri, {params}); }

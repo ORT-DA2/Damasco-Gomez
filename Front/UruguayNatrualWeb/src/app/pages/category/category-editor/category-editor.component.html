@@ -55,7 +55,7 @@
                         onChangeTouristPointName(touristPointName[i], i)"
                         class="mb-2 custom-select form-control form-control-alternative">
                       <option>{{ touristPoints.name }}</option>
-                      <option enable>Choose Tourist point</option>
+                      <option disabled>Choose Tourist point</option>
                       <option *ngFor="let touristPoint of touristPoints" [ngValue]="touristPoint.name">
                         {{ touristPoint.name }}
                       </option>

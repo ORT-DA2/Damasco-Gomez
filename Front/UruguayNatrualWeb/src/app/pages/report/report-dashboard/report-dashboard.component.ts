@@ -1,7 +1,5 @@
-import { BoundElementPropertyAst } from '@angular/compiler';
 import { Component, OnInit } from '@angular/core';
 import { ReportBasicInfo } from 'src/app/models/report/report-base-info';
-import { ReportInfoIn } from 'src/app/models/report/report-info-in';
 import { TouristPointsBasicInfo } from 'src/app/models/touristpoint/touristpoint-base-info';
 import { ReportService } from 'src/app/services/reports/report.service';
 import { TouristPointsService } from 'src/app/services/touristpoints/touristpoint.service';
@@ -23,6 +21,7 @@ export class ReportDashboardComponent implements OnInit {
   public checkOutParse : string;
   public reports : ReportBasicInfo [] = [];
   public errorBackend: string = '';
+  public noReportsMessage: string = '';
 
   constructor( private touristPointService: TouristPointsService , private reportService: ReportService) { }
 
@@ -48,13 +47,14 @@ export class ReportDashboardComponent implements OnInit {
 
   private parseDate(date: string) {
     const dates = date.split('-');
-    // tslint:disable-next-line: triple-equals
-    const year = dates.length == 3 ? dates[0] : '0';
-    // tslint:disable-next-line: triple-equals
-    const month = dates.length == 3 ? dates[1] : '0';
-    // tslint:disable-next-line: triple-equals
-    const day = dates.length == 3 ? dates[2] : '0';
-    return day + '/' + month + '/' + year;
+    let returnValue = '';
+    if (dates.length == 3){
+      const year = dates.length == 3 ? dates[0] : '0';
+      const month = dates.length == 3 ? dates[1] : '0';
+      const day = dates.length == 3 ? dates[2] : '0';
+      returnValue = day + '/' + month + '/' + year;
+    }
+    return returnValue;
   }
 
   private getAllTouristPoints(touristPointResponse: TouristPointsBasicInfo[]) {
@@ -62,9 +62,11 @@ export class ReportDashboardComponent implements OnInit {
   }
   private getAllReports(reportResponse: ReportBasicInfo[]) {
     this.reports = reportResponse;
-    this.showReports = true;
+    this.showReports = reportResponse.length > 0;
+    this.noReportsMessage = reportResponse.length > 0 ? '' : 'No reports for that data';
   }
-  private getReportByTp(){
+
+  getReportByTp(){
     const checkInDate = new Date(this.dateFrom);
     const checkOutDate = new Date(this.dateOut);
     if (checkInDate < checkOutDate) {
