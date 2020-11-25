@@ -30,10 +30,8 @@
           </div>
           <div class="card-body px-lg-5 py-lg-5">
             <form (ngSubmit)="login(loginForm)" #loginForm="ngForm" role="form">
-              <span *ngIf="
-                  loginForm.submitted && loginForm.controls['email'].errors
-                " class="text-danger animated fadeIn">Email required</span>
-
+              <span *ngIf="loginForm.submitted && loginForm.controls['email'].errors"
+                class="text-danger animated fadeIn">Email required</span>
 
               <input class="form-control" type="text" name="email" [(ngModel)]="sessionUser.email" required email
                 placeholder="Email" />
@@ -42,9 +40,8 @@
 
               <div class="form-group">
                 <div class="input-group input-group-alternative">
-                  <span *ngIf="
-                      loginForm.submitted && loginForm.controls['pass'].errors
-                    " class="text-danger animated fadeIn">The password must be at least 6 characters
+                  <span *ngIf="loginForm.submitted && loginForm.controls['pass'].errors"
+                    class="text-danger animated fadeIn">The password must be at least 6 characters
                   </span>
                   <div class="input-group-prepend">
                     <span class="input-group-text" data-validate="Password is required"><i
@@ -58,6 +55,11 @@
                 <button type="button" type="submit" class="btn btn-primary my-4">
                   Sign in
                 </button>
+              </div>
+              <div class="col-12">
+                <div class="errorMessage">
+                  <strong>{{errorMessageEndpoint}}</strong>
+                </div>
               </div>
             </form>
           </div>
