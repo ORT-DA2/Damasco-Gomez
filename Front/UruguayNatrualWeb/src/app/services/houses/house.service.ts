@@ -43,8 +43,8 @@ export class HouseService {
     var httpRequest = this.http.delete<any>(this.uri + '/' + id, options)
       .pipe(catchError(this.handleError));
     return httpRequest;
-
   }
+
   updateAvailable(id, body): Observable<HouseDetailInfo> {
     const headers = new HttpHeaders({
       'Content-Type': 'application/json',

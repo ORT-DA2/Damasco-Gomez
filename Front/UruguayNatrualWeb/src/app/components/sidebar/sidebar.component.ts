@@ -20,7 +20,8 @@ export const ROUTES: RouteInfo[] = [
     { path: '/search', title: 'Search',  icon:'ni-building text-yellow', class: '' , admin:false},
     { path: '/reports', title: 'Reports',  icon:'ni-shop text-red', class: '' , admin:true},
     { path: '/review', title: 'Review',  icon:'ni-chart-pie-35 text-blue', class: '' , admin:false},
-    { path: '/import', title: 'Import',  icon:'ni-chart-pie-35 text-blue', class: '' , admin:true},
+    { path: '/import', title: 'Import',  icon:'ni-chart-pie-35 text-brown', class: '' , admin:true},
+    { path: '/admin', title: 'Admin',  icon:'ni-circle-08 text-green', class: '' , admin:true},
 ];
 
 @Component({

@@ -11,34 +11,48 @@ import { HouseEditorComponent } from 'src/app/pages/house/house-editor/house-edi
 import { HouseDashboardComponent } from 'src/app/pages/house/house-dashboard/house-dashboard.component';
 import { ReportDashboardComponent } from 'src/app/pages/report/report-dashboard/report-dashboard.component';
 import { ImportDashboardComponent } from 'src/app/pages/import/import-dashboard/import-dashboard.component';
+import { AdminDashboardComponent } from 'src/app/pages/admin/admin-dashboard/admin-dashboard.component';
+import { AdminEditorComponent } from 'src/app/pages/admin/admin-editor/admin-editor.component';
 
 
 
 
 export const AdminLayoutRoutes: Routes = [
-    { path: 'user-profile',   component: UserProfileComponent },
-    { path: 'bookings',
-      children: [
-        { path: '', component: BookingDashboardComponent},
-        { path: 'booking-editor/:id', component: BookingEditorComponent }
-      ]
-    },
-    { path: 'tourist-points',
-      children: [
-        { path: '', component: TouristPointDashboardComponent  },
-        { path: 'tourist-point-editor/:id', component: TouristPointEditorComponent },
-      ]
-    },
-    { path: 'categories',
-      children:[
-        { path: '', component: CategoryDashboardComponent},
-        { path: 'category-editor/:id', component :  CategoryEditorComponent},
-      ]
-    },
-    { path: 'houses', children:[
+  { path: 'user-profile', component: UserProfileComponent },
+  {
+    path: 'bookings',
+    children: [
+      { path: '', component: BookingDashboardComponent },
+      { path: 'booking-editor/:id', component: BookingEditorComponent }
+    ]
+  },
+  {
+    path: 'tourist-points',
+    children: [
+      { path: '', component: TouristPointDashboardComponent },
+      { path: 'tourist-point-editor/:id', component: TouristPointEditorComponent },
+    ]
+  },
+  {
+    path: 'categories',
+    children: [
+      { path: '', component: CategoryDashboardComponent },
+      { path: 'category-editor/:id', component: CategoryEditorComponent },
+    ]
+  },
+  {
+    path: 'houses', children: [
       { path: '', component: HouseDashboardComponent },
-      { path: 'house-editor/:id', component :  HouseEditorComponent},
-    ] },
-    { path: 'reports', component: ReportDashboardComponent },
-    { path: 'import', component: ImportDashboardComponent },
+      { path: 'house-editor/:id', component: HouseEditorComponent },
+    ]
+  },
+  { path: 'reports', component: ReportDashboardComponent },
+  { path: 'import', component: ImportDashboardComponent },
+  {
+    path: 'admin',
+    children: [
+      { path: '', component: AdminDashboardComponent },
+      { path: 'admin-editor/:id', component: AdminEditorComponent },
+    ]
+  },
 ];

@@ -23,12 +23,12 @@
             </div>
             <div class="col-4 text-right">
               <button *ngIf="existentCategory" type="button" placement="top-center" triggers="hover focus click"
-                class="btn btn-rounded btn-outline-warning" ngxClipboard [cbContent]="'air-baloon'"
+                class="btn btn-rounded btn-outline-warning" ngxClipboard
                 (cbOnSuccess)="copy = 'air-baloon'" (click)="updateData(category)">
                 Update
               </button>
               <button *ngIf="!existentCategory" type="button" placement="top-center" triggers="hover focus click"
-                class="btn btn-rounded btn-outline-warning" ngxClipboard [cbContent]="'air-baloon'"
+                class="btn btn-rounded btn-outline-warning" ngxClipboard
                 (cbOnSuccess)="copy = 'air-baloon'" (click)="addCategory(category)">
                 Add Category
               </button>
@@ -63,12 +63,12 @@
                   </div>
 
                   <button type="button" placement="top-center" triggers="hover focus click"
-                    class="btn btn-rounded btn-outline-warning" ngxClipboard [cbContent]="'air-baloon'"
+                    class="btn btn-rounded btn-outline-warning" ngxClipboard
                     (click)="addTouristPoint()" (cbOnSuccess)="copy = 'air-baloon'">
                     Add Tourist Point
                   </button>
                   <button type="button" placement="top-center" triggers="hover focus click"
-                    class="btn btn-rounded btn-outline-danger" ngxClipboard [cbContent]="'air-baloon'"
+                    class="btn btn-rounded btn-outline-danger" ngxClipboard
                     (click)="deleteTouristPoint()" (cbOnSuccess)="copy = 'air-baloon'">
                     Delete Tourist Point
                   </button>
@@ -79,7 +79,7 @@
           </form>
 
           <button routerLink="/categories" type="button" placement="top-center" triggers="hover focus click"
-            class="btn btn-rounded btn-outline-warning" ngxClipboard [cbContent]="'air-baloon'"
+            class="btn btn-rounded btn-outline-warning" ngxClipboard
             (cbOnSuccess)="copy = 'air-baloon'">
             Go back
           </button>

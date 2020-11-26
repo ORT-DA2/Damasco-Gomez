@@ -1,7 +1,8 @@
 <!-- Table -->
 <div class="card shadow">
   <div class="card-header border-0">
-    <h3 class="mb-0">Bookings</h3>
+    <h3 class="mb-0">Admin</h3>
+    <p class="errorMessage" id="error-message">{{errorMessageEndpoint}}</p>
   </div>
   <div class="table-responsive">
     <table class="table align-items-center table-flush">
@@ -9,21 +10,17 @@
         <tr>
           <th scope="col">Name</th>
           <th scope="col">Email</th>
-          <th scope="col">Code</th>
-          <th scope="col">HouseId</th>
           <th></th>
           <th></th>
         </tr>
       </thead>
       <tbody>
-        <tr *ngFor="let booking of bookings; let i = index">
-          <th scope="row"> {{booking.name}} </th>
-          <td>{{booking.email}}</td>
-          <td>{{booking.code}} </td>
-          <td>{{booking.houseId}}</td>
+        <tr *ngFor="let person of persons; let i = index">
+          <th scope="row"> {{person.name}} </th>
+          <td>{{person.email}}</td>
           <td>
               <button
-                [routerLink]="['/bookings/booking-editor',booking.id]"
+                [routerLink]="['/admin/admin-editor',person.id]"
                 type="button"
                 placement="top-center"
                 triggers="hover focus click"
@@ -41,7 +38,7 @@
                 class="btn btn-rounded btn-outline-danger"
                 ngxClipboard
                 (cbOnSuccess) = "copy = 'air-baloon'"
-                (click)="delete(booking)">
+                (click)="delete(person)">
                 Delete
               </button>
           </td>

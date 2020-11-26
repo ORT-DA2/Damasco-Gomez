@@ -23,6 +23,9 @@ import { ReviewService } from './services/reviews/review.service';
 import { SessionService } from './services/sessions/session.service';
 import { TouristLayoutComponent } from './layouts/tourist-layout/tourist-layout.component';
 import { ImportDashboardComponent } from './pages/import/import-dashboard/import-dashboard.component';
+import { AdminDashboardComponent } from './pages/admin/admin-dashboard/admin-dashboard.component';
+import { AdminEditorComponent } from './pages/admin/admin-editor/admin-editor.component';
+import { AdminTableComponent } from './pages/admin/admin-table/admin-table.component';
 
 
 
@@ -47,6 +50,9 @@ import { ImportDashboardComponent } from './pages/import/import-dashboard/import
     AdminLayoutComponent,
     TouristLayoutComponent,
     ImportDashboardComponent,
+    AdminDashboardComponent,
+    AdminEditorComponent,
+    AdminTableComponent,
   ],
   providers: [TouristPointsService,
     CategoryService,

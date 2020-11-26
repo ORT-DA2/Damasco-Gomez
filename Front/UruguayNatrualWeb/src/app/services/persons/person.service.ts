@@ -17,7 +17,11 @@ export class PersonService {
     return this.http.get<PersonBasicInfo[]>(this.uri)
       .pipe(catchError(this.handleError));
   }
-  logout() { }
+
+  getBy(id): Observable<PersonBasicInfo>{
+    return this.http.get<PersonBasicInfo>(this.uri + '/' + id)
+    .pipe(catchError(this.handleError));
+  }
 
   newUser(user):Observable<PersonBasicInfo> {
     const headers = new HttpHeaders({
@@ -29,17 +33,27 @@ export class PersonService {
     return httpRequest;
   }
 
-  update(id, body):Observable<any>{
+  update(id, body):Observable<PersonBasicInfo>{
     const headers = new HttpHeaders({
       'Content-Type': 'application/json',
       'Authorization':  localStorage.getItem('token')
     });
     let options = { headers: headers };
-    var httpRequest = this.http.put<any>(this.uri + '/' + id, body, options)
+    var httpRequest = this.http.put<PersonBasicInfo>(this.uri + '/' + id, body, options)
       .pipe(catchError(this.handleError));
     return httpRequest;
   }
 
+  delete(id): Observable<PersonBasicInfo> {
+    const headers = new HttpHeaders({
+      'Authorization': localStorage.getItem('token'),
+      'Content-Type': 'application/json'
+    });
+    let options = { headers: headers };
+    var httpRequest = this.http.delete<PersonBasicInfo>(this.uri + '/' + id, options)
+      .pipe(catchError(this.handleError));
+    return httpRequest;
+  }
 
   private handleError(error: HttpErrorResponse) {
     return throwError(error.error);

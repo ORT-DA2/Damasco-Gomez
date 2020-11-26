@@ -1,0 +1,11 @@
+.mt--7{
+  margin-top: -28rem !important;
+}
+.errorMessage{
+  font-weight: bold;
+  color: red;
+}
+.successMessage{
+  font-weight: bold;
+  color: green;
+}
