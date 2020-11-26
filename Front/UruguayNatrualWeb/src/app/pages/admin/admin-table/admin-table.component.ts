@@ -1,5 +1,4 @@
 import { Component, OnInit } from '@angular/core';
-import { catchError } from 'rxjs/operators';
 import { PersonBasicInfo } from 'src/app/models/person/person-base-info';
 import { PersonService } from 'src/app/services/persons/person.service';
 
