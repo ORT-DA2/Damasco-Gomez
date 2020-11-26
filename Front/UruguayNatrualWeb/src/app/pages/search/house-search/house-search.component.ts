@@ -19,9 +19,9 @@ export class HouseSearchComponent implements OnInit {
   touristPointId: string;
   public checkIn: string;
   public checkOut: string;
-  checkInValue: string;
-  checkOutValue: string;
-  public cantAdults: string = '0';
+  checkInValue: string = '1/1/2020';
+  checkOutValue: string = '1/12/2020';
+  public cantAdults: string = '1';
   public cantChildren: string = '0';
   public cantBabies: string = '0';
   public cantSeniors: string = '0';

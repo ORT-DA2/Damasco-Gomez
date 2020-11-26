@@ -20,6 +20,7 @@ export const ROUTES: RouteInfo[] = [
     { path: '/search', title: 'Search',  icon:'ni-building text-yellow', class: '' , admin:false},
     { path: '/reports', title: 'Reports',  icon:'ni-shop text-red', class: '' , admin:true},
     { path: '/review', title: 'Review',  icon:'ni-chart-pie-35 text-blue', class: '' , admin:false},
+    { path: '/import', title: 'Import',  icon:'ni-chart-pie-35 text-blue', class: '' , admin:true},
 ];
 
 @Component({

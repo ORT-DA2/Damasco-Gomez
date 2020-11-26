@@ -99,7 +99,7 @@ namespace BusinessLogic.Logics
                     };
                     this.touristPointLogic.Add(tourist);
                 }
-                                    );
+            );
             parseo.HouseImportModels.ForEach(m =>
             {
                 House house = new House()

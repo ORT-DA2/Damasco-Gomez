@@ -10,6 +10,7 @@ import { CategoryEditorComponent } from 'src/app/pages/category/category-editor/
 import { HouseEditorComponent } from 'src/app/pages/house/house-editor/house-editor.component';
 import { HouseDashboardComponent } from 'src/app/pages/house/house-dashboard/house-dashboard.component';
 import { ReportDashboardComponent } from 'src/app/pages/report/report-dashboard/report-dashboard.component';
+import { ImportDashboardComponent } from 'src/app/pages/import/import-dashboard/import-dashboard.component';
 
 
 
@@ -39,4 +40,5 @@ export const AdminLayoutRoutes: Routes = [
       { path: 'house-editor/:id', component :  HouseEditorComponent},
     ] },
     { path: 'reports', component: ReportDashboardComponent },
+    { path: 'import', component: ImportDashboardComponent },
 ];
