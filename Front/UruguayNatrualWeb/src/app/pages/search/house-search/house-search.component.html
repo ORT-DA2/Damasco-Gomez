@@ -76,7 +76,7 @@
                     </div>
                   </div>
                 </div>
-                <div class="col-4 col-lg-3 mt-4">
+                <div class="col-4 mt-4">
                   <div class="card bg-secondary shadow">
                     <div class="card-header bg-white border-0">
                       <button type="button" placement="top-center" triggers="hover focus click"
@@ -95,6 +95,9 @@
   </div>
 
 </div>
+
+
+
 
 <div *ngIf="searchDone" class="container-fluid mt--7">
   <!-- Table -->
@@ -118,17 +121,59 @@
           <mat-panel-description (click)="open(mymodal, house)" class="btn btn-sm btn-primary"> Choose
           </mat-panel-description>
         </mat-expansion-panel-header>
-        <div class="col-6">
-          <p>Price per Nigh: {{house.pricePerNight}} </p>
-          <p>Starts: {{house.starts}}</p>
-          <p>Address: {{house.address}}</p>
-          <p>Description: {{house.description}}</p>
-          <p>Phone: {{house.phone}}</p>
-          <p>Contact: {{house.contact}}</p>
-        </div>
-        <div class="col-6">
-          <div *ngFor="let image of house.images;" >
-            <img src='environment.imageURL + "image.name"' class="img-thumbnail img-circle">
+        <div class="row">
+          <div class="col-6">
+            <p>Price per Nigh: {{house.pricePerNight}} </p>
+            <p>Starts: {{house.starts}}</p>
+            <p>Address: {{house.address}}</p>
+            <p>Description: {{house.description}}</p>
+            <p>Phone: {{house.phone}}</p>
+            <p>Contact: {{house.contact}}</p>
+          </div>
+          <div *ngIf="house.reviews" class="col-6 border-black">
+            <div id="carouselExampleControlsReviews" class="carousel slide" data-ride="carousel">
+              <div class="carousel-inner">
+                <div class="carousel-item active">
+                  <p>Reviews</p>
+                </div>
+                <div *ngFor="let review of house.reviews; let i = index" class="carousel-item">
+                  <p>Comment: {{review.comment}}</p>
+                  <p>Score: {{review.score}}</p>
+                </div>
+              </div>
+              <a class="carousel-control-prev" role="button" data-slide="prev"
+                data-target="#carouselExampleControlsReviews">
+                <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                <span class="sr-only">Previous</span>
+              </a>
+              <a class="carousel-control-next" role="button" data-slide="next"
+                data-target="#carouselExampleControlsReviews">
+                <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                <span class="sr-only">Next</span>
+              </a>
+            </div>
+          </div>
+          <div *ngIf="house.images" class="col-6">
+            <div id="carouselExampleControlsImages" class="carousel slide" data-ride="carousel">
+              <div class="carousel-inner">
+                <div class="carousel-item active">
+                  <img class="d-block w-100" [src]="imageSourceUrl+house.images[0].name" [alt]="house.images[0].name">
+                </div>
+                <div *ngFor="let image of house.images | slice:1; let i = index" class="carousel-item">
+                  <img class="d-block w-100" [src]="imageSourceUrl+image.name" [alt]="image.name">
+                </div>
+              </div>
+              <a class="carousel-control-prev" role="button" data-slide="prev"
+                data-target="#carouselExampleControlsImages">
+                <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                <span class="sr-only">Previous</span>
+              </a>
+              <a class="carousel-control-next" role="button" data-slide="next"
+                data-target="#carouselExampleControlsImages">
+                <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                <span class="sr-only">Next</span>
+              </a>
+            </div>
           </div>
         </div>
       </mat-expansion-panel>

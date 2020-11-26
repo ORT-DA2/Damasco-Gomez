@@ -3,10 +3,14 @@ import { FormGroup } from '@angular/forms';
 import { MatDialog, MatDialogConfig } from '@angular/material/dialog';
 import { ActivatedRoute } from '@angular/router';
 import { ModalDismissReasons, NgbModal } from '@ng-bootstrap/ng-bootstrap';
+import { catchError } from 'rxjs/operators';
 import { BookingInInfo } from 'src/app/models/booking/booking-in-info';
 import { HouseBasicInfo } from 'src/app/models/house/house-base-info';
+import { ReviewBasicInfo } from 'src/app/models/reviews/review-base-info';
 import { BookingService } from 'src/app/services/bookings/booking.service';
 import { HouseService } from 'src/app/services/houses/house.service';
+import { ReviewService } from 'src/app/services/reviews/review.service';
+import { environment } from 'src/environments/environment';
 
 @Component({
   selector: 'app-house-search',
@@ -16,6 +20,7 @@ import { HouseService } from 'src/app/services/houses/house.service';
 export class HouseSearchComponent implements OnInit {
   panelOpenState = false;
   public houses: HouseBasicInfo[] = {} as HouseBasicInfo[];
+  public reviews: ReviewBasicInfo[] = {} as ReviewBasicInfo[];
   touristPointId: string;
   public checkIn: string;
   public checkOut: string;
@@ -40,15 +45,21 @@ export class HouseSearchComponent implements OnInit {
   public successMessage: string = '';
   public myForm: FormGroup;
   closeResult: string;
+  imageSourceUrl: string = environment.imageURL;
 
   constructor(
     private route: ActivatedRoute,
     private houseService: HouseService,
     private bookingService: BookingService,
+    private reviewService: ReviewService,
     private modalService: NgbModal) { }
 
   ngOnInit(): void {
     this.touristPointId = (this.route.snapshot.paramMap.get('id'));
+    this.reviewService.getAll()
+    .subscribe(
+      response => this.reviews = response, catchError => this.errorMessage = catchError
+    );
   }
 
   open(content, house) {
@@ -73,8 +84,9 @@ export class HouseSearchComponent implements OnInit {
   private getAll(houseResponse: HouseBasicInfo[]) {
     this.houses = houseResponse;
     this.searchDone = true;
+    this.houses.forEach(h => h.reviews = this.reviews.filter(x => x.houseId === h.id));
+    console.log(this.houses[0].reviews[0].comment);
   }
-
   searchBy() {
     const checkInDate = new Date(this.checkIn);
     const checkOutDate = new Date(this.checkOut);

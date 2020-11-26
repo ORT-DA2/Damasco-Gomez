@@ -33,7 +33,7 @@ export class RegisterComponent implements OnInit {
           this.loginNewUser(response);
         },
         catchError => {
-          this.errorMessageEndpoint = catchError.error + ', fix it and try again';
+          this.errorMessageEndpoint = catchError + ', fix it and try again';
         }
       )
   }
@@ -45,7 +45,7 @@ export class RegisterComponent implements OnInit {
         this.router.navigateByUrl('/user-profile');
       },
       catchError => {
-        this.errorMessageEndpoint = catchError.error + ', fix it and try again';
+        this.errorMessageEndpoint = catchError + ', fix it and try again';
       }
     )
   }
