@@ -19,14 +19,14 @@ export class PersonService {
   }
   logout() { }
 
-  newUser(user: PersonBasicInfo) {
-    const personData = {
-      ...user,
-    };
-    return this.http.post(
-      `${this.uri}`,
-      personData
-    );
+  newUser(user):Observable<PersonBasicInfo> {
+    const headers = new HttpHeaders({
+      'Content-Type': 'application/json',
+    });
+    let options = { headers: headers };
+    var httpRequest = this.http.post<any>(this.uri, user, options)
+      .pipe(catchError(this.handleError));
+    return httpRequest;
   }
 
   update(id, body):Observable<any>{

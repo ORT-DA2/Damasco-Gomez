@@ -44,6 +44,8 @@ export class NavbarComponent implements OnInit {
   }
   logOut() {
     localStorage.removeItem('token');
+    localStorage.removeItem('name');
+    localStorage.removeItem('email');
     this.refreshPage();
   }
   refreshPage() { window.location.reload(); }

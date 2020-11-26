@@ -24,10 +24,12 @@ export class RegisterComponent implements OnInit {
   }
 
   createAccount() {
-    debugger;
     this.personService.newUser(this.user).
       subscribe(
         response => {
+          console.log(response);
+          localStorage.setItem('name',response.name);
+          localStorage.setItem('email',response.email);
           this.loginNewUser(response);
         },
         catchError => {
@@ -37,7 +39,6 @@ export class RegisterComponent implements OnInit {
   }
 
   loginNewUser(user: any) {
-    debugger;
     this.sessionService.login(this.user).
     subscribe(
       response => {
