@@ -9,7 +9,7 @@ using WebApi.Filters;
 namespace WebApi.Controllers
 {
     [Route("api/categories")]
-    public class CategoryController : VidlyControllerBase
+    public class CategoryController : ControllerBaseApi
     {
         private readonly ICategoryLogic categoryLogic;
         public CategoryController(ICategoryLogic categoryLogic)
@@ -23,8 +23,8 @@ namespace WebApi.Controllers
         [HttpGet]
         public IActionResult Get()
         {
-            var elementCategory = this.categoryLogic.GetAll().Select(m => new CategoryBasicInfoModel(m)).ToList();
-            return Ok(elementCategory);
+            var Categories = this.categoryLogic.GetAll().Select(m => new CategoryBasicInfoModel(m)).ToList();
+            return Ok(Categories);
         }
         /// <summary>
         /// Permite a un ususario ver una categoria del sistema
@@ -35,8 +35,8 @@ namespace WebApi.Controllers
         [HttpGet("{id}",Name="GetCategory")]
         public IActionResult GetBy([FromRoute]int id)
         {
-            Category elementCategory = this.categoryLogic.GetBy(id);
-            return Ok(new CategoryDetailInfoModel(elementCategory));
+            Category Category = this.categoryLogic.GetBy(id);
+            return Ok(new CategoryDetailInfoModel(Category));
         }
         /// <summary>
         /// Permite a un administrador agregar una categoria
@@ -49,7 +49,7 @@ namespace WebApi.Controllers
         public IActionResult Post([FromBody]CategoryModel categoryModel)
         {
             Category categoryAdded = this.categoryLogic.Add(categoryModel.ToEntity());
-            CategoryBasicInfoModel categoryInfoModel = new CategoryBasicInfoModel(categoryAdded);
+            CategoryDetailInfoModel categoryInfoModel = new CategoryDetailInfoModel(categoryAdded);
             return CreatedAtRoute("GetCategory", new {Id = categoryInfoModel.Id} ,categoryInfoModel);
         }
         /// <summary>
@@ -65,7 +65,7 @@ namespace WebApi.Controllers
         {
             Category newCategory = categoryModel.ToEntity();
             newCategory = this.categoryLogic.Update(id,newCategory);
-            CategoryBasicInfoModel categoryInfoModel = new CategoryBasicInfoModel(newCategory);
+            CategoryDetailInfoModel categoryInfoModel = new CategoryDetailInfoModel(newCategory);
             return CreatedAtRoute("GetCategory", new {Id = categoryInfoModel.Id} ,categoryInfoModel);
         }
         /// <summary>

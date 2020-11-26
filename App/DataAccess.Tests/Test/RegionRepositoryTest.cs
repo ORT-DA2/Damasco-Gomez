@@ -16,7 +16,7 @@ namespace DataAccess.Tests
         private RepositoryMaster repositoryMaster;
         private DbContext context;
         private DbContextOptions options;
-        private RegionRepository repository;
+        private RegionRepository repositoryRegion;
         [TestInitialize]
         public void Setup()
         {
@@ -39,7 +39,7 @@ namespace DataAccess.Tests
             regionsToReturn.ForEach(m => this.context.Add(m));
             this.context.SaveChanges();
             repositoryMaster = new RepositoryMaster(context);
-            repository = new RegionRepository(repositoryMaster);
+            repositoryRegion = new RegionRepository(repositoryMaster);
         }
 
         [TestCleanup]
@@ -52,7 +52,7 @@ namespace DataAccess.Tests
         {
             Region region = new Region(){Id = 123, Name="name new"};
             RegionRepository repo = new RegionRepository(this.repositoryMaster);
-            int cantRepo = this.repository.GetElements().Count();
+            int cantRepo = this.repositoryRegion.GetElements().Count();
 
             repo.Add(region);
 
@@ -64,7 +64,7 @@ namespace DataAccess.Tests
         {
             Region region = new Region(){Id = 1, Name="name new"};
 
-            repository.Add(region);
+            repositoryRegion.Add(region);
         }
         [TestMethod]
         [ExpectedException(typeof(ArgumentException))]
@@ -72,7 +72,7 @@ namespace DataAccess.Tests
         {
             Region region = regionsToReturn.First();
 
-            repository.Add(region);
+            repositoryRegion.Add(region);
         }
         [TestMethod]
         [ExpectedException(typeof(ArgumentException))]
@@ -80,12 +80,12 @@ namespace DataAccess.Tests
         {
             Region region = new Region(){Name = ""};
 
-            repository.Add(region);
+            repositoryRegion.Add(region);
         }
         [TestMethod]
         public void TestGetAllRegionsOk()
         {
-            var result = repository.GetElements();
+            var result = repositoryRegion.GetElements();
 
             Assert.IsTrue(regionsToReturn.SequenceEqual(result));
         }
@@ -94,7 +94,7 @@ namespace DataAccess.Tests
         {
             Region region = regionsToReturn.First();
 
-            bool result = repository.ExistElement(region);
+            bool result = repositoryRegion.ExistElement(region);
 
             Assert.IsTrue(result);
         }
@@ -103,7 +103,7 @@ namespace DataAccess.Tests
         {
             Region region = new Region(){Id = 223 , Name="name"};
 
-            bool result = repository.ExistElement(region);
+            bool result = repositoryRegion.ExistElement(region);
 
             Assert.IsFalse(result);
         }
@@ -113,7 +113,7 @@ namespace DataAccess.Tests
         {
             int regionId = 234234234;
 
-            bool result = repository.ExistElement(regionId);
+            bool result = repositoryRegion.ExistElement(regionId);
 
             Assert.IsFalse(result);
         }
@@ -122,7 +122,7 @@ namespace DataAccess.Tests
         {
             Region region = regionsToReturn.First();
 
-            bool result = repository.ExistElement(region.Id);
+            bool result = repositoryRegion.ExistElement(region.Id);
 
             Assert.IsTrue(result);
         }
@@ -131,7 +131,7 @@ namespace DataAccess.Tests
         {
             Region region = new Region(){Id=123423};
 
-            bool result = repository.ExistElement(region.Id);
+            bool result = repositoryRegion.ExistElement(region.Id);
 
             Assert.IsFalse(result);
         }
@@ -140,7 +140,7 @@ namespace DataAccess.Tests
         {
             Region region = regionsToReturn.First();
 
-            Region result = repository.Find(region.Id);
+            Region result = repositoryRegion.Find(region.Id);
 
             Assert.AreEqual(result,region);
         }
@@ -151,7 +151,7 @@ namespace DataAccess.Tests
         {
             Region region = new Region(){Id=232323};
 
-            Region result = repository.Find(region.Id);
+            Region result = repositoryRegion.Find(region.Id);
         }
         [TestMethod]
         public void TestUpdate()
@@ -160,7 +160,7 @@ namespace DataAccess.Tests
             region.Name = "New name of region";
             string newName = region.Name;
 
-            repository.Update(region.Id, region);
+            repositoryRegion.Update(region.Id, region);
 
             Assert.AreEqual(region.Name, newName);
         }
@@ -168,11 +168,11 @@ namespace DataAccess.Tests
         public void TestDelete()
         {
             Region region = regionsToReturn.First();
-            int repoCount = this.repository.GetElements().Count();
+            int repoCount = this.repositoryRegion.GetElements().Count();
 
-            repository.Delete(region);
+            repositoryRegion.Delete(region);
 
-            Assert.AreEqual(repoCount - 1 , repository.GetElements().Count());
+            Assert.AreEqual(repoCount - 1 , repositoryRegion.GetElements().Count());
         }
         [TestMethod]
         [ExpectedException(typeof(ArgumentException))]
@@ -180,17 +180,17 @@ namespace DataAccess.Tests
         {
             Region region = new Region(){Id = 2342342};
 
-            repository.Delete(region);
+            repositoryRegion.Delete(region);
         }
         [TestMethod]
         public void TestDeleteById()
         {
             Region region = regionsToReturn.First();
-            int repoCount = this.repository.GetElements().Count();
+            int repoCount = this.repositoryRegion.GetElements().Count();
 
-            repository.Delete(region.Id);
+            repositoryRegion.Delete(region.Id);
 
-            Assert.AreEqual(repoCount - 1 , repository.GetElements().Count());
+            Assert.AreEqual(repoCount - 1 , repositoryRegion.GetElements().Count());
         }
         [TestMethod]
         [ExpectedException(typeof(ArgumentException))]
@@ -198,7 +198,7 @@ namespace DataAccess.Tests
         {
             int id = 23123123;
 
-            repository.Delete(id);
+            repositoryRegion.Delete(id);
         }
     }
 }

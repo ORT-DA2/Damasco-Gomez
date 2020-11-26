@@ -1,0 +1,154 @@
+<div class="header pb-8 pt-5 pt-lg-8 d-flex align-items-center" style="
+    min-height: 600px;
+    background-image: url(assets/img/theme/profile-cover.jpg);
+    background-size: cover;
+    background-position: center top;
+  ">
+  <!-- Mask -->
+  <span class="mask bg-gradient-danger opacity-8"></span>
+</div>
+<div class="container-fluid mt--7">
+  <div class="row">
+    <div class="col-xl-8 order-xl-1">
+      <div class="card bg-secondary shadow">
+        <div class="card-header bg-white border-0">
+          <div class="row align-items-center">
+            <div class="col-4">
+              <h3 class="mb-0">House</h3>
+              <span class="heading-small text-muted mb-4">Id {{ houseId }}</span>
+            </div>
+            <div class="col-4 text-right">
+              <p class="errorMessage" id="error-message">{{errorMessage}}</p>
+              <p class="successMessage" id="succes-messages">{{updateMessage}}</p>
+            </div>
+            <div class="col-4 text-right">
+              <a (click)="updateAvailable()" class="btn btn-primary">Update</a>
+            </div>
+          </div>
+        </div>
+        <div class="card-body">
+          <form>
+            <div class="pl-lg-4">
+              <div class="row">
+                <div class="col-6">
+                  <div class="form-group">
+                    <label class="form-control-label" for="input-username">Name</label>
+                    <input type="text" id="input-username" class="form-control form-control-alternative"
+                      [(ngModel)]="house.name" name="nameHouse" />
+                  </div>
+                </div>
+
+
+                <div class="col-6">
+                  <div class="form-group">
+                    <label class="form-control-label" for="input-pricePerNight">Starts</label>
+                    <input type="number" id="input-starts" class="form-control form-control-alternative"
+                      [(ngModel)]="house.starts" name="starts" />
+                  </div>
+                </div>
+
+                <div class="col-6">
+                  <div class="form-group">
+                    <label class="form-control-label" for="input-pricePerNight">PricePerNight</label>
+                    <input type="number" id="input-pricepernight" class="form-control form-control-alternative"
+                      [(ngModel)]="house.pricePerNight" name="pricePerNigth" />
+                  </div>
+                </div>
+
+                <div class="col-6">
+                  <div class="form-group">
+                    <label class="form-control-label">Avaiable</label>
+                    <select class="custom-select form-control form-control-alternative" [(ngModel)]="house.avaible"
+                      name="house.avaible">
+                      <option disabled>Choose Avaible</option>
+                      <option [ngValue]="true">True</option>
+                      <option [ngValue]="false">False</option>
+                    </select>
+                  </div>
+                </div>
+
+                <div class="col-6">
+                  <div class="form-group">
+                    <label class="form-control-label" for="input-adress">Adress</label>
+                    <input type="text" id="input-adress" class="form-control form-control-alternative"
+                      [(ngModel)]="house.address" name="adress" />
+                  </div>
+                </div>
+
+                <div class="col-6">
+                  <div class="form-group">
+                    <label class="form-control-label" for="input-description">Description</label>
+                    <input type="text" id="input-description" class="form-control form-control-alternative"
+                      [(ngModel)]="house.description" name="description" />
+                  </div>
+                </div>
+                <div class="col-6">
+                  <div class="form-group">
+                    <label class="form-control-label" for="input-phone">Phone</label>
+                    <input type="number" id="input-phone" class="form-control form-control-alternative"
+                      [(ngModel)]="house.phone" name="phone" />
+                  </div>
+                </div>
+
+                <div class="col-6">
+                  <div class="form-group">
+                    <label class="form-control-label" for="input-contact">Contact</label>
+                    <input type="text" id="input-contact" class="form-control form-control-alternative"
+                      [(ngModel)]="house.contact" name="contact" />
+                  </div>
+                </div>
+
+                <div class="col-12">
+                  <div class="form-group">
+                    <label class="form-control-label">Tourist Point</label>
+                    <select class="custom-select form-control form-control-alternative"
+                      [(ngModel)]="touristPointName"
+                      name="touristPointName" (change)="onChangeTouristPointName(touristPointName)">
+                      <option disabled>Choose Tourist Point</option>
+                      <option *ngFor="let touristPoint of touristPoints">
+                        {{ touristPoint.name }}
+                      </option>
+                    </select>
+                  </div>
+                </div>
+
+
+
+                <div class="col-12">
+                  <div class="form-group" id="imagesTouristPoints">
+                    <label class="form-control-label" for="input-images">Images</label>
+                    <div *ngFor="let image of imagesNames;
+                          let i = index" [(ngModel)]="imagesNames[i]" name="{{i}}">
+                      <img src="{{sourcesImages[i]}}" class="img-thumbnail img-circle">
+                    </div>
+                    <input *ngIf="addNewImage" type="file" size="50"
+                      class="form-control form-control-alternative"
+                      (change)="onSelectFile($event)" multiple/>
+                  </div>
+                  <button type="button" placement="top-center" triggers="hover focus click"
+                    class="btn btn-rounded btn-md btn-outline-warning" ngxClipboard (click)="addImage()"
+                    (cbOnSuccess)="copy = 'air-baloon'">
+                    Add Images
+                  </button>
+                  <button
+                    type="button" placement="top-center" triggers="hover focus click"
+                    class="btn btn-rounded btn-outline-danger" ngxClipboard (click)="deleteImage()"
+                    (cbOnSuccess)="copy = 'air-baloon'">
+                    Delete Image
+                  </button>
+                </div>
+
+              </div>
+            </div>
+            <hr class="my-4" />
+          </form>
+          <button routerLink="/houses" type="button" placement="top-center" triggers="hover focus click"
+            class="btn btn-rounded btn-outline-warning" ngxClipboard
+            (cbOnSuccess)="copy = 'air-baloon'">
+            Go back
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

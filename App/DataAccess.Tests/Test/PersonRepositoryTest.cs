@@ -17,7 +17,7 @@ namespace DataAccess.Tests.Test
         private RepositoryMaster repositoryMaster;
         private DbContext context;
         private DbContextOptions options;
-        private PersonRepository repository;
+        private PersonRepository repositoryPerson;
         [TestInitialize]
         public void Setup()
         {
@@ -40,7 +40,7 @@ namespace DataAccess.Tests.Test
             personsToReturn.ForEach(m => this.context.Add(m));
             this.context.SaveChanges();
             repositoryMaster = new RepositoryMaster(context);
-            repository = new PersonRepository(repositoryMaster);
+            repositoryPerson = new PersonRepository(repositoryMaster);
         }
 
         [TestCleanup]
@@ -53,7 +53,7 @@ namespace DataAccess.Tests.Test
         {
             Person person = new Person(){Id = 123, Email="name new"};
             PersonRepository repo = new PersonRepository(this.repositoryMaster);
-            int cantRepo = this.repository.GetElements().Count();
+            int cantRepo = this.repositoryPerson.GetElements().Count();
 
             repo.Add(person);
 
@@ -65,7 +65,7 @@ namespace DataAccess.Tests.Test
         {
             Person person = new Person(){Id = 1, Email="name new"};
 
-            repository.Add(person);
+            repositoryPerson.Add(person);
         }
         [TestMethod]
         [ExpectedException(typeof(ArgumentException))]
@@ -74,12 +74,12 @@ namespace DataAccess.Tests.Test
             Person person = personsToReturn.First();
             ArgumentException exception = new ArgumentException();
 
-            repository.Add(person);
+            repositoryPerson.Add(person);
         }
         [TestMethod]
         public void TestGetAllPersonsOk()
         {
-            var result = repository.GetElements();
+            var result = repositoryPerson.GetElements();
 
             Assert.IsTrue(personsToReturn.SequenceEqual(result));
         }
@@ -88,7 +88,7 @@ namespace DataAccess.Tests.Test
         {
             Person person = personsToReturn.First();
 
-            bool result = repository.ExistElement(person);
+            bool result = repositoryPerson.ExistElement(person);
 
             Assert.IsTrue(result);
         }
@@ -97,7 +97,7 @@ namespace DataAccess.Tests.Test
         {
             Person person = new Person(){Id = 223 , Email="name"};
 
-            bool result = repository.ExistElement(person);
+            bool result = repositoryPerson.ExistElement(person);
 
             Assert.IsFalse(result);
         }
@@ -107,7 +107,7 @@ namespace DataAccess.Tests.Test
         {
             int personId = 234234234;
 
-            bool result = repository.ExistElement(personId);
+            bool result = repositoryPerson.ExistElement(personId);
 
             Assert.IsFalse(result);
         }
@@ -116,7 +116,7 @@ namespace DataAccess.Tests.Test
         {
             Person person = personsToReturn.First();
 
-            bool result = repository.ExistElement(person.Id);
+            bool result = repositoryPerson.ExistElement(person.Id);
 
             Assert.IsTrue(result);
         }
@@ -125,7 +125,7 @@ namespace DataAccess.Tests.Test
         {
             Person person = new Person(){Id=123423};
 
-            bool result = repository.ExistElement(person.Id);
+            bool result = repositoryPerson.ExistElement(person.Id);
 
             Assert.IsFalse(result);
         }
@@ -134,7 +134,7 @@ namespace DataAccess.Tests.Test
         {
             Person person = personsToReturn.First();
 
-            Person result = repository.Find(person.Id);
+            Person result = repositoryPerson.Find(person.Id);
 
             Assert.AreEqual(result,person);
         }
@@ -145,7 +145,7 @@ namespace DataAccess.Tests.Test
         {
             Person person = new Person(){Id=232323};
 
-            Person result = repository.Find(person.Id);
+            Person result = repositoryPerson.Find(person.Id);
         }
         [TestMethod]
         public void TestUpdate()
@@ -154,7 +154,7 @@ namespace DataAccess.Tests.Test
             person.Email = "New name of person";
             string newEmail = person.Email;
 
-            repository.Update(person.Id,person);
+            repositoryPerson.Update(person.Id,person);
 
             Assert.AreEqual(person.Email,newEmail);
         }
@@ -162,11 +162,11 @@ namespace DataAccess.Tests.Test
         public void TestDelete()
         {
             Person person = personsToReturn.First();
-            int repoCount = this.repository.GetElements().Count();
+            int repoCount = this.repositoryPerson.GetElements().Count();
 
-            repository.Delete(person);
+            repositoryPerson.Delete(person);
 
-            Assert.AreEqual(repoCount - 1 , repository.GetElements().Count());
+            Assert.AreEqual(repoCount - 1 , repositoryPerson.GetElements().Count());
         }
         [TestMethod]
         [ExpectedException(typeof(ArgumentException))]
@@ -174,17 +174,17 @@ namespace DataAccess.Tests.Test
         {
             Person person = new Person(){Id = 2342342};
 
-            repository.Delete(person);
+            repositoryPerson.Delete(person);
         }
         [TestMethod]
         public void TestDeleteById()
         {
             Person person = personsToReturn.First();
-            int repoCount = this.repository.GetElements().Count();
+            int repoCount = this.repositoryPerson.GetElements().Count();
 
-            repository.Delete(person.Id);
+            repositoryPerson.Delete(person.Id);
 
-            Assert.AreEqual(repoCount - 1 , repository.GetElements().Count());
+            Assert.AreEqual(repoCount - 1 , repositoryPerson.GetElements().Count());
         }
         [TestMethod]
         [ExpectedException(typeof(ArgumentException))]
@@ -192,7 +192,7 @@ namespace DataAccess.Tests.Test
         {
             int id = 23123123;
 
-            repository.Delete(id);
+            repositoryPerson.Delete(id);
         }
     }
 }

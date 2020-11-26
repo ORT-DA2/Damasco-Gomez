@@ -23,7 +23,7 @@ namespace BusinessLogic.Tests.Test
         private House houseId1;
 
         [TestInitialize]
-        public void initVariables()
+        public void InitVariables()
         {
             reviewsToReturn = new List<Review>()
             {

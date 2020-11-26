@@ -16,11 +16,11 @@ namespace WebApi.Tests.Test
     {
         private List<Report> reportsToReturn;
         private List<Report> reportsToReturnEmpty;
-        private Report report1;
-        private Mock<IReportLogic> mock;
-        private ReportController controller ;
+        private Report report;
+        private Mock<IReportLogic> mockReportLogic;
+        private ReportController controllerReport;
         [TestInitialize]
-        public void initVariables()
+        public void InitVariables()
         {
             reportsToReturn = new List<Report>()
             {
@@ -46,52 +46,74 @@ namespace WebApi.Tests.Test
                     }
             };
             reportsToReturnEmpty = new List<Report>();
-            report1 = reportsToReturn.First();
-            mock = new Mock<IReportLogic>(MockBehavior.Strict);
-            controller = new ReportController(mock.Object);
+            report = reportsToReturn.First();
+            mockReportLogic = new Mock<IReportLogic>(MockBehavior.Strict);
+            controllerReport = new ReportController(mockReportLogic.Object);
+        }
+        [TestMethod]
+        public void TestGetHousesReportBookingWithId1ByOk()
+        {
+            ReportTouristPointModel reportTouristPointModel = new ReportTouristPointModel()
+            {
+                IdTouristPoint = 1,
+                DateFrom = "01/01/2020",
+                DateOut = "09/01/2020",
+            };
+            ReportTouristPoint reportTouristPoint = reportTouristPointModel.ToEntity();
+            IEnumerable<ReportHousesBasicModel> reportsBasic = reportsToReturn.Select(m => new ReportHousesBasicModel(m));
+
+            mockReportLogic.Setup(m => m.GetHousesReportBy(It.IsAny<ReportTouristPoint>())).Returns(reportsToReturn);
+
+            var result = controllerReport.GetHousesReportBy(reportTouristPointModel);
+
+            var okResult = result as OkObjectResult;
+            var reports = okResult.Value as IEnumerable<ReportHousesBasicModel>;
+            mockReportLogic.VerifyAll();
+            Assert.IsTrue(reportsBasic.SequenceEqual(reports));
+
         }
         [TestMethod]
         public void TestGetHousesReportByOk()
         {
-            ReportTouristPointModel reportTouristPointModel = new ReportTouristPointModel ()
+            ReportTouristPointModel reportTouristPointModel = new ReportTouristPointModel()
             {
-                IdTp = 1,
-                DateFrom= "01/12/2020",
-                DateOut= "31/12/2020",
+                IdTouristPoint = 1,
+                DateFrom = "01/12/2020",
+                DateOut = "31/12/2020",
             };
-            ReportTouristPoint  reportTouristPoint= reportTouristPointModel.ToEntity();
+            ReportTouristPoint reportTouristPoint = reportTouristPointModel.ToEntity();
             IEnumerable<ReportHousesBasicModel> reportsBasic = reportsToReturn.Select(m => new ReportHousesBasicModel(m));
 
-            mock.Setup(m => m.GetHousesReportBy(It.IsAny<ReportTouristPoint>())).Returns(reportsToReturn);
-        
-            var result = controller.GetHousesReportBy(reportTouristPointModel);
+            mockReportLogic.Setup(m => m.GetHousesReportBy(It.IsAny<ReportTouristPoint>())).Returns(reportsToReturn);
+
+            var result = controllerReport.GetHousesReportBy(reportTouristPointModel);
 
             var okResult = result as OkObjectResult;
             var reports = okResult.Value as IEnumerable<ReportHousesBasicModel>;
-            mock.VerifyAll();
+            mockReportLogic.VerifyAll();
             Assert.IsTrue(reportsBasic.SequenceEqual(reports));
 
         }
         [TestMethod]
         public void TestGetHousesReportByNullResult()
         {
-            ReportTouristPointModel reportTouristPointModel = new ReportTouristPointModel ()
+            ReportTouristPointModel reportTouristPointModel = new ReportTouristPointModel()
             {
-                IdTp = 1,
-                DateFrom= "01/12/2020",
-                DateOut= "31/12/2020",
+                IdTouristPoint = 1,
+                DateFrom = "01/12/2020",
+                DateOut = "31/12/2020",
             };
-            List <Report> reportsToReturnEmpty = new List<Report>();
-            ReportTouristPoint  reportTouristPoint= reportTouristPointModel.ToEntity();
-            IEnumerable<ReportHousesBasicModel> reportsBasic = new List<ReportHousesBasicModel>(){}; 
+            List<Report> reportsToReturnEmpty = new List<Report>();
+            ReportTouristPoint reportTouristPoint = reportTouristPointModel.ToEntity();
+            IEnumerable<ReportHousesBasicModel> reportsBasic = new List<ReportHousesBasicModel>() { };
 
-            mock.Setup(m => m.GetHousesReportBy(It.IsAny<ReportTouristPoint>())).Returns(reportsToReturnEmpty);
-        
-            var result = controller.GetHousesReportBy(reportTouristPointModel);
+            mockReportLogic.Setup(m => m.GetHousesReportBy(It.IsAny<ReportTouristPoint>())).Returns(reportsToReturnEmpty);
+
+            var result = controllerReport.GetHousesReportBy(reportTouristPointModel);
 
             var okResult = result as OkObjectResult;
             var reports = okResult.Value as IEnumerable<ReportHousesBasicModel>;
-            mock.VerifyAll();
+            mockReportLogic.VerifyAll();
             Assert.IsTrue(reportsBasic.SequenceEqual(reports));
         }
     }

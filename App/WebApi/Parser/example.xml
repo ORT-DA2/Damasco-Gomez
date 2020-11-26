@@ -1,0 +1,81 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<root>
+  <TouristImportModels>
+    <Name>Name tourist point</Name>
+    <Image>arroyo.jpeg</Image>
+    <Description>Description tourist point</Description>
+    <RegionId>1</RegionId>
+    <Categories>
+        <Category>1</Category>
+        <Category>2</Category>
+        <Category>3</Category>
+    </Categories>
+  </TouristImportModels>
+  <TouristImportModels>
+    <Name>Name tourist point 2</Name>
+    <Image>campo.jpeg</Image>
+    <Description>Description tourist point 2</Description>
+    <RegionId>2</RegionId>
+    <Categories>
+        <Category>2</Category>
+        <Category>3</Category>
+        <Category>4</Category>
+    </Categories>
+  </TouristImportModels>
+  <HouseImportModels>
+    <PricePerNight>100</PricePerNight>
+    <TouristPointId>1</TouristPointId>
+    <Name>Name house 1</Name>
+    <Starts>1</Starts>
+    <Address>asdfasdfasdf</Address>
+    <Description>asdfasdf</Description>
+    <Phone>1234</Phone>
+    <Contact>Contact example</Contact>
+    <Images>
+        <Image>museo.jpeg</Image>
+        <Image>playa.jpeg</Image>
+    </Images>
+  </HouseImportModels>
+  <HouseImportModels>
+    <PricePerNight>200</PricePerNight>
+    <TouristPointId>1</TouristPointId>
+    <Name>Name house 2</Name>
+    <Starts>1</Starts>
+    <Address>asdfasdfasdf</Address>
+    <Description>asdfasdf</Description>
+    <Phone>1234</Phone>
+    <Contact>Contact example</Contact>
+    <Images>
+        <Image>punta.jpeg</Image>
+        <Image>piedras.jpeg</Image>
+    </Images>
+  </HouseImportModels>
+  <HouseImportModels>
+    <PricePerNight>100</PricePerNight>
+    <TouristPointId>1</TouristPointId>
+    <Name>Name house 3</Name>
+    <Starts>1</Starts>
+    <Address>asdfasdfasdf</Address>
+    <Description>asdfasdf</Description>
+    <Phone>1234</Phone>
+    <Contact>Contact example</Contact>
+    <Images>
+        <Image>punta.jpeg</Image>
+        <Image>piedras.jpeg</Image>
+    </Images>
+  </HouseImportModels>
+  <HouseImportModels>
+    <PricePerNight>100</PricePerNight>
+    <TouristPointId>1</TouristPointId>
+    <Name>Name house 4</Name>
+    <Starts>4</Starts>
+    <Address>asdfasdfasdf</Address>
+    <Description>asdfasdf</Description>
+    <Phone>1234</Phone>
+    <Contact>Contact example</Contact>
+    <Images>
+        <Image>punta.jpeg</Image>
+        <Image>piedras.jpeg</Image>
+    </Images>
+  </HouseImportModels>
+</root>

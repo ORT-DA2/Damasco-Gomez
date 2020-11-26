@@ -9,7 +9,7 @@ using WebApi.Filters;
 namespace WebApi.Controllers
 {
     [Route("api/bookings")]
-    public class BookingController : VidlyControllerBase
+    public class BookingController : ControllerBaseApi
     {
         private readonly IBookingLogic bookingLogic;
         public BookingController(IBookingLogic bookingLogic)
@@ -23,8 +23,8 @@ namespace WebApi.Controllers
         [HttpGet]
         public IActionResult Get()
         {
-            IEnumerable<Booking> elementBookings = this.bookingLogic.GetAll();
-            IEnumerable<BookingBasicModel> bookingModels =  elementBookings.Select(m => new BookingBasicModel(m));
+            IEnumerable<Booking> bookings = this.bookingLogic.GetAll();
+            IEnumerable<BookingBasicModel> bookingModels =  bookings.Select(m => new BookingBasicModel(m));
             return Ok(bookingModels);
         }
         /// <summary>
@@ -36,8 +36,8 @@ namespace WebApi.Controllers
         [HttpGet("{id}",Name="GetBooking")]
         public IActionResult GetBy([FromRoute]int id)
         {
-            Booking elementBooking = this.bookingLogic.GetBy(id);
-            BookingDetailModel bookingModel = new BookingDetailModel(elementBooking);
+            Booking Booking = this.bookingLogic.GetBy(id);
+            BookingDetailModel bookingModel = new BookingDetailModel(Booking);
             return Ok(bookingModel);
         }
         /// <summary>
@@ -47,12 +47,11 @@ namespace WebApi.Controllers
         /// <response code="200">Se devuelve la información requerida.</response>
         /// <response code="400">Reserva no existente con ese identificador</response>
         [HttpPost]
-        [AuthorizationFilter]
         public IActionResult Post([FromBody]BookingModel bookingModel)
         {
             Booking newBooking = bookingModel.ToEntity();
             newBooking = this.bookingLogic.Add(newBooking);
-            BookingBasicModel basicModel = new BookingBasicModel(newBooking);
+            BookingDetailModel basicModel = new BookingDetailModel(newBooking);
             return CreatedAtRoute("GetBooking", new {Id = basicModel.Id} , basicModel);
         }
         /// <summary>
@@ -68,7 +67,7 @@ namespace WebApi.Controllers
         {
             Booking newBooking = bookingModel.ToEntity(false);
             newBooking = this.bookingLogic.Update(id, newBooking);
-            BookingBasicModel basicModel = new BookingBasicModel(newBooking);
+            BookingDetailModel basicModel = new BookingDetailModel(newBooking);
             return CreatedAtRoute("GetBooking", new {Id = basicModel.Id} , basicModel);
         }
         /// <summary>

@@ -1,10 +1,8 @@
 using System;
-using System.Diagnostics.CodeAnalysis;
 using Domain.Entities;
 
 namespace Model.In
 {
-    [ExcludeFromCodeCoverage]
     public class ReviewModel
     {
         public int HouseId {get; set;}

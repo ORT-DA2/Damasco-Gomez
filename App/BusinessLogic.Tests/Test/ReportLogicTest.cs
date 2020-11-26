@@ -58,7 +58,7 @@ namespace BusinessLogic.Tests.Test
             {
                 DateFrom= dateFrom,
                 DateOut = dateOut,
-                IdTp = idTP,
+                IdTouristPoint = idTP,
             };
 
             mock.Setup(m => m.FilterCantBookigsByHouse(dateFrom,dateOut,idTP)).Returns(reportsToReturn);
@@ -77,7 +77,7 @@ namespace BusinessLogic.Tests.Test
             {
                 DateFrom= dateFrom,
                 DateOut = dateOut,
-                IdTp = idTP,
+                IdTouristPoint = idTP,
             };
 
             mock.Setup(m => m.FilterCantBookigsByHouse(dateFrom,dateOut,idTP)).Returns(reportsEmpty);

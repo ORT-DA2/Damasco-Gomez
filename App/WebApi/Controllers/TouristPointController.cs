@@ -10,7 +10,7 @@ using WebApi.Filters;
 namespace WebApi.Controllers
 {   
     [Route("api/touristpoints")]
-    public class TouristPointController : VidlyControllerBase
+    public class TouristPointController : ControllerBaseApi
     {
         private readonly ITouristPointLogic touristPointLogic;
         public TouristPointController(ITouristPointLogic touristPointLogic)
@@ -24,9 +24,9 @@ namespace WebApi.Controllers
         [HttpGet]
         public IActionResult Get()
         {
-            var elementTouristPoint = this.touristPointLogic.GetAll();
-            var model = elementTouristPoint.Select(m => new TouristPointBasicInfoModel(m)).ToList();
-            return Ok(model);
+            var touristPoints = this.touristPointLogic.GetAll();
+            var modelTouristPoint = touristPoints.Select(m => new TouristPointBasicInfoModel(m)).ToList();
+            return Ok(modelTouristPoint);
         }
         /// <summary>
         /// Permite a un ususario ver un punto turistico del sistema
@@ -38,8 +38,8 @@ namespace WebApi.Controllers
         public IActionResult GetBy([FromRoute]int id)
         {
             var elementTouristPoint = this.touristPointLogic.GetBy(id);
-            var model = new TouristPointDetailInfoModel(elementTouristPoint);
-            return Ok(model);
+            var modelTouristPoint = new TouristPointDetailInfoModel(elementTouristPoint);
+            return Ok(modelTouristPoint);
         }
         /// <summary>
         /// Permite a un administrador realizar un punto turisticos
@@ -53,7 +53,7 @@ namespace WebApi.Controllers
         {
             var newTouristPoint = touristPointModel.ToEntity();
             var touristPointAdded = this.touristPointLogic.Add(newTouristPoint);
-            var touristPointModelOut = new TouristPointBasicInfoModel(touristPointAdded);
+            var touristPointModelOut = new TouristPointDetailInfoModel(touristPointAdded);
             var routePost = CreatedAtRoute("GetTouristPoint", new {Id = touristPointAdded.Id} , touristPointModelOut);
             return routePost;
         }
@@ -70,7 +70,7 @@ namespace WebApi.Controllers
         {
             TouristPoint touristPoint = touristPointModel.ToEntity();
             touristPoint = this.touristPointLogic.Update(id,touristPoint);
-            TouristPointBasicInfoModel basicModel = new TouristPointBasicInfoModel(touristPoint);
+            TouristPointDetailInfoModel basicModel = new TouristPointDetailInfoModel(touristPoint);
             return CreatedAtRoute("GetTouristPoint", new {id =basicModel.Id} ,basicModel);
         }
         /// <summary>

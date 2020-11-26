@@ -1,0 +1,65 @@
+<div class="header pb-8 pt-5 pt-lg-8 d-flex align-items-center"
+  style="min-height: 600px; background-image: url(assets/img/theme/profile-cover.jpg); background-size: cover; background-position: center top;">
+  <!-- Mask -->
+  <span class="mask bg-gradient-danger opacity-8"></span>
+  <!-- Header container -->
+  <div class="container-fluid d-flex align-items-center">
+    <div class="row">
+      <div class="col-12">
+        <h1 class="display-2 text-white">Import</h1>
+        <p class="text-white mt-0 mb-5">Select a file and type of import</p>
+        <div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+
+<div class="container-fluid mt--7">
+  <div class="row">
+    <div class="col-xl-8 order-xl-1">
+      <div class="card bg-secondary shadow">
+        <div class="card-header bg-white border-0">
+          <div class="row align-items-center">
+            <div class="col-4">
+              <h3 class="mb-0">Import</h3>
+            </div>
+            <div class="col-4">
+              <p class="errorMessage" id="error-message">{{errorMessageBackend}}</p>
+              <p class="successMessage" id="succes-messages">{{updateMessage}}</p>
+            </div>
+            <div class="col-4 text-right">
+              <a (click)="importData()" class="btn btn-primary">Import</a>
+            </div>
+          </div>
+        </div>
+        <div class="card-body">
+          <form>
+            <h6 class="heading-small text-muted mb-4">File information</h6>
+            <div class="pl-lg-4">
+              <div class="row">
+                <div class="col-lg-6">
+                  <div class="form-group">
+                    <label class="form-control-label" for="input-type">Type File</label>
+                    <input type="text" id="input-type" class="form-control form-control-alternative"
+                      [(ngModel)]="fileInfo.name" name="name">
+                  </div>
+                </div>
+                <div class="col-12">
+                  <div class="form-group">
+                    <label class="form-control-label" for="input-file">File</label>
+                    <input type="file" id="input-file" size="50" class="form-control form-control-alternative"
+                      (change)="onSelectFile($event)" value="file.path" />
+                  </div>
+                </div>
+              </div>
+            </div>
+            <hr class="my-4" />
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

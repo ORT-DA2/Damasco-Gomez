@@ -17,7 +17,7 @@ namespace DataAccess.Tests.Test
         private RepositoryMaster repositoryMaster;
         private DbContext context;
         private DbContextOptions options;
-        private TouristPointRepository repository;
+        private TouristPointRepository repositoryTouristPoint;
         [TestInitialize]
         public void Setup()
         {
@@ -42,7 +42,7 @@ namespace DataAccess.Tests.Test
             touristPointsToReturn.ForEach(m => this.context.Add(m));
             this.context.SaveChanges();
             repositoryMaster = new RepositoryMaster(context);
-            repository = new TouristPointRepository(repositoryMaster);
+            repositoryTouristPoint = new TouristPointRepository(repositoryMaster);
         }
 
         [TestCleanup]
@@ -55,7 +55,7 @@ namespace DataAccess.Tests.Test
         {
             TouristPoint touristPoint = new TouristPoint(){Id = 123, Name="name new",RegionId = 1};
             TouristPointRepository repo = new TouristPointRepository(this.repositoryMaster);
-            int cantRepo = this.repository.GetElements().Count();
+            int cantRepo = this.repositoryTouristPoint.GetElements().Count();
 
             repo.Add(touristPoint);
 
@@ -67,7 +67,7 @@ namespace DataAccess.Tests.Test
         {
             TouristPoint touristPoint = new TouristPoint(){Id = 123, Name="name new",RegionId=0};
 
-            repository.Add(touristPoint);
+            repositoryTouristPoint.Add(touristPoint);
         }
         [TestMethod]
         [ExpectedException(typeof(ArgumentException))]
@@ -76,12 +76,12 @@ namespace DataAccess.Tests.Test
             TouristPoint touristPoint = touristPointsToReturn.First();
             ArgumentException exception = new ArgumentException();
 
-            repository.Add(touristPoint);
+            repositoryTouristPoint.Add(touristPoint);
         }
         [TestMethod]
         public void TestGetAllTouristPointsOk()
         {
-            var result = repository.GetElements();
+            var result = repositoryTouristPoint.GetElements();
 
             Assert.IsTrue(touristPointsToReturn.SequenceEqual(result));
         }
@@ -90,7 +90,7 @@ namespace DataAccess.Tests.Test
         {
             TouristPoint touristPoint = touristPointsToReturn.First();
 
-            bool result = repository.ExistElement(touristPoint);
+            bool result = repositoryTouristPoint.ExistElement(touristPoint);
 
             Assert.IsTrue(result);
         }
@@ -99,7 +99,7 @@ namespace DataAccess.Tests.Test
         {
             TouristPoint touristPoint = new TouristPoint(){Id = 223 , Name="name"};
 
-            bool result = repository.ExistElement(touristPoint);
+            bool result = repositoryTouristPoint.ExistElement(touristPoint);
 
             Assert.IsFalse(result);
         }
@@ -109,7 +109,7 @@ namespace DataAccess.Tests.Test
         {
             int touristPointId = 234234234;
 
-            bool result = repository.ExistElement(touristPointId);
+            bool result = repositoryTouristPoint.ExistElement(touristPointId);
 
             Assert.IsFalse(result);
         }
@@ -118,7 +118,7 @@ namespace DataAccess.Tests.Test
         {
             TouristPoint touristPoint = touristPointsToReturn.First();
 
-            bool result = repository.ExistElement(touristPoint.Id);
+            bool result = repositoryTouristPoint.ExistElement(touristPoint.Id);
 
             Assert.IsTrue(result);
         }
@@ -127,7 +127,7 @@ namespace DataAccess.Tests.Test
         {
             TouristPoint touristPoint = new TouristPoint(){Id=123423};
 
-            bool result = repository.ExistElement(touristPoint.Id);
+            bool result = repositoryTouristPoint.ExistElement(touristPoint.Id);
 
             Assert.IsFalse(result);
         }
@@ -136,7 +136,7 @@ namespace DataAccess.Tests.Test
         {
             TouristPoint touristPoint = touristPointsToReturn.First();
 
-            TouristPoint result = repository.Find(touristPoint.Id);
+            TouristPoint result = repositoryTouristPoint.Find(touristPoint.Id);
 
             Assert.AreEqual(result,touristPoint);
         }
@@ -147,7 +147,7 @@ namespace DataAccess.Tests.Test
         {
             TouristPoint touristPoint = new TouristPoint(){Id=232323};
 
-            TouristPoint result = repository.Find(touristPoint.Id);
+            TouristPoint result = repositoryTouristPoint.Find(touristPoint.Id);
         }
         [TestMethod]
         public void TestUpdate()
@@ -156,7 +156,7 @@ namespace DataAccess.Tests.Test
             touristPoint.Name = "New name of touristPoint";
             string newName = touristPoint.Name;
 
-            repository.Update(touristPoint.Id,touristPoint);
+            repositoryTouristPoint.Update(touristPoint.Id,touristPoint);
 
             Assert.AreEqual(touristPoint.Name,newName);
         }
@@ -164,11 +164,11 @@ namespace DataAccess.Tests.Test
         public void TestDelete()
         {
             TouristPoint touristPoint = touristPointsToReturn.First();
-            int repoCount = this.repository.GetElements().Count();
+            int repoCount = this.repositoryTouristPoint.GetElements().Count();
 
-            repository.Delete(touristPoint);
+            repositoryTouristPoint.Delete(touristPoint);
 
-            Assert.AreEqual(repoCount - 1 , repository.GetElements().Count());
+            Assert.AreEqual(repoCount - 1 , repositoryTouristPoint.GetElements().Count());
         }
         [TestMethod]
         [ExpectedException(typeof(ArgumentException))]
@@ -176,17 +176,17 @@ namespace DataAccess.Tests.Test
         {
             TouristPoint touristPoint = new TouristPoint(){Id = 2342342};
 
-            repository.Delete(touristPoint);
+            repositoryTouristPoint.Delete(touristPoint);
         }
         [TestMethod]
         public void TestDeleteById()
         {
             TouristPoint touristPoint = touristPointsToReturn.First();
-            int repoCount = this.repository.GetElements().Count();
+            int repoCount = this.repositoryTouristPoint.GetElements().Count();
 
-            repository.Delete(touristPoint.Id);
+            repositoryTouristPoint.Delete(touristPoint.Id);
 
-            Assert.AreEqual(repoCount - 1 , repository.GetElements().Count());
+            Assert.AreEqual(repoCount - 1 , repositoryTouristPoint.GetElements().Count());
         }
         [TestMethod]
         [ExpectedException(typeof(ArgumentException))]
@@ -194,7 +194,7 @@ namespace DataAccess.Tests.Test
         {
             int id = 23123123;
 
-            repository.Delete(id);
+            repositoryTouristPoint.Delete(id);
         }
     }
 }

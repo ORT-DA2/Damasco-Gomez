@@ -1,3 +1,4 @@
+using System;
 using System.Diagnostics.CodeAnalysis;
 
 namespace Domain.Entities
@@ -7,13 +8,32 @@ namespace Domain.Entities
         public int Id {get ; set ;}
         public string Name {get; set;}
         public string Extention {get; set;}
+        public int HouseId {get; set;}
         [ExcludeFromCodeCoverage]
-        public ImageHouse()
+        public ImageHouse(string name, int houseId)
         {
+            this.Name = name;
+            this.HouseId = houseId;
+            this.Extention = GetExtention(name);
         }
         public void Update(ImageHouse element)
         {
-            if(element.Name != null) this.Name = element.Name;
+            if(element.Name != null) 
+            { 
+                this.Name = element.Name;
+                this.Extention = GetExtention(element.Name);
+            }
+        }
+        private string GetExtention(string name)
+        {
+            if(name.Contains("."))
+            {
+                return name.Split('.')[1];
+            }
+            else 
+            {
+                throw new ArgumentException("Name doesn't have extention");
+            }
         }
     }
 }

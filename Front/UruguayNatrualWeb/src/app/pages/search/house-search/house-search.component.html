@@ -1,0 +1,191 @@
+<div class="header pb-8 pt-5 pt-lg-8 d-flex align-items-center"
+  style="min-height: 600px; background-image: url(assets/img/theme/profile-cover.jpg); background-size: cover; background-position: center top;">
+  <!-- Mask -->
+  <span class="mask bg-gradient-danger opacity-8"></span>
+  <!-- Header container -->
+  <div class="container-fluid d-flex align-items-center">
+    <div class="row">
+      <div class="col-12">
+        <h1 class="display-2 text-white">Search by</h1>
+        <p class="text-white mt-0 mb-5">Enter the next data</p>
+        <div>
+          <form class="form">
+            <div class="container-fluid">
+              <div class="row">
+                <div class="col-12 mt-4">
+                  <div class="card bg-secondary shadow">
+                    <div class="card-header bg-white border-0">
+                      <div class="row align-items-center">
+                        <div class="col-6">
+                          <div class="input-group align-items-center">
+                            <label class="form-control-label m-0 mr-3" for="input-date">Check In:</label>
+                            <input type="date" id="input-date-in" [(ngModel)]="checkIn" name="checkIn"
+                              class="form-control form-control-alternative" (change)="onChangeCheckIn(checkIn)">
+                          </div>
+                        </div>
+                        <div class="col-6">
+                          <div class="input-group align-items-center">
+                            <label class="form-control-label m-0 mr-3" for="input-date">Check Out:</label>
+                            <input type="date" id="input-date-in" [(ngModel)]="checkOut" name="checkOut"
+                              class="form-control form-control-alternative" (change)="onChangeCheckOut(checkOut)">
+                          </div>
+                        </div>
+                        <div class="col-12">
+                          <p class="errorMessage">{{errorMessageDates}}</p>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <div class="col-12 mt-4">
+                  <div class="card bg-secondary shadow">
+                    <div class="card-header bg-white border-0">
+                      <div class="row align-items-center">
+                        <div class="col-6 col-lg-3">
+                          <div class="input-group align-items-center">
+                            <label class="form-control-label mr-3" for="input-adults">Adults</label>
+                            <input type="number" min="0" step="0" id="input-adults" placement="top-center"
+                              class="form-control" [(ngModel)]="cantAdults" name="adults">
+                          </div>
+                        </div>
+                        <div class="col-6 col-lg-3">
+                          <div class="input-group align-items-center">
+                            <label class="form-control-label mr-3" for="input-children">Children</label>
+                            <input type="number" min="0" step="0" id="input-children" class="form-control m-2 ml-3"
+                              [(ngModel)]="cantChildren" name="children">
+                          </div>
+                        </div>
+                        <div class="col-6 col-lg-3">
+                          <div class="input-group align-items-center">
+                            <label class="form-control-label mr-3" for="input-babies">Babies</label>
+                            <input type="number" min="0" step="0" id="input-babies" class="form-control m-2 ml-3"
+                              [(ngModel)]="cantBabies" name="babies">
+                          </div>
+                        </div>
+                        <div class="col-6 col-lg-3">
+                          <div class="input-group align-items-center">
+                            <label class="form-control-label mr-3" for="input-retires">Seniors</label>
+                            <input type="number" min="0" step="0" id="input-retires" class="form-control m-2 ml-3"
+                              [(ngModel)]="cantSeniors" name="retires">
+                          </div>
+                        </div>
+                        <div class="col-12">
+                          <p class="errorMessage">{{errorMessagePeople}}</p>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <div class="col-4 col-lg-3 mt-4">
+                  <div class="card bg-secondary shadow">
+                    <div class="card-header bg-white border-0">
+                      <button type="button" placement="top-center" triggers="hover focus click"
+                        class="bg-warning btn btn-rounded bg-warning text-white shadow" ngxClipboard
+                        (cbOnSuccess)="copy = 'air-baloon'" (click)="searchBy()">
+                        Search</button>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+
+</div>
+
+<div *ngIf="searchDone" class="container-fluid mt--7">
+  <!-- Table -->
+  <div class="card shadow">
+    <div class="card-header border-0">
+      <h3 class="mb-0">Houses</h3>
+    </div>
+
+    <mat-accordion *ngFor="let house of houses; let i = index">
+      <mat-expansion-panel (opened)="panelOpenState = true" (closed)="panelOpenState = false">
+        <mat-expansion-panel-header class="mb-3">
+          <mat-panel-title>
+            Id: {{house.id}}
+          </mat-panel-title>
+          <mat-panel-description>
+            Name: {{house.name}}
+          </mat-panel-description>
+          <mat-panel-description>
+            Total Price: {{house.totalPrice}}
+          </mat-panel-description>
+          <mat-panel-description (click)="open(mymodal, house)" class="btn btn-sm btn-primary"> Choose
+          </mat-panel-description>
+        </mat-expansion-panel-header>
+        <div class="col-6">
+          <p>Price per Nigh: {{house.pricePerNight}} </p>
+          <p>Starts: {{house.starts}}</p>
+          <p>Address: {{house.address}}</p>
+          <p>Description: {{house.description}}</p>
+          <p>Phone: {{house.phone}}</p>
+          <p>Contact: {{house.contact}}</p>
+        </div>
+        <div class="col-6">
+          <div *ngFor="let image of house.images;" >
+            <img src='environment.imageURL + "image.name"' class="img-thumbnail img-circle">
+          </div>
+        </div>
+      </mat-expansion-panel>
+    </mat-accordion>
+  </div>
+
+</div>
+
+
+
+<ng-template #mymodal let-modal>
+  <div class="modal-header">
+    <h4 class="modal-title" id="modal-basic-title">Complete Booking</h4>
+    <button type="button" class="close" aria-label="Close" (click)="modal.dismiss('Cross click')">
+      <span aria-hidden="true">×</span>
+    </button>
+  </div>
+  <div class="modal-body">
+    <form>
+      <div class="col-12">
+        <div class="form-group">
+          <label class="form-control-label" for="input-email">Email</label>
+          <input type="email" id="input-email" [(ngModel)]="email" name="email" [readonly]="codeGenerated"
+            class="form-control form-control-alternative" placeholder="jesse@example.com">
+        </div>
+      </div>
+      <div class="col-12">
+        <div class="form-group">
+          <label class="form-control-label" for="input-first">FirstName</label>
+          <input type="text" id="input-first" [(ngModel)]="firstName" name="firstName" [readonly]="codeGenerated"
+            class="form-control form-control-alternative">
+        </div>
+      </div>
+      <div class="col-12">
+        <div class="form-group">
+          <label class="form-control-label" for="input-last">LastName</label>
+          <input type="text" id="input-last" [(ngModel)]="lastName" name="lastName" [readonly]="codeGenerated"
+            class="form-control form-control-alternative">
+        </div>
+      </div>
+      <div *ngIf="codeGenerated" class="col-12">
+        <div class="form-group">
+          <label class="form-control-label" for="input-last">Booking Code</label>
+          <input type="text" id="input-code" [(ngModel)]="code" name="code" [readonly]="true"
+            class="form-control form-control-alternative">
+        </div>
+      </div>
+    </form>
+  </div>
+  <div class="modal-footer">
+    <div>
+      <p class="errorMessage" id="modal-error">{{errorMessage}}</p>
+      <p class="successMessage" id="modal-success">{{successMessage}}</p>
+    </div>
+    <button *ngIf="codeGenerated" type="button" class="btn btn-outline-dark" (click)="done(modal)">Done</button>
+    <button *ngIf="!codeGenerated" type="button" class="btn btn-outline-dark" (click)="okModal()">Book</button>
+    <button *ngIf="!codeGenerated" type="button" class="btn btn-outline-danger"
+      (click)="modal.close('Cancel click')">Cancel</button>
+  </div>
+</ng-template>

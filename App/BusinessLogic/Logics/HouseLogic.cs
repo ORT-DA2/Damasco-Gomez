@@ -11,10 +11,14 @@ namespace BusinessLogic
     {
         private readonly ITouristPointRepository touristPointRepository;
         private readonly IHouseRepository houseRepository;
-        public HouseLogic(IHouseRepository houseRepository, ITouristPointRepository touristPointRepository)
+        private readonly IImageHouseRepository imageHouseRepository;
+        public HouseLogic(IHouseRepository houseRepository, 
+            ITouristPointRepository touristPointRepository,
+            IImageHouseRepository imageHouseRepository)
         {
             this.houseRepository = houseRepository;
             this.touristPointRepository = touristPointRepository;
+            this.imageHouseRepository = imageHouseRepository;
         }
 
         public void Delete()
@@ -42,8 +46,20 @@ namespace BusinessLogic
         }
         public House Update(int id, House house)
         {
-            if(house.TouristPointId > 0) ValidateTouristPoint(house.TouristPointId);
+            if(house.TouristPointId > 0) 
+            {
+                ValidateTouristPoint(house.TouristPointId);
+            }
             House houseBD = this.houseRepository.Find(id);
+            if(house.ImagesHouse != null && house.ImagesHouse.Count > 0) 
+            {
+                houseBD.ImagesHouse.ForEach
+                (
+                    m => m = this.imageHouseRepository.Find(m.Id)
+                );
+                houseBD.ImagesHouse.RemoveAll(x => x.Id == houseBD.Id);
+                houseBD.ImagesHouse = house.ImagesHouse;
+            }
             houseBD.Update(house);
             this.houseRepository.Update(id, houseBD);
             return houseBD;

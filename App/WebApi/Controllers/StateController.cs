@@ -8,7 +8,7 @@ using Model.Out;
 namespace WebApi.Controllers
 {
     [Route("api/states")]
-    public class StateController : VidlyControllerBase
+    public class StateController : ControllerBaseApi
     {
         private readonly IStateLogic stateLogic;
 

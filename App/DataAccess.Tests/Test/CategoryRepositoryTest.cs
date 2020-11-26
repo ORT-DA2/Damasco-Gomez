@@ -17,7 +17,7 @@ namespace DataAccess.Tests.Test
         private RepositoryMaster repositoryMaster;
         private DbContext context;
         private DbContextOptions options;
-        private CategoryRepository repository;
+        private CategoryRepository repositoryCategory;
         [TestInitialize]
         public void Setup()
         {
@@ -40,7 +40,7 @@ namespace DataAccess.Tests.Test
             categoriesToReturn.ForEach(m => this.context.Add(m));
             this.context.SaveChanges();
             repositoryMaster = new RepositoryMaster(context);
-            repository = new CategoryRepository(repositoryMaster);
+            repositoryCategory = new CategoryRepository(repositoryMaster);
         }
 
         [TestCleanup]
@@ -53,7 +53,7 @@ namespace DataAccess.Tests.Test
         {
             Category category = new Category(){Id = 123, Name="name new"};
             CategoryRepository repo = new CategoryRepository(this.repositoryMaster);
-            int cantRepo = this.repository.GetElements().Count();
+            int cantRepo = this.repositoryCategory.GetElements().Count();
 
             repo.Add(category);
 
@@ -65,7 +65,7 @@ namespace DataAccess.Tests.Test
         {
             Category category = new Category(){Id = 1, Name=""};
 
-            repository.Add(category);
+            repositoryCategory.Add(category);
         }
         [TestMethod]
         [ExpectedException(typeof(ArgumentException))]
@@ -73,7 +73,7 @@ namespace DataAccess.Tests.Test
         {
             Category category = null;
 
-            repository.Add(category);
+            repositoryCategory.Add(category);
         }
         [TestMethod]
         [ExpectedException(typeof(ArgumentException))]
@@ -81,7 +81,7 @@ namespace DataAccess.Tests.Test
         {
             Category category = categoriesToReturn.First();
 
-            repository.Add(category);
+            repositoryCategory.Add(category);
         }
         [TestMethod]
         [ExpectedException(typeof(ArgumentException))]
@@ -89,12 +89,12 @@ namespace DataAccess.Tests.Test
         {
             Category category = new Category(){Id = 123123123, Name=""};
 
-            repository.Add(category);
+            repositoryCategory.Add(category);
         }
         [TestMethod]
         public void TestGetAllCategorysOk()
         {
-            var result = repository.GetElements();
+            var result = repositoryCategory.GetElements();
 
             Assert.IsTrue(categoriesToReturn.SequenceEqual(result));
         }
@@ -103,7 +103,7 @@ namespace DataAccess.Tests.Test
         {
             Category category = categoriesToReturn.First();
 
-            bool result = repository.ExistElement(category);
+            bool result = repositoryCategory.ExistElement(category);
 
             Assert.IsTrue(result);
         }
@@ -112,7 +112,7 @@ namespace DataAccess.Tests.Test
         {
             Category category = new Category(){Id = 223 , Name="name"};
 
-            bool result = repository.ExistElement(category);
+            bool result = repositoryCategory.ExistElement(category);
 
             Assert.IsFalse(result);
         }
@@ -122,7 +122,7 @@ namespace DataAccess.Tests.Test
         {
             int categoryId = 234234234;
 
-            bool result = repository.ExistElement(categoryId);
+            bool result = repositoryCategory.ExistElement(categoryId);
 
             Assert.IsFalse(result);
         }
@@ -131,7 +131,7 @@ namespace DataAccess.Tests.Test
         {
             Category category = categoriesToReturn.First();
 
-            bool result = repository.ExistElement(category.Id);
+            bool result = repositoryCategory.ExistElement(category.Id);
 
             Assert.IsTrue(result);
         }
@@ -140,7 +140,7 @@ namespace DataAccess.Tests.Test
         {
             Category category = new Category(){Id=123423};
 
-            bool result = repository.ExistElement(category.Id);
+            bool result = repositoryCategory.ExistElement(category.Id);
 
             Assert.IsFalse(result);
         }
@@ -149,7 +149,7 @@ namespace DataAccess.Tests.Test
         {
             Category category = categoriesToReturn.First();
 
-            Category result = repository.Find(category.Id);
+            Category result = repositoryCategory.Find(category.Id);
 
             Assert.AreEqual(result,category);
         }
@@ -160,7 +160,7 @@ namespace DataAccess.Tests.Test
         {
             Category category = new Category(){Id=232323};
 
-            Category result = repository.Find(category.Id);
+            Category result = repositoryCategory.Find(category.Id);
         }
         [TestMethod]
         public void TestUpdate()
@@ -169,7 +169,7 @@ namespace DataAccess.Tests.Test
             category.Name = "New name of category";
             string newName = category.Name;
 
-            repository.Update(category.Id,category);
+            repositoryCategory.Update(category.Id,category);
 
             Assert.AreEqual(category.Name,newName);
         }
@@ -177,11 +177,11 @@ namespace DataAccess.Tests.Test
         public void TestDelete()
         {
             Category category = categoriesToReturn.First();
-            int repoCount = this.repository.GetElements().Count();
+            int repoCount = this.repositoryCategory.GetElements().Count();
 
-            repository.Delete(category);
+            repositoryCategory.Delete(category);
 
-            Assert.AreEqual(repoCount - 1 , repository.GetElements().Count());
+            Assert.AreEqual(repoCount - 1 , repositoryCategory.GetElements().Count());
         }
         [TestMethod]
         [ExpectedException(typeof(ArgumentException))]
@@ -189,17 +189,17 @@ namespace DataAccess.Tests.Test
         {
             Category category = new Category(){Id = 2342342};
 
-            repository.Delete(category);
+            repositoryCategory.Delete(category);
         }
         [TestMethod]
         public void TestDeleteById()
         {
             Category category = categoriesToReturn.First();
-            int repoCount = this.repository.GetElements().Count();
+            int repoCount = this.repositoryCategory.GetElements().Count();
 
-            repository.Delete(category.Id);
+            repositoryCategory.Delete(category.Id);
 
-            Assert.AreEqual(repoCount - 1 , repository.GetElements().Count());
+            Assert.AreEqual(repoCount - 1 , repositoryCategory.GetElements().Count());
         }
         [TestMethod]
         [ExpectedException(typeof(ArgumentException))]
@@ -207,7 +207,7 @@ namespace DataAccess.Tests.Test
         {
             int id = 23123123;
 
-            repository.Delete(id);
+            repositoryCategory.Delete(id);
         }
     }
 }

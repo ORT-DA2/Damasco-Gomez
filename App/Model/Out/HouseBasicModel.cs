@@ -1,6 +1,4 @@
-using System;
 using System.Collections.Generic;
-using System.Diagnostics.CodeAnalysis;
 using System.Linq;
 using Domain;
 using Domain.Entities;
@@ -8,7 +6,6 @@ using Model.Out;
 
 namespace Model
 {
-    [ExcludeFromCodeCoverage]
     public class HouseBasicModel
     {
         public int Id {get ; set ; }
@@ -24,15 +21,6 @@ namespace Model
         public string Contact {get; set;}
         public double TotalPrice {get; set; }
 
-        public override bool Equals(object obj)
-        {
-            var result = false;
-            if(obj is HouseBasicModel house)
-            {
-                result = this.Id == house.Id ;
-            }
-            return result;
-        }
         public HouseBasicModel(House house, HouseSearch houseSearch = null)
         {
             this.Id = house.Id;
@@ -46,12 +34,21 @@ namespace Model
             this.Description = house.Description;
             this.Contact = house.Contact;
             if(houseSearch!=null) this.TotalPrice = house.CalculateTotalPrice(houseSearch);
-            if(this.Images!=null)
+            if(house.ImagesHouse!=null && house.ImagesHouse.Count > 0)
             {
                 this.Images = house.ImagesHouse.Select(
                     m => new ImageHouseBasicModel(m)
                 ).ToList();
             }
+        }
+        public override bool Equals(object obj)
+        {
+            var result = false;
+            if(obj is HouseBasicModel house)
+            {
+                result = this.Id == house.Id ;
+            }
+            return result;
         }
     }
 }

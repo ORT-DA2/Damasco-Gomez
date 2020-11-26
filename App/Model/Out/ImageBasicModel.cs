@@ -4,12 +4,15 @@ namespace Model.Out
 {
     public class ImageHouseBasicModel
     {
-        public int Id {get ; set ; }
-        public string Name {get; set;}
+        public int Id { get; set; }
+        public string Name { get; set; }
         public ImageHouseBasicModel(ImageHouse image)
         {
-            this.Id = image.Id;
-            this.Name = image.Name;
+            if (image != null)
+            {
+                this.Id = image.Id;
+                this.Name = image.Name;
+            }
         }
     }
 }

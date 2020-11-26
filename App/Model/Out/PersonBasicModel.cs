@@ -1,9 +1,7 @@
-using System.Diagnostics.CodeAnalysis;
 using Domain;
 
 namespace Model.Out
 {
-    [ExcludeFromCodeCoverage]
     public class PersonBasicModel
     {
         public int Id {get; set;}

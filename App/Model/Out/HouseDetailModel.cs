@@ -1,13 +1,10 @@
 using Domain;
 using Model.Out;
 using System.Collections.Generic;
-using System.Diagnostics.CodeAnalysis;
 using System.Linq;
 
 namespace Model
-{
-    [ExcludeFromCodeCoverage]
-    public class HouseDetailModel
+{    public class HouseDetailModel
     {
         public int Id {get ; set ; }
         public bool Avaible {get ; set; }
@@ -21,16 +18,6 @@ namespace Model
         public string Description {get ; set;}
         public int Phone {get; set; }
         public string Contact {get; set;}
-
-        public override bool Equals(object obj)
-        {
-            var result = false;
-            if(obj is HouseDetailModel house)
-            {
-                result = this.Id == house.Id ;
-            }
-            return result;
-        }
         public HouseDetailModel(House house)
         {
             this.Id = house.Id;
@@ -42,7 +29,7 @@ namespace Model
             this.TouristPoint = new TouristPointBasicInfoModel(house.TouristPoint);
             this.Name = house.Name;
             this.Starts = house.Starts;
-            if(this.Images!=null)
+            if(house.ImagesHouse!=null && house.ImagesHouse.Count > 0)
             {
                 this.Images = house.ImagesHouse.Select(
                     m => new ImageHouseBasicModel(m)
@@ -50,6 +37,16 @@ namespace Model
             }
             this.Description = house.Description;
             this.Contact = house.Contact;
+        }
+
+        public override bool Equals(object obj)
+        {
+            var result = false;
+            if(obj is HouseDetailModel house)
+            {
+                result = this.Id == house.Id ;
+            }
+            return result;
         }
     }
 }

@@ -1,11 +1,9 @@
 using System.Collections.Generic;
-using System.Diagnostics.CodeAnalysis;
 using System.Linq;
 using Domain;
 
 namespace Model.Out
 {
-    [ExcludeFromCodeCoverage]
     public class TouristPointDetailInfoModel
     {
         public int Id {get; private set;}
@@ -20,10 +18,7 @@ namespace Model.Out
             {
                 this.Id = touristPoint.Id;
                 this.Name = touristPoint.Name;
-                if(this.Image != null)
-                {
-                    this.Image = new ImageTouristPointBasicModel(touristPoint.ImageTouristPoint);
-                }
+                this.Image = new ImageTouristPointBasicModel(touristPoint.ImageTouristPoint);
                 this.Description = touristPoint.Description;
                 this.RegionId = touristPoint.RegionId;
                 this.Categories = touristPoint.CategoriesTouristPoints.

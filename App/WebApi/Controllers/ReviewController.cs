@@ -10,7 +10,7 @@ using WebApi.Filters;
 namespace WebApi.Controllers
 {
     [Route("api/reviews")]
-    public class ReviewController : VidlyControllerBase
+    public class ReviewController : ControllerBaseApi
     {
         private readonly IReviewLogic reviewLogic;
 
@@ -25,20 +25,19 @@ namespace WebApi.Controllers
         [HttpGet]
         public IActionResult GetReviewsBy([FromQuery]int houseId)
         {
-            IEnumerable<Review> varRet ;
+            IEnumerable<Review> reviews ;
             IEnumerable<ReviewBasicModel> basicModels;
             if(houseId > 0)
             {
-                // Get reviews by houseId
-                varRet = this.reviewLogic.GetByHouseId(houseId);
-                basicModels = varRet.
+                reviews = this.reviewLogic.GetByHouseId(houseId);
+                basicModels = reviews.
                     Select(m => new ReviewBasicModel(m)).ToList();
             }
             else
             {
                 //Get ALL reviews
-                varRet = this.reviewLogic.GetAll();
-                basicModels = varRet.Select( m => new ReviewBasicModel(m));
+                reviews = this.reviewLogic.GetAll();
+                basicModels = reviews.Select( m => new ReviewBasicModel(m));
             }
             return Ok(basicModels);
         }
@@ -62,7 +61,6 @@ namespace WebApi.Controllers
         /// <response code="200">Se devuelve la información requerida.</response>
         /// <response code="400">Categoria no existente con ese identificador</response>
         [HttpPost]
-        [AuthorizationFilter]
         public IActionResult Post([FromBody]ReviewModel reviewModel)
         {
             Review review = reviewModel.ToEntity();

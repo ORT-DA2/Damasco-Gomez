@@ -1,9 +1,7 @@
-using System.Diagnostics.CodeAnalysis;
 using Domain.Entities;
 
 namespace Model.Out
 {
-    [ExcludeFromCodeCoverage]
     public class ReviewDetailModel
     {
         public int Id {get; private set; }

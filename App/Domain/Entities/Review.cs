@@ -30,10 +30,9 @@ namespace Domain.Entities
         public bool IsEmpty()
         {
             bool nameNull = Name == null;
-            bool houseIdZero = HouseId == 0;
             bool scoreZero = Score == 0;
             bool commentNull = Comment == null;
-            return nameNull && houseIdZero && scoreZero && commentNull ;
+            return nameNull && scoreZero && commentNull ;
         }
     }
 }

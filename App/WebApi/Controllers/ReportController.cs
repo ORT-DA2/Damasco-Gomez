@@ -11,25 +11,24 @@ using WebApi.Filters;
 namespace WebApi.Controllers
 {
     [Route("api/reports")]
-    public class ReportController : VidlyControllerBase
+    public class ReportController : ControllerBaseApi
     {
         private IReportLogic reportLogic;
-         public ReportController(IReportLogic reportLogic)
+        public ReportController(IReportLogic reportLogic)
         {
             this.reportLogic = reportLogic;
         }
         [HttpGet]
-        [AuthorizationFilter]
-        public IActionResult GetHousesReportBy([FromQuery]ReportTouristPointModel touristPointReportModel)
+        public IActionResult GetHousesReportBy([FromQuery] ReportTouristPointModel touristPointReportModel)
         {
-            IEnumerable<Report> varRet ;
-            IEnumerable<ReportHousesBasicModel> basicModelsToReturn = new List<ReportHousesBasicModel> () ;
-            if(touristPointReportModel.NotNull())
+            IEnumerable<Report> reports;
+            IEnumerable<ReportHousesBasicModel> basicModelsToReturn = new List<ReportHousesBasicModel>();
+            if (touristPointReportModel.NotNull())
             {
-               touristPointReportModel.CheckAllParameters();
+                touristPointReportModel.CheckAllParameters();
                 ReportTouristPoint reportTouristPoint = touristPointReportModel.ToEntity();
-                varRet = this.reportLogic.GetHousesReportBy(reportTouristPoint);
-                basicModelsToReturn = varRet.
+                reports = this.reportLogic.GetHousesReportBy(reportTouristPoint);
+                basicModelsToReturn = reports.
                     Select(m => new ReportHousesBasicModel(m)).ToList();
             }
             return Ok(basicModelsToReturn);

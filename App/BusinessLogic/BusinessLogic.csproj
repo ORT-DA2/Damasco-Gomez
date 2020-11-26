@@ -7,6 +7,7 @@
     <ProjectReference Include="..\DataAccess\DataAccess.csproj" />
     <ProjectReference Include="..\Model\Model.csproj" />
     <ProjectReference Include="..\SessionInterface\SessionInterface.csproj" />
+    <ProjectReference Include="..\ImporterInterface\ImporterInterface.csproj" />
   </ItemGroup>
 
   <ItemGroup>

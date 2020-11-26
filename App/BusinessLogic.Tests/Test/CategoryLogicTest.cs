@@ -20,7 +20,7 @@ namespace BusinessLogic.Tests.Test
         private List<Category> categoriesToReturn;
 
         [TestInitialize]
-        public void initVariables()
+        public void InitVariables()
         {
             categoriesToReturn = new List<Category>()
             {
@@ -119,7 +119,6 @@ namespace BusinessLogic.Tests.Test
         {
             Category category = categoriesToReturn.First();
             mock.Setup(m => m.Add(category)).Returns(category);
-            //this.touristPointRepository.Find(m.TouristPointId)
             mock2.Setup(m => m.Find(category.CategoryTouristPoints.First().TouristPointId)).Returns(category.CategoryTouristPoints.First().TouristPoint);
 
             Category result = categoryLogic.Add(category);
@@ -129,7 +128,7 @@ namespace BusinessLogic.Tests.Test
         [TestMethod]
         public void TestAddValidateError()
         {
-            Category category = categoriesToReturn.Last(); // Category tiene que terner un formato erroneo despues para que la validación falle
+            Category category = categoriesToReturn.Last();
             mock.Setup(m => m.Add(category)).Returns(category);
 
             Category result = categoryLogic.Add(category);

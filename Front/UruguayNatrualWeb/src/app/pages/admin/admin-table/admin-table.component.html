@@ -1,0 +1,49 @@
+<!-- Table -->
+<div class="card shadow">
+  <div class="card-header border-0">
+    <h3 class="mb-0">Admin</h3>
+    <p class="errorMessage" id="error-message">{{errorMessageEndpoint}}</p>
+  </div>
+  <div class="table-responsive">
+    <table class="table align-items-center table-flush">
+      <thead class="thead-light">
+        <tr>
+          <th scope="col">Name</th>
+          <th scope="col">Email</th>
+          <th></th>
+          <th></th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let person of persons; let i = index">
+          <th scope="row"> {{person.name}} </th>
+          <td>{{person.email}}</td>
+          <td>
+              <button
+                [routerLink]="['/admin/admin-editor',person.id]"
+                type="button"
+                placement="top-center"
+                triggers="hover focus click"
+                class="btn btn-rounded"
+                ngxClipboard
+                (cbOnSuccess) = "copy = 'air-baloon'">
+                Edit
+              </button>
+              </td>
+                <td>
+              <button
+                type="button"
+                placement="top-center"
+                triggers="hover focus click"
+                class="btn btn-rounded btn-outline-danger"
+                ngxClipboard
+                (cbOnSuccess) = "copy = 'air-baloon'"
+                (click)="delete(person)">
+                Delete
+              </button>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</div>

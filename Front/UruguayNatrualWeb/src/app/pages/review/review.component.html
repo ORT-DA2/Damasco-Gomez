@@ -1,0 +1,113 @@
+<div class="header pb-8 pt-5 pt-lg-8 d-flex align-items-center"
+  style="min-height: 600px; background-image: url(assets/img/theme/profile-cover.jpg); background-size: cover; background-position: center top;">
+  <!-- Mask -->
+  <span class="mask bg-gradient-danger opacity-8"></span>
+  <!-- Header container -->
+  <div class="container-fluid d-flex align-items-center">
+    <div class="row">
+      <div class="col-12">
+        <h1 class="display-2 text-white">Review</h1>
+        <p class="text-white mt-0 mb-5">Add a review base in your booking code</p>
+        <div>
+          <form class="form">
+            <div class="container">
+              <div class="row">
+                <div class="col-12">
+                  <div class="card bg-secondary shadow">
+                    <div class="card-header bg-white border-0">
+                      <div class="row m-1">
+                        <div class="col-4">
+                          <label class="form-control-label" for="input-code">Booking code:</label>
+                        </div>
+                        <div class="col-8">
+                          <input class="form-control" type="text" id="input-code" [(ngModel)]="code" name="code">
+                        </div>
+                      </div>
+                      <div class="row m-1">
+                        <div class="col-6">
+                          <button type="button" placement="top-center" triggers="hover focus click"
+                            class="bg-warning btn btn-rounded bg-warning text-white shadow" ngxClipboard
+                            (cbOnSuccess)="copy = 'air-baloon'" (click)="checkBookingCode()">
+                            Check Code</button>
+                        </div>
+                        <div class="col-6">
+                          <p class="errorMessage">{{errorMessageCode}}</p>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+
+<div *ngIf="showInputsReview" class="container-fluid mt--7">
+  <div class="row">
+    <div class="col-xl-8 order-xl-1">
+      <div class="card bg-secondary shadow">
+        <div class="card-header bg-white border-0">
+          <div class="row align-items-center">
+            <div class="col-8">
+              <h3 class="mb-0">Complete the next data</h3>
+            </div>
+            <div class="col-4 text-right">
+              <button type="button" placement="top-center" triggers="hover focus click"
+                class="btn btn-rounded btn-outline-warning" ngxClipboard [disabled]="disableSend"
+                (cbOnSuccess)="copy = 'air-baloon'" (click)="send()">
+                Send
+              </button>
+            </div>
+          </div>
+        </div>
+        <div class="card-body">
+          <form>
+            <div class="pl-lg-4">
+              <div class="row">
+                <div class="col-6">
+                  <div class="form-group">
+                    <label class="form-control-label" for="input-username">Name</label>
+                    <input type="text" id="input-name" class="form-control form-control-alternative"
+                      [(ngModel)]="review.name" name="nameT" />
+                  </div>
+                </div>
+
+                <div class="col-6">
+                  <div class="form-group">
+                    <label class="form-control-label" for="input-comment">Comment</label>
+                    <input type="text" id="input-comment" class="form-control form-control-alternative"
+                      [(ngModel)]="review.comment" name="comment" />
+                  </div>
+                </div>
+
+                <div class="col-3">
+                  <div class="form-group">
+                    <label class="form-control-label" for="label-score">Score</label>
+                    <input type="number" id="input-score" class="form-control form-control-alternative"
+                      [(ngModel)]="review.score" name="score"/>
+                  </div>
+                </div>
+
+                <div class="col-9">
+                  <div class="errorMessage">
+                    <strong>{{errorMessageEndpoint}}</strong>
+                  </div>
+                  <div class="successMessage">
+                    <strong>{{successMessage}}</strong>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <hr class="my-4" />
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
