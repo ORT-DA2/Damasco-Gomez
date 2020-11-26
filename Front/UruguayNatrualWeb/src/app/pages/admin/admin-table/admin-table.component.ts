@@ -34,7 +34,7 @@ export class AdminTableComponent implements OnInit {
       this.errorMessageEndpoint = '';
     },
     catchError => {
-      this.errorMessageEndpoint = catchError;
+      this.errorMessageEndpoint = catchError.error;
     })
   }
 
