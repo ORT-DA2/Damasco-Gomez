@@ -1,13 +1,11 @@
 using System;
 using System.Collections.Generic;
-using System.Diagnostics.CodeAnalysis;
 using System.Linq;
 using Domain;
 using Domain.Entities;
 
 namespace Model.In
 {
-    [ExcludeFromCodeCoverage]
     public class CategoryModel
     {
         public string Name {get; set;}

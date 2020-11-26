@@ -1,0 +1,14 @@
+.container-fluid.d-flex.align-items-center{
+  margin-top: -12rem!important;
+}
+.card.bg-secondary.shadow{
+  margin-top: -15rem!important;
+}
+.errorMessage{
+  font-weight: bold;
+  color: red;
+}
+.successMessage{
+  font-weight: bold;
+  color: green;
+}

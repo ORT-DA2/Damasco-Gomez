@@ -17,7 +17,7 @@ namespace BusinessLogic.Tests.Test
         private List<Person> emptyPersons;
 
         [TestInitialize]
-        public void initVariables()
+        public void InitVariables()
         {
             personsToReturn = new List<Person>()
             {

@@ -11,9 +11,9 @@ namespace WebApi.Controllers
 {
 
     [Route("api/regions")]
-    public class RegionController : VidlyControllerBase
+    public class RegionController : ControllerBaseApi
     {
-       private readonly IRegionLogic regionLogic;
+        private readonly IRegionLogic regionLogic;
 
         public RegionController(IRegionLogic regionLogic)
         {

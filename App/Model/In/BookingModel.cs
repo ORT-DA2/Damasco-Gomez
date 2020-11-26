@@ -1,10 +1,9 @@
 using System;
-using System.Diagnostics.CodeAnalysis;
 using Domain;
+using Domain.Entities;
 
 namespace Model
 {
-    [ExcludeFromCodeCoverage]
     public class BookingModel
     {
         public string Name {get; set;}
@@ -26,9 +25,18 @@ namespace Model
                 CheckOut = this.CheckOut
             };
             booking.Code = Booking.RandomString();
-            if(post) booking.StateId = 1;
-            else booking.StateId = this.StateId;
-            if(post && booking.IsEmpty()) throw new ArgumentException("No values");
+            if(post) 
+            {
+                booking.StateId = 1;
+            }
+            else 
+            {
+                booking.StateId = this.StateId;
+            }
+            if(post && booking.IsEmpty())
+            {
+                throw new ArgumentException("No values");
+            }
             return booking;
         }
     }

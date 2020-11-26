@@ -4,6 +4,7 @@ using System.Linq;
 using BusinessLogic.Logics;
 using DataAccessInterface.Repositories;
 using Domain;
+using Domain.Entities;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Model;
 using Moq;
@@ -16,13 +17,13 @@ namespace BusinessLogic.Tests.Test
         private  List<Booking> bookingsToReturn;
         private  List<Booking>  emptyBookings;
         private BookingLogic bookingLogic;
-        private Mock<IBookingRepository> mock;
-        private Mock<IHouseRepository> mock2;
-        private Mock<IStateRepository> mock3;
+        private Mock<IBookingRepository> mockBookingRepository;
+        private Mock<IHouseRepository> mockHouseRepository;
+        private Mock<IStateRepository> mockStateRepository;
         private House houseId1;
 
         [TestInitialize]
-        public void initVariables()
+        public void InitVariables()
         {
             bookingsToReturn = new List<Booking>()
             {
@@ -31,6 +32,7 @@ namespace BusinessLogic.Tests.Test
                     Id = 1,
                     Name = "Booking 1",
                     HouseId = 1,
+                    State = new State() {Id = 1},
                     StateId = 1,
                 },
                 new Booking()
@@ -38,54 +40,56 @@ namespace BusinessLogic.Tests.Test
                     Id = 2,
                     Name = "Booking 2",
                     HouseId = 1,
+                    State = new State() {Id = 1},
+                    StateId = 1,
                 }
             };
             houseId1 = new House() {Id = 1, Avaible=true};
             emptyBookings = new List<Booking>();
-            mock = new Mock<IBookingRepository>(MockBehavior.Strict);
-            mock2 = new Mock<IHouseRepository>(MockBehavior.Strict);
-            mock3 = new Mock<IStateRepository>(MockBehavior.Strict);
-            mock2.Setup(c => c.Find(houseId1.Id)).Returns(houseId1);
-            bookingLogic = new BookingLogic(mock.Object,mock2.Object,mock3.Object);
+            mockBookingRepository = new Mock<IBookingRepository>(MockBehavior.Strict);
+            mockHouseRepository = new Mock<IHouseRepository>(MockBehavior.Strict);
+            mockStateRepository = new Mock<IStateRepository>(MockBehavior.Strict);
+            mockHouseRepository.Setup(c => c.Find(houseId1.Id)).Returns(houseId1);
+            bookingLogic = new BookingLogic(mockBookingRepository.Object,mockHouseRepository.Object,mockStateRepository.Object);
         }
         [TestMethod]
         public void TestDeleteById()
         {
             int lengthTouristPoint = bookingsToReturn.Count;
-            mock.Setup(m => m.Delete(bookingsToReturn.First().Id));
+            mockBookingRepository.Setup(m => m.Delete(bookingsToReturn.First().Id));
 
             bookingLogic.Delete(bookingsToReturn.First().Id);
 
-            mock.VerifyAll();
+            mockBookingRepository.VerifyAll();
         }
 
         [TestMethod]
         public void TestDelete()
         {
             int lengthRegions = bookingsToReturn.Count;
-            mock.Setup(m => m.GetElements()).Returns(bookingsToReturn);
+            mockBookingRepository.Setup(m => m.GetElements()).Returns(bookingsToReturn);
             foreach (Booking t in bookingsToReturn)
             {
-                mock.Setup(m => m.Delete(t.Id));
+                mockBookingRepository.Setup(m => m.Delete(t.Id));
             }
 
             bookingLogic.Delete();
 
-            mock.VerifyAll();
+            mockBookingRepository.VerifyAll();
         }
         [TestMethod]
         public void TestDeleteEmpty()
         {
-            mock.Setup(m => m.GetElements()).Returns(emptyBookings);
+            mockBookingRepository.Setup(m => m.GetElements()).Returns(emptyBookings);
 
             bookingLogic.Delete();
 
-            mock.VerifyAll();
+            mockBookingRepository.VerifyAll();
         }
         [TestMethod]
         public void GetAll()
         {
-            mock.Setup(m => m.GetElements()).Returns(bookingsToReturn);
+            mockBookingRepository.Setup(m => m.GetElements()).Returns(bookingsToReturn);
 
             var result = bookingLogic.GetAll();
 
@@ -95,7 +99,7 @@ namespace BusinessLogic.Tests.Test
         public void GetByTestOk()
         {
             Booking booking = bookingsToReturn.First();
-            mock.Setup(m => m.Find(booking.Id)).Returns(booking);
+            mockBookingRepository.Setup(m => m.Find(booking.Id)).Returns(booking);
 
             var result = bookingLogic.GetBy(booking.Id);
 
@@ -106,7 +110,7 @@ namespace BusinessLogic.Tests.Test
         {
             Booking booking = bookingsToReturn.First();
             Booking empty = null;
-            mock.Setup(m => m.Find(booking.Id)).Returns(empty);
+            mockBookingRepository.Setup(m => m.Find(booking.Id)).Returns(empty);
 
             var result = bookingLogic.GetBy(booking.Id);
 
@@ -122,9 +126,10 @@ namespace BusinessLogic.Tests.Test
                 StateId = 1
             };
             Booking booking = bookingModel.ToEntity();
-            mock.Setup(m => m.Add(booking)).Returns(booking);
-            mock2.Setup(m => m.ExistElement(booking.HouseId)).Returns(true);
-            mock3.Setup(m => m.ExistElement(booking.StateId)).Returns(true);
+            mockBookingRepository.Setup(m => m.Add(booking)).Returns(booking);
+            mockHouseRepository.Setup(m => m.ExistElement(booking.HouseId)).Returns(true);
+            mockStateRepository.Setup(m => m.ExistElement(booking.StateId)).Returns(true);
+            mockStateRepository.Setup(m => m.Find(booking.StateId)).Returns(booking.State);
 
             Booking result = bookingLogic.Add(booking);
 
@@ -137,14 +142,14 @@ namespace BusinessLogic.Tests.Test
             BookingModel bookingModel = new BookingModel()
             {
                 Name = "nombre",
-                HouseId = 0
+                HouseId = 10
             };
             Booking booking = bookingModel.ToEntity();
-            mock2.Setup(m => m.ExistElement(booking.HouseId)).Returns(false);
+            mockHouseRepository.Setup(m => m.ExistElement(booking.HouseId)).Returns(false);
 
             var result = bookingLogic.Add(booking);
 
-            mock.VerifyAll();
+            mockBookingRepository.VerifyAll();
         }
         [TestMethod]
         public void TestUpdateOk ()
@@ -156,11 +161,12 @@ namespace BusinessLogic.Tests.Test
             };
             Booking booking = bookingModel.ToEntity();
             int id  = booking.Id;
-            mock.Setup(m => m.Update(booking.Id,booking));
-            mock.Setup(m => m.Find(booking.Id)).Returns(booking);
-            mock2.Setup(m => m.ExistElement(booking.HouseId)).Returns(true);
-            mock3.Setup(m => m.ExistElement(booking.StateId)).Returns(true);
-            mock2.Setup(m => m.Find(booking.HouseId)).Returns(houseId1);
+            mockBookingRepository.Setup(m => m.Update(booking.Id,booking));
+            mockBookingRepository.Setup(m => m.Find(booking.Id)).Returns(booking);
+            mockHouseRepository.Setup(m => m.ExistElement(booking.HouseId)).Returns(true);
+            mockStateRepository.Setup(m => m.ExistElement(booking.StateId)).Returns(true);
+            mockStateRepository.Setup(m => m.Find(booking.StateId)).Returns(booking.State);
+            mockHouseRepository.Setup(m => m.Find(booking.HouseId)).Returns(houseId1);
 
             Booking result = bookingLogic.Update(id, booking);
 
@@ -177,11 +183,12 @@ namespace BusinessLogic.Tests.Test
             };
             Booking booking = bookingModel.ToEntity();
             int id  = booking.Id;
-            mock.Setup(m => m.Update(booking.Id,booking));
-            mock.Setup(m => m.Find(booking.Id)).Returns(booking);
-            mock2.Setup(m => m.ExistElement(booking.HouseId)).Returns(true);
-            mock3.Setup(m => m.ExistElement(booking.StateId)).Returns(true);
-            mock2.Setup(m => m.Find(booking.HouseId)).Returns(houseId1);
+            mockBookingRepository.Setup(m => m.Update(booking.Id,booking));
+            mockBookingRepository.Setup(m => m.Find(booking.Id)).Returns(booking);
+            mockHouseRepository.Setup(m => m.ExistElement(booking.HouseId)).Returns(true);
+            mockStateRepository.Setup(m => m.ExistElement(booking.StateId)).Returns(true);
+            mockStateRepository.Setup(m => m.Find(booking.StateId)).Returns(booking.State);
+            mockHouseRepository.Setup(m => m.Find(booking.HouseId)).Returns(houseId1);
 
             Booking result = bookingLogic.Update(id, booking);
 
@@ -198,11 +205,12 @@ namespace BusinessLogic.Tests.Test
             };
             Booking booking = bookingModel.ToEntity();
             int id  = booking.Id;
-            mock.Setup(m => m.Update(booking.Id,booking));
-            mock.Setup(m => m.Find(booking.Id)).Returns(booking);
-            mock2.Setup(m => m.ExistElement(booking.HouseId)).Returns(true);
-            mock3.Setup(m => m.ExistElement(booking.StateId)).Returns(true);
-            mock2.Setup(m => m.Find(booking.HouseId)).Returns(houseId1);
+            mockBookingRepository.Setup(m => m.Update(booking.Id,booking));
+            mockBookingRepository.Setup(m => m.Find(booking.Id)).Returns(booking);
+            mockHouseRepository.Setup(m => m.ExistElement(booking.HouseId)).Returns(true);
+            mockStateRepository.Setup(m => m.ExistElement(booking.StateId)).Returns(true);
+            mockStateRepository.Setup(m => m.Find(booking.StateId)).Returns(booking.State);
+            mockHouseRepository.Setup(m => m.Find(booking.HouseId)).Returns(houseId1);
 
             Booking result = bookingLogic.Update(id, booking);
 
@@ -218,17 +226,17 @@ namespace BusinessLogic.Tests.Test
                 HouseId = 12
             };
             Booking booking = bookingModel.ToEntity();
-            mock2.Setup(m => m.ExistElement(booking.HouseId)).Returns(false);
+            mockHouseRepository.Setup(m => m.ExistElement(booking.HouseId)).Returns(false);
 
             bookingLogic.Update(booking.Id,booking);
 
-            mock.VerifyAll();
+            mockBookingRepository.VerifyAll();
         }
         [TestMethod]
         public void TestExistOk()
         {
             Booking booking = bookingsToReturn.First();
-            mock.Setup(m => m.ExistElement(booking)).Returns(true);
+            mockBookingRepository.Setup(m => m.ExistElement(booking)).Returns(true);
 
             var result = bookingLogic.Exist(booking);
 
@@ -238,7 +246,7 @@ namespace BusinessLogic.Tests.Test
         public void TestNotExistOk()
         {
             Booking booking = bookingsToReturn.First();
-            mock.Setup(m => m.ExistElement(booking)).Returns(false);
+            mockBookingRepository.Setup(m => m.ExistElement(booking)).Returns(false);
 
             var result = bookingLogic.Exist(booking);
 
@@ -250,8 +258,8 @@ namespace BusinessLogic.Tests.Test
         {
             Booking booking = bookingsToReturn.First();
             ArgumentException exception = new ArgumentException();
-            mock3.Setup(m => m.ExistElement(booking.StateId)).Returns(false);
-            mock2.Setup(m => m.ExistElement(booking.HouseId)).Returns(true);
+            mockStateRepository.Setup(m => m.ExistElement(booking.StateId)).Returns(false);
+            mockHouseRepository.Setup(m => m.ExistElement(booking.HouseId)).Returns(true);
 
             var result = bookingLogic.Update(booking.Id,booking);
         }
@@ -259,11 +267,12 @@ namespace BusinessLogic.Tests.Test
         public void TestValidateStateOk()
         {
             Booking booking = bookingsToReturn.First();
-            mock2.Setup(m => m.ExistElement(booking.HouseId)).Returns(true);
-            mock2.Setup(m => m.Find(booking.HouseId)).Returns(houseId1);
-            mock3.Setup(m => m.ExistElement(booking.StateId)).Returns(true);
-            mock.Setup(m => m.Update(booking.Id,booking));
-            mock.Setup(m => m.Find(booking.Id)).Returns(booking);
+            mockHouseRepository.Setup(m => m.ExistElement(booking.HouseId)).Returns(true);
+            mockHouseRepository.Setup(m => m.Find(booking.HouseId)).Returns(houseId1);
+            mockStateRepository.Setup(m => m.Find(booking.StateId)).Returns(booking.State);
+            mockStateRepository.Setup(m => m.ExistElement(booking.StateId)).Returns(true);
+            mockBookingRepository.Setup(m => m.Update(booking.Id,booking));
+            mockBookingRepository.Setup(m => m.Find(booking.Id)).Returns(booking);
 
             var result = bookingLogic.Update(booking.Id, booking);
         }
@@ -280,10 +289,10 @@ namespace BusinessLogic.Tests.Test
             Booking booking = bookingModel.ToEntity();
             House house = new House(){Id=1 , Avaible=false};
             int id  = booking.Id;
-            mock.Setup(m => m.Update(booking.Id,booking));
-            mock.Setup(m => m.Find(booking.Id)).Returns(booking);
-            mock2.Setup(m => m.ExistElement(booking.HouseId)).Returns(true);
-            mock2.Setup(m => m.Find(booking.HouseId)).Returns(house);
+            mockBookingRepository.Setup(m => m.Update(booking.Id,booking));
+            mockBookingRepository.Setup(m => m.Find(booking.Id)).Returns(booking);
+            mockHouseRepository.Setup(m => m.ExistElement(booking.HouseId)).Returns(true);
+            mockHouseRepository.Setup(m => m.Find(booking.HouseId)).Returns(house);
 
             Booking result = bookingLogic.Update(id, booking);
         }

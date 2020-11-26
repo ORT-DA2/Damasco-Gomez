@@ -32,7 +32,6 @@ namespace BusinessLogic
 
         public Category Add(Category category)
         {
-            //Validate(category);
             if (category.CategoryTouristPoints != null)
             {
                 category.CategoryTouristPoints.ForEach
@@ -52,6 +51,7 @@ namespace BusinessLogic
                 (
                     m => m.TouristPoint = this.touristPointRepository.Find(m.TouristPointId)
                 );
+                categoryBd.CategoryTouristPoints.RemoveAll(x => x.CategoryId == categoryBd.Id);
                 categoryBd.CategoryTouristPoints = category.CategoryTouristPoints;
             }
             categoryBd.Update(category);

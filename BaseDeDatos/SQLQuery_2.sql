@@ -1,0 +1,13 @@
+
+  DELETE Persons;
+  DELETE Bookings;
+  DELETE Categories;
+  DELETE CategoriesTouristicPoints;
+   DELETE Houses;
+ DELETE ImagesHouses;
+  DELETE ImagesTouristPoints;
+   DELETE Regions;
+    DELETE Reviews;
+     DELETE Sessions; 
+      DELETE States;
+       DELETE TouristPoints;

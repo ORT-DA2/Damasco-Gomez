@@ -1,0 +1,13 @@
+
+.btn.btn-sm.btn-primary{
+  display: block;
+}
+
+.errorMessage{
+  font-weight: bold;
+  color: red;
+}
+.successMessage{
+  font-weight: bold;
+  color: green;
+}

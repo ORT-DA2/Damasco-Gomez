@@ -18,7 +18,7 @@ namespace Filters
                 context.Result = new ContentResult()
                 {
                     StatusCode = 400,
-                    Content = e.Message.ToString()
+                    Content = e.Message
                 };
             }
             catch (AggregateException e)
@@ -26,7 +26,7 @@ namespace Filters
                 context.Result = new ContentResult()
                 {
                     StatusCode = 401,
-                    Content = e.Message.ToString()
+                    Content = e.Message
                 };
             }
             catch(Exception)
@@ -34,7 +34,7 @@ namespace Filters
                 context.Result = new ContentResult()
                 {
                     StatusCode = 500,
-                    Content = "Server error"
+                    Content = "Server error :" + context.Exception.Message,
                 };
             }
         }

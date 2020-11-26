@@ -1,12 +1,11 @@
-using System;
-using System.Diagnostics.CodeAnalysis;
+using System.Collections.Generic;
+using System.Linq;
 using Domain;
 using Domain.Entities;
 using Model.Out;
 
 namespace Model
 {
-    [ExcludeFromCodeCoverage]
     public class HouseBasicModel
     {
         public int Id {get ; set ; }
@@ -16,21 +15,12 @@ namespace Model
         public string Name {get ; set; }
         public int Starts {get ; set; }
         public string Address {get ; set; }
-        public string Ilustrations {get ; set; }
+        public List<ImageHouseBasicModel> Images {get ; set; }
         public string Description {get ; set;}
         public int Phone {get; set; }
         public string Contact {get; set;}
         public double TotalPrice {get; set; }
 
-        public override bool Equals(object obj)
-        {
-            var result = false;
-            if(obj is HouseBasicModel house)
-            {
-                result = this.Id == house.Id ;
-            }
-            return result;
-        }
         public HouseBasicModel(House house, HouseSearch houseSearch = null)
         {
             this.Id = house.Id;
@@ -41,10 +31,24 @@ namespace Model
             this.TouristPointId = house.TouristPointId;
             this.Name = house.Name;
             this.Starts = house.Starts;
-            this.Ilustrations = house.Ilustrations;
             this.Description = house.Description;
             this.Contact = house.Contact;
             if(houseSearch!=null) this.TotalPrice = house.CalculateTotalPrice(houseSearch);
+            if(house.ImagesHouse!=null && house.ImagesHouse.Count > 0)
+            {
+                this.Images = house.ImagesHouse.Select(
+                    m => new ImageHouseBasicModel(m)
+                ).ToList();
+            }
+        }
+        public override bool Equals(object obj)
+        {
+            var result = false;
+            if(obj is HouseBasicModel house)
+            {
+                result = this.Id == house.Id ;
+            }
+            return result;
         }
     }
 }

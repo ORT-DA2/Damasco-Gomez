@@ -10,7 +10,7 @@ using Model.Out;
 namespace WebApi.Controllers
 {
     [Route("api/persons")]
-    public class PersonController : VidlyControllerBase
+    public class PersonController : ControllerBaseApi
     {
         private readonly IPersonLogic personLogic;
 
@@ -25,8 +25,8 @@ namespace WebApi.Controllers
         [HttpGet]
         public IActionResult Get()
         {
-            IEnumerable<Person> elementPerson = this.personLogic.GetAll();
-            IEnumerable<PersonBasicModel> personBasicModels = elementPerson.Select(m => new PersonBasicModel(m));
+            IEnumerable<Person> Persons = this.personLogic.GetAll();
+            IEnumerable<PersonBasicModel> personBasicModels = Persons.Select(m => new PersonBasicModel(m));
             return Ok(personBasicModels);
         }
 
@@ -68,7 +68,7 @@ namespace WebApi.Controllers
         [HttpPut("{id}")]
         public IActionResult Put([FromRoute]int id,[FromBody]PersonModel personModel)
         {
-            Person person = personModel.ToEntity();
+            Person person = personModel.ToEntity(false);
             person = this.personLogic.Update(id,person);
             PersonBasicModel personBasicModel = new PersonBasicModel(person);
             return CreatedAtRoute("GetPerson", new {Id = personBasicModel.Id} , personBasicModel);

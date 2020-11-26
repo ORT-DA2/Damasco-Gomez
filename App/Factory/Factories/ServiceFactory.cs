@@ -2,6 +2,7 @@ using System.Diagnostics.CodeAnalysis;
 using BusinessLogic;
 using BusinessLogic.Logics;
 using BusinessLogicInterface;
+using BusinessLogicInterface.Interfaces;
 using Contracts;
 using DataAccess.Context;
 using DataAccess.Repositories;
@@ -30,6 +31,10 @@ namespace Factory.Factories
             services.AddScoped<IRegionRepository, RegionRepository>();
             services.AddScoped<ISessionUserRepository, SessionUserRepository>();
             services.AddScoped<IStateRepository, StateRepository>();
+            services.AddScoped<IImageHouseRepository, ImageHouseRepository>();
+            services.AddScoped<IImageTouristPointRepository, ImageTouristPointRepository>();
+            services.AddScoped<IReviewRepository, ReviewRepository>();
+            services.AddScoped<IReportRepository, ReportRepository>();
             services.AddScoped<ITouristPointLogic, TouristPointLogic>();
             services.AddScoped<IBookingLogic, BookingLogic>();
             services.AddScoped<ICategoryLogic, CategoryLogic>();
@@ -37,6 +42,11 @@ namespace Factory.Factories
             services.AddScoped<IPersonLogic, PersonLogic>();
             services.AddScoped<IRegionLogic, RegionLogic>();
             services.AddScoped<ISessionLogic, SessionLogic>();
+            services.AddScoped<IReportLogic, ReportLogic>();
+            services.AddScoped<IReviewLogic, ReviewLogic>();
+            services.AddScoped<IReportLogic, ReportLogic>();
+            services.AddScoped<IStateLogic, StateLogic>();
+            services.AddScoped<IImporterLogic, ImporterLogic>();
 
         }
         public void AddDbContextService()

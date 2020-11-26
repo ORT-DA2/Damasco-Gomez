@@ -33,10 +33,10 @@ namespace BusinessLogic
         {
             return this.personRepository.Add(person);
         }
-        public Person Update(int id, Person Person)
+        public Person Update(int id, Person person)
         {
             Person personBd = this.personRepository.Find(id);
-            personBd.Update(personBd);
+            personBd.Update(person);
             this.personRepository.Update(id,personBd);
             return personBd;
         }

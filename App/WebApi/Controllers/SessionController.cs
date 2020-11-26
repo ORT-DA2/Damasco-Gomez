@@ -8,7 +8,7 @@ using Model.Out;
 namespace WebApi.Controllers
 {
     [Route("api/sessions")]
-    public class SessionController : VidlyControllerBase
+    public class SessionController : ControllerBaseApi
     {
         private readonly ISessionLogic sessionLogic;
 
@@ -25,7 +25,7 @@ namespace WebApi.Controllers
         [HttpPost]
         public IActionResult Post([FromBody] PersonModel personModel)
         {
-            Person newPerson = personModel.ToEntity();
+            Person newPerson = personModel.ToEntity(false);
             Guid token =this.sessionLogic.Login(newPerson);
             SessionBasicModel sessionModel = new SessionBasicModel(token);
             return Ok(sessionModel);

@@ -17,7 +17,7 @@ namespace DataAccess.Tests.Test
         private RepositoryMaster repositoryMaster;
         private DbContext context;
         private DbContextOptions options;
-        private SessionUserRepository repository;
+        private SessionUserRepository repositorySession;
         [TestInitialize]
         public void Setup()
         {
@@ -40,7 +40,7 @@ namespace DataAccess.Tests.Test
             sessions.ForEach(m => this.context.Add(m));
             this.context.SaveChanges();
             repositoryMaster = new RepositoryMaster(context);
-            repository = new SessionUserRepository(repositoryMaster);
+            repositorySession = new SessionUserRepository(repositoryMaster);
         }
         [TestCleanup]
         public void TestCleanup()
@@ -52,7 +52,7 @@ namespace DataAccess.Tests.Test
         {
             Guid correctToken = sessions.First().Token;
 
-            bool result = repository.IsCorrectToken(correctToken);
+            bool result = repositorySession.IsCorrectToken(correctToken);
 
             Assert.IsTrue(result);
         }
@@ -62,7 +62,7 @@ namespace DataAccess.Tests.Test
         {
             Guid notExistToken = Guid.NewGuid();
 
-            bool result = repository.IsCorrectToken(notExistToken);
+            bool result = repositorySession.IsCorrectToken(notExistToken);
         }
     }
 }

@@ -1,10 +1,11 @@
 using System;
-using System.Diagnostics.CodeAnalysis;
+using System.Collections.Generic;
+using System.Linq;
 using Domain;
+using Domain.Entities;
 
 namespace Model
 {
-    [ExcludeFromCodeCoverage]
     public class HouseModel
     {
         public bool Avaible {get ; set; }
@@ -13,7 +14,7 @@ namespace Model
         public string Name {get ; set; }
         public int Starts {get ; set; }
         public string Address {get ; set; }
-        public string Ilustrations {get ; set; }
+        public List<string> Images {get ; set; }
         public string Description {get ; set;}
         public int Phone {get; set; }
         public string Contact {get; set;}
@@ -27,12 +28,18 @@ namespace Model
                 Name = this.Name,
                 Starts = this.Starts,
                 Address = this.Address,
-                Ilustrations = this.Ilustrations,
                 Description = this.Description,
                 Phone = this.Phone,
                 Contact = this.Contact
             };
             if (post && newHouse.IsEmpty()) throw new ArgumentException("The values are all empty");
+            if (this.Images != null && this.Images.Count > 0)
+            {
+                newHouse.ImagesHouse = this.Images.Select
+                (
+                    m => new ImageHouse(m, newHouse.Id)
+                ).ToList();
+            }
             return newHouse;
         }
     }

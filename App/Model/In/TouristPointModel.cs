@@ -1,12 +1,10 @@
 using System.Collections.Generic;
-using System.Diagnostics.CodeAnalysis;
 using System.Linq;
 using Domain;
 using Domain.Entities;
 
 namespace Model.In
 {
-    [ExcludeFromCodeCoverage]
     public class TouristPointModel
     {
         public string Name {get; set;}
@@ -16,17 +14,28 @@ namespace Model.In
         public virtual  IEnumerable<int> Categories {get; set;}
         public TouristPoint ToEntity()
         {
-            return new TouristPoint()
+            TouristPoint touristPoint = new TouristPoint()
             {
                 Name= this.Name,
-                Image = this.Image,
                 Description = this.Description,
                 RegionId = this.RegionId,
-                CategoriesTouristPoints = this.Categories.Select(m => new CategoryTouristPoint()
+            };
+            if (this.Categories!=null)
+            {
+                touristPoint.CategoriesTouristPoints = this.Categories.Select(m => new CategoryTouristPoint()
                 {
                     CategoryId = m
-                }).ToList()
+                }).ToList();
             };
+            if (this.Image != null) 
+            {
+                touristPoint.ImageTouristPoint = new ImageTouristPoint(this.Image);
+            }
+            if (this.RegionId > 0)
+            {
+                touristPoint.Region = new Region(){Id = this.RegionId};
+            }
+            return touristPoint;
         }
     }
 }

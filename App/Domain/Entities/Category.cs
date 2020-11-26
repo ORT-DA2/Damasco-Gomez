@@ -23,7 +23,7 @@ namespace Domain
         }
         public void Update(Category element)
         {
-            if(element.Name != null) this.Name = element.Name;
+            if(element.Name != "") this.Name = element.Name;
         }
         public bool IsEmpty()
         {
