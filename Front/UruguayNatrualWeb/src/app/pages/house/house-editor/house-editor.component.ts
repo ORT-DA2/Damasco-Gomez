@@ -23,7 +23,6 @@ export class HouseEditorComponent implements OnInit {
   public pricePerNigth: number;
   public starts: number;
   public existentHouse: boolean;
-  public readonly: boolean;
   public regionName: string;
   public touristPointName: string;
   public touristPointId: number;
@@ -59,6 +58,7 @@ export class HouseEditorComponent implements OnInit {
       .subscribe(
         houseResponse => {
           this.getBy(houseResponse);
+          this.errorBackend = '';
         },
         catchError => {
           this.errorBackend = catchError + ', fix it and try again';
@@ -68,7 +68,8 @@ export class HouseEditorComponent implements OnInit {
     this.touristPointService.getAll()
     .subscribe(
       touristPointResponse => {
-        this.getAllTouristPoints(touristPointResponse)
+        this.getAllTouristPoints(touristPointResponse);
+        this.errorBackend = '';
       },
       catchError => {
         this.errorBackend = catchError + ', fix it and try again';
@@ -101,9 +102,11 @@ export class HouseEditorComponent implements OnInit {
     this.houseService.add(basicInfo)
     .subscribe(
       responseAdd => {
+        this.updateMessage = 'Added!';
         this.houseId = responseAdd.id;
         this.router.navigateByUrl(`/houses/house-editor/${this.houseId}`);
         this.existentHouse = true;
+        this.errorBackend = '';
       },
       catchError => {
         this.errorBackend = catchError + ', fix it and try again';
