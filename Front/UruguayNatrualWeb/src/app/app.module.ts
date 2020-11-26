@@ -27,10 +27,6 @@ import { AdminDashboardComponent } from './pages/admin/admin-dashboard/admin-das
 import { AdminEditorComponent } from './pages/admin/admin-editor/admin-editor.component';
 import { AdminTableComponent } from './pages/admin/admin-table/admin-table.component';
 
-
-
-
-
 @NgModule({
   imports: [
     CommonModule,
