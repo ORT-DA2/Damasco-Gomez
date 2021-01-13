@@ -79,7 +79,7 @@ namespace WebApi.Controllers
         public IActionResult Delete([FromRoute]int id)
         {
             this.categoryLogic.Delete(id);
-            return Ok("Element was delete with id "+id);
+            return Ok();
         }
         /// <summary>
         /// Permite a un administrador eliminar todas las categorias
@@ -90,7 +90,7 @@ namespace WebApi.Controllers
         public IActionResult Delete()
         {
             this.categoryLogic.Delete();
-            return Ok("All data from Category was");
+            return Ok();
         }
     }
 }

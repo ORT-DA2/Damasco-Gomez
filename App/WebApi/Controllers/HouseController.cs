@@ -103,7 +103,7 @@ namespace WebApi.Controllers
         public IActionResult Delete([FromRoute]int id)
         {
             this.houseLogic.Delete(id);
-            return Ok("Element was delete with id "+id);
+            return Ok();
         }
         /// <summary>
         /// Permite a un administrador eliminar todos los hospedajes
@@ -114,7 +114,7 @@ namespace WebApi.Controllers
         public IActionResult Delete()
         {
             this.houseLogic.Delete();
-            return Ok("All data from House was");
+            return Ok();
         }
     }
 }

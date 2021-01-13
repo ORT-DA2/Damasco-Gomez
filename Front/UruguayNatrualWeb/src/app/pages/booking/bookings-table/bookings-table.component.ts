@@ -30,12 +30,11 @@ export class BookingsTableComponent implements OnInit {
     this.bookings = bookingResponse;
   }
 
-  private delete(event) {
+  delete(event) {
     this.id = event.id;
     this.bookingService.delete(this.id)
     .subscribe(
       bookingResponse => {
-        this.delete(bookingResponse);
         this.bookings = this.bookings.filter(item => item.id != this.id);
       },
       catchError => {

@@ -87,7 +87,7 @@ namespace WebApi.Controllers
         public IActionResult Delete([FromRoute]int id)
         {
             this.regionLogic.Delete(id);
-            return Ok("Element was delete with id "+id);
+            return Ok();
         }
         /// <summary>
         /// Permite a un administrador eliminar todas las regiones
@@ -98,7 +98,7 @@ namespace WebApi.Controllers
         public IActionResult Delete()
         {
             this.regionLogic.Delete();
-            return Ok("All data from Region was");
+            return Ok();
         }
     }
 }

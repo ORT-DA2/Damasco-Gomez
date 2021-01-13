@@ -97,7 +97,7 @@ namespace WebApi.Controllers
         public IActionResult Delete([FromRoute]int id)
         {
             this.reviewLogic.Delete(id);
-            return Ok("Element was delete with id "+id);
+            return Ok();
         }
         /// <summary>
         /// Permite a un administrador eliminar todas las reviewes
@@ -108,7 +108,7 @@ namespace WebApi.Controllers
         public IActionResult Delete()
         {
             this.reviewLogic.Delete();
-            return Ok("All data from Review was");
+            return Ok();
         }
     }
 }

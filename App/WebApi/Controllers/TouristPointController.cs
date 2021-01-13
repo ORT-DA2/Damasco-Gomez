@@ -80,11 +80,11 @@ namespace WebApi.Controllers
         /// <response code="200">Se devuelve la información requerida.</response>
         /// <response code="400">Reserva no existente con ese identificador</response>
         [HttpDelete("{id}")]
-        [AuthorizationFilter]
+        // [AuthorizationFilter]
         public IActionResult Delete([FromRoute]int id)
         {
             this.touristPointLogic.Delete(id);
-            return Ok("Element was delete with id "+id);
+            return Ok();
         }
         /// <summary>
         /// Permite a un administrador eliminar todos los punto turisticos
@@ -95,7 +95,7 @@ namespace WebApi.Controllers
         public IActionResult Delete()
         {
             this.touristPointLogic.Delete();
-            return Ok("All data from TouristPoint was");
+            return Ok();
         }
     }
 }

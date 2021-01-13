@@ -83,7 +83,7 @@ namespace WebApi.Controllers
         public IActionResult Delete([FromRoute]int id)
         {
             this.personLogic.Delete(id);
-            return Ok("Element was delete with id "+id);
+            return Ok();
         }
         /// <summary>
         /// Permite a un administrador eliminar todas las personas
@@ -93,7 +93,7 @@ namespace WebApi.Controllers
         public IActionResult Delete()
         {
             this.personLogic.Delete();
-            return Ok("All data from Person was");
+            return Ok();
         }
     }
 }

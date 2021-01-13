@@ -30,12 +30,11 @@ export class TouristPointsTableComponent implements OnInit {
     this.touristpoints = touristPointResponse;
   }
 
-  private delete(event) {
+  delete(event) {
     this.id = event.id;
     this.touristPointService.delete(this.id)
     .subscribe(
       touristPointResponse => {
-        this.delete(touristPointResponse);
         this.touristpoints = this.touristpoints.filter(item => item.id != this.id);
       },
       catchError => {

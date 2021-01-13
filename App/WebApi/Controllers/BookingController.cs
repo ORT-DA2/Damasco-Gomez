@@ -81,7 +81,7 @@ namespace WebApi.Controllers
         public IActionResult Delete([FromRoute]int id)
         {
             this.bookingLogic.Delete(id);
-            return Ok("Element was delete with id "+id);
+            return Ok();
         }
         /// <summary>
         /// Permite a un administrador eliminar todas las reservas
@@ -92,7 +92,7 @@ namespace WebApi.Controllers
         public IActionResult Delete()
         {
             this.bookingLogic.Delete();
-            return Ok("All data from Booking was");
+            return Ok();
         }
     }
 
